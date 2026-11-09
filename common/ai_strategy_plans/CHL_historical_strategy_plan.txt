@@ -1,0 +1,45 @@
+#####-----> CHL: Historical AI Behavior <><> <><> <><> <><> <><>
+
+CHL_historical_plan = {
+	name = "Chile Hisorical Plan"
+	desc = "Historical behavior for Chile."
+	allowed = {
+		original_tag = CHL
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = CHL_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = CHL_AI_HISTORICAL
+			has_game_rule = {
+				rule = CHL_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	focus_factors = {
+		CHL_communist_path = 0
+		CHL_side_with_the_nacistas = 0
+		CHL_crush_the_communists = 0
+		CHL_join_the_comintern = 0
+		CHL_join_allies = 0
+		CHL_the_global_defense_pact = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

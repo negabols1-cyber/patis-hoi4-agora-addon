@@ -1,0 +1,199 @@
+﻿capital = 300
+for_each_scope_loop = {
+	array = controlled_states
+
+	set_state_flag = uruguayan_starting_state
+
+	ROOT = {
+		add_to_array = { cores_at_game_start = PREV }
+	}
+}
+
+add_ideas = {
+	URG_legacy_of_batlle_idea
+	URG_welfare_state
+	URG_debt_to_the_british
+}
+
+set_country_flag = URG_terra
+
+URG_initiate_balance_of_power = yes
+
+set_variable = { URG_debt_to_britain = 0 }
+activate_mission = URG_pay_the_british_debt
+
+set_variable = {
+	var = URG_politicians_arrested
+	value = 43
+}
+
+URG_set_up_prisoners_modifier = yes
+
+set_war_support = 0.16
+
+country_event = { id = uruguay.4 days = 1 }
+
+hidden_effect = { #NATIONAL SPIRIT
+	add_dynamic_modifier = { modifier = URG_the_terra_dictatorship }
+}
+
+### EUYL ###
+recruit_character = URG_gabriel_terra_c
+recruit_character = URG_luis_alberta_de_herrera_c
+recruit_character = URG_alfredo_baldomir_c
+recruit_character = URG_pedro_sicco_c
+recruit_character = URG_cesarreo_l_barisso_c
+recruit_character = URG_tydeo_borges_c
+recruit_character = URG_angel_cambior_c
+recruit_character = URG_arturo_juambeltz_c
+recruit_character = URG_julia_arevalo_de_roche_c
+recruit_character = URG_emilio_frugoni_c
+recruit_character = URG_horacio_arredondo_c
+recruit_character = URG_pedro_manini_rios_c
+recruit_character = URG_julius_dalldorf_c
+recruit_character = URG_rodney_arismendi_c
+recruit_character = URG_serafino_mazzolini_c
+recruit_character = URG_arturo_rios_c
+recruit_character = URG_arturo_campos_c
+recruit_character = URG_juan_battione_c
+recruit_character = URG_luis_tuya_c
+recruit_character = URG_federico_garcia_c
+recruit_character = URG_eugenio_gomez_c
+recruit_character = URG_domingo_mendivil_c
+recruit_character = URG_juan_viera_c
+recruit_character = URG_oscar_diego_gestido_c
+recruit_character = URG_atilio_frigerio_c
+recruit_character = URG_basilio_munoz_c
+recruit_character = URG_luis_batlle_berres_c
+recruit_character = URG_augusto_cesar_bado_c
+recruit_character = URG_juana_de_ibarbourou_c
+recruit_character = URG_hugo_fernandez_artucio_c
+recruit_character = URG_alfeo_brum_c
+recruit_character = URG_jose_lazarraga_c
+recruit_character = URG_paulina_luisi_c
+recruit_character = URG_consejo_de_estado_provisorio_c
+recruit_character = URG_carlos_vaz_ferreira_c
+recruit_character = URG_andres_martinez_trueba_c
+recruit_character = URG_consejo_nacional_de_gobierno_c
+recruit_character = URG_virginia_bolten_c
+recruit_character = URG_collapsed_government_c
+recruit_character = URG_adolfo_agorio_c
+recruit_character = URG_defensive_military_council
+recruit_character = URG_offensive_military_council
+recruit_character = URG_organizational_military_council
+recruit_character = URG_air_safety_aviation_council
+recruit_character = URG_all_weather_aviation_council
+recruit_character = URG_commerce_raiding_naval_council
+recruit_character = URG_reform_naval_council
+recruit_character = URG_infantry_military_council
+recruit_character = URG_army_regrouping_military_council
+recruit_character = URG_concealment_military_council
+recruit_character = URG_naval_strike_aviation_council
+recruit_character = URG_close_air_support_aviation_council
+recruit_character = URG_logistics_naval_council
+recruit_character = URG_anti_submarine_naval_council
+recruit_character = URG_council_of_theorists
+recruit_character = URG_tydeo_borges_scientist
+recruit_character = URG_atilio_frigeiro
+recruit_character = URG_felix_cernuschi
+recruit_character = URG_enrique_loedel_palumbo
+### EUYL ###
+
+
+oob = "URG_1936"
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	set_naval_oob = "URG_1936_naval_mtg"
+	else = {
+		set_naval_oob = "URG_1936_naval_legacy"
+	}
+}
+
+# Starting tech
+set_technology = {
+	tech_support = 1
+	tech_engineers = 1
+	tech_mountaineers = 1
+	infantry_weapons = 1
+	infantry_weapons1 = 1
+	tech_trucks = 1
+	gw_artillery = 1
+	interwar_antiair = 1
+	basic_train = 1
+}
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+	set_technology = {
+		iw_small_airframe = 1
+		engines_1 = 1
+		early_bombs = 1
+	}
+	else = {
+		set_technology = {
+			early_fighter = 1
+			CAS1 = 1
+		}
+	}
+}
+if = {
+	limit = { not = { has_dlc = "Man the Guns" } }
+	set_technology = {
+		early_destroyer = 1
+		early_light_cruiser = 1
+	}
+}
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	set_technology = {
+		basic_naval_mines = 1
+		early_ship_hull_light = 1
+		basic_battery = 1
+		basic_torpedo = 1
+	}
+}
+set_country_flag = monroe_doctrine
+
+set_convoys = 45
+
+
+set_politics = {
+	ruling_party = neutrality
+	last_election = "1934.4.19"
+	election_frequency = 48
+	elections_allowed = yes
+}
+set_popularities = {
+	democratic = 41
+	fascism = 4
+	neutrality = 52
+	communism = 3
+}
+
+
+
+### VARIANTS ###
+# 1936 Start #
+if = {
+	limit = { not = { has_dlc = "Man the Guns" } }
+	### Ship Variants ###
+}
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Uruguay Class"
+		type = ship_hull_light_1
+		name_group = URG_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = empty
+			rear_1_custom_slot = empty
+		}
+	}
+}

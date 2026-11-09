@@ -1,0 +1,154 @@
+scripted_gui = {
+	view_GDP = {
+		context_type = player_context
+		parent_window_token = top_bar
+		window_name = "view_GDP_container"
+		dirty = show_GDP_main
+
+		visible = {
+			is_ai = no
+			has_game_rule = {
+				rule = allow_gdp_ranking
+				option = ALLOWED
+			}
+		}
+
+
+		effects = {
+			view_GDP_button_click = {
+				if = {
+					limit = { has_variable = show_GDP_main }
+					clear_variable = show_GDP_main
+				}
+				else = {
+					set_variable = { show_GDP_main = 1 }
+				}
+				#ezzzzz
+				if = {
+					limit = {
+						date < 1936.2.1
+						NOT = {
+							has_global_flag = ef_gdp_calculation_cooldown_flag
+						}
+					}
+					update_position = yes
+				}
+				if = {
+					limit = {
+						OR = {
+							NOT = {
+								has_dynamic_modifier = EF_country_gdp
+							}
+							NOT = {
+								has_country_flag = EF_avarage_GDP_player
+							}
+						}
+						NOT = {
+							has_global_flag = ef_gdp_calculation_cooldown_flag
+						}
+					}
+					if = {
+						limit = {
+							NOT = {
+								has_dynamic_modifier = EF_country_gdp
+							}
+						}
+						add_dynamic_modifier = {
+							modifier = EF_country_gdp
+						}
+					}
+					clear_array = global.GDP_list_array
+					set_country_flag = EF_avarage_GDP_player
+					every_country = { #Geçici test amaçlı daha fazla düzenlenmesi gerekebilir belki de gerekmez
+						limit = {
+							has_country_flag = EF_avarage_GDP_player
+							NOT = { is_in_array = { global.GDP_list_array = THIS } }
+						}
+						add_to_array = { global.GDP_list_array = THIS }
+						calculate_GDP = yes
+					}
+					#every_country = { // Tıklayınca herkesi eklemesin diye
+						#	if = {
+							#		limit = {
+								#			NOT = { is_in_array = { global.GDP_list_array = THIS } }
+								#		}
+							#		add_to_array = { global.GDP_list_array = THIS }
+							#		calculate_GDP = yes
+							#	}
+						#}
+					clear_array = GDP_selected_country_array
+					add_to_array = { GDP_selected_country_array = THIS }
+					set_global_flag = { flag = ef_gdp_calculation_cooldown_flag days = 20 value = 1 }
+				}
+			}
+		}
+	}
+
+	GDP_main = {
+		context_type = player_context
+		parent_window_token = top_bar
+		window_name = "GDP_main_container"
+		dirty = show_GDP_main
+
+		visible = {
+			check_variable = { show_GDP_main > 0 }
+			has_game_rule = {
+				rule = allow_gdp_ranking
+				option = ALLOWED
+			}
+		}
+
+
+		dynamic_lists = {
+			top_ten_GDP_grid = {
+				array = global.top_ten_GDP_array
+				change_scope = yes
+				entry_container = top_ten_GDP_entry
+			}
+			GDP_list_grid = {
+				array = global.GDP_list_array
+				change_scope = yes
+				entry_container = GDP_list_entry
+			}
+			GDP_selected_country_grid = {
+				array = GDP_selected_country_array
+				change_scope = yes
+				entry_container = GDP_selected_country_entry
+			}
+		}
+
+		effects = {
+			GDP_list_sort_button_click = {
+				create_GDP_sorted_array = yes
+				add_to_variable = { show_GDP_main = 1 }
+			}
+			GDP_per_capita_list_sort_button_click = {
+				create_GDP_per_capita_sorted_array = yes
+				add_to_variable = { show_GDP_main = 1 }
+			}
+			GDP_list_flag_button_click = {
+				ROOT = {
+					clear_array = GDP_selected_country_array
+					add_to_array = { GDP_selected_country_array = PREV }
+					add_to_variable = { show_GDP_main = 1 }
+				}
+			}
+			close_GDP_button_click = {
+				clear_variable = show_GDP_main
+			}
+		}
+
+		properties = {
+			GDP_list_flag_button = {
+				image = "[THIS.GetFlag]"
+			}
+			GDP_selected_country_flag_icon = {
+				image = "[THIS.GetFlag]"
+			}
+			top_ten_GDP_country_flag_icon = {
+				image = "[THIS.GetFlag]"
+			}
+		}
+	}
+}
+

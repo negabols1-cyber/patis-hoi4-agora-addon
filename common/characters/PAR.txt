@@ -1,0 +1,991 @@
+characters={
+	EUYL_PAR_rafael_franco={
+		name="Rafael Franco"
+		portraits={
+			civilian={
+				large="GFX_Portrait_paraguay_rafael_franco"
+			}
+		}
+		country_leader={
+			ideology=despotism
+			expire="1965.1.1.1"
+			id=-1
+		}
+		corps_commander={
+			traits={ }
+			skill=2
+			attack_skill=1
+			defense_skill=4
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	### EUSEBIO AYALA ###
+	EUYL_PAR_eusebio_ayala={
+		name="Eusebio Ayala"
+		portraits={
+			civilian={
+				large="gfx/leaders/PAR/PAR_portrait_Eusebio_Ayala.dds"
+			}
+		}
+		country_leader={
+			ideology=liberalism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	### Eugenio A. Garay ###
+	PAR_eugenio_a_garay = {
+		name = "Eugenio A. Garay"
+		portraits={
+			civilian={
+				large="gfx/leaders/PAR/portrait_PAR_eugenio_garay.dds"
+			}
+		}
+		corps_commander={
+			traits={ unyielding_defender }
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	### Luis Irrazábal ###
+	PAR_luis_irrazabal = {
+		name = "Luis Irrazábal"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/PAR/portrait_PAR_luis_irrazabal.dds"
+			}
+		}
+		corps_commander={
+			traits={ }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	### JUNTA and Armed Civilians ###
+	PAR_junta={
+		name="Junta Militar Paraguaya"
+		portraits={
+			civilian={
+				large="gfx/leaders/PAR/PAR_junta.dds"
+			}
+		}
+		country_leader = {
+			desc="POLITICS_JUNTA_MILITAR_DESC"
+			ideology=militarism
+			traits = { BRA_disorganized_leadership }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	PAR_revolutionary_army={
+		name="Fuerzas Armadas Revolucionarias"
+		portraits={
+			civilian={
+				large="gfx/leaders/PAR/portrait_PAR_revolutionary_army.dds"
+			}
+		}
+		country_leader = {
+			desc="POLITICS_JUNTA_MILITAR_DESC"
+			ideology=conservatism
+			traits = { BRA_disorganized_leadership }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	PAR_armed_civilians = {
+		name = "Resistencia Civil"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/South America/EUYL_armed_civilians.dds"
+			}
+		}
+		country_leader={
+			traits = { BRA_disorganized_leadership }
+			desc="POLITICS_ARMED_CIVILIANS_DESC"
+			ideology=conservatism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	EUYL_PAR_juan_manuel_frutos={
+		advisor={
+			slot = army_chief
+			idea_token = EUYL_PAR_juan_manuel_frutos
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				army_chief_offensive_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+			available = { has_government = democratic }
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Juan Manuel Frutos"
+		portraits={
+			army={
+				small="GFX_idea_PAR_manuel_frutos_icon"
+			}
+			civilian = {
+				large = "gfx/leaders/PAR/portrait_PAR_juan_manuel_frutos.dds"
+			}
+		}
+		country_leader={
+			traits = { }
+			desc="POLITICS_JUAN_MANUEL_FRUTOS_DESC"
+			ideology=conservatism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	PAR_carlos_pastore = {
+		name = "Carlos Pastore"
+		portraits = {
+			army = {
+				small = "GFX_idea_generic_democratic_reformer_southamerican_2d"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PAR_carlos_pastore_idea
+			available = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_country_leader = {
+							character = EUYL_PAR_higinio_morinigo
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			allowed = {
+				original_tag = PAR
+			}
+			traits  = {
+				PAR_liberal_irredentist
+			}
+		}
+	}
+
+	PAR_juan_sinforiano_bogarin = {
+		name = "Juan Sinforiano Bogarín"
+		portraits = {
+			army = {
+				small = "GFX_idea_PAR_juan_sinforiano"
+			}
+		}
+
+		advisor={
+			slot = political_advisor
+			idea_token = PAR_carlos_pastore_idea
+			available = {
+				NOT = {
+					OR = {
+						has_government = communism
+						has_country_leader = {
+							character = PAR_felix_paiva
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			on_add = {
+				PAR = {
+					if = {
+						limit = { has_any_power_balance = yes }
+					}
+					PAR_move_10_leader = yes
+				}
+			}
+			can_be_fired = no
+			allowed = {
+				original_tag = PAR
+			}
+			traits  = {
+				PAR_arzobispo_anticomunista
+			}
+		}
+	}
+
+	#José Félix Estigarribia
+	EUYL_PAR_jose_felix_estigarribia = {
+		name = "José Félix Estigarribia"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/PAR/PAR_Jose_Felix_Estigarribia.dds"
+			}
+		}
+		country_leader = {
+			ideology=liberalism
+			expire="1965.1.1.1"
+			traits = { ARG_inexperienced_leader_1 }
+			id=-1
+		}
+		corps_commander={
+			traits={ harsh_leader }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=4
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+
+	# Jose Bozzano
+	PAR_jose_bozzano = {
+		name = "José Bozzano"
+		portraits = {
+			army = {
+				small = "GFX_idea_idea_generic_navy_south_america_2"
+			}
+		}
+
+		advisor={
+			slot = high_command
+			idea_token = PAR_jose_bozzano_idea
+			ledger = navy
+			allowed  = {
+				original_tag  = PAR
+			}
+			cost = 75
+			available = {
+				any_owned_state = { is_coastal = yes }
+			}
+			traits  = {
+				navy_fleet_logistics_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+	}
+
+	### Félix PAIVA ###
+	PAR_felix_paiva = {
+		name="Félix Paiva"
+		portraits={
+			civilian={
+				large="gfx/leaders/PAR/PAR_felix_paiva.dds"
+			}
+		}
+		country_leader = {
+			ideology=liberalism
+			expire="1965.1.1.1"
+			traits = { ARG_inexperienced_leader_1 }
+			id=-1
+		}
+	}
+	### José Patricio Guggiari ###
+	PAR_jose_patricio_guggiari = {
+		name="José Patricio Guggiari"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/PAR/PAR_jose_patricio.dds"
+			}
+		}
+		country_leader = {
+			ideology=liberalism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	### Luis Alberto Riart ###
+	PAR_luis_alberto_riart = {
+		name="Luis Alberto Riart"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/PAR/PAR_luis_alberto.dds"
+			}
+		}
+		country_leader = {
+			ideology=liberalism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	### Obdulio Barthe ###
+	PAR_obdulio_barthe={
+		name="Obdulio Barthe"
+		portraits={
+			civilian={
+				large="gfx/leaders/PAR/portrait_PAR_obdulio_barthe.dds"
+			}
+		}
+		country_leader={
+			ideology=syndicalism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	### Óscar Creydt ###
+	PAR_oscar_creydt = {
+		name = "Óscar Creydt"
+		portraits = {
+			army = {
+				small = "GFX_idea_generic_communist_revolutionary_southamerican_2d"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PAR_oscar_creydt_idea
+			available = { has_completed_focus = PAR_go_against_right_wing }
+			allowed  = {
+				original_tag  = PAR
+			}
+			traits  = {
+				PAR_revolutionary_writer
+			}
+		}
+	}
+
+	### Emilio Gardel ###
+	EUYL_PAR_emilio_gardel = {
+		name = "Emilio Gardel"
+		portraits = {
+			army = {
+				small = "GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+
+		advisor={
+			slot = political_advisor
+			idea_token = PAR_emilio_gardel_idea
+			available = {
+				NOT = { has_idea = PAR_stagnated_economy_1 }
+			}
+			allowed  = {
+				original_tag  = PAR
+			}
+			traits  = {
+				financial_expert
+			}
+		}
+	}
+
+	PAR_ramon_l_parades = {
+		name = "Ramón L. Paredes"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/PAR/portrait_PAR_ramon_paredes.dds"
+			}
+		}
+		field_marshal={
+			traits={  }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+
+	### Juan Stefanich ###
+	EUYL_PAR_juan_stefanich = {
+		instance = {
+			allowed = {has_dlc = "By Blood Alone"}
+			advisor={
+				slot = political_advisor
+				cost = 75
+				idea_token = PAR_juan_stefanich_idea
+				visible = {
+					has_completed_focus = PAR_create_new_ministries
+				}
+				allowed = {
+					original_tag  = PAR
+				}
+				traits = { SWE_foreign_minister }
+
+				ai_will_do = {
+					factor = 0.5
+				}
+			}
+
+			name = "Juan Stefanich"
+			portraits = {
+				army = {
+					small = "GFX_idea_generic_political_advisor_south_america_1"
+				}
+			}
+		}
+
+		instance = {
+			allowed = { NOT = { has_dlc = "By Blood Alone" }}
+			advisor={
+				slot = political_advisor
+				cost = 75
+				idea_token = PAR_juan_stefanich_idea
+				visible = {
+					has_completed_focus = PAR_create_new_ministries
+				}
+				allowed = {
+					original_tag  = PAR
+				}
+				traits = { SWE_foreign_minister_no_bba }
+
+				ai_will_do = {
+					factor = 0.5
+				}
+			}
+			name = "Juan Stefanich"
+			portraits = {
+				army = {
+					small = "GFX_idea_generic_political_advisor_south_america_1"
+				}
+			}
+		}
+	}
+
+	### Germán Soler ###
+	PAR_german_soler = {
+		name = "Germán Soler"
+		portraits = {
+			army = {
+				small = "GFX_idea_generic_political_advisor_europe_4"
+			}
+		}
+
+		advisor={
+			slot = political_advisor
+			idea_token = PAR_german_soler_idea
+			visible = {
+				has_completed_focus = PAR_create_new_ministries
+			}
+			cost = 100
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				ARG_minister_of_interior
+			}
+		}
+	}
+
+	### Pedro Duarte Ortellado ###
+	PAR_pedro_duarte_ortellando = {
+		name = "Pedro Duarte Ortellando"
+		portraits = {
+			army = {
+				small = "GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}
+
+		advisor={
+			slot = political_advisor
+			idea_token = PAR_pedro_duarte_ortellando_idea
+			allowed  = {
+				original_tag  = PAR
+			}
+			traits  = {
+				ICE_minister_of_healthcare_and_finance
+			}
+		}
+	}
+
+	### Felipe Molas Lopez ###
+	EUYL_PAR_felipe_molas_lopez = {
+		name = "Felipe Molas Lopez"
+		portraits = {
+			army = {
+				small = "GFX_idea_PAR_felipe_molas_icon"
+			}
+		}
+
+		advisor={
+			slot = political_advisor
+			idea_token = PAR_pedro_duarte_ortellando_idea
+			allowed  = {
+				original_tag  = PAR
+			}
+			traits  = {
+				PAR_mayor
+			}
+			on_add = {
+				PAR = {
+					if = {
+						limit = { has_full_control_of_state = 301 }
+					}
+					301 = { add_extra_state_shared_building_slots = 1 }
+				}
+			}
+			can_be_fired = no
+		}
+	}
+
+	### Juan Belaieff ##
+	PAR_juan_belaieff = {
+		name = "Juan Belaieff"
+		portraits = {
+			civilian={
+				large="gfx/leaders/PAR/PAR_portrait_Juan_Belaieff.dds"
+			}
+			army = {
+				small = "GFX_idea_PAR_juan_baileff_icon"
+			}
+		}
+		corps_commander={
+			traits={  }
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+		advisor={
+			slot = army_chief
+			idea_token = PAR_juan_belaieff_idea
+			allowed  = {
+				original_tag  = PAR
+			}
+			visible = {
+				has_completed_focus = PAR_utilize_our_indigenous_knowledge
+			}
+			cost = 75
+			available = {
+				PAR = {
+					NOT = {
+						has_country_leader = {
+							character = PAR_juan_belaieff
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			traits  = {
+				army_chief_defensive_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+				modifier = {
+					factor = 450
+					has_game_rule = {
+						rule = PAR_ai_behavior
+						option = PAR_NATIVE
+					}
+				}
+			}
+		}
+	}
+	EUYL_PAR_emilio_melgarejo={
+		name="Emilio Melgarejo"
+		portraits={
+			civilian={
+				large=GFX_portrait_Emilio_Melgarejo
+			}
+		}
+		country_leader={
+			ideology=conservatism
+			traits={ silent_workhorse quartermaster_general }
+			expire="1950.1.1.12"
+			id=-1
+		}
+	}
+	EUYL_PAR_francisco_daza={
+		name="Francisco Daza"
+		portraits={
+			civilian={
+				large=GFX_portrait_Francisco_Daza
+			}
+		}
+		country_leader={
+			ideology=rexism
+			traits={ tenacious_negotiator }
+			expire="1942.1.1.12"
+			id=-1
+		}
+	}
+	EUYL_PAR_manuel_de_la_cruz={
+		name="Manuel de la Cruz"
+		portraits={
+			civilian={
+				large=GFX_portrait_Manuel_de_la_Cruz
+			}
+		}
+		country_leader={
+			ideology=moderatism
+			traits={ quartermaster_general armaments_organizer }
+			expire="1950.1.1.12"
+			id=-1
+		}
+	}
+
+	### HIGINIO MORINIGO ###
+	EUYL_PAR_higinio_morinigo={
+		name="Higinio Morínigo"
+		portraits={
+			army = {
+				small = "GFX_idea_PAR_higinio_icon"
+			}
+			civilian={
+				large=gfx/leaders/PAR/PAR_higinio.dds
+			}
+		}
+		advisor={
+			cost = 100
+
+			slot = theorist
+			idea_token = EUYL_PAR_higenio_morinigo_martinez
+			ledger = army
+			allowed = {
+				original_tag = PAR
+			}
+
+			traits = {
+				military_theorist
+			}
+		}
+		country_leader={
+			ideology=fascism_ideology
+			traits={ fascist_sympathies }
+			expire="1950.1.1.12"
+			id=-1
+		}
+		corps_commander={
+			traits={ }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	### Manuel T Aponte ###
+	EUYL_PAR_manuel_t_aponte={
+		advisor={
+
+
+			slot = army_chief
+			idea_token = EUYL_PAR_manuel_t_aponte
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				army_chief_morale_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Manuel T. Aponte"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_1"
+			}
+		}
+	}
+	EUYL_PAR_hector_velasquez={
+		advisor={
+
+
+			slot = air_chief
+			idea_token = EUYL_PAR_hector_velasquez
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				air_chief_safety_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Héctor Velasquez"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_2"
+			}
+		}
+	}
+	EUYL_PAR_jesus_g_arraza={
+		advisor={
+
+
+			slot = navy_chief
+			idea_token = EUYL_PAR_jesus_g_arraza
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				navy_chief_naval_aviation_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Jesus G. Arraza"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_2"
+			}
+		}
+	}
+	EUYL_PAR_isaias_baez_allende={
+		advisor={
+
+
+			slot = high_command
+			idea_token = EUYL_PAR_isaias_baez_allende
+			ledger = army
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				army_concealment_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Isaias Baez Allende"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_4"
+			}
+		}
+	}
+	EUYL_PAR_vicente_almonacid={
+		advisor={
+
+
+			slot = high_command
+			idea_token = EUYL_PAR_vicente_almonacid
+			ledger = air
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				air_air_superiority_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Vicente Almonacid"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+	}
+	EUYL_PAR_alfred_stroessner_matiauda={
+		advisor={
+
+
+			slot = high_command
+			idea_token = EUYL_PAR_alfred_stroessner_matiauda
+			ledger = army
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				army_armored_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Alfred Stroessner Matiauda"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_3"
+			}
+		}
+	}
+	EUYL_PAR_amancio_pampliega={
+		advisor={
+
+
+			slot = high_command
+			idea_token = EUYL_PAR_amancio_pampliega
+			ledger = army
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				army_logistics_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Amancio Pampliega"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_5"
+			}
+		}
+	}
+	EUYL_PAR_hernan_rojas_baltassare={
+		advisor={
+
+
+			slot = air_chief
+			idea_token = EUYL_PAR_hernan_rojas_baltassare
+			allowed = {
+				original_tag = PAR
+			}
+			traits = {
+				air_chief_ground_support_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Hernan Rojas Baltassare"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_3"
+			}
+		}
+	}
+	EUYL_PAR_higenio_morinigo_martinez={
+		advisor={
+			cost = 100
+
+			slot = theorist
+			idea_token = EUYL_PAR_higenio_morinigo_martinez
+			ledger = navy
+			allowed = {
+				original_tag = PAR
+			}
+
+			traits = {
+				naval_theorist
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Higenio Morinigo Martinez"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+	}
+	EUYL_PAR_juan_natalicio_gonzalez={
+		advisor={
+			slot = political_advisor
+			idea_token = PAR_juan_natalicio_gonzalez_idea
+			cost = 175
+			allowed  = {
+				original_tag  = PAR
+			}
+			traits  = {
+				PAR_prominent_colorado
+			}
+			available = { NOT = { has_government = communism } }
+			on_add = {
+				PAR = {
+					PAR_move_10_leader = yes
+				}
+			}
+			can_be_fired = no
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Juan Natalicio Gonzalez"
+		portraits={
+			army={
+				small="GFX_idea_PAR_natalicio_icon"
+			}
+		}
+	}
+	EUYL_PAR_remigio_bastia_martin={
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_PAR_remigio_bastia_martin
+			allowed  = {
+				original_tag  = PAR
+			}
+			traits  = {
+				captain_of_industry
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Remigio Bastia Martín"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}
+	}
+	EUYL_PAR_francisco_esculies={
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_PAR_francisco_esculies
+			cost = 100
+			allowed  = {
+				original_tag  = PAR
+			}
+			traits  = {
+				PAR_minister_of_finance
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Francisco Esculies"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_3"
+			}
+		}
+	}
+	EUYL_PAR_riccardo_odriosola={
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_PAR_riccardo_odriosola
+			allowed  = {
+				original_tag  = PAR
+			}
+			traits  = {
+				backroom_backstabber
+			}
+			ai_will_do  = {
+				factor  = 0.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Riccardo Odriosola"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+	}
+}

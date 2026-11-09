@@ -1,0 +1,99 @@
+MAN_historical_plan = {
+	name = "Manchukuo historical plan"
+	desc = "Historical behavior for Manchukuo"
+
+	allowed = {
+		original_tag = MAN
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = MAN_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = MAN_AI_RANDOM_OBEDIENCE
+			has_game_rule = {
+				rule = MAN_ai_behavior
+				option = OBEDIENCE
+			}
+		}
+	}
+	abort = {
+		JAP = {
+			OR = {
+				has_completed_focus = JAP_strengthen_civilian_government
+				has_completed_focus = JAP_the_unthinkable_option
+				has_completed_focus = JAP_okadas_military_purge_speech
+			}
+		}
+	}
+
+	ai_national_focuses = {
+		MAN_for_the_emperor #Take this asap
+		MAN_second_five_year_plan #Take this asap
+
+		MAN_pacify_the_countryside
+		CHI_invite_foreign_investors
+		MAN_draft_the_industrial_plan
+		MAN_army_modernization
+		MAN_mukden_military_academy
+		MAN_initiate_the_first_year_plan
+		MAN_obedience
+		MAN_establish_mangyo
+		MAN_expand_the_kyowa_kai
+		MAN_invite_japanese_settlers
+		MAN_hoankyoku
+		MAN_invite_japanese_investors
+		MAN_manei
+		MAN_expand_the_railways
+		MAN_develop_aluminum_sources
+		MAN_send_cadets_to_japan
+		MAN_invitation_of_nissan_capital
+		MAN_invite_kwantung_instructors
+		MAN_fushun_shale_oil_plants
+		MAN_expand_showa_steel_works
+		MAN_the_mukden_arsenal_modernization
+		MAN_alliance_with_the_kwantung_army
+		MAN_social_research_unit
+		MAN_standardized_artillery_batteries
+		MAN_chinese_leadership
+		MAN_fortress_manchuria
+		MAN_manchurian_chemical_industries
+		MAN_army_aviation_department
+		MAN_dowa_automobile_company
+		MAN_kirin_synthetic_rubber_plants
+		MAN_spiritual_mobilization
+		MAN_mamc
+		MAN_incentivize_the_zaibatsu
+		MAN_license_nakajima_designs
+		MAN_enact_the_national_army_law
+		MAN_river_defence_fleet
+	}
+
+	focus_factors = {
+		MAN_vassalize_mengukuo = 0
+		MAN_national_cooperation_government = 0
+		MAN_the_two_emperors = 0
+	}
+
+	research = {
+
+	}
+
+	ideas = {
+
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+}

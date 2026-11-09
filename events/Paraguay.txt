@@ -1,0 +1,1232 @@
+add_namespace = paraguay
+
+# People protesting against the laissez-faire economics
+country_event = {
+	id = paraguay.1
+	title = paraguay.1.t
+	desc = paraguay.1.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	# Placate the people
+	option = {
+		name = paraguay.1.a
+		add_ideas = PAR_dissatisfied_population
+		unlock_decision_tooltip = PAR_appease_the_people
+	}
+	# Send the military to deal with them
+	option = {
+		name = paraguay.1.b
+		random_list = {
+			35 = {
+				add_manpower = -1500
+				PAR_move_5_military = yes
+				custom_effect_tooltip = PAR_people_will_back_down_tt
+			}
+			65 = {
+				if = {
+					limit = {
+						NOT = {
+							has_template = "Milicia"
+						}
+					}
+					hidden_effect = {
+						division_template = { 
+							name = "Milicia" 
+							division_names_group = SPAN_INF_02 
+							is_locked = yes 
+							regiments = { 
+								infantry = { x = 0 y = 0 }  
+								infantry = { x = 0 y = 1 } 
+								infantry = { x = 0 y = 2 } 
+							}
+						}
+					}
+				}
+				effect_tooltip = {
+					start_civil_war = { ideology = democratic }
+				}
+				hidden_effect = {
+					start_civil_war = {
+						ideology = democratic
+						size = 0.4
+						keep_all_characters = yes 
+					}
+					every_controlled_state = {
+						create_unit = {
+							division = "name = \"Milicias Leales\" division_template = \"Milicia\" start_experience_factor = 0.02 start_equipment_factor = 0.9" 
+							owner = ROOT
+							count = 2
+						}
+					}
+					random_other_country = {
+						limit = {
+							has_government = democratic
+							has_civil_war = yes
+							original_tag = PAR
+						}
+						retire_country_leader = yes
+						promote_character = PAR_armed_civilians
+						every_controlled_state = {
+							create_unit = {
+								division = "name = \"Milicias Anti-Gobierno\" division_template = \"Milicia\" start_experience_factor = 0.02 start_equipment_factor = 0.9" 
+								owner = PREV
+								count = 2
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# Ex-leader gets deposed by military
+country_event = {
+	id = paraguay.2
+	title = paraguay.2.t
+	desc = paraguay.2.d
+	picture = GFX_report_event_generic_army
+
+	is_triggered_only = yes
+
+	option = {
+		name = paraguay.2.a
+		if = {
+			limit = {
+				has_completed_focus = PAR_go_against_franco
+				NOT = { has_country_flag = PAR_paiva_called_up_flag }
+			}
+			custom_effect_tooltip = PAR_military_will_put_paiva_in_charge_soon_tt
+			hidden_effect = {
+				country_event = { ## calls the event
+					id = paraguay.9
+					days = 4
+				}
+			}
+			set_country_flag = PAR_paiva_called_up_flag ## prevent event from happening again
+		}
+		effect_tooltip = {
+			retire_country_leader = yes
+			promote_character = PAR_junta
+		}
+		hidden_effect = {
+			retire_country_leader = yes
+			set_politics = {
+				ruling_party = neutrality
+			}
+			promote_character = PAR_junta
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.20
+			}
+		}
+	}
+}
+
+# Franco assumes power uwu <3
+country_event = {
+	id = paraguay.3
+	title = paraguay.3.t
+	desc = paraguay.3.d
+	picture = GFX_PAR_febrista_revolution
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			retire_country_leader = yes
+			set_politics = {
+				ruling_party = neutrality
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.2
+			}
+			promote_character = EUYL_PAR_rafael_franco
+			set_power_balance = {
+				id = PAR_military_leader_bop
+				left_side = PAR_military_side # will keep the last set side if not specified
+				right_side = PAR_franco_side # will keep the last set side if not specified
+				set_value = -0.2 # if specified will set the value of the power balance, this option will override the effect of set_default so the two options should not be used together. if neither set_default or set_value is specified the current value of the power balance will not change
+			}
+		}
+	}
+
+	option = {
+		name = paraguay.3.a
+		add_stability = -0.03
+		add_political_power = -20
+		set_party_name = {
+			ideology = neutrality
+			long_name = "Unión Nacional Revolucionaria"
+			name = "UNR"
+		}
+		effect_tooltip = {
+			retire_country_leader = yes
+			promote_character = EUYL_PAR_rafael_franco
+			set_power_balance = {
+				id = PAR_military_leader_bop
+				right_side = PAR_franco_side 
+			}
+		}
+	}
+}
+
+# Elections - (✿◠‿◠)
+country_event = {
+	id = paraguay.4
+	title = paraguay.4.t
+	desc = paraguay.4.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	#keep eusebio
+	option = {
+		name = paraguay.4.a
+	}
+	#luis alberto riart
+	option = {
+		name = paraguay.4.b
+		promote_character = PAR_luis_alberto_riart
+		set_power_balance = {
+			id = PAR_military_leader_bop
+			right_side = PAR_alberto_side 
+		}
+	}
+	#felix paiva
+	option = {
+		name = paraguay.4.c
+		promote_character = PAR_felix_paiva
+		set_power_balance = {
+			id = PAR_military_leader_bop
+			right_side = PAR_paiva_side 
+		}
+	}
+	#jose patricio guggiari
+	option = {
+		name = paraguay.4.e
+		promote_character = PAR_jose_patricio_guggiari
+		set_power_balance = {
+			id = PAR_military_leader_bop
+			right_side = PAR_patricio_side 
+		}
+	}
+}
+
+# Purchasing Formosa - (✿o‿o)
+country_event = {
+	id = paraguay.5
+	title = paraguay.5.t
+	desc = paraguay.5.d
+	picture = GFX_report_event_hitler_handshake
+
+	is_triggered_only = yes
+
+	#purchase Formosa
+	option = {
+		name = paraguay.5.a
+		ai_chance = {
+            base = 80
+            modifier = {
+                add = 60
+                has_opinion = {
+                    target = FROM
+                    value > 69
+                }
+            }
+            modifier = {
+                add = 40 
+                num_divisions > 24
+            }
+            modifier = {
+                add = 20
+                num_of_civilian_factories > 12
+            }
+        }
+        FROM = {
+            transfer_state = 957
+            random_owned_controlled_state = {
+                limit = { industrial_complex > 1 }
+                remove_building = {
+                    type = industrial_complex
+                    level = 2
+                }
+            }
+            country_event = { id = peru.16 hours = 3 }
+        }
+        add_offsite_building = { 
+            type = industrial_complex 
+            level = 2
+        }
+	}
+	#don't purchase formosa
+	option = {
+		name = paraguay.5.b
+		ai_chance = {
+            base = 40 
+            modifier = {
+                add = 60 
+                has_opinion = {
+                    target = FROM
+                    value < 0
+                }
+            }
+            modifier = {
+                add = 40
+                has_war = yes 
+            }
+        }
+        FROM = {
+            country_event = { id = peru.17 hours = 6 }
+            effect_tooltip = {
+				random_list = {
+					50 = {
+						create_wargoal = {
+							target = ROOT 
+							type = take_state_focus
+							generator = { 957 }
+						}
+					}
+					50 = { }
+				}
+			}
+        }
+	}
+}
+
+# A Dissatisfied Right Wing - (✿T_T)
+country_event = {
+	id = paraguay.6
+	title = paraguay.6.t
+	desc = paraguay.6.d
+	picture = GFX_PAR_agitated_right_wing_event
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			add_ideas = PAR_agitated_right_wing_revs
+		}
+	}
+	option = { #keep an eye out on them
+		name = paraguay.6.b
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+		add_stability = -0.02
+		effect_tooltip = {
+			add_ideas = PAR_agitated_right_wing_revs
+		}
+	}
+}
+
+# Liberal Remnants in the Army
+country_event = {
+	id = paraguay.7
+	title = paraguay.7.t
+	desc = paraguay.7.d
+	picture = GFX_report_event_generic_army
+
+	is_triggered_only = yes
+
+	#ok
+	option = {
+		name = paraguay.7.a
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.04
+		}
+		PAR_move_5_military = yes
+		set_country_flag = PAR_liberals_in_army
+		add_ideas = PAR_liberal_remnants_idea
+	}
+}
+
+# "Kindly" asking for Gran Chaco
+country_event = {
+	id = paraguay.8
+	title = paraguay.8.t
+	desc = paraguay.8.d
+	picture = GFX_report_event_hitler_handshake
+
+	is_triggered_only = yes
+
+	# "Kindly" ask for Gran Chaco 
+	option = {
+		name = paraguay.8.a
+		ai_chance = {
+            base = 75
+            modifier = {
+                add = 60
+                has_opinion = {
+                    target = FROM
+                    value > 69
+                }
+            }
+            modifier = {
+                add = 40 
+                num_divisions > 24
+            }
+            modifier = {
+                add = 20
+                num_of_civilian_factories > 12
+            }
+        }
+        FROM = {
+            transfer_state = 302
+            country_event = { id = peru.16 hours = 3 }
+        }
+	}
+	# Rudely demand control of Gran Chaco =＾● ⋏ ●＾=
+	option = {
+		name = paraguay.8.b
+		ai_chance = {
+            base = 80 
+            modifier = {
+                add = 60 
+                has_opinion = {
+                    target = FROM
+                    value < 0
+                }
+            }
+            modifier = {
+                add = 40
+                has_war = yes 
+            }
+        }
+        FROM = {
+            country_event = { id = peru.17 hours = 6 }
+            effect_tooltip = {
+				random_list = {
+					50 = {
+						create_wargoal = {
+							target = ROOT 
+							type = take_state_focus
+							generator = { 302 }
+						}
+					}
+					50 = { }
+				}
+			}
+        }
+	}
+}
+
+# Military puts Felix Paiva in control ((MAKE CUSTOM PIC))
+country_event = {
+	id = paraguay.9
+	title = paraguay.9.t
+	desc = paraguay.9.d
+	picture = GFX_PAR_paiva_event
+
+	is_triggered_only = yes
+
+	# promote Paiva
+	option = {
+		name = paraguay.9.a
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+		}
+		promote_character = PAR_felix_paiva
+		activate_mission = PAR_days_until_the_elections
+		hidden_effect = {
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.3
+			}
+		}
+	}
+}
+
+# Elect José Félix Estigarribia
+country_event = {
+	id = paraguay.10
+	title = paraguay.10.t
+	desc  = paraguay.10.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	option = {
+		name = paraguay.10.a
+		promote_character = EUYL_PAR_jose_felix_estigarribia
+		hidden_effect = {
+			country_event = {
+				id = paraguay.11
+				days = 380
+			}
+		}
+	}
+}
+
+# Plane Crashes (sadge)
+country_event = {
+	id = paraguay.11
+	title = paraguay.11.t
+	desc = paraguay.11.d
+	picture = GFX_PAR_jose_felix_death
+
+	is_triggered_only = yes 
+
+	immediate = { set_country_flag = PAR_jose_felix_died_flag }
+
+	option = {
+		name = paraguay.11.a 
+		add_stability = -0.03
+		if = {
+			limit = {
+				has_country_leader = {
+					character = EUYL_PAR_jose_felix_estigarribia
+					ruling_only = yes 
+				}
+			}
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = no 
+			}
+			promote_character = PAR_junta ## This is another way to take power in commie or fascist route
+			hidden_effect = {
+				add_popularity = {
+					ideology = neutrality
+					popularity = 0.1
+				}
+			}
+		}
+		retire_character = EUYL_PAR_jose_felix_estigarribia
+	}
+}
+
+# Abolishment of the 1870 Constitution
+country_event = {
+	id = paraguay.12
+	title = paraguay.12.t
+	desc = paraguay.12.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = paraguay.12.a
+		add_political_power = -5
+		add_stability = -0.01
+	}
+}
+
+## Civilians Take Up Arms!
+country_event = {
+	id = paraguay.13
+	title = paraguay.13.t 
+	desc = paraguay.13.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes 
+
+	immediate = {
+		hidden_effect = {
+			PAR_bop_remove_bop_effect = yes 
+			clr_country_flag = PAR_solano_lopez_active_flag
+			if = {
+				limit = {
+					NOT = {
+						has_template = "Milicias" 
+					}
+				}
+				division_template = { 
+					name = "Milicias" 
+					division_names_group = SPAN_INF_02 
+					is_locked = no 
+					regiments = { 
+						infantry = { x = 0 y = 0 } 
+						infantry = { x = 1 y = 0 } 
+						infantry = { x = 2 y = 0 } 
+						infantry = { x = 3 y = 0 } 
+					} 
+					support = {
+						artillery = { x = 0 y = 0 }
+					}
+				}
+			}
+		}
+	}
+
+	option = { #They'll pay with their blood!
+		name = argentina.rework.35.a
+		start_civil_war = {
+			ideology = democratic
+			size = 0.52
+			keep_all_characters = yes
+		}
+		hidden_effect = {
+			random_other_country = {
+				limit = {
+					original_tag = ARG 
+					has_civil_war = yes 
+					has_government = democratic
+				}
+				retire_country_leader = yes 
+                create_country_leader = {
+                    name = "Disorganized Nationalists"
+                    desc = "POLITICS_ARMED_CIVILIANS_DESC"
+                    picture =  "gfx/leaders/South America/EUYL_armed_civilians.dds"
+                    expire = "1965.1.1"
+                    ideology = liberalism
+                    traits = {
+                        BRA_disorganized_leadership
+                    }
+                }
+				every_controlled_state = {
+					create_unit = {
+                        division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.05 start_equipment_factor = 0.9" 
+                        owner = PREV 
+						count = 3
+                    }
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+                        division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.05 start_equipment_factor = 0.9" 
+                        owner = PREV 
+						count = 4
+                    }
+				}
+			}
+			every_controlled_state = {
+				create_unit = {
+                    division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.05 start_equipment_factor = 0.9" 
+                    owner = ROOT
+					count = 1
+                }
+			}
+		}
+	}	
+}
+
+## Paraguay is Demanding We give Them Their Rightful Lands
+country_event = {
+	id = paraguay.14
+	title = paraguay.14.t 
+	desc = paraguay.14.d 
+	picture = GFX_report_event_ast_army
+
+	is_triggered_only = yes
+
+	immediate = { set_country_flag = PAR_affected_by_paraguay_flag } 
+
+	option = { #fine, we accept
+		name = paraguay.14.a 
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 4
+				strength_ratio = {
+					tag = FROM
+					ratio < 1
+				}
+			}
+			modifier = {
+				factor = 2
+				has_war = yes 
+			}
+			modifier = {
+				factor = 2
+				FROM = {
+					num_of_factories > 19
+				}
+			}
+		}
+		every_controlled_state = {
+			limit = {
+				is_core_of = FROM 
+				NOT = { has_state_flag = paraguayan_starting_state }
+			}
+			custom_effect_tooltip = EUYL_state_will_get_transferred_to_FROM_tt
+			hidden_effect = { FROM = { transfer_state = PREV } }
+		}
+		if = {
+			limit = {
+				check_variable = { FROM.PAR_global_concern > 6 }
+			}
+			country_event = paraguay.15 ##form the anti-paraguay pact 
+		}
+		FROM = {
+			country_event = {
+				id = peru.16
+				hours = 4
+			}
+		}
+	}
+
+	option = { # Not a chance, back off
+		name = paraguay.14.b 
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 2
+				strength_ratio = {
+					tag = FROM
+					ratio > 1
+				}
+			}
+			modifier = {
+				factor = 2
+				num_of_factories > 31
+			}
+			modifier = {
+				factor = 2
+				FROM = { has_war = yes }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { FROM.PAR_global_concern > 2 }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { FROM.PAR_global_concern > 3 }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { FROM.PAR_global_concern > 4 }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { FROM.PAR_global_concern > 5 }
+			}
+			modifier = {
+				factor = 2
+				check_variable = { FROM.PAR_global_concern > 6 }
+			}
+			modifier = {
+				factor = 0
+				OR = {	
+					has_civil_war = yes 
+					FROM = { has_civil_war = yes }
+				}
+			}
+		}
+		FROM = { 
+			country_event = {
+				id = peru.17
+				hours = 4
+			}
+		}
+		if = {
+			limit = {
+				check_variable = { FROM.PAR_global_concern > 5 }
+			}
+			country_event = paraguay.15 ##form the anti-paraguay pact 
+		}
+	}
+}
+
+## Shall we form a coalition against Paraguay?
+country_event = {
+	id = paraguay.15
+	title = paraguay.15.t 
+	desc = paraguay.15.d 
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes 
+
+	option = { #we need to defend ourselves
+		name = paraguay.15.a 
+		ai_chance = {
+			base = 125
+			modifier = {
+				factor = 2
+				PAR = { 
+					OR = {
+						num_of_factories > 24
+						has_army_manpower = { size > 229999 }
+						num_of_controlled_states > 8
+						has_war_with = ROOT
+					}
+				}
+			}
+			modifier = {
+				factor = 1.7
+				strength_ratio = {
+					tag = PAR
+					ratio < 1
+				}
+			}
+			modifier = {
+				factor = 0
+				has_civil_war = yes 
+			}
+		}
+		set_rule = { can_create_factions = yes }
+		create_faction = PAR_anti_paraguay_faction
+		set_global_flag = triple_alliance_formed_flag
+		if = {
+			limit = {
+				NOT = { has_war_with = PAR }
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = PAR 
+			}
+		}
+		add_ai_strategy = { ## to motivate the AI to declare war on Paraguay
+			type = declare_war
+			id = PAR
+			value = 100
+		}
+		every_other_country = {
+			limit = {
+				has_civil_war = no 
+				is_in_faction = no 
+				capital_scope = { is_on_continent = south_america }
+				is_subject = no 
+				NOT = {
+					original_tag = PAR
+				}
+				OR = {
+					has_war_with = PAR 
+					is_neighbor_of = PAR 
+				}
+			}
+			custom_effect_tooltip = EUYL_these_countries_will_receive_invites_to_faction_tt
+			hidden_effect = { 
+				country_event = {
+					id = generic.5
+					hours = 3 
+				}
+				if = {
+					limit = {
+						has_war_with = PAR 
+						NOT = { has_global_flag = triple_alliance_war_event_triggered }
+					}
+					set_global_flag = triple_alliance_war_event_triggered
+				}
+				add_ai_strategy = { ## to motivate the AI to declare war on Paraguay
+					type = declare_war
+					id = PAR
+					value = 100
+				}
+				add_ai_strategy = {
+					type = diplo_action_acceptance
+					id = ROOT
+					value = 100
+					target = join_allies
+				}
+			}
+		}
+	}
+
+	option = { # we can do this ourselves, thank you 
+		name = paraguay.15.b 
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 2
+				has_government = fascism
+			}
+		}
+		add_political_power = -10
+		add_stability = -0.01 
+	}
+}
+
+### FROM is Demanding we Subjegate to them
+country_event = {
+	id = paraguay.150
+	title = paraguay.150.t 
+	desc = paraguay.150.d 
+	picture = GFX_report_event_generic_army
+
+	is_triggered_only = yes 
+
+	option = { #Accept their demands
+		name = paraguay.150.a 
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 2
+				casualties_k > 99
+			}
+			modifier = {
+				factor = 2
+				surrender_progress > 0.6
+			}
+			modifier = {
+				factor = 3
+				strength_ratio = {
+					tag = FROM
+					ratio < 1
+				}
+			}
+		}
+		every_owned_state = {
+			limit = {
+				OR = {
+					is_core_of = FROM 
+					is_claimed_by = FROM 
+				}
+			}
+			FROM = { transfer_state = PREV }
+		}
+		set_politics = {
+			ruling_party = FROM 
+			elections_allowed = no 
+		}
+		if = {
+			limit = { num_of_controlled_states > 0 }
+			FROM = { puppet = ROOT }
+		}
+		hidden_effect = {
+			add_popularity = {
+				ideology = FROM 
+				popularity = 0.3
+			}
+			FROM = {
+				country_event = {
+					id = peru.16
+					hours = 4
+				}
+			}
+		}
+	}
+	option = {
+		name = paraguay.150.b 
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 2
+				OR = {
+					has_government = communism
+					has_government = fascism
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = { casualties_k > 199 }
+			}
+			modifier = {
+				factor = 3
+				strength_ratio = {
+					tag = FROM
+					ratio > 1
+				}
+			}
+		}
+		add_war_support = 0.05
+		FROM = {
+			country_event = {
+				id = paraguay.16
+				hours = 4
+			}
+		}
+	}
+}
+
+## FROM has refused to be subjegated
+country_event = {
+	id = paraguay.16
+	title = paraguay.16.t 
+	desc = paraguay.16.d 
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes 
+
+	option = { #very well, they'll pay with their blood 
+		name = paraguay.16.a 
+		add_command_power = 5
+		add_war_support = 0.01
+	}
+}
+
+### EASTER EGG | Native Path ###
+## A Call for a Native Revolution ##
+country_event = {
+	id = paraguay.17
+	title = paraguay.17.t 
+	desc = paraguay.17.d 
+	picture = GFX_report_event_generic_riot
+
+	fire_only_once = yes 
+	trigger = {
+		original_tag = PAR 
+		has_civil_war = no 
+		has_completed_focus = PAR_expand_on_native_rights
+		has_completed_focus = PAR_utilize_our_indigenous_knowledge
+		has_idea = PAR_juan_belaieff_idea
+		NOT = { has_cosmetic_tag = PAR_NATIVE }
+	}
+
+	immediate = {
+		hidden_effect = { activate_mission = PAR_impending_native_uprising }
+		688 = { 
+			set_state_flag = PAR_native_controlled_flag
+			set_variable = { PAR_extra_militia = 0 } 
+		}
+		set_variable = { PAR_stockpiled_guns = 0 }
+	}
+
+	option = { ## We shall take our revenge!
+		name = paraguay.17.a 
+		ai_chance = { base = 100 }
+		activate_mission = PAR_impending_native_uprising
+		custom_effect_tooltip = PAR_control_natives_and_change_tree_tt
+		set_global_flag = PAR_chose_native_path_flag
+		mark_focus_tree_layout_dirty = yes 
+		hidden_effect = {
+			PAR_bop_remove_bop_effect = yes
+		}
+	}
+
+	option = { # we'll fight these damn bastards 
+		name = paraguay.17.b 
+		effect_tooltip = {
+			start_civil_war = {
+				ideology = neutrality 
+			}
+			add_country_leader_role = {
+				character = PAR_juan_belaieff
+				promote_leader = yes
+				country_leader = {
+					ideology = theocracy
+					expire = "1965.1.1.1"
+				}
+			}
+			set_party_name = {
+				ideology = neutrality
+				long_name = PAR_native_party_long
+				name = PAR_native_party
+			}
+		}
+		hidden_effect = {
+			remove_mission = PAR_impending_native_uprising
+			if = {
+				limit = {
+					NOT = { has_template = "Brigada Paraguaya"}
+				}
+				division_template = {
+					name = "Brigada Paraguaya"
+					division_names_group = SPAN_INF_02
+					template_counter = 3
+					
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+					}
+				}
+			}
+			start_civil_war = {
+				ideology = neutrality 
+				size = 0.5
+				capital = 688
+				states = all 
+				states_filter = { 
+					has_state_flag = PAR_native_controlled_flag
+				}
+				keep_all_characters = yes 
+				PREV = {
+					PAR_juan_belaieff = { set_nationality = PREV.PREV }
+				}
+			}
+			every_controlled_state = { ## Base militia spawning
+				create_unit = {
+					division = "name = \"Brigada Paraguaya\" division_template = \"Brigada Paraguaya\" start_experience_factor = 0.05 start_equipment_factor = 0.9" 
+					owner = ROOT
+					count = 2 
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.1 start_equipment_factor = 0.85" 
+					owner = ROOT
+					count = 2 
+				}
+			}
+			random_other_country = {
+				limit = {
+					original_tag = PAR 
+					has_civil_war = yes 
+					has_government = neutrality
+				}
+				add_country_leader_role = {
+					character = PAR_juan_belaieff
+					promote_leader = yes
+					country_leader = {
+						ideology = theocracy
+						expire = "1965.1.1.1"
+					}
+				}
+				set_party_name = {
+					ideology = neutrality
+					long_name = PAR_native_party_long
+					name = PAR_native_party
+				}
+				set_cosmetic_tag = PAR_NATIVE
+				every_controlled_state = {
+					clr_state_flag = PAR_native_controlled_flag
+					clear_variable = PAR_extra_militia
+				}
+				every_controlled_state = { ## Base militia spawning
+					create_unit = {
+						division = "name = \"Brigada Nativa\" division_template = \"Brigada Paraguaya\" start_experience_factor = 0.05 start_equipment_factor = 0.9" 
+						owner = PREV
+						count = 2 
+					}
+				}
+			}
+		}
+	}
+}
+
+## Our Revolution Begins ##
+country_event = {
+	id = paraguay.18
+	title = paraguay.18.t 
+	desc = paraguay.18.d 
+	picture = GFX_PAR_agitated_right_wing_event
+
+	is_triggered_only = yes 
+
+	option = {
+		name = paraguay.18.a 
+		add_ideas = PAR_the_native_struggle_1
+		hidden_effect = {
+			if = {
+				limit = { has_idea = PAR_political_instability }
+				remove_ideas = PAR_political_instability
+			}
+		}
+	}
+}
+
+## Paraguay is Intensifying Native Resistance ##
+country_event = {
+	id = paraguay.19
+	title = paraguay.19.t 
+	desc = paraguay.19.d 
+	
+	is_triggered_only = yes 
+
+	immediate = { 
+		hidden_effect = {
+			FROM = {
+				country_event = {
+					id = paraguay.20
+					hours = 2
+				}
+			}
+		}
+	}
+
+	option = { #We'll make them pay!
+		name = paraguay.19.a
+		ai_chance = { 
+			base = 25
+			modifier = {
+				factor = 4
+				strength_ratio = {
+					tag = FROM
+					ratio > 1
+				}
+			}
+		} 
+		create_wargoal = {
+			type = annex_everything
+			target = FROM 
+		}
+	}
+
+	option = { #we can't do anything about it 
+		name = paraguay.19.b 
+		ai_chance = { 
+			base = 20
+			modifier = {
+				factor = 5
+				strength_ratio = {
+					tag = FROM
+					ratio < 1
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = { 
+					has_army_manpower = { size > 149999 }
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = {
+					num_of_factories > 19
+				}
+			}
+		}
+		add_war_support = -0.01
+		add_political_power = -10
+	}
+}
+
+## Paraguay gets notified of FROM finding out about native intensification ##
+country_event = {
+	id = paraguay.20
+	title = paraguay.20.t 
+	desc = paraguay.20.d 
+
+	is_triggered_only = yes 
+
+	option = {
+		name = "Oiporavo hikuái pe tape hasýva"
+		add_war_support = 0.05
+		add_command_power = 20
+		add_manpower = -15
+	}
+}
+
+## Liberal Remnants in the army dealt wit
+country_event = {
+	id = paraguay.21
+	title = paraguay.21.t 
+	desc = paraguay.21.d 
+	picture = GFX_URG_event_2
+
+	is_triggered_only = yes 
+
+	option = {
+		name = paraguay.21.a 
+		effect_tooltip = {
+			remove_ideas = PAR_liberal_remnants_idea
+		}
+	}
+}
+
+## Agitated Right Wing Crackdown
+country_event = {
+	id = paraguay.22
+	title = paraguay.22.t 
+	desc = paraguay.22.d 
+	picture = GFX_URG_event_3
+
+	is_triggered_only = yes 
+
+	option = {
+		name = paraguay.21.a 
+		effect_tooltip = {
+			remove_ideas = PAR_agitated_right_wing_revs
+		}
+	}
+}
+
+## Failed Search 
+country_event = {
+	id = paraguay.23
+	title = paragauy.23.t 
+	desc = paragauy.23.d 
+
+	is_triggered_only = yes 
+
+	option = {
+		name = paraguay.23.a 
+		effect_tooltip = { add_political_power = 15 }
+	}
+}

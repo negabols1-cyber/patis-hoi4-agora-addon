@@ -1,0 +1,62 @@
+# befriend
+# conquer
+# antagonize
+# build_ship
+# build_army
+# unit_ratio
+# build_building
+# research_tech
+# garrison
+# protect
+# influence
+
+
+SAU_build_inf ={
+	allowed = {
+		original_tag = SAU
+	}
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 200
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = irregular_infantry
+		value = 40
+	}
+}
+SAU_build_civ = {
+	allowed = {
+		original_tag = SAU
+	}
+	enable = {
+		date < 1938.6.1
+		has_war = no
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 120
+	}
+}
+SAU_build_mil = {
+	allowed = {
+		original_tag = SAU
+	}
+	enable = {
+		date > 1938.6.1
+		date < 1943.6.1
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 150
+	}
+}

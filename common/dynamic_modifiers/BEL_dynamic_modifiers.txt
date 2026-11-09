@@ -1,0 +1,102 @@
+BEL_wallonia_state_modifier = {
+	enable = { always = yes }
+	icon = GFX_modifiers_generic_military_plans
+
+	remove_trigger = {
+		#NOT = {	original_tag = BEL }
+	}
+
+	local_manpower = 0.1 #BEL_wll_recruitable_population_factor
+	local_resources = 0.1
+	state_production_speed_industrial_complex_factor = 0.1
+}
+
+BEL_flanders_state_modifier = {
+	enable = { always = yes }
+	icon = GFX_modifiers_generic_military_plans
+
+	remove_trigger = {
+		#NOT = {	original_tag = BEL }
+	}
+
+	local_manpower = -0.1 #BEL_fla_recruitable_population_factor
+	local_resources = -0.1
+	state_production_speed_industrial_complex_factor = -0.1
+}
+
+BEL_kingdom_of_belgium_dmod = {
+	enable = { always = yes }
+
+	remove_trigger = {
+		NOT = {	has_government = neutrality	}
+		if = {
+			limit = {
+				has_completed_focus = BEL_meet_with_the_king
+			}
+			NOT = {	has_government = fascism }
+		}
+	}
+
+	icon = GFX_idea_BEL_kingdom_of_belgium
+
+	stability_factor = 0.05
+	military_leader_cost_factor = -0.5
+	political_power_gain = BEL_kingdom_of_belgium_dmod_political_power_gain # 0.15
+	offensive_war_stability_factor = BEL_kingdom_of_belgium_dmod_offensive_war_stability_factor # 0.1
+	drift_defence_factor = BEL_kingdom_of_belgium_dmod_drift_defence_factor # 0.4
+	improve_relations_maintain_cost_factor = BEL_kingdom_of_belgium_dmod_improve_relations_maintain_cost_factor # -0.5
+	join_faction_tension = BEL_kingdom_of_belgium_dmod_join_faction_tension # -1.0
+	guarantee_tension = BEL_kingdom_of_belgium_dmod_guarantee_tension # 1.0
+	political_advisor_cost_factor = BEL_kingdom_of_belgium_dmod_political_advisor_cost_factor # -0.1
+	consumer_goods_factor = BEL_kingdom_of_belgium_dmod_consumer_goods_factor # -0.1
+	research_speed_factor = BEL_kingdom_of_belgium_dmod_research_speed # 0.08
+	army_org_factor = BEL_kingdom_of_belgium_dmod_army_org_factor # 0.1
+	conscription_factor = BEL_kingdom_of_belgium_dmod_recruitable_population_factor # 0.10
+	army_defence_against_major_factor = BEL_kingdom_of_belgium_dmod_army_defence_against_major_factor #0.05
+	justify_war_goal_time = BEL_kingdom_of_belgium_dmod_justify_war_goal_time # -0.25
+	production_speed_arms_factory_factor = BEL_kingdom_of_belgium_dmod_production_speed_arms_factory_factor
+	production_speed_industrial_complex_factor = BEL_kingdom_of_belgium_dmod_production_speed_industrial_complex_factor
+	production_speed_rail_way_factor = BEL_kingdom_of_belgium_dmod_production_speed_rail_way_factor
+	production_speed_infrastructure_factor = BEL_kingdom_of_belgium_dmod_production_speed_infrastructure_factor
+	training_time_factor = BEL_kingdom_of_belgium_dmod_training_time_factor
+}
+
+BEL_belgian_armed_forces_dmod = {
+	enable = { always = yes }
+
+	icon = GFX_idea_belgian_armed_forces
+
+	army_org_factor = BEL_belgian_armed_forces_dmod_army_org_factor # 0.05
+	army_morale_factor = BEL_belgian_armed_forces_dmod_army_morale_factor # 0.05
+	experience_gain_army_factor = BEL_belgian_armed_forces_dmod_experience_gain_army_factor #0.05
+	army_spirit_category_type_cost_factor = BEL_belgian_armed_forces_dmod_army_spirit_category_type_cost_factor #-0.1
+	army_artillery_attack_factor = BEL_belgian_armed_forces_dmod_army_artillery_attack_factor #0.05
+	mobilization_speed = BEL_belgian_armed_forces_dmod_mobilization_speed #0.1 #Rapid Mobilization
+	conscription_factor = BEL_belgian_armed_forces_dmod_conscription_factor #0.1
+	breakthrough_factor = BEL_belgian_armed_forces_dmod_breakthrough_factor #0.05
+	equipment_conversion_speed = BEL_belgian_armed_forces_dmod_equipment_conversion_speed #0.25 #Modernization
+	modifier_army_sub_unit_jaeger_attack_factor = BEL_belgian_armed_forces_dmod_modifier_army_sub_unit_jaeger_attack_factor #0.05
+	modifier_army_sub_unit_jaeger_defence_factor = BEL_belgian_armed_forces_dmod_modifier_army_sub_unit_jaeger_defence_factor #0.05
+	modifier_army_sub_unit_jaeger_speed_factor = BEL_belgian_armed_forces_dmod_modifier_army_sub_unit_jaeger_speed_factor #0.05
+	special_forces_out_of_supply_factor = BEL_belgian_armed_forces_dmod_special_forces_out_of_supply_factor #-0.1
+	special_forces_attack_factor = BEL_belgian_armed_forces_dmod_special_forces_attack_factor #0.05
+	unit_limit_bonus = BEL_belgian_armed_forces_dmod_unit_limit_bonus #10
+
+	#Air
+	experience_gain_air_factor = BEL_belgian_armed_forces_dmod_experience_gain_air_factor #0.05
+	air_home_defence_factor = BEL_belgian_armed_forces_dmod_air_home_defence_factor #0.1
+	air_superiority_efficiency = BEL_belgian_armed_forces_dmod_air_superiority_efficiency #0.1
+
+	#Navy
+	experience_gain_navy_factor = BEL_belgian_armed_forces_dmod_experience_gain_navy_factor #0.05
+	naval_coordination = BEL_belgian_armed_forces_dmod_naval_coordination #0.05
+	spotting_chance = BEL_belgian_armed_forces_dmod_spotting_chance #0.05
+}
+
+BEL_first_reactor_building = {
+	enable = { always = yes }
+
+	icon = GFX_state_construction
+
+	state_production_speed_nuclear_reactor_factor = 0.1
+}

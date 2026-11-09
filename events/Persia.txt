@@ -1,0 +1,2163 @@
+###########################
+# Persian Events
+###########################
+
+add_namespace = persia
+add_namespace = persia_misc
+add_namespace = persia_clergy
+
+#Election
+country_event = {
+	id = persia.1
+	title = persia.1.t
+	desc = persia.1.d
+	picture = GFX_event_per_parliament
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = persia.1.a #Mohammad Ali Foroughi
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 2
+				PER_is_democratic_ai = yes
+			}
+		}
+		effect_tooltip = {
+			PER_mohammad_ali_foroughi = {
+				add_country_leader_role = {
+					country_leader = {
+						expire = "1965.1.1"
+						ideology = liberalism
+						traits = {
+						}
+					}
+					promote_leader = yes
+				}
+			}
+		}
+		set_politics = { ruling_party = democratic elections_allowed = no }
+	}
+
+	option = {
+		name = persia.1.b #Mohammad Mosaddegh
+		ai_chance = {
+			base = 2
+		}
+		promote_character = PER_mohammad_mosaddegh
+		set_party_name = {
+			ideology = democratic
+			long_name = PER_national_front_long
+			name = PER_national_front
+		}
+		set_politics = { ruling_party = democratic elections_allowed = no }
+	}
+}
+
+#Generic events - FROM Accepts
+country_event = {
+	id = persia.2
+	title = persia.2.t
+	desc = persia.2.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia.2.a
+		if = {
+			limit = {
+				check_variable = { PER_event_var = 1 }
+			}
+			effect_tooltip = {
+				ENG = { remove_resource_rights = 413 }
+				swap_ideas = {
+					remove_idea = PER_british_repression
+					add_idea = PER_british_repression2
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_var = 2 }
+			}
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						has_state_flag = PER_syrian_claims
+					}
+					transfer_state_to = ROOT
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_var = 3 }
+			}
+			effect_tooltip = {
+				every_state = {
+					limit = {
+						has_state_flag = PER_egypt_claims
+					}
+					transfer_state_to = PER
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_var = 4 }
+			}
+			effect_tooltip = {
+				GER = {
+					if = {
+						limit = {
+							has_dlc = "Death or Dishonor"
+						}
+						if = {
+							limit = {
+								has_tech = advanced_light_tank
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = light_tank_equipment_3
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = improved_light_tank
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = light_tank_equipment_2
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = basic_light_tank
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = light_tank_equipment_1
+								}
+								cost_factor = 0
+							}
+						}
+						if = {
+							limit = {
+								has_tech = advanced_medium_tank
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = medium_tank_equipment_3
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = improved_medium_tank
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = medium_tank_equipment_2
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = basic_medium_tank
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = medium_tank_equipment_1
+								}
+								cost_factor = 0
+							}
+						}
+						if = {
+							limit = {
+								has_tech = advanced_heavy_tank
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = heavy_tank_equipment_3
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = improved_heavy_tank
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = heavy_tank_equipment_2
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = basic_heavy_tank
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = heavy_tank_equipment_1
+								}
+								cost_factor = 0
+							}
+						}
+						if = {
+							limit = {
+								has_tech = advanced_light_tank_chassis
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = light_tank_chassis_3
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = improved_light_tank_chassis
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = light_tank_chassis_2
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = basic_light_tank_chassis
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = light_tank_chassis_1
+								}
+								cost_factor = 0
+							}
+						}
+						if = {
+							limit = {
+								has_tech = advanced_medium_tank_chassis
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = medium_tank_chassis_3
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = improved_medium_tank_chassis
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = medium_tank_chassis_2
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = basic_medium_tank_chassis
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = medium_tank_chassis_1
+								}
+								cost_factor = 0
+							}
+						}
+						if = {
+							limit = {
+								has_tech = advanced_heavy_tank_chassis
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = heavy_tank_chassis_3
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = improved_heavy_tank_chassis
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = heavy_tank_chassis_2
+								}
+								cost_factor = 0
+							}
+						}
+						else_if = {
+							limit = {
+								has_tech = basic_heavy_tank_chassis
+							}
+							create_production_license = {
+								target = PER
+								equipment = {
+									type = heavy_tank_chassis_1
+								}
+								cost_factor = 0
+							}
+						}
+					}
+				}
+				add_tech_bonus = {
+					name = armor
+					bonus = 1.0
+					uses = 1
+					category = armor
+				}
+				give_resource_rights = { receiver = GER state = 421 }
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_var = 5 }
+			}
+			effect_tooltip = {
+				FROM = {
+					diplomatic_relation = {
+						country = ROOT
+						relation = non_aggression_pact
+						active = yes
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_var = 6 }
+			}
+			effect_tooltip = {
+				add_country_leader_trait = likes_turkey
+				FROM = {
+					add_country_leader_trait = likes_iran
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_var = 7 }
+			}
+			effect_tooltip = {
+				transfer_state = 444
+				transfer_state = 445
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_var = 8 }
+			}
+			annex_country = {
+				target = FROM
+				transfer_troops = no
+			}
+		}
+	}
+}
+
+#Generic events - FROM Rejects
+country_event = {
+	id = persia.3
+	title = persia.3.t
+	desc = persia.3.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia.3.a
+		if = {
+			limit = {
+				check_variable = { PER_event_reject_var = 1 }
+			}
+			effect_tooltip = {
+				add_opinion_modifier = {
+					target = FROM
+					modifier = SWI_rejected_our_request
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_reject_var = 2 }
+			}
+			effect_tooltip = {
+				create_wargoal = {
+					target = FROM
+					type = take_state_focus
+					generator = { 677 680 554 }
+					expire = 90
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_reject_var = 3 }
+			}
+			effect_tooltip = {
+				create_wargoal = {
+					target = FROM
+					type = take_state_focus
+					generator = { 907 }
+					expire = 90
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_reject_var = 4 }
+			}
+			effect_tooltip = {
+				create_wargoal = {
+					target = FROM
+					type = take_state_focus
+					generator = { 444 445 }
+					expire = 90
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_event_reject_var = 5 }
+			}
+			effect_tooltip = {
+				create_wargoal = {
+					target = FROM
+					type = annex_everything
+				}
+			}
+		}
+	}
+}
+
+#Revise the oil agreement
+country_event = {
+	id = persia.4
+	title = persia.4.t
+	desc = persia.4.d
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Ok
+		name = persia.4.a
+		if = {
+			limit = {
+				PER = {
+					NOT = { has_completed_focus = PER_continue_pahlavi_dictatorship }
+				}
+			}
+			ENG = { remove_resource_rights = 413 }
+
+			PER = {
+				swap_ideas = {
+					remove_idea = PER_british_repression
+					add_idea = PER_british_repression2
+				}
+				set_country_flag = PER_britain_agrees_flag
+			}
+		}
+		else = {
+			PER = {
+				413 = {
+					add_resource = {
+						amount = 8
+						type = oil
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			remove_ideas = aioc
+			add_ideas = british_petroleum
+			FROM = {
+				set_variable = { PER_event_var = 1 }
+				country_event = { id = persia.2 hours = 2 }
+			}
+		}
+	}
+
+	option = { #Nope
+		name = persia.4.b
+		PER = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = SWI_rejected_our_request
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_reject_var = 1 }
+				country_event = { id = persia.3 hours = 2 }
+			}
+		}
+	}
+}
+
+#Demand Syria
+country_event = {
+	id = persia.5
+	title = persia.5.t
+	desc = persia.5.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Ok
+		name = persia.5.a
+		add_stability = -0.02
+		every_state = {
+			limit = {
+				has_state_flag = PER_syrian_claims
+			}
+			transfer_state_to = PER
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_var = 2 }
+				country_event = { id = persia.2 hours = 2 }
+			}
+		}
+	}
+
+	option = { #Nope
+		name = persia.5.b
+		add_political_power = -20
+		FROM = {
+			create_wargoal = {
+				target = ROOT
+				type = take_state_focus
+				generator = { 677 680 554 }
+				expire = 90
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_reject_var = 2 }
+				country_event = { id = persia.3 hours = 2 }
+			}
+		}
+	}
+}
+
+#Demand Egypt
+country_event = {
+	id = persia.6
+	title = persia.6.t
+	desc = persia.6.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Ok
+		name = persia.6.a
+		add_stability = -0.02
+		every_state = {
+			limit = {
+				has_state_flag = PER_egypt_claims
+			}
+			transfer_state_to = PER
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_var = 3 }
+				country_event = { id = persia.2 hours = 2 }
+			}
+		}
+	}
+
+	option = { #Nope
+		name = persia.6.b
+		add_political_power = -20
+		FROM = {
+			create_wargoal = {
+				target = ROOT
+				type = take_state_focus
+				generator = { 907 }
+				expire = 90
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_reject_var = 3 }
+				country_event = { id = persia.3 hours = 2 }
+			}
+		}
+	}
+}
+
+#Invite Qajar King
+country_event = {
+	id = persia.7
+	title = persia.7.t
+	desc = persia.7.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Mohammad Hassan Mirza
+		name = persia.7.a
+		set_country_flag = PER_mohammad_hassan_invited_flag
+		custom_effect_tooltip = PER_mohammad_hassan_invited_tt
+	}
+
+	option = { #Fereydoun Mirza Qajar
+		name = persia.7.b
+		set_country_flag = PER_fereydoun_mirza_invited_flag
+		custom_effect_tooltip = PER_fereydoun_mirza_invited_tt
+	}
+}
+
+#Approach Germany
+country_event = {
+	id = persia.8
+	title = persia.8.t
+	desc = persia.8.d
+	picture = GFX_report_event_DEN_danish_politics
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia.8.a
+		add_opinion_modifier = {
+			target = PER
+			modifier = large_increase
+		}
+		PER = {
+			add_ideas = PER_german_advisors
+			add_opinion_modifier = {
+				target = GER
+				modifier = large_increase
+			}
+			set_country_flag = PER_german_persian_cooperation_flag
+			country_event = { id = persia.9 }
+		}
+	}
+
+	option = { #No
+		name = persia.8.b
+		PER = { country_event = { id = persia.10 } }
+	}
+}
+
+#Approach Germany - Yes
+country_event = {
+	id = persia.9
+	title = persia.9.t
+	desc = persia.9.d
+	picture = GFX_report_event_DEN_danish_politics
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia.9.a
+		effect_tooltip = {
+			add_ideas = PER_german_advisors
+			add_opinion_modifier = {
+				target = GER
+				modifier = large_increase
+			}
+			GER = {
+				add_opinion_modifier = {
+					target = PER
+					modifier = large_increase
+				}
+			}
+		}
+	}
+}
+
+#Approach Germany - No
+country_event = {
+	id = persia.10
+	title = persia.10.t
+	desc = persia.10.d
+	picture = GFX_report_event_DEN_danish_politics
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia.10.a
+	}
+}
+
+#German Resource Exchange
+country_event = {
+	id = persia.11
+	title = persia.11.t
+	desc = persia.11.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = { #Accept
+		name = persia.11.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 2.0
+				has_government = FROM
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_in_faction = no
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_dlc = "Death or Dishonor"
+			}
+			if = {
+				limit = {
+					has_tech = advanced_light_tank
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = light_tank_equipment_3
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = improved_light_tank
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = light_tank_equipment_2
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = basic_light_tank
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = light_tank_equipment_1
+					}
+					cost_factor = 0
+				}
+			}
+			if = {
+				limit = {
+					has_tech = advanced_medium_tank
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = medium_tank_equipment_3
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = improved_medium_tank
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = medium_tank_equipment_2
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = basic_medium_tank
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = medium_tank_equipment_1
+					}
+					cost_factor = 0
+				}
+			}
+			if = {
+				limit = {
+					has_tech = advanced_heavy_tank
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = heavy_tank_equipment_3
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = improved_heavy_tank
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = heavy_tank_equipment_2
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = basic_heavy_tank
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = heavy_tank_equipment_1
+					}
+					cost_factor = 0
+				}
+			}
+			if = {
+				limit = {
+					has_tech = advanced_light_tank_chassis
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = light_tank_chassis_3
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = improved_light_tank_chassis
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = light_tank_chassis_2
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = basic_light_tank_chassis
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = light_tank_chassis_1
+					}
+					cost_factor = 0
+				}
+			}
+			if = {
+				limit = {
+					has_tech = advanced_medium_tank_chassis
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = medium_tank_chassis_3
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = improved_medium_tank_chassis
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = medium_tank_chassis_2
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = basic_medium_tank_chassis
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = medium_tank_chassis_1
+					}
+					cost_factor = 0
+				}
+			}
+			if = {
+				limit = {
+					has_tech = advanced_heavy_tank_chassis
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = heavy_tank_chassis_3
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = improved_heavy_tank_chassis
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = heavy_tank_chassis_2
+					}
+					cost_factor = 0
+				}
+			}
+			else_if = {
+				limit = {
+					has_tech = basic_heavy_tank_chassis
+				}
+				create_production_license = {
+					target = PER
+					equipment = {
+						type = heavy_tank_chassis_1
+					}
+					cost_factor = 0
+				}
+			}
+		}
+		PER = {
+			add_tech_bonus = {
+				name = armor
+				bonus = 1.0
+				uses = 1
+				category = armor
+			}
+			give_resource_rights = { receiver = GER state = 421 }
+			hidden_effect = {
+				set_variable = { PER_event_var = 4 }
+				country_event = { id = persia.2 hours = 2 }
+			}
+		}
+	}
+
+	option = { #Refuse
+		name = persia.11.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0
+				FROM = {
+					is_in_faction_with = ROOT
+				}
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_enemy_ideology = yes
+				}
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_in_faction_with = USA
+				}
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_in_faction_with = ENG
+				}
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_in_faction_with = SOV
+				}
+			}
+		}
+		PER = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = SWI_rejected_our_request
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_reject_var = 1 }
+				country_event = { id = persia.3 hours = 2 }
+			}
+		}
+	}
+}
+
+#Sign Non Aggression Pacts
+country_event = {
+	id = persia.12
+	title = persia.12.t
+	desc = persia.12.d
+	picture = GFX_report_event_generic_handshake
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia.12.a
+		diplomatic_relation = {
+			country = FROM
+			relation = non_aggression_pact
+			active = yes
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_var = 5 }
+				country_event = { id = persia.2 hours = 2 }
+			}
+		}
+	}
+
+	option = { #Nope
+		name = persia.12.a
+		PER = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = SWI_rejected_our_request
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_reject_var = 1 }
+				country_event = { id = persia.3 hours = 2 }
+			}
+		}
+	}
+}
+
+#Treaty of Friendship with Turks
+country_event = {
+	id = persia.13
+	title = persia.13.t
+	desc = persia.13.d
+	picture = GFX_report_event_generic_handshake
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia.13.a
+		add_country_leader_trait = likes_iran
+		PER = {
+			add_country_leader_trait = likes_turkey
+		}
+		hidden_effect = {
+			add_ai_strategy = {
+				type = befriend
+				id = "PER"
+				value = 50
+			}
+			FROM = {
+				add_ai_strategy = {
+					type = befriend
+					id = "TUR"
+					value = 50
+				}
+				set_variable = { PER_event_var = 6 }
+				country_event = { id = persia.2 hours = 2 }
+			}
+		}
+	}
+
+	option = { #Nope
+		name = persia.13.a
+		PER = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = SWI_rejected_our_request
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_reject_var = 1 }
+				country_event = { id = persia.3 hours = 2 }
+			}
+		}
+	}
+}
+
+#Demand Claims
+country_event = {
+	id = persia.14
+	title = persia.14.t
+	desc = persia.14.d
+	picture = GFX_report_event_gathering_protest
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia.14.a
+		FROM = {
+			transfer_state = 444
+			transfer_state = 445
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_var = 7 }
+				country_event = { id = persia.2 hours = 2 }
+			}
+		}
+	}
+
+	option = { #Nope
+		name = persia.14.a
+		FROM = {
+			create_wargoal = {
+				target = ROOT
+				type = take_state_focus
+				generator = { 444 445 }
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_reject_var = 4 }
+				country_event = { id = persia.3 hours = 2 }
+			}
+		}
+	}
+}
+
+#Demand Annexation
+country_event = {
+	id = persia.15
+	title = persia.15.t
+	desc = persia.15.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia.15.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				threat > 20
+				factor = 1.3
+			}
+			modifier = {
+				threat > 40
+				factor = 1.3
+			}
+			modifier = {
+				has_non_aggression_pact_with = FROM
+				factor = 1.5
+			}
+			modifier = {
+				is_in_faction = no
+				factor = 2
+			}
+			modifier = {
+				is_in_faction = yes
+				factor = 0.75
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 65
+				}
+				factor = 1.5
+			}
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+		effect_tooltip = {
+			FROM = {
+				annex_country = {
+					target = ROOT
+					transfer_troops = no
+				}
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_var = 8 }
+				country_event = { id = persia.2 hours = 2 }
+			}
+		}
+	}
+
+	option = { #Nope
+		name = persia.15.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				is_in_faction = yes
+				factor = 2 #we're good thanks
+			}
+			modifier = {
+				FROM = {
+					is_ai = yes
+				}
+				factor = 0
+			}
+		}
+		FROM = {
+			create_wargoal = {
+				target = ROOT
+				type = annex_everything
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				set_variable = { PER_event_reject_var = 5 }
+				country_event = { id = persia.3 hours = 2 }
+			}
+		}
+	}
+}
+
+#Demand Peace
+country_event = {
+	id = persia.16
+	title = persia.16.t
+	desc = persia.16.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia.16.a
+		unlock_decision_tooltip = PER_demand_peace_negotiations
+	}
+}
+
+# PER demands peace and territorial concessions after turning the tables in War - Event for SOV
+country_event = {
+	id = persia.17
+	title = persia.17.t
+	desc = persia.17.d
+	picture = GFX_report_event_soviet_soldiers
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	#Accept
+	option = {
+		name = persia.17.a
+
+		ai_chance = {
+			base = 1 #Soviets should always surrender territory otherwise Iran player can get screwed
+		}
+
+		effect_tooltip = {
+			white_peace = FROM
+			if = {
+				limit = {
+					FROM = {
+						is_faction_leader = yes
+					}
+				}
+				every_enemy_country = {
+					limit = {
+						is_in_faction_with = FROM
+					}
+					ROOT = { white_peace = PREV }
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						is_subject = yes
+					}
+				}
+				FROM = {
+					overlord = {
+						ROOT = { white_peace = PREV }
+					}
+				}
+				if = {
+					limit = {
+						FROM = {
+							any_allied_country = {
+								has_war_with = ROOT
+							}
+						}
+					}
+					every_other_country = {
+						limit = {
+							is_in_faction_with = FROM
+							has_war_with = ROOT
+						}
+						ROOT = { white_peace = PREV }
+					}
+				}
+			}
+
+			FROM = {
+				every_owned_state = {
+					limit = {
+						is_claimed_by = ROOT
+					}
+					remove_claim_by = ROOT
+				}
+			}
+
+			if = {
+				limit = {
+					230 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+				}
+				FROM = { transfer_state = 230 }
+			}
+			if = {
+				limit = {
+					830 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+				}
+				FROM = { transfer_state = 830 }
+			}
+			if = {
+				limit = {
+					831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+				}
+				FROM = { transfer_state = 831 }
+			}
+			if = {
+				limit = {
+					831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+				}
+				FROM = { transfer_state = 832 }
+			}
+			if = {
+				limit = {
+					831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+				}
+				FROM = { transfer_state = 584 }
+			}
+			if = {
+				limit = {
+					831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+				}
+				FROM = { transfer_state = 229 }
+			}
+			if = {
+				limit = {
+					831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+				}
+				FROM = { transfer_state = 231 }
+			}
+			if = {
+				limit = {
+					831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+				}
+				FROM = { transfer_state = 826 }
+			}
+		}
+		hidden_effect = {
+			FROM = { country_event = { id = persia.18 hours = 1 } }
+		}
+	}
+
+	#Reject
+	option = {
+		name = persia.17.b
+
+		ai_chance = {
+			base = 0
+		}
+
+		add_stability = -0.1
+		add_war_support = -0.1
+		SOV_paranoia_medium_increase_effect = yes
+
+		hidden_effect = {
+			FROM = { country_event = { id = persia.19 hours = 6 random_hours = 4 } }
+		}
+	}
+}
+
+# Soviets accept peace demands - event for PER
+country_event = {
+	id = persia.18
+	title = persia.18.t
+	desc = persia.18.d
+	picture = GFX_report_event_soviet_finnish_pact
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia.18.a
+
+		white_peace = FROM
+		if = {
+			limit = {
+				is_faction_leader = yes
+			}
+			every_other_country = {
+				limit = {
+					is_in_faction_with = ROOT
+				}
+				white_peace = FROM
+			}
+		}
+		else_if = {
+			limit = {
+				is_subject = yes
+			}
+			overlord = {
+				white_peace = FROM
+			}
+			if = {
+				limit = {
+					any_allied_country = {
+						has_war_with = FROM
+					}
+				}
+				every_other_country = {
+					limit = {
+						is_in_faction_with = ROOT
+						has_war_with = FROM
+					}
+					white_peace = FROM
+				}
+			}
+		}
+
+		every_owned_state = {
+			limit = {
+				is_claimed_by = FROM
+			}
+			remove_claim_by = FROM
+		}
+
+		hidden_effect = { #Prevent Soviet AI from insta-justify on Iran after peacing out.
+			FROM = {
+				add_ai_strategy = {
+					type = antagonize
+					id = ROOT
+					value = -200
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				230 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+			}
+			transfer_state = 230
+		}
+		if = {
+			limit = {
+				830 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+			}
+			transfer_state = 830
+		}
+		if = {
+			limit = {
+				831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+			}
+			transfer_state = 831
+		}
+		if = {
+			limit = {
+				831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+			}
+			transfer_state = 832
+		}
+		if = {
+			limit = {
+				831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+			}
+			transfer_state = 584
+		}
+		if = {
+			limit = {
+				831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+			}
+			transfer_state = 229
+		}
+		if = {
+			limit = {
+				831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+			}
+			transfer_state = 231
+		}
+		if = {
+			limit = {
+				831 = { has_state_flag = PER_demanded_by_iran_in_soviet_war_flag }
+			}
+			transfer_state = 826
+		}
+	}
+}
+
+# Soviets reject peace demands - event for PER
+country_event = {
+	id = persia.19
+	title = persia.19.t
+	desc = persia.19.d
+	picture = GFX_report_event_soviet_finnish_pact
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia.19.a
+
+		effect_tooltip = {
+			FROM = {
+				add_stability = -0.1
+				add_war_support = -0.1
+				SOV_paranoia_medium_increase_effect = yes
+			}
+		}
+	}
+}
+
+#Reza Shah Pahlavi dies
+country_event = {
+	id = persia.100
+	title = persia.100.t
+	desc = persia.100.desc
+	picture = GFX_report_event_generic_funeral
+
+	fire_only_once = yes
+
+	trigger = {
+		date > 1944.06.12
+		original_tag = PER
+		NOT = { has_country_flag = PER_reza_shah_pahlavi_died_flag }
+		NOT = {
+			has_completed_focus = PER_kill_the_shah
+			has_completed_focus = PER_towards_a_red_government
+			has_completed_focus = PER_start_socialist_revolution
+			has_completed_focus = PER_rise_against_the_king
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 180
+	}
+
+	option = {
+		name = persia.100.a
+		if = {
+			limit = {
+				has_country_leader = {
+					character = PER_reza_shah_pahlavi
+				}
+			}
+			kill_country_leader = yes
+			if = {
+				limit = {
+					has_government = democratic
+				}
+				PER_mohammed_reza_pahlavi = {
+					add_country_leader_role = {
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = democratic_monarchy
+							traits = {
+								PER_shah_of_iran
+								PER_modernist_and_reformer
+							}
+						}
+						promote_leader = yes
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_idea = PER_reza_pahlavi_idea
+			}
+			remove_ideas = PER_reza_pahlavi_idea
+			add_ideas = PER_mohammed_reza_pahlavi_idea
+		}
+		set_country_flag = PER_reza_shah_pahlavi_died_flag
+	}
+}
+
+#Reza Shah Pahlavi dies - hidden
+country_event = {
+	id = persia.101
+
+	hidden = yes
+	fire_only_once = yes
+
+	trigger = {
+		date > 1944.06.12
+		original_tag = PER
+		NOT = { has_country_flag = PER_reza_shah_pahlavi_died_flag }
+		has_completed_focus = PER_towards_a_red_government
+	}
+
+	mean_time_to_happen = {
+		days = 180
+	}
+
+	immediate = {
+		retire_character = PER_reza_shah_pahlavi
+		set_country_flag = PER_reza_shah_pahlavi_died_flag
+	}
+}
+
+#Clergy Random Event Generator
+country_event = {
+	id = persia_clergy.1
+
+	hidden = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		random_list = {
+			20 = { # Clergy wants more mosques built
+				modifier = {
+					factor = 0
+					has_country_flag = PER_clergy_more_mosques_flag
+				}
+				modifier = {
+					factor = 0
+					has_country_flag = PER_clergy_more_mosques_cooldown_flag
+				}
+				country_event = { id = persia_clergy.2 }
+			}
+			20 = { # Clergy demands financial support from the state treasury
+				modifier = {
+					factor = 0
+					has_country_flag = PER_financial_support_for_clergy_flag
+				}
+				modifier = {
+					factor = 0
+					has_idea = PER_financial_support_for_clergy
+				}
+				country_event = { id = persia_clergy.3 }
+			}
+			20 = { # Clergy demands more land be transferred to them
+				modifier = {
+					factor = 0
+					has_country_flag = PER_clergy_demands_land_flag
+				}
+				modifier = {
+					factor = 1.5
+					has_country_flag = PER_recently_confiscated_land_flag
+				}
+				country_event = { id = persia_clergy.4 }
+			}
+			20 = { # Clergy wants alcohol banned
+				modifier = {
+					factor = 0
+					has_country_flag = PER_clergy_alcohol_ban_flag
+				}
+				country_event = { id = persia_clergy.5 }
+			}
+			20 = { # Clergy wants more conservative education in schools
+				modifier = {
+					factor = 0
+					has_country_flag = PER_clergy_conservative_education_flag
+				}
+				modifier = {
+					factor = 0
+					has_country_flag = PER_clergy_conservative_education_cooldown_flag
+				}
+				modifier = {
+					factor = 0
+					check_variable = { PER_conservative_education_var > 2 }
+				}
+				country_event = { id = persia_clergy.6 }
+			}
+			20 = { # Clergy demands lifting of hijab ban
+				modifier = {
+					factor = 0
+					NOT = { has_country_flag = PER_hijabs_are_banned_flag }
+				}
+				modifier = {
+					factor = 0
+					has_country_flag = PER_hijab_ban_lifted_flag
+				}
+				country_event = { id = persia_clergy.7 }
+			}
+			20 = { # Clergy is influencing more people
+				country_event = { id = persia_clergy.8 }
+			}
+		}
+	}
+}
+
+#Clergy wants more mosques built
+country_event = {
+	id = persia_clergy.2
+	title = persia_clergy.2.t
+	desc = persia_clergy.2.d
+	picture = GFX_report_event_generic_rally_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia_clergy.2.a
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 2
+				is_power_balance_in_range = {
+					id = PER_clergy_balance
+					range > PER_clergy_low_control_range
+				}
+			}
+			modifier = {
+				factor = 2
+				has_completed_focus = PER_side_with_islamists
+			}
+			modifier = {
+				factor = 2
+				check_variable = { PER_clergy_anger_level > 5 }
+			}
+			modifier = {
+				factor = 0.5
+				has_completed_focus = PER_blackmail_the_clergy
+			}
+		}
+		activate_mission = PER_clergy_more_mosques
+		unlock_decision_tooltip = PER_built_more_mosques
+		set_country_flag = PER_clergy_more_mosques_flag
+		set_country_flag = { flag = PER_clergy_more_mosques_cooldown_flag value = 1 days = 90 }
+	}
+
+	option = {
+		name = persia_clergy.2.b
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 2
+				check_variable = { PER_clergy_anger_level < 6 }
+			}
+			modifier = {
+				factor = 2
+				has_completed_focus = PER_embrace_persian_identity
+			}
+			modifier = {
+				factor = 2
+				is_power_balance_in_range = {
+					id = PER_clergy_balance
+					range < PER_balance_range
+				}
+			}
+			modifier = {
+				factor = 0.25
+				check_variable = { PER_clergy_anger_level > 5 }
+			}
+		}
+		custom_effect_tooltip = PER_clergy_angry_tt
+		add_to_variable = { PER_clergy_anger_level = 1 }
+		set_country_flag = { flag = PER_clergy_more_mosques_cooldown_flag value = 1 days = 40 }
+	}
+}
+
+#Clergy demands financial support from the state treasury
+country_event = {
+	id = persia_clergy.3
+	title = persia_clergy.3.t
+	desc = persia_clergy.3.d
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia_clergy.3.a
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 3
+				is_power_balance_in_range = {
+					id = PER_clergy_balance
+					range > PER_clergy_low_control_range
+				}
+			}
+			modifier = {
+				factor = 2
+				has_completed_focus = PER_side_with_islamists
+			}
+			modifier = {
+				factor = 0.5
+				has_completed_focus = PER_blackmail_the_clergy
+			}
+		}
+		add_timed_idea = { idea = PER_financial_support_for_clergy days = 90 }
+		set_country_flag = { flag = PER_financial_support_for_clergy_flag value = 1 days = 150 }
+	}
+
+	option = { #Nope
+		name = persia_clergy.3.b
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 2
+				has_completed_focus = PER_blackmail_the_clergy
+			}
+			modifier = {
+				factor = 2
+				is_power_balance_in_range = {
+					id = PER_clergy_balance
+					range < PER_shah_side_low_control_range
+				}
+			}
+		}
+		add_political_power = -25
+		custom_effect_tooltip = PER_clergy_angry_tt
+		add_to_variable = { PER_clergy_anger_level = 1 }
+	}
+}
+
+#Clergy demands more land be transferred to them
+country_event = {
+	id = persia_clergy.4
+	title = persia_clergy.4.t
+	desc = persia_clergy.4.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia_clergy.4.a
+		activate_mission = PER_clergy_demands_more_land
+		set_country_flag = PER_clergy_demands_land_flag
+	}
+}
+
+#Clergy wants alcohol banned
+country_event = {
+	id = persia_clergy.5
+	title = persia_clergy.5.t
+	desc = persia_clergy.5.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia_clergy.5.a
+		activate_mission = PER_clergy_alcohol_ban
+		unlock_decision_tooltip = PER_ban_alcohol_d
+		set_country_flag = PER_clergy_alcohol_ban_flag
+	}
+}
+
+#Clergy wants more conservative education in schools
+country_event = {
+	id = persia_clergy.6
+	title = persia_clergy.6.t
+	desc = persia_clergy.6.d
+	picture = GFX_report_event_worker_protests
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia_clergy.6.a
+		activate_mission = PER_clergy_conservative_education
+		unlock_decision_tooltip = PER_conservative_education_d
+		set_country_flag = PER_clergy_conservative_education_flag
+		set_country_flag = { flag = PER_clergy_conservative_education_cooldown_flag value = 1 days = 90 }
+	}
+}
+
+#Clergy demands lifting of hijab ban
+country_event = {
+	id = persia_clergy.7
+	title = persia_clergy.7.t
+	desc = persia_clergy.7.d
+	picture = GFX_report_event_generic_strike
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia_clergy.7.a
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 2
+				is_power_balance_in_range = {
+					id = PER_clergy_balance
+					range > PER_clergy_medium_control_range
+				}
+			}
+			modifier = {
+				factor = 3
+				is_power_balance_in_range = {
+					id = PER_clergy_balance
+					range = PER_clergy_total_control_range
+				}
+			}
+			modifier = {
+				factor = 2
+				check_variable = { PER_clergy_anger_level > 5 }
+			}
+		}
+		clr_country_flag = PER_hijabs_are_banned_flag
+		set_country_flag = PER_hijab_ban_lifted_flag
+		if = {
+			limit = {
+				has_completed_focus = PER_women_in_the_army
+			}
+			add_political_power = -25
+			army_experience = -10
+			remove_ideas = PER_women_in_the_army_ns
+			uncomplete_national_focus = {
+				focus = PER_empowerment_women
+				uncomplete_children = yes
+			}
+			uncomplete_national_focus = {
+				focus = PER_women_in_the_army
+				uncomplete_children = yes
+			}
+		}
+		else_if = {
+			limit = {
+				has_completed_focus = PER_empowerment_women
+			}
+			add_political_power = -25
+			add_stability = -0.025
+			remove_ideas = PER_empowerment_women_ns
+			uncomplete_national_focus = {
+				focus = PER_empowerment_women
+				uncomplete_children = yes
+			}
+		}
+	}
+
+	option = { #Nope
+		name = persia_clergy.7.b
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 2
+				has_completed_focus = PER_enforce_the_hat_and_dress_code
+			}
+			modifier = {
+				factor = 4
+				has_completed_focus = PER_forced_secularization
+			}
+			modifier = {
+				factor = 0.5
+				check_variable = { PER_clergy_anger_level > 6 }
+			}
+		}
+		custom_effect_tooltip = PER_clergy_angry_tt
+		add_to_variable = { PER_clergy_anger_level = 1 }
+	}
+}
+
+#Clergy is influencing more people
+country_event = {
+	id = persia_clergy.8
+	title = persia_clergy.8.t
+	desc = persia_clergy.8.d
+	picture = GFX_report_event_generic_rally2
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia_clergy.8.a
+		add_stability = -0.01
+	}
+}
+
+#Clergy don't like our policies
+country_event = {
+	id = persia_clergy.9
+	title = persia_clergy.9.t
+	desc = persia_clergy.9.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia_clergy.9.a
+		add_political_power = -10
+	}
+}
+
+#Clergy are angry
+country_event = {
+	id = persia_clergy.10
+	title = persia_clergy.10.t
+	desc = persia_clergy.10.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = persia_clergy.10.a
+		add_political_power = -50
+		add_stability = -0.02
+		custom_effect_tooltip = PER_clergy_angry_tt
+		add_to_variable = { PER_clergy_anger_level = 1 }
+	}
+}
+
+#Assassination Attempt
+country_event = {
+	id = persia_clergy.11
+	title = persia_clergy.11.t
+	desc = persia_clergy.11.d
+	picture = GFX_report_event_generic_rifles
+
+	is_triggered_only = yes
+
+	option = { #Failed
+		name = persia_clergy.11.a
+		trigger = {
+			check_variable = {
+				var = PER_clergy_anger_level
+				value = 3
+				compare = less_than_or_equals
+			}
+		}
+		add_stability = 0.025
+		set_country_flag = { flag = PER_assassination_attempt_failed_flag value = 1 days = 60 }
+		if = {
+			limit = {
+				NOT = { has_country_leader_with_trait = assassination_survivor }
+			}
+			add_country_leader_trait = assassination_survivor
+		}
+		PER_bop_low_decrease_effect = yes
+	}
+
+	option = {
+		name = persia_clergy.11.b
+		trigger = {
+			check_variable = {
+				var = PER_clergy_anger_level
+				value = 3
+				compare = greater_than
+			}
+		}
+		set_temp_variable = { PER_assassination_chance = 0 }
+		if = {
+			limit = {
+				check_variable = { PER_clergy_anger_level < 5 }
+			}
+			set_temp_variable = { PER_assassination_chance = 1 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_clergy_anger_level > 4 }
+				check_variable = { PER_clergy_anger_level < 8 }
+			}
+			set_temp_variable = { PER_assassination_chance = 2 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_clergy_anger_level > 7 }
+				check_variable = { PER_clergy_anger_level < 10 }
+			}
+			set_temp_variable = { PER_assassination_chance = 3 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { PER_clergy_anger_level > 9 }
+			}
+			set_temp_variable = { PER_assassination_chance = 4 }
+		}
+		random = {
+			chance = PER_assassination_chance
+			PER_assassination_effect = yes
+		}
+	}
+}
+
+# PER builds Mils in TAG - event for TAG (via Incraease Military Investments focus)
+country_event = {
+	id = persia_misc.1
+	title = persia_misc.1.t
+	desc = persia_misc.1.d
+	picture = GFX_report_event_generic_factory
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	#Cool
+	option = {
+		name = persia_misc.1.a
+
+		effect_tooltip = {
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = PREV
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+# Shah Dies - Assassination
+news_event = {
+	id = persia_misc.2
+	title = persia_misc.2.t
+	desc = persia_misc.2.d
+	picture = GFX_news_event_generic_funeral
+
+	major = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = persia_misc.2.a
+		trigger = {
+			original_tag = PER
+		}
+	}
+
+	option = {
+		name = persia_misc.2.b
+		trigger = {
+			NOT = { original_tag = PER }
+		}
+	}
+}

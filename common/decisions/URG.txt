@@ -1,0 +1,2335 @@
+URG_defying_foreign_influence = {
+	URG_brazil_attempting_to_cause_civil_war = {
+		priority = 100
+		icon = revolt
+
+		activation = { always = no }
+
+		days_mission_timeout = 145
+
+		is_good = no
+
+		available = {
+			has_global_flag = BRA_URG_cleaned_out_intruders
+		}
+
+		complete_effect = {
+			add_stability = 0.03
+			add_war_support = 0.05
+		}
+
+		timeout_effect = {
+			effect_tooltip = {
+				set_cosmetic_tag = BRA_URG
+				start_civil_war = {
+					ideology = neutrality
+				}
+			}
+		}
+	}
+
+	URG_cleanse_FROM_of_intruders = {
+		icon = opression
+
+		visible = {
+			has_active_mission = URG_brazil_attempting_to_cause_civil_war
+			FROM = {
+				NOT = {
+					has_state_flag = URG_intruders_cleansed_in_FROM
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 35
+		}
+
+		cost = 40
+
+		days_remove = 25
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		on_map_mode = map_and_decisions_view
+
+		target_trigger = {
+			FROM = {
+				is_core_of = ROOT
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = URG_not_cleansing_state
+				NOT = { has_country_flag = URG_currently_cleansing}
+			}
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_brazil_attempting_to_cause_civil_war
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = URG_currently_cleansing
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_currently_cleansing
+			custom_effect_tooltip = URG_state_will_be_cleansed_from_intruders_tt
+			hidden_effect = {
+				FROM = {
+					set_state_flag = URG_intruders_cleansed_in_FROM
+				}
+			}
+		}
+	}
+
+	URG_shut_down_the_brazilian_attempt = {
+		priority = 40
+		icon = eng_trade_unions_demand
+
+		visible = { has_active_mission = URG_brazil_attempting_to_cause_civil_war  }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = URG_every_state_cleansed_tt
+				all_core_state = {
+					has_state_flag = URG_intruders_cleansed_in_FROM
+				}
+			}
+		}
+
+		cost = 5
+
+		ai_will_do = {
+			base = 70
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = URG_BRA_plans_stopped_tt
+			hidden_effect = {
+				set_global_flag = BRA_URG_cleaned_out_intruders
+				random_other_country = {
+					limit = {
+						original_tag = BRA
+						exists = yes
+						num_of_factories > 14
+					}
+					country_event = { id = brazil.75 hours = 4 }
+				}
+			}
+		}
+	}
+}
+
+URG_prisoners_of_the_terra_dictatorship = {
+
+	URG_arrest_politicians = {
+		priority = 10
+		icon = generic_arrest
+		allowed = {
+			original_tag = URG
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URG_terra_decision
+			}
+			has_country_flag = URG_terra
+			check_variable = { URG_politicians_arrested < 81 }
+		}
+
+		cost = 25
+
+		fire_only_once = no
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		ai_will_do = {
+			base = 105
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 115
+			}
+			modifier = {
+				has_completed_focus = URG_go_with_terra
+				factor = 125
+			}
+			modifier = {
+				factor = 0
+				check_variable = { URG_politicians_arrested > 52 }
+			}
+		}
+
+		days_remove = 25
+
+		complete_effect = {
+			set_country_flag = URG_terra_decision
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_terra_decision
+			custom_effect_tooltip = URG_politicians_being_arrested
+			hidden_effect = {
+				add_to_variable = { URG_politicians_arrested = 2 }
+				URG_set_up_prisoners_modifier = yes
+			}
+		}
+	}
+
+	URG_set_free_politicians = {
+		priority = 10
+		icon = hol_war_on_pacifism
+		allowed = {
+			original_tag = URG
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URG_terra_decision
+			}
+			has_country_flag = URG_terra
+		}
+
+		cost = 25
+
+		fire_only_once = no
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		ai_will_do = {
+			base = 105
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				has_completed_focus = URG_go_against_terra
+				factor = 125
+			}
+			modifier = {
+				factor = 0
+				check_variable = { URG_politicians_arrested < 4 }
+			}
+		}
+
+		days_remove = 25
+
+		complete_effect = {
+			set_country_flag = URG_terra_decision
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_terra_decision
+			custom_effect_tooltip = URG_politicians_being_set_free
+			hidden_effect = {
+				subtract_from_variable = { URG_politicians_arrested = 2 }
+				URG_set_up_prisoners_modifier = yes
+			}
+		}
+	}
+}
+
+URG_repaying_the_debt_to_britain = {
+
+	URG_small_debt_repayment = {
+		priority = 10
+		icon = gre_paying_ifc_debt
+		allowed = { original_tag = URG }
+
+		available = {
+			NOT = {
+				has_country_flag = URG_debt_repayment_in_progress
+			}
+		}
+
+		cost = 20
+
+		ai_will_do = {
+			base = 135
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.03
+			political_power_factor = -0.05
+		}
+
+		days_remove = 50
+
+		complete_effect = {
+			set_country_flag = URG_debt_repayment_in_progress
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_pay_the_british_debt
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_debt_repayment_in_progress
+			custom_effect_tooltip = URG_15_debt_paid
+			hidden_effect = {
+				add_to_variable = { URG_debt_to_britain = 15 }
+			}
+		}
+	}
+
+	URG_medium_debt_repayment = {
+		priority = 10
+		icon = gre_paying_ifc_debt
+		allowed = { original_tag = URG }
+
+		available = {
+			NOT = {
+				has_country_flag = URG_debt_repayment_in_progress
+			}
+		}
+
+		cost = 45
+
+		ai_will_do = {
+			base = 145
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.07
+			political_power_factor = -0.1
+		}
+
+		days_remove = 70
+
+		complete_effect = {
+			set_country_flag = URG_debt_repayment_in_progress
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_pay_the_british_debt
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_debt_repayment_in_progress
+			custom_effect_tooltip = URG_25_debt_paid
+			hidden_effect = {
+				add_to_variable = { URG_debt_to_britain = 25 }
+			}
+		}
+	}
+
+	URG_large_debt_repayment = {
+		priority = 10
+		icon = gre_paying_ifc_debt
+		allowed = { original_tag = URG }
+
+		available = {
+			NOT = {
+				has_country_flag = URG_debt_repayment_in_progress
+			}
+		}
+
+		cost = 75
+
+		ai_will_do = {
+			base = 155
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.15
+			political_power_factor = -0.2
+		}
+
+		days_remove = 100
+
+		complete_effect = {
+			set_country_flag = URG_debt_repayment_in_progress
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_pay_the_british_debt
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_debt_repayment_in_progress
+			custom_effect_tooltip = URG_40_debt_paid
+			hidden_effect = {
+				add_to_variable = { URG_debt_to_britain = 40 }
+			}
+		}
+	}
+}
+
+URG_dealing_with_the_protestors = {
+
+	URG_stomp_out_the_loyalists_in_FROM = {
+		priority = 10
+		icon = generic_civil_support
+		allowed = { original_tag = URG }
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				is_core_of = ROOT
+				has_dynamic_modifier = { modifier = URG_terra_loyalities }
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URG_dealing_with_protestors
+			}
+		}
+
+		visible = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				has_dynamic_modifier = { modifier = URG_terra_loyalities }
+			}
+		}
+
+		cost = 25
+
+		ai_will_do = {
+			base = 300 #AI shold prioritize this
+		}
+
+		modifier = {
+			weekly_manpower = -80
+		}
+
+		days_remove = 40
+
+		complete_effect = {
+			set_country_flag = URG_dealing_with_protestors
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_dealing_with_protestors
+			FROM = { remove_dynamic_modifier = { modifier = URG_terra_loyalities } }
+			add_stability = 0.05
+		}
+	}
+}
+
+URG_guide_the_companies = {
+
+	URG_ask_companies_to_invest_slightly_in_the_industry = {
+
+		priority = 10
+		icon = generic_factory
+
+		allowed = {
+			tag = URG
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URG_guiding_company
+			}
+		}
+
+		cost = 100
+
+		ai_will_do = {
+			base = 250
+		}
+
+		days_remove = 80
+
+		complete_effect = {
+			set_country_flag = URG_guiding_company
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_guiding_company
+			EUYL_add_1_civilian = yes
+		}
+	}
+
+	URG_ask_companies_to_invest_heavily_in_the_industry = {
+
+		priority = 10
+		icon = generic_factory
+
+		allowed = {
+			tag = URG
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URG_guiding_company
+			}
+		}
+
+		cost = 200
+
+		ai_will_do = {
+			base = 250
+		}
+
+		days_remove = 145
+
+		complete_effect = {
+			set_country_flag = URG_guiding_company
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_guiding_company
+			EUYL_add_2_civilian = yes
+		}
+	}
+
+	URG_ask_companies_to_invest_slightly_in_the_military = {
+
+		priority = 10
+		icon = ger_military_buildup
+
+		allowed = {
+			tag = URG
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URG_guiding_company
+			}
+		}
+
+		cost = 80
+
+		ai_will_do = {
+			base = 250
+		}
+
+		days_remove = 65
+
+		complete_effect = {
+			set_country_flag = URG_guiding_company
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_guiding_company
+			EUYL_add_1_military = yes
+		}
+	}
+
+	URG_ask_companies_to_invest_heavily_in_the_military = {
+
+		priority = 10
+		icon = ger_military_buildup
+
+		allowed = {
+			tag = URG
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URG_guiding_company
+			}
+		}
+
+		cost = 175
+
+		ai_will_do = {
+			base = 250
+		}
+
+		days_remove = 110
+
+		complete_effect = {
+			set_country_flag = URG_guiding_company
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_guiding_company
+			EUYL_add_2_military = yes
+		}
+	}
+
+	URG_ask_companies_to_invest_dockyard_expansion = {
+
+		priority = 10
+		icon = generic_naval
+
+		allowed = {
+			tag = URG
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URG_guiding_company
+			}
+		}
+
+		cost = 75
+
+		ai_will_do = {
+			base = 200
+		}
+
+		days_remove = 60
+
+		complete_effect = {
+			set_country_flag = URG_guiding_company
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_guiding_company
+			EUYL_add_1_dockyard = yes
+		}
+	}
+
+	URG_ask_companies_to_invest_in_the_infrastructure = {
+
+		priority = 10
+		icon = railroad_construction
+
+		allowed = {
+			tag = URG
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = URG_guiding_company
+			}
+		}
+
+		cost = 50
+
+		ai_will_do = {
+			base = 150
+		}
+
+		days_remove = 40
+
+		complete_effect = {
+			set_country_flag = URG_guiding_company
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_guiding_company
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+URG_march_to_argentina_capital = {
+
+	URG_capture_buenos_aires = {
+		priority = 10
+
+		icon = generic_civil_support
+
+		allowed = { tag = URG }
+
+		available = {
+			controls_state = 278
+		}
+
+		activation = {
+			has_completed_focus = URG_march_to_buenos_aires
+		}
+
+		is_good = yes
+		fire_only_once = yes
+		days_mission_timeout = 250
+
+		timeout_effect = {
+			add_stability = -0.02
+			add_war_support = -0.05
+			ARG = {
+				add_war_support = 0.03
+			}
+		}
+		complete_effect = {
+			add_stability = 0.1
+			add_war_support = 0.15
+			ARG = {
+				add_war_support = -0.2
+			}
+		}
+	}
+}
+
+URG_form_liga_federal_category = {
+
+	form_liga_federal = {
+		allowed = {
+			original_tag = URG
+		}
+		visible = {
+			OR = {
+				has_government = neutrality
+				has_government = fascism
+				has_government = communism
+			}
+		}
+
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		available = {
+			hidden_trigger  = {
+				controls_state = 946
+				controls_state = 300
+			}
+			controls_state = 502
+			controls_state = 510
+			controls_state = 956
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = LGA_federal
+			502 = { add_core_of = ROOT }
+			510 = { add_core_of = ROOT }
+			956 = { add_core_of = ROOT }
+			hidden_effect = {
+				add_ideas = {
+					URG_economic_instability
+					URG_rebelling_officers
+				}
+			}
+		}
+	}
+}
+
+URG_teritorial_expansion = {
+
+	URG_conquer_FROM = {
+		icon = generic_prepare_civil_war
+
+		ai_will_do = {
+			base = 80
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					is_on_continent = south_america
+					is_fully_controlled_by = PREV
+				}
+				NOT = {
+					OR = {
+						has_war_with = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+		}
+
+		available = {
+			FROM = {
+				NOT = {
+					OR = {
+						has_war_with = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = URG_expand_beyond_our_borders
+			FROM = {
+				exists = yes
+				is_subject = no
+				is_neighbor_of = ROOT
+			}
+		}
+
+		cost = 50
+		days_remove = 40
+
+		remove_effect = {
+			create_wargoal = {
+				type = annex_everything
+				target = FROM
+			}
+		}
+	}
+
+	URG_gain_the_edge_against_FROM = {
+		icon = generic_tank
+
+		allowed = {
+			original_tag = URG
+		}
+
+		ai_will_do = {
+			base = 80
+		}
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					is_on_continent = south_america
+					is_fully_controlled_by = PREV
+				}
+				exists = yes
+				is_neighbor_of = ROOT
+			}
+		}
+
+		available = {
+			has_capitulated = no
+			FROM = {
+				has_war_with = ROOT
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = URG_focusing_on_enemy
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = URG_gain_the_edge
+		}
+
+		cost = 25
+
+		days_remove = 90
+
+		complete_effect = {
+			set_country_flag = URG_focusing_on_enemy
+		}
+
+		targeted_modifier = {
+			tag = FROM
+			attack_bonus_against = 0.1
+			defense_bonus_against = 0.1
+		}
+
+		modifier = {
+			army_speed_factor = 0.05
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_focusing_on_enemy
+		}
+	}
+
+	URG_integrate_the_province_of_FROM = {
+		icon = GFX_decision_generic_nationalism
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 100
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+					has_government = communism
+				}
+			}
+			modifier = {
+				factor = 1
+				is_historical_focus_on = yes
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				is_on_continent = south_america
+				is_fully_controlled_by = ROOT
+				NOT = { is_core_of = ROOT }
+				any_neighbor_state = {
+					is_core_of = ROOT
+				}
+			}
+		}
+
+		available = {
+			FROM = {
+				compliance > 24
+			}
+			has_equipment = {
+				infantry_equipment > 299
+			}
+			has_manpower > 1078
+			has_army_experience > 4
+		}
+
+		visible = {
+			has_completed_focus = URG_integrate_our_conquered_lands
+			FROM = {
+				is_fully_controlled_by = ROOT
+				NOT = { is_core_of = ROOT }
+				any_neighbor_state = {
+					is_core_of = ROOT
+				}
+			}
+		}
+
+		cost = 35
+
+		days_remove = 70
+
+		complete_effect = {
+			add_manpower = -1079
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -300
+			}
+			army_experience = -5
+		}
+
+		remove_effect = {
+			FROM = {
+				add_core_of = ROOT
+			}
+		}
+	}
+}
+
+URG_purchasing_british_ships = {
+
+	URG_purchase_british_submarines = {
+		icon = generic_naval
+
+		allowed = {
+			original_tag = URG
+		}
+
+		target_trigger = {
+			FROM = {
+				original_tag = ENG
+			}
+		}
+
+		available = {
+			NOT = {
+				has_idea = ROOT_paying_for_ship_purchase
+			}
+			FROM = {
+				NOT = {
+					has_war_with = ROOT
+				}
+				is_subject = no
+				has_capitulated = no
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ROOT_asking_for_ship_purchase
+				}
+			}
+		}
+
+		cost = 15
+		days_remove = 10
+
+
+		complete_effect = {
+			set_country_flag = ROOT_asking_for_ship_purchase
+			FROM = {
+				country_event = { id = peru.25 hours = 4 }
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = ROOT_asking_for_ship_purchase
+			effect_tooltip = {
+				add_timed_idea = {
+					idea = ROOT_paying_for_ship_purchase
+					days = 15
+				}
+				FROM = {
+					add_timed_idea = {
+						idea = FROM_getting_payed_for_ship_purchase
+						days = 15
+					}
+					transfer_ship = {
+						type = submarine
+						target = URG
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = FROM_accepted_purchase_of_ships
+					}
+					ROOT = {
+						add_timed_idea = {
+							idea = ROOT_paying_for_ship_purchase
+							days = 15
+						}
+					}
+					FROM = {
+						add_timed_idea = {
+							idea = FROM_getting_payed_for_ship_purchase
+							days = 15
+						}
+						transfer_ship = {
+							type = submarine
+							target = ROOT
+						}
+					}
+					clr_country_flag = FROM_accepted_purchase_of_ships
+				}
+			}
+		}
+	}
+
+	URG_purchase_destroyers = {
+		icon = generic_naval
+
+		allowed = {
+			original_tag = URG
+		}
+
+		target_trigger = {
+			FROM = {
+				original_tag = ENG
+			}
+		}
+
+		available = {
+			NOT = {
+				has_idea = ROOT_paying_for_ship_purchase
+			}
+			FROM = {
+				NOT = {
+					has_war_with = ROOT
+				}
+				is_subject = no
+				has_capitulated = no
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ROOT_asking_for_ship_purchase
+				}
+			}
+		}
+
+		cost = 25
+		days_remove = 15
+
+		complete_effect = {
+			set_country_flag = ROOT_asking_for_ship_purchase
+			FROM = {
+				country_event = { id = peru.25 hours = 4 }
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = ROOT_asking_for_ship_purchase
+			effect_tooltip = {
+				add_timed_idea = {
+					idea = ROOT_paying_for_ship_purchase
+					days = 25
+				}
+				FROM = {
+					add_timed_idea = {
+						idea = FROM_getting_payed_for_ship_purchase
+						days = 25
+					}
+					transfer_ship = {
+						type = destroyer
+						target = URG
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = FROM_accepted_purchase_of_ships
+					}
+					ROOT = {
+						add_timed_idea = {
+							idea = ROOT_paying_for_ship_purchase
+							days = 25
+						}
+					}
+					FROM = {
+						add_timed_idea = {
+							idea = FROM_getting_payed_for_ship_purchase
+							days = 25
+						}
+						transfer_ship = {
+							type = destroyer
+							target = ROOT
+						}
+					}
+					clr_country_flag = FROM_accepted_purchase_of_ships
+				}
+			}
+		}
+	}
+
+	URG_purchase_light_cruiser = {
+		icon = generic_naval
+
+		allowed = {
+			original_tag = URG
+		}
+
+		target_trigger = {
+			FROM = {
+				original_tag = ENG
+			}
+		}
+
+		available = {
+			NOT = {
+				has_idea = ROOT_paying_for_ship_purchase
+			}
+			FROM = {
+				NOT = {
+					has_war_with = ROOT
+				}
+				is_subject = no
+				has_capitulated = no
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ROOT_asking_for_ship_purchase
+				}
+			}
+		}
+
+		cost = 40
+		days_remove = 35
+
+
+		complete_effect = {
+			set_country_flag = ROOT_asking_for_ship_purchase
+			FROM = {
+				country_event = { id = peru.25 hours = 4 }
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = ROOT_asking_for_ship_purchase
+			effect_tooltip = {
+				add_timed_idea = {
+					idea = ROOT_paying_for_ship_purchase
+					days = 45
+				}
+				FROM = {
+					add_timed_idea = {
+						idea = FROM_getting_payed_for_ship_purchase
+						days = 45
+					}
+					transfer_ship = {
+						type = light_cruiser
+						target = URG
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = FROM_accepted_purchase_of_ships
+					}
+					ROOT = {
+						add_timed_idea = {
+							idea = ROOT_paying_for_ship_purchase
+							days = 45
+						}
+					}
+					FROM = {
+						add_timed_idea = {
+							idea = FROM_getting_payed_for_ship_purchase
+							days = 45
+						}
+						transfer_ship = {
+							type = light_cruiser
+							target = ROOT
+						}
+					}
+					clr_country_flag = FROM_accepted_purchase_of_ships
+				}
+			}
+		}
+	}
+
+	URG_purchase_heavy_cruiser = {
+		icon = generic_naval
+
+		allowed = {
+			original_tag = URG
+		}
+
+		target_trigger = {
+			FROM = {
+				original_tag = ENG
+			}
+		}
+
+		available = {
+			NOT = {
+				has_idea = ROOT_paying_for_ship_purchase
+			}
+			FROM = {
+				NOT = {
+					has_war_with = ROOT
+				}
+				is_subject = no
+				has_capitulated = no
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ROOT_asking_for_ship_purchase
+				}
+			}
+		}
+
+		cost = 75
+		days_remove = 50
+
+		complete_effect = {
+			set_country_flag = ROOT_asking_for_ship_purchase
+			FROM = {
+				country_event = { id = peru.25 hours = 4 }
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = ROOT_asking_for_ship_purchase
+			effect_tooltip = {
+				add_timed_idea = {
+					idea = ROOT_paying_for_ship_purchase
+					days = 100
+				}
+				FROM = {
+					add_timed_idea = {
+						idea = FROM_getting_payed_for_ship_purchase
+						days = 100
+					}
+					transfer_ship = {
+						type = heavy_cruiser
+						target = URG
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = FROM_accepted_purchase_of_ships
+					}
+					ROOT = {
+						add_timed_idea = {
+							idea = ROOT_paying_for_ship_purchase
+							days = 100
+						}
+					}
+					FROM = {
+						add_timed_idea = {
+							idea = FROM_getting_payed_for_ship_purchase
+							days = 100
+						}
+						transfer_ship = {
+							type = heavy_cruiser
+							target = ROOT
+						}
+					}
+					clr_country_flag = FROM_accepted_purchase_of_ships
+				}
+			}
+		}
+	}
+
+	URG_purchase_carrier = {
+		icon = generic_naval
+
+		allowed = {
+			original_tag = URG
+		}
+
+		target_trigger = {
+			FROM = {
+				original_tag = ENG
+			}
+		}
+
+		available = {
+			NOT = {
+				has_idea = ROOT_paying_for_ship_purchase
+			}
+			FROM = {
+				NOT = {
+					has_war_with = ROOT
+				}
+				is_subject = no
+				has_capitulated = no
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ROOT_asking_for_ship_purchase
+				}
+			}
+		}
+
+		cost = 100
+		days_remove = 60
+
+		complete_effect = {
+			set_country_flag = ROOT_asking_for_ship_purchase
+			FROM = {
+				country_event = { id = peru.25 hours = 4 }
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = ROOT_asking_for_ship_purchase
+			effect_tooltip = {
+				add_timed_idea = {
+					idea = ROOT_paying_for_ship_purchase
+					days = 180
+				}
+				FROM = {
+					add_timed_idea = {
+						idea = FROM_getting_payed_for_ship_purchase
+						days = 180
+					}
+					transfer_ship = {
+						type = carrier
+						target = URG
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = FROM_accepted_purchase_of_ships
+					}
+					ROOT = {
+						add_timed_idea = {
+							idea = ROOT_paying_for_ship_purchase
+							days = 180
+						}
+					}
+					FROM = {
+						add_timed_idea = {
+							idea = FROM_getting_payed_for_ship_purchase
+							days = 180
+						}
+						transfer_ship = {
+							type = carrier
+							target = ROOT
+						}
+					}
+					clr_country_flag = FROM_accepted_purchase_of_ships
+				}
+			}
+		}
+	}
+
+	URG_purchase_battleship = {
+		icon = generic_naval
+
+		allowed = {
+			original_tag = URG
+		}
+
+		target_trigger = {
+			FROM = {
+				original_tag = ENG
+			}
+		}
+
+		available = {
+			NOT = {
+				has_idea = ROOT_paying_for_ship_purchase
+			}
+			FROM = {
+				NOT = {
+					has_war_with = ROOT
+				}
+				is_subject = no
+				has_capitulated = no
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ROOT_asking_for_ship_purchase
+				}
+			}
+		}
+
+		cost = 100
+		days_remove = 60
+
+		complete_effect = {
+			set_country_flag = ROOT_asking_for_ship_purchase
+			FROM = {
+				country_event = { id = peru.25 hours = 4 }
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = ROOT_asking_for_ship_purchase
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				add_timed_idea = {
+					idea = ROOT_paying_for_ship_purchase
+					days = 180
+				}
+				FROM = {
+					add_timed_idea = {
+						idea = FROM_getting_payed_for_ship_purchase
+						days = 180
+					}
+					transfer_ship = {
+						type = battleship
+						target = URG
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = FROM_accepted_purchase_of_ships
+					}
+					ROOT = {
+						add_timed_idea = {
+							idea = ROOT_paying_for_ship_purchase
+							days = 180
+						}
+					}
+					FROM = {
+						add_timed_idea = {
+							idea = FROM_getting_payed_for_ship_purchase
+							days = 180
+						}
+						transfer_ship = {
+							type = battleship
+							target = ROOT
+						}
+					}
+					clr_country_flag = FROM_accepted_purchase_of_ships
+				}
+			}
+		}
+	}
+}
+
+
+URG_political_actions = {
+	URG_pay_the_british_debt = {
+		priority = 150
+		icon = gre_investment_decisions
+
+		is_good = no
+
+		days_mission_timeout = 1080
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = URG_repayed_the_debt_to_the_british_tt
+				check_variable = { URG_debt_to_britain > 99 }
+			}
+		}
+
+		cancel_trigger = {
+			ENG = {
+				exists = no
+			}
+		}
+
+		activation = { always = no }
+
+		allowed = { original_tag = URG }
+
+		timeout_effect = {
+			swap_ideas = {
+				remove_idea = URG_debt_to_the_british
+				add_idea = URG_lingering_british_debt
+			}
+		}
+
+		complete_effect = {
+			add_stability = 0.01
+			add_political_power = 10
+		}
+	}
+
+	URG_blancos_in_opposition = {
+		icon = generic_ignite_civil_war
+		priority = 100
+
+		is_good = no
+
+		days_mission_timeout = 100
+
+		available = {
+			power_balance_value = {
+				id = URG_nacional_colorado_bop
+				value > -0.4
+			}
+		}
+
+		activation = {
+			always = no
+		}
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					OR = {
+						has_idea = URG_blancos_in_opposition0
+						has_idea = URG_blancos_in_opposition1
+						has_idea = URG_blancos_in_opposition2
+					}
+				}
+				has_government = democratic #nacionales in power
+				has_civil_war = yes
+			}
+		}
+
+		timeout_effect = {
+			URG_increase_blanco_opposition = yes
+		}
+
+		cancel_effect = {
+			hidden_effect = {
+				remove_ideas = {
+					URG_blancos_in_opposition0
+					URG_blancos_in_opposition1
+					URG_blancos_in_opposition2
+				}
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				remove_ideas = {
+					URG_blancos_in_opposition0
+					URG_blancos_in_opposition1
+					URG_blancos_in_opposition2
+				}
+			}
+		}
+	}
+
+	URG_colorados_in_opposition = {
+		icon = generic_ignite_civil_war
+		priority = 100
+
+		is_good = no
+
+		days_mission_timeout = 100
+
+		available = {
+			power_balance_value = {
+				id = URG_nacional_colorado_bop
+				value < 0.4
+			}
+		}
+
+		activation = {
+			always = no
+		}
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					OR = {
+						has_idea = URG_colorados_in_opposition0
+						has_idea = URG_colorados_in_opposition1
+						has_idea = URG_colorados_in_opposition2
+					}
+				}
+				has_government = neutrality #colorados in power
+				has_civil_war = yes
+			}
+		}
+
+		timeout_effect = {
+			URG_increase_colorado_opposition = yes
+		}
+
+		cancel_effect = {
+			hidden_effect = {
+				remove_ideas = {
+					URG_colorados_in_opposition0
+					URG_colorados_in_opposition1
+					URG_colorados_in_opposition2
+				}
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				remove_ideas = {
+					URG_colorados_in_opposition0
+					URG_colorados_in_opposition1
+					URG_colorados_in_opposition2
+				}
+			}
+		}
+	}
+
+	URG_stabilization_effort = {
+		priority = 50
+		icon = eng_trade_unions_support
+
+		cost = 25
+
+		visible = {
+			OR = {
+				has_active_mission = URG_colorados_in_opposition
+				has_active_mission = URG_blancos_in_opposition
+			}
+			has_stability < 0.75
+		}
+
+		days_remove = 50
+
+		ai_will_do = {
+			base = 200
+		}
+
+		modifier = {
+			political_power_factor = -0.15
+		}
+
+		remove_effect = {
+			add_stability = 0.05
+		}
+	}
+
+	URG_concession_to_the_blancos_party = {
+		icon = GFX_decision_generic_army_support
+		priority = 40
+
+		available = {
+			AND = {
+				has_idea = URG_blancos_in_opposition0
+				has_stability > 0.75
+			}
+		}
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cost = 25
+
+		ai_will_do = {
+			base = 225
+		}
+
+		visible = {
+			has_idea = URG_blancos_in_opposition0
+			has_active_mission = URG_blancos_in_opposition
+		}
+		fire_only_once = no
+
+		days_remove = 40
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_blancos_in_opposition
+			}
+		}
+
+		remove_effect = {
+			remove_ideas = URG_blancos_in_opposition0
+			URG_move_5_nacionales = yes
+		}
+	}
+	URG_concession_to_the_blancos_party1 = {
+		icon = GFX_decision_generic_army_support
+		priority = 40
+
+		available = {
+			has_idea = URG_blancos_in_opposition1
+		}
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cost = 50
+
+		ai_will_do = {
+			base = 225
+		}
+
+		visible = {
+			has_idea = URG_blancos_in_opposition1
+			has_active_mission = URG_blancos_in_opposition
+		}
+		fire_only_once = no
+
+		days_remove = 40
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_blancos_in_opposition
+			}
+		}
+
+		remove_effect = {
+			URG_reduce_blanco_opposition = yes
+			URG_move_5_nacionales = yes
+		}
+	}
+	URG_concession_to_the_blancos_party2 = {
+		icon = GFX_decision_generic_army_support
+		priority = 40
+
+		available = {
+			has_idea = URG_blancos_in_opposition2
+		}
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cost = 80
+
+		ai_will_do = {
+			base = 225
+		}
+
+		visible = {
+			has_idea = URG_blancos_in_opposition2
+			has_active_mission = URG_blancos_in_opposition
+		}
+		fire_only_once = no
+
+		days_remove = 40
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_blancos_in_opposition
+			}
+		}
+
+		remove_effect = {
+			URG_reduce_blanco_opposition = yes
+			URG_move_5_nacionales = yes
+		}
+	}
+
+	URG_concession_to_the_colorados_party = {
+		icon = GFX_decision_generic_army_support
+		priority = 40
+
+		available = {
+			AND = {
+				has_idea = URG_colorados_in_opposition0
+				has_stability > 0.75
+			}
+		}
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cost = 25
+
+		ai_will_do = {
+			base = 225
+		}
+
+		visible = {
+			has_idea = URG_colorados_in_opposition0
+			has_active_mission = URG_colorados_in_opposition
+		}
+		fire_only_once = no
+
+		days_remove = 40
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_colorados_in_opposition
+			}
+		}
+
+		remove_effect = {
+			URG_reduce_colorado_opposition = yes
+			URG_move_5_colorado = yes
+		}
+	}
+	URG_concession_to_the_colorados_party1 = {
+		icon = GFX_decision_generic_army_support
+		priority = 40
+
+		available = {
+			has_idea = URG_colorados_in_opposition1
+		}
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cost = 50
+
+		ai_will_do = {
+			base = 225
+		}
+
+		visible = {
+			has_idea = URG_colorados_in_opposition1
+			has_active_mission = URG_colorados_in_opposition
+		}
+		fire_only_once = no
+
+		days_remove = 40
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_colorados_in_opposition
+			}
+		}
+
+		remove_effect = {
+			URG_reduce_colorado_opposition = yes
+			URG_move_5_colorado = yes
+		}
+	}
+	URG_concession_to_the_colorados_party2 = {
+		icon = GFX_decision_generic_army_support
+		priority = 40
+
+		available = {
+			has_idea = URG_blancos_in_opposition2
+		}
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cost = 80
+
+		ai_will_do = {
+			base = 225
+		}
+
+		visible = {
+			has_idea = URG_blancos_in_opposition2
+			has_active_mission = URG_colorados_in_opposition
+		}
+		fire_only_once = no
+
+		days_remove = 40
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = URG_colorados_in_opposition
+			}
+		}
+
+		remove_effect = {
+			URG_reduce_colorado_opposition = yes
+			URG_move_5_colorado = yes
+		}
+	}
+
+	URG_work_with_the_PCU = {
+		icon = generic_political_discourse
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cost = 75
+
+		available = {
+			has_country_leader = { ruling_only = yes name = "Emilio Frugoni" }
+		}
+
+		modifier = {
+			political_power_gain = -0.25
+			consumer_goods_factor = 0.05
+		}
+
+		days_remove = 180
+
+		fire_only_once = yes
+
+		remove_effect = {
+			add_stability = -0.1
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+			custom_effect_tooltip = URG_work_with_the_PCU_tt
+			hidden_effect = {
+				set_country_flag = URG_communist_coalition
+			}
+		}
+	}
+
+	URG_support_berres = {
+		icon = generic_political_discourse
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cost = 75
+
+		available = {
+			has_country_leader = { ruling_only = yes name = "Luis Batlle Berres" }
+			NOT = {
+				has_decision = URG_undermine_berres
+				has_idea = URG_andres_martinez_trueba
+			}
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			add_stability = 0.05
+			EUYL_add_1_civilian = yes
+		}
+	}
+
+	URG_undermine_berres = {
+		icon = generic_political_discourse
+
+		allowed = {
+			original_tag = URG
+		}
+
+		cost = 75
+
+		available = {
+			has_country_leader = { ruling_only = yes name = "Luis Batlle Berres" }
+			NOT = {
+				has_decision = URG_support_berres
+			}
+			has_idea = URG_andres_martinez_trueba
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 250
+				has_idea = URG_andres_martinez_trueba #might as well go anarchy if the AI for some reason has Martinez
+			}
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			add_stability = 0.1
+			add_political_power = -50
+			custom_effect_tooltip = URG_may_lead_to_undesired_consequences_tt
+			hidden_effect = {
+				set_country_flag = URG_undermined_berres_flag
+				URG = {
+					country_event = { id = uruguay.19 days = 30 }
+				}
+			}
+		}
+	}
+}
+
+URG_anarchist_revolution = {
+	URG_foment_anarchist_sentiment_in_FROM = {
+		icon = generic_civil_support
+
+		cost = 25
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					is_on_continent = south_america
+					is_fully_controlled_by = PREV
+				}
+				exists = yes
+				is_neighbor_of = ROOT
+				has_civil_war = no
+			}
+		}
+
+		fire_only_once = yes
+
+		available = {
+			has_capitulated = no
+			FROM = {
+				has_war_with = ROOT
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = URG_fomenting_sentiment
+				}
+			}
+		}
+
+		days_remove = 70
+
+		complete_effect = {
+			set_country_flag = URG_fomenting_sentiment
+		}
+
+		cancel_effect = {
+			clr_country_flag = URG_fomenting_sentiment
+		}
+
+		remove_effect = {
+			clr_country_flag = URG_fomenting_sentiment
+			custom_effect_tooltip = URG_can_insitgate_uprising_in_FROM_tt
+			hidden_effect = {
+				FROM = {
+					set_country_flag = URG_can_instigate_uprising
+				}
+			}
+		}
+	}
+
+	URG_instigate_uprising_in_FROM = {
+		icon = generic_ignite_civil_war
+
+		cost = 50
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					is_on_continent = south_america
+					is_fully_controlled_by = PREV
+				}
+				exists = yes
+				is_neighbor_of = ROOT
+				has_civil_war = no
+			}
+		}
+
+		available = {
+			FROM = {
+				has_war_with = ROOT
+				has_country_flag = URG_can_instigate_uprising
+			}
+		}
+
+		days_remove = 20
+
+		days_re_enable = 120
+
+		complete_effect = {
+			FROM = {
+				clr_country_flag = URG_can_instigate_uprising
+			}
+			custom_effect_tooltip = URG_decision_will_be_avail_again_120_days_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_template = "Milicia Anarquista"
+						}
+					}
+					division_template = {
+						name = "Milicia Anarquista"
+						division_names_group = SPAN_INF_02
+						is_locked = yes
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+						}
+					}
+				}
+			}
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = URG_create_small_uprising_in_random_state_with_divs
+			hidden_effect = {
+				FROM = {
+					if = {
+						limit = {
+							num_of_controlled_states > 9
+						}
+						random_owned_controlled_state = {
+							limit = {
+								is_capital = no
+								any_neighbor_state = {
+									OR = {
+										is_controlled_by = ROOT
+										any_neighbor_state = {
+											is_core_of = ROOT
+										}
+									}
+								}
+							}
+							create_unit = {
+								division = "name = \"Milicia Anarquista\" division_template = \"Milicia Anarquista\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+								owner = ROOT
+								allow_spawning_on_enemy_provs = yes
+								count = 4
+							}
+						}
+						random_owned_controlled_state = {
+							limit = {
+								is_capital = no
+								any_neighbor_state = {
+									OR = {
+										is_controlled_by = ROOT
+										any_neighbor_state = {
+											is_core_of = ROOT
+										}
+									}
+								}
+							}
+							create_unit = {
+								division = "name = \"Milicia Anarquista\" division_template = \"Milicia Anarquista\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+								owner = ROOT
+								allow_spawning_on_enemy_provs = yes
+								count = 4
+							}
+						}
+					}
+					else = {
+						random_owned_controlled_state = {
+							limit = {
+								is_capital = no
+								any_neighbor_state = {
+									OR = {
+										is_controlled_by = ROOT
+										any_neighbor_state = {
+											is_core_of = ROOT
+										}
+									}
+								}
+							}
+							create_unit = {
+								division = "name = \"Milicia Anarquista\" division_template = \"Milicia Anarquista\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+								owner = ROOT
+								allow_spawning_on_enemy_provs = yes
+								count = 5
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+URG_divide_argentina_cat = {
+	URG_divide_argentina = {
+		icon = generic_political_discourse
+
+		allowed = {
+			original_tag = URG
+		}
+
+		visible = {
+			has_completed_focus = URG_liberate_argentinian_workers
+		}
+
+		available = {
+			278 = {
+				controller = {
+					OR = {
+						is_in_faction_with = URG
+						is_puppet_of = URG
+						tag = URG
+					}
+				}
+			}
+			ARG = {
+				OR = {
+					NOT = {
+						country_exists = ARG
+					}
+					is_puppet_of = CHL
+					is_puppet_of = URG
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					NOT = {
+						is_in_faction_with = CHL
+					}
+				}
+				URG = {
+					country_event = { id = uruguay.26 hours = 1 }
+				}
+			}
+			else_if = {
+				limit = {
+					is_in_faction_with = CHL
+				}
+				URG = {
+					country_event = { id = uruguay.27 hours = 1 }
+				}
+			}
+		}
+	}
+}
+
+URG_BoP_nacional_colorado = {
+	URG_support_the_colorados = {
+		icon = GFX_decision_hol_exchange_intelligence_data
+
+		visible = {
+			has_civil_war = no
+		}
+
+		available = {
+			has_civil_war = no
+			custom_trigger_tooltip = {
+				tooltip = URG_not_supporting_any_side_tt
+				NOT = { has_country_flag = URG_supporting_side }
+			}
+		}
+
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 200
+				has_government = neutrality
+				power_balance_value = {
+					id = URG_nacional_colorado_bop
+					value > 0.5
+				}
+			}
+		}
+
+		cost = 35
+
+		days_remove = 50
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		complete_effect = {
+			random_list = {
+				50 = {
+					URG_move_10_colorado = yes
+				}
+				50 = {
+					URG_move_20_colorado = yes
+				}
+			}
+			set_country_flag = URG_supporting_side
+		}
+		remove_effect = {
+			clr_country_flag = URG_supporting_side
+		}
+	}
+	URG_appease_the_nacionales = {
+		icon = GFX_decision_eng_trade_unions_support
+
+		visible = {
+			has_civil_war = no
+		}
+
+		available = {
+			has_civil_war = no
+			custom_trigger_tooltip = {
+				tooltip = URG_not_supporting_any_side_tt
+				NOT = { has_country_flag = URG_supporting_side }
+			}
+		}
+
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 200
+				has_government = democratic
+				power_balance_value = {
+					id = URG_nacional_colorado_bop
+					value < -0.5
+				}
+			}
+		}
+
+		cost = 35
+
+		days_remove = 50
+
+		modifier = {
+			political_power_factor = -0.05
+		}
+
+		complete_effect = {
+			random_list = {
+				50 = {
+					URG_move_10_nacionales = yes
+				}
+				50 = {
+					URG_move_20_nacionales = yes
+				}
+			}
+			set_country_flag = URG_supporting_side
+		}
+		remove_effect = {
+			clr_country_flag = URG_supporting_side
+		}
+	}
+}
+
+

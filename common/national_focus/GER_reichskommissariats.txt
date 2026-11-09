@@ -1,0 +1,1545 @@
+##search_filters = { FOCUS_FILTER_POLITICAL }
+##search_filters = { FOCUS_FILTER_RESEARCH }
+##search_filters = { FOCUS_FILTER_INDUSTRY }
+##search_filters = { FOCUS_FILTER_STABILITY }
+##search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+##search_filters = { FOCUS_FILTER_MANPOWER }
+##search_filters = { FOCUS_FILTER_ANNEXATION }
+
+focus_tree = {
+	id = RKK_focus
+	
+	country = {
+		factor = 0
+	}
+	
+	default = no
+
+	continuous_focus_position = { x = 10000 y = 820 }
+
+	#############################
+	####POLITICAL SECTION #####
+	#############################
+
+	focus = {
+		id = RKK_civil_administration
+		icon = {
+			trigger = {
+				has_game_rule = {
+					rule = ef_censor_setting
+					option = CENSORED
+				}
+			}
+			value = GFX_GER_Ein_Volk_Ein_Reich_Ein_Fuhrer
+		}
+		icon = {
+			value = GFX_GER_Enabling_Act
+		}
+		x = 15
+		y = 0
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			is_subject = yes
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_STABILITY }
+
+		completion_reward = {
+			add_political_power = 25
+			add_stability = 0.05
+		}
+	}
+
+	#COLONIAL
+	focus = {
+		id = RKK_zentralverwaltung
+		icon = GFX_focus_GER_appease_the_wehrmacht
+		x = 2
+		y = 1
+		relative_position_id = RKK_civil_administration
+
+		prerequisite = { focus = RKK_civil_administration }
+		mutually_exclusive = { focus = RKK_regional_autonomy }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			is_subject = yes
+			#HANGİ LİDERİ SEÇMİŞ BAK
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		search_filters = { FOCUS_FILTER_MANPOWER }
+
+		completion_reward = {
+			#RESISTANCE KISMA UYUMLULUK YOK ETME IDEA
+			add_stability = -0.1
+			add_popularity = {
+				ideology = var:ROOT.ROOT_overlord_nation
+				popularity = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_germanisierungspolitik
+		icon = GFX_focus_HRE_four_year_plan
+		x = 2
+		y = 1
+		relative_position_id = RKK_zentralverwaltung
+
+		prerequisite = { focus = RKK_zentralverwaltung }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_STABILITY }
+
+		completion_reward = {
+			#RESISTANCE KISMA UYUMLULUK YOK ETME IDEA
+			add_war_support = 0.05
+			add_stability = -0.025
+			add_popularity = {
+				ideology = var:ROOT.ROOT_overlord_nation
+				popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_germanische_leitstelle
+		icon = GFX_focus_HRE_four_year_plan
+		x = 2
+		y = 1
+		relative_position_id = RKK_germanisierungspolitik
+
+		prerequisite = { focus = RKK_germanisierungspolitik }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_STABILITY }
+
+		completion_reward = {
+			#RESISTANCE KISMA UYUMLULUK YOK ETME IDEA
+			add_war_support = 0.05
+			add_stability = -0.025
+			add_popularity = {
+				ideology = var:ROOT.ROOT_overlord_nation
+				popularity = 0.05
+			}
+		}
+	}
+
+
+	focus = {
+		id = RKK_ultimate_integration
+		icon = GFX_focus_GER_support_the_fuhrer
+		x = 4
+		y = 5
+		relative_position_id = RKK_germanisierungspolitik
+
+		prerequisite = { focus = RKK_germanische_leitstelle }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			num_of_factories > 50
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			add_autonomy_score = { 
+				value = 100 
+				localization = TO_DO_MANDALIN
+			}
+			add_political_power = 25
+			add_stability = 0.075
+			add_research_slot = 1
+		}
+	}
+
+	#SHARED
+
+	focus = {
+		id = RKK_railways #why
+		icon = GFX_focus_GER_kriegslokomotive
+		x = 0
+		y = 2
+		relative_position_id = RKK_zentralverwaltung
+
+		prerequisite = { focus = RKK_zentralverwaltung focus = RKK_regional_autonomy }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_tech_bonus = {
+				name = GER_kriegslokomotiven
+				bonus = 0.5
+				uses = 1
+				category = train_tech
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_equipment_to_stockpile = {
+				type = train_equipment
+				amount = 15
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 0
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 0
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#TECHNOLOGIC - MILITARY
+	focus = {
+		id = RKK_grossraumwirtschaft #Großraumwirtschaft
+		icon = GFX_goal_LEP_krupp_industial
+		x = -3
+		y = 1
+		relative_position_id = RKK_zentralverwaltung
+
+		prerequisite = { focus = RKK_zentralverwaltung focus = RKK_regional_autonomy }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_STABILITY }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_stability = 0.025
+			add_popularity = {
+				ideology = var:ROOT.ROOT_overlord_nation
+				popularity = 0.05
+			}
+			add_tech_bonus = {
+				name = industrial_bonus
+				bonus = 1.0
+				uses = 1
+				category = industry
+			}
+			add_tech_bonus = {
+					name = electronics_bonus
+					bonus = 0.75
+					uses = 2
+					category = electronics
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_connect_to_berlin
+		icon = GFX_z_goal_yunnan_birma_highway
+		x = -1
+		y = 1
+		relative_position_id = RKK_grossraumwirtschaft
+
+		prerequisite = { focus = RKK_grossraumwirtschaft }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_STABILITY }
+
+		completion_reward = {
+			add_stability = 0.025
+			add_popularity = {
+				ideology = var:ROOT.ROOT_overlord_nation
+				popularity = 0.05
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 0
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 0
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_intive_german_manufacturers
+		icon = GFX_focus_generic_university_2
+		x = 0
+		y = 1
+		relative_position_id = RKK_connect_to_berlin
+
+		prerequisite = { focus = RKK_connect_to_berlin }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			army_experience = 25
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 0.1
+			}
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_extra_research_slot
+		icon = GFX_focus_generic_university_3
+		x = -1
+		y = 1
+		relative_position_id = RKK_intive_german_manufacturers
+
+		prerequisite = { focus = RKK_intive_german_manufacturers }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = RKK_small_arms
+		icon = GFX_GENERIC_Superior_Firepower
+		x = 1
+		y = 1
+		relative_position_id = RKK_intive_german_manufacturers
+
+		prerequisite = { focus = RKK_intive_german_manufacturers }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = RAJ_royal_indian_artillery_dlc
+				bonus = 0.5
+				uses = 2
+				category = artillery # optional 
+				# technology  = technology_id # optional
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_support_eq
+		icon = GFX_focus_SWE_varnplikt
+		x = -1
+		y = 1
+		relative_position_id = RKK_small_arms
+
+		prerequisite = { focus = RKK_small_arms }
+		prerequisite = { focus = RKK_extra_research_slot }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 0.1
+			}
+			add_tech_bonus = {
+				name = engineers_tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = engineers_tech
+			}
+			add_tech_bonus = {
+				name = recon_tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = recon_tech
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_agreement_with_corporate_groups
+		icon = GFX_goal_generic_dangerous_deal
+		x = 1
+		y = 1
+		relative_position_id = RKK_small_arms
+
+		prerequisite = { focus = RKK_small_arms }
+		prerequisite = { focus = RKK_increase_employment }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_black_conscripts
+		icon = GFX_focus_GER_hegemony_of_the_ss
+		x = 0
+		y = 1
+		relative_position_id = RKK_agreement_with_corporate_groups
+
+		prerequisite = { focus = RKK_agreement_with_corporate_groups }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_MANPOWER }
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RKK_local_high_command
+		icon = GFX_focus_HRE_four_year_plan
+		x = -2
+		y = 1
+		relative_position_id = RKK_black_conscripts
+
+		prerequisite = { focus = RKK_black_conscripts }
+		mutually_exclusive = { focus = RKK_german_high_command }
+
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = RKK_local_tactics
+		icon = GFX_z_goal_translation_of_scientific_and_military_works_into_Dari
+		prerequisite = { focus = RKK_local_high_command }
+
+		x = 0
+		y = 1
+		relative_position_id = RKK_local_high_command
+
+		cost = 5
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+
+		completion_reward = {
+			army_experience = 50
+			add_war_support = 0.05
+			add_doctrine_cost_reduction = {
+				name = RKK_learn_from_the_berlin
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_german_high_command
+		icon = GFX_focus_GER_appease_the_wehrmacht
+		x = 2
+		y = 1
+		relative_position_id = RKK_black_conscripts
+
+		prerequisite = { focus = RKK_black_conscripts }
+		mutually_exclusive = { focus = RKK_local_high_command }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = GER_all_terrain_military_motorcycle
+				uses = 1
+				bonus = 0.5
+				category = military_police_tech
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_learn_from_the_prussia
+		icon = GFX_GER_Gott_Mit_Uns
+		prerequisite = { focus = RKK_german_high_command }
+
+		x = 0
+		y = 1
+		relative_position_id = RKK_german_high_command
+
+		cost = 5
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = RKK_learn_from_the_berlin
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_labour_battalions
+		icon = GFX_z_goal_small_professional_army
+		prerequisite = { focus = RKK_german_high_command }
+
+		x = 2
+		y = 1
+		relative_position_id = RKK_german_high_command
+
+		cost = 5
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = RKK_learn_from_the_berlin
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_supply_the_reich
+		icon = GFX_z_goal_supply_of_weapons
+		prerequisite = { focus = RKK_labour_battalions }
+		prerequisite = { focus = RKK_learn_from_the_prussia }
+
+		x = 0
+		y = 1
+		relative_position_id = RKK_labour_battalions
+
+		cost = 5
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = RKK_learn_from_the_berlin
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_elit_units
+		icon = GFX_z_goal_ger_peoples_army
+		prerequisite = { focus = RKK_supply_the_reich }
+		prerequisite = { focus = RKK_armoured_corps }
+
+		x = -1
+		y = 1
+		relative_position_id = RKK_supply_the_reich
+
+		cost = 5
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = RKK_learn_from_the_berlin
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_wagen
+		icon = GFX_GER_Panzertruppen
+		prerequisite = { focus = RKK_german_high_command focus = RKK_local_high_command }
+		x = -2
+		y = 1
+		relative_position_id = RKK_german_high_command
+		
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_CHARACTER}
+
+		completion_reward = {
+			add_research_slot = 1
+
+			add_tech_bonus = {
+				name = engineers_tech_bonus
+				bonus = 0.75
+				uses = 2
+				category = motorized_equipment
+			}
+			if = {
+				limit = {
+					has_dlc = "Gotterdammerung"
+				}
+				if = {
+					limit = {
+						NOT = { has_tech = sp_armored_motorized_military_police_tech }
+					}
+					add_tech_bonus = {
+						name = GER_all_terrain_military_motorcycle
+						uses = 1
+						bonus = 1
+						technology = sp_armored_motorized_military_police_tech
+					}
+				}
+				add_equipment_bonus = {
+					name = GER_all_terrain_military_motorcycle
+					bonus = {
+						motorbike_equipment_1 = {
+							build_cost_ic = -0.25
+						}
+					}
+				}
+			}
+
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_avation_effort
+		icon = GFX_focus_generic_cas_aircraft
+		prerequisite = { focus = RKK_wagen }
+		x = -1
+		y = 1
+		relative_position_id = RKK_wagen
+		
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_CHARACTER}
+
+		complete_tooltip = {
+			air_experience = 25
+			if = { limit = { has_country_flag = aviation_effort_AB }
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}			
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}			
+		}
+
+		completion_reward = {
+			air_experience = 25
+
+			if = {
+				limit = {
+					capital_scope = {
+						NOT = {
+							free_building_slots = {
+								building = air_base
+								size > 1
+							}
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					ROOT = { set_country_flag = aviation_effort_AB }
+				}
+			}
+			if = {
+				limit = {
+					capital_scope = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+				}
+				capital_scope = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					ROOT = { set_country_flag = aviation_effort_AB }
+				}
+			}
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_avation_effort_2
+		icon = GFX_focus_generic_multi_role_aircraft
+		prerequisite = { focus = RKK_avation_effort }
+		x = 0
+		y = 1
+		relative_position_id = RKK_avation_effort
+		
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_CHARACTER}
+
+		completion_reward = {
+			air_experience = 25
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+			add_tech_bonus = {
+				name = CAS_bonus
+				bonus = 1.0
+				uses = 1
+				category = cat_air_guns
+			}
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 0.5
+				uses = 1
+				category = light_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_armoured_corps
+		icon = GFX_goal_generic_heavy_armour_german
+		prerequisite = { focus = RKK_wagen }
+		x = 1
+		y = 1
+		relative_position_id = RKK_wagen
+		
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_CHARACTER}
+
+		completion_reward = {
+			random_army_leader = {
+				limit = {
+					NOT = { has_trait = panzer_leader }
+				}
+				add_trait = {
+					trait = panzer_leader
+				}
+			}
+			add_tech_bonus = {
+				name = RAJ_armoured_corps_center_and_school
+				bonus = 0.3
+				uses = 2
+				category = armor
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_mechanization_of_the_cavalry
+		icon = GFX_GENERIC_Mechanization
+		prerequisite = { focus = RKK_armoured_corps }
+		x = 0
+		y = 1
+		relative_position_id = RKK_armoured_corps
+		
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_XP}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = RAJ_mechanization_of_the_cavalry
+				bonus = 1
+				uses = 1
+				category = cat_mechanized_equipment
+			}
+			army_experience = 20
+		}
+	}
+
+	focus = {
+		id = RKK_expand_the_sicherheitskorps
+		icon = GFX_GER_Ordnungspolizei
+		x = -1
+		y = 1
+		relative_position_id = RKK_zentralverwaltung
+
+		prerequisite = { focus = RKK_zentralverwaltung focus = RKK_regional_autonomy }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_STABILITY }
+
+		completion_reward = {
+			#RESISTANCE KISMA İSHTİHBARAT IDEA
+			add_stability = -0.025
+			add_popularity = {
+				ideology = var:ROOT.ROOT_overlord_nation
+				popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_seize_industries
+		icon = GFX_focus_DEN_heavy_regulations
+		x = -1
+		y = 1
+		relative_position_id = RKK_expand_the_sicherheitskorps
+
+		prerequisite = { focus = RKK_grossraumwirtschaft }
+		prerequisite = { focus = RKK_expand_the_sicherheitskorps }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			add_political_power = -50
+			add_popularity = {
+				ideology = var:ROOT.ROOT_overlord_nation
+				popularity = 0.025
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+
+		}
+	}
+
+	#HARD WORK
+	focus = {
+		id = RKK_german_camps
+		icon = GFX_focus_generic_public_works
+		x = 2
+		y = 1
+		relative_position_id = RKK_seize_industries
+
+		prerequisite = { focus = RKK_seize_industries }
+		prerequisite = { focus = RKK_railways }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_STABILITY }
+
+		completion_reward = {
+			#FACTORY TAMİR CONSUMER GOODS KIS IDEA
+			add_stability = -0.05
+			add_popularity = {
+				ideology = var:ROOT.ROOT_overlord_nation
+				popularity = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = RKK_exploit_the_mines
+		icon = GFX_z_goal_develop_geju_mine
+		x = 1
+		y = 1
+		relative_position_id = RKK_german_camps
+
+		prerequisite = { focus = RKK_german_camps }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_stability = -0.05
+			add_popularity = {
+				ideology = var:ROOT.ROOT_overlord_nation
+				popularity = 0.1
+			}
+			#ÜLKEYE GÖRE KAYNAK SAĞLA
+		}
+	}
+
+	focus = {
+		id = RKK_increase_employment
+		icon = GFX_z_focus_the_workers
+		x = -1
+		y = 1
+		relative_position_id = RKK_german_camps
+
+		prerequisite = { focus = RKK_intive_german_manufacturers }
+		prerequisite = { focus = RKK_german_camps }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			#PRODUCTION ARTTIR
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#AUTONOMY
+	focus = {
+		id = RKK_regional_autonomy
+		icon = GFX_focus_HRE_four_year_plan
+		x = -2
+		y = 1
+		relative_position_id = RKK_civil_administration
+
+		prerequisite = { focus = RKK_civil_administration }
+		mutually_exclusive = { focus = RKK_zentralverwaltung }
+
+		cost = 5.13
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			is_subject = yes
+			#HANGİ LİDERİ SEÇMİŞ BAK
+		}
+		
+		bypass = {
+
+		}
+
+		
+		
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		search_filters = { FOCUS_FILTER_STABILITY }
+
+		completion_reward = {
+			#UYUMLULUK ARTTIRAN IDEA
+			add_autonomy_score = { 
+				value = 100 
+				localization = TO_DO_MANDALIN
+			}
+			add_political_power = 50
+			add_stability = -0.15
+		}
+	}
+
+
+}
+

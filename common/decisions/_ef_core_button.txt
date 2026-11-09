@@ -1,0 +1,268 @@
+core_category = {
+	ef_core_state = {
+
+		icon = GFX_decision_category_conference
+
+		target_array = ROOT.controlled_states
+		state_target = yes
+		on_map_mode = map_only
+		days_remove = 30
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = CREATE_CORE2_TOOLTIP
+				ROOT = {
+					NOT = { has_country_flag = { flag = ef_core_state_tt value = 4 } }
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = CREATE_CORE1_TOOLTIP
+				FROM = {
+					if = {
+						limit = {
+							AND = {
+								is_fully_controlled_by = ROOT
+								NOT = { is_core_of = ROOT }
+								NOT = { state_population > 50000 }
+							}
+						}
+						check_variable = { ROOT.political_power > 49.99 }
+					}
+					else_if = {
+						limit = {
+							AND = {
+								is_fully_controlled_by = ROOT
+								NOT = { is_core_of = FROM }
+								state_population > 50000
+								NOT = { state_population > 100000 }
+							}
+						}
+						check_variable = { ROOT.political_power > 74.99 }
+					}
+					else_if = {
+						limit = {
+							AND = {
+								is_fully_controlled_by = ROOT
+								NOT = { is_core_of = FROM }
+								state_population > 100000
+								NOT = { state_population > 250000 }
+							}
+						}
+						check_variable = { ROOT.political_power > 99.99 }
+					}
+					else_if = {
+						limit = {
+							AND = {
+								is_fully_controlled_by = ROOT
+								NOT = { is_core_of = FROM }
+								state_population > 250000
+								NOT = { state_population > 500000 }
+							}
+						}
+						check_variable = { ROOT.political_power > 124.99 }
+					}
+					else_if = {
+						limit = {
+							AND = {
+								is_fully_controlled_by = ROOT
+								FROM = { NOT = { is_core_of = ROOT }}
+								FROM = {
+									state_population > 500000
+									NOT = { state_population > 1000000 }
+								}
+							}
+						}
+						check_variable = { ROOT.political_power > 149.99 }
+					}
+					else_if = {
+						limit = {
+							AND = {
+								is_fully_controlled_by = ROOT
+								NOT = { is_core_of = FROM }
+								state_population > 1000000
+								NOT = { state_population > 5000000 }
+							}
+						}
+						check_variable = { ROOT.political_power > 174.99 }
+					}
+					else_if = {
+						limit = {
+							AND = {
+								is_fully_controlled_by = ROOT
+								NOT = { is_core_of = FROM }
+								state_population > 5000000
+								NOT = { state_population > 10000000 }
+							}
+						}
+						check_variable = { ROOT.political_power > 249.99 }
+					}
+					else_if = {
+						limit = {
+							AND = {
+								is_fully_controlled_by = ROOT
+								NOT = { is_core_of = FROM }
+								state_population > 10000000
+								NOT = { state_population > 15000000 }
+							}
+						}
+						check_variable = { ROOT.political_power > 349.99 }
+					}
+					else_if = {
+						limit = {
+							AND = {
+								is_fully_controlled_by = ROOT
+								NOT = { is_core_of = FROM }
+								state_population > 15000000
+							}
+						}
+						check_variable = { ROOT.political_power > 449.99 }
+					}
+					OR = {
+						AND = {
+							is_core_of = KUR
+							NOT = { is_owned_by = TUR }
+						}
+						AND = {
+							is_core_of = ETH
+							NOT = { is_owned_by = ITA }
+						}
+						AND = {
+							NOT = {
+								is_core_of = ETH
+								is_core_of = KUR
+							}
+						}
+					}
+				}
+			}
+			FROM = {
+				if = {
+					limit = {
+						impassable = no
+					}
+					AND = {
+						if = {
+							limit = {
+								ROOT = {
+									OR = {
+										AND = {
+											tag = LIB
+											has_completed_focus = LIB_liberate_africans
+										}
+										AND = {
+											tag = SAU
+											has_completed_focus = SAU_liberate_our_arab_brothers
+											FROM = { SAU_arabian_countries_core_trigger = yes }
+										}
+									}
+								}
+							}
+							hidden_trigger = {
+								always = yes
+							}
+						}
+						else = {
+							compliance > 25
+						}
+						resistance < 15
+					}
+				}
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				is_controlled_by = ROOT
+				NOT = {
+					is_core_of = ROOT
+				}
+			}
+		}
+		target_root_trigger = {
+			is_ai = no
+		}
+
+		visible = {
+			FROM = {
+				is_controlled_by = ROOT
+				NOT = {
+					is_core_of = ROOT
+				}
+				NOT = { has_dynamic_modifier = { modifier = ongoing_riots_eng } }
+			}
+			ROOT = {
+				NOT = { has_country_flag = JAP_allow_arasaka_path }
+			}
+			if = {
+				limit = {
+					has_global_flag = his_only
+				}
+				always = no
+			}
+		}
+
+		complete_effect = {
+			ROOT = {
+				if = {
+					limit = {
+						has_country_flag = ef_core_state_tt
+					}
+					modify_country_flag = {
+						flag = ef_core_state_tt
+						value = 1
+					}
+				}
+				else = {
+					set_country_flag = { flag = ef_core_state_tt value = 1 }
+				}
+			}
+			CORE_button_cost_variables = yes
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					NOT = {
+						AND = {
+							controller = {
+								has_completed_focus = LIB_liberate_africans
+							}
+							FROM = {
+								is_on_continent = africa
+							}
+						}
+					}
+					NOT = {
+						AND = {
+							controller = { #TODO Hypno
+								has_completed_focus = SAU_liberate_our_arab_brothers
+							}
+							FROM = {
+								SAU_arabian_countries_core_trigger = yes
+							}
+						}
+					}
+				}
+				#CORE_button_stability_hit_variables = yes
+				FROM = {
+					add_dynamic_modifier = { modifier = EF_administrative_reorganization_modifier scope = ROOT days = 90 }
+				}
+			}
+			FROM = {
+				add_core_of = ROOT
+			}
+			ROOT = {
+				#clr_country_flag = ef_core_state_tt
+				modify_country_flag = {
+					flag = ef_core_state_tt
+					value = -1
+				}
+			}
+		}
+		ai_will_do = {
+			base = 0
+		}
+
+	}
+
+}

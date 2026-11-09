@@ -1,0 +1,210 @@
+################
+#### TURKEY ####
+################
+
+EQA_category_religion = {
+
+	icon = GFX_decision_category_EQA_religion
+
+	allowed = {
+		original_tag = TUR
+		OR = {
+			has_country_leader = {
+				character = TUR_mustafa_kemal_ataturk
+				ruling_only = yes
+			}
+			has_country_flag = ataturk_enabled
+		}
+	}
+
+	visible_when_empty = yes
+
+	scripted_gui = EQA_religion_decision_ui
+
+	priority = 85
+}
+
+TUR_the_constitutional_arrows_category = {
+	priority = 8
+	icon = tur_the_constitutional_arrows_category
+
+	picture = GFX_decision_cat_picture_constitutional_arrows
+
+	allowed = {
+		original_tag = TUR
+		NOT = {
+			has_completed_focus = TUR_replace_sixarrow
+		}
+	}
+}
+
+TUR_gain_control_over_egypt = {
+	icon = GFX_decision_category_GER_war_planning
+	priority = 97
+
+	allowed = {
+		original_tag = TUR
+	}
+
+	visible = {
+		has_completed_focus = TUR_take_over_egypt
+	}
+}
+
+TUR_Oguz_Tribes_System = {
+	priority = 99999
+	icon = SOV_soviet_academy_of_sciences
+
+	#picture = GFX_decision_cat_picture_constitutional_arrows
+	visible_when_empty = yes
+	scripted_gui = TUR_Oguz_Tribes_System_decision_ui
+	allowed = {
+		original_tag = TUR
+		has_completed_focus = TUR_replace_sixarrow
+	}
+}
+
+TUR_kurdish_state_management_category  = {
+	priority = 4
+	icon = tur_unifying_the_country
+
+	visible_when_empty = yes 
+
+	on_map_area = {
+		targets = { 350 352 353 800 }
+		name = TUR_kurdish_state_management_map_category_name
+		zoom = 150
+	}
+
+	allowed = {
+		original_tag = TUR
+	}
+}
+
+TUR_fundamentalist_state_management_category  = {
+	priority = 5
+	icon = tur_unifying_the_country
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				TUR_is_fundamentalist_state = yes
+			}
+		}
+		name = TUR_fundamentalist_state_management_map_category_name
+		zoom = 150
+	}
+
+	allowed = {
+		original_tag = TUR
+	}
+}
+
+TUR_kemalist_state_management_category = {
+	priority = 5
+	icon = tur_unifying_the_country
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				TUR_is_kemalist_state = yes
+			}
+		}
+		name = TUR_kemalist_state_management_map_category_name
+		zoom = 150
+	}
+
+	allowed = {
+		original_tag = TUR
+	}
+}
+
+TUR_the_fading_father_category  = {
+	priority = 9
+	icon = generic_crisis
+
+	picture = GFX_decision_cat_picture_ataturk_health
+
+	allowed = {
+		original_tag = TUR
+	}
+}
+
+TUR_the_enemy_within = {
+	priority = 7
+	icon = tur_unifying_the_country
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				TUR_is_unaligned_state = yes
+			}
+		}
+		name = TUR_unaligned_state_management_map_category_name
+		zoom = 150
+	}
+
+	allowed = {
+		original_tag = TUR
+	}
+}
+
+TUR_industrial_projects_category = {
+	priority = 1
+	icon = gre_investment_decisions
+
+	picture = GFX_decision_cat_generic_mefo_bills
+
+	allowed = {
+		original_tag = TUR
+	}
+}
+
+TUR_reforming_our_armed_forces_category = {
+	priority = 3
+	icon = gre_faction_management
+
+	picture = GFX_decision_cat_picture_reforming_our_armed_forces
+
+	allowed = {
+		original_tag = TUR
+	}
+}
+
+category_faction_debug_decisions = {
+	priority = 0
+	visible = {
+		is_debug = yes
+	}
+
+	allowed = {
+		original_tag = TUR
+	}
+}
+
+TUR_village_institutes_category = {
+	priority = 7
+	icon = GFX_decision_category_SOV_merge_designers
+
+	allowed = {
+		original_tag = TUR
+	}
+
+	visible = {
+		has_completed_focus = TUR_village_institutes
+	}
+
+	on_map_area = {
+		target_array = ROOT.core_states
+		target_trigger = {
+			FROM = {
+				has_state_flag = TUR_developed_village_institutes_flag
+			}
+		}
+		name = TUR_developed_village_institutes
+		zoom = 500
+	}
+}

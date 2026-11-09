@@ -1,0 +1,170 @@
+scripted_gui = {
+
+	st_state_manager_powers = {
+
+		context_type = selected_state_context
+
+		window_name = "st_state_manager_powers_container"
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				has_country_flag = transfer_enabled
+			}
+			OR = {
+				is_owned_and_controlled_by = ROOT
+				AND = {
+					has_game_rule = {
+						rule = allow_subject_transfers
+						option = FREE
+					}
+					any_country = {
+						is_ai = yes
+						is_subject_of = ROOT
+						owns_state = FROM
+						NOT = {
+							has_autonomy_state = autonomy_supervised_state
+							has_autonomy_state = autonomy_protectorate
+						}
+					}
+				}
+				AND = {
+					has_game_rule = {
+						rule = allow_subject_transfers
+						option = LOW_AUTONOMY_ONLY
+					}
+					any_country = {
+						is_ai = yes
+						is_subject_of = ROOT
+						compare_autonomy_state < autonomy_colony
+						owns_state = FROM
+						NOT = {
+							has_autonomy_state = autonomy_supervised_state
+							has_autonomy_state = autonomy_protectorate
+						}
+					}
+				}
+			}
+			NOT = {
+				has_global_flag = EF_disabled_stt
+			}
+			
+		}
+
+		effects = {
+			st_state_cancel_resource_rights_click = { 
+				set_temp_variable = { ROOT.selected_state = FROM.FROM }
+				var:selected_state = {
+					controller = {
+						set_temp_variable = {
+							ROOT.EF_controller_of_the_selected_state = THIS
+						}
+					}
+				}
+				every_country = {
+					remove_resource_rights = PREV
+				}
+				var:selected_state = { 
+					clr_state_flag = EF_res_transfered
+				}
+			}
+			st_state_manager_power_mark_for_transfer_click = {
+				FROM.FROM = {
+					add_to_array = {
+						array = ROOT.EF_marked_for_transfer
+					}
+					set_state_flag = marked_for_transfer
+					#set_border_war = yes
+				}
+				add_to_variable = { ROOT.marked_states = 1 }
+			}
+
+			st_state_manager_power_unmark_for_transfer_click = {
+				FROM.FROM = {
+					remove_from_array = {
+						array = ROOT.EF_marked_for_transfer
+					}
+					clr_state_flag = marked_for_transfer
+					#set_border_war = no
+				}
+				subtract_from_variable = { ROOT.marked_states = 1 }
+			}
+		}
+
+		triggers = {
+			st_state_cancel_resource_rights_click_enabled = {
+				FROM.FROM = { 
+					has_state_flag = EF_res_transfered
+					controller = {
+						OR = { 
+							tag = ROOT
+							AND = {
+								is_subject_of = ROOT
+								is_ai = yes
+								NOT = {
+									has_autonomy_state = autonomy_supervised_state
+									has_autonomy_state = autonomy_protectorate
+								}
+							}
+						}
+					}
+				}
+			}
+			st_state_cancel_resource_rights_visible = { 
+				set_temp_variable = { ROOT.taker = this.controller}
+				var:taker = {
+					OR = { 
+						tag = ROOT
+						is_subject_of = ROOT
+					}
+				}
+			}
+			st_state_manager_power_mark_for_transfer_click_enabled = {
+				ROOT = { 
+					if = {
+						limit = { 
+							has_country_flag = resource_award_states
+						}
+						set_temp_variable = { ROOT.selected_state = FROM.FROM }
+						all_of_scopes = {
+							array = ROOT.selected_state
+							OR = {
+								ROOT = {
+									has_resources_rights = {
+										state = PREV
+									}
+								}
+								any_of_scopes = {
+									array = ROOT.subjects
+									has_resources_rights = {
+										state = PREV
+									}
+								}
+							}
+						}
+					}
+				}
+				FROM.FROM = {
+					NOT = { has_state_flag = marked_for_transfer }
+					NOT = { has_dynamic_modifier = { modifier = international_city } }
+					NOT = { has_dynamic_modifier = { modifier = international_city_2 } }
+				}
+			}
+			st_state_manager_power_mark_for_transfer_visible = {
+				FROM.FROM = {
+					NOT = { has_state_flag = marked_for_transfer }
+					NOT = { has_dynamic_modifier = { modifier = international_city } }
+					NOT = { has_dynamic_modifier = { modifier = international_city_2 } }
+				}
+			}
+			st_state_manager_power_unmark_for_transfer_visible = {
+				FROM.FROM = {
+					has_state_flag = marked_for_transfer
+				}
+			}
+		}
+
+	}
+
+}
+

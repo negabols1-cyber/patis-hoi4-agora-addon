@@ -1,0 +1,267 @@
+###########################
+# CHINA_BORDER_OPERATIONS Events
+###########################
+
+add_namespace = prc_border_operations
+
+country_event = {
+
+	id = prc_border_operations.1
+	title = prc_border_operations.1.t
+	desc = prc_border_operations.1.d
+	picture = GFX_report_event_generic_strike
+
+	is_triggered_only = yes
+
+	option = {
+		name = prc_border_operations.1.a	#victory-xibei
+		ai_chance = { base = 100 }
+		add_political_power = 100
+		add_stability = 0.1
+		add_war_support = 0.15
+		add_manpower = 50000
+		annex_country = { target = XSM transfer_troops = yes }
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.2
+	title = prc_border_operations.2.t
+	desc = prc_border_operations.2.d
+	picture = report_event_gre_fascism
+
+	is_triggered_only = yes
+
+	option = {
+		name = prc_border_operations.2.a	#lose-xibei
+		ai_chance = { base = 100 }
+		add_timed_idea = {
+			idea = CHI_illegal_regime
+			days = 450
+		}
+		add_manpower = -50000
+		add_stability = -0.1
+		add_war_support = -0.1
+		add_political_power = -150
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.3
+	title = prc_border_operations.3.t
+	desc = prc_border_operations.3.d
+	picture = report_event_polish_tanks_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = prc_border_operations.3.a	#victory-yunnan-prc
+		ai_chance = { base = 100 }
+		add_political_power = 50
+		add_stability = 0.1
+		add_war_support = 0.15
+		remove_ideas = CHI_ineffective_bureaucracy_warlord
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.4
+	title = prc_border_operations.4.t
+	desc = prc_border_operations.4.d
+	picture = report_event_polish_tanks_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = prc_border_operations.4.a	#lose-yunnan-prc
+		ai_chance = { base = 100 }
+		add_political_power = -250
+		add_stability = -0.25
+		add_war_support = -0.25
+		add_timed_idea = {
+			idea = CHI_illegal_regime
+			days = 450
+		}
+		add_manpower = -50000
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.5
+	title = prc_border_operations.5.t
+	desc = prc_border_operations.5.d
+	picture = report_event_gre_italian_troops
+
+	is_triggered_only = yes
+
+	option = {
+		name = prc_border_operations.5.a	#victory-prc-shanxi
+		ai_chance = { base = 100 }
+		add_political_power = 75
+		add_stability = 0.05
+		add_war_support = 0.05
+		annex_country = { target = SHX transfer_troops = yes }
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.6
+	title = prc_border_operations.6.t
+	desc = prc_border_operations.6.d
+	picture = report_event_portugal_navy_mutiny_prisoners
+
+	is_triggered_only = yes
+
+	option = {
+		name = prc_border_operations.6.a	#lose-prc-shanxi
+		ai_chance = { base = 100 }
+		add_political_power = -75
+		add_stability = -0.05
+		add_war_support = -0.05
+		SHX = { add_manpower = 50000 }
+		add_manpower = -50000
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.7
+	title = prc_border_operations.7.t
+	desc = prc_border_operations.7.d
+	picture = report_event_gre_militaristic_march
+
+	is_triggered_only = yes
+
+	option = {
+		name = prc_border_operations.7.a	#victory-xibei-prc
+		ai_chance = { base = 100 }
+		add_political_power = 150
+		add_stability = 0.15
+		add_war_support = 0.2
+		PRC = {
+			add_timed_idea = {
+				idea = CHI_illegal_regime
+				days = 450
+			}
+		}
+		remove_ideas = CHI_ineffective_bureaucracy_warlord
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.8
+	title = prc_border_operations.8.t
+	desc = prc_border_operations.8.d
+	picture = report_event_royal_parade
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_border_conflict.8.a	#lose-xibei-chi
+		ai_chance = { base = 100 }
+		add_political_power = -150
+		add_stability = -0.1
+		add_war_support = -0.15
+		add_manpower = -50000
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.9
+	title = prc_border_operations.9.t
+	desc = prc_border_operations.9.d
+	picture = report_event_tur_opposition_party
+
+	is_triggered_only = yes
+
+	option = {
+		name = prc_border_operations.9.a	#victory-chi
+		ai_chance = { base = 100 }
+		add_political_power = 150
+		add_stability = 0.1
+		add_war_support =  0.1
+		CHI = {
+			add_timed_idea = {
+				idea = CHI_illegal_regime
+				days = 450
+			}
+			add_political_power = -75
+			add_stability = -0.1
+			add_war_support =  -0.1
+		}
+		PRC = { transfer_state = 607 }
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.10
+	title = prc_border_operations.10.t
+	desc = prc_border_operations.10.d
+	picture = report_event_tur_opposition_party
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_border_conflict.10.a	#victory-prc
+		ai_chance = { base = 100 }
+		remove_ideas = PRC_power_struggles
+		remove_ideas = PRC_red_army_weakened
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.11
+	title = prc_border_operations.11.t
+	desc = prc_border_operations.11.d
+	picture = report_event_tur_opposition_party
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_border_conflict.11.a	#victory-chi-prc
+		ai_chance = { base = 100 }
+		add_political_power = 150
+		add_stability = 0.1
+		add_war_support =  0.1
+		PRC = {
+			add_timed_idea = {
+				idea = CHI_illegal_regime
+				days = 450
+			}
+		}
+	}
+}
+
+country_event = {
+
+	id = prc_border_operations.12
+	title = prc_border_operations.12.t
+	desc = prc_border_operations.12.d
+	picture = report_event_tur_opposition_party
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_border_conflict.12.a	#lose-chi-prc
+		ai_chance = { base = 100 }
+		add_political_power = -75
+		add_stability = -0.1
+		add_war_support =  -0.1
+		CHI = {
+			add_timed_idea = {
+				idea = CHI_illegal_regime
+				days = 450
+			}
+		}
+		PRC = { transfer_state = 607 }
+	}
+}

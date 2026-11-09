@@ -1,0 +1,226 @@
+###########################################################################
+# Syria (SYR) scripted effects
+#
+# Shared effects for the Syrian focus tree (common/national_focus/SYR.txt),
+# the National Struggle decisions (common/decisions/SYR.txt) and the Syrian
+# events (events/SYR_events.txt).
+#
+# National Resistance (SYR country variable SYR_resistance) runs from 0 to
+# @SYR_RESISTANCE_GOAL. When it is full, Syria can force the independence
+# crisis: France either grants independence or Syria rises in revolt.
+# Design notes: docs/systems/syria_focus_tree.md
+###########################################################################
+
+@SYR_RESISTANCE_GOAL = 100
+@SYR_FRANCE_WEAK_MULT = 1.5
+@SYR_UNDERGROUND_MULT = 1.25
+@SYR_RESPONSE_CHANCE = 50
+@SYR_NO_RESPONSE_CHANCE = 50
+@SYR_RESPONSE_COOLDOWN_DAYS = 30
+@SYR_LEADERSHIP_MAX_STABILITY_COST = 0.15
+@SYR_LEADERSHIP_POPULARITY_BOOST = 0.15
+@SYR_REVOLT_WAR_SUPPORT = 0.15
+
+# SYR scope. Input: temp variable SYR_resistance_gain (base gain).
+# The gain grows while France is weakened or no longer democratic, and once
+# the National Bloc has gone underground.
+SYR_add_resistance = {
+	hidden_effect = {
+		if = {
+			limit = {
+				OR = {
+					SYR_france_is_weakened = yes
+					SYR_france_is_not_democratic = yes
+				}
+			}
+			multiply_temp_variable = { SYR_resistance_gain = @SYR_FRANCE_WEAK_MULT }
+		}
+		if = {
+			limit = { has_completed_focus = SYR_the_national_bloc_underground }
+			multiply_temp_variable = { SYR_resistance_gain = @SYR_UNDERGROUND_MULT }
+		}
+	}
+	custom_effect_tooltip = SYR_add_resistance_tt
+	hidden_effect = {
+		add_to_variable = { SYR_resistance = SYR_resistance_gain }
+		clamp_variable = {
+			var = SYR_resistance
+			min = 0
+			max = @SYR_RESISTANCE_GOAL
+		}
+	}
+}
+
+# SYR scope. Input: temp variable SYR_resistance_loss.
+SYR_reduce_resistance = {
+	custom_effect_tooltip = SYR_reduce_resistance_tt
+	hidden_effect = {
+		subtract_from_variable = { SYR_resistance = SYR_resistance_loss }
+		clamp_variable = {
+			var = SYR_resistance
+			min = 0
+			max = @SYR_RESISTANCE_GOAL
+		}
+	}
+}
+
+# SYR scope. Gives France a chance to answer a National Struggle decision.
+# France answers at most once per cooldown.
+SYR_roll_french_response = {
+	hidden_effect = {
+		if = {
+			limit = {
+				country_exists = FRA
+				is_subject_of = FRA
+				NOT = { has_country_flag = SYR_french_response_pending }
+			}
+			random_list = {
+				@SYR_RESPONSE_CHANCE = {
+					set_country_flag = { flag = SYR_french_response_pending days = @SYR_RESPONSE_COOLDOWN_DAYS value = 1 }
+					FRA = { country_event = { id = syria.10 days = 5 random_days = 10 } }
+				}
+				@SYR_NO_RESPONSE_CHANCE = { }
+			}
+		}
+	}
+	custom_effect_tooltip = SYR_french_response_possible_tt
+}
+
+# SYR scope. Starts the independence crisis once National Resistance is full
+# (or the treaty route breaks down). A weakened France decides first;
+# otherwise Syria must decide whether to rise in arms.
+SYR_start_independence_crisis = {
+	if = {
+		limit = { SYR_france_is_weakened = yes }
+		custom_effect_tooltip = SYR_crisis_france_decides_tt
+		FRA = { country_event = { id = syria.30 hours = 12 } }
+	}
+	else = {
+		custom_effect_tooltip = SYR_crisis_revolt_choice_tt
+		country_event = { id = syria.31 hours = 12 }
+	}
+}
+
+# SYR scope. Bookkeeping for a Syria that has just left the mandate.
+# The caller ends the subject relation first.
+SYR_become_independent = {
+	set_country_flag = SYR_independent
+	clr_country_flag = SYR_revolt_postponed
+	if = {
+		limit = { has_cosmetic_tag = SYR_mandate }
+		drop_cosmetic_tag = yes
+	}
+	if = {
+		limit = { has_idea = SYR_the_french_mandate }
+		remove_ideas = SYR_the_french_mandate
+	}
+}
+
+# SYR scope. Brings Fawzi al-Qawuqji into the Syrian army once.
+SYR_recruit_qawuqji = {
+	if = {
+		limit = { NOT = { has_country_flag = SYR_qawuqji_recruited } }
+		set_country_flag = SYR_qawuqji_recruited
+		recruit_character = SYR_fawzi_al_qawuqji
+	}
+}
+
+# SYR scope. Syria breaks from France by force.
+SYR_launch_the_revolt = {
+	FRA = { end_puppet = SYR }
+	SYR_become_independent = yes
+	SYR_recruit_qawuqji = yes
+	declare_war_on = {
+		target = FRA
+		type = independence_wargoal
+	}
+	load_oob = "SYR_revolt"
+	add_ideas = SYR_war_of_independence
+	add_war_support = @SYR_REVOLT_WAR_SUPPORT
+	activate_mission = SYR_hold_damascus
+	set_country_flag = SYR_fought_for_independence
+}
+
+# SYR scope. Input: temp variable SYR_leader_popularity (0 to 1).
+# A movement with little support costs more stability to put in power.
+SYR_pay_leadership_cost = {
+	set_temp_variable = { SYR_stability_cost = 1 }
+	subtract_from_temp_variable = { SYR_stability_cost = SYR_leader_popularity }
+	multiply_temp_variable = { SYR_stability_cost = @SYR_LEADERSHIP_MAX_STABILITY_COST }
+	multiply_temp_variable = { SYR_stability_cost = -1 }
+	add_stability = SYR_stability_cost
+}
+
+# SYR scope. Khalid Bakdash and the Syrian Communist Party take power.
+SYR_install_communist_government = {
+	set_temp_variable = { SYR_leader_popularity = party_popularity@communism }
+	SYR_pay_leadership_cost = yes
+	add_popularity = { ideology = communism popularity = @SYR_LEADERSHIP_POPULARITY_BOOST }
+	set_politics = {
+		ruling_party = communism
+		elections_allowed = no
+	}
+	promote_character = SYR_khalid_bakdash
+	set_country_flag = SYR_route_communist
+}
+
+# SYR scope. Antun Saadeh and the Syrian Social Nationalist Party take power.
+SYR_install_fascist_government = {
+	set_temp_variable = { SYR_leader_popularity = party_popularity@fascism }
+	SYR_pay_leadership_cost = yes
+	add_popularity = { ideology = fascism popularity = @SYR_LEADERSHIP_POPULARITY_BOOST }
+	set_politics = {
+		ruling_party = fascism
+		elections_allowed = no
+	}
+	promote_character = SYR_antun_saadeh
+	set_country_flag = SYR_route_fascist
+}
+
+# SYR scope. The Hashemite throne of Syria is restored under Zeid bin Hussein.
+SYR_install_hashemite_monarchy = {
+	set_temp_variable = { SYR_leader_popularity = party_popularity@neutrality }
+	SYR_pay_leadership_cost = yes
+	add_popularity = { ideology = neutrality popularity = @SYR_LEADERSHIP_POPULARITY_BOOST }
+	recruit_character = SYR_zeid_bin_hussein
+	set_politics = {
+		ruling_party = neutrality
+		elections_allowed = no
+	}
+	promote_character = SYR_zeid_bin_hussein
+	set_country_flag = SYR_route_monarchy
+}
+
+# SYR scope. Gives Hashim al-Atassi his presidential role once.
+SYR_make_atassi_president = {
+	if = {
+		limit = { NOT = { has_country_flag = SYR_atassi_president } }
+		set_country_flag = SYR_atassi_president
+		add_country_leader_role = {
+			character = SYR_hashim_al_atassi
+			country_leader = {
+				ideology = liberalism
+				expire = "1965.1.1.1"
+				id = -1
+			}
+			promote_leader = yes
+		}
+	}
+	else = {
+		promote_character = SYR_hashim_al_atassi
+	}
+}
+
+# SYR scope. The National Bloc keeps the democratic republic after France
+# broke the treaty.
+SYR_install_national_bloc_government = {
+	set_temp_variable = { SYR_leader_popularity = party_popularity@democratic }
+	SYR_pay_leadership_cost = yes
+	add_popularity = { ideology = democratic popularity = @SYR_LEADERSHIP_POPULARITY_BOOST }
+	set_politics = {
+		ruling_party = democratic
+		elections_allowed = yes
+	}
+	SYR_make_atassi_president = yes
+	set_country_flag = SYR_route_democratic
+}

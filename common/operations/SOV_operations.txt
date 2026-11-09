@@ -1,0 +1,93 @@
+### operations are sorted by order of
+### 1) no. of required operatives
+### 2) required network strength
+### eg. 1/70 comes before 2/40
+
+operation_red_rescue_nicholas = {
+	icon = GFX_operations_rescue_captured_operative
+	map_icon = GFX_operations_rescue_captured_operative_map
+	name = operation_rescue_nicholas
+	desc = operation_rescue_nicholas_desc
+	priority = 8
+
+	days = 55
+	network_strength = 50
+	operatives = 2
+
+	allowed = {
+		original_tag = SOV
+	}
+	visible = {
+		agency_upgrade_number > 4
+		date > 1936.1.1
+		date < 1938.11.1
+		NOT = {
+			has_completed_focus = SOV_reconvene_the_zemsky_sobor
+			has_country_flag = SOV_paranoia_system_active_flag
+			has_country_flag = tsar_romanov_enabled
+		}
+		has_completed_focus = SOV_reformalize_the_role_of_the_patriarchate
+		FROM = {
+			has_country_flag = SOV_tsar_romanov_found_flag
+		}
+	}
+
+	available = {
+		agency_upgrade_number > 4
+		NOT = {
+			has_idea = SOV_consolidate_power
+			is_in_faction_with = FROM
+		}
+		has_civil_war = no
+	}
+
+	equipment = {
+		infantry_equipment = 325
+		support_equipment = 100
+		civilian_factories = {
+			amount = 4
+			days = 30
+		}
+	}
+
+	risk_chance = 0.05
+	experience = 2
+	outcome_extra_chance = 0.3
+
+	outcome_execute = { # SCOPE_OPERATION
+		ROOT = { country_event = { id = NSB_soviet_fascist_tsarist.34 } }
+	}
+
+	outcome_extra_execute = {
+		ROOT = { country_event = { id = NSB_soviet_fascist_tsarist.40 } }
+	}
+
+	outcome_potential = {
+		custom_effect_tooltip = SOV_operation_red_tt
+	}
+
+	phases = { #infiltration
+		infiltration_border = { base = 60 }
+		infiltration_submarine = { base = 20 }
+		infiltration_paradrop = {
+			base = 20
+			modifier = {
+				ROOT = {
+					has_equipment = {
+						transport_plane_equipment < 1
+					}
+				}
+				factor = 0
+			}
+		}
+	}
+	phases = {
+		free_operative_free_in_transit = { base = 33 }
+		free_operative_liberate_camp = { base = 33 }
+		free_operative_smuggle_in_escape_gear = { base = 33 }
+	}
+	phases = { #exfiltration
+		exfiltration_border = { base = 85 }
+		exfiltration_submarine_pickup = { base = 15 }
+	}
+}

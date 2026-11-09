@@ -1,0 +1,490 @@
+################
+##### PRU ######
+################
+
+PRU_politics = {
+	priority = 250
+	icon = GFX_PRU_politic_icon
+
+	allowed = { original_tag = PRU }
+
+	visible = {
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_inca_nationalism_decisions = {
+	icon = GFX_PRU_politic_icon
+	priority = 70
+	visible_when_empty = no
+	allowed = {
+		original_tag = PRU
+		has_dlc = "Trial of Allegiance"
+	}
+
+	visible = {
+	}
+}
+
+PRU_internal_factions = {
+	priority = 100
+
+	icon = power_struggle
+
+	picture = GFX_decision_PRU_part_pic
+
+	scripted_gui = pru_partidos_decision_ui
+
+	visible = {
+		has_country_flag = PRU_partidos_unlocked_flag
+		NOT = {
+			OR = {
+				has_country_flag = is_PBC
+				has_cosmetic_tag = INC_UNIFIED
+			}
+		}
+	}
+
+	allowed = {
+		original_tag = PRU
+	}
+}
+
+PRU_army_navy_rivalry = {
+	priority = 20
+	icon = GFX_PRU_decision_category_army_navy
+	visible_when_empty = yes
+	picture = GFX_PRU_army_navy_picture
+
+	allowed = {
+		tag = PRU
+	}
+
+	available = {
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		has_any_power_balance = yes
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+### Balance of Power
+PRU_army_navy_rivalry_bop = {
+	icon = GFX_PRU_decision_category_army_navy
+
+	allowed = { original_tag = PRU }
+
+	visible = {
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_purchase_american_armaments = {
+	priority = 12
+	icon = GFX_PRU_amarican_armament
+
+	#picture = GFX_ARG_decision_cat_robertos_health
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	visible = {
+		has_completed_focus = PRU_improve_relations_with_the_US
+		NOT = { has_war_with = USA }
+		USA = { exists = yes }
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_south_american_investment = {
+	priority = 10
+	icon = GFX_decision_category_generic_industry
+
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	visible = {
+		has_completed_focus = PRU_the_bedrock_of_south_america
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_social_democracy_investment = {
+	priority = 10
+	icon = GFX_decision_category_generic_industry
+
+
+	allowed = {
+		tag = PRU
+	}
+
+	available = {
+		has_completed_focus = PRU_tie_social_democracies_closer
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		has_completed_focus = PRU_tie_social_democracies_closer
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_restabalizing_our_currency = {
+	priority = 10
+	icon = GFX_decision_category_generic_economy
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	available = {
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_cooperating_with_the_church = {
+	priority = 15
+	icon = GFX_PRU_cooperating_with_the_church
+
+	picture = GFX_PRU_ccoperate_with_church_cusco
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	available = {
+		has_completed_focus = PRU_supporting_religious_traditons
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		has_completed_focus = PRU_supporting_religious_traditons
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_building_up_the_military = {
+	priority = 10
+	icon = GFX_decision_category_ger_military_buildup
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	available = {
+		NOT = {
+			has_country_flag = is_PBC
+		}
+		OR = {
+			has_government = communism
+			has_government = fascism
+		}
+	}
+
+	visible = {
+		NOT = {
+			has_country_flag = is_PBC
+		}
+		OR = {
+			has_government = communism
+			has_government = fascism
+		}
+	}
+}
+
+PRU_the_peruvian_civil_war = {
+	priority = 15
+	icon = GFX_PRU_the_peruvian_civil_war
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	visible = {
+		has_completed_focus = PRU_the_people_serve_the_state
+		NOT = {
+			has_country_flag = is_PBC
+		}
+		NOT = {
+			OR = {
+				has_country_flag = PRU_has_civil_war_fascism
+				has_country_flag = PRU_had_peaceful_coup
+			}
+		}
+	}
+}
+
+PRU_coup_attempt_fascists = {
+	priority = 45
+	icon = GFX_PRU_fascist_coup
+
+	allowed = { original_tag = PRU }
+
+	on_map_area = {
+		targets = { 492 490 491 }
+		name = PRU_states_fascists_have_influence_over_tt
+		zoom = 150
+	}
+
+	visible = { has_active_mission = PRU_the_coup_attempt }
+}
+
+PRU_civil_war = {
+	priority = 10
+	icon = GFX_decision_category_military_operation
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	available = {
+		has_civil_war = yes
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		has_civil_war = yes
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_aftermath_of_coup = {
+	priority = 10
+	icon = GFX_decision_category_generic_political_actions
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	available = {
+		has_completed_focus = PRU_recover_from_the_coup
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		has_completed_focus = PRU_recover_from_the_coup
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_the_purchase_of_japanese_ships = {
+	priority = 10
+	icon = GFX_PRU_purchasing_various_japanese_ships
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	available = {
+		has_completed_focus = PRU_purchase_japanese_ships
+		NOT = { has_war_with = JAP }
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		has_completed_focus = PRU_purchase_japanese_ships
+		NOT = { has_war_with = JAP }
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_the_peruvian_empire = {
+	priority = 25
+	icon = GFX_PRU_the_empire
+
+	picture = GFX_PRU_imperial_management_pic
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	visible = {
+		OR = {
+			has_completed_focus = PRU_proclaim_peruvian_empire
+			has_completed_focus = PRU_the_kingdom_of_peru
+		}
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_conquering_the_imperialist_europeans = {
+	priority = 50
+	icon = GFX_decision_category_saf_anti_colonialist_crusade
+
+	allowed = {
+		original_tag = PRU
+	}
+
+	available = {
+		has_completed_focus = PRU_get_revenge_against_the_europeans
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		has_completed_focus = PRU_get_revenge_against_the_europeans
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+PRU_united_for_the_revolution = {
+	priority = 200
+	icon = GFX_PRU_united_revolution_icon
+
+	picture = GFX_PRU_united_revolution_pic
+
+	allowed = { original_tag = PRU }
+
+	visible = {
+		has_completed_focus = PRU_communist_peru
+		NOT = { has_government = communism }
+		NOT = { has_completed_focus = PRU_take_hold_of_the_country }
+	}
+}
+
+PRU_the_revolution_has_no_boundaries = {
+	priority = 200
+	icon = GFX_decision_category_sov_great_patriotic_war
+
+	allowed = { original_tag = PRU }
+
+	visible = {
+		has_completed_focus = PRU_expansionist_foreign_policy
+		has_government = communism
+		has_civil_war = no
+	}
+}
+
+#Second War of the Pacific decisions
+ROOT_the_second_war_of_the_pacific = {
+	priority = 100
+	icon = GFX_decision_category_military_operation
+
+	picture = GFX_second_war_of_pacific_picture
+
+	allowed = {
+		OR = {
+			original_tag = PRU
+			original_tag = BOL
+			original_tag = COL
+			original_tag = ECU
+			original_tag = PAR
+			original_tag = ARG
+			original_tag = CHL
+			original_tag = VEN
+		}
+	}
+
+	available = {
+		has_country_flag = is_in_second_war_of_the_pacific
+		NOT = {
+			has_country_flag = is_PBC
+		}
+		if = {
+			limit = {
+				original_tag = PRU
+			}
+			OR = {
+				has_completed_focus = PRU_focus_on_winning_the_war
+				has_completed_focus = PRU_the_second_war_of_the_pacific
+			}
+			has_war_with = CHL
+		}
+		if = {
+			limit = {
+				original_tag = CHL
+			}
+			has_completed_focus = CHL_the_second_war_of_the_pacific
+			has_war_with = PRU
+		}
+		if = {
+			limit = {
+				original_tag = BOL
+			}
+			has_completed_focus = BOL_the_second_war_of_the_pacific
+			has_war_with = CHL
+		}
+	}
+
+	visible = {
+		has_country_flag = is_in_second_war_of_the_pacific
+		NOT = {
+			has_country_flag = is_PBC
+		}
+		if = {
+			limit = {
+				original_tag = PRU
+			}
+			OR = {
+				has_completed_focus = PRU_focus_on_winning_the_war
+				has_completed_focus = PRU_the_second_war_of_the_pacific
+			}
+			has_war_with = CHL
+		}
+		if = {
+			limit = {
+				original_tag = CHL
+			}
+			has_completed_focus = CHL_the_second_war_of_the_pacific
+			has_war_with = PRU
+		}
+		if = {
+			limit = {
+				original_tag = BOL
+			}
+			has_completed_focus = BOL_the_second_war_of_the_pacific
+			has_war_with = CHL
+		}
+	}
+}
+

@@ -1,0 +1,117 @@
+add_namespace = JUNO_brazil_events
+
+country_event = { #BRA requests tech sharing
+	id = JUNO_brazil_events.120
+	title = JUNO_brazil_events.120.t
+	desc = JUNO_brazil_events.120.desc
+	picture = GFX_report_event_physics_lab_01
+	is_triggered_only = yes
+	# Sure
+	option = {
+		name = JUNO_brazil_events.120.a
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 10
+				has_opinion = {
+					target = FROM
+					value > 0.5
+				}
+			}
+			modifier = {
+				factor = 100
+				is_in_faction_with = FROM
+			}
+			modifier = {
+				factor = 5
+				has_government = FROM
+			}
+			modifier = {
+				factor = 0
+				has_war_with = FROM
+			}
+		}
+		FROM = {
+			country_event = {
+				id = JUNO_brazil_events.121
+				hours = 1
+			}
+		}
+		effect_tooltip = {
+			IF = {
+				limit = {
+					FROM = {
+						has_completed_focus = AFG_soviet_research_cooperation
+					}
+				}
+				add_to_tech_sharing_group = AFG_SOV_tech_sharing_group
+				FROM = {
+					add_to_tech_sharing_group = AFG_SOV_tech_sharing_group
+				}
+			}
+		}
+	}
+
+	# Nope
+	option = {
+		name = JUNO_brazil_events.120.b
+		ai_chance = {
+			base = 1
+		}
+		FROM = {
+			country_event = {
+				id = JUNO_brazil_events.122
+				hours = 1
+			}
+		}
+		effect_tooltip = {
+			FROM = {
+				add_cic = 1000
+			}
+		}
+	}
+}
+
+country_event = { #USA agrees to share tech
+	id = JUNO_brazil_events.121
+	title = JUNO_brazil_events.121.t
+	desc = JUNO_brazil_events.121.desc
+	picture = GFX_report_event_physics_lab_01
+	is_triggered_only = yes
+
+	# Sure
+	option = {
+		name = JUNO_brazil_events.121.a
+		ai_chance = {
+			base = 1
+		}
+		IF = {
+			limit = {
+				FROM = {
+					has_completed_focus = AFG_soviet_research_cooperation
+				}
+			}
+			add_to_tech_sharing_group = AFG_SOV_tech_sharing_group
+			FROM = {
+				add_to_tech_sharing_group = AFG_SOV_tech_sharing_group
+			}
+		}
+	}
+}
+
+country_event = { #USA refuses to share tech
+	id = JUNO_brazil_events.122
+	title = JUNO_brazil_events.122.t
+	desc = JUNO_brazil_events.122.desc
+	picture = GFX_report_event_physics_lab_01
+	is_triggered_only = yes
+
+	# Better than nothing
+	option = {
+		name = JUNO_brazil_events.122.a
+		ai_chance = {
+			base = 1
+		}
+		add_cic = 1000
+	}
+}

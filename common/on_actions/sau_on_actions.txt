@@ -1,0 +1,103 @@
+on_actions = {
+	#ROOT is new controller #FROM is old controller #FROM.FROM is state I
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = SAU
+					has_country_flag = fall_of_mecca
+					NOT = { has_country_flag = SAU_mecca_retaken_flag }
+					FROM = {
+						has_war_with = SAU
+					}
+					FROM.FROM = {
+						state = 856
+					}
+				}
+				country_event = { id = saudi.13 hours = 4 random_hours = 8 }
+				set_country_flag = SAU_mecca_retaken_flag
+			}
+			if = {
+				limit = {
+					original_tag = SAU
+					has_country_flag = fall_of_dhahran
+					NOT = { has_country_flag = SAU_dhahran_retaken_flag }
+					FROM = {
+						has_war_with = SAU
+					}
+					FROM.FROM = {
+						state = 859
+					}
+				}
+				country_event = { id = saudi.15 hours = 4 random_hours = 8 }
+				set_country_flag = SAU_dhahran_retaken_flag
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					original_tag = SAU
+					has_completed_focus = SAU_pan_arabist_policies
+					FROM.FROM = {
+						SAU_arabian_countries_core_no_sau_trigger = yes
+						has_resistance = yes
+						is_controlled_by = SAU
+					}
+				}
+				FROM.FROM = {
+					add_compliance = 15
+				}
+			}
+		}
+	}
+
+	on_war = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = SAU
+					has_country_flag = SAU_in_secret_pact_with_allies
+				}
+				var:SAU.SAU_secret_ally = {
+					if = {
+						limit = { is_faction_leader = yes }
+						add_to_faction = SAU
+					}
+					else_if = {
+						limit = {
+							is_in_faction = yes
+						}
+						random_other_country = {
+							limit = {
+								is_in_faction_with = PREV
+								is_faction_leader = yes
+							}
+							add_to_faction = SAU
+						}
+					}
+				}
+			}
+		}
+	}
+
+	on_declare_war = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = {
+						NOT = { is_in_faction_with = USA }
+					}
+					FROM = {
+						original_tag = SAU
+						has_country_flag = SAU_protected_by_usa_flag
+					}
+				}
+				ROOT = {
+					set_country_flag = SAU_agressor_country_flag
+					set_variable = { SAU.agressor_country_var = original_tag }
+				}
+				USA = { country_event = { id = saudi.51 } }
+			}
+		}
+	}
+}

@@ -1,0 +1,3495 @@
+###########################
+# Peru Events
+###########################
+
+add_namespace = peru
+
+
+#Peruvian 1936 elections
+country_event = {
+	id = peru.122
+	title = peru.122.t
+	desc = peru.122.d
+	picture = GFX_PRU_1936_election
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #luis antonio eguiguren/partido social democrata
+		name = peru.122.a
+		effect_tooltip = {
+			retire_country_leader = yes
+			set_politics = {
+				ruling_party = democratic
+			}
+		}
+		hidden_effect = {
+			country_event = { id = peru.123 hours = 32 }
+		}
+	}
+
+	option = { #Jorge Prado Ugarteche – Frente Nacional de Derecha
+		name = peru.122.b
+		effect_tooltip = {
+			retire_country_leader = yes
+			create_country_leader = {
+				name = "Jorge Prado Ugarteche"
+				desc = "POLITICS_JORGE_PRADO_DESC"
+				picture = "GFX_Portrait_peru_oscar_benavides"
+				expire = "1965.1.1"
+				ideology = militarism
+				traits = {
+					#
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = { id = peru.123 hours = 32 }
+		}
+	}
+
+	option = { #Luis A. Flores – Partido Unión Revolucionaria
+		name = peru.122.c
+		effect_tooltip = {
+			retire_country_leader = yes
+			set_politics = {
+				ruling_party = fascism
+			}
+		}
+		hidden_effect = {
+			country_event = { id = peru.123 hours = 32 }
+		}
+	}
+
+	option = { #Manuel Vicente Villarán – Alianza Acción Republicana
+		name = peru.122.e
+		effect_tooltip = {
+			retire_country_leader = yes
+			set_politics = {
+				ruling_party = communism
+			}
+		}
+		hidden_effect = {
+			country_event = { id = peru.123 hours = 32 }
+		}
+	}
+}
+
+#Election fraud and election cancellation event
+country_event = {
+	id = peru.123
+	title = peru.123.t
+	desc = peru.123.d
+	picture = GFX_report_event_poland_rejects
+
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = PRU_1936_elections_cancelled
+	}
+
+	option = {
+		name = peru.123.a
+		add_stability = -0.05
+		add_political_power = -35
+		custom_effect_tooltip = PRU_union_revolucionaria_may_try_something_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					OR = {
+						has_government = fascism
+						is_historical_focus_on = yes
+					}
+				}
+				add_political_power = 1
+			}
+			else = {
+				set_temp_variable = { PRU_chance_of_coup_attempt = 0 }
+				set_temp_variable = { PRU_nothing = 100 }
+				if = {
+					limit = { has_stability < 0.5 }
+					add_to_temp_variable = { PRU_chance_of_coup_attempt = 10 }
+				}
+				if = {
+					limit = { has_stability < 0.25 }
+					add_to_temp_variable = { PRU_chance_of_coup_attempt = 15 }
+				}
+				if = {
+					limit = { has_war_support < 0.3 }
+					add_to_temp_variable = { PRU_chance_of_coup_attempt = 10 }
+				}
+				if = {
+					limit = { fascism > 0.15 }
+					add_to_temp_variable = { PRU_chance_of_coup_attempt = 5 }
+				}
+				if = {
+					limit = { fascism > 0.3 }
+					add_to_temp_variable = { PRU_chance_of_coup_attempt = 15 }
+				}
+				if = {
+					limit = {
+						AND = {
+							GER = { has_government = fascism }
+							ITA = { has_government = fascism }
+							JAP = { has_government = fascism }
+						}
+					}
+					add_to_temp_variable = { PRU_chance_of_coup_attempt = 5 }
+				}
+				if = {
+					limit = {
+						OR = {
+							USA = { has_government = fascism }
+							ENG = { has_government = fascism }
+							FRA = { has_government = fascism }
+						}
+					}
+					add_to_temp_variable = { PRU_chance_of_coup_attempt = 10 }
+				}
+				if = {
+					limit = { threat > 0.2 }
+					add_to_temp_variable = { PRU_chance_of_coup_attempt = 5 }
+				}
+				if = {
+					limit = {
+						any_neighbor_country = {
+							has_government = fascism
+						}
+					}
+					add_to_temp_variable = { PRU_chance_of_coup_attempt = 15 }
+				}
+				clamp_variable = {
+					var = PRU_chance_of_coup_attempt
+					min = 0
+					max = 100
+				}
+				random_list = {
+					PRU_chance_of_coup_attempt = {
+						modifier = {
+							factor = 0
+							has_completed_focus = PRU_communist_peru
+						}
+						country_event = { id = peru.80 days = 14 }
+					}
+					PRU_nothing = {
+
+					}
+				}
+			}
+		}
+	}
+}
+
+#Fascist party begins planning a coup
+country_event = {
+	id = peru.80
+	title = peru.254.t
+	desc = peru.254.d
+	picture = GFX_report_event_generic_army
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.254.a
+		custom_effect_tooltip = PRU_fascists_take_over_states_tt
+		set_country_flag = PRU_fascist_coup_attempt
+		unlock_decision_category_tooltip = PRU_coup_attempt_fascists
+		activate_mission = PRU_the_coup_attempt
+	}
+}
+
+#Peru Requests Investment!
+country_event = {
+	id = peru.126
+	title = peru.126.t
+	desc = peru.126.desc
+	picture = GFX_report_event_peru_invest
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = peru.126.a #small investment
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 5
+				has_opinion = {
+					target = FROM
+					value > 75
+				}
+			}
+		}
+
+		FROM = { country_event = { id = peru.128 days = 10 } }
+	}
+
+	option = {
+		name = peru.126.b #med investment
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 5
+				has_opinion = {
+					target = FROM
+					value > 25
+				}
+			}
+			modifier = {
+				add = 10
+				has_opinion = {
+					target = FROM
+					value > 75
+				}
+			}
+		}
+
+		FROM = { country_event = { id = peru.129 days = 10 } }
+	}
+
+	option = {
+		name = peru.126.c #heavy investment
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 10
+				has_opinion = {
+					target = FROM
+					value > 25
+				}
+			}
+			modifier = {
+				add = 25
+				has_opinion = {
+					target = FROM
+					value > 75
+				}
+			}
+		}
+
+		FROM = { country_event = { id = peru.130 days = 10 } }
+	}
+
+	option = {
+		name = peru.126.d #no
+		ai_chance = {
+			base = 5
+			modifier = {
+				add = 20
+				has_opinion = {
+					target = FROM
+					value < -10
+				}
+			}
+			modifier = {
+				add = 100
+				has_war = yes
+			}
+			modifier = {
+				add = 50
+				has_opinion = {
+					target = FROM
+					value < -75
+				}
+			}
+		}
+		FROM = { country_event = { id = peru.127 days = 1 } }
+	}
+
+
+
+}
+
+#[FROM] Rules Investment Out
+country_event = {
+	id = peru.127
+	title = peru.127.t
+	desc = peru.127.desc
+	picture = GFX_report_event_peru_invest
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.127.a #bah, we do not need them
+		add_political_power = -25
+	}
+}
+
+#[FROM] Invests Light Amount
+country_event = {
+	id = peru.128
+	title = peru.128.t
+	desc = peru.128.desc
+	picture = GFX_report_event_peru_invest
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.128.a
+		random_owned_state = {
+			random_list = {
+				40 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+				30 = {
+					add_building_construction = {
+						type = air_base
+						level = 1 # 2
+						instant_build = yes
+					}
+				}
+				30 = {
+					add_building_construction = {
+						type = anti_air_building
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		FROM = {
+			add_ai_strategy = {
+				type = befriend
+				target = ROOT
+				value = 10
+			}
+		}
+		FROM = {
+			add_timed_idea = {
+				idea = PRU_investing days = 60
+			}
+		}
+	}
+}
+
+#[FROM] Invests Medium Amount
+country_event = {
+	id = peru.129
+	title = peru.129.t
+	desc = peru.129.desc
+	picture = GFX_report_event_peru_invest
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.129.a
+		random_owned_state = {
+			random_list = {
+				60 = {
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 1
+				}
+				40 = {
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
+				}
+				#	15 = {
+					#		add_building_construction = {
+						#			type = industrial_complex
+						#			level = 3
+						#			instant_build = yes
+						#		}
+					#		add_extra_state_shared_building_slots = 3
+					#	}
+			}
+		}
+		FROM = {
+			add_timed_idea = {
+				idea = PRU_investing_1 days = 60
+			}
+		}
+	}
+}
+
+#[FROM] Invests Heavy Amount
+country_event = {
+	id = peru.130
+	title = peru.130.t
+	desc = peru.130.desc
+	picture = GFX_report_event_peru_invest
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.130.a #a true ally of the Turkish people
+		random_owned_state = {
+			random_list = {
+				60 = {
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 1
+				}
+				40 = {
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+					add_extra_state_shared_building_slots = 2
+				}
+				#	15 = {
+					#		add_building_construction = {
+						#			type = arms_factory
+						#			level = 3
+						#			instant_build = yes
+						#		}
+					#		add_extra_state_shared_building_slots = 3
+					#	}
+			}
+		}
+		FROM = {
+			add_timed_idea = {
+				idea = PRU_investing_2 days = 60
+			}
+		}
+	}
+}
+
+# ELECTION DEMOCRACY
+country_event = {
+	id = peru.131
+	title = peru.131.t
+	desc = peru.131.desc
+	picture = GFX_report_PRU_event_election
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.131.a #the coalition wins
+		PRU = {
+			complete_national_focus = PRU_the_coalition_wins
+		}
+	}
+
+}
+
+country_event = {
+	id = peru.132
+	title = peru.132.t
+	desc = peru.132.desc
+	picture = GFX_report_PRU_event_election
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.132.a #the liberals wins
+		PRU = {
+			complete_national_focus = PRU_the_liberals_win
+		}
+	}
+
+}
+
+
+# Requesting Free Trade Agreement
+
+country_event = {
+	id = peru.133
+	title = peru.133.t
+	desc = peru.133.desc
+	#picture = GFX_report_PRU_event_election
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.133.a # OK
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = -50
+				has_opinion = {
+					target = PRU
+					value < -19
+				}
+			}
+			modifier = {
+				add = 25
+				has_opinion = {
+					target = PRU
+					value > 49
+				}
+			}
+
+		}
+
+		PRU = { country_event = { id = peru.134 days = 7 } }
+	}
+
+	option = {
+		name = peru.133.b # OK
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 50
+				has_opinion = {
+					target = PRU
+					value < -19
+				}
+			}
+			modifier = {
+				add = -25
+				has_opinion = {
+					target = PRU
+					value > 49
+				}
+			}
+
+		}
+
+		PRU = { country_event = { id = peru.135 days = 7 } }
+	}
+}
+
+country_event = {
+	id = peru.134
+	title = peru.134.t
+	desc = peru.134.desc
+	#picture = GFX_report_PRU_event_election
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.134.a #the liberals wins
+		ROOT = {
+			add_opinion_modifier = { target = PRU modifier = PRU_free_trade_opi }
+			add_opinion_modifier = { target = PRU modifier = PRU_free_trade_opinion }
+		}
+		PRU = {
+			add_opinion_modifier = { target = ROOT modifier = PRU_free_trade_opi }
+			add_opinion_modifier = { target = ROOT modifier = PRU_free_trade_opinion }
+		}
+	}
+
+}
+
+country_event = {
+	id = peru.135
+	title = peru.135.t
+	desc = peru.135.desc
+	#picture = GFX_report_PRU_event_election
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.135.a #Says no
+		PRU = {
+			add_opinion_modifier = { target = FROM modifier = PRU_free_trade_opinion_deny }
+		}
+	}
+
+}
+
+# Coalition Collapsing! Due to pandering to communists!
+country_event = {
+	id = peru.136
+	title = peru.136.t
+	desc = peru.136.desc
+	#picture = GFX_report_PRU_event_election
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.136.a # OK
+		add_stability = -0.1
+		set_temp_variable = {
+			var = ban_ideology_var
+			value = party_popularity@democratic
+		}
+		multiply_temp_variable = {
+			var = ban_ideology_var
+			value = 0.15
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = ban_ideology_var
+		}
+		add_popularity = {
+			ideology = neutrality
+			popularity = ban_ideology_var
+		}
+		multiply_temp_variable = {
+			var = ban_ideology_var
+			value = -2
+		}
+		add_popularity = {
+			ideology = democratic
+			popularity = ban_ideology_var
+		}
+	}
+}
+
+#Bolivia/Peru gets event to reform the Peru-Bolivian Confederation
+country_event = {
+	id = peru.137
+	title = peru.137.t
+	desc = peru.137.d
+	picture = GFX_report_event_soldiers_marching
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			FROM = {
+				add_state_claim = 305
+				add_state_claim = 506
+				add_state_claim = 487
+				add_state_claim = 302
+			}
+		}
+	}
+
+	option = { #accept
+		name = peru.137.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 0
+				has_civil_war = yes
+			}
+			modifier = {
+				add = 40
+				num_divisions > 19
+			}
+			modifier = {
+				add = 60
+				num_of_military_factories > 7
+			}
+			modifier = {
+				add = 80
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 100
+				FROM = {
+					OR = {
+						has_completed_focus = BOL_make_our_ideals_official
+						has_completed_focus = BOL_continue_with_toro
+						has_completed_focus = PRU_recover_from_the_coup
+						has_completed_focus = PRU_communist_peru
+					}
+				}
+				ROOT = {
+					OR = {
+						has_completed_focus = BOL_make_our_ideals_official
+						has_completed_focus = BOL_continue_with_toro
+						has_completed_focus = PRU_recover_from_the_coup
+						has_completed_focus = PRU_communist_peru
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					NOT = { has_government = ROOT}
+				}
+			}
+			FROM = {
+				set_country_flag = PBC_divided_ideologies
+				add_ideas = PBC_divided_ideological_sentiments_2
+			}
+		}
+		else = {
+			FROM = {
+				add_ideas = PBC_divided_ideological_sentiments_1
+			}
+		}
+		every_character = {
+			set_nationality = FROM
+		}
+		FROM = {
+			set_cosmetic_tag = PBC_UNIFIED
+			set_country_flag = is_PBC
+			annex_country = {
+				target = ROOT
+				transfer_troops = yes
+			}
+			hidden_effect = {
+				country_event = peru.1
+				if = {
+					limit = { has_government = fascism }
+					add_popularity = {
+						ideology = fascism
+						popularity = 0.6
+					}
+				}
+				else_if ={
+					limit = { has_government = communism }
+					add_popularity = {
+						ideology = communism
+						popularity = 0.6
+					}
+				}
+				if = {
+					limit = {
+						original_tag = PRU
+					}
+					PRU_clear_caudillismo_mechanic = yes
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						NOT = {
+							has_country_flag = PBC_divided_ideologies
+						}
+						OR = {
+							has_completed_focus = BOL_make_our_ideals_official
+							has_completed_focus = BOL_continue_with_toro
+							has_completed_focus = PRU_recover_from_the_coup
+							has_completed_focus = PRU_communist_peru
+						}
+					}
+					ROOT = {
+						OR = {
+							has_completed_focus = BOL_make_our_ideals_official
+							has_completed_focus = BOL_continue_with_toro
+							has_completed_focus = PRU_recover_from_the_coup
+							has_completed_focus = PRU_communist_peru
+						}
+					}
+				}
+				every_state = {
+					limit = { is_core_of = ROOT }
+					add_core_of = FROM
+				}
+			}
+			else = {
+				every_state = {
+					limit = {
+						is_core_of = ROOT
+					}
+					if = {
+						limit = { is_controlled_by = FROM }
+						set_compliance = 20
+					}
+					add_claim_by = FROM
+				}
+				set_country_flag = PBC_must_integrate
+			}
+		}
+	}
+
+	option = { #decline
+		name = peru.137.b
+		ai_chance = {
+			base = 25
+		}
+		FROM = {
+			country_event = peru.3
+		}
+		effect_tooltip = {
+			FROM = {
+				create_wargoal = {
+					type = annex_everything
+					target = ROOT
+				}
+				every_state = {
+					limit = { is_core_of = ROOT }
+					add_claim_by = FROM
+				}
+			}
+		}
+	}
+}
+
+#Peru/Bolivia has accepted to reform the confederation
+country_event = {
+	id = peru.1
+	title = peru.1.t
+	desc = peru.1.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			news_event = { hours = 8 id = news.345 }
+			every_country = {
+				limit = {
+					capital_scope = { is_on_continent = south_america }
+					NOT = {
+						has_war_with = USA
+					}
+				}
+				USA = {
+					give_guarantee = PREV
+				}
+			}
+		}
+	}
+
+	option = {
+		name = peru.1.a
+		if = {
+			limit = { has_country_flag = PBC_must_integrate }
+			unlock_decision_category_tooltip = PBC_integrating_all_our_claimed_lands
+		}
+		if = {
+			limit = {
+				original_tag = PRU
+			}
+			PRU_bop_remove_bop_effect = yes
+		}
+		FROM = {
+			every_unit_leader = {
+				set_nationality = ROOT
+			}
+		}
+		set_country_flag = is_in_second_war_of_confederation
+		set_global_flag = EUYL_second_war_of_the_confederation_flag
+		hidden_effect = {
+			load_focus_tree = PBC_focus_tree
+			add_ideas = {
+				PBC_split_armies_1
+				PBC_divided_economy_1
+			}
+			retire_country_leader = yes
+			if = {
+				limit = {
+					has_government = communism
+				}
+				create_country_leader = {
+					name = "Congreso de Tacna"
+					desc = "POLITICS_CONGRESS_TACNA_DESC"
+					picture = "gfx/leaders/PRU/PBC_portrait_congreso_de_tacna.dds"
+					expire = "1965.1.1"
+					ideology = leninism
+					traits = {
+						PRU_not_a_real_person
+					}
+				}
+			}
+			else = {
+				create_country_leader = {
+					name = "Congreso de Tacna"
+					desc = "POLITICS_CONGRESS_TACNA_DESC"
+					picture = "gfx/leaders/PRU/PBC_portrait_congreso_de_tacna.dds"
+					expire = "1965.1.1"
+					ideology = gen_nazism
+					traits = {
+						PRU_not_a_real_person
+					}
+				}
+			}
+			every_neighbor_country = {
+				limit = {
+					NOT = {
+						is_in_faction_with = ROOT
+						has_war_with = ROOT
+						OR = {
+							original_tag = BRA
+							original_tag = PAR
+						}
+					}
+				}
+				country_event = { id = peru.2 days = 4 random_hours = 14 }
+			}
+			every_owned_state = {
+				limit = {
+					has_dynamic_modifier = { modifier = BOL_controlled_by_toro }
+				}
+				remove_dynamic_modifier = { modifier = BOL_controlled_by_toro }
+			}
+			news_event = { days = 8 random_hours = 10 id = news.342 }
+		}
+	}
+}
+
+#Neighboring nations getting call to war against Peru-Bolivia
+country_event = {
+	id = peru.2
+	title = peru.2.t
+	desc = peru.2.d
+	picture = GFX_report_event_generic_army
+
+	is_triggered_only = yes
+
+	option = { #declare war
+		name = peru.2.a
+		ai_chance = {
+			base = 180
+			modifier = {
+				factor = 0
+				has_civil_war = yes
+			}
+			modifier = {
+				factor = 0
+				has_war = yes #wont declare war if its already on a war of its own
+			}
+		}
+		declare_war_on = {
+			target = FROM
+			type = puppet_wargoal_focus
+		}
+		set_country_flag = is_in_second_war_of_confederation
+	}
+
+	option = {
+		name = peru.2.b
+		ai_chance = {
+			base = 1
+		}
+		add_war_support = -0.05
+	}
+}
+
+#Peru/Bolivia gets event of other refusing to reform the confederation
+country_event = {
+	id = peru.3
+	title = peru.3.t
+	desc = peru.3.d
+	picture = GFX_report_event_eng_blackshirt_march
+
+	is_triggered_only = yes
+
+	option = { #still reform confederation and go after Peru/Bolivia
+		name = peru.3.a
+		ai_chance = {
+			base = 2
+			modifier = {
+				add = 40
+				num_divisions > 21 #haha funny number
+			}
+			modifier = {
+				add = 60
+				num_of_factories > 29
+			}
+		}
+		set_cosmetic_tag = PBC_UNIFIED
+		load_focus_tree = PBC_focus_tree
+		retire_country_leader = yes
+		if = {
+			limit = { has_government = fascism }
+			create_country_leader = {
+				name = "Congreso de Tacna"
+				desc = "POLITICS_CONGRESO_DESC"
+				picture = "gfx/leaders/PRU/PBC_portrait_congreso_de_tacna.dds"
+				expire = "1965.1.1"
+				ideology = gen_nazism
+				traits = {
+					PRU_not_a_real_person
+				}
+			}
+		}
+		else = {
+			create_country_leader = {
+				name = "Congreso de Tacna"
+				desc = "POLITICS_CONGRESO_DESC"
+				picture = "gfx/leaders/PRU/PBC_portrait_congreso_de_tacna.dds"
+				expire = "1965.1.1"
+				ideology = socialism
+				traits = {
+					PRU_not_a_real_person
+				}
+			}
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+		}
+		every_state = {
+			limit = { is_core_of = FROM }
+			add_claim_by = ROOT
+		}
+		set_country_flag = PBC_must_integrate
+		set_country_flag = PBC_refused_cooperation
+		set_country_flag = is_PBC
+		set_country_flag = is_in_second_war_of_confederation
+		FROM = {
+			set_country_flag = is_in_second_war_of_confederation
+		}
+	}
+
+	option = { #let the idea go
+		name = peru.3.b
+		ai_chance = {
+			base = 40
+		}
+		add_war_support = -0.05
+		FROM = {
+			if = {
+				limit = {
+					original_tag = PRU
+				}
+				if = {
+					limit = { has_government = fascism }
+					unlock_national_focus = PRU_propose_a_plan_to_bolivia
+				}
+			}
+			else_if = {
+				limit = {
+					original_tag = BOL
+					OR = {
+						has_government = communism
+						has_government = fascism
+					}
+				}
+				unlock_national_focus = BOL_propose_a_plan_to_peru
+			}
+		}
+	}
+}
+
+#event that triggers to start the war of the confederation
+country_event = {
+	id = peru.125
+	title = peru.125.t
+	desc = peru.125.d
+
+	fire_only_once = yes
+
+	hidden = yes
+
+	trigger = {
+		OR = {
+			original_tag = BOL
+			original_tag = PRU
+		}
+		has_country_flag = PBC_refused_cooperation
+		OR = {
+			has_war_with = BOL
+			has_war_with = PRU
+		}
+	}
+
+	immediate = {
+		every_neighbor_country = {
+			limit = {
+				NOT = {
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					OR = {
+						original_tag = BRA
+						original_tag = PAR
+					}
+				}
+			}
+			country_event = { id = peru.2 days = 1 random_hours = 8 }
+		}
+		news_event = { days = 4 id = news.342 }
+	}
+}
+
+#Bolivia/Peru gets event to join in on the Second War of the Pacific
+country_event = {
+	id = peru.138
+	title = peru.138.t
+	desc = peru.138.d
+	picture = GFX_report_event_generic_army
+
+	is_triggered_only = yes
+
+	option = { #accept
+		name = peru.138.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 40
+				num_divisions > 19
+			}
+			modifier = {
+				add = 80
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+		}
+		FROM = {
+			country_event = { id = peru.4 hours = 6 }
+		}
+		ROOT = {
+			custom_effect_tooltip = ROOT_will_join_war
+			if = {
+				limit = {
+					NOT = { has_country_flag = ROOT_accepted_to_declare_war }
+				}
+				set_country_flag = ROOT_accepted_to_declare_war
+			}
+		}
+	}
+
+	option = { #decline
+		name = peru.138.b
+		ai_chance = {
+			base = 10
+		}
+		FROM = {
+			country_event = { id = peru.5 hours = 6 }
+			effect_tooltip = {
+				random_list = {
+					50 = {
+						create_wargoal = {
+							type = annex_everything
+							target = ROOT
+						}
+					}
+					50 = {
+					}
+				}
+			}
+		}
+	}
+}
+
+#Bolivia/Peru gets event that the other accepted the pact
+country_event = {
+	id = peru.4
+	title = peru.4.t
+	desc = peru.4.d
+	picture = GFX_report_event_gre_allied_diplomacy_military
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.4.a
+	}
+}
+
+#Bolivia/Peru gets event that the other did not accept
+country_event = {
+	id = peru.5
+	title = peru.5.t
+	desc = peru.5.d
+	picture = GFX_report_event_spr_solidify_the_frontlines
+
+	is_triggered_only = yes
+
+	option = { #go after them
+		name = peru.5.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 40
+				num_divisions > 24
+			}
+			modifier = {
+				add = 60
+				has_country_flag = FROM_not_honor_pact
+			}
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+		}
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = FROM_not_honor_pact}
+				clr_country_flag = FROM_not_honor_pact
+			}
+		}
+	}
+
+	option = { #let them go
+		name = peru.5.b
+		ai_chance = {
+			base = 40
+		}
+		add_war_support = -0.05
+		hidden_effect = {
+			if = {
+				limit = { has_country_flag = FROM_not_honor_pact}
+				clr_country_flag = FROM_not_honor_pact
+			}
+		}
+	}
+}
+
+#Bolivia/Peru gets event to declare war on Chile as well
+country_event = {
+	id = peru.124
+	title = peru.124.t
+	desc = peru.124.d
+	picture = GFX_report_event_spr_army_of_africa
+
+	is_triggered_only = yes
+
+	option = { #respect the pact
+		name = peru.124.a
+		ai_chance = {
+			base = 120
+			modifier = {
+				add = 150
+				FROM = {
+					num_divisions > 19
+				}
+			}
+		}
+		declare_war_on = {
+			target = CHL
+			type = annex_everything
+		}
+		set_global_flag = EUYL_second_war_of_the_pacific_flag
+		hidden_effect = {
+			every_country = {
+				limit = {
+					OR = {
+						original_tag = PRU
+						original_tag = CHL
+						original_tag = BOL
+					}
+					NOT = { has_country_flag = is_in_second_war_of_the_pacific}
+				}
+				set_country_flag = is_in_second_war_of_the_pacific
+				if = {
+					limit = {
+						has_country_flag = BOL_influenced_by_peru_flag
+					}
+					clr_country_flag = BOL_influenced_by_peru_flag
+				}
+			}
+			news_event = {
+				id = news.343
+				days = 2
+			}
+			if = {
+				limit = {
+					ECU = {
+						exists = yes
+						NOT = {
+							OR = {
+								has_war_with = CHL
+								has_war_with = BOL
+								has_war_with = PRU
+								has_country_flag = is_in_second_war_of_the_pacific
+							}
+						}
+					}
+				}
+				ECU = {
+					country_event = {
+						id = peru.6
+						hours = 12
+						random_hours = 12
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					COL = {
+						exists = yes
+						NOT = {
+							OR = {
+								has_war_with = CHL
+								has_war_with = BOL
+								has_war_with = PRU
+								has_country_flag = is_in_second_war_of_the_pacific
+							}
+						}
+					}
+				}
+				COL = {
+					country_event = {
+						id = peru.6
+						hours = 12
+						random_hours = 12
+					}
+				}
+			}
+		}
+	}
+
+	option = { #refuse to join the war
+		name = peru.124.b
+		ai_chance = {
+			base = 1
+		}
+		FROM = {
+			country_event = { id = peru.5 hours = 6 }
+			set_country_flag = FROM_not_honor_pact
+			effect_tooltip = {
+				random_list = {
+					90 = {
+						create_wargoal = {
+							type = annex_everything
+							target = ROOT
+						}
+					}
+					10 = {
+					}
+				}
+			}
+		}
+	}
+}
+
+#Ecuador/Colombia gets event of joining the war
+country_event = {
+	id = peru.6
+	title = peru.6.t
+	desc = peru.6.d
+	picture = GFX_report_event_british_inspect_troops
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					original_tag = ECU
+					COL = {
+						NOT = { has_country_flag = COL_already_recieved_event}
+						NOT = {
+							OR = {
+								has_war_with = CHL
+								has_war_with = BOL
+								has_war_with = PRU
+								has_country_flag = is_in_second_war_of_the_pacific
+							}
+						}
+					}
+				}
+				COL = {
+					country_event = { id = peru.6 days = 2 }
+				}
+			}
+		}
+	}
+
+	option = { #join the war
+		name = peru.6.a
+		ai_chance = {
+			base = 120
+			modifier = {
+				add = 50
+				ECU = { has_war_with = PRU }
+			}
+		}
+		if = {
+			limit = {
+				BOL = { has_war_with = CHL}
+			}
+			declare_war_on = {
+				target = BOL
+				type = annex_everything
+			}
+		}
+		declare_war_on = {
+			target = PRU
+			type = annex_everything
+		}
+		set_country_flag = is_in_second_war_of_the_pacific
+		hidden_effect = {
+			COL = {
+				set_country_flag = COL_already_recieved_event
+			}
+			CHL = {
+				country_event = { id = peru.7 hours = 3 }
+			}
+		}
+	}
+
+	option = { #refuse to join
+		name = peru.6.b
+		ai_chance = {
+			base = 1
+		}
+		add_war_support = -0.03
+		hidden_effect = {
+			COL = {
+				set_country_flag = COL_already_recieved_event
+			}
+		}
+	}
+}
+
+#Chile gets event of Ecuador/Colombia helping
+country_event = {
+	id = peru.7
+	title = peru.7.t
+	desc = peru.7.d
+	picture = GFX_report_event_ast_army
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.7.a
+	}
+}
+
+##Peru-Bolvian Confederation gets event of stopping the war
+#country_event = {
+	#	id = peru.8
+	#	title = peru.8.t
+	#	desc = peru.8.d
+	#	picture = GFX_report_event_generic_rally_3
+	#
+	#	fire_only_once = yes
+	#
+	#	trigger = {
+		#		has_country_flag = is_PBC
+		#		has_country_flag = is_in_second_war_of_confederation
+		#		NOT = {
+			#			has_country_flag = PBC_negotiating_peace_talks
+			#		}
+		#		OR = {
+			#			has_war_with = CHL
+			#			has_war_with = ARG
+			#			has_war_with = ECU
+			#			has_war_with = COL
+			#		}
+		#		NOT = {
+			#			OR = {
+				#				has_war_with = BOA
+				#				has_war_with = PRA
+				#			}
+			#		}
+		#		CHL = {
+			#			if = {
+				#				limit = {
+					#					has_war_with = ROOT
+					#					has_country_flag = is_in_second_war_of_confederation
+					#				}
+				#				CHL = {
+					#					OR = {
+						#						has_capitulated = yes
+						#						casualties > 65999
+						#						surrender_progress > 0.34
+						#					}
+					#				}
+				#			}
+			#		}
+		#		ARG = {
+			#			if = {
+				#				limit = {
+					#					has_war_with = ROOT
+					#					has_country_flag = is_in_second_war_of_confederation
+					#				}
+				#				ARG = {
+					#					OR = {
+						#						has_capitulated = yes
+						#						casualties > 65999
+						#						surrender_progress > 0.34
+						#					}
+					#				}
+				#			}
+			#		}
+		#		ECU = {
+			#			if = {
+				#				limit = {
+					#					has_war_with = ROOT
+					#					has_country_flag = is_in_second_war_of_confederation
+					#				}
+				#				ECU = {
+					#					OR = {
+						#						has_capitulated = yes
+						#						casualties > 65999
+						#						surrender_progress > 0.34
+						#					}
+					#				}
+				#			}
+			#		}
+		#		COL = {
+			#			if = {
+				#				limit = {
+					#					has_war_with = ROOT
+					#					has_country_flag = is_in_second_war_of_confederation
+					#				}
+				#				COL = {
+					#					OR = {
+						#						has_capitulated = yes
+						#						casualties > 65999
+						#						surrender_progress > 0.34
+						#					}
+					#				}
+				#			}
+			#		}
+		#
+		#	}
+	#	immediate = {
+		#		hidden_effect = {
+			#			set_country_flag = PBC_negotiating_peace_talks
+			#		}
+		#	}
+	#	option = { #begin peace talks
+		#		name = peru.8.a
+		#		ai_chance = {
+			#			base = 80
+			#			modifier = {
+				#				add = 30
+				#				995 = {
+					#					is_controlled_by = ROOT
+					#				}
+				#			}
+			#			modifier = {
+				#				add = 30
+				#				996 = {
+					#					is_controlled_by = ROOT
+					#				}
+				#			}
+			#			modifier = {
+				#				add = 80
+				#				casualties > 49999
+				#			}
+			#			modifier = {
+				#				add = 150
+				#				any_enemy_country = {
+					#					has_capitulated = yes
+					#				}
+				#			}
+			#		}
+		#		custom_effect_tooltip = PBC_all_must_accept
+		#		effect_tooltip = {
+			#			every_enemy_country = {
+				#				white_peace = ROOT
+				#			}
+			#			every_state = {
+				#				limit = {
+					#					NOT = {
+						#						is_controlled_by = ROOT
+						#						is_owned_by = BRA
+						#					}
+					#					OR = {
+						#						is_claimed_by = ROOT
+						#						is_core_of = ROOT
+						#					}
+					#				}
+				#				ROOT = {
+					#					transfer_state = PREV
+					#				}
+				#			}
+			#		}
+		#		every_enemy_country = {
+			#			country_event = { id = peru.9 random = 12 }
+			#		}
+		#	}
+	#
+	#	option = { #keep on going
+		#		name = peru.8.b
+		#		ai_chance = {
+			#			base = 10
+			#		}
+		#		add_stability = -0.25
+		#		add_war_support = -0.35
+		#		add_manpower = -45000
+		#		add_political_power = -100
+		#	}
+	#}
+
+#Countries at war with the Peru-Bolivian confederation get event to surrender
+country_event = {
+	id = peru.9
+	title = peru.9.t
+	desc = peru.9.d
+	picture = GFX_report_event_gre_allied_diplomacy_military
+
+	trigger = {
+		any_enemy_country = {
+			OR = {
+				original_tag = PRU
+				original_tag = BOL
+			}
+			has_cosmetic_tag = PBC_UNIFIED
+		}
+		has_country_flag = is_in_second_war_of_confederation
+		OR = {
+			AND = {
+				surrender_progress > 0.25
+				casualties > 90000
+			}
+			has_capitulated = yes
+		}
+		NOT = {
+			has_country_flag = event_happened
+		}
+	}
+
+	immediate = {
+		set_country_flag = event_happened
+	}
+
+	mean_time_to_happen = {
+		days = 5
+	}
+
+	option = { #accept peace terms
+		name = peru.9.a
+		ai_chance = {
+			base = 80
+			modifier = {
+				add = 30
+				any_owned_state = {
+					OR = {
+						is_core_of = FROM
+						is_claimed_by = FROM
+					}
+					NOT = { is_controlled_by = ROOT }
+					is_controlled_by = FROM
+				}
+			}
+			modifier = {
+				add = 40
+				casualties > 99999
+			}
+			modifier = {
+				add = 80
+				surrender_progress > 0.29
+			}
+		}
+		custom_effect_tooltip = ARG_iftheyaccept
+		effect_tooltip = {
+			white_peace = FROM
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = ROOT
+						is_claimed_by = ROOT
+					}
+				}
+				ROOT = {
+					transfer_state = PREV
+				}
+			}
+		}
+		hidden_effect = {
+			random_enemy_country = {
+				limit = {
+					OR = {
+						original_tag = PRU
+						original_tag = BOL
+					}
+					has_cosmetic_tag = PBC_UNIFIED
+				}
+				country_event = { id = peru.10 hours = 4 random_hours = 4 }
+			}
+		}
+	}
+
+	option = { #refuse peace talks
+		name = peru.9.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 50
+				OR = {
+					has_government = communism
+					has_government = fascism
+				}
+			}
+		}
+		add_ideas = EUYL_crippled_army
+	}
+}
+
+#Peru-Bolivian Confederation gets event that other country is willing to surrender
+country_event = {
+	id = peru.10
+	title = peru.10.t
+	desc = peru.10.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { #Accept surrender terms
+		name = peru.10.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 60
+				casualties > 49999
+			}
+			modifier = {
+				add = 100
+				casualties > 119999
+			}
+			modifier = { #controls a claimed state already
+				add = 50
+				any_controlled_state = {
+					is_core_of = ROOT
+					is_core_of = FROM
+				}
+			}
+		}
+		FROM = {
+			clr_country_flag = is_in_second_war_of_confederation
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = ROOT
+						is_claimed_by = ROOT
+					}
+				}
+				ROOT = {
+					transfer_state = PREV
+				}
+			}
+			white_peace = ROOT
+			add_timed_idea = {
+				idea = EUYL_defeated_by_PBC
+				days = 320
+			}
+			if = {
+				limit = { is_faction_leader = yes }
+				dismantle_faction = yes
+			}
+			else_if = {
+				limit = { is_in_faction = yes }
+				leave_faction = yes
+			}
+			clr_country_flag = event_happened
+		}
+		if = {
+			limit = {
+				has_war = no ## Since the white peace occurs before, this condition should tick true if last country surrenders
+			}
+			set_country_flag = PBC_winner_of_war_of_independence
+		}
+	}
+
+	option = { #We won't stop until you're D E A D
+		name = peru.10.b
+		ai_chance = { base = 25 }
+		custom_effect_tooltip = EUYL_post_war_resistance_worsened_tt
+		hidden_effect = {
+			FROM = {
+				every_owned_state = {
+					limit = {
+						is_core_of = FROM
+						NOT = {
+							has_dynamic_modifier = { modifier = EUYL_bloody_resistance }
+						}
+					}
+					set_state_flag = EUYL_worsen_resistance
+				}
+			}
+		}
+	}
+}
+
+#Countries at war with Peru/Bolivia get option to surrender
+country_event = {
+	id = peru.11
+	title = peru.11.t
+	desc = peru.11.d
+	picture = GFX_report_event_gre_allied_diplomacy_military
+
+	trigger = {
+		has_country_flag = is_in_second_war_of_the_pacific
+		OR = {
+			original_tag = ECU
+			original_tag = COL
+			original_tag = CHL
+		}
+		NOT = {
+			has_country_flag = ROOT_alread_was_asked_to_surrender
+		}
+		OR = {
+			has_war_with = BOL
+			has_war_with = PRU
+		}
+		OR = {
+			has_capitulated = yes
+			AND = {
+				surrender_progress > 0.24
+				casualties > 119999
+			}
+		}
+	}
+
+	mean_time_to_happen = { days = 4 }
+
+	option = { #surrender
+		name = peru.11.a
+		ai_chance = {
+			base = 80
+			modifier = {
+				add = 40
+				casualties > 63999
+			}
+			modifier = {
+				add = 80
+				surrender_progress > 0.32
+			}
+			modifier = {
+				add = 150
+				has_capitulated = yes
+			}
+		}
+		set_country_flag = ROOT_alread_was_asked_to_surrender
+		every_enemy_country = {
+			limit = {
+				capital_scope = { is_on_continent = south_america }
+			}
+			country_event = { id = peru.12 hours = 4 }
+		}
+		effect_tooltip = {
+			white_peace = PRU
+			every_owned_state = {
+				limit = {
+					is_core_of = PRU
+				}
+				PRU = {
+					transfer_state = PREV
+				}
+			}
+			if = {
+				limit = {
+					BOL = { has_war_with = ROOT }
+				}
+				white_peace = BOL
+				every_owned_state = {
+					limit = {
+						is_core_of = BOL
+					}
+					BOL = {
+						transfer_state = PREV
+					}
+				}
+			}
+		}
+	}
+
+	option = { #continue going
+		name = peru.11.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 50
+				OR = {
+					has_government = communism
+					has_government = fascism
+				}
+			}
+		}
+		add_ideas = EUYL_crippled_army
+	}
+}
+
+#Player gets event of other nation willing to surrender
+country_event = {
+	id = peru.12
+	title = peru.12.t
+	desc = peru.12.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.12.a
+		ai_chance = {
+			base = 100
+		}
+		effect_tooltip = {
+			FROM = {
+				white_peace = ROOT
+				every_owned_state = {
+					limit = {
+						is_core_of = ROOT
+					}
+					ROOT = {
+						transfer_state = PREV
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					original_tag = COL
+				}
+			}
+			COL = {
+				random_owned_controlled_state = {
+					limit = { industrial_complex > 1 }
+					remove_building = {
+						type = industrial_complex
+						level = 1
+					}
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		hidden_effect = { ## event is sent to both countries
+			FROM = {
+				white_peace = ROOT
+				every_controlled_state = {
+					limit = {
+						is_core_of = FROM
+						is_core_of = ROOT
+					}
+					ROOT = {
+						transfer_state = PREV
+					}
+				}
+			}
+			hidden_effect = {
+				FROM = {
+					clr_country_flag = is_in_second_war_of_the_pacific
+				}
+			}
+		}
+		hidden_effect = { ## Slightly Inefficient but it works
+			BOL = {
+				if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_war_with = CHL
+								has_war_with = ECU
+								has_war_with = COL
+								has_war_with = PRU
+							}
+						}
+					}
+					clr_country_flag = is_in_second_war_of_the_pacific
+					set_country_flag = PRU_BOL_winner_of_war_of_pacific
+				}
+			}
+			PRU = {
+				if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_war_with = CHL
+								has_war_with = ECU
+								has_war_with = COL
+							}
+						}
+					}
+					clr_country_flag = is_in_second_war_of_the_pacific
+					set_country_flag = PRU_BOL_winner_of_war_of_pacific
+				}
+				if = {
+					limit = {
+						has_idea = PRU_pathetic_navy_1
+					}
+					remove_ideas = PRU_pathetic_navy_1
+				}
+				else_if = {
+					limit = {
+						has_idea = PRU_pathetic_navy_2
+					}
+					remove_ideas = PRU_pathetic_navy_2
+				}
+			}
+		}
+	}
+
+	option = {
+		name = peru.8.b
+		ai_chance = {
+			base = 5
+			modifier = {
+				add = 25
+				has_government = fascism
+			}
+		}
+		custom_effect_tooltip = EUYL_post_war_resistance_worsened_tt
+		hidden_effect = {
+			FROM = {
+				every_owned_state = {
+					limit = {
+						is_core_of = FROM
+						NOT = { ## To make sure not to add to states that already have the modifier
+							has_dynamic_modifier = { modifier = EUYL_bloody_resistance }
+						}
+					}
+					set_state_flag = EUYL_worsen_resistance
+				}
+			}
+		}
+	}
+}
+
+#Peru requests gurantees from foreign powers
+country_event = {
+	id = peru.13
+	title = peru.13.t
+	desc = peru.13.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = { #accept to gurantee
+		name = peru.13.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 30
+				FROM = {
+					has_completed_focus = PRU_strengthen_ties_with_social_democracies_in_oceania
+					has_completed_focus = PRU_strengthen_ties_with_scandinavian_social_democrats
+				}
+			}
+			modifier = {
+				add = 60
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+		}
+		give_guarantee = FROM
+		FROM = { country_event = peru.16 }
+	}
+
+	option = { #refuse
+		name = peru.13.b
+		ai_chance = {
+			base = 50
+		}
+		FROM = {
+			country_event = { id = peru.14 hours = 6 }
+		}
+	}
+}
+
+#Peru gets notified of other country not accepting to guarantee them
+country_event = {
+	id = peru.14
+	title = peru.14.t
+	desc = peru.14.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.14.a
+	}
+}
+
+#Ecuador gets event of pastaza for guarantee and allience
+country_event = {
+	id = peru.15
+	title = peru.15.t
+	desc = peru.15.d
+	picture = GFX_report_event_chinese_japanese_handshake
+
+	is_triggered_only = yes
+
+	option = { #accept
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 50
+				FROM = {
+					num_divisions > 19
+				}
+			}
+			modifier = {
+				add = 60
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+		}
+		FROM = {
+			transfer_state = 490
+			add_to_faction = ROOT
+			give_guarantee = ROOT
+			country_event = peru.16
+		}
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_global_flag = EUYL_peru_ecuador_war_concluded_flag
+						has_global_flag = EUYL_peru_ecuador_war_triggered_flag
+					}
+				}
+			}
+			set_global_flag = EUYL_peru_ecuador_war_concluded_flag
+		}
+	}
+
+	option = { #decline
+		ai_chance = {
+			base = 40
+		}
+		FROM = {
+			country_event = peru.17
+			effect_tooltip = {
+				FROM = {
+					random_list = {
+						50 = {
+							create_wargoal = {
+								type = annex_everything
+								target = ROOT
+							}
+						}
+						50 = {
+
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#FROM gets event that ROOT did accept
+country_event = {
+	id = peru.16
+	title = peru.16.t
+	desc = peru.16.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.16.a
+		if = {
+			limit = { original_tag = PAR }
+			add_war_support = 0.03
+		}
+	}
+}
+
+#FROM gets event that ROOT did not accept territorial demand
+country_event = {
+	id = peru.17
+	title = peru.17.t
+	desc = peru.17.d
+	picture = GFX_report_event_soldiers_marching
+
+	is_triggered_only = yes
+
+	option = { #take it back by force
+		name = peru.17.a
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 10
+				OR = {
+					has_government = communism
+					has_government = fascism
+				}
+			}
+			modifier = {
+				factor = 20
+				original_tag = ARG
+				has_government = communism
+			}
+		}
+		trigger = {
+			OR = {
+				has_government = communism
+				has_government = fascism
+				has_government = neutrality
+				has_cosmetic_tag = HSPAM
+			}
+			NOT = {
+				OR = {
+					has_war_with = FROM
+					is_in_faction_with = FROM
+				}
+			}
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+		}
+	}
+
+	option = { #let them go
+		name = peru.17.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 10
+				OR = {
+					has_war = yes
+					has_government = democratic
+				}
+			}
+		}
+		add_war_support = -0.01
+	}
+}
+
+#FROM Gets event of ROOT asking for volunteers
+country_event = {
+	id = peru.18
+	title = peru.18.t
+	desc = peru.18.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			FROM = {
+				if = {
+					limit = {
+						NOT = {
+							has_template = "Voluntarios"
+						}
+					}
+					division_template = {
+						name = "Voluntarios"
+						division_names_group = SPAN_INF_02
+						is_locked = yes
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = { #accept 3 volunteers
+		name = peru.18.a
+		ai_chance = {
+			base = 15
+			modifier = {
+				add = 40
+				FROM = {
+					has_government = ROOT
+				}
+			}
+			modifier = {
+				add = 40
+				FROM = {
+					has_opinion = {
+						target = ROOT
+						value > 79
+					}
+				}
+			}
+			modifier = {
+				add = 20
+				FROM = {
+					surrender_progress > 0.09
+				}
+			}
+			modifier = {
+				add = 40
+				FROM = {
+					num_of_military_factories > 7
+				}
+			}
+		}
+		add_manpower = -21450
+		FROM = {
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Voluntarios\" division_template = \"Voluntarios\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = FROM
+				}
+				create_unit = {
+					division = "name = \"Voluntarios\" division_template = \"Voluntarios\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = FROM
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Voluntarios\" division_template = \"Voluntarios\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = FROM
+				}
+			}
+			hidden_effect = {
+				country_event = peru.19
+			}
+		}
+	}
+
+	option = { #accept 6 volunteers
+		name = peru.18.b
+		ai_chance = {
+			base = 5
+			modifier = {
+				add = 30
+				FROM = {
+					has_government = ROOT
+				}
+			}
+			modifier = {
+				add = 30
+				FROM = {
+					has_opinion = {
+						target = ROOT
+						value > 79
+					}
+				}
+			}
+			modifier = {
+				add = 20
+				FROM = {
+					surrender_progress > 0.09
+				}
+			}
+			modifier = {
+				add = 40
+				FROM = {
+					num_of_military_factories > 7
+				}
+			}
+		}
+		add_manpower = -45790
+		FROM = {
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Voluntarios\" division_template = \"Voluntarios\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = FROM
+				}
+				create_unit = {
+					division = "name = \"Voluntarios\" division_template = \"Voluntarios\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = FROM
+				}
+				create_unit = {
+					division = "name = \"Voluntarios\" division_template = \"Voluntarios\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = FROM
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Voluntarios\" division_template = \"Voluntarios\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = FROM
+				}
+				create_unit = {
+					division = "name = \"Voluntarios\" division_template = \"Voluntarios\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = FROM
+				}
+				create_unit = {
+					division = "name = \"Voluntarios\" division_template = \"Voluntarios\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = FROM
+				}
+			}
+			hidden_effect = {
+				country_event = peru.20
+			}
+		}
+	}
+
+	option = { #refuse
+		name = peru.18.c
+		ai_chance = {
+			base = 50
+		}
+		FROM = {
+			country_event = peru.21
+		}
+	}
+}
+
+#ROOT gets event of FROM sending 3 volunteers
+country_event = {
+	id = peru.19
+	title = peru.19.t
+	desc = peru.19.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.19.a
+	}
+}
+
+#ROOT gets event of FROM sending 6 volunteers
+country_event = {
+	id = peru.20
+	title = peru.20.t
+	desc = peru.20.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.19.a
+	}
+}
+
+#ROOT gets event of FROM not sending any volunteers
+country_event = {
+	id = peru.21
+	title = peru.21.t
+	desc = peru.21.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.21.a
+	}
+}
+
+
+#Chile gets event of Peru willing to purchase lands
+country_event = {
+	id = peru.22
+	title = peru.22.t
+	desc = peru.22.d
+	picture = GFX_report_event_canada_patriation
+
+	is_triggered_only = yes
+
+	option = { #accept
+		name = peru.22.a
+		ai_chance = {
+			base = 80
+			modifier = {
+				add = 60
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 40
+				FROM = {
+					num_divisions > 24
+				}
+			}
+		}
+		FROM = {
+			transfer_state = 951
+			random_owned_controlled_state = {
+				limit = { industrial_complex > 1 }
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			add_timed_idea = {
+				idea = PRU_purchasing_arica
+				days = 120
+			}
+			country_event = { id = peru.16 hours = 3 }
+		}
+		add_offsite_building = {
+			type = industrial_complex
+			level = 1
+		}
+		add_timed_idea = {
+			idea = CHL_purchasing_arica
+			days = 120
+		}
+	}
+
+	option = { #decline
+		name = peru.22.b
+		ai_chance = {
+			base = 40
+			modifier = {
+				add = 60
+				has_opinion = {
+					target = FROM
+					value < 0
+				}
+			}
+			modifier = {
+				add = 500  #Anarchists wouldn't be willing to give away their lands what-so-ever
+				CHL = {
+					has_government = neutrality
+				}
+			}
+		}
+		FROM = {
+			country_event = { id = peru.17 hours = 6 }
+		}
+	}
+}
+
+#Chile gets event of Peru offering an invitation to the allience in exchange for Arica
+country_event = {
+	id = peru.23
+	title = peru.23.t
+	desc = peru.23.d
+	picture = GFX_report_event_second_vienna_award_pact
+
+	is_triggered_only = yes
+
+	option = { #accept
+		name = peru.23.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 40
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 60
+				num_faction_members > 2
+			}
+		}
+		if = {
+			limit = {
+				is_in_faction = yes
+				is_faction_leader = yes
+			}
+			dismantle_faction = yes
+		}
+		else_if = {
+			limit = {
+				is_in_faction = yes
+			}
+			leave_faction = yes
+		}
+		FROM = {
+			transfer_state = 951
+			add_to_faction = ROOT
+			give_guarantee = ROOT
+			country_event = peru.16
+		}
+	}
+
+	option = { #decline
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 500  #Anarchists wouldn't be willing to give away their lands what-so-ever
+				CHL = {
+					has_government = neutrality
+				}
+			}
+		}
+		FROM = {
+			country_event = peru.17
+			effect_tooltip = {
+				FROM = {
+					random_list = {
+						50 = {
+							create_wargoal = {
+								type = annex_everything
+								target = ROOT
+							}
+						}
+						50 = {
+
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#Peru gets event to either kill/retire/keep Oscar after the end of coup/civil war
+country_event = {
+	id = peru.24
+	title = peru.24.t
+	desc = peru.24.d
+	picture = GFX_report_event_generic_army
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #publicly hang Oscar
+		name = peru.24.a
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = 49
+				has_country_flag = PRU_has_civil_war_fascism
+			}
+		}
+		retire_character = PRU_Oscar_benavides
+		add_stability = 0.05
+		add_war_support = -0.03
+	}
+
+	option = { #retire oscar
+		name = peru.24.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = 34
+				has_country_flag = PRU_has_civil_war_fascism
+			}
+		}
+		retire_character = PRU_Oscar_benavides
+		add_stability = 0.03
+	}
+
+	option = { #let him stay
+		name = peru.24.c
+		add_stability = -0.03
+		if = {
+			limit = {
+				NOT = {
+					has_unit_leader = 44512
+				}
+			}
+			create_corps_commander = {
+				name = "Oscar R. Benavides"
+				portrait_path = "gfx/leaders/PRU/portrait_per_oscar_benavides.dds"
+				traits = { }
+				id = 44512
+				skill = 2
+				attack_skill = 1
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 2
+			}
+		}
+	}
+}
+
+#ROOT is requesting FROM for permission to purchase ship
+country_event = {
+	id = peru.25
+	title = peru.25.t
+	desc = peru.25.d
+	picture = GFX_report_event_merchant_ship_01
+
+	is_triggered_only = yes
+
+	option = { #accept
+		name = peru.25.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 20
+				has_navy_size = {
+					size > 79
+				}
+			}
+			modifier = {
+				add = 40
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 30
+				FROM = {
+					has_navy_size = {
+						size < 16
+					}
+				}
+			}
+			modifier = {
+				add = 20
+				has_war = yes
+			}
+			modifier = {
+				add = 40
+				num_of_factories > 24
+			}
+		}
+		FROM = {
+			set_country_flag = FROM_accepted_purchase_of_ships
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.26 hours = 4 }
+			}
+		}
+	}
+
+	option = { #decline
+		name = peru.25.b
+		ai_chance = {
+			base = 50
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.27 hours = 4 }
+			}
+		}
+	}
+}
+
+#ROOT gets event that FROM allowed them to purchase ship
+country_event = {
+	id = peru.26
+	title = peru.26.t
+	desc = peru.26.d
+	picture = GFX_report_event_second_vienna_award_pact
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.26.a
+	}
+}
+
+#ROOT gets event that FROM did not allow them to purchase ship
+country_event = {
+	id = peru.27
+	title = peru.27.t
+	desc = peru.27.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.27.a
+	}
+}
+
+#The Inca Emprie gets event of choosing a leader
+country_event = {
+	id = peru.28
+	title = peru.28.t
+	desc = peru.28.d
+	picture = GFX_report_event_generic_rally_3
+
+	is_triggered_only = yes
+
+	option = { #choose Jose luis bustamante
+		name = peru.28.b
+		ai_chance = {
+			base = 10
+		}
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "José Luis Bustamante y Rivero"
+			desc = ""
+			picture = "gfx/leaders/PRU/portrait_per_socialist.dds"
+			expire = "1965.1.1"
+			ideology = theocracy
+			traits = {
+				CHL_military_leader
+			}
+		}
+	}
+
+	option = { #choose Pachacutec the II
+		name = peru.28.e
+		ai_chance = {
+			base = 15
+		}
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Pachacutec II"
+			desc = ""
+			picture = "gfx/leaders/PRU/PRU_Pachacutec_II.dds"
+			expire = "1965.1.1"
+			ideology = theocracy
+			traits = {
+				driver_of_the_faithful
+			}
+		}
+	}
+
+	option = { #sun god as leader
+		name = peru.28.c
+		ai_chance = {
+			base = 5
+		}
+		retire_country_leader = yes
+		add_country_leader_role = {
+			character = PRU_apu_panchau
+			promote_leader = yes
+			country_leader = {
+				ideology = theocracy
+				expire = "1965.1.1.1"
+				desc = "POLITICS_SUN_GOD_DESC"
+				traits = {
+					PRU_godly_being
+					PRU_not_a_real_person
+				}
+			}
+		}
+	}
+
+	option = { #keep current leader
+		name = peru.28.f
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+#Event that get rids of Army-Navy rivalry
+country_event = {
+	id = peru.29
+	title = peru.29.t
+	desc = peru.29.d
+	picture = GFX_report_event_molotov_ribentrop_handshake
+
+	trigger = {
+		original_tag = PRU
+		has_any_power_balance = yes
+		OR = {
+			AND = {
+				check_variable = { PRU_army_ideology = 1 }
+				check_variable = { PRU_navy_ideology = 1 }
+			}
+			AND = {
+				check_variable = { PRU_army_ideology = 0 }
+				check_variable = { PRU_navy_ideology = 0 }
+			}
+		}
+		NOT = {
+			OR = {
+				has_idea = PRU_rebelling_navy_1
+				has_idea = PRU_rebelling_navy_2
+				has_idea = PRU_rebelling_army_1
+				has_idea = PRU_rebelling_army_2
+			}
+		}
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = peru.29.a
+		add_stability = 0.05
+		add_war_support = 0.05
+		set_country_flag = PRU_stabilized_army_navy
+		PRU_bop_remove_bop_effect = yes
+		set_variable = {
+			PRU_army_loyalty_status = 0
+		}
+		set_variable = {
+			PRU_navy_loyalty_status = 0
+		}
+		PRU_partidos_update_update_effect = yes
+	}
+}
+
+#Event that notifies a player the Peruvian civil war launched
+country_event = {
+	id = peru.30
+	title = peru.30.t
+	desc = peru.30.d
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.30.a
+		start_civil_war = {
+			ruling_party = fascism
+			ideology = ROOT
+			size = PRU_size_of_government
+			states = all
+			states_filter = {
+				NOT = { has_state_flag = PRU_state_is_fascist }
+			}
+			keep_all_characters = yes
+			PREV = {
+				PRU_Oscar_benavides = {
+					set_nationality = prev.PREV
+				}
+				PRU_miguel_monteza_tafur = {
+					set_nationality = prev.prev
+				}
+				PRU_antonio_silva_santiesteban = {
+					set_nationality = prev.prev
+				}
+			}
+			promote_character = PRU_Oscar_benavides
+		}
+
+		set_country_flag = PRU_has_civil_war_fascism
+
+		hidden_effect = {
+			division_template = {
+				name = "Milicias"
+				division_names_group = SPAN_INF_02
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+				}
+			}
+			add_ideas = PRU_civil_war_f_idea
+			division_template = {
+				name = "División de Ejército Peruana"
+				division_names_group = SPAN_INF_02
+				is_locked = no
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 0 y = 3 }
+					infantry = { x = 0 y = 4 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 1 y = 3 }
+					infantry = { x = 1 y = 4 }
+				}
+				support = {
+					artillery = { x = 0 y = 0 }
+				}
+			}
+			delete_unit_template_and_units = {
+				division_template = "División de Infanteria"
+				disband = yes
+			}
+			delete_unit_template_and_units = {
+				division_template = "División de Caballería"
+				disband = yes
+			}
+
+			every_controlled_state = {
+				create_unit = {
+					division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.04 start_equipment_factor = 0.9"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.04 start_equipment_factor = 0.9"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.04 start_equipment_factor = 0.9"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.04 start_equipment_factor = 0.9"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"División de Ejército Peruana\" division_template = \"División de Ejército Peruana\" start_experience_factor = 0.2 start_equipment_factor = 1"
+					owner = ROOT
+				}
+			}
+
+			random_owned_controlled_state = {
+				if = {
+					limit = { check_variable = { PRU_size_of_government < 0.5} }
+					create_unit = {
+						division = "name = \"División de Ejército Peruana\" division_template = \"División de Ejército Peruana\" start_experience_factor = 0.2 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"División de Ejército Peruana\" division_template = \"División de Ejército Peruana\" start_experience_factor = 0.2 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"División de Ejército Peruana\" division_template = \"División de Ejército Peruana\" start_experience_factor = 0.2 start_equipment_factor = 1"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"División de Ejército Peruana\" division_template = \"División de Ejército Peruana\" start_experience_factor = 0.2 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+				else = {
+					create_unit = {
+						division = "name = \"División de Ejército Peruana\" division_template = \"División de Ejército Peruana\" start_experience_factor = 0.2 start_equipment_factor = 1"
+						owner = ROOT
+					}
+				}
+			}
+
+			random_other_country = {
+				limit = {
+					original_tag = PRU
+					has_civil_war = yes
+				}
+				add_ideas = PRU_civil_war_d_idea
+				division_template = {
+					name = "Milicias Leales"
+					division_names_group = SPAN_INF_02
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+					}
+				}
+				division_template = {
+					name = "División de Ejército Peruana Leales"
+					division_names_group = SPAN_INF_02
+					is_locked = no
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+						infantry = { x = 0 y = 4 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+						infantry = { x = 1 y = 3 }
+						infantry = { x = 1 y = 4 }
+					}
+					support = {
+						artillery = { x = 0 y = 0 }
+					}
+				}
+				every_controlled_state = {
+					create_unit = {
+						division = "name = \"Milicias Leales\" division_template = \"Milicias Leales\" start_experience_factor = 0.04 start_equipment_factor = 0.9"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"Milicias Leales\" division_template = \"Milicias Leales\" start_experience_factor = 0.04 start_equipment_factor = 0.9"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"Milicias Leales\" division_template = \"Milicias Leales\" start_experience_factor = 0.04 start_equipment_factor = 0.9"
+						owner = PREV
+					}
+				}
+
+				random_owned_controlled_state = {
+					if = {
+						limit = { check_variable = { PRU_size_of_government < 0.5} }
+						create_unit = {
+							division = "name = \"División de Ejército Peruana Leales\" division_template = \"División de Ejército Peruana Leales\" start_experience_factor = 0.2 start_equipment_factor = 1"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Ejército Peruana Leales\" division_template = \"División de Ejército Peruana Leales\" start_experience_factor = 0.2 start_equipment_factor = 1"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Ejército Peruana Leales\" division_template = \"División de Ejército Peruana Leales\" start_experience_factor = 0.2 start_equipment_factor = 1"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Ejército Peruana Leales\" division_template = \"División de Ejército Peruana Leales\" start_experience_factor = 0.2 start_equipment_factor = 1"
+							owner = PREV
+						}
+					}
+					else = {
+						create_unit = {
+							division = "name = \"División de Ejército Peruana Leales\" division_template = \"División de Ejército Peruana Leales\" start_experience_factor = 0.2 start_equipment_factor = 1"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Ejército Peruana Leales\" division_template = \"División de Ejército Peruana Leales\" start_experience_factor = 0.2 start_equipment_factor = 1"
+							owner = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+#Event that notifies players there was a coup
+country_event = {
+	id = peru.31
+	title = peru.31.t
+	desc = peru.31.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.31.a
+		set_politics = {
+			ruling_party = fascism
+		}
+		set_country_flag = PRU_had_peaceful_coup
+		add_timed_idea = {
+			idea = PRU_aftermath_of_coup
+			days = 140
+		}
+		hidden_effect = {
+			country_event = { id = peru.24 hours = 8 }
+		}
+	}
+}
+
+#Player chooses whether or not to have Ureta or Flores lead the nation
+country_event = {
+	id = peru.32
+	title = peru.32.t
+	desc = peru.32.d
+	picture = GFX_PRU_event_32
+
+	is_triggered_only = yes
+
+	option = { #Eloy Ureta
+		name = peru.32.a
+		ai_chance = {
+			base = 5
+		}
+		retire_character = PRU_luis_a_flores
+		promote_character = PRU_eloy_ureta_montehermoso_leader
+	}
+
+	option = { #Luis stays president lol
+		name  = peru.32.b
+		ai_chance = {
+			base = 5
+		}
+	}
+}
+
+#Czechoslovakia gets Peruvian request to purchase tanks
+country_event = {
+	id = peru.33
+	title = peru.33.t
+	desc = peru.33.d
+	picture = GFX_report_event_tank_factory
+
+	is_triggered_only = yes
+
+	option = { #give them proper light tanks
+		name = peru.33.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 30
+				has_opinion = {
+					target = FROM
+					value > 49
+				}
+			}
+			modifier = {
+				add = 50
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 40
+				has_war = no
+			}
+		}
+		FROM = {
+			random_owned_controlled_state = {
+				limit = { industrial_complex > 1 }
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			country_event = { id = peru.16 hours = 4 }
+			if = {
+				limit = {
+					has_any_power_balance = yes
+				}
+				PRU_increase_army_15_percent = yes
+			}
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 1
+				uses = 1
+				category = armor
+			}
+			if = {
+				limit = {
+					has_dlc = "No Step Back"
+				}
+				if = {
+					limit = {
+						has_tech = basic_light_tank_chassis
+					}
+					PRU_ltp_template_and_production = yes
+				}
+				else = {
+					set_technology = { basic_light_tank_chassis = 1 }
+					PRU_ltp_template_and_production = yes
+				}
+
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = light_tank_chassis
+					amount = 350
+					producer = CZE
+				}
+			}
+		}
+		add_offsite_building = {
+			type = industrial_complex
+			level = 1
+		}
+	}
+
+	option = { #decline
+		name = peru.33.c
+		ai_chance = {
+			base = 15
+			modifier = {
+				add = 100
+				has_war = yes #most countries won't be willing to give away their equipment whilst at war lol
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes #historically happened
+			}
+		}
+		FROM = { country_event = { id = peru.17 hours = 4 } }
+	}
+}
+
+## The Choice between Eudocio and Jorge del Prado Chavez
+country_event = {
+	id = peru.34
+	title = peru.34.t
+	desc = peru.34.d
+	picture = GFX_PRU_prado_and_eudocino
+
+	is_triggered_only = yes
+
+	option = { #Eudocio Ravines
+		trigger = { has_character = PRU_eudocio_ravines }
+		name = "Eudocio Ravines"
+		PRU_add_5_revolution_support = yes
+		effect_tooltip = { promote_character = PRU_eudocio_ravines }
+		set_country_flag = PRU_chose_eudocio_flag
+	}
+
+	option = { #Jorge del Prado Chavez
+		trigger = { has_character = PRU_jorge_del_prado_chávez }
+		name = "Jorge del Prado Chávez"
+		PRU_add_5_revolution_support = yes
+		promote_character = PRU_jorge_del_prado_chávez
+		set_country_flag = PRU_chose_jorge_del_prado_flag
+	}
+}
+
+## Peruvian Government Begins Crackdown Efforts Aaginsts Us
+country_event = {
+	id = peru.35
+	title = peru.35.t
+	desc = peru.35.d
+	picture = GFX_PRU_government_begins_crackdown
+
+	fire_only_once = yes
+	trigger = {
+		original_tag = PRU
+		NOT = { has_government = communism }
+		check_variable = { PRU_support_for_the_revolution > 19 }
+	}
+
+	option = { #Damn Bastards
+		name = peru.35.a
+		PRU_remove_5_revolution_support = yes
+		activate_mission = PRU_government_crackdown_on_our_movement
+		custom_effect_tooltip = PRU_government_periodically_will_brutally_opress_us_tt
+	}
+}
+
+## Government Persecuted our Supporters
+country_event = {
+	id = peru.36
+	title = peru.36.t
+	desc = peru.36.d
+	picture = GFX_PRU_government_persecution
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.36.a
+		PRU_remove_5_revolution_support = yes
+		add_popularity = {
+			ideology = communism
+			popularity = -0.01
+		}
+		add_political_power = -10
+		add_days_mission_timeout = {
+			days = -10
+			mission = PRU_government_crackdown_on_our_movement
+		}
+	}
+}
+
+## We've Succesfully Taken Over
+country_event = {
+	id = peru.37
+	title = peru.37.t
+	desc = peru.37.d
+	picture = GFX_report_event_sanation_left_victory
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.37.a
+		effect_tooltip = {
+			set_politics = {
+				ruling_party = communism
+				elections_allowed = no
+			}
+			add_ideas = PRU_social_and_economic_crisis_1
+			if = {
+				limit = {
+					has_any_power_balance = yes ## makes sure the player still has the rivalry
+				}
+				if = {
+					limit = {
+						NOT = { has_completed_focus = PRU_gain_the_armys_support }
+					}
+					add_ideas = PRU_rebelling_army_1
+				}
+				add_ideas = PRU_rebelling_navy_1
+			}
+		}
+	}
+}
+
+## Government Cracks Down on our Movement
+country_event = {
+	id = peru.38
+	title = peru.38.t
+	desc = peru.38.d
+	picture = GFX_PRU_government_begins_crackdown
+
+	is_triggered_only = yes
+
+	option = { # Everyone to Arms! Fight for your Freedom!
+		name = peru.38.a
+		effect_tooltip = {
+			start_civil_war = { ideology = communism }
+		}
+		hidden_effect = {
+			PRU_start_communist_civil_war = yes
+		}
+	}
+}
+
+## Peru Declared War on Chile, this is our Golden Opportunity
+country_event = {
+	id = peru.39
+	title = peru.39.t
+	desc = peru.39.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = peru.39.a
+		ai_chance = {
+			base = 100
+			modifier = {
+				factor = 0
+				OR = {
+					has_civil_war = yes
+					surrender_progress > 0.2
+				}
+			}
+		}
+		create_wargoal = {
+			type = take_state_focus
+			generator = { 302 }
+			target = CHL
+		}
+		hidden_effect = {
+			add_ai_strategy = {
+				type = declare_war
+				id = CHL
+				value = 100
+			}
+		}
+		set_country_flag = BOL_influenced_by_peru_flag
+	}
+
+	option = {
+		name = peru.39.b
+		ai_chance = { base = 1 }
+		add_war_support = -0.02
+	}
+}
+
+## The Choice between Haya de la Torre and Luis Antonio Eguiguren Escudero
+country_event = {
+	id = peru.40
+	title = peru.40.t
+	desc = peru.40.d
+	picture = GFX_PRU_peru_40
+
+	is_triggered_only = yes
+
+	option = {
+		trigger = { has_character = PRU_haya_de_la_torre }
+		name = "Víctor Raúl Haya de la Torre"
+		promote_character = PRU_haya_de_la_torre
+		set_party_name = {
+			ideology = democratic
+			long_name = PRU_democratic_party_1_long
+			name = PRU_democratic_party_1
+		}
+	}
+
+	option = {
+		trigger = { has_character = PRU_luis_antonio_eguiguren_escudero }
+		name = "Luis Antonio Eguiguren Escudero"
+		promote_character = PRU_luis_antonio_eguiguren_escudero
+		set_party_name = {
+			ideology = democratic
+			long_name = PRU_democratic_party_2_long
+			name = PRU_democratic_party_2
+		}
+	}
+}
+
+## The Restoration of the Spanish Empire ##
+news_event = {
+	id = peru.41
+	title = peru.41.t
+	desc = peru.41.d
+	picture = GFX_PRU_spanish_empire_restored
+
+	is_triggered_only = yes
+
+	major = yes
+
+	option = {
+		name = peru.41.a
+		trigger = {
+			NOT = {
+				original_tag = var:curr_spanish_empire
+			}
+		}
+	}
+
+	option = {
+		name = peru.41.b
+		trigger = {
+			original_tag = var:curr_spanish_empire
+		}
+	}
+}
+
+## Shall we promote a king?
+country_event = {
+	id = peru.42
+	title = peru.42.t
+	desc = peru.42.d
+	picture = GFX_PRU_elect_king
+
+	is_triggered_only = yes
+
+	option = { ## Of course, its only logical
+		name = peru.42.a
+		ai_chance = {
+			base = 20
+		}
+		add_country_leader_role = {
+			character = PRU_carlos_pio_habsburgo_borbon
+			promote_leader = yes
+			country_leader = {
+				ideology = fascism_ideology
+				expire = "1965.1.1.1"
+				desc = "POLITICS_CARLOS_PIO_DESC"
+				traits = {
+					BRA_heir_of_the_throne
+				}
+			}
+		}
+	}
+
+	option = { ## A peruvian shall be in charge!
+		name = peru.42.b
+		ai_chance = {
+			base = 16
+		}
+		add_war_support = 0.01
+	}
+}

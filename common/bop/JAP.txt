@@ -1,0 +1,118 @@
+JAP_arasaka_emperor_bop = {
+	initial_value = 0.1
+	left_side = JAP_emperor_side
+	right_side = JAP_arasaka_side
+	decision_category = JAP_arasaka_emperor_balance
+
+	range = { #Balanced Range
+		id = JAP_arasaka_emperor_bop_balanced
+		min = -0.10
+		max = 0.10
+		modifier = {
+			neutrality_drift = 0.05
+		}
+	}
+
+	side = {
+		id = JAP_emperor_side
+		icon = GFX_bop_ENG_king_side
+		range = {
+			id = JAP_emperor_medium_control_range
+			min = -0.5
+			max = -0.1
+			modifier = {
+				political_power_factor = 0.05
+			}
+			on_activate = {
+
+			}
+		}
+
+		range = {
+			id = JAP_emperor_high_control_range
+			min = -0.9
+			max = -0.5
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.03
+				war_support_factor = 0.03
+			}
+			on_activate = {
+				# activate effect
+			}
+		}
+
+		range = {
+			id = JAP_emperor_total_control_range
+			min = -1
+			max = -0.9
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.05
+				war_support_factor = 0.05
+				drift_defence_factor = 0.5
+				fascism_drift = 0.05
+				required_garrison_factor = -0.05
+			}
+			on_activate = {
+				# activate effect
+			}
+		}
+	}
+
+	side = {
+		id = JAP_arasaka_side
+		icon = GFX_bop_ETH_anarchist_side
+		range = {
+			id = JAP_arasaka_medium_control_range
+			min = 0.1
+			max = 0.5
+			modifier = {
+				stability_weekly = -0.0015
+				war_support_weekly = -0.0015
+				power_balance_weekly = 0.001
+				neutrality_drift = 0.05
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_country_leader = { id = 700 } #Hirohito
+					}
+					add_country_leader_trait = JAP_losing_power
+				}
+			}
+		}
+
+		range = {
+			id = JAP_arasaka_high_control_range
+			min = 0.5
+			max = 0.9
+			modifier = {
+				stability_weekly = -0.001
+				power_balance_weekly = 0.001
+				neutrality_drift = 0.06
+			}
+			on_activate = {
+				# activate effect
+			}
+		}
+
+		range = {
+			id = JAP_arasaka_total_control_range
+			min = 0.9
+			max = 1
+			modifier = {
+				stability_weekly = 0.001
+				weekly_casualties_war_support = 0.002
+				weekly_convoys_war_support = 0.002
+				weekly_bombing_war_support = 0.002
+				lend_lease_tension = -0.6
+				neutrality_drift = 0.06
+			}
+			on_activate = {
+				# activate effect
+				add_stability = 0.03
+			}
+		}
+	}
+}

@@ -1,0 +1,163 @@
+#####-----> CHI: Historical AI Behavior <><> <><> <><> <><> <><>
+
+CHI_historical_plan = {
+	name = "CHI: China Historical AI Plan"
+	desc = "Historical behavior for Republic of China."
+
+	allowed = {
+		original_tag = CHI
+		NOT = {
+			has_dlc = "No Compromise, No Surrender"
+		}
+	}
+
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = CHI_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = CHI_AI_RANDOM_HISTORICAL
+			has_game_rule = {
+				rule = CHI_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	abort = {
+		OR = {
+			has_government = fascism
+			has_government = communism
+			has_government = democratic
+		}
+	}
+
+	ai_national_focuses = {
+		#do these asap
+		KMT_the_big_rear_concept
+		KMT_lure_them_in_strategy
+
+		#1936
+		KMT_political_effort
+		KMT_unitary_semi_presidential_republic
+		CHI_overclaim_of_factions
+		KMT_zhonghua_minzu
+		KMT_cbis
+		KMT_cement_control_on_the_economy
+		KMT_external_defense					#Xian incident December 1936
+		KMT_fortify_land
+		KMT_national_def_propaganda
+		KMT_national_defense_council
+		#1937
+		KMT_invite_foreign_investors
+		KMT_sino_soviet_non_agression_pact
+		KMT_soviet_equipments
+		KMT_closer_tie_with_fra
+		KMT_purchase_french_equipments
+		KMT_french_military_mission
+		KMT_french_drill
+		KMT_soviet_volunteer_groups
+		KMT_purchase_soviet_aircrafts
+		KMT_dare_to_die_corps
+		KMT_increase_sino_german_cooperation
+		#1938
+		KMT_falkenhausen_citizenship
+		KMT_chinese_general_staff
+		KMT_war_gaming_division
+		KMT_closer_tie_with_eng
+		KMT_fighter_purchases
+		KMT_industrial_effort
+		KMT_science_effort
+		KMT_extra_research_slot
+		KMT_armament_effort
+		KMT_revive_hanyang_armory
+		KMT_improve_burma_road					#started 1937 by Britain, completed 1938 by China
+		CHI_industrial_evacuations					#(historically bypassed)
+		#1939
+		KMT_increase_funding_of_german_weaponary
+		KMT_focus_on_our_own_army
+		KMT_modernize_army
+		KMT_national_institute
+		#1940
+		KMT_military_science
+		KMT_electronics_research
+		#adding these focuses in case China wins really fast against Japan
+		KMT_preemptive_preparation
+		KMT_taiwan_bastion
+		KMT_north_west_insurgence
+		KMT_warlord_after_civil_war
+		KMT_development_of_taiwan
+		KMT_monetary_reform						#gonna get rid of that corruption before building industry
+		KMT_industrialization_NW
+		KMT_industrialization_S
+		KMT_pioneering_the_north_east
+		KMT_national_resources_commission
+		KMT_excavation_NW
+		KMT_excavation_S
+		KMT_excavation_NE
+		#back to historical history
+		#1941
+		#KMT_special_force_training
+		KMT_bold_hypothesis
+		#1942
+		KMT_pursuade_britain					#(historically bypassed)
+		KMT_fighter_focus
+		KMT_cas_effort
+		KMT_revive_jiangnan_shipyard
+		KMT_gain_control_of_the_sea
+		KMT_demand_taiwan
+		KMT_jet
+		KMT_ballistic_weapon
+		#1943
+		KMT_extra_research_slot_2				#added those useless focuses to postpone Sinkiang and Tibetian operations of KMT
+		KMT_nuclear_physics
+		KMT_ledo_road							#autumn 1943
+		#1944
+		KMT_study_foreign_ship
+		KMT_taiwan_fleet_hub
+		KMT_sea_fleet
+	}
+
+	ideas = {
+		KMT_chiang_kaishek_high_command = 200
+		security_press_fake = 160
+		security_press = 160
+		CHI_chen_jitang = 125
+		KMT_sun_lijen = 95
+		finances_science = 140 #70 oluyor 0.5 factor
+		r56i_laws_social_normal = 7 #52.5
+		CHI_lin_sen = 40
+		CHI_chiang_ching_kuo = 30
+		CHI_zhang_qun = 25
+		r56i_laws_war_historical = 15
+	}
+	research = {
+		infantry_weapons = 30.0
+		infantry_tech = 20.0
+		industry = 15
+	}
+	traits = {
+
+	}
+
+	focus_factors = {
+		KMT_unitary_semi_presidential_republic = 500
+		KMT_democratic_republic = 0
+		KMT_promote_nationalism = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

@@ -1,0 +1,224 @@
+### ECUADOR ###
+
+VEN_political_crisis = {
+	priority = 500
+	icon = GFX_decision_category_generic_crisis
+
+	allowed = {
+		OR = {
+			#original_tag = VEN
+			original_tag = ECU
+			original_tag = PRU
+		}
+	}
+
+	visible = { exists = yes }
+}
+
+ECU_liberal_conservative_conflict = {
+	priority = 300
+	allowed = {
+		original_tag = ECU
+	}
+
+	visible = {
+		has_idea = ECU_aftermath_of_4_day_civil_war_1
+	}
+
+	icon = GFX_ECU_liberal_conservative_war_icon
+
+	picture = GFX_ECU_liberal_conservative_war_pic
+
+	scripted_gui = ECU_liberal_conservative_conflict_ui
+
+	#visible_when_empty = yes
+}
+
+ECU_economic_reignition_cat = {
+	priority = 150
+	allowed = {
+		original_tag = ECU
+	}
+
+	icon = GFX_ECU_economic_reignition_icon
+
+	on_map_area = {
+		target_array = controlled_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = ECU_rural_state }
+			}
+		}
+		name = ECU_rural_provinces_tt
+		zoom = 150
+	}
+
+	#visible_when_empty = yes
+}
+
+EUYL_peru_ecuador_rising_tensions = {
+	priority = 450
+	allowed = {
+		OR = {
+			original_tag = ECU
+			original_tag = PRU
+		}
+	}
+
+	visible = {
+		ECU = { exists = yes }
+		PRU = {
+			exists = yes
+			NOT = {
+				has_country_flag = is_PBC
+			}
+		}
+		NOT = {
+			has_global_flag = EUYL_peru_ecuador_war_concluded_flag
+		}
+	}
+
+	icon = GFX_EUYL_ecuador_peru_rising_tensions_icon
+
+	picture = GFX_EUYL_ecuador_peru_rising_tensions_pic
+
+	scripted_gui = EUYL_peru_ecuador_gui
+
+	visible_when_empty = yes
+}
+
+ECU_greater_ecuador_cat = {
+	priority = 650
+	allowed = {
+		original_tag = ECU
+	}
+
+	icon = generic_formable_nations
+
+	picture = GFX_ECU_form_greater_ecuador_pic
+
+	visible = {
+		OR = { ## will have other focuses
+			has_completed_focus = ECU_greater_ecuador ## strongest one for obvious reasons
+			has_completed_focus = ECU_pushing_our_claims
+		}
+	}
+}
+
+ECU_the_revolution_lives_on_cat = {
+	priority = 600
+	allowed = {
+		original_tag = ECU
+	}
+
+	icon = GFX_decision_category_generic_communism
+
+	picture = GFX_ECU_world_revolution_icon
+
+	visible = {
+		has_completed_focus = ECU_the_revolution_lives_on
+	}
+}
+
+ECU_cooperating_with_the_fascists = {
+	priority = 600
+	allowed = {
+		original_tag = ECU
+	}
+
+	icon = GFX_decision_category_generic_fascism
+
+	picture = GFX_decision_cat_picture_NOR_fascist_war
+
+	visible = {
+		has_completed_focus = ECU_gain_support_from_the_fascists
+	}
+}
+
+ECU_national_mobilization_cat = {
+	priority = 20
+	allowed = {
+		original_tag = ECU
+	}
+
+	icon = GFX_decision_category_military_operation
+
+	picture = GFX_south_american_army
+
+	visible = {
+		OR = {
+			has_completed_focus = ECU_pass_conscription_laws
+			has_completed_focus = ECU_national_mobilization_f
+			has_completed_focus = ECU_build_up_the_army
+		}
+	}
+}
+
+ECU_reforming_the_lost_unions = {
+	priority = 750
+	allowed = {
+		OR = {
+			original_tag = ECU
+			#original_tag = VEN alamıyor flagı
+			original_tag = COL
+		}
+	}
+
+	icon = GFX_PBC_reforming_old_nations
+
+	visible = {
+		has_country_flag = EUYL_can_reform_lost_unions_flag
+	}
+}
+
+ECU_the_united_kingdom_of_peru_ecuador_and_bolivia = {
+	priority = 700
+	icon = GFX_ECU_united_kingdom_cat_icon
+
+	allowed = {
+		original_tag = ECU
+	}
+
+	picture = GFX_ECU_united_kingdom_cat_pic
+
+	visible = {
+		has_completed_focus = ECU_revive_a_lost_idea
+	}
+}
+
+ECU_fuerzas_armadas_ecuatorianas = {
+	priority = 35
+	icon = GFX_decision_category_NOR_fascist_deploy_prep
+
+	allowed = {
+		original_tag = ECU
+	}
+
+	picture = GFX_ECU_fuerzas_armadas_pic
+
+	visible = {
+		OR = {
+			has_completed_focus = ECU_el_ejercito_ecuatoriano
+			has_completed_focus = ECU_import_american_planes
+			has_completed_focus = ECU_la_armada_ecuatoriana
+		}
+	}
+
+	visible_when_empty = yes
+}
+
+ECU_bananas_for_all = {
+	priority = 750
+	icon = GFX_ECU_banana_company_cat_icon
+
+	picture = GFX_ECU_banana_company_cat_pic
+
+	allowed = {
+		original_tag = ECU
+	}
+
+	visible = {
+		has_completed_focus = ECU_banana_company_takeover
+	}
+}
+

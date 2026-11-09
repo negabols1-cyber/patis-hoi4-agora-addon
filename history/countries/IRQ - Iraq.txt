@@ -1,0 +1,144 @@
+﻿capital = 291
+
+oob = "IRQ_1936"
+
+# Starting tech
+set_technology = {
+	infantry_weapons = 1
+	infantry_weapons1 = 1
+	tech_mountaineers = 1
+	tech_trucks = 1
+	gw_artillery = 1
+	fuel_silos = 1
+}
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+	set_air_oob = "IRQ_1936_air_bba"
+	set_technology = {
+		iw_small_airframe = 1
+	}
+	else = {
+		set_air_oob = "IRQ_1936_air_legacy"
+		set_technology = {
+			early_fighter = 1
+			CAS1 = 1
+		}
+	}
+}
+
+add_ideas = {
+	IRQ_middle_east_chaos_bridge
+	IRQ_illiterate_army
+	#IRQ_libertarian_kurds
+}
+
+set_variable = { var = IRQ_army_book_page value = 1 }
+clamp_variable = { var = IRQ_army_book_page min = 1 max = 4 }
+set_variable = { var = IRQ_army_academy_decision_select_limit value = 0 }
+clamp_variable = { var = IRQ_army_book_page min = 0 max = 2 }
+set_variable = { var = army_learing_points value = 0 }
+add_dynamic_modifier = { modifier = IRQ_army_dynamic_modifier }
+set_variable = { var = this_army_attack_factor value = -0.1 }
+set_variable = { var = this_army_defence_factor value = -0.1 }
+set_variable = { var = this_planning_speed value = -0.15 }
+set_variable = { var = this_max_planning_factor value = -0.15 }
+set_variable = { var = this_army_org_factor value = -0.1 }
+set_variable = { var = this_land_doctrine_cost_factor value = 0.25 }
+set_variable = { var = this_experience_gain_army value = 0.02 }
+
+if = {
+	limit = {
+		has_dlc = "Battle for the Bosporus"
+	}
+	set_technology = { camelry = 1 }
+}
+
+set_convoys = 5
+
+recruit_character = IRQ_yasin_al_hashimi
+recruit_character = IRQ_ghazi_i
+recruit_character = IRQ_faisal_ii
+recruit_character = IRQ_rashid_ali_algaylani
+recruit_character = IRQ_yusuf_salman_yusuf
+recruit_character = IRQ_bakr_sidqi_al_askari
+recruit_character = IRQ_fahmi_said
+recruit_character = IRQ_fawzi_al_qawuqji
+recruit_character = IRQ_kamil_shabib
+recruit_character = IRQ_mahmud_salman
+recruit_character = IRQ_nuri_pasha_al_said
+recruit_character = IRQ_salah_al_din_al_sabbagh
+recruit_character = IRQ_taha_al_hashimi
+recruit_character = IRQ_hikmat_sulayman
+recruit_character = IRQ_khazal_ibn_jabir
+recruit_character = TAG_hans_jeschonnek
+recruit_character = TAG_werner_junck
+recruit_character = IRQ_ali_jawdat_al_aiyubi
+recruit_character = IRQ_amin_al_husseini
+recruit_character = IRQ_hamdi_al_pachachi
+recruit_character = IRQ_jamil_al_midfai
+recruit_character = IRQ_naji_shawkat
+recruit_character = IRQ_tawfiq_al_suwaidi
+
+if = {
+	limit = {
+		has_dlc = "Graveyard of Empires"
+	}
+	recruit_character = IRQ_saib_shawkat
+	recruit_character = IRQ_fawsi_al_kaukji
+	recruit_character = IRQ_harry_george_smart
+	recruit_character = IRQ_werner_junck
+	recruit_character = IRQ_abd_al_ilah
+	recruit_character = IRQ_sharaf_bin_rajeh
+	recruit_character = IRQ_naji_al_suwaidi
+	recruit_character = IRQ_muhammad_ali_jawad
+	recruit_character = IRQ_nuri_as_said
+
+	add_ideas = IRQ_golden_square
+	add_ideas = IRQ_anglo_iraqi_treaty
+
+	IRQ_salah_al_din_al_sabbagh = {
+		set_character_flag = IRQ_golden_square_char
+	}
+	IRQ_mahmud_salman = {
+		set_character_flag = IRQ_golden_square_char
+	}
+	IRQ_fahmi_said = {
+		set_character_flag = IRQ_golden_square_char
+	}
+	IRQ_kamil_shabib = {
+		set_character_flag = IRQ_golden_square_char
+	}
+
+	IF = {
+		limit = { has_dlc = "Arms Against Tyranny" }
+		give_market_access = ENG
+	}
+
+	ENG = {
+		add_opinion_modifier = {
+			target = IRQ
+			modifier = IRQ_anglo_iraqi_treaty_in_place_opm
+		}
+	}
+	add_opinion_modifier = {
+		target = ENG
+		modifier = IRQ_anglo_iraqi_treaty_in_place_opm
+	}
+
+	add_ideas = IRQ_ghazi_i
+}
+
+
+set_politics = {
+	ruling_party = neutrality
+	last_election = "1936.1.1"
+	election_frequency = 48
+	elections_allowed = no
+}
+set_stability = 0.45
+set_popularities = {
+	democratic = 2
+	fascism = 15
+	neutrality = 83
+}
+

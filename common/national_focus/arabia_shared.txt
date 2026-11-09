@@ -1,0 +1,479 @@
+#United Arabia
+shared_focus = {
+	id = ARB_united_arabia
+	icon = GFX_goal_Unite_Arabia #GFX_z_goal_arab_strengthening_centralization
+	x = 0
+	y = 0
+	offset = {
+		x = 21
+		y = 8
+		trigger = {
+			original_tag = YEM
+		}
+	}
+	offset = {
+		x = 11
+		y = 7
+		trigger = {
+			original_tag = IRQ
+		}
+	}
+	offset = {
+		x = 29
+		y = 10
+		trigger = {
+			original_tag = SAU
+		}
+	}
+	offset = {
+		x = 6
+		y = 0
+		trigger = {
+			original_tag = SAU
+			has_game_rule = {
+				rule = obsolete_focus_branches_visibility
+				option = HIDE
+			}
+			has_completed_focus = SAU_invite_germans
+			NOT = { has_completed_focus = SAU_dream_of_caliphate }
+			NOT = { has_completed_focus = SAU_new_civil_constitution }
+		}
+	}
+	offset = {
+		x = -10
+		y = 0
+		trigger = {
+			original_tag = SAU
+			has_game_rule = {
+				rule = obsolete_focus_branches_visibility
+				option = HIDE
+			}
+			has_completed_focus = SAU_invite_germans
+			has_completed_focus = SAU_new_civil_constitution
+		}
+	}
+	offset = {
+		x = -10
+		y = 0
+		trigger = {
+			original_tag = SAU
+			has_game_rule = {
+				rule = obsolete_focus_branches_visibility
+				option = HIDE
+			}
+			has_completed_focus = SAU_invite_germans
+			has_completed_focus = SAU_dream_of_caliphate
+		}
+	}
+	offset = {
+		x = -15
+		y = 0
+		trigger = {
+			original_tag = SAU
+			has_game_rule = {
+				rule = obsolete_focus_branches_visibility
+				option = HIDE
+			}
+			OR = {
+				has_completed_focus = SAU_concessions_to_aioc
+				has_completed_focus = SAU_concessions_to_standard_oil_and_texaco
+			}
+		}
+	}
+	cost = 5
+	search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+	allow_branch = {
+		NOT = {
+			has_global_flag = his_only
+		}
+	}
+	available = {
+		if = {
+			limit = {
+				original_tag = YEM
+			}
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = is_arab_tt
+					OR = {
+						has_cosmetic_tag = ARA_UNIFIED
+						has_cosmetic_tag = FORM_ARA
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = is_africa_italia_tt
+					has_cosmetic_tag = YEM_africa_orientale_italiana_arabia
+				}
+				custom_trigger_tooltip = {
+					tooltip = is_british_middle_east_tt
+					has_cosmetic_tag = YEM_british_dominion
+				}
+				custom_trigger_tooltip = {
+					tooltip = is_supreme_arabia_tt
+					has_cosmetic_tag = YEM_arabian_soviet_sr
+					has_completed_focus = YEM_supreme_asr
+				}
+				custom_trigger_tooltip = {
+					tooltip = is_reichkommisarat_tt
+					has_idea = yem_model_colony
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				original_tag = SAU
+			}
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = is_arab_tt
+					OR = {
+						has_cosmetic_tag = ARA_UNIFIED
+						has_cosmetic_tag = FORM_ARA
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = is_united_arab_state_tt
+					OR = {
+						has_cosmetic_tag = SAU_united_arab_state
+						check_variable = { SAU_arab_league_countries_var = 2 }
+					}
+				}
+			}
+		}
+		else = {
+			custom_trigger_tooltip = {
+				tooltip = is_arab_tt
+				OR = {
+					has_cosmetic_tag = ARA_UNIFIED
+					has_cosmetic_tag = FORM_ARA
+				}
+			}
+		}
+	}
+	completion_reward = {
+		add_stability = 0.1
+		add_war_support = 0.1
+		add_political_power = 100
+	}
+}
+
+#Arabian-Iraqi railways - ALL
+shared_focus = {
+	id = ARB_arabian_iraqi_railways
+	icon = GFX_ef_focus_railway_blue
+	x = -3
+	y = 1
+	cost = 5
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+	prerequisite = { focus = ARB_united_arabia }
+	relative_position_id = ARB_united_arabia
+	available = {
+		if = {
+			limit = {
+				NOT = { original_tag = YEM }
+			}
+			is_puppet = no
+		}
+		controls_state = 291
+		controls_state = 675
+		controls_state = 1010
+		controls_state = 1011
+	}
+	completion_reward = {
+		build_railway = {
+			level = 2
+			build_only_on_allied = yes
+			start_state = 291
+			target_state = ROOT.capital
+		}
+	}
+}
+
+#Push Through Iran - ALL
+shared_focus = {
+	id = ARB_push_through_iran
+	icon = GFX_z_goal_continue_construction_of_transiranian_road
+	x = 0
+	y = 1
+	cost = 5
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+	prerequisite = { focus = ARB_arabian_iraqi_railways }
+	relative_position_id = ARB_arabian_iraqi_railways
+	available = {
+		if = {
+			limit = {
+				NOT = { original_tag = YEM }
+			}
+			is_puppet = no
+		}
+		controls_state = 266
+		controls_state = 417
+		controls_state = 421
+		controls_state = 413
+		controls_state = 411
+	}
+	completion_reward = {
+		build_railway = {
+			level = 2
+			build_only_on_allied = yes
+			start_state = 266
+			target_state = ROOT.capital
+		}
+		build_railway = {
+			level = 1
+			start_province = 2065
+			target_province = 12855
+		}
+		build_railway = {
+			level = 1
+			start_province = 10837
+			target_province = 7982
+		}
+	}
+}
+
+#Merge the Industries - ALL
+shared_focus = {
+	id = ARB_merge_the_industries
+	icon = GFX_z_goal_direct_zakat_to_industry
+	x = 0
+	y = 1
+	cost = 5
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+	prerequisite = { focus = ARB_united_arabia }
+	relative_position_id = ARB_united_arabia
+	completion_reward = {
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = industrial_complex
+					size > 1
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			limit = {
+				free_building_slots = {
+					building = arms_factory
+					size > 1
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+#Protector of the Arab World - ALL
+shared_focus = {
+	id = ARB_protector_of_the_arab_world
+	icon = GFX_focus_AFG_savior_of_the_holy_lands
+	x = -1
+	y = 1
+	cost = 5
+	search_filters = {  }
+	prerequisite = { focus = ARB_merge_the_industries }
+	relative_position_id = ARB_merge_the_industries
+	available = {
+		is_puppet = no
+	}
+	completion_reward = {
+		add_country_leader_trait = SAU_protector_of_arabs
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		every_controlled_state = {
+			limit = {
+				SAU_arabian_countries_core_trigger = yes
+				has_resistance = yes
+			}
+			add_compliance = 20
+			add_resistance = -5
+			custom_effect_tooltip = generic_skip_one_line_tt
+		}
+
+		every_other_country = {
+			limit = {
+				SAU_arabian_countries_trigger = yes
+				exists = yes
+			}
+			add_opinion_modifier = { target = ROOT modifier = medium_increase }
+		}
+	}
+}
+
+#Saudi Oil Wells - YEM/IRQ/OMA
+shared_focus = {
+	id = ARB_saudi_oil_wells
+	icon = GFX_z_goal_oil_derrick
+	x = 2
+	y = 1
+	cost = 5
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+	prerequisite = { focus = ARB_united_arabia }
+	relative_position_id = ARB_united_arabia
+	allow_branch = {
+		OR = {
+			original_tag = YEM
+			original_tag = IRQ
+			original_tag = OMA
+		}
+		NOT = {
+			has_global_flag = his_only
+		}
+	}
+	available = {
+		if = {
+			limit = {
+				NOT = { original_tag = YEM }
+			}
+			is_puppet = no
+		}
+		OR = {
+			SAU = {
+				is_puppet_of = ROOT
+			}
+			AND = {
+				controls_state = 859
+				controls_state = 679
+				controls_state = 292
+			}
+		}
+	}
+	completion_reward = {
+		add_resource = {
+			type = oil
+			amount = 6
+			state = 859
+		}
+		add_resource = {
+			type = oil
+			amount = 6
+			state = 679
+		}
+		add_resource = {
+			type = oil
+			amount = 2
+			state = 292
+		}
+	}
+}
+
+#Iraqi Oil Wells - SAU
+shared_focus = {
+	id = ARB_iraqi_oil_wells
+	icon = GFX_z_goal_oil_derrick
+	x = 2
+	y = 1
+	cost = 5
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+	prerequisite = { focus = ARB_united_arabia }
+	relative_position_id = ARB_united_arabia
+	allow_branch = {
+		original_tag = SAU
+		NOT = {
+			has_global_flag = his_only
+		}
+	}
+	available = {
+		controls_state = 676
+	}
+	completion_reward = {
+		add_resource = {
+			type = oil
+			amount = 16
+			state = 676
+		}
+	}
+}
+
+#Strengthen Oil Extraction Sites - ALL
+shared_focus = {
+	id = ARB_strengthen_oil_extraction_sites
+	icon = GFX_z_goal_oil_refining
+	x = -1
+	y = 1
+	cost = 5
+	search_filters = { FOCUS_FILTER_INDUSTRY }
+	prerequisite = { focus = ARB_iraqi_oil_wells focus = ARB_saudi_oil_wells }
+	prerequisite = { focus = ARB_merge_the_industries }
+	relative_position_id = ARB_iraqi_oil_wells
+
+	available = {
+
+	}
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_resource = {
+				type = oil
+				amount = 16
+			}
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_ideas = SAU_oil_extraction_ns
+	}
+}
+
+#Land Reform - ALL
+shared_focus = {
+	id = ARB_land_reform
+	icon = GFX_focus_generic_agriculture
+	x = 4
+	y = 1
+	cost = 5
+	search_filters = { }
+	prerequisite = { focus = ARB_united_arabia }
+	relative_position_id = ARB_united_arabia
+	completion_reward = {
+		random_owned_controlled_state = {
+			increase_state_category = yes
+		}
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+		}
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+}
+
+#Open New Resource Mines - ALL
+shared_focus = {
+	id = ARB_extract_soil
+	icon = GFX_focus_generic_mining_industry
+	x = -1
+	y = 2
+	cost = 5
+	search_filters = { }
+	prerequisite = { focus = ARB_land_reform }
+	prerequisite = { focus = ARB_strengthen_oil_extraction_sites }
+	relative_position_id = ARB_land_reform
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_resource = {
+				type = steel
+				amount = 12
+			}
+		}
+		random_owned_controlled_state = {
+			add_resource = {
+				type = aluminium
+				amount = 12
+			}
+		}
+	}
+}

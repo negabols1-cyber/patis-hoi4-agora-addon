@@ -1,0 +1,1251 @@
+URG_the_terra_dictatorship = { #national spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_URG_terra_dictator
+
+	stability_factor = URG_terra_stability
+	neutrality_drift = URG_terra_support
+	democratic_drift = URG_democracy_from_terra
+}
+
+URG_terra_loyalities = {
+	enable = { always = yes }
+
+	icon = GFX_idea_URG_terra_loyalities
+
+	recruitable_population_factor = -0.25
+	local_building_slots_factor = -0.25
+	state_resources_factor = -0.25
+	state_production_speed_buildings_factor = -0.25
+	army_speed_factor_for_controller = -0.15
+}
+
+BOL_controlled_by_toro = {
+	enable = { always = yes }
+
+	icon = GFX_idea_bol_controlled_by_toro
+
+	recruitable_population_factor = -0.3
+	local_building_slots_factor = -0.3
+	state_resources_factor = -0.3
+	state_production_speed_buildings_factor = -0.25
+	army_speed_factor_for_controller = -0.15
+}
+
+CHL_organized_nacista_rebellion = {
+	enable = { always = yes }
+
+	icon = GFX_idea_CHL_nacista_rebellion
+
+	recruitable_population_factor = -0.3
+	state_production_speed_buildings_factor = -0.3
+	local_building_slots_factor = -0.5
+
+	remove_trigger = {
+		OWNER = {
+			OR = {
+				has_government = fascism
+				NOT = {
+					has_dynamic_modifier = {
+						modifier = CHL_political_instability
+					}
+				}
+			}
+		}
+	}
+
+}
+
+CHL_organized_communist_rebellion = {
+	enable = { always = yes }
+
+	icon = GFX_idea_CHL_communists_rebellion
+
+	recruitable_population_factor = -0.3
+	state_production_speed_buildings_factor = -0.3
+	local_building_slots_factor = -0.5
+
+	remove_trigger = {
+		OWNER = {
+			OR = {
+				has_government = communism
+				NOT = {
+					has_dynamic_modifier = {
+						modifier = CHL_political_instability
+					}
+				}
+			}
+		}
+	}
+
+}
+
+CHL_political_instability = {
+	enable = { always = yes }
+
+	icon = GFX_idea_CHL_political_instability
+
+	stability_factor = -0.1
+	political_power_factor = -0.05
+	fascism_drift = CHL_fascist_drift
+	communism_drift = CHL_communist_drift
+}
+
+COL_laureanist_agitation = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_col_laureanist_agitation
+
+	recruitable_population_factor = -0.3
+	state_production_speed_buildings_factor = -0.25
+	army_speed_factor_for_controller = -0.15
+}
+
+COL_general_strike = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_col_strikes
+
+	local_building_slots_factor = -0.3
+	local_factories = -0.3
+	state_production_speed_buildings_factor = -0.25
+}
+
+COL_road_blockades = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_col_blockade
+
+	state_resources_factor = -0.33
+	local_supplies_for_controller = -0.3
+}
+
+PBC_PRU_nationalists = {
+	enable = { always = yes }
+
+	icon = GFX_PBC_PRU_nationalistas
+
+	recruitable_population_factor = -0.35
+	state_production_speed_buildings_factor = -0.25
+	local_building_slots_factor = -0.4
+	industry_air_damage_factor = 0.2
+}
+
+PBC_BOL_nationalists =  {
+	enable = { always = yes }
+
+	icon = GFX_PBC_BOL_nationalistas
+
+	recruitable_population_factor = -0.35
+	state_production_speed_buildings_factor = -0.25
+	local_building_slots_factor = -0.4
+	industry_air_damage_factor = 0.2
+}
+
+PRU_army_modifier = { #NATIONAL SPIRIT
+	enable = { always = yes }
+	icon = GFX_idea_PRU_ejercito_icon
+
+	experience_gain_army_factor = JUNO_army_modifier_experience_gain_army_factor
+	experience_loss_factor = JUNO_army_modifier_experience_loss_factor
+	experience_gain_army = JUNO_army_modifier_experience_gain_army
+	production_speed_arms_factory_factor = JUNO_army_production_speed_arms_factory_factor
+	army_org_factor = JUNO_army_modifier_army_org_factor
+	operative_slot = JUNO_army_operative_slot
+	supply_combat_penalties_on_core_factor = JUNO_supply_combat_penalties_on_core_factor
+	production_speed_supply_node_factor = JUNO_modifier_production_speed_supply_node_factor
+	army_core_defence_factor = JUNO_army_modifier_army_core_defence_factor
+	army_armor_defence_factor = JUNO_army_modifier_army_armor_defence_factor
+	army_armor_attack_factor = JUNO_army_modifier_army_armor_attack_factor
+	army_attack_speed_factor = JUNO_army_modifier_army_attack_speed_factor
+	army_artillery_attack_factor = JUNO_army_modifier_army_artillery_attack_factor
+	army_artillery_defence_factor = JUNO_army_modifier_army_artillery_defence_factor
+	production_speed_anti_air_building_factor = JUNO_army_modifier_production_speed_anti_air_building_factor
+	conscription_factor = JUNO_army_modifier_conscription_factor
+	training_time_factor = JUNO_army_modifier_training_time_factor
+	conscription = JUNO_army_modifier_conscription
+	army_defence_factor = JUNO_army_modifier_army_defence_factor
+	army_attack_factor = JUNO_army_modifier_army_attack_factor
+	special_forces_cap = JUNO_army_modifier_special_forces_cap
+	industrial_capacity_factory = JUNO_army_modifier_industrial_capacity_factory
+	special_forces_out_of_supply_factor = JUNO_army_modifier_special_forces_out_of_supply_factor
+	extra_marine_supply_grace = JUNO_army_modifier_extra_marine_supply_grace
+	max_planning_factor = JUNO_army_modifier_max_planning_factor
+	planning_speed = JUNO_army_modifier_planning_speed_factor
+	max_command_power_mult = JUNO_army_modifier_max_command_power_mult
+	command_power_gain_mult = JUNO_army_modifier_command_power_gain_mult
+	acclimatization_cold_climate_gain_factor = JUNO_army_modifier_acclimatization_cold_climate_gain_factor
+	acclimatization_hot_climate_gain_factor = JUNO_army_modifier_acclimatization_hot_climate_gain_factor
+}
+
+PRU_airforce_modifier = { #NATIONAL SPIRIT
+	enable = { always = yes }
+
+	icon = GFX_idea_PRU_aviacion_icon
+
+	air_doctrine_cost_factor =  JUNO_airforce_modifier_air_doctrine_cost_factor
+	air_ace_generation_chance_factor = JUNO_airforce_modifier_air_ace_generation_chance_factor
+	air_range_factor = JUNO_airforce_modifier_air_range_factor
+	air_superiority_efficiency = JUNO_airforce_modifier_air_superiority_efficiency
+	air_intercept_efficiency = JUNO_airforce_modifier_air_intercept_efficiency
+	air_mission_xp_gain_factor = JUNO_airforce_modifier_air_mission_xp_gain_factor
+	air_agility_factor = JUNO_airforce_modifier_air_agility_factor
+	ground_attack_factor = JUNO_airforce_modifier_ground_attack_factor
+	experience_gain_air = JUNO_airforce_modifier_experience_gain_air
+	industrial_capacity_factory = JUNO_army_modifier_industrial_capacity_factory_airfoce
+	conscription_factor = JUNO_airforce_modifier_conscription_factor
+	air_strategic_bomber_bombing_factor = JUNO_airforce_modifier_air_strategic_bomber_bombing_factor
+	air_cas_present_factor = JUNO_airforce_modifier_air_cas_present_factor
+	#ground_attack_factor = JUNO_airforce_modifier_ground_attack_factor
+	air_defence_factor = JUNO_airforce_modifier_air_defence_factor
+	special_forces_cap = JUNO_army_modifier_special_forces_cap
+}
+
+PRU_navy_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_idea_PRU_marina_icon
+
+	experience_gain_navy = JUNO_navy_experience_gain_navy_factor
+	mines_planting_by_fleets_factor = JUNO_navy_mines_planting_by_fleets_factor
+	navy_anti_air_attack_factor = JUNO_navy_navy_anti_air_attack_factor
+	navy_spirit_category_type_cost_factor = JUNO_navy_navy_spirit_category_type_cost_factor
+	convoy_retreat_speed = JUNO_navy_convoy_retreat_speed
+	refit_speed = JUNO_navy_refit_speed
+	spotting_chance = JUNO_navy_spotting_chance
+	repair_speed_factor = JUNO_navy_repair_speed_factor
+	production_speed_dockyard_factor = JUNO_navy_production_speed_dockyard_factor
+	industrial_capacity_dockyard = JUNO_navy_industrial_capacity_dockyard
+	extra_marine_supply_grace = JUNO_navy_extra_marine_supply_grace
+	naval_invasion_capacity = JUNO_navy_naval_invasion_capacity
+	naval_mines_effect_reduction = JUNO_navy_naval_mines_effect_reduction
+	experience_gain_navy_unit_factor = JUNO_navy_experience_gain_navy_unit_factor
+	naval_coordination = JUNO_navy_naval_coordination
+	naval_equipment_upgrade_xp_cost = JUNO_navy_naval_equipment_upgrade_xp_cost
+	naval_morale_factor = JUNO_naval_morale_factor
+	screening_efficiency =	JUNO_screening_efficiency
+	convoy_escort_efficiency =	JUNO_convoy_escort_efficiency
+	navy_capital_ship_defence_factor =	JUNO_navy_capital_ship_defence_factor
+	naval_accidents_chance = JUNO_naval_accidents_chance
+	navy_screen_defence_factor = JUNO_navy_screen_defence_factor
+	production_speed_coastal_bunker_factor = JUNO_modifier_production_speed_coastal_bunker_factor
+}
+
+
+
+PBC_nationalism_on_the_rise = {
+	enable = { always = yes }
+
+	icon = GFX_PBC_nationalism_rising
+
+	stability_factor = PBC_stability_factor
+	production_speed_buildings_factor = PBC_industrial_factors
+	industrial_capacity_factory = PBC_industrial_factors
+	industrial_capacity_dockyard = PBC_industrial_factors
+	production_oil_factor = PBC_industrial_factors
+	industry_repair_factor = PBC_industrial_factors
+}
+
+BRA_small_coffee_plantations = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_small_coffee
+
+	remove_trigger = {
+		OWNER = {
+			OR = {
+				has_completed_focus = BRA_switch_to_a_war_economy
+				has_completed_focus = BRA_mobilize_the_economy
+				has_completed_focus = BRA_the_imperial_war_machine
+				has_idea = BRA_rebellious_coffee_plantations_idea
+			}
+		}
+	}
+
+	state_production_speed_buildings_factor = -0.03
+	local_building_slots_factor = 0.05
+	industry_air_damage_factor = -0.05
+	local_resources = 0.05
+}
+
+BRA_widespread_coffee_plantations = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_large_coffee
+
+	remove_trigger = {
+		OWNER = {
+			OR = {
+				has_completed_focus = BRA_switch_to_a_war_economy
+				has_completed_focus = BRA_mobilize_the_economy
+				has_completed_focus = BRA_the_imperial_war_machine
+				has_idea = BRA_rebellious_coffee_plantations_idea
+			}
+		}
+	}
+
+	state_production_speed_buildings_factor = -0.05
+	local_building_slots_factor = 0.1
+	industry_air_damage_factor = -0.1
+	local_resources = 0.08
+}
+
+BRA_rebelling_coffee_plantations = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_rebelling_plantations
+
+	recruitable_population_factor = -0.35
+	state_production_speed_buildings_factor = -0.25
+	local_building_slots_factor = -0.4
+	local_factories = -0.3
+}
+
+BRA_brazilian_political_crisis = { #National Spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_BRA_political_crisis
+
+	stability_factor = BRA_crisis_stability_factor
+	political_power_factor = BRA_crisis_political_factor
+	political_advisor_cost_factor = BRA_crisis_advisor_cost
+	fascism_drift = BRA_crisis_integralist_influence
+	neutrality_drift = BRA_crisis_vargas_influence
+	democratic_drift = BRA_crisis_congress_influence
+}
+
+BRA_brazilian_economy = { #National Spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_BRA_the_brazilian_economy
+
+	production_speed_industrial_complex_factor = BRA_civilian_factory_boost
+	production_speed_arms_factory_factor = BRA_military_factory_boost
+	production_speed_dockyard_factor = BRA_dockyard_construction_boost
+	industrial_capacity_factory = BRA_industrial_capacity_factory_speed
+	industrial_capacity_dockyard = BRA_industrial_capacity_dockyard_speed
+	production_speed_infrastructure_factor = BRA_infrastructure_construction_speed
+	production_speed_rail_way_factor = BRA_railway_construction_speed
+	production_speed_supply_node_factor = BRA_supply_node_construction_speed
+}
+
+BRA_protests = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_col_strikes
+
+	local_building_slots_factor = -0.3
+	local_factories = -0.3
+	state_production_speed_buildings_factor = -0.25
+}
+
+BRA_subversive_communist_activity_in_state = {
+	enable = {  always = yes }
+
+	icon = GFX_idea_BRA_subversive_communist
+
+	remove_trigger = {
+		OWNER = {
+			has_government = communism
+		}
+	}
+
+	state_production_speed_rail_way_factor = -0.2
+	state_production_speed_infrastructure_factor = -0.2
+	state_production_speed_buildings_factor = -0.05
+}
+
+BRA_integralists_occupation = { #Will be used for both regular protesting and civil war preperations
+	enable = { always = yes }
+
+	icon = GFX_BRA_integralist_occupation
+
+	remove_trigger = {
+		OWNER = {
+			has_government = fascism
+			OR = {
+				has_completed_focus = BRA_cooperate_with_plinio
+				has_completed_focus = BRA_reject_the_estado_navo
+			}
+		}
+	}
+
+	recruitable_population_factor = -0.25
+	state_production_speed_buildings_factor = -0.2
+	army_speed_factor_for_controller = -0.1
+}
+
+BRA_democratic_influence_in_state = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_democratic_occupation
+
+	army_speed_factor_for_controller = -0.05
+	local_manpower = -0.2
+}
+
+BRA_sao_paulo_seperatist_movement = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_sao_seperatist_movement
+
+	remove_trigger = {
+		OWNER = {
+			original_tag = SAO
+			exists = yes
+		}
+	}
+
+	recruitable_population_factor = -0.05
+	state_production_speed_buildings_factor = -0.05
+	local_resources = -0.1
+	army_speed_factor_for_controller = -0.15
+}
+
+BRA_sao_paulo_seperatist_movement_2 = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_sao_seperatist_movement
+
+	recruitable_population_factor = -0.25
+	state_production_speed_buildings_factor = -0.25
+	local_resources = -0.2
+	army_speed_factor_for_controller = -0.4
+	attrition_for_controller = 0.5
+}
+
+BRA_soviet_civil_war_repayment = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_SOV_war_repayment
+
+	consumer_goods_factor = BRA_SOV_consumer_goods
+	local_resources = BRA_SOV_local_resources_factor
+}
+
+BRA_post_civil_war_resistance = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_post_civ_res
+
+	recruitable_population_factor = -0.15
+	state_production_speed_buildings_factor = -0.1
+	local_resources = -0.1
+	local_manpower = -0.15
+}
+
+BRA_post_civil_war_social_crisis = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_post_civil_war_resistance_icon
+
+	political_power_factor = -0.1
+	industrial_capacity_factory = -0.15
+	stability_factor = BRA_post_civil_war_stabilitty
+	production_speed_buildings_factor = BRA_post_civil_war_buildings
+	production_speed_infrastructure_factor = BRA_post_civil_war_infrastructure
+	production_speed_rail_way_factor = BRA_post_civil_war_rail_way
+}
+
+BRA_monarchist_influence = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_monarchist_influence
+
+	army_speed_factor_for_controller = -0.05
+}
+
+BRA_integralist_police_force = {
+	enable = { always = yes }
+
+	icon = GFX_idea_bul_zveno
+
+	political_power_factor = BRA_integralist_police_force_pp_gain
+	conscription = BRA_integralist_police_force_conscription
+	drift_defence_factor = BRA_integralist_police_force_drift_defense
+	stability_factor = BRA_integralist_police_force_stability
+}
+
+BRA_ongoing_integration_campaign = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_integrate_campaign
+
+	resistance_decay = 0.15
+	compliance_growth = 0.15
+}
+
+BRA_army_expansion = {
+	enable = { always = yes }
+
+	icon = GFX_idea_chi_army_corruption3
+
+	conscription = BRA_army_expansion_conscription
+	stability_factor = BRA_army_expansion_stability
+}
+
+BRA_portugal_nationalists = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_portuguese_nationalists
+
+	local_building_slots_factor = -0.1
+	local_factories = -0.1
+	state_production_speed_buildings_factor = -0.15
+}
+
+BRA_active_bavarian_nationalism = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_BRA_bavarian_seperatist_sentiment_modifier
+
+	recruitable_population_factor = -0.25
+	state_production_speed_buildings_factor = -0.2
+	army_speed_factor_for_controller = -0.1
+}
+
+########################################
+
+### Argentina ###
+
+ARG_infamous_decade_idea = { #National Spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_ARG_infamous_decade_modifier_icon
+
+	stability_factor = ARG_infamous_decade_stability_modifier
+	power_balance_weekly = ARG_power_balance_weekly_modifier
+
+	custom_modifier_tooltip = ARG_infamous_decade_tt
+}
+
+ARG_corruption_scandal_idea = { #National Spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_ARG_corruption_scandals_icon
+
+	political_power_factor = ARG_political_power_factor
+	party_popularity_stability_factor = ARG_party_popularity_stability_factor
+	political_advisor_cost_factor = ARG_political_advisor_cost_factor
+	economy_cost_factor = ARG_economy_cost_factor
+	consumer_goods_factor = ARG_corruption_consumer_goods_factor
+	industrial_capacity_factory = ARG_corruption_factory_output
+	production_speed_buildings_factor = ARG_corruption_building_speed
+	stability_factor = ARG_corruption_stability_factor
+	command_power_gain_mult = ARG_corruption_command_power_gain_mult
+	experience_gain_army_factor = ARG_corruption_experience_gain_army_factor
+
+	custom_modifier_tooltip = ARG_corruption_tt
+}
+
+ARG_dominant_ucr_a = {
+	enable = { always = yes }
+
+	icon = GFX_ucr_a_icon
+
+	custom_modifier_tooltip = ARG_ucra_desc_tt
+
+}
+
+ARG_dominant_ucr = {
+	enable = { always = yes }
+
+	icon = GFX_ucr_icon
+
+	custom_modifier_tooltip = ARG_ucr_desc_tt
+}
+
+ARG_dominant_ps = {
+	enable = { always = yes }
+
+	icon = GFX_partido_socialista_icon
+
+	custom_modifier_tooltip = ARG_ps_desc_tt
+
+}
+
+ARG_active_ANL_terrorist_group = {
+	enable = { always = yes }
+
+	icon = GFX_ANL_occupation_icon
+
+	local_building_slots_factor = -0.1
+	local_manpower = -0.15
+	state_production_speed_buildings_factor = -0.15
+	local_factories = -0.25
+}
+
+ARG_protests = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_col_strikes
+
+	local_building_slots_factor = -0.3
+	local_factories = -0.3
+	state_production_speed_buildings_factor = -0.25
+}
+
+ARG_redirected_fundings_positive = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_directed_fundings_positive
+
+	state_production_speed_buildings_factor = 0.1
+}
+
+ARG_redirected_fundings_negative = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_directed_fundings_negative
+
+	state_production_speed_buildings_factor = -0.15
+}
+
+ARG_huemul_reactor = {
+	enable = { always = yes }
+
+	icon = GFX_state_construction
+
+	state_production_speed_nuclear_reactor_factor = 0.2
+}
+
+ARG_communist_tendencies = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_commie_tendencies
+
+	state_production_speed_buildings_factor = -0.06
+	local_manpower = -0.05
+
+	custom_modifier_tooltip = ARG_communist_state_tt
+}
+
+ARG_anarchist_occupation = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_anarchist_occupation
+
+	local_manpower = -0.4
+	local_factories = -0.6
+	army_speed_factor_for_controller = -0.25
+}
+
+ARG_anti_government_resistance = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_post_civ_res
+
+	recruitable_population_factor = -0.1
+	state_production_speed_buildings_factor = -0.1
+	local_resources = -0.1
+	local_manpower = -0.25
+}
+
+ARG_agitated_oligarchs = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_agitated_oligarchs
+
+	state_production_speed_buildings_factor = -0.2
+	local_factories = -0.2
+	local_factory_sabotage = 0.1
+	local_supplies = -0.1
+	state_resources_factor = -0.15
+}
+
+ARG_patagonic_industrialization_state_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_state_industry
+
+	state_production_speed_buildings_factor = 0.2
+	local_building_slots_factor = 0.15
+}
+
+ARG_conflicting_architectural_influences = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_conflicting_architectural_influences
+
+	state_production_speed_buildings_factor = -0.05
+
+	custom_modifier_tooltip = ARG_conflicting_architecture_desc_tt
+}
+
+ARG_italian_influenced_architecture = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_ITA_influenced_architecture
+
+	state_production_speed_buildings_factor = 0.15
+	local_resources = -0.05
+	local_building_slots_factor = -0.05
+
+	custom_modifier_tooltip = ARG_italian_architecture_desc_tt
+}
+
+ARG_german_influenced_architecture = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_GER_influenced_architecture
+
+	local_resources = 0.1
+	local_building_slots_factor = 0.1
+	state_production_speed_buildings_factor = -0.05
+
+	custom_modifier_tooltip = ARG_german_architecture_desc_tt
+}
+
+ARG_hydroelectric_power_plant = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_hydroelectric_power
+
+	state_production_speed_buildings_factor = 0.1
+	local_building_slots_factor = 0.05
+}
+
+ARG_GOU_state_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_SOV_invaders_must_die
+
+	local_manpower = -0.1
+	state_production_speed_buildings_factor = -0.1
+
+	custom_modifier_tooltip = ARG_state_controlled_by_GOU_tt
+}
+
+
+ARG_peronist_march = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_peronist_march_state_modifier
+
+	local_manpower = -0.5
+	local_resources = -0.1
+}
+
+ARG_unitarian_resistance = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_unitarian_resistance_icon
+
+	local_factories = -0.1
+	local_manpower = -0.1
+}
+
+ARG_rosas_immortalized_idea = {
+	enable = { always = yes }
+
+	icon = GFX_idea_ARG_rosas_icon
+
+	conscription = ARG_rosas_conscription_factor
+	army_attack_factor = ARG_rosas_attack_factor
+	army_defence_factor = ARG_rosas_defence_factor
+	production_speed_buildings_factor = ARG_rosas_production_speed_buildings_factor
+	industrial_capacity_factory = ARG_rosas_industrial_capacity_factory
+	consumer_goods_factor = ARG_rosas_consumer_goods_factor
+}
+
+### Bolivia ###
+
+BOL_underdeveloped_province = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_SOV_civilian_labor_in_defense
+
+	state_resources_factor = -0.1
+	state_production_speed_buildings_factor = -0.1
+	army_speed_factor_for_controller = -0.25
+	attrition_for_controller = 0.15
+}
+
+########################################
+
+### Paraguay ###
+
+PAR_advanced_reactor_technology = {
+	enable = { always = yes }
+
+	icon = GFX_state_construction
+
+	state_production_speed_nuclear_reactor_factor = 0.1
+}
+
+PAR_paraguayan_military_production = {
+	enable = { always = yes }
+
+	icon = GFX_idea_PAR_heavy_military
+
+	production_speed_arms_factory_factor = PAR_arms_factory_construction_speed
+	industrial_capacity_factory = PAR_factory_output
+}
+
+PAR_railway_infrastructure_initiative = {
+	enable = { always = yes }
+
+	icon = GFX_PAR_infrastructure_state_icon
+
+	state_production_speed_rail_way_factor = 0.1
+	state_production_speed_infrastructure_factor = 0.1
+	state_production_speed_supply_node_factor = 0.1
+}
+
+PAR_capital_investments = {
+	enable = { always = yes }
+
+	icon = GFX_state_construction
+
+	state_production_speed_buildings_factor = 0.15
+}
+
+PAR_power_grid_present = {
+	enable = { always = yes }
+
+	icon = GFX_PAR_power_grid_pres
+
+	state_production_speed_buildings_factor = 0.05
+	local_building_slots_factor = 0.05
+	local_resources = 0.05
+}
+
+### CHILE ###
+
+CHL_rugged_geography = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_modifiers_generic_military_plans
+
+	state_production_speed_rail_way_factor = -0.2
+	state_production_speed_supply_node_factor = -0.1
+	local_supplies_for_controller = -0.1
+	army_speed_factor_for_controller = -0.05
+}
+
+### VENEZUELA ###
+
+VEN_inefficient_oil_extraction_1 = {
+	enable = { always = yes }
+
+	icon = GFX_VEN_inefficient_oil
+
+	local_resources = -0.35
+
+	custom_modifier_tooltip = VEN_inefficient_oil_extraction_desc_tt
+}
+
+VEN_inefficient_oil_extraction_2 = {
+	enable = { always = yes }
+
+	icon = GFX_VEN_inefficient_oil
+
+	local_resources = -0.2
+
+	custom_modifier_tooltip = VEN_inefficient_oil_extraction_desc_tt
+}
+
+VEN_inefficient_oil_extraction_3 = {
+	enable = { always = yes }
+
+	icon = GFX_VEN_inefficient_oil
+
+	local_resources = -0.05
+
+	custom_modifier_tooltip = VEN_inefficient_oil_extraction_desc_tt
+}
+
+VEN_advanced_oil_extraction = {
+	enable = { always = yes }
+
+	icon = GFX_state_construction
+
+	local_resources = 0.05
+}
+
+VEN_concerning_enviornmental_impact = {
+	enable = { always = yes }
+
+	icon = GFX_VEN_environmental_impact
+
+	local_building_slots_factor = -0.05
+	state_production_speed_buildings_factor = -0.05
+}
+
+VEN_severe_enviornmental_impact = {
+	enable = { always = yes }
+
+	icon = GFX_VEN_environmental_impact
+
+	local_building_slots_factor = -0.1
+	state_production_speed_buildings_factor = -0.15
+}
+
+VEN_industrial_initiative = {
+	enable = { always = yes }
+
+	icon = GFX_ARG_state_industry
+
+	state_production_speed_buildings_factor = 0.1
+}
+
+VEN_gold_extraction = {
+	enable = { always = yes }
+
+	icon = GFX_VEN_gold_extraction_icon
+
+	local_resources_factor = 0.03
+	state_production_speed_buildings_factor = 0.05
+	local_building_slots_factor = 0.1
+}
+
+VEN_local_mobilization_active = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_VEN_local_mobilization
+
+	local_manpower = 0.2
+}
+
+VEN_ongoing_bolivarian_integration_campaign = {
+	enable = { always = yes }
+
+	icon = GFX_VEN_bolvarian_integration_icon
+
+	resistance_decay = 0.15
+	compliance_growth = 0.15
+}
+
+## Ecuador ##
+
+ECU_rural_state = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_modifiers_SOV_civilian_labor_in_defense
+
+	state_resources_factor = -0.1
+	state_production_speed_buildings_factor = -0.1
+	local_building_slots_factor = -0.1
+}
+
+ECU_local_banana_production = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_idea_ECU_banana_production_icon
+
+	state_resources_factor = 0.1
+	state_production_speed_buildings_factor = 0.1
+	local_factories = 0.1
+
+	remove_trigger = {
+		NOT = { OWNER = { original_tag = ECU } }
+	}
+}
+
+ECU_economic_reignition = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_ECU_ecuadorian_economy
+
+	consumer_goods_factor = ECU_economy_consumer_goods
+	production_speed_buildings_factor = ECU_economy_production_speeds_buildings_factor
+	industrial_capacity_factory = ECU_economy_industrial_capacity
+
+	## Improved Later in the Tree ##
+
+	political_power_factor = ECU_economy_political_power_gain
+	production_factory_efficiency_gain_factor = ECU_economy_production_factory_efficiency_gain_factor
+	production_factory_max_efficiency_factor = ECU_economy_production_factory_max_efficiency_factor
+	global_building_slots_factor = ECU_economy_global_buildings_factor
+	production_speed_arms_factory_factor = ECU_economy_production_speed_arms_factory_factor
+	production_speed_industrial_complex_factor = ECU_economy_production_speed_civilian_factory_factor
+	local_resources_factor = ECU_economy_resources_factor
+	production_speed_supply_node_factor = ECU_economy_production_speed_supply_node_factor
+	production_speed_rail_way_factor = ECU_economy_production_speed_rail_way_factor
+	production_speed_dockyard_factor = ECU_economy_production_speed_dockyard_factor
+	industrial_capacity_dockyard = ECU_economy_industrial_capacity_dockyard
+}
+
+ECU_national_mobilization = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_ECU_national_mobilization_ic
+
+	conscription = ECU_national_mobilization_conscription
+}
+
+ECU_ejercito_ecuatoriano_idea = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_idea_ECU_ejercito_icon
+
+	conscription = ECU_ejercito_conscription
+	experience_gain_army_factor = ECU_army_modifier_experience_gain_army_factor
+	production_speed_arms_factory_factor = ECU_army_production_speed_arms_factory_factor
+	max_planning_factor = ECU_army_modifier_max_planning_factor
+	planning_speed = ECU_army_modifier_planning_speed_factor
+	max_command_power_mult = ECU_army_modifier_max_command_power_mult
+	army_defence_factor = ECU_army_modifier_army_defence_factor
+	army_attack_factor = ECU_army_modifier_army_attack_factor
+	army_artillery_attack_factor = ECU_army_modifier_army_artillery_attack_factor
+	army_artillery_defence_factor = ECU_army_modifier_army_artillery_defence_factor
+	supply_combat_penalties_on_core_factor = ECU_supply_combat_penalties_on_core_factor
+	production_speed_supply_node_factor = ECU_modifier_production_speed_supply_node_factor
+	production_speed_anti_air_building_factor = JUNO_army_modifier_production_speed_anti_air_building_factor
+	army_armor_attack_factor = ECU_army_modifier_army_armor_attack_factor
+	training_time_factor = ECU_army_training_time_factor
+	unit_limit_bonus = ECU_army_unit_limit_bonus
+}
+
+ECU_armada_ecuatoriana_idea = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_idea_ECU_armada_icon
+
+	experience_gain_navy_unit_factor = JUNO_navy_experience_gain_navy_unit_factor
+	refit_speed = JUNO_navy_refit_speed
+	spotting_chance = JUNO_navy_spotting_chance
+	naval_invasion_capacity = JUNO_navy_naval_invasion_capacity
+	production_speed_coastal_bunker_factor = JUNO_modifier_production_speed_coastal_bunker_factor
+	repair_speed_factor = JUNO_navy_repair_speed_factor
+	production_speed_dockyard_factor = JUNO_navy_production_speed_dockyard_factor
+	industrial_capacity_dockyard = JUNO_navy_industrial_capacity_dockyard
+	navy_capital_ship_defence_factor =	JUNO_navy_capital_ship_defence_factor
+	navy_capital_ship_attack_factor = ECU_navy_capital_ship_attack_factor
+}
+
+ECU_fuerza_aerea_ecuatoriana_idea = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_idea_ECU_fuerza_aerea_icon
+
+	air_doctrine_cost_factor =  JUNO_airforce_modifier_air_doctrine_cost_factor
+	experience_gain_air = JUNO_airforce_modifier_experience_gain_air
+	air_strategic_bomber_bombing_factor = JUNO_airforce_modifier_air_strategic_bomber_bombing_factor
+	air_cas_present_factor = JUNO_airforce_modifier_air_cas_present_factor
+	air_defence_factor = JUNO_airforce_modifier_air_defence_factor
+	air_range_factor = JUNO_airforce_modifier_air_range_factor
+	air_superiority_efficiency = JUNO_airforce_modifier_air_superiority_efficiency
+	air_intercept_efficiency = JUNO_airforce_modifier_air_intercept_efficiency
+}
+
+ECU_the_banana_company_administration_idea = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_idea_ECU_banana_company_idea_icon
+
+	industrial_capacity_factory = ECU_banana_company_industrial_capacity_factory ## max will be 20%
+	industrial_capacity_dockyard = ECU_banana_company_industrial_capacity_dockyard ## max will be 15%
+	production_speed_buildings_factor = ECU_banana_company_production_speed_buildings_factor ## max will be 15%
+	local_resources_factor = ECU_banana_company_local_resources_factor ## max 10%
+
+	conscription = ECU_banana_company_conscription
+	army_attack_factor = ECU_banana_company_army_attack_factor
+	army_defence_factor = ECU_banana_company_army_defence_factor
+
+	trade_opinion_factor = 0.25
+}
+
+## CENTRAL AMERICA ##
+
+CEA_local_banana_production = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_idea_ECU_banana_production_icon
+
+	state_resources_factor = 0.1
+	state_production_speed_buildings_factor = -0.05
+	local_manpower = -0.1
+
+	remove_trigger = {
+		NOT = {
+			OWNER = {
+				OR = {
+					has_idea = CEA_the_banana_republic
+					has_idea = CEA_repaying_the_american_debt
+				}
+			}
+		}
+	}
+}
+
+CEA_improved_banana_production = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_idea_ECU_banana_production_icon
+
+	state_resources_factor = 0.15
+	state_production_speed_buildings_factor = 0.05
+
+	remove_trigger = {
+		NOT = {
+			OWNER = {
+				OR = {
+					has_idea = CEA_the_banana_republic
+					has_idea = CEA_repaying_the_american_debt
+				}
+			}
+		}
+	}
+}
+
+GUA_uneven_economic_development = {
+	enable = {
+		always = yes
+	}
+
+	remove_trigger = {
+		NOT = {
+			any_controlled_state = {
+				has_state_flag = GUA_underdeveloped_flag
+			}
+		}
+	}
+
+	icon = GFX_idea_GUA_uneven_development_icon
+
+	production_speed_buildings_factor = GUA_uneven_development_buildings_factor
+	consumer_goods_factor = GUA_uneven_development_consumer_goods_factor
+	industrial_capacity_factory = GUA_uneven_development_industrial_capacity_factory
+}
+
+CEA_urbanization_efforts = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_ARG_state_industry
+
+	state_production_speed_buildings_factor = 0.1
+}
+
+CEA_rural_subsidies = {
+	enable = {
+		always = yes
+	}
+
+	icon = GFX_ARG_state_industry
+
+	local_building_slots_factor = 0.1
+	state_resources_factor = 0.05
+}
+
+### GENERIC EUYL MODIFIERS ###
+
+EUYL_rising_border_tension_idea = {
+	enable = {
+		always = yes
+	}
+	icon = GFX_ECU_peru_ecuador_tension_icon
+
+	army_attack_factor = EUYL_peru_ecuador_attack_bonus
+	army_defence_factor = EUYL_peru_ecuador_defense_bonus
+
+	remove_trigger = {
+		NOT = {
+			OR = {
+				has_war_with = ECU
+				has_war_with = PRU
+			}
+		}
+	}
+}
+
+EUYL_bloody_resistance = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_post_civ_res
+
+	recruitable_population_factor = -0.1
+	state_production_speed_buildings_factor = -0.1
+	local_resources_factor = -0.1
+	local_manpower = -0.5
+	compliance_growth = -0.25
+	resistance_growth = 0.25
+	resistance_damage_to_garrison = 0.25
+
+	custom_modifier_tooltip = EUYL_major_resistance_tt
+}
+
+EUYL_south_american_dreadnought_race_idea = {
+	enable = { always = yes }
+
+	icon = GFX_idea_EUYL_south_american_dreadnought_race
+
+	remove_trigger = {
+		exists = no
+	}
+
+	production_speed_dockyard_factor = EUYL_naval_arms_race_dockyard_factor
+	industrial_capacity_dockyard = EUYL_naval_arms_race_industrial_capacity_dockyard
+	experience_gain_navy = EUYL_naval_arms_race_experience_gain
+	naval_doctrine_cost_factor = EUYL_naval_arms_race_doctrine_cost
+	naval_damage_factor = EUYL_naval_arms_race_damage_factor
+	naval_defense_factor = EUYL_naval_arms_race_defense_factor
+	naval_detection = EUYL_naval_arms_race_detection
+	naval_hit_chance = EUYL_naval_arms_race_hit_chance
+	naval_morale_factor = EUYL_naval_arms_race_morale_factor
+	naval_speed_factor = EUYL_naval_arms_race_speed_factor
+	naval_coordination = EUYL_naval_arms_race_coordination
+	naval_accidents_chance = EUYL_naval_arms_race_accidents_chance
+	ai_focus_naval_air_factor = 0.75
+	ai_focus_naval_factor = 1
+
+	custom_modifier_tooltip = EUYL_dreadnought_race_tt
+}
+
+EUYL_native_population = {
+	enable = { always = yes }
+
+	icon = GFX_EUYL_native_population
+
+	recruitable_population_factor = -0.05
+	custom_modifier_tooltip = EUYL_native_pop_desc_tt
+}
+
+EUYL_cooperating_natives = {
+	enable = { always = yes }
+
+	icon = GFX_PAR_natives_cooperating_pic
+
+	recruitable_population_factor = 0.05
+	production_speed_buildings_factor = 0.05
+	compliance_growth = 0.15
+	resistance_decay = 0.15
+}
+
+EUYL_agitated_natives = {
+	enable = { always = yes }
+
+	icon = GFX_PAR_agitated_natives_pic
+
+	recruitable_population_factor = -0.1
+	production_speed_buildings_factor = -0.1
+	local_factory_sabotage = 0.1
+}

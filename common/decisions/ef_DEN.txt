@@ -1,0 +1,360 @@
+DEN_Defence_Our_Country = {
+	DEN_Send_Diplomats_London = {
+		icon = GFX_decision_eng_install_government
+		available = {
+			has_country_flag = DEN_British_Diplomacy
+			NOT = {
+				check_variable = {
+					DEN_British_var > 100
+				}
+			}
+		}
+
+		cost = 75
+
+		days_remove = 5
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus = DEN_Prepare_for_German_war
+			has_variable = DEN_British_var
+		}
+
+
+		remove_effect = {
+			add_to_variable = {
+				var = DEN_British_var
+				value = 10
+			}
+			custom_effect_tooltip = DEN_15
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+							var = DEN_British_var
+							value = 30
+							compare = less_than_or_equals
+						}
+					}
+					set_country_flag = DEN_Bad_Ties
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+							var = DEN_British_var
+							value = 50
+							compare = less_than_or_equals
+						}
+					}
+					set_country_flag = DEN_Notr_Ties
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+							var = DEN_British_var
+							value = 50
+							compare = greater_than_or_equals
+						}
+					}
+					set_country_flag = DEN_Good_Ties
+				}
+			}
+		}
+	}
+
+	DEN_Seek_Help_From_Britain = {
+
+		icon = GFX_decision_eng_propaganda_campaigns
+		available = {
+			NOT = {has_war_with = GER}
+			is_in_faction_with = ENG
+			has_country_flag = DEN_Good_Ties
+		}
+
+		cost = 75
+
+		days_remove = 15
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus = DEN_Prepare_for_German_war
+			check_variable = {
+				DEN_British_var > 1
+			}
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			ENG = {country_event = DEN.15}
+		}
+	}
+
+	DEN_Increase_Healthcare_Funding = {
+
+		icon = GFX_decision_hol_attract_foreign_investors
+		available = {
+			has_country_flag = DEN_British_Diplomacy
+			has_war_with = GER
+		}
+
+		cost = 125
+
+		days_remove = 25
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus = DEN_Prepare_for_German_war
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 1000
+			}
+		}
+	}
+
+	DEN_Start_armament = {
+
+		icon = GFX_decision_hol_draw_up_staff_plans
+		available = {
+			has_completed_focus = DEN_Prepare_for_German_war
+		}
+
+		cost = 150
+
+		days_remove = 75
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus = DEN_Prepare_for_German_war
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			59 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			99 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_stability = -0.05
+		}
+	}
+
+	DEN_Resist_Foreign_Powers = {
+
+		icon = GFX_decision_eng_propaganda_campaigns
+		available = {
+			has_war_with = GER
+			has_country_flag = DEN_Good_Ties
+		}
+
+		cost = 75
+
+		days_remove = 15
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		visible = {
+			has_completed_focus = DEN_Prepare_for_German_war
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			swap_ideas = {
+				add_idea = DEN_Defence_Our_Country2
+				remove_idea = DEN_Defence_Our_Country4
+			}
+		}
+	}
+
+	DEN_Resist_Foreign_Powers2  = {
+
+		icon = GFX_decision_eng_propaganda_campaigns
+		available = {
+			has_war_with = GER
+			has_country_flag = DEN_Good_Ties
+		}
+
+		cost = 100
+
+		days_remove = 30
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_idea  = DEN_Defence_Our_Country2
+			has_country_flag = DEN_Good_Ties
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			if = {
+				limit = {
+					has_idea  = DEN_Defence_Our_Country2
+				}
+				swap_ideas = {
+					add_idea = DEN_Defence_Our_Country3
+					remove_idea = DEN_Defence_Our_Country2
+				}
+			}
+		}
+	}
+
+	DEN_Fortify_Our_Borders_a  = {
+
+		icon = GFX_decision_eng_trade_unions_support
+		available = {
+			has_country_flag = DEN_British_Diplomacy
+			has_completed_focus  = DEN_Fortify_Our_Borders
+		}
+
+		cost = 100
+
+		days_remove = 30
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus  = DEN_Fortify_Our_Borders
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			99 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 11251
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 332
+					instant_build = yes
+				}
+			}
+			37 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					province = 6287
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	DEN_Protect_Danish_Sea_decision  = {
+
+		icon = GFX_decision_generic_naval
+		available = {
+			has_country_flag = DEN_Good_Ties
+			has_completed_focus  = DEN_Protect_Danish_Sea
+		}
+
+		cost = 35
+
+		days_remove = 55
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus  = DEN_Protect_Danish_Sea
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			add_tech_bonus = {
+				name = DEN_Develop_Submarines
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+
+	DEN_Germany_Pressure = {
+
+		icon = GFX_decision_GER_claim_yugo_4
+		available = {
+			NOT = {
+				check_variable = {
+					DEN_British_var < 55
+				}
+			}
+		}
+
+		allowed = {
+			original_tag = DEN
+		}
+
+		visible = {
+			has_completed_focus = DEN_Prepare_for_German_war
+		}
+
+		fire_only_once = no
+
+		days_mission_timeout = 75
+
+		is_good = no
+
+		activation = {
+			has_completed_focus = DEN_Prepare_for_German_war
+		}
+
+		timeout_effect = {
+			add_to_variable = {
+				var = DEN_British_var
+				value = -10
+			}
+		}
+	}
+}
+DEN_ideology_balance_category = {
+
+}

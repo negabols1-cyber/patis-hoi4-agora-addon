@@ -1,0 +1,2606 @@
+political_actions = {
+	ECU_act_effects_taking_place_here = {
+		icon = eng_trade_unions_support
+		allowed = {
+			original_tag = ECU
+		}
+		activation = {
+			always = no
+		}
+
+		highlight_states = {
+			highlight_states_trigger = {
+				has_state_flag = ECU_act_active_here_flag
+			}
+		}
+
+		days_mission_timeout = 75
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ECU_no_states_with_active_act_tt
+				NOT = {
+					any_controlled_state = {
+						has_state_flag = ECU_act_active_here_flag
+					}
+				}
+			}
+		}
+
+		is_good = yes
+
+		timeout_effect = {
+			add_stability = 0.03
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.02
+			}
+			hidden_effect = {
+				random_owned_controlled_state = {
+					limit = {
+						has_state_flag = ECU_act_active_here_flag
+					}
+					clr_state_flag = ECU_act_active_here_flag
+					set_state_flag = ECU_act_was_present_here_flag
+					if = {
+						limit = {
+							any_neighbor_state = {
+								has_state_flag = ECU_starting_state
+								NOT = {
+									has_state_flag = ECU_act_was_present_here_flag
+								}
+							}
+						}
+						random_neighbor_state = {
+							limit = {
+								has_state_flag = ECU_starting_state
+								NOT = {
+									has_state_flag = ECU_act_was_present_here_flag
+								}
+							}
+							set_state_flag = ECU_act_active_here_flag
+							ROOT = {
+								activate_mission = ECU_act_effects_taking_place_here
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	EUYL_change_name_to_nueva_granada = {
+		priority = 50
+
+		icon = generic_form_nation
+
+		allowed = {
+			OR = {
+				original_tag = VEN
+				original_tag = ECU
+			}
+		}
+
+		visible = {
+			has_cosmetic_tag = GRC_UNIFIED
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+
+		complete_effect = {
+			add_stability = 0.01
+
+			custom_effect_tooltip = CHL_skip_one_line_tt
+
+			drop_cosmetic_tag = yes
+			set_cosmetic_tag = COL_NUEVA_GRANADA
+		}
+	}
+
+	EUYL_enforce_mandatory_conscription = {
+		priority = 100
+		icon = generic_military
+
+		visible = {
+			capital_scope = {
+				is_on_continent = south_america
+			}
+		}
+
+		available = {
+			has_civil_war = no
+		}
+
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		custom_cost_text = decision_cost_CP_25_pp_25
+
+		complete_effect = {
+			if = {
+				limit = {
+					has_government = democratic
+				}
+				add_stability = -0.05
+			}
+			else = {
+				add_stability = -0.03
+			}
+			hidden_effect = {
+				add_political_power = -25
+				add_command_power = -25
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 5
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+			}
+			modifier = {
+				factor = 25
+				has_army_manpower = {
+					size < 49999
+				}
+			}
+			modifier = {
+				factor = 100
+				has_war = yes
+			}
+		}
+
+		modifier = {
+			conscription = 0.01
+		}
+
+		days_remove = -1
+	}
+
+	ARG_declare_provinces_eva_peron_and_presidente_peron = {
+		priority = 150
+		icon = generic_operation
+
+		allowed = {
+			original_tag = ARG
+		}
+
+		visible = {
+			has_full_control_of_state = 509
+		}
+
+		available = {
+			has_civil_war = no
+			509 = { is_core_of = ROOT }
+			OR = {
+				has_country_leader = {
+					character = ARG_juan_domingo_peron
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = ARG_juan_domingo_peron_fascist
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = ARG_juan_peron
+					ruling_only = yes
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 100
+				is_historical_focus_on = yes
+			}
+		}
+
+		complete_effect = {
+			add_political_power = 10
+			509 = {
+				set_state_name = "Provincia Presidente Perón"
+			}
+		}
+	}
+
+	ARG_lower_our_arms = {
+		priority = 120
+		icon = generic_nationalism
+
+		allowed = {
+			original_tag = ARG
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				any_controlled_state = {
+					NOT = {
+						state = 953
+					}
+				}
+			}
+			modifier = {
+				factor = 1079
+				NOT = {
+					OR = {
+						controls_state = 954
+						controls_state = 955
+					}
+				}
+				has_full_control_of_state = 953
+			}
+		}
+
+		visible = {
+			has_civil_war = yes
+			has_cosmetic_tag = AARC
+		}
+
+		available = {
+			has_full_control_of_state = 953
+			NOT = {
+				OR = {
+					controls_state = 954
+					controls_state = 955
+				}
+			}
+		}
+
+		days_remove = -1
+
+		modifier = {
+			forced_surrender_limit = -1.0
+		}
+	}
+
+	BOL_form_the_anti_paraguay_pact = {
+		priority = 100
+		icon = generic_nationalism
+
+		allowed = { original_tag = BOL }
+
+		visible = {
+			PAR = {
+				has_country_flag = PAR_solano_lopez_active_flag
+				check_variable = { PAR_global_concern > 2 }
+			}
+			is_subject = no
+		}
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				check_variable = { PAR.PAR_global_concern < 5 }
+			}
+			modifier = {
+				factor = 1
+				check_variable = { PAR.PAR_global_concern > 4 }
+			}
+			modifier = {
+				factor = 3
+				check_variable = { PAR.PAR_global_concern > 5 }
+			}
+			modifier = {
+				factor = 6
+				check_variable = { PAR.PAR_global_concern > 6 }
+			}
+			modifier = {
+				factor = 20
+				check_variable = { PAR.PAR_global_concern > 7 }
+			}
+			modifier = {
+				factor = 3
+				has_war_with = PAR
+			}
+		}
+
+		complete_effect = { country_event = paraguay.15 }
+	}
+
+	ARG_declare_as_an_enemy_FROM = {
+		icon = generic_prepare_civil_war
+		allowed = {
+			original_tag = ARG
+		}
+		ai_will_do = { base = 90 }
+		target_root_trigger = {
+			has_completed_focus = ARG_al_amigo_todo_al_enemigo_nada
+		}
+		target_trigger = {
+			FROM = {
+				NOT = { has_war_with = ROOT }
+				NOT = { is_in_faction_with = ROOT }
+				ROOT = {
+					has_opinion = {
+						target = PREV
+						value < -50
+					}
+				}
+			}
+		}
+
+		available = {
+			FROM = {
+				NOT = {
+					OR = {
+						has_war_with = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = ARG_al_amigo_todo_al_enemigo_nada
+			FROM = { #target trigger da bu bulunamaz çünkü target trigger kaydeder targetı hiçbir zaman çıkarmaz targetdan sonrasında exist olsa bile
+				exists = yes
+			}
+		}
+
+		cost = 35
+		days_remove = 30
+
+		remove_effect = {
+			create_wargoal = {
+				type = annex_everything
+				target = FROM
+			}
+		}
+	}
+
+	ARG_viva_el_camarada_posadas = {
+		icon = eng_propaganda_campaigns
+
+		allowed = { original_tag = ARG }
+
+		visible = {
+			has_completed_focus = ARG_the_birth_of_posadism
+		}
+
+		modifier = {
+			political_power_factor = -0.2
+			stability_weekly = 0.005
+			war_support_weekly = 0.005
+		}
+
+		days_remove = 90
+
+		available = {
+			NOT = {
+				has_country_flag = ARG_active_propaganda_campaign
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = ARG_active_propaganda_campaign
+		}
+
+		remove_effect = {
+			clr_country_flag = ARG_active_propaganda_campaign
+		}
+	}
+
+	ARG_viva_la_revolucion_mundial_d = {
+		icon = eng_propaganda_campaigns
+
+		allowed = { original_tag = ARG }
+
+		visible = {
+			has_completed_focus = ARG_the_birth_of_posadism
+		}
+
+		modifier = {
+			political_power_factor = -0.2
+			communism_drift = 0.1
+			weekly_manpower = 1079
+		}
+
+		days_remove = 90
+
+		available = {
+			NOT = {
+				has_country_flag = ARG_active_propaganda_campaign
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = ARG_active_propaganda_campaign
+		}
+
+		remove_effect = {
+			clr_country_flag = ARG_active_propaganda_campaign
+		}
+	}
+
+	ARG_viva_la_cuarta_internacional = {
+		icon = eng_propaganda_campaigns
+
+		allowed = { original_tag = ARG }
+
+		visible = {
+			has_completed_focus = ARG_the_birth_of_posadism
+		}
+
+		modifier = {
+			political_power_factor = -0.2
+			justify_war_goal_time = -0.2
+			offensive_war_stability_factor = 0.1
+		}
+
+		days_remove = 90
+
+		available = {
+			NOT = {
+				has_country_flag = ARG_active_propaganda_campaign
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = ARG_active_propaganda_campaign
+		}
+
+		remove_effect = {
+			clr_country_flag = ARG_active_propaganda_campaign
+		}
+	}
+
+	EUYL_exterminate_the_anarchists_in_our_country = {
+		icon = generic_assassination
+
+		allowed = { always = yes }
+
+		visible = {
+			has_idea = ARG_growing_anarchist_sentiment
+		}
+
+		fire_only_once = yes
+
+		cost = 25
+
+		days_remove = 25
+
+		available = {
+			has_manpower > 10000
+			has_equipment = { infantry_equipment > 499 }
+		}
+
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -500
+			}
+		}
+
+		modifier = {
+			weekly_manpower = -1079
+		}
+
+		cancel_trigger = {
+			NOT = { has_idea = ARG_growing_anarchist_sentiment}
+		}
+
+		remove_effect = {
+			remove_ideas = ARG_growing_anarchist_sentiment
+			custom_effect_tooltip = EUYL_ARG_will_know_about_this_and_may_intervene_tt
+			hidden_effect = {
+				ARG = {
+					country_event = {
+						id = argentina.rework.30
+						days = 4
+						random_days = 4
+					}
+				}
+			}
+		}
+	}
+}
+
+economy_decisions = {
+	GUA_promote_development_in_FROM = {
+		icon = generic_fundraising
+
+		allowed = {
+			original_tag = GUA
+		}
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = GUA_developing_state_flag
+				}
+			}
+			NOT = {
+				has_country_flag = GUA_recently_promoted_development_flag
+			}
+		}
+
+		visible = {
+			has_completed_focus = CEA_commence_regional_development_programs
+		}
+
+		modifier = {
+			political_power_factor = -0.05
+			consumer_goods_factor = 0.1
+		}
+
+		state_target = yes
+
+		target_array = core_states
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				has_state_flag = GUA_underdeveloped_flag
+			}
+		}
+
+		cost = 25
+
+		days_remove = 60
+
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = GUA_developing_state_flag
+			FROM = {
+				clr_state_flag = GUA_underdeveloped_flag
+			}
+		}
+
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					controls_state = FROM
+					has_dynamic_modifier = {
+						modifier = GUA_uneven_economic_development
+					}
+				}
+			}
+		}
+
+		cancel_effect = {
+			clr_country_flag = GUA_developing_state_flag
+		}
+
+		remove_effect = {
+			clr_country_flag = GUA_developing_state_flag
+			EUYL_improve_GUA_uneven_economic_development = yes
+
+			hidden_effect = {
+				set_country_flag = {
+					flag = GUA_recently_promoted_development_flag
+					days = 90
+					value = 1
+				}
+			}
+		}
+	}
+
+	EUYL_redirect_resources_to_build_up_supply_connections = {
+		icon = generic_motorized
+
+		allowed = {
+			always = yes
+		}
+
+		visible = {
+			capital_scope = {
+				OR = {
+					is_on_continent = south_america
+					is_on_continent = north_america
+				}
+			}
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 0
+			has_civil_war = no
+		}
+
+		fire_only_once = yes
+
+		cancel_trigger = {
+			has_civil_war = yes
+		}
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 10
+				num_of_factories > 19
+			}
+			modifier = {
+				factor = 15
+				num_of_factories > 34
+			}
+		}
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 0
+		}
+		custom_cost_text = decision_cost_civ_factory_1
+
+		days_remove = 720
+
+		modifier = {
+			civilian_factory_use = 1
+			production_speed_rail_way_factor = 0.15
+			production_speed_supply_node_factor = 0.5
+		}
+	}
+
+	EUYL_implement_the_import_substitution_model = {
+		icon = eng_trade_unions_support
+
+		allowed = {
+			NOT = {
+				original_tag = CHL
+			}
+		}
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = export_focus
+					has_idea = free_trade
+				}
+			}
+		}
+
+		visible = {
+			capital_scope = {
+				OR = {
+					is_on_continent = south_america
+					is_on_continent = north_america
+				}
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				has_idea = export_focus
+				has_idea = free_trade
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				num_of_factories < 14 ## need a semi robust economy for this
+			}
+			modifier = { ## These countries historically adopted the ISI model
+				factor = 25
+				OR = {
+					original_tag = ARG
+					original_tag = BRA
+					original_tag = MEX
+				}
+			}
+			modifier = {
+				factor = 10
+				OR = {
+					original_tag = URG
+					original_tag = VEN
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 20
+
+		days_remove = 365
+
+		complete_effect = {
+			ROOT = {
+				set_country_flag = EUYL_adopted_the_ISI_model_flag ## might do some wacky stuff with this
+				custom_effect_tooltip = EUYL_free_trade_will_be_inaccesible_tt
+			}
+		}
+
+		modifier = {
+			industrial_capacity_factory = 0.05
+			industrial_capacity_dockyard = 0.05
+		}
+	}
+
+	PAR_construct_a_power_grid_FROM = {
+		icon = generic_construction
+
+		allowed = {
+			original_tag = PAR
+		}
+
+		state_target = yes
+		target_array = controlled_states
+		target_trigger = {
+			FROM = {
+				has_state_flag = paraguayan_starting_state
+				is_fully_controlled_by = ROOT
+				NOT = { has_dynamic_modifier = { modifier = PAR_power_grid_present } }
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		cost = 25
+		days_remove = 30
+
+		fire_only_once = yes
+
+		visible = {
+			has_completed_focus = PAR_electrical_grid
+			FROM = {
+				NOT = { has_dynamic_modifier = { modifier = PAR_power_grid_present } }
+			}
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 0
+			hidden_trigger = {
+				NOT = { has_country_flag = PAR_currently_constructing_power_grid }
+			}
+		}
+		modifier = {
+			civilian_factory_use = 1
+		}
+
+		complete_effect = { set_country_flag = PAR_currently_constructing_power_grid }
+
+		remove_effect = {
+			clr_country_flag = PAR_currently_constructing_power_grid
+			FROM = {
+				add_dynamic_modifier = { modifier = PAR_power_grid_present }
+			}
+		}
+	}
+
+	ARG_steal_factories_from_FROM = {
+		allowed = {
+			original_tag = ARG
+		}
+
+		icon = generic_factory
+		target_root_trigger = {
+			has_completed_focus = ARG_steal_foreign_factories
+		}
+		target_trigger = {
+			FROM = {
+				capital_scope = { is_on_continent = south_america }
+				has_civil_war = no
+				is_subject = no
+				NOT = { has_war_with = ROOT }
+				num_of_factories > 9
+			}
+		}
+
+		visible = {
+			FROM = {
+				has_civil_war = no
+			}
+		}
+
+		on_map_mode = map_only
+
+		available = {
+			has_civil_war = no
+			NOT = { has_war_with = FROM }
+			hidden_trigger = {
+				NOT = { has_country_flag = ARG_stealing_factories }
+			}
+		}
+
+		cancel_trigger = {
+			FROM = {
+				OR = {
+					has_war_with = ROOT
+					has_civil_war = yes
+				}
+			}
+		}
+
+		cancel_effect = { add_political_power = 35 }
+
+		cost = 75
+
+		days_remove = 25
+
+		complete_effect = {
+			set_country_flag = ARG_stealing_factories
+		}
+
+		remove_effect = {
+			clr_country_flag = ARG_stealing_factories
+			custom_effect_tooltip = ARG_more_likely_to_steal_with_anarchist_support_tt
+			if = {
+				limit = {
+					FROM = {
+						has_country_flag = ARG_anarchist_sentiment_fomented_here
+					}
+				}
+				random_list = {
+					50 = {
+						EUYL_add_2_civilian = yes
+						EUYL_add_2_military = yes
+						FROM = {
+							random_owned_controlled_state = {
+								limit = { arms_factory > 0 }
+								damage_building = {
+									type = arms_factory
+									damage = 1
+								}
+							}
+							random_owned_controlled_state = {
+								limit = { arms_factory > 0 }
+								damage_building = {
+									type = arms_factory
+									damage = 1
+								}
+							}
+							random_owned_controlled_state = {
+								limit = { industrial_complex > 1 }
+								damage_building = {
+									type = industrial_complex
+									damage = 2
+								}
+							}
+							country_event = argentina.rework.25
+						}
+					}
+					50 = {
+						EUYL_add_1_civilian = yes
+						EUYL_add_1_military = yes
+						FROM = {
+							random_owned_controlled_state = {
+								limit = { arms_factory > 0 }
+								damage_building = {
+									type = arms_factory
+									damage = 1
+								}
+							}
+							random_owned_controlled_state = {
+								limit = { industrial_complex > 0 }
+								damage_building = {
+									type = industrial_complex
+									damage = 1
+								}
+							}
+						}
+					}
+				}
+			}
+			else = {
+				random_list = {
+					85 = {
+						EUYL_add_1_civilian = yes
+						EUYL_add_1_military = yes
+						FROM = {
+							random_owned_controlled_state = {
+								limit = { arms_factory > 0 }
+								damage_building = {
+									type = arms_factory
+									damage = 1
+								}
+							}
+							random_owned_controlled_state = {
+								limit = { industrial_complex > 0 }
+								damage_building = {
+									type = industrial_complex
+									damage = 1
+								}
+							}
+							country_event = argentina.rework.25
+						}
+					}
+					15 = {
+						add_political_power = 25
+					}
+				}
+			}
+		}
+	}
+
+	ARG_promote_german_architecture_in_FROM = {
+		icon = generic_construction
+
+		allowed = { original_tag = ARG }
+
+		state_target = yes
+		target_array = core_states
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				state_population_k > 150
+				NOT = { has_dynamic_modifier = { modifier = ARG_german_influenced_architecture } }
+			}
+		}
+
+		visible = { has_completed_focus = ARG_prioritize_german_architecture }
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ARG_promoting_architecture
+				}
+			}
+		}
+
+		cost = 10
+
+		days_remove = 70
+
+		fire_only_once = yes
+
+		cancel_trigger = {
+			FROM = {
+				NOT = {
+					is_fully_controlled_by = ROOT
+				}
+			}
+		}
+
+		modifier = {
+			political_power_factor = -0.05
+			consumer_goods_factor = 0.03
+		}
+
+		complete_effect = {
+			set_country_flag = ARG_promoting_architecture
+		}
+
+		remove_effect = {
+			clr_country_flag = ARG_promoting_architecture
+			FROM = {
+				add_dynamic_modifier = { modifier = ARG_german_influenced_architecture }
+			}
+		}
+	}
+
+	ARG_promote_italian_architecture_in_FROM = {
+		icon = generic_construction
+
+		allowed = { original_tag = ARG }
+
+		state_target = yes
+		target_array = core_states
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				state_population_k > 150
+				NOT = { has_dynamic_modifier = { modifier = ARG_italian_influenced_architecture } }
+			}
+		}
+
+		visible = { has_completed_focus = ARG_prioritize_italian_architecture }
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ARG_promoting_architecture
+				}
+			}
+		}
+
+		cost = 10
+
+		days_remove = 70
+
+		fire_only_once = yes
+
+		cancel_trigger = {
+			FROM = {
+				NOT = {
+					is_fully_controlled_by = ROOT
+				}
+			}
+		}
+
+		modifier = {
+			political_power_factor = -0.05
+			consumer_goods_factor = 0.03
+		}
+
+		complete_effect = {
+			set_country_flag = ARG_promoting_architecture
+		}
+
+		remove_effect = {
+			clr_country_flag = ARG_promoting_architecture
+			FROM = {
+				add_dynamic_modifier = { modifier = ARG_italian_influenced_architecture }
+			}
+		}
+	}
+
+	ARG_the_4_year_patagonic_plan = {
+		priority = 100
+		icon = generic_factory
+
+		activation = { always = no }
+
+		allowed = { original_tag = ARG}
+
+		is_good = no
+
+		days_mission_timeout = 1460
+
+		available = {
+			512 = {
+				infrastructure > 3
+				industrial_complex > 1
+				arms_factory > 0
+			}
+			955 = {
+				infrastructure > 3
+				industrial_complex > 1
+				arms_factory > 0
+			}
+			954 = {
+				infrastructure > 3
+				industrial_complex > 1
+				arms_factory > 0
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 949
+				}
+				949 = {
+					infrastructure > 2
+					OR = {
+						industrial_complex > 0
+						arms_factory > 0
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 950
+				}
+				950 = {
+					infrastructure > 2
+					OR = {
+						industrial_complex > 0
+						arms_factory > 0
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_full_control_of_state = 507
+				}
+				507 = {
+					infrastructure > 2
+					OR = {
+						industrial_complex > 0
+						arms_factory > 0
+					}
+				}
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = { controls_state = 512 }
+				NOT = { controls_state = 955 }
+				NOT = { controls_state = 954 }
+				NOT = { controls_state = 953 }
+			}
+		}
+
+		cancel_effect = {
+			add_stability = -0.05
+			add_political_power = -25
+		}
+
+		complete_effect = {
+			effect_tooltip = {
+				unlock_national_focus = ARG_4_year_patagonic_plan
+			}
+			set_country_flag = ARG_succesful_4_year_plan_flag
+			add_timed_idea = {
+				idea = ARG_succesful_4_year_plan
+				days = 365
+			}
+		}
+
+		timeout_effect = {
+			add_stability = -0.03
+			add_timed_idea = {
+				idea = ARG_failed_4_year_plan
+				days = 365
+			}
+		}
+	}
+
+	ARG_invest_in_the_development_of_FROM = {
+		icon = generic_construction
+
+		allowed = { original_tag = ARG }
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				has_state_flag = ARG_patagonic_state
+				NOT = { has_dynamic_modifier = { modifier = ARG_patagonic_industrialization_state_modifier } }
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		visible = { has_completed_focus = ARG_patagonic_industrialization }
+
+		available = {
+			has_government = communism
+			has_civil_war = no
+			FROM = { is_fully_controlled_by = ROOT }
+		}
+
+		cost = 10
+
+		days_remove = 40
+
+		modifier = { consumer_goods_factor = 0.03 }
+
+		remove_effect = {
+			FROM = {
+				add_dynamic_modifier = {
+					modifier = ARG_patagonic_industrialization_state_modifier
+					days = 365
+				}
+			}
+		}
+	}
+
+	ARG_build_a_hydroelectric_power_plant_in_FROM = {
+		icon = generic_electricity
+
+		allowed = { original_tag = ARG }
+
+		state_target = yes
+
+		targets = { 278 956 510 509 } ## states that border the Rio de la Plata
+
+		visible = {
+			FROM = { is_fully_controlled_by = ROOT }
+			has_completed_focus = ARG_establish_hydroelectric_powerplants
+		}
+
+		available = {
+			has_civil_war = no
+			hidden_trigger = {
+				NOT = { has_country_flag = ARG_building_powerplant }
+			}
+		}
+
+		cost = 15
+
+		days_remove = 90
+
+		complete_effect = { set_country_flag = ARG_building_powerplant }
+
+		remove_effect = {
+			clr_country_flag = ARG_building_powerplant
+			FROM = {
+				add_dynamic_modifier = { modifier = ARG_hydroelectric_power_plant }
+			}
+		}
+	}
+
+	BOL_develop_the_province_of_FROM = {
+		icon = generic_construction
+
+		allowed = { original_tag = BOL }
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		on_map_mode = map_and_decisions_view
+
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BOL_underdeveloped_province }
+			}
+		}
+
+		available = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = BOL_developing_province
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = BOL_the_bohen_plan
+		}
+
+		fire_only_once = yes
+
+		cancel_trigger = {
+			FROM = {
+				NOT = {
+					is_controlled_by = ROOT
+				}
+			}
+		}
+
+		cost = 25
+
+		days_remove = 70
+
+		ai_will_do = {
+			base = 160
+		}
+
+		modifier = {
+			production_speed_buildings_factor = -0.1
+			consumer_goods_factor = 0.1
+		}
+
+		complete_effect = {
+			set_country_flag = BOL_developing_province
+		}
+
+		remove_effect = {
+			clr_country_flag = BOL_developing_province
+			FROM = {
+				remove_dynamic_modifier = {
+					modifier = BOL_underdeveloped_province
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+operations = {
+	BRA_gain_back_our_territory_from_FROM = {
+		priority = 200
+		icon = generic_prepare_civil_war
+
+		allowed = { original_tag = BRA }
+		#target trigger kaydediyor
+		target_trigger = {
+			FROM = {
+				has_country_flag = BRA_vengeful_flag
+			}
+		}
+		target_array = global.BRA_vengeful_flag_countries
+		visible = {
+			FROM = {
+				exists = yes
+				NOT = {
+					OR = {
+						has_war_with = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+		}
+
+		available = {
+			strength_ratio = {
+				tag = FROM
+				ratio > 1
+			}
+			NOT = { has_country_flag = BRA_recently_justified_flag }
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+		}
+
+		custom_cost_text = decision_cost_CP_25
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 5
+				strength_ratio = {
+					tag = FROM
+					ratio > 1.5
+				}
+			}
+			modifier = {
+				factor = 3
+				num_of_factories > 99
+			}
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			create_wargoal = {
+				type = annex_everything
+				target = FROM
+			}
+			custom_effect_tooltip = EUYL_decision_will_reappear_in_90_days_tt
+			hidden_effect = {
+				FROM = { clr_country_flag = BRA_vengeful_flag }
+				set_country_flag = {
+					flag = BRA_recently_justified_flag
+					days = 90
+					value = 1
+				}
+				add_command_power = -25
+			}
+		}
+	}
+
+	EUYL_disband_militia_regiments = {
+		priority = 20
+		icon = generic_army_support
+
+		allowed = {
+			OR = {
+				original_tag = BRA
+				original_tag = PRU
+				original_tag = ARG
+				original_tag = URG
+				original_tag = CHL
+				original_tag = BOL
+				original_tag = COL
+				original_tag = ECU
+				original_tag = PAR
+				original_tag = VEN
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			exists = yes
+			is_subject = no
+			has_capitulated = no
+			has_civil_war = no
+			if = { #to make sure the civil wars work properly
+				limit = { original_tag = CHL }
+				date > 1939.12.30
+			}
+		}
+
+		visible = {
+			is_ai = no
+			OR = {
+				has_template = "Milicias"
+				has_template = "Loyalists"
+				has_template = "Militares"
+				has_template = "Comunistas"
+				has_template = "Milicias del Ejército"
+				has_template = "Anarqúistas"
+				has_template = "Nacionales"
+				has_template = "Milicias Leales"
+				has_template = "Milicias Argentinas"
+				has_template = "Gauchos"
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 25
+
+		days_remove = 35
+
+		remove_effect = {
+			if = {
+				limit = { has_template = "Milicias" }
+				delete_unit_template_and_units = {
+					division_template = "Milicias"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_template = "Loyalists" }
+				delete_unit_template_and_units = {
+					division_template = "Loyalists"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_template = "Militares" }
+				delete_unit_template_and_units = {
+					division_template = "Militares"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_template = "Comunistas" }
+				delete_unit_template_and_units = {
+					division_template = "Comunistas"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_template = "Milicias del Ejército" }
+				delete_unit_template_and_units = {
+					division_template = "Milicias del Ejército"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_template = "Anarqúistas" }
+				delete_unit_template_and_units = {
+					division_template = "Anarqúistas"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_template = "Nacionales" }
+				delete_unit_template_and_units = {
+					division_template = "Nacionales"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_template = "Milicias Leales" }
+				delete_unit_template_and_units = {
+					division_template = "Milicias Leales"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_template = "Milicias Argentinas" }
+				delete_unit_template_and_units = {
+					division_template = "Milicias Argentinas"
+					disband = yes
+				}
+			}
+			if = {
+				limit = { has_template = "Gauchos" }
+				delete_unit_template_and_units = {
+					division_template = "Gauchos"
+					disband = yes
+				}
+			}
+		}
+	}
+
+	EUYL_scrap_the_obligatory_military_service = {
+		icon = generic_military
+
+		allowed = {
+			original_tag = BOL
+		}
+
+		available = {
+			exists = yes
+			has_war = no
+			is_subject = no
+			has_capitulated = no
+		}
+
+		visible = {
+			has_idea = BOL_servicio_militar_obligatorio
+		}
+
+		days_remove = 100
+
+		modifier = {
+			war_support_weekly = -0.005
+		}
+
+		remove_effect = {
+			if = {
+				limit = { original_tag = BOL }
+				remove_ideas = BOL_servicio_militar_obligatorio
+			}
+		}
+	}
+
+	ARG_expand_the_camisas_negras = {
+		icon = generic_reorganize_irregulars
+
+		allowed = { original_tag = ARG }
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 25
+				has_manpower < 9999
+			}
+			modifier = {
+				add = 45
+				has_war = yes
+			}
+		}
+
+		cost = ARG_camisas_negras_cost
+
+		visible = { has_completed_focus = ARG_form_the_camisas_negras }
+
+		available = {
+			has_civil_war = no
+		}
+
+		days_remove = 90
+
+		days_re_enable = 90
+
+		complete_effect = { set_country_flag = SAU_conscription_in_progress }
+
+		remove_effect = {
+			custom_effect_tooltip = ARG_create_2_camisas_negras_tt
+			custom_effect_tooltip = ARG_cost_to_form_doubles_tt
+			custom_effect_tooltip = EUYL_decision_will_reappear_in_90_days_tt
+			hidden_effect = {
+				multiply_variable = { ARG_camisas_negras_cost = 2 }
+				random_owned_controlled_state = {
+					limit = {
+						any_neighbor_state = {
+							is_capital = yes
+							is_fully_controlled_by = ROOT
+						}
+					}
+					create_unit = {
+						division = "name = \"Camisas Negras\" division_template = \"Camisas Negras\" start_experience_factor = 0.2 start_equipment_factor = 0.9"
+						owner = ROOT
+						count = 2
+					}
+				}
+			}
+		}
+	}
+
+	CHL_recall_peter_hansen = {
+		icon = eng_trade_unions_support
+
+		allowed = { original_tag = CHL }
+
+		available = {
+			GER = {
+				OR = {
+					has_civil_war = yes
+					NOT = { has_government = fascism}
+				}
+			}
+			has_government = fascism
+		}
+
+		visible = {
+			exists = yes
+			is_subject = no
+		}
+
+		cost = 50
+		fire_only_once = yes
+		days_remove = 20
+
+		remove_effect = {
+			custom_effect_tooltip = CHL_peter_hansen_available_as_general_and_advisor_tt
+			hidden_effect = {
+				EUYL_CHL_peter_hansen = {
+					clr_character_flag = CHL_living_in_germany
+				}
+			}
+		}
+	}
+
+	BOL_invite_vicente_rojo_to_the_military_school = {
+		icon = eng_trade_unions_support
+
+		allowed = { original_tag = BOL }
+
+		available = {
+			exists = yes
+			SPR_scw_in_progress = yes
+			any_country_with_original_tag = {
+				original_tag_to_check = SPR
+				has_war = yes
+				surrender_progress > 0.5
+			}
+		}
+
+		cost = 25
+
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = BOL_viente_rojo_available_tt
+			hidden_effect = {
+				BOL_vicente_rojo = {
+					clr_character_flag = BRA_living_in_the_exterior
+				}
+			}
+		}
+	}
+
+	BOL_promote_manuel_marzana_oroza = {
+		icon = generic_army_support
+
+		allowed = { original_tag = BOL }
+
+		available = {
+			OR = {
+				has_war = yes
+				date > 1937.1.1
+			}
+			hidden_trigger = {
+				has_political_power > 24
+				command_power > 24
+			}
+		}
+
+		custom_cost_text = BRA_cost_25_pol_command
+
+		custom_cost_trigger = {
+			has_political_power > 24
+			command_power > 24
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				add_political_power = -25
+				add_command_power = -25
+			}
+			add_war_support = 0.05
+			custom_effect_tooltip = BOL_promote_manuel_tt
+			set_country_flag = BOL_promoted_manuel
+		}
+	}
+
+	CHL_deal_with_rebellion_in_FROM = {
+		icon = oppression
+
+		ai_will_do = {
+			base = 200
+		}
+
+		state_target = yes
+
+		target_array = CHL_organized_nacista_rebellion_states
+		target_array = CHL_organized_communist_rebellion_states
+
+		on_map_mode = map_and_decisions_view
+		target_trigger = {
+			FROM = {
+				is_demilitarized_zone = yes
+				is_fully_controlled_by = ROOT
+				is_core_of = ROOT
+			}
+		}
+
+		available = {
+			hidden_trigger = {
+				has_manpower > 1078
+			}
+		}
+
+		visible = {
+			NOT = { has_dynamic_modifier = { modifier = CHL_political_instability } }
+			FROM = {
+				OR = {
+					has_dynamic_modifier = { modifier = CHL_organized_nacista_rebellion }
+					has_dynamic_modifier = { modifier = CHL_organized_communist_rebellion }
+				}
+			}
+		}
+
+		custom_cost_trigger = {
+			has_manpower > 1078
+		}
+
+		custom_cost_text = CHL_manpower_1000_tt
+
+		days_remove = 60
+
+		modifier = {
+			weekly_manpower = -20
+		}
+
+		complete_effect = {
+			add_stability = -0.01
+			hidden_effect = {
+				add_manpower = -1079
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				set_demilitarized_zone = no
+				if = {
+					limit = { has_dynamic_modifier = { modifier = CHL_organized_nacista_rebellion } }
+					remove_dynamic_modifier = { modifier = CHL_organized_nacista_rebellion }
+					hidden_effect = {
+						remove_from_array = {
+							array = CHL_organized_nacista_rebellion_states
+						}
+					}
+				}
+				else = {
+					remove_dynamic_modifier = { modifier = CHL_organized_communist_rebellion }
+					hidden_effect = {
+						remove_from_array = {
+							array = CHL_organized_communist_rebellion_states
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+south_american_armament = {
+	SOA_conscript_a_weak_militia = {
+		icon = generic_army_support
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 15
+				has_manpower < 9999
+			}
+			modifier = {
+				add = 20
+				has_war = yes
+			}
+		}
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 199
+			}
+			NOT = {
+				has_country_flag = SAU_conscription_in_progress
+			}
+		}
+
+		custom_cost_trigger = {
+			has_political_power > 24
+			command_power > 19
+			has_army_experience > 34
+		}
+
+		custom_cost_text = SAU_cost_15_command
+
+		days_remove = 140
+
+		days_re_enable = 70
+
+		complete_effect = {
+			set_country_flag = SAU_conscription_in_progress
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -200
+			}
+			hidden_effect = {
+				add_command_power = -20
+				add_political_power = -25
+				army_experience = -35
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = SAU_conscription_in_progress
+			custom_effect_tooltip = SAU_create_weak_unit_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { has_template = "Milicias" }
+					}
+					division_template = {
+						name = "Milicias"
+						division_names_group = SPAN_INF_02
+						is_locked = yes
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	SOA_conscript_proper_militia = {
+		icon = generic_army_support
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 15
+				has_manpower < 9999
+			}
+			modifier = {
+				add = 20
+				has_war = yes
+			}
+		}
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 499
+			}
+			NOT = {
+				has_country_flag = SAU_conscription_in_progress
+			}
+		}
+
+		custom_cost_trigger = {
+			has_political_power > 49
+			command_power > 29
+			has_army_experience > 49
+		}
+
+		custom_cost_text = SAU_cost_25_command
+
+		days_remove = 180
+
+		days_re_enable = 80
+
+		complete_effect = {
+			set_country_flag = SAU_conscription_in_progress
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -500
+			}
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -50
+				army_experience = -50
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = SAU_conscription_in_progress
+			custom_effect_tooltip = SAU_create_militia_unit_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { has_template = "Milicia Entrenada" }
+					}
+					division_template = {
+						name = "Milicia Entrenada"
+						division_names_group = SPAN_INF_02
+						is_locked = yes
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+						}
+						support = {
+							artillery = { x = 0 y = 0 }
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Milicia Entrenada\" division_template = \"Milicia Entrenada\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	SOA_hide_show_conscript_divison_decisions = {
+		priority = 100
+		complete_effect = {
+			if = {
+				limit = { has_country_flag = SOA_hide_decisions }
+				custom_effect_tooltip = SOA_will_show_decisions_tt
+				clr_country_flag = SOA_hide_decisions
+			}
+			else = {
+				custom_effect_tooltip = SOA_will_hide_decisions_tt
+				set_country_flag = SOA_hide_decisions
+			}
+		}
+	}
+
+	CHL_recruit_young_officers = {
+		icon = eng_trade_unions_support
+		priority = 90
+		allowed = {
+			original_tag = CHL
+		}
+		visible = {
+			has_completed_focus = CHL_ejercito_de_chile
+		}
+
+		available = {
+			has_civil_war = no
+			exists = yes
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		complete_effect = {
+			custom_effect_tooltip = CHL_pinochet_carlos_rene_available_generals_tt
+			hidden_effect = {
+				EUYL_CHL_rene_schneider = {
+					set_character_flag = CHL_promoted
+				}
+				CHL_augusto_pinochet = {
+					set_character_flag = CHL_promoted
+				}
+				EUYL_CHL_carlos_prats = {
+					set_character_flag = CHL_promoted
+				}
+			}
+		}
+	}
+
+	SOA_conscript_proper_divison = {
+		icon = generic_army_support
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				add = 20
+				has_manpower < 9999
+			}
+			modifier = {
+				add = 30
+				has_war = yes
+			}
+		}
+
+		available = {
+			has_equipment = {
+				infantry_equipment > 1078
+			}
+			NOT = {
+				has_country_flag = SAU_conscription_in_progress
+			}
+		}
+
+		custom_cost_trigger = {
+			has_political_power > 79
+			command_power > 44
+			has_army_experience > 74
+		}
+
+		custom_cost_text = SAU_cost_45_command
+
+		days_remove = 250
+
+		days_re_enable = 100
+
+		complete_effect = {
+			set_country_flag = SAU_conscription_in_progress
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+			hidden_effect = {
+				add_command_power = -45
+				add_political_power = -80
+				army_experience = -75
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = SAU_conscription_in_progress
+			custom_effect_tooltip = SAU_create_proper_division_unit_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { has_template = "Division de Infantería" }
+					}
+					division_template = {
+						name = "Division de Infantería"
+						division_names_group = SPAN_INF_02
+						is_locked = yes
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+							infantry = { x = 0 y = 4 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 1 y = 2 }
+							infantry = { x = 1 y = 3 }
+							infantry = { x = 1 y = 4 }
+						}
+						support = {
+							artillery = { x = 0 y = 0 }
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Division de Infantería\" division_template = \"Division de Infantería\" start_experience_factor = 0.2 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	SOA_employ_stricter_conscription_laws_in_FROM = {
+		icon = generic_military
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 35
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+					has_government = communism
+				}
+			}
+			modifier = {
+				factor = 1
+				is_historical_focus_on = yes
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				is_core_of = ROOT
+				is_fully_controlled_by = ROOT
+				NOT = {
+					has_state_flag = SAU_conscripted_in_state
+				}
+			}
+		}
+
+		available = {
+			has_capitulated = no
+		}
+
+		visible = {
+			NOT = {
+				original_tag = PRU
+			}
+			NOT = { has_country_flag = SOA_hide_decisions }
+			FROM = {
+				is_fully_controlled_by = ROOT
+				NOT = {
+					has_state_flag = SAU_conscripted_in_state
+				}
+			}
+		}
+
+		cost = 40
+
+		days_remove = 50
+
+		modifier = {
+			political_power_factor = -0.1
+			consumer_goods_factor = 0.05
+		}
+
+		complete_effect = {
+		}
+
+		remove_effect = {
+			add_manpower = 10000
+			FROM = {
+				set_state_flag = SAU_conscripted_in_state
+			}
+		}
+	}
+}
+
+conference_cat = {
+
+	conference_mission1 = {
+
+		icon = GFX_decision_generic_factory
+
+		available = {
+			hidden_trigger = {
+				has_country_flag = conference_denied
+			}
+		}
+
+		days_mission_timeout = 106
+
+		activation = {
+			has_country_flag = conference
+			NOT = { has_country_flag = conference_denied }
+			NOT = { has_country_flag = conference1_ready }
+		}
+
+		visible = {
+			NOT = { has_country_flag = conference_denied }
+			has_country_flag = conference
+		}
+
+		timeout_effect = {
+			country_event = { id = conference.1 hours = 8 }
+			set_country_flag = conference1_ready
+		}
+		complete_effect = {
+
+		}
+	}
+
+	conference_mission2 = {
+
+		icon = GFX_decision_generic_military
+
+		available = {
+			hidden_trigger = {
+				has_country_flag = conference_denied
+			}
+		}
+
+		days_mission_timeout = 212
+
+		activation = {
+			has_country_flag = conference
+			NOT = { has_country_flag = conference_denied }
+			NOT = { has_country_flag = conference2_ready }
+		}
+
+		visible = {
+			NOT = { has_country_flag = conference_denied }
+			has_country_flag = conference
+		}
+
+		timeout_effect = {
+			country_event = { id = conference.2 hours = 8 }
+			set_country_flag = conference2_ready
+		}
+		complete_effect = {
+
+		}
+	}
+
+	conference_mission3 = {
+
+		icon = GFX_decision_generic_research
+
+		available = {
+			hidden_trigger = {
+				has_country_flag = conference_denied
+			}
+		}
+
+		days_mission_timeout = 318
+
+		activation = {
+			has_country_flag = conference
+			NOT = { has_country_flag = conference_denied }
+			NOT = { has_country_flag = conference3_ready }
+		}
+
+		visible = {
+			NOT = { has_country_flag = conference_denied }
+			has_country_flag = conference
+		}
+
+		timeout_effect = {
+			country_event = { id = conference.3 hours = 8 }
+			set_country_flag = conference3_ready
+		}
+		complete_effect = {
+
+		}
+	}
+
+	conference_mission4 = {
+
+		icon = GFX_decision_eng_trade_unions_support
+
+		available = {
+			hidden_trigger = {
+				has_country_flag = conference_denied
+			}
+		}
+
+		days_mission_timeout = 20
+
+		activation = {
+			date > 1936.11.30
+			NOT = { has_country_flag = conference_denied }
+			NOT = { has_global_flag = conference_ends }
+			has_country_flag = conference
+		}
+
+		visible = {
+			NOT = { has_country_flag = conference_denied }
+			has_country_flag = conference
+		}
+
+		timeout_effect = {
+			country_event = { id = conference.4 hours = 8 }
+		}
+		complete_effect = {
+
+		}
+	}
+}
+
+foreing_immigration = {
+
+	EUYL_take_in_war_refugees = {
+		icon = GFX_EUYL_attract_refugees
+
+		priority = 15
+		target_trigger = {
+			FROM = {
+				OR = {
+					has_civil_war = yes
+					has_war = yes
+				}
+				surrender_progress > 0.4
+			}
+		}
+
+		available = {
+			exists = yes
+			has_war = no
+			has_stability > 0.5
+			has_navy_size = {
+				size > 10
+				type = convoy
+			}
+		}
+		target_root_trigger = {
+			is_subject = no
+			is_ai = no
+		}
+		visible = {
+			capital_scope = { is_on_continent = south_america }
+			NOT = { has_country_flag = EUYL_attracting_refugees }
+			is_subject = no
+			if = {
+				limit = {
+					has_government = communism
+				}
+				FROM = {
+					NOT = { has_government = fascism}
+				}
+			}
+			if = {
+				limit = {
+					has_government = fascism
+				}
+				FROM = {
+					NOT = { has_government = communism }
+				}
+			}
+			FROM = {
+				exists = yes
+			}
+		}
+
+		cost = EUYL_cost_take_in_refugees
+
+		days_remove = 100
+
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = -10
+			}
+			hidden_effect = { set_country_flag = EUYL_attracting_refugees }
+		}
+
+		remove_effect = {
+			clr_country_flag = EUYL_attracting_refugees
+		}
+
+		modifier = {
+			political_power_factor = -0.1
+			monthly_population = 1
+		}
+	}
+
+	EUYL_attract_many_immigrants = {
+		priority = 10
+		icon = eng_blackshirt_march
+
+		available = {
+			has_war = no
+			OR = {
+				AND = {
+					has_stability > 0.65
+					num_of_factories > 19
+				}
+				AND = {
+					has_stability > 0.4
+					num_of_factories > 29
+				}
+				AND = {
+					has_stability > 0.25
+					num_of_factories > 39
+				}
+			}
+			has_navy_size = {
+				size > 15
+				type = convoy
+			}
+			if = {
+				limit = {
+					NOT = {
+						original_tag = ARG
+					}
+				}
+				has_government = democratic
+			}
+			else = {
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+				}
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			monthly_population = 1.5
+			consumer_goods_factor = 0.1
+			stability_factor = -0.1
+		}
+
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = -15
+			}
+		}
+
+		days_remove = 365
+
+		cost = EUYL_cost_many_immigrants
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 35
+				has_manpower < 5000
+			}
+		}
+	}
+
+	EUYL_attract_some_immigrants = {
+		priority = 8
+		icon = GFX_EUYL_some_immigration
+
+		available = {
+			has_war = no
+			OR = {
+				AND = {
+					has_stability > 0.55
+					num_of_factories > 15
+				}
+				AND = {
+					has_stability > 0.35
+					num_of_factories > 24
+				}
+				AND = {
+					has_stability > 0.2
+					num_of_factories > 34
+				}
+			}
+			has_navy_size = {
+				size > 10
+				type = convoy
+			}
+			if = {
+				limit = {
+					NOT = {
+						original_tag = ARG
+					}
+				}
+				has_government = democratic
+			}
+			else = {
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+				}
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			monthly_population = 1.0
+			consumer_goods_factor = 0.075
+			stability_factor = -0.075
+		}
+
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = -10
+			}
+		}
+
+		days_remove = 365
+
+		cost = EUYL_cost_some_immigrants
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 35
+				has_manpower < 5000
+			}
+		}
+	}
+
+	EUYL_attract_a_few_immigrants = {
+		priority = 6
+		icon = GFX_EUYL_little_immigration
+
+		available = {
+			has_war = no
+			OR = {
+				AND = {
+					has_stability > 0.45
+					num_of_factories > 12
+				}
+				AND = {
+					has_stability > 0.3
+					num_of_factories > 19
+				}
+				AND = {
+					has_stability > 0.1
+					num_of_factories > 29
+				}
+			}
+			has_navy_size = {
+				size > 5
+				type = convoy
+			}
+		}
+
+		fire_only_once = no
+
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = -5
+			}
+		}
+
+		modifier = {
+			monthly_population = 0.5
+			consumer_goods_factor = 0.05
+		}
+
+		days_remove = 365
+
+		cost = EUYL_cost_few_immigrants
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 35
+				has_manpower < 5000
+			}
+		}
+	}
+
+	ARG_attract_italian_immigrants = {
+		priority = 25
+		icon = GFX_EUYL_attract_refugees
+		allowed = {
+			original_tag = ARG
+		}
+		target_root_trigger = {
+			has_completed_focus = ARG_take_in_spanish_immigrants
+		}
+		target_trigger = {
+			FROM = {
+				original_tag = ITA
+			}
+		}
+
+		available = {
+			exists = yes
+			has_war = no
+			has_navy_size = {
+				size > 10
+				type = convoy
+			}
+		}
+
+		visible = {
+			FROM = {
+				exists = yes
+			}
+		}
+
+		cost = 50
+
+		modifier = {
+			consumer_goods_factor = 0.05
+			political_power_factor = -0.05
+			monthly_population = 0.25
+		}
+
+		days_remove = 240
+
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = convoy
+				amount = -10
+			}
+		}
+
+		remove_effect = {
+			add_manpower = 35000
+		}
+
+	}
+
+	PAR_attract_the_mennonites = {
+		priority = 25
+
+		icon = GFX_EUYL_attract_refugees
+		allowed = {
+			original_tag = PAR
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		available = {
+			exists = yes
+			has_civil_war = no
+			has_stability > 0.5
+		}
+
+		complete_effect = {
+			add_manpower = 25000
+		}
+
+		days_remove = 365
+
+		modifier = {
+			production_speed_buildings_factor = 0.05
+		}
+	}
+}

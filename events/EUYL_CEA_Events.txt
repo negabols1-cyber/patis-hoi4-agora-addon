@@ -1,0 +1,227 @@
+###########################
+# Central American Events
+###########################
+
+add_namespace = cea
+
+# USA demands a cut from our profits
+country_event = {
+	id = cea.1
+	title = cea.1.t
+	desc = cea.1.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = { ## We cant do anything
+		name = cea.1.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0.5
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_idea = CEA_profit_cuts
+			}
+			modify_timed_idea = {
+				idea = CEA_profit_cuts
+				days = 35
+			}
+		}
+		else = {
+			add_timed_idea = {
+				idea = CEA_profit_cuts
+				days = 50
+			}
+		}
+	}
+
+	option = { ## Go to Hell
+		name = cea.1.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 2
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+			}
+		}
+		add_political_power = 50
+
+		custom_effect_tooltip = CEA_USA_may_respond_harshly_tt
+
+		hidden_effect = {
+			USA = {
+				country_event = {
+					id = cea.2
+					hours = 16
+					random_hours = 8
+				}
+			}
+		}
+	}
+}
+
+## [FROM.GetNameDef] has refused to pay the USA their share of the profits.
+country_event = {
+	id = cea.2
+	title = cea.2.t
+	desc = cea.2.d
+	picture = GFX_report_event_poland_rejects
+
+	is_triggered_only = yes
+
+	option = { ## Alright then, no more money for you
+		name = cea.2.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0.5
+				FROM = {
+					num_of_factories > 19
+				}
+			}
+		}
+		FROM = {
+			set_country_flag = CEA_cant_ask_for_financing_flag
+			country_event = {
+				id = cea.3 ## USA has prevented us from asking for financing
+				hours = 16
+				random_hours = 8
+			}
+		}
+	}
+
+	option = { ## Eh, whatever
+		name = cea.2.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 100
+				OR = {
+					is_subject = yes
+					has_capitulated = yes
+				}
+			}
+		}
+		add_political_power = -25
+	}
+
+	option = { ## Mess around and find out
+		name = cea.2.c
+		ai_chance = {
+			base = 2
+			modifier = {
+				factor = 0
+				OR = {
+					is_subject = yes
+					has_capitulated = yes
+				}
+			}
+			modifier = {
+				factor = 10
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+					has_government = communism
+				}
+			}
+		}
+		add_ai_strategy = {
+			type = prepare_for_war
+			id = FROM
+			value = 70
+		}
+		create_wargoal = {
+			target = FROM
+			type = puppet_wargoal_focus
+		}
+
+		hidden_effect = {
+			FROM = {
+				country_event = {
+					id = cea.4 ## USA invasion imminent
+					hours = 8
+					random_hours = 8
+				}
+			}
+		}
+	}
+}
+
+## [FROM.GetName] has prevented us from asking for financing.
+country_event = {
+	id = cea.3
+	title = cea.3.t
+	desc = cea.3.d
+
+	is_triggered_only = yes
+
+	option = { ## Maybe we shouldn't have done that...
+		name = cea.3.b
+	}
+}
+
+## Invasion from the [FROM.GetName] seems Imminent...
+country_event = {
+	id = cea.4
+	title = cea.4.t
+	desc = cea.4.d
+
+	is_triggered_only = yes
+
+	option = { ## We won't go down without a fight!
+		name = cea.4.a
+		add_war_support = 0.05
+	}
+}
+
+## The future of our economy (Guatemala)
+country_event = {
+	id = cea.5
+	title = cea.5.t
+	desc = cea.5.d
+	picture = GFX_report_event_tur_industry
+
+	is_triggered_only = yes
+
+	option = { ## Promote Urbanization
+		name = cea.5.a
+
+		set_country_flag = CEA_promoted_urbanization_flag
+
+		every_core_state = {
+			limit = {
+				is_fully_controlled_by = ROOT
+			}
+			add_dynamic_modifier = {
+				modifier = CEA_urbanization_efforts
+				days = 720
+			}
+		}
+	}
+
+	option = { ## Hand out Rural Subsidies
+		name = cea.5.b
+
+		set_country_flag = CEA_rural_subsidies_flag
+
+		every_core_state = {
+			limit = {
+				is_fully_controlled_by = ROOT
+			}
+			add_dynamic_modifier = {
+				modifier = CEA_rural_subsidies
+				days = 720
+			}
+		}
+	}
+}

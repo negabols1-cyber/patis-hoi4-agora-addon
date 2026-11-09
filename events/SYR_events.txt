@@ -1,0 +1,809 @@
+###########################################################################
+# Syria (SYR) events
+#
+# syria.1-2    Opening: the 1936 general strike and the Sanjak question
+# syria.10-14  National Struggle: France answers Syrian unrest
+# syria.30-35  Independence crisis, revolt and recognition
+# syria.40     Leadership of independent Syria (sets the ideology route)
+# syria.50-57  Loyalist route: Lebanon and the independence treaty
+# syria.60     Loyalist route: France has fallen (on_capitulation hook)
+# syria.80-92  Foreign answers to Syrian proposals
+#
+# Fired from common/national_focus/SYR.txt, common/decisions/SYR.txt and
+# common/on_actions/SYR_on_actions.txt.
+# Design notes: docs/systems/syria_focus_tree.md
+###########################################################################
+
+add_namespace = syria
+
+@SYR_STRIKE_RESISTANCE = 5
+@SYR_CRACKDOWN_LOSS = 8
+@SYR_CONCESSION_LOSS = 3
+@SYR_ARREST_LOSS = 15
+@SYR_CACHE_LOSS = 3
+@SYR_POSTPONE_LOSS = 20
+@SYR_BETRAYAL_RESISTANCE = 25
+
+#######################################################################
+# Opening
+#######################################################################
+
+# The general strike of 1936
+country_event = {
+	id = syria.1
+	title = syria.1.t
+	desc = syria.1.d
+	picture = GFX_report_event_generic_strike
+	is_triggered_only = yes
+
+	option = { # Negotiate with the High Commissioner
+		name = syria.1.a
+		ai_chance = { base = 60 }
+		add_political_power = 50
+		add_popularity = { ideology = democratic popularity = 0.05 }
+	}
+	option = { # Keep the souks shut
+		name = syria.1.b
+		ai_chance = { base = 40 }
+		add_war_support = 0.05
+		add_popularity = { ideology = communism popularity = 0.03 }
+		add_popularity = { ideology = fascism popularity = 0.03 }
+		set_temp_variable = { SYR_resistance_gain = @SYR_STRIKE_RESISTANCE }
+		SYR_add_resistance = yes
+	}
+}
+
+# The Sanjak of Alexandretta
+country_event = {
+	id = syria.2
+	title = syria.2.t
+	desc = syria.2.d
+	picture = GFX_report_event_ENG_middle_eastern_conflict
+	is_triggered_only = yes
+
+	option = { # Iskenderun is Syrian
+		name = syria.2.a
+		ai_chance = { base = 50 }
+		add_war_support = 0.05
+		set_country_flag = SYR_hatay_defiant
+		799 = {
+			add_building_construction = {
+				type = bunker
+				level = 1
+				instant_build = yes
+				province = { all_provinces = yes limit_to_border = yes }
+			}
+		}
+		if = {
+			limit = { country_exists = TUR }
+			TUR = { add_opinion_modifier = { target = ROOT modifier = SYR_hatay_dispute } }
+		}
+	}
+	option = { # Seek an understanding with Ankara
+		name = syria.2.b
+		ai_chance = { base = 50 }
+		add_political_power = 50
+		set_country_flag = SYR_hatay_understanding
+		if = {
+			limit = { country_exists = TUR }
+			TUR = { add_opinion_modifier = { target = ROOT modifier = SYR_hatay_understanding } }
+		}
+	}
+}
+
+#######################################################################
+# National Struggle: France answers
+#######################################################################
+
+# France: unrest in the Levant. FROM is Syria.
+country_event = {
+	id = syria.10
+	title = syria.10.t
+	desc = syria.10.d
+	picture = GFX_report_event_generic_riot
+	is_triggered_only = yes
+
+	trigger = {
+		FROM = { is_subject_of = ROOT }
+	}
+
+	option = { # Send in the Surete
+		name = syria.10.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0.5
+				SYR_france_is_weakened = yes
+			}
+		}
+		add_political_power = -15
+		FROM = {
+			set_temp_variable = { SYR_resistance_loss = @SYR_CRACKDOWN_LOSS }
+			SYR_reduce_resistance = yes
+			add_stability = -0.03
+			add_war_support = 0.03
+			country_event = { id = syria.11 hours = 6 }
+		}
+	}
+	option = { # Offer concessions
+		name = syria.10.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 2
+				SYR_france_is_weakened = yes
+			}
+		}
+		add_political_power = -25
+		FROM = {
+			set_temp_variable = { SYR_resistance_loss = @SYR_CONCESSION_LOSS }
+			SYR_reduce_resistance = yes
+			add_stability = 0.05
+			add_political_power = 25
+			country_event = { id = syria.12 hours = 6 }
+		}
+	}
+	option = { # Arrest the National Bloc leaders
+		name = syria.10.c
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 0
+				SYR_france_is_weakened = yes
+			}
+		}
+		add_political_power = -10
+		FROM = {
+			set_temp_variable = { SYR_resistance_loss = @SYR_ARREST_LOSS }
+			SYR_reduce_resistance = yes
+			add_political_power = -40
+			add_popularity = { ideology = communism popularity = 0.04 }
+			add_popularity = { ideology = fascism popularity = 0.04 }
+			country_event = { id = syria.13 hours = 6 }
+		}
+	}
+}
+
+# Syria: the Surete moves in. FROM is France.
+country_event = {
+	id = syria.11
+	title = syria.11.t
+	desc = syria.11.d
+	picture = GFX_report_event_soldiers_marching
+	is_triggered_only = yes
+
+	option = {
+		name = syria.11.a
+	}
+}
+
+# Syria: France offers concessions. FROM is France.
+country_event = {
+	id = syria.12
+	title = syria.12.t
+	desc = syria.12.d
+	picture = GFX_report_event_generic_parliament
+	is_triggered_only = yes
+
+	option = {
+		name = syria.12.a
+	}
+}
+
+# Syria: the National Bloc leaders are arrested. FROM is France.
+country_event = {
+	id = syria.13
+	title = syria.13.t
+	desc = syria.13.d
+	picture = GFX_report_event_JAP_communists_arrested
+	is_triggered_only = yes
+
+	option = {
+		name = syria.13.a
+	}
+}
+
+# Syria: an arms cache is discovered.
+country_event = {
+	id = syria.14
+	title = syria.14.t
+	desc = syria.14.d
+	picture = GFX_report_event_ITA_partisans
+	is_triggered_only = yes
+
+	option = {
+		name = syria.14.a
+		add_equipment_to_stockpile = { type = infantry_equipment amount = -300 }
+		set_temp_variable = { SYR_resistance_loss = @SYR_CACHE_LOSS }
+		SYR_reduce_resistance = yes
+	}
+}
+
+#######################################################################
+# Independence crisis
+#######################################################################
+
+# France: Syria demands independence. FROM is Syria.
+country_event = {
+	id = syria.30
+	title = syria.30.t
+	desc = syria.30.d
+	picture = GFX_report_event_gathering_protest
+	is_triggered_only = yes
+
+	option = { # Let Syria go
+		name = syria.30.a
+		ai_chance = {
+			base = 60
+			modifier = {
+				factor = 2
+				has_capitulated = yes
+			}
+		}
+		end_puppet = FROM
+		FROM = {
+			SYR_become_independent = yes
+			country_event = { id = syria.32 hours = 6 }
+		}
+	}
+	option = { # The Levant stays French
+		name = syria.30.b
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 0
+				has_capitulated = yes
+			}
+		}
+		FROM = {
+			set_country_flag = SYR_france_refused_independence
+			country_event = { id = syria.31 hours = 6 }
+		}
+	}
+}
+
+# Syria: the hour of the gun.
+country_event = {
+	id = syria.31
+	title = syria.31.t
+	desc = syria.31.d
+	picture = GFX_report_event_ENG_middle_eastern_conflict_2
+	is_triggered_only = yes
+
+	option = { # Raise the flag of revolt
+		name = syria.31.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 3
+				SYR_france_is_weakened = yes
+			}
+		}
+		SYR_launch_the_revolt = yes
+		country_event = { id = syria.40 hours = 6 }
+	}
+	option = { # Not yet
+		name = syria.31.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0.2
+				SYR_france_is_weakened = yes
+			}
+		}
+		set_country_flag = SYR_revolt_postponed
+		set_temp_variable = { SYR_resistance_loss = @SYR_POSTPONE_LOSS }
+		SYR_reduce_resistance = yes
+		add_stability = 0.03
+		custom_effect_tooltip = SYR_revolt_postponed_tt
+	}
+}
+
+# Syria: France lets Syria go. FROM is France.
+country_event = {
+	id = syria.32
+	title = syria.32.t
+	desc = syria.32.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = syria.32.a
+		add_stability = 0.05
+		country_event = { id = syria.40 hours = 6 }
+	}
+}
+
+# France: the Levant war has gone on too long; peace is signed and Syria keeps its land.
+# Fired by the timeout of SYR_hold_damascus. FROM is Syria.
+country_event = {
+	id = syria.33
+	title = syria.33.t
+	desc = syria.33.d
+	picture = GFX_report_event_gathering_protest
+	is_triggered_only = yes
+
+	trigger = {
+		has_war_with = FROM
+	}
+
+	option = { # Recognise Syrian independence
+		name = syria.33.a
+		FROM = {
+			white_peace = {
+				tag = FRA
+				message = SYR_peace_with_france_msg
+			}
+			country_event = { id = syria.34 hours = 6 }
+		}
+	}
+}
+
+# Syria: France recognises independence. FROM is France.
+country_event = {
+	id = syria.34
+	title = syria.34.t
+	desc = syria.34.d
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = syria.34.a
+		add_stability = 0.1
+		add_war_support = 0.05
+	}
+}
+
+#######################################################################
+# Leadership of independent Syria
+#######################################################################
+
+country_event = {
+	id = syria.40
+	title = syria.40.t
+	desc = syria.40.d
+	picture = GFX_report_event_generic_rally
+	is_triggered_only = yes
+
+	trigger = {
+		NOT = { has_country_flag = SYR_route_communist }
+		NOT = { has_country_flag = SYR_route_fascist }
+		NOT = { has_country_flag = SYR_route_monarchy }
+		NOT = { has_country_flag = SYR_route_democratic }
+	}
+
+	option = { # The People's Front
+		name = syria.40.a
+		trigger = {
+			NOT = { has_country_flag = SYR_treaty_betrayed }
+			NOT = { SYR_is_loyalist = yes }
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 30
+				communism > 0.25
+			}
+		}
+		SYR_install_communist_government = yes
+	}
+	option = { # The Syrian Social Nationalist Party
+		name = syria.40.b
+		trigger = {
+			NOT = { has_country_flag = SYR_treaty_betrayed }
+			NOT = { SYR_is_loyalist = yes }
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 30
+				fascism > 0.25
+			}
+		}
+		SYR_install_fascist_government = yes
+	}
+	option = { # A Hashemite king in Damascus
+		name = syria.40.c
+		trigger = {
+			NOT = { has_country_flag = SYR_treaty_betrayed }
+			NOT = { SYR_is_loyalist = yes }
+		}
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 30
+				neutrality > 0.25
+			}
+		}
+		SYR_install_hashemite_monarchy = yes
+	}
+	option = { # The National Bloc keeps the republic
+		name = syria.40.e
+		trigger = {
+			OR = {
+				has_country_flag = SYR_treaty_betrayed
+				SYR_is_loyalist = yes
+			}
+		}
+		ai_chance = { base = 10 }
+		SYR_install_national_bloc_government = yes
+	}
+}
+
+#######################################################################
+# Loyalist route
+#######################################################################
+
+# France: Syria asks for Lebanon. FROM is Syria.
+country_event = {
+	id = syria.50
+	title = syria.50.t
+	desc = syria.50.d
+	picture = GFX_report_event_gre_cabinet_meeting
+	is_triggered_only = yes
+
+	trigger = {
+		country_exists = LEB
+		LEB = { is_subject_of = ROOT }
+	}
+
+	option = { # Unite the Levant
+		name = syria.50.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 2
+				FROM = { has_autonomy_state = autonomy_dominion }
+			}
+		}
+		FROM = {
+			annex_country = { target = LEB transfer_troops = yes }
+			country_event = { id = syria.51 hours = 6 }
+		}
+	}
+	option = { # Lebanon stays separate
+		name = syria.50.b
+		ai_chance = { base = 60 }
+		FROM = {
+			country_event = { id = syria.52 hours = 6 }
+		}
+	}
+}
+
+# Syria: Lebanon joins Syria. FROM is France.
+country_event = {
+	id = syria.51
+	title = syria.51.t
+	desc = syria.51.d
+	picture = GFX_report_event_generic_handshake
+	is_triggered_only = yes
+
+	option = {
+		name = syria.51.a
+		add_stability = 0.05
+		553 = { add_core_of = ROOT }
+	}
+}
+
+# Syria: France keeps Lebanon separate. FROM is France.
+country_event = {
+	id = syria.52
+	title = syria.52.t
+	desc = syria.52.d
+	picture = GFX_report_event_gathering_protest
+	is_triggered_only = yes
+
+	option = {
+		name = syria.52.a
+		add_political_power = 50
+		add_popularity = { ideology = democratic popularity = -0.03 }
+	}
+}
+
+# France: ratify Syrian independence. FROM is Syria.
+country_event = {
+	id = syria.55
+	title = syria.55.t
+	desc = syria.55.d
+	picture = GFX_report_event_generic_sign_treaty3
+	is_triggered_only = yes
+
+	trigger = {
+		FROM = { is_subject_of = ROOT }
+	}
+
+	option = { # Ratify the treaty
+		name = syria.55.a
+		ai_chance = {
+			base = 60
+			modifier = {
+				factor = 0.3
+				NOT = { has_government = democratic }
+			}
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+		}
+		end_puppet = FROM
+		FROM = {
+			SYR_become_independent = yes
+			set_country_flag = SYR_route_democratic
+			country_event = { id = syria.56 hours = 6 }
+		}
+	}
+	option = { # Shelve the treaty
+		name = syria.55.b
+		ai_chance = { base = 40 }
+		FROM = {
+			set_country_flag = SYR_treaty_betrayed
+			country_event = { id = syria.57 hours = 6 }
+		}
+	}
+}
+
+# Syria: the treaty is ratified. FROM is France.
+country_event = {
+	id = syria.56
+	title = syria.56.t
+	desc = syria.56.d
+	picture = GFX_report_event_canada_treaty
+	is_triggered_only = yes
+
+	option = {
+		name = syria.56.a
+		add_stability = 0.1
+		add_political_power = 100
+	}
+}
+
+# Syria: France shelves the treaty. FROM is France.
+country_event = {
+	id = syria.57
+	title = syria.57.t
+	desc = syria.57.d
+	picture = GFX_report_event_india_protests
+	is_triggered_only = yes
+
+	option = {
+		name = syria.57.a
+		add_war_support = 0.1
+		set_temp_variable = { SYR_resistance_gain = @SYR_BETRAYAL_RESISTANCE }
+		SYR_add_resistance = yes
+		custom_effect_tooltip = SYR_unlocks_national_struggle_tt
+	}
+}
+
+# Syria: France has fallen. Fired from on_capitulation.
+country_event = {
+	id = syria.60
+	title = syria.60.t
+	desc = syria.60.d
+	picture = GFX_report_event_french_resistance_01
+	is_triggered_only = yes
+
+	trigger = {
+		is_subject_of = FRA
+	}
+
+	option = { # Stand with Free France
+		name = syria.60.a
+		ai_chance = { base = 50 }
+		add_ideas = SYR_free_french_levant
+		FRA = { add_opinion_modifier = { target = ROOT modifier = SYR_loyal_partner } }
+	}
+	option = { # Recognise the government at Vichy
+		name = syria.60.b
+		trigger = {
+			26 = {
+				OWNER = {
+					has_country_flag = vichy_france
+					exists = yes
+				}
+			}
+		}
+		ai_chance = { base = 30 }
+		FRA = { end_puppet = ROOT }
+		26 = {
+			OWNER = { puppet = ROOT }
+		}
+		add_ideas = SYR_vichy_levant
+	}
+	option = { # The mandate is over
+		name = syria.60.c
+		ai_chance = { base = 20 }
+		FRA = { end_puppet = ROOT }
+		SYR_become_independent = yes
+		set_country_flag = SYR_route_democratic
+		add_war_support = 0.1
+	}
+}
+
+#######################################################################
+# Foreign answers. FROM is Syria in syria.80-84; FROM is the answering
+# country in syria.90-92.
+#######################################################################
+
+# Soviet Union: Syria asks to join.
+country_event = {
+	id = syria.80
+	title = syria.80.t
+	desc = syria.80.d
+	picture = GFX_report_event_molotov_signing_pact
+	is_triggered_only = yes
+
+	trigger = {
+		is_faction_leader = yes
+		FROM = { is_in_faction = no }
+	}
+
+	option = { # Welcome our Syrian comrades
+		name = syria.80.a
+		ai_chance = { base = 70 }
+		add_to_faction = FROM
+		FROM = { country_event = { id = syria.90 hours = 6 } }
+	}
+	option = { # Not now
+		name = syria.80.b
+		ai_chance = { base = 30 }
+		FROM = { country_event = { id = syria.91 hours = 6 } }
+	}
+}
+
+# Germany: Syria seeks Axis patronage.
+country_event = {
+	id = syria.81
+	title = syria.81.t
+	desc = syria.81.d
+	picture = GFX_report_event_fascist_speech
+	is_triggered_only = yes
+
+	trigger = {
+		is_faction_leader = yes
+		FROM = { is_in_faction = no }
+	}
+
+	option = { # Bring Syria into the fold
+		name = syria.81.a
+		ai_chance = { base = 50 }
+		add_to_faction = FROM
+		FROM = { country_event = { id = syria.90 hours = 6 } }
+	}
+	option = { # The Levant is not our concern
+		name = syria.81.b
+		ai_chance = { base = 50 }
+		FROM = { country_event = { id = syria.91 hours = 6 } }
+	}
+}
+
+# Iraq: the Hashemite Entente.
+country_event = {
+	id = syria.82
+	title = syria.82.t
+	desc = syria.82.d
+	picture = GFX_report_event_generic_handshake
+	is_triggered_only = yes
+
+	trigger = {
+		is_in_faction = no
+		FROM = { is_faction_leader = yes }
+	}
+
+	option = { # Join our Hashemite brothers
+		name = syria.82.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 3
+				has_government = neutrality
+			}
+			modifier = {
+				factor = 0
+				is_subject = yes
+			}
+		}
+		FROM = {
+			add_to_faction = ROOT
+			country_event = { id = syria.90 hours = 6 }
+		}
+	}
+	option = { # Baghdad goes its own way
+		name = syria.82.b
+		ai_chance = { base = 30 }
+		FROM = { country_event = { id = syria.91 hours = 6 } }
+	}
+}
+
+# Lebanon: union with Syria.
+country_event = {
+	id = syria.84
+	title = syria.84.t
+	desc = syria.84.d
+	picture = GFX_report_event_gre_cabinet_meeting
+	is_triggered_only = yes
+
+	trigger = {
+		is_subject = no
+		owns_state = 553
+	}
+
+	option = { # Accept the union
+		name = syria.84.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 2
+				FROM = { strength_ratio = { tag = ROOT ratio > 3 } }
+			}
+		}
+		FROM = {
+			annex_country = { target = ROOT transfer_troops = yes }
+			country_event = { id = syria.92 hours = 6 }
+		}
+	}
+	option = { # Lebanon stays free
+		name = syria.84.b
+		ai_chance = { base = 80 }
+		FROM = {
+			create_wargoal = {
+				type = take_state_focus
+				target = ROOT
+				generator = { 553 }
+			}
+			country_event = { id = syria.91 hours = 6 }
+		}
+	}
+}
+
+# Syria: a proposal is accepted. FROM is the answering country.
+country_event = {
+	id = syria.90
+	title = syria.90.t
+	desc = syria.90.d
+	picture = GFX_report_event_generic_handshake
+	is_triggered_only = yes
+
+	option = {
+		name = syria.90.a
+	}
+}
+
+# Syria: a proposal is refused. FROM is the answering country.
+country_event = {
+	id = syria.91
+	title = syria.91.t
+	desc = syria.91.d
+	picture = GFX_report_event_gathering_protest
+	is_triggered_only = yes
+
+	option = {
+		name = syria.91.a
+	}
+}
+
+# Syria: Lebanon accepts the union. FROM is Lebanon.
+country_event = {
+	id = syria.92
+	title = syria.92.t
+	desc = syria.92.d
+	picture = GFX_report_event_generic_rally2
+	is_triggered_only = yes
+
+	option = {
+		name = syria.92.a
+		add_stability = 0.05
+		553 = { add_core_of = ROOT }
+	}
+}
+
+news_event = {
+	id = syria.93
+	title = syria.93.t
+	desc = syria.93.d
+	picture = GFX_news_event_generic_read_write
+	is_triggered_only = yes
+
+	option = {
+		name = syria.93.a
+	}
+}

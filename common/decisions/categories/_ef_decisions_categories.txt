@@ -1,0 +1,173 @@
+join_faction_category = {
+	icon = generic_foreign_policy
+	priority = 100
+	allowed = {
+		original_tag = ROOT
+	}
+
+	visible = {
+		is_subject = no
+		NOT = {
+			has_country_leader = {
+				character = TUR_mustafa_kemal_ataturk
+				ruling_only = yes
+			}
+		}
+		NOT = {
+			has_global_flag = his_only
+			has_country_flag = ef_cant_join_factions_flag
+		}
+	}
+}
+
+ef_ai_behavior_category = {
+	icon = generic_crisis
+	priority = 499
+
+	visible = {
+		NOT = {
+			has_global_flag = his_only
+		}
+		is_ai = yes
+	}
+}
+
+core_category = {
+	allowed = {
+		original_tag = ROOT
+	}
+}
+
+CAN_civil_war_category = {
+	icon = generic_crisis
+	priority = 100
+	allowed = {
+		original_tag = CAN
+	}
+
+	available = {
+		has_civil_war = no
+	}
+}
+
+USA_civil_war_category = {
+	icon = generic_crisis
+	priority = 100
+	allowed = {
+		original_tag = USA
+	}
+
+	available = {
+		has_civil_war = no
+	}
+}
+
+ai_optimisation_category = {
+	icon = GFX_decision_category_generic_political_actions
+	priority = 99
+	allowed = {
+		original_tag = ROOT
+	}
+
+	available = {
+
+	}
+}
+
+Al_amain_war = {
+	icon = GFX_decision_category_military_operation
+	priority = 101
+	allowed = {
+		original_tag = ROOT
+	}
+
+	available = {
+
+	}
+}
+
+SPR_civil_war_recovery = {
+	icon = GFX_decision_category_generic_industry
+	priority = 101
+	allowed = {
+		original_tag = SPR
+	}
+
+	available = {
+
+	}
+}
+
+EF_Jihad_Public_Unrest = {
+	icon = GFX_decision_category_GER_war_planning
+	priority = 101
+
+	allowed = {
+		OR = {
+			original_tag = SAU
+			original_tag = TUR
+		}
+	}
+
+	visible = {
+		OR = {
+			has_idea = EF_Jihad_idea
+			has_country_flag = EF_caliph_dispute_no_jihad_flag
+		}
+		has_global_flag = EF_caliph_dispute_war_option_flag
+		TUR = { has_completed_focus = TUR_pivot_to_the_past }
+		SAU = { has_completed_focus = SAU_dream_of_caliphate }
+	}
+}
+
+EF_country_point_category = {
+	icon = GFX_decision_category_GER_war_planning
+	priority = 200
+
+	allowed = {
+		always = no
+	}
+
+	scripted_gui = EF_country_point_decision_ui
+
+	visible = {
+		always = no #Ara güncelleme atılmadan önce always no yapılmalı
+		#is_debug = yes
+		#has_game_rule = {
+			#	rule = RP_mode
+			#	option = ENABLED
+			#}
+	}
+}
+
+CYP_crusader_operations_category = {
+	icon = GFX_decision_category_GER_war_planning
+
+	picture = GFX_decision_cat_picture_generic_border_conflicts
+
+	priority = 11
+
+	visible_when_empty = no
+
+	allowed = {
+		original_tag = CYP
+	}
+
+	visible = {
+		has_completed_focus = CYP_grandmasters_ambition
+	}
+}
+
+MAN_five_year_plan_category = {
+	icon = GFX_decision_category_generic_arms_trade
+
+	priority = 40
+
+	allowed = {
+		original_tag = MAN
+	}
+
+	visible = {
+		has_completed_focus = MAN_initiate_the_first_year_plan
+	}
+}

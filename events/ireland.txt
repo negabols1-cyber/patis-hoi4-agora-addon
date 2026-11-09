@@ -1,0 +1,1205 @@
+###########################
+# Ireland Events
+###########################
+
+add_namespace = ireland
+
+#Grab Norway (Vikings)
+country_event = {
+	id = ireland.1
+	title = ireland.1.t
+	desc = ireland.1.d
+	picture = GFX_report_event_generic_riot
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.1.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = -25
+				FROM = { has_army_size = { size < 40 } }
+			}
+			modifier = {
+				add = 100
+				FROM = { has_army_size = { size > 39 } }
+			}
+			modifier = {
+				add = 20
+				is_in_faction_with = FROM
+			}
+			modifier = {
+				factor = 0.1
+				is_in_faction = yes
+			}
+			modifier = {
+				factor = 0.5
+				check_variable = { IRE_viking_militants_power_war > 35 }
+			}
+		}
+		FROM = {
+			set_autonomy = {
+				target = ROOT
+				autonomy_state = autonomy_personal_union
+			}
+		}
+	}
+
+	option = {
+		name = ireland.1.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				FROM = { has_army_size = { size > 39 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 20
+				FROM = { has_army_size = { size < 30 } }
+			}
+			modifier = {
+				factor = 2
+				is_in_faction = yes
+				NOT = { is_in_faction_with = FROM }
+			}
+			modifier = {
+				any_other_country = {
+					is_major = yes
+					has_guaranteed = NOR
+				}
+				factor = 5
+			}
+			modifier = {
+				factor = 10
+				check_variable = { IRE_viking_militants_power_war < 35 }
+			}
+		}
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = medium_decrease }
+		}
+		add_opinion_modifier = { target = ENG modifier = medium_decrease }
+		FROM = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = ROOT
+			}
+		}
+	}
+}
+
+#Ireland Demand Northern Ireland
+country_event = {
+	id = ireland.2
+	title = ireland.2.t
+	desc = ireland.2.desc
+	picture = GFX_decision_cat_picture_government_in_exile
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.2.a #Britain accepts
+		effect_tooltip = {
+			IRE = {
+				transfer_state = 119
+			}
+		}
+		hidden_effect = {
+			IRE = {
+				country_event = { id = ireland.3 hours = 8 }
+			}
+		}
+	}
+
+	option = {
+		name = ireland.2.b #Britain refuse
+		IRE = {
+			country_event = { id = ireland.4 hours = 8 }
+		}
+	}
+}
+
+#Ireland Demand Northern Ireland (Britain accepts)
+country_event = {
+	id = ireland.3
+	title = ireland.3.t
+	desc = ireland.3.desc
+	picture = GFX_decision_cat_picture_government_in_exile
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.3.a #we truly are a great power
+		transfer_state = 119
+	}
+}
+
+#Ireland Demand Northern Ireland (Britain refuses)
+country_event = {
+	id = ireland.4
+	title = ireland.4.t
+	desc = ireland.4.desc
+	picture = GFX_report_event_tur_the_montreux_convention
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.4.a #we will not forget
+		add_state_claim = 119
+		add_stability = -0.05
+
+		create_wargoal = {
+			type = annex_everything
+			target = ENG
+		}
+	}
+}
+
+#Qusling's Offer
+country_event = {
+	id = ireland.55
+	title = "Qusling's Offer."
+	desc = ireland.55.d
+	picture = GFX_report_event_NOR_quisling_meeting
+	is_triggered_only = yes
+	#
+	option = {
+		name = ireland.55.a
+		NOR = {
+			NOR_vidkun_quisling = {
+				set_nationality = ROOT
+			}
+		}
+		NOR = { country_event = ireland.66 }
+
+		add_to_variable = {
+			var = IRE_viking_militants_power_war
+			value = 25
+			tooltip = IRE_viking_militants_power_war_quisling_increase
+		}
+	}
+	#
+	option = {
+		name = ireland.55.b
+		add_to_variable = {
+			var = IRE_viking_militants_power_war
+			value = -10
+			tooltip = IRE_viking_militants_power_war_quisling_decrease
+		}
+	}
+}
+
+country_event = {
+	id = ireland.66
+	title = "Quisling Escape To Ireland"
+	desc = ireland.66.d
+	picture = GFX_report_event_NOR_quisling_meeting
+	is_triggered_only = yes
+	#
+	option = {
+		name = ireland.66.a
+
+		effect_tooltip = {
+			NOR = {
+				NOR_vidkun_quisling = {
+					set_nationality = IRE
+				}
+			}
+		}
+
+		add_stability = -0.05
+	}
+}
+
+#Ireland Demands Norway
+country_event = {
+	id = ireland.5
+	title = ireland.5.t
+	desc = ireland.5.desc
+	picture = GFX_report_event_lithuanian_ultimatum
+
+	is_triggered_only = yes
+
+	option = { #Sure!
+		name = ireland.5.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = -25
+				IRE = { has_army_size = { size < 40 } }
+			}
+			modifier = {
+				add = 100
+				IRE = { has_army_size = { size > 39 } }
+			}
+			modifier = {
+				add = 20
+				is_in_faction_with = IRE
+			}
+			modifier = {
+				factor = 0.1
+				is_in_faction = yes
+			}
+		}
+		IRE = {
+			country_event = { hours = 2 id =  ireland.6 }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+
+	option = { #No thank you
+		name = ireland.5.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				IRE = { has_army_size = { size > 39 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 20
+				IRE = { has_army_size = { size < 30 } }
+			}
+			modifier = {
+				factor = 2
+				is_in_faction = yes
+				NOT = { is_in_faction_with = IRE }
+			}
+			modifier = {
+				any_other_country = {
+					has_guaranteed = NOR
+				}
+				factor = 5 #i've got friends
+			}
+			modifier = {
+				any_other_country = {
+					is_major = yes
+					has_guaranteed = NOR
+				}
+				factor = 5 #i've got big friends
+			}
+		}
+		IRE = {
+			add_opinion_modifier = { target = PREV modifier = POL_annexation_refused }
+			country_event = { hours = 2 id = ireland.7 }
+			if = { limit = { is_in_faction_with = NOR }
+				remove_from_faction = NOR
+			}
+		}
+	}
+}
+
+#Norway says yes
+country_event = {
+	id = ireland.6
+	title =  ireland.6.t
+	desc =  ireland.6.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = { #Good News
+		name =  ireland.6.a
+		ai_chance = {
+			base = 30
+		}
+		annex_country = { target = FROM transfer_troops = yes }
+	}
+}
+
+#Norway says no
+country_event = {
+	id = ireland.7
+	title = ireland.7.t
+	desc = ireland.7.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.7.a
+		ai_chance = {
+			base = 30
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+		}
+	}
+}
+
+#German Military Attache
+country_event = {
+	id = ireland.8
+	title = "Irish Government Talks About Attache"
+	desc = ireland.8.d
+	picture = GFX_report_event_generic_conference
+	is_triggered_only = yes
+	#Agree to send advisors
+	option = {
+		name = "Acceptable"
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {
+						has_government = fascism
+						has_government = neutrality
+					}
+					has_civil_war = yes
+					NOT = {
+						IRE = {has_war_with = GER}
+					}
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				hours = 1
+				id = ireland.9
+			}
+		}
+		custom_effect_tooltip = ETH_send_ita_generals_tt
+	}
+	#Refuse to send advisors
+	option = {
+		name = "Our Generals Are Not For Sale."
+		ai_chance = {
+			base = 0
+			modifier = {
+				factor = 10
+				OR = {
+					NOT = {
+						has_government = fascism
+						has_government = neutrality
+					}
+					has_civil_war = yes
+					NOT = {FROM = {is_subject_of = GER}}
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				hours = 1
+				id = ireland.10
+			}
+		}
+	}
+}
+
+#Germany Accept
+country_event = {
+	id = ireland.9
+	title = "German Government Accept The Send Officer"
+	desc = ireland.9.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+	option = {
+		name = "Good News"
+		ai_chance = {
+			base = 10
+		}
+		hidden_effect = {
+			GER = {
+				GER_ludwig_beck = {
+					set_nationality = IRE
+					set_character_flag = IRE_german_advisor
+				}
+			}
+		}
+	}
+}
+
+#Germany Refuse
+country_event = {
+	id = ireland.10
+	title = "German Government Refuse The Send Officers"
+	desc = ireland.10.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+	option = {
+		name = "Not Good"
+		add_political_power = -50
+	}
+}
+
+#BlueShirt's Spawn
+country_event = {
+	id = ireland.11
+	title = "BlueShirt's Ready!"
+	desc = ireland.11.d
+	picture = GFX_report_event_SWE_internment_camp
+	is_triggered_only = yes
+	#Agree to send advisors
+	option = {
+		name = "Ready."
+		ai_chance = {
+			base = 1
+		}
+		hidden_effect = {
+			every_core_state = {
+				limit = {
+					NOT = { has_state_flag = blueshirts_activated }
+				}
+				set_state_flag = blueshirts_activated
+				while_loop_effect = {
+					limit = { check_variable = { IRE_blueshirts_equiped > 0 } }
+
+					subtract_from_variable = { IRE_blueshirts_equiped = 1 }
+					create_unit = {
+						division = "name = \"Na Léinte Gorma\" division_template = \"Na Léinte Gorma\" start_experience_factor = 0.1 start_equipment_factor = 0.6 start_manpower_factor = 0.7"
+						allow_spawning_on_enemy_provs = no
+						owner = ROOT
+					}
+				}
+			}
+
+			set_division_template_lock = {
+				division_template = "Na Léinte Gorma"
+				is_locked = no
+			}
+		}
+	}
+}
+
+#IRELAND DEMAND FAROE ISLANDS
+country_event = {
+	id = ireland.12
+	title = ireland.12.t
+	desc = ireland.12.desc
+	picture = GFX_report_event_ger_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.12.a #accepts
+		effect_tooltip = {
+			IRE = {
+				transfer_state = 337
+			}
+		}
+		hidden_effect = {
+			IRE = {
+				country_event = { id = ireland.13 hours = 5 }
+			}
+		}
+	}
+
+	option = {
+		name = ireland.12.b #Britain refuse
+		IRE = {
+			country_event = { id = ireland.14 hours = 5 }
+		}
+	}
+}
+
+#ACCEPTED
+country_event = {
+	id = ireland.13
+	title = ireland.13.t
+	desc = ireland.13.desc
+	picture = GFX_report_event_ger_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.13.a #we truly are a great power
+		transfer_state = 337
+	}
+}
+
+#REFUSED
+country_event = {
+	id = ireland.14
+	title = ireland.14.t
+	desc = ireland.14.desc
+	picture = GFX_report_event_ger_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.14.a #we will not forget
+		add_state_claim = 337
+		add_stability = -0.05
+	}
+}
+
+country_event = {
+	id = ireland.15
+	title = ireland.15.t
+	desc = ireland.15.desc
+	picture = GFX_report_event_ger_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.15.a #accepts
+		effect_tooltip = {
+			IRE = {
+				transfer_state = 100
+			}
+		}
+		hidden_effect = {
+			IRE = {
+				country_event = { id = ireland.16 hours = 5 }
+			}
+		}
+	}
+
+	option = {
+		name = ireland.15.b #Britain refuse
+		IRE = {
+			country_event = { id = ireland.17 hours = 5 }
+		}
+	}
+}
+
+#Ireland Demand Northern Ireland (Britain accepts)
+country_event = {
+	id = ireland.16
+	title = ireland.16.t
+	desc = ireland.16.desc
+	picture = GFX_report_event_ger_civil_war
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.16.a #we truly are a great power
+		transfer_state = 100
+	}
+}
+
+#Ireland Demand Northern Ireland (Britain refuses)
+country_event = {
+	id = ireland.17
+	title = ireland.17.t
+	desc = ireland.17.desc
+	picture = GFX_report_event_tur_the_montreux_convention
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.17.a #we will not forget
+		add_state_claim = 100
+		add_stability = -0.05
+	}
+}
+
+country_event = {
+	id = ireland.18
+	title = ireland.18.t
+	desc = ireland.18.desc
+	picture = GFX_decision_cat_picture_government_in_exile
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.18.a #accepts
+		ENG = {
+			add_political_power = 200
+		}
+		IRE = {
+			diplomatic_relation = {
+				country = ENG
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+		ENG = {
+			diplomatic_relation = {
+				country = IRE
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+		IRE = {
+			diplomatic_relation = {
+				country = ENG
+				relation = guarantee
+				active = yes
+			}
+		}
+		ENG = {
+			diplomatic_relation = {
+				country = IRE
+				relation = guarantee
+				active = yes
+			}
+		}
+
+		IRE = { add_political_power = 100 }
+	}
+
+	option = {
+		name = ireland.18.b #Britain refuse
+		IRE = {
+			add_opinion_modifier = { target = ROOT modifier = medium_decrease }
+		}
+	}
+}
+
+country_event = {
+	id = ireland.19
+	title = ireland.19.t
+	desc = ireland.19.desc
+	picture = GFX_decision_cat_picture_government_in_exile
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.19.a #accepts
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 5
+				has_opinion = {
+					target = FROM
+					value > 24
+				}
+			}
+			modifier = {
+				factor = 10
+				has_opinion = {
+					target = FROM
+					value > 49
+				}
+			}
+			modifier = {
+				factor = 20
+				has_opinion = {
+					target = FROM
+					value > 89
+				}
+			}
+			modifier = {
+				factor = 1.5
+				is_guaranteed_by = FROM
+			}
+			modifier = {
+				factor = 1.2
+				has_non_aggression_pact_with = FROM
+			}
+			modifier = {
+				factor = 10
+				is_in_faction_with = FROM
+			}
+			modifier = {
+				factor = 100
+				is_subject_of = FROM
+			}
+			modifier = {
+				factor = 100
+				FROM = { is_ai = no }
+				OR = {
+					is_in_faction_with = FROM
+					is_subject_of = FROM
+				}
+			}
+		}
+
+		SOV = {
+			add_political_power = 100
+
+			add_ideas = IRE_irish_soviet_pact
+		}
+
+		effect_tooltip = {
+			IRE = { set_country_flag = ire_military_pact }
+
+			IRE = {
+				unlock_national_focus = IRE_red_army_officers
+			}
+		}
+
+	}
+
+	option = {
+		name = ireland.19.b #Britain refuse
+
+		ai_chance = {
+			base = 15
+		}
+
+		SOV = {
+			add_political_power = 100
+
+			add_ideas = IRE_irish_soviet_pact
+		}
+
+		effect_tooltip = {
+			IRE = { set_country_flag = ire_industrial_pact }
+
+			IRE = {
+				unlock_national_focus = IRE_soviet_designers
+			}
+		}
+	}
+
+	option = {
+		name = ireland.19.c #Britain refuse
+
+		ai_chance = {
+			base = 15
+		}
+
+		SOV = {
+			add_political_power = 100
+
+			add_ideas = IRE_irish_soviet_pact
+		}
+
+		effect_tooltip = {
+			IRE = {
+				set_country_flag = ire_industrial_pact
+				set_country_flag = ire_military_pact
+			}
+
+			IRE = {
+				unlock_national_focus = IRE_soviet_designers
+				unlock_national_focus = IRE_red_army_officers
+			}
+		}
+	}
+
+	option = {
+		name = ireland.19.d #Britain refuse
+
+		ai_chance = {
+			base = 10
+		}
+
+		SOV = { add_political_power = -75 }
+
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = medium_decrease }
+		}
+
+		hidden_effect = {
+			IRE = { set_country_flag = ire_pact_canceled }
+		}
+	}
+}
+
+country_event = {
+	id = ireland.20
+	title = ireland.20.t
+	desc = ireland.20.desc
+	picture = GFX_report_event_hol_cabinet_de_geer
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.20.a
+
+		add_political_power = 10
+	}
+
+	option = {
+		name = ireland.20.c
+
+		add_political_power = 10
+
+		add_ideas = IRE_Thomas_Finlay
+		remove_ideas = IRE_Horace_Plunkett
+	}
+
+	option = {
+		name = ireland.20.d
+
+		add_political_power = 10
+
+		add_ideas = IRE_George_William_Russell
+		remove_ideas = IRE_Horace_Plunkett
+	}
+}
+
+#Secret Pact With Soviet
+country_event = {
+	id = ireland.21
+	title = ireland.21.t
+	desc = ireland.21.desc
+	picture = GFX_report_event_SOV_litvinov_beck
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.21.a #accepts
+
+		hidden_effect = {
+			IRE = { country_event = { id = ireland.22 hours = 4 random_hours = 2 } }
+		}
+		effect_tooltip = {
+			if = {
+				limit = {
+					SOV = {	has_war_with = ENG }
+					NOT = { IRE = { has_war_with = ENG } }
+				}
+				IRE = { add_to_war = { targeted_alliance = SOV enemy = ENG hostility_reason = asked_to_join } }
+			}
+			else_if = {
+				limit = {
+					IRE = { has_war_with = ENG }
+					NOT = { SOV = {	has_war_with = ENG } }
+				}
+				SOV = { add_to_war = { targeted_alliance = IRE enemy = ENG hostility_reason = asked_to_join } }
+			}
+			else_if = {
+				limit = {
+					NOT = { IRE = { has_war_with = ENG } }
+					NOT = { SOV = {	has_war_with = ENG } }
+				}
+				IRE = {
+					declare_war_on = {
+						target = ENG
+						type = annex_everything
+					}
+				}
+				SOV = { add_to_war = { targeted_alliance = IRE enemy = ENG hostility_reason = asked_to_join } }
+			}
+
+			SOV = {
+				if = {
+					limit = {
+						NOT = {
+							has_non_aggression_pact_with = IRE
+						}
+					}
+					diplomatic_relation = {
+						country = IRE
+						relation = non_aggression_pact
+						active = yes
+					}
+				}
+			}
+
+			every_state = {
+				limit = {
+					is_core_of = ENG
+				}
+				add_claim_by = IRE
+			}
+			every_state = {
+				limit = {
+					is_core_of = ENG
+				}
+				add_claim_by = SOV
+			}
+
+			SOV = {
+				add_opinion_modifier = { target = IRE modifier = medium_increase }
+			}
+
+			IRE = {
+				add_timed_idea = { idea = IRE_secret_pact_with_soviet days = 365 }
+			}
+			SOV = {
+				add_timed_idea = { idea = IRE_secret_pact_with_soviet days = 365 }
+			}
+		}
+	}
+
+	option = {
+		name = ireland.21.b #Soviet refuse
+
+		hidden_effect = {
+			IRE = { country_event = { id = ireland.23 hours = 4 random_hours = 2 } }
+		}
+		effect_tooltip = {
+			ROOT = {
+				add_political_power = -25
+			}
+
+			IRE = {
+				add_opinion_modifier = { target = SOV modifier = medium_decrease }
+			}
+			SOV = {
+				add_opinion_modifier = { target = IRE modifier = medium_decrease }
+			}
+		}
+	}
+}
+
+#Soviet Government Accepted The Pact
+country_event = {
+	id = ireland.22
+	title = "Soviet Government Accepted The Pact"
+	desc = ireland.22.d
+	picture = GFX_report_event_SOV_litvinov_beck
+	is_triggered_only = yes
+	option = {
+		name = "Good News"
+		ai_chance = {
+			base = 10
+		}
+
+		if = {
+			limit = {
+				SOV = {	has_war_with = ENG }
+				NOT = { IRE = { has_war_with = ENG } }
+			}
+			IRE = { add_to_war = { targeted_alliance = SOV enemy = ENG hostility_reason = asked_to_join } }
+		}
+		else_if = {
+			limit = {
+				IRE = { has_war_with = ENG }
+				NOT = { SOV = {	has_war_with = ENG } }
+			}
+			SOV = { add_to_war = { targeted_alliance = IRE enemy = ENG hostility_reason = asked_to_join } }
+		}
+		else_if = {
+			limit = {
+				NOT = { IRE = { has_war_with = ENG } }
+				NOT = { SOV = {	has_war_with = ENG } }
+			}
+			IRE = {
+				declare_war_on = {
+					target = ENG
+					type = annex_everything
+				}
+			}
+			SOV = { add_to_war = { targeted_alliance = IRE enemy = ENG hostility_reason = asked_to_join } }
+		}
+
+		SOV = {
+			if = {
+				limit = {
+					NOT = {
+						has_non_aggression_pact_with = IRE
+					}
+				}
+				diplomatic_relation = {
+					country = IRE
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+		}
+
+		every_state = {
+			limit = {
+				is_core_of = ENG
+			}
+			add_claim_by = IRE
+		}
+		every_state = {
+			limit = {
+				is_core_of = ENG
+			}
+			add_claim_by = SOV
+		}
+
+		SOV = {
+			add_opinion_modifier = { target = IRE modifier = medium_increase }
+		}
+
+		IRE = {
+			add_timed_idea = { idea = IRE_secret_pact_with_soviet days = 365 }
+		}
+		SOV = {
+			add_timed_idea = { idea = IRE_secret_pact_with_soviet days = 365 }
+		}
+	}
+}
+
+#Soviet Government Refused The Pact
+country_event = {
+	id = ireland.23
+	title = "Soviet Government Refused The Pact"
+	desc = ireland.23.desc
+	picture = GFX_report_event_tur_the_montreux_convention
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Bad News." #we will not forget
+
+		ROOT = {
+			add_political_power = -25
+		}
+
+		IRE = {
+			add_opinion_modifier = { target = SOV modifier = medium_decrease }
+		}
+		SOV = {
+			add_opinion_modifier = { target = IRE modifier = medium_decrease }
+		}
+	}
+}
+
+#Duffy Escaped To Other Country
+country_event = {
+	id = ireland.24
+	title = ireland.24.t
+	desc = ireland.24.desc
+	picture = GFX_report_event_merchant_ship_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.24.a #accepts
+
+		IRE = {
+			IRE_eoin_oduffy = { set_nationality = ROOT }
+		}
+	}
+
+	option = {
+		name = ireland.24.b
+
+		add_political_power = -10
+	}
+}
+
+#
+country_event = {
+	id = ireland.25
+	title = ireland.25.t
+	desc = ireland.25.desc
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = ireland.25.a #accepts
+
+		IRE = { country_event = { id = ireland.26 hours = 5 } }
+		effect_tooltip = {
+			119 = { remove_dynamic_modifier = { modifier = IRE_irish_actions } }
+
+			ENG = {
+				add_political_power = 25
+				random_core_state = {
+					limit = {
+						is_fully_controlled_by = ENG
+						industrial_complex > 0
+					}
+					remove_building = {
+						type = industrial_complex
+						level = 1
+					}
+				}
+			}
+
+			IRE = {
+				add_political_power = 25
+				random_core_state = {
+					limit =	{
+						is_fully_controlled_by = IRE
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = ireland.25.b #Britain refuse
+
+		IRE = { country_event = { id = ireland.27 hours = 5 } }
+		effect_tooltip = {
+			119 = { remove_dynamic_modifier = { modifier = IRE_irish_actions } }
+			119 = { add_dynamic_modifier = { modifier = IRE_irish_actions2 } }
+
+			119 = {
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+			}
+		}
+	}
+}
+
+#UK Accept
+country_event = {
+	id = ireland.26
+	title = "UK Government Accept The Deal"
+	desc = ireland.26.d
+	picture = GFX_report_event_generic_conference
+	is_triggered_only = yes
+	option = {
+		name = ireland.26.a
+
+		119 = { remove_dynamic_modifier = { modifier = IRE_irish_actions } }
+
+		ENG = {
+			add_political_power = 25
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ENG
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+		}
+
+
+		IRE = {
+			add_political_power = 25
+			random_core_state = {
+				limit =	{
+					is_fully_controlled_by = IRE
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+#UK Refuse
+country_event = {
+	id = ireland.27
+	title = "UK Government Refuse The Deal"
+	desc = ireland.27.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+	option = {
+		name = ireland.27.a
+
+		119 = { remove_dynamic_modifier = { modifier = IRE_irish_actions } }
+		119 = { add_dynamic_modifier = { modifier = IRE_irish_actions2 } }
+
+		119 = {
+			damage_building = {
+				type = infrastructure
+				damage = 2
+			}
+		}
+	}
+}
+
+country_event = {
+	id = ireland.28
+	title = "Emergence of Irish Independence!"
+	desc = ireland.28.d
+	picture = GFX_report_event_eng_royal_family
+	is_triggered_only = yes
+	option = {
+		name = ireland.28.a
+		effect_tooltip = {
+			ENG = { end_puppet = IRE }
+			remove_ideas = ENG_anglo_irish_trade_war
+			IRE = {
+				leave_faction = yes
+				remove_ideas = ENG_anglo_irish_trade_war_IRE
+			}
+		}
+		add_stability = 0.05
+	}
+}

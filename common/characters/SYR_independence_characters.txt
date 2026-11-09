@@ -1,0 +1,134 @@
+###########################################################################
+# Syria (SYR) characters for the Syrian focus tree
+#
+# The vanilla file common/characters/SYR.txt keeps Mehemed Ali Abed and
+# Hashim al-Atassi. This file adds the leaders of the independence routes
+# and the commander of the war of independence.
+# - SYR_khalid_bakdash and SYR_antun_saadeh are recruited at game start
+#   (history/countries/SYR - Syria.txt).
+# - SYR_zeid_bin_hussein is recruited by SYR_install_hashemite_monarchy.
+# - SYR_fawzi_al_qawuqji is recruited by SYR_recruit_qawuqji.
+# Portraits reuse the mod's existing art: GFX_portrait_Zeid_bin_Hussein
+# (interface/_ef_leader_portraits.gfx) and the Fawzi al-Qawuqji portrait of
+# IRQ_fawzi_al_qawuqji (common/characters/IRQ.txt).
+# Design notes: docs/systems/syria_focus_tree.md
+###########################################################################
+
+characters = {
+
+	SYR_khalid_bakdash = {
+		name = SYR_khalid_bakdash
+		portraits = {
+			civilian = {
+				large = GFX_portrait_Khalid_Bakdash
+			}
+		}
+		country_leader = {
+			ideology = leninism
+			traits = { proletariat_internationalist }
+			expire = "1965.1.1.1"
+			id = -1
+		}
+	}
+
+	SYR_antun_saadeh = {
+		name = SYR_antun_saadeh
+		portraits = {
+			civilian = {
+				large = GFX_portrait_Antun_Saadeh
+			}
+		}
+		country_leader = {
+			ideology = fascism_ideology
+			traits = { nationalist_symbol }
+			expire = "1965.1.1.1"
+			id = -1
+		}
+	}
+
+	SYR_zeid_bin_hussein = {
+		name = SYR_zeid_bin_hussein
+		portraits = {
+			civilian = {
+				large = GFX_portrait_Zeid_bin_Hussein
+			}
+		}
+		country_leader = {
+			ideology = monarchism
+			traits = { constitutional_monarch_minor }
+			expire = "1965.1.1.1"
+			id = -1
+		}
+	}
+
+	SYR_fawzi_al_qawuqji = {
+		name = SYR_fawzi_al_qawuqji
+		portraits = {
+			army = {
+				large = "gfx/leaders/IRQ/Portrait_fawzi_al_qawuqji.dds"
+				small = "gfx/interface/ideas/IRQ/IRQ_fawzi_al_qawuqji.dds"
+			}
+		}
+		corps_commander = {
+			traits = { guerilla_fighter desert_fox }
+			skill = 3
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 2
+			legacy_id = -1
+		}
+	}
+
+	SYR_anamarudun = {
+		name = SYR_anamarudun
+		portraits = {
+			civilian = {
+				large = GFX_Portrait_Arabia_Generic_3
+				small = GFX_Portrait_Arabia_Generic_3_small
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SYR_anamarudun
+			cost = 150
+			traits = { SYR_patron_of_learning }
+		}
+	}
+
+	SYR_savilnabtar = {
+		name = SYR_savilnabtar
+		portraits = {
+			army = {
+				large = GFX_portrait_africa_generic_land_7
+			}
+		}
+		corps_commander = {
+			traits = { }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+			legacy_id = -1
+		}
+	}
+
+	SYR_adobel = {
+		name = SYR_adobel
+		portraits = {
+			army = {
+				large = GFX_portrait_unknown
+			}
+		}
+		field_marshal = {
+			traits = { infantry_officer trait_brave }
+			skill = 10
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+			legacy_id = -1
+		}
+	}
+}

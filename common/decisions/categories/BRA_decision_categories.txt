@@ -1,0 +1,546 @@
+################
+##### BRA ######
+################
+
+BRA_economic_management = {
+	priority = 250
+	icon = GFX_BRA_economic_management
+
+	allowed = { original_tag = BRA }
+
+	visible = {
+		exists = yes
+	}
+}
+
+BRA_dependency_on_our_coffee_productions = {
+	priority = 100
+	icon = GFX_BRA_coffee_dependency
+
+	picture = GFX_BRA_coffee_plantation_image
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				OR = {
+					has_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+					has_dynamic_modifier = { modifier = BRA_widespread_coffee_plantations }
+				}
+			}
+		}
+		name = BRA_states_that_have_coffee_tt
+		zoom = 150
+	}
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_rebelling_coffee_plantations }
+			}
+		}
+		name = BRA_states_that_have_rebels_tt
+		zoom = 150
+	}
+
+	allowed = { original_tag = BRA }
+
+	visible = {
+		OR = {
+			BRA_coffee_plantations_active = yes
+			any_core_state = {
+				has_dynamic_modifier = { modifier = BRA_rebelling_coffee_plantations }
+			}
+			any_core_state = {
+				OR = {
+					has_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+					has_dynamic_modifier = { modifier = BRA_widespread_coffee_plantations }
+				}
+			}
+		}
+	}
+}
+
+BRA_brazilian_plane_production = {
+	priority = 10
+	icon = GFX_BRA_plane_production
+
+	allowed = { original_tag = BRA }
+
+	available = {
+		has_civil_war = no
+		exists = yes
+		is_subject = no
+	}
+
+	visible = { has_completed_focus = BRA_increased_plane_production }
+}
+
+BRA_foreign_plane_purchases = {
+	priority = 10
+	icon = GFX_decision_category_generic_arms_trade
+
+	allowed = { original_tag = BRA }
+
+	visible = { always = no }
+}
+
+BRA_BoP_decision_category = {
+	icon = GFX_decision_category_generic_democracy
+
+	allowed = { original_tag = BRA }
+
+	visible = {
+		has_any_power_balance = yes ## only one balance of power lol
+	}
+}
+
+BRA_patrianovism_on_the_rise = {
+	priority = 450
+	icon = GFX_BRA_patrianovissm_icon
+
+	picture = GFX_BRA_patrianovism_pic
+
+	scripted_gui = BRA_patrianovism_ui
+
+	on_map_area = {
+		target_array = core_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_monarchist_influence }
+			}
+		}
+		name = BRA_states_monarchists_control_tt
+		zoom = 150
+	}
+
+	visible = {
+		has_completed_focus = BRA_empower_the_patrianovistas
+		has_country_flag = BRA_preparing_monarchist_takeover_flag
+		NOT = {
+			OR = {
+				has_civil_war = yes
+				has_global_flag = BRA_civil_war_in_progress
+				has_global_flag = BRA_civil_war_concluded
+				has_cosmetic_tag = BRA_TEMPORARY_MONARCHIST_STATE
+				has_cosmetic_tag = BRA_SECOND_EMPIRE
+			}
+		}
+	}
+
+	visible_when_empty = yes
+}
+
+BRA_political_manegement = {
+	priority = 200
+	icon = GFX_brazilian_government_management
+
+	picture = GFX_BRA_giv_management_picture
+
+	scripted_gui = BRA_political_manegement_ui
+
+	allowed = { original_tag = BRA }
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_subversive_communist_activity_in_state }
+			}
+		}
+		name = BRA_states_with_communist_activity_tt
+		zoom = 150
+	}
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_protests }
+			}
+		}
+		name = BRA_states_with_protests_tt
+		zoom = 150
+	}
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_integralists_occupation }
+			}
+		}
+		name = BRA_states_occupied_by_integralists_tt
+		zoom = 150
+	}
+
+	visible = {
+		has_civil_war = no
+		NOT = { has_country_flag = BRA_state_of_anarchy } #State of Anarchy will be for the Integralist path / Civil war path
+		NOT = { has_country_flag = BRA_all_parties_shutdown }
+		NOT = {
+			has_completed_focus = BRA_empower_the_patrianovistas
+		}
+		has_dynamic_modifier = { modifier = BRA_brazilian_political_crisis }
+		NOT = {
+			OR = {
+				has_global_flag = BRA_civil_war_in_progress
+				has_global_flag = BRA_civil_war_concluded
+			}
+		}
+		NOT = {
+			OR = {
+				has_country_flag = BRA_neutrality_won_elections
+				has_country_flag = BRA_integralists_won_elections
+				has_country_flag = BRA_democrats_won_elections
+			}
+		}
+	}
+}
+
+BRA_imminent_civil_war = {
+	priority = 255
+	icon = GFX_BRA_civil_war_preperations
+
+	visible_when_empty = yes
+
+	on_map_area = {
+		target_array = core_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_integralists_occupation }
+			}
+		}
+		name = BRA_states_we_will_start_civil_war_with_tt
+		zoom = 150
+	}
+
+	visible = {
+		check_variable = { BRA_playing_as_integralists = 1 }
+		has_country_flag = BRA_integralist_player_planning_uprising
+		has_civil_war = no
+		is_power_balance_in_range = {
+			id = BRA_progress_to_dictatorship_bop
+			range < BRA_total_control
+		}
+		NOT = {
+			OR = {
+				has_global_flag = BRA_civil_war_in_progress
+				has_global_flag = BRA_civil_war_concluded
+			}
+		}
+	}
+
+	visible_when_empty = yes
+
+	allowed = { original_tag = BRA }
+}
+
+BRA_the_brazilian_civil_war = {
+	priority = 255
+	icon = GFX_BRA_civil_war_icon
+
+	#on_map_area = {
+		#	target_array = core_states
+		#	target_trigger = {
+			#		FROM = {
+				#            has_state_flag = BRA_democratic_influence_state
+				#            NOT = { has_state_flag = democratic_state_rebelled }
+				#		}
+			#	}
+		#	name = BRA_states_democrats_control_tt
+		#	zoom = 150
+		#}
+
+	on_map_area = {
+		target_array = core_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_subversive_communist_activity_in_state }
+			}
+		}
+		name = BRA_states_with_communist_activity_tt
+		zoom = 150
+	}
+
+	on_map_area = {
+		target_array = core_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_integralists_occupation }
+			}
+		}
+		name = BRA_states_integralists_control_tt
+		zoom = 150
+	}
+
+	allowed = { original_tag = BRA }
+
+	visible = {
+		has_global_flag = BRA_civil_war_in_progress
+	}
+}
+
+BRA_monarchism_on_the_rise = {
+	priority = 350
+	icon = GFX_decision_category_eng_appeal_to_imperial_loyalists
+
+	allowed = { original_tag = BRA }
+
+	on_map_area = {
+		target_array = core_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_monarchist_influence }
+			}
+		}
+		name = BRA_states_monarchists_control_tt
+		zoom = 150
+	}
+
+	visible = {
+		has_global_flag = BRA_civil_war_in_progress
+	}
+}
+
+POR_preparing_the_monarchist_uprising = {
+	priority = 200
+	icon = GFX_decision_category_eng_appeal_to_imperial_loyalists
+
+	allowed = { original_tag = POR }
+
+	on_map_area = {
+		target_array = BRA.core_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_monarchist_influence }
+			}
+		}
+		name = BRA_states_monarchists_control_tt
+		zoom = 150
+	}
+
+	visible_when_empty = yes
+
+	visible = {
+		has_global_flag = BRA_civil_war_in_progress
+		has_completed_focus = POR_monarchist_uprising_in_brazil
+	}
+}
+
+BRA_integralist_management = {
+	priority = 300
+	icon = GFX_BRA_integralist_category
+
+	allowed = {
+		original_tag = BRA
+	}
+
+	available = { has_government = fascism }
+
+	visible = { has_completed_focus = BRA_a_new_brazilian_era }
+}
+
+BRA_the_administration_of_brazilian_west_africa = {
+	priority = 150
+	icon = GFX_BRA_managing_west_africa
+
+	picture = GFX_BRA_west_africa_administration_pic
+
+	allowed = {
+		original_tag = BRA
+	}
+
+	available = {
+		LIB = {
+			exists = yes
+			is_subject_of = ROOT
+		}
+	}
+
+	visible = {
+		has_completed_focus = BRA_establish_brazilian_west_africa
+	}
+}
+
+BRA_imperial_management = {
+	priority = 310
+	icon = GFX_BRA_imperial_management_icon
+
+	picture = GFX_BRA_imperial_management_pic
+
+	allowed = {
+		original_tag = BRA
+	}
+
+	on_map_area = {
+		target_trigger = {
+			FROM = {
+				has_state_flag = BRA_infleuncable_state
+			}
+		}
+		name = BRA_states_that_can_be_influenced_tt
+		zoom = 150
+	}
+
+	visible = {
+		has_completed_focus = BRA_officialy_establish_the_empire
+	}
+}
+
+BRA_peasant_revolt = {
+	priority = 230
+	icon = GFX_BRA_peasant_revolt
+
+	scripted_gui = BRA_peasant_revolt_ui
+
+	allowed = { original_tag = BRA }
+
+	visible = {
+		OR = {
+			has_country_flag = BRA_active_communist_revolt_ai
+			has_country_flag = BRA_active_communist_revolt
+		}
+		has_civil_war = no
+	}
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_subversive_communist_activity_in_state }
+			}
+		}
+		name = BRA_states_communists_will_start_with_tt
+		zoom = 150
+	}
+}
+
+BRA_aiding_the_brazilians = {
+	priority = 100
+	icon = GFX_decision_category_generic_foreign_policy
+
+	allowed = {
+		exists = yes
+		capital_scope = {
+			OR = {
+				is_on_continent = south_america
+				is_on_continent = north_america
+			}
+		}
+	}
+
+	visible = {
+		has_global_flag = BRA_civil_war_in_progress
+		has_country_flag = BRA_agreed_to_help
+	}
+}
+
+BRA_post_civil_war_recovery_category = {
+	priority = 150
+	icon = GFX_decision_category_generic_political_actions
+
+	allowed = {
+		original_tag = BRA
+	}
+
+	visible_when_empty = yes
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_post_civil_war_resistance }
+			}
+		}
+		name = BRA_states_with_resistance_tt
+		zoom = 150
+	}
+
+	visible = {
+		has_global_flag = BRA_civil_war_concluded
+		NOT = {
+			OR = {
+				has_war_with = BRA
+				has_war_with = BUS
+				has_war_with = BRC
+				has_war_with = BZE
+				has_war_with = SAO
+			}
+		}
+		OR = {
+			has_idea = BRA_post_civil_war_economic_recession_5
+			has_idea = BRA_post_civil_war_economic_recession_4
+			has_idea = BRA_post_civil_war_economic_recession_3
+			has_idea = BRA_post_civil_war_economic_recession_2
+			has_idea = BRA_post_civil_war_economic_recession_1
+			any_controlled_state = {
+				has_dynamic_modifier = { modifier = BRA_post_civil_war_resistance }
+			}
+		}
+	}
+}
+
+BRA_the_spread_of_communism = {
+	priority = 140
+	icon = GFX_decision_category_generic_communism
+
+	allowed = {
+		original_tag = BRA
+	}
+
+	visible = {
+		has_government = communism
+		tag = BRC
+		has_completed_focus = BRA_the_inevitable_spread_of_communism
+	}
+}
+
+BRA_political_crisis = {
+	priority = 500
+	icon = GFX_decision_category_generic_crisis
+
+	allowed = { original_tag = BRA }
+
+	on_map_area = {
+		target_array = core_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BRA_portugal_nationalists }
+			}
+		}
+		name = BRA_states_with_nationalists_tt
+		zoom = 150
+	}
+
+	visible = {
+		exists = yes
+	}
+}
+
+BRA_smoking_snakes_management = {
+	priority = 40
+	icon = GFX_BRA_smoking_snakes_category
+
+	allowed = { original_tag = BRA }
+
+	picture = GFX_BRA_smoking_snakes_picture
+
+	visible = {
+		has_completed_focus = BRA_establish_the_FAB
+	}
+}
+
+BRA_spreading_democracy = {
+	priority = 230
+	icon = GFX_decision_category_generic_democracy
+
+	allowed = { original_tag = BRA }
+
+	visible_when_empty = yes
+
+	visible = {
+		has_completed_focus = BRA_spread_democracy_to_those_around_us
+	}
+}

@@ -1,0 +1,373 @@
+###########################################################################
+# Syria (SYR) decisions
+#
+# SYR_the_national_struggle
+#   Resistance decisions grow National Resistance (SYR_resistance) and may
+#   provoke a French answer (syria.10). SYR_the_hour_has_come restarts the
+#   independence crisis after a postponed revolt or a shelved treaty.
+#   SYR_hold_damascus is the war-of-independence mission: if the war with
+#   France still goes on when it ends, France signs the peace (syria.33) and
+#   Syria keeps its land.
+#   SYR_choose_the_new_leadership is the fallback when Syria becomes free
+#   without the leadership event.
+# SYR_the_french_levant
+#   Loyalist support for France at war, paid in equipment and manpower and
+#   rewarded with autonomy.
+# Helpers: common/scripted_effects/SYR_scripted_effects.txt
+# Design notes: docs/systems/syria_focus_tree.md
+###########################################################################
+
+@SYR_STRIKE_GAIN = 12
+@SYR_PAMPHLET_GAIN = 6
+@SYR_SMUGGLE_GAIN = 8
+@SYR_SMUGGLE_RIFLES = 400
+@SYR_SMUGGLE_DISCOVERY_CHANCE = 30
+@SYR_SMUGGLE_SAFE_CHANCE = 70
+@SYR_CLANS_GAIN = 14
+@SYR_CLANS_MANPOWER = 3000
+@SYR_SABOTAGE_GAIN = 10
+@SYR_COURT_GAIN = 4
+@SYR_COURT_POPULARITY = 0.05
+@SYR_HOLD_DAMASCUS_DAYS = 100
+@SYR_ARMS_FOR_FRANCE = 1000
+@SYR_BATTALION_MANPOWER = 10000
+@SYR_BATTALION_MANPOWER_COST = -10000
+@SYR_LOYAL_AUTONOMY = 0.05
+
+SYR_the_national_struggle = {
+
+	SYR_organize_a_general_strike = {
+		icon = GFX_decision_POL_organize_strike_two
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_struggle_is_active = yes
+		}
+		available = {
+			SYR_is_french_mandate = yes
+			has_stability > 0.25
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 60
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				has_stability < 0.35
+			}
+		}
+		complete_effect = {
+			add_stability = -0.03
+			set_temp_variable = { SYR_resistance_gain = @SYR_STRIKE_GAIN }
+			SYR_add_resistance = yes
+			SYR_roll_french_response = yes
+		}
+	}
+
+	SYR_print_nationalist_newspapers = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_struggle_is_active = yes
+		}
+		available = {
+			SYR_is_french_mandate = yes
+		}
+		cost = 15
+		fire_only_once = no
+		days_re_enable = 30
+		ai_will_do = { base = 8 }
+		complete_effect = {
+			set_temp_variable = { SYR_resistance_gain = @SYR_PAMPHLET_GAIN }
+			SYR_add_resistance = yes
+		}
+	}
+
+	SYR_smuggle_rifles_from_iraq = {
+		icon = GFX_decision_generic_military
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_struggle_is_active = yes
+			has_completed_focus = SYR_arm_the_ghouta
+		}
+		available = {
+			SYR_is_french_mandate = yes
+			country_exists = IRQ
+		}
+		cost = 20
+		fire_only_once = no
+		days_re_enable = 45
+		ai_will_do = { base = 8 }
+		complete_effect = {
+			add_equipment_to_stockpile = { type = infantry_equipment amount = @SYR_SMUGGLE_RIFLES producer = IRQ }
+			set_temp_variable = { SYR_resistance_gain = @SYR_SMUGGLE_GAIN }
+			SYR_add_resistance = yes
+			custom_effect_tooltip = SYR_smuggling_risk_tt
+			hidden_effect = {
+				random_list = {
+					@SYR_SMUGGLE_DISCOVERY_CHANCE = {
+						country_event = { id = syria.14 days = 10 random_days = 10 }
+					}
+					@SYR_SMUGGLE_SAFE_CHANCE = { }
+				}
+			}
+			SYR_roll_french_response = yes
+		}
+	}
+
+	SYR_rally_the_mountain_clans = {
+		icon = GFX_decision_generic_political_rally
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_struggle_is_active = yes
+			has_completed_focus = SYR_the_mountain_alliance
+		}
+		available = {
+			SYR_is_french_mandate = yes
+		}
+		cost = 30
+		fire_only_once = no
+		days_re_enable = 90
+		ai_will_do = { base = 10 }
+		complete_effect = {
+			add_manpower = @SYR_CLANS_MANPOWER
+			set_temp_variable = { SYR_resistance_gain = @SYR_CLANS_GAIN }
+			SYR_add_resistance = yes
+			SYR_roll_french_response = yes
+		}
+	}
+
+	SYR_sabotage_the_mandate_railways = {
+		icon = GFX_decision_revolt
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_struggle_is_active = yes
+			has_completed_focus = SYR_the_spirit_of_1925
+		}
+		available = {
+			SYR_is_french_mandate = yes
+			has_war_support > 0.2
+		}
+		cost = 20
+		fire_only_once = no
+		days_re_enable = 60
+		ai_will_do = { base = 8 }
+		complete_effect = {
+			add_war_support = -0.02
+			set_temp_variable = { SYR_resistance_gain = @SYR_SABOTAGE_GAIN }
+			SYR_add_resistance = yes
+			if = {
+				limit = { country_exists = FRA }
+				FRA = { add_political_power = -10 }
+			}
+			SYR_roll_french_response = yes
+		}
+	}
+
+	SYR_court_soviet_sympathy = {
+		icon = GFX_decision_generic_political_address
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_struggle_is_active = yes
+			NOT = { has_country_flag = SYR_treaty_betrayed }
+			country_exists = SOV
+		}
+		available = {
+			SYR_is_french_mandate = yes
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 90
+		ai_will_do = {
+			base = 3
+			modifier = {
+				factor = 3
+				communism > 0.2
+			}
+		}
+		complete_effect = {
+			add_popularity = { ideology = communism popularity = @SYR_COURT_POPULARITY }
+			set_temp_variable = { SYR_resistance_gain = @SYR_COURT_GAIN }
+			SYR_add_resistance = yes
+		}
+	}
+
+	SYR_court_axis_sympathy = {
+		icon = GFX_decision_generic_political_address
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_struggle_is_active = yes
+			NOT = { has_country_flag = SYR_treaty_betrayed }
+			OR = {
+				country_exists = GER
+				country_exists = ITA
+			}
+		}
+		available = {
+			SYR_is_french_mandate = yes
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 90
+		ai_will_do = {
+			base = 3
+			modifier = {
+				factor = 3
+				fascism > 0.2
+			}
+		}
+		complete_effect = {
+			add_popularity = { ideology = fascism popularity = @SYR_COURT_POPULARITY }
+			set_temp_variable = { SYR_resistance_gain = @SYR_COURT_GAIN }
+			SYR_add_resistance = yes
+		}
+	}
+
+	SYR_court_hashemite_sympathy = {
+		icon = GFX_decision_generic_political_address
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_struggle_is_active = yes
+			NOT = { has_country_flag = SYR_treaty_betrayed }
+			country_exists = IRQ
+		}
+		available = {
+			SYR_is_french_mandate = yes
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 90
+		ai_will_do = {
+			base = 4
+			modifier = {
+				factor = 3
+				neutrality > 0.2
+			}
+		}
+		complete_effect = {
+			add_popularity = { ideology = neutrality popularity = @SYR_COURT_POPULARITY }
+			set_temp_variable = { SYR_resistance_gain = @SYR_COURT_GAIN }
+			SYR_add_resistance = yes
+		}
+	}
+
+	SYR_the_hour_has_come = {
+		icon = GFX_decision_generic_prepare_civil_war
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_struggle_is_active = yes
+			OR = {
+				has_country_flag = SYR_revolt_postponed
+				has_country_flag = SYR_treaty_betrayed
+			}
+		}
+		available = {
+			SYR_is_french_mandate = yes
+			SYR_resistance_is_ready = yes
+		}
+		cost = 0
+		fire_only_once = no
+		days_re_enable = 30
+		ai_will_do = { base = 20 }
+		complete_effect = {
+			clr_country_flag = SYR_revolt_postponed
+			SYR_start_independence_crisis = yes
+		}
+	}
+
+	SYR_choose_the_new_leadership = {
+		icon = GFX_decision_generic_political_rally
+		allowed = { original_tag = SYR }
+		visible = {
+			is_subject = no
+			has_completed_focus = SYR_crossroads_of_the_levant
+			NOT = { has_country_flag = SYR_route_communist }
+			NOT = { has_country_flag = SYR_route_fascist }
+			NOT = { has_country_flag = SYR_route_monarchy }
+			NOT = { has_country_flag = SYR_route_democratic }
+		}
+		available = {
+			has_war = no
+		}
+		cost = 0
+		fire_only_once = yes
+		ai_will_do = { base = 50 }
+		complete_effect = {
+			if = {
+				limit = { NOT = { has_country_flag = SYR_independent } }
+				SYR_become_independent = yes
+			}
+			country_event = { id = syria.40 }
+		}
+	}
+
+	SYR_hold_damascus = {
+		icon = GFX_decision_generic_protection
+		allowed = { original_tag = SYR }
+		activation = { always = no }
+		available = { always = no }
+		days_mission_timeout = @SYR_HOLD_DAMASCUS_DAYS
+		cancel_trigger = {
+			NOT = { has_war_with = FRA }
+		}
+		is_good = yes
+		fire_only_once = no
+		ai_will_do = { base = 1 }
+		timeout_effect = {
+			if = {
+				limit = { has_war_with = FRA }
+				FRA = { country_event = { id = syria.33 hours = 12 } }
+			}
+		}
+	}
+}
+
+SYR_the_french_levant = {
+
+	SYR_ship_arms_to_france = {
+		icon = GFX_decision_generic_factory
+		allowed = { original_tag = SYR }
+		visible = {
+			has_completed_focus = SYR_war_industries_for_france
+		}
+		available = {
+			FRA = { has_war = yes }
+			has_equipment = { infantry_equipment > @SYR_ARMS_FOR_FRANCE }
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 60
+		ai_will_do = { base = 10 }
+		complete_effect = {
+			send_equipment = {
+				equipment = infantry_equipment
+				amount = @SYR_ARMS_FOR_FRANCE
+				target = FRA
+			}
+			add_autonomy_ratio = { value = @SYR_LOYAL_AUTONOMY localization = SYR_autonomy_arms }
+			FRA = { add_opinion_modifier = { target = ROOT modifier = SYR_loyal_partner } }
+		}
+	}
+
+	SYR_raise_levantine_battalions = {
+		icon = GFX_decision_generic_military
+		allowed = { original_tag = SYR }
+		visible = {
+			has_completed_focus = SYR_the_levantine_volunteers
+		}
+		available = {
+			FRA = { has_war = yes }
+			has_manpower > @SYR_BATTALION_MANPOWER
+		}
+		cost = 25
+		fire_only_once = no
+		days_re_enable = 90
+		ai_will_do = { base = 8 }
+		complete_effect = {
+			add_manpower = @SYR_BATTALION_MANPOWER_COST
+			FRA = { add_manpower = @SYR_BATTALION_MANPOWER }
+			army_experience = 5
+			add_autonomy_ratio = { value = @SYR_LOYAL_AUTONOMY localization = SYR_autonomy_battalions }
+		}
+	}
+}

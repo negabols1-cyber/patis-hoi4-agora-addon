@@ -1,0 +1,165 @@
+on_actions = {
+	on_declare_war = {
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						has_global_flag = his_only
+						has_game_rule = {
+							rule = ef_historical_only
+							option = ENABLED
+						}
+					}
+					GER = { has_completed_focus = GER_danzig_or_war }
+					GER = { NOT = { has_country_flag = GER_poland_war_flag } }
+				}
+				GER = { set_country_flag = GER_poland_war_flag }
+				news_event = { id = EF_news.5 hours = 72 }
+				news_event = { id = EF_news.11 days = 45 }
+			}
+		}
+	}
+	on_war = {
+		effect = {
+			if = {
+				limit = {
+					SPR_scw_in_progress = yes
+					OR = {
+						has_global_flag = his_only
+
+					}
+					NOT = { has_global_flag = SPR_war }
+				}
+				news_event = { id = EF_news.4 hours = 72 }
+				set_global_flag = SPR_war
+			}
+		}
+	}
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						has_global_flag = his_only
+
+					}
+				}
+				if = {
+					limit = {
+						date > 1939.4.30
+						date < 1940.1.1
+						NOT = { has_global_flag = SOV_khalkin_gol }
+					}
+					news_event = { id = EF_news.3 days = 5 }
+					set_global_flag = SOV_khalkin_gol
+				}
+				if = {
+					limit = {
+						date > 1939.8.30
+						date < 1940.1.1
+						NOT = { has_global_flag = JAP_khalkin_gol }
+					}
+					news_event = { id = EF_news.2 days = 5 }
+					set_global_flag = JAP_khalkin_gol
+				}
+				if = {
+					limit = {
+						date > 1939.9.30
+						FRA = { has_capitulated = yes }
+						NOT = { has_global_flag = GER_reichstag_speech }
+					}
+					news_event = { id = EF_news.12 days = 5 }
+					set_global_flag = GER_reichstag_speech
+				}
+				if = {
+					limit = {
+						date > 1940.1.30
+						NOT = { has_global_flag = USA_soviet_speak }
+					}
+					news_event = { id = EF_news.13 days = 5 }
+					set_global_flag = USA_soviet_speak
+				}
+				if = {
+					limit = {
+						date > 1940.3.29
+						NOT = { has_global_flag = SOV_baku_flight }
+					}
+					news_event = { id = EF_news.14 days = 2 }
+					set_global_flag = SOV_baku_flight
+				}
+				if = {
+					limit = {
+						date > 1940.3.30
+						NOT = { has_global_flag = SOV_katyn }
+					}
+					news_event = { id = EF_news.16 days = 10 }
+					set_global_flag = SOV_katyn
+				}
+				if = {
+					limit = {
+						date > 1943.10.30
+						NOT = { has_global_flag = USA_cairo }
+					}
+					news_event = { id = EF_news.22 days = 22 }
+					set_global_flag = USA_cairo
+				}
+				if = {
+					limit = {
+						date > 1940.6.30
+						NOT = { has_global_flag = GER_reichstag_speech_2 }
+					}
+					news_event = { id = EF_news.15 days = 10 }
+					set_global_flag = GER_reichstag_speech_2
+				}
+				if = {
+					limit = {
+						date > 1937.8.30
+						NOT = { has_global_flag = GER_musollini_meet }
+					}
+					news_event = { id = EF_news.8 days = 10 }
+					set_global_flag = GER_musollini_meet
+				}
+				if = {
+					limit = {
+						date > 1938.4.30
+						NOT = { has_global_flag = GER_hitler_meet }
+					}
+					news_event = { id = EF_news.9 days = 10 }
+					set_global_flag = GER_hitler_meet
+				}
+				if = {
+					limit = {
+						date > 1940.10.30
+						NOT = { has_global_flag = GER_soviet_meet }
+					}
+					news_event = { id = EF_news.18 days = 12 }
+					set_global_flag = GER_soviet_meet
+				}
+				if = {
+					limit = {
+						date > 1941.6.30
+						NOT = { has_global_flag = USA_embargo }
+					}
+					news_event = { id = EF_news.19 days = 25 }
+					set_global_flag = USA_embargo
+				}
+				if = {
+					limit = {
+						date > 1942.12.30
+						NOT = { has_global_flag = USA_casablanca }
+					}
+					news_event = { id = EF_news.20 days = 14 }
+					set_global_flag = USA_casablanca
+				}
+				if = {
+					limit = {
+						date > 1940.12.30
+						NOT = { has_global_flag = GER_holokost }
+					}
+					news_event = { id = EF_news.23 days = 2 }
+					set_global_flag = GER_holokost
+				}
+			}
+		}
+	}
+}

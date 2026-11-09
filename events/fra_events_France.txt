@@ -1,0 +1,7069 @@
+###########################
+# French Events
+###########################
+
+add_namespace = u_fra
+
+# Vienot Agreements
+country_event = {
+	id = u_fra.1
+	title = u_fra.1.t
+	desc = u_fra.1.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.1.a
+	}
+}
+
+# Pagan or catholics
+country_event = {
+	id = u_fra.2
+	title = u_fra.2.t
+	desc = u_fra.2.d
+	picture = GFX_report_event_fascist_gathering
+
+	is_triggered_only = yes
+
+	option = { # Catholism
+		name = u_fra.2.a
+		ai_chance = { base = 50 }
+		add_ideas = FRA_state_catholicism
+	}
+	option = { # Paganism
+		name = u_fra.2.b
+		ai_chance = { base = 50 }
+		add_ideas = FRA_state_paganism
+	}
+}
+
+# Destroy Symbols
+country_event = {
+	id = u_fra.3
+	title = u_fra.3.t
+	desc = u_fra.3.d
+	picture = GFX_report_event_fascist_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.3.a
+	}
+}
+
+# SECRET SERVICES
+country_event = {
+	id = u_fra.4
+	title = u_fra.4.t
+	desc = u_fra.4.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.4.a
+		add_ideas = FRA_dgse
+	}
+	option = {
+		name = u_fra.4.b
+		add_ideas = FRA_dgsi
+	}
+}
+
+# Armaments choices
+country_event = {
+	id = u_fra.5
+	title = u_fra.5.t
+	desc = u_fra.5.d
+	picture = GFX_report_event_airplane_factory
+
+	is_triggered_only = yes
+
+	option = { # SmallWeapons
+		name = u_fra.5.a
+		ai_chance = { base = 30 }
+		add_ideas = FRA_small_weapons_program
+	}
+	option = { # Motor
+		name = u_fra.5.b
+		ai_chance = { base = 30 }
+		add_ideas = FRA_motor_program
+	}
+	option = { # Artillery
+		name = u_fra.5.c
+		ai_chance = { base = 40 }
+		add_ideas = FRA_artillery_program
+	}
+}
+
+# Capital ?
+country_event = {
+	id = u_fra.6
+	title = u_fra.6.t
+	desc = u_fra.6.d
+	picture = GFX_report_event_fascist_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.6.a
+		ai_chance = { base = 40 }
+		set_capital = { state = 16 }
+		add_political_power = 150
+		16 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	option = {
+		name = u_fra.6.b
+		ai_chance = { base = 30 }
+		set_capital = { state = 2 }
+		add_political_power = 150
+		2 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	option = {
+		name = u_fra.6.c
+		ai_chance = { base = 30 }
+		set_capital = { state = 219 }
+		add_political_power = 150
+		219 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+# Code civil
+country_event = {
+	id = u_fra.7
+	title = u_fra.7.t
+	desc = u_fra.7.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.7.a
+	}
+}
+
+# Empire West East
+country_event = {
+	id = u_fra.8
+	title = u_fra.8.t
+	desc = u_fra.8.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.8.a
+		hidden_effect = {
+			FROM = { country_event = { id = u_fra.14 days = 10 } }
+
+		}
+	}
+}
+
+# Natural borders
+country_event = {
+	id = u_fra.9
+	title = u_fra.9.t
+	desc = u_fra.9.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.9.a
+	}
+}
+
+# Trans Saharian
+country_event = {
+	id = u_fra.10
+	title = u_fra.10.t
+	desc = u_fra.10.d
+	picture = report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.10.a
+		add_threat = -1
+	}
+}
+
+# Trans European
+country_event = {
+	id = u_fra.11
+	title = u_fra.11.t
+	desc = u_fra.11.d
+	picture = GFX_report_event_ledo_road
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.11.a
+	}
+}
+
+# Sahara
+country_event = {
+	id = u_fra.12
+	title = u_fra.12.t
+	desc = u_fra.12.d
+	picture = GFX_report_event_france_victory_syria
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.12.a
+		add_state_core = 459
+		add_state_core = 460
+		add_state_core = 513
+		add_stability = -0.2
+	}
+	option = {
+		name = u_fra.12.b
+
+		459 = {
+			add_manpower = -500000
+		}
+		460 = {
+			add_manpower = -500000
+		}
+		513 = {
+			add_manpower = -500000
+		}
+
+		21 = {
+			add_manpower = 500000
+		}
+		22 = {
+			add_manpower = 500000
+		}
+		31 = {
+			add_manpower = 500000
+		}
+		add_stability = 0.1
+	}
+}
+
+# Indochina War
+country_event = {
+	id = u_fra.13
+	title = u_fra.13.t
+	desc = u_fra.13.d
+	picture = GFX_report_event_chinese_soldiers
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.13.a
+		release = VIN
+		custom_effect_tooltip = france_indochina_war
+		hidden_effect = {
+			set_global_flag = indochina_war
+			FRA = {
+				division_template = {
+					name = "French Loyalists"
+					priority = 1
+					division_names_group = FRA_COL_01
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+					}
+				}
+				670 = {
+					create_unit = {
+						division = "name = \"1. French Loyalists\" division_template = \"French Loyalists\" start_experience_factor = 0.5"
+						owner = FRA
+					}
+					create_unit = {
+						division = "name = \"1. Cambodian Security Troops\" division_template = \"French Loyalists\" start_experience_factor = 0.5"
+						owner = FRA
+					}
+				}
+				741 = {
+					create_unit = {
+						division = "name = \"1. Troupes Coloniales d'Indochine\" division_template = \"French Loyalists\" start_experience_factor = 0.5"
+						owner = FRA
+					}
+					create_unit = {
+						division = "name = \"2. Troupes Coloniales d'Indochine\" division_template = \"French Loyalists\" start_experience_factor = 0.5"
+						owner = FRA
+					}
+				}
+			}
+			VIN = {
+				add_popularity = { ideology = communism popularity = 0.5 }
+				set_politics = { ruling_party = communism elections_allowed = no }
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 500000
+					producer = PRC
+				}
+				division_template = {
+					name = "Vietnamese Liberation Army"
+					priority = 1
+					division_names_group = RAJ_INF_01
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+					}
+				}
+				671 = {
+					create_unit = {
+						division = "name = \"1. Vietnamese Liberation Army\" division_template = \"Vietnamese Liberation Army\" start_experience_factor = 0.5"
+						owner = VIN
+					}
+					create_unit = {
+						division = "name = \"2. Vietnamese Liberation Army\" division_template = \"Vietnamese Liberation Army\" start_experience_factor = 0.5"
+						owner = VIN
+					}
+					create_unit = {
+						division = "name = \"3. Vietnamese Liberation Army\" division_template = \"Vietnamese Liberation Army\" start_experience_factor = 0.5"
+						owner = VIN
+					}
+					create_unit = {
+						division = "name = \"3. Vietnamese Liberation Army\" division_template = \"Vietnamese Liberation Army\" start_experience_factor = 0.5"
+						owner = VIN
+					}
+				}
+				289 = {
+					create_unit = {
+						division = "name = \"1. Vietnamese Liberation Army\" division_template = \"Vietnamese Liberation Army\" start_experience_factor = 0.5"
+						owner = VIN
+					}
+					create_unit = {
+						division = "name = \"2. Vietnamese Liberation Army\" division_template = \"Vietnamese Liberation Army\" start_experience_factor = 0.5"
+						owner = VIN
+					}
+					create_unit = {
+						division = "name = \"3. Vietnamese Liberation Army\" division_template = \"Vietnamese Liberation Army\" start_experience_factor = 0.5"
+						owner = VIN
+					}
+					create_unit = {
+						division = "name = \"3. Vietnamese Liberation Army\" division_template = \"Vietnamese Liberation Army\" start_experience_factor = 0.5"
+						owner = VIN
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+# Event for Democratic minors: FRA invites to European Union
+country_event = {
+	id = u_fra.15
+	title = u_fra.15.t
+	desc = u_fra.15.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	# Good idea!
+	option = {
+		name = mtg_netherlands.19.a
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0
+				is_in_faction = yes
+				has_war = yes
+			}
+		}
+		FROM = {
+			add_to_faction = ROOT
+			country_event = { id = generic.6 hours = 6 }
+		}
+	}
+
+	# No ty
+	option = {
+		name = mtg_netherlands.19.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 1
+				is_in_faction = yes
+				has_war = yes
+			}
+		}
+		FROM = { country_event = { id = generic.7 hours = 6 } }
+	}
+}
+
+
+# European Strikes
+country_event = {
+	id = u_fra.14
+	title = u_fra.14.t
+	desc = u_fra.14.d
+	picture = GFX_report_event_worker_protests
+
+	is_triggered_only = yes
+
+	option = {
+		add_stability = 0.2
+		name = u_fra.14.a
+		release = GER
+		release = POL
+		release = UKR
+		release = BLR
+		release = SOV
+		release = CZE
+		release = AUS
+	}
+	option = {
+		add_stability = -0.35
+		name = u_fra.14.b
+		set_global_flag = european_strikes_missions
+		add_ideas = FRA_european_protests1
+	}
+}
+
+# Country asked to join EU Federal State
+country_event = {
+	id = u_fra.16
+	title = u_fra.16.t
+	desc = u_fra.16.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { # Yes
+		name = u_fra.16.a
+
+		ai_chance = {
+			base = 15
+		}
+		transfer_navy = { target = FROM }
+		every_unit_leader = {
+			set_nationality = FRA
+		}
+		FROM = {
+			annex_country = { target = ROOT }
+		}
+		every_state = {
+			limit = {
+				is_core_of = ROOT
+			}
+			add_core_of = FROM
+		}
+		FROM = { country_event = { id = u_fra.17 hours = 1 } }
+	}
+	option = { # no
+		ai_chance = {
+			base = 5
+		}
+		name = u_fra.16.b
+	}
+}
+
+country_event = { # country accept eu unification
+	id = u_fra.17
+	title = u_fra.17.t
+	desc = u_fra.17.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { # Yes
+		name = u_fra.17.a
+		set_cosmetic_tag = EUR_UNIFIED
+	}
+}
+
+# BEL / LUX asked to capitulate
+country_event = {
+	id = u_fra.18
+	title = u_fra.18.t
+	desc = u_fra.18.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = { # Yes
+		name = u_fra.18.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 0.05 #if you are in a faction with a major, probably fight
+				is_faction_leader = no
+				is_in_faction = yes
+				any_allied_country = {
+					is_major = yes
+				}
+			}
+			modifier = {
+				factor = 0.5
+				has_global_flag = BEL_benelux_faction_formed
+				OR = {
+					is_in_faction_with = BEL
+					is_in_faction_with = LUX
+					is_in_faction_with = HOL
+				}
+			}
+			modifier = {
+				factor = 0
+				is_puppet = yes
+				OVERLORD = {
+					is_major = yes #puppeted countries wouldn't surrender bcuz the overlord is a major
+				}
+			}
+		}
+		transfer_navy = { target = FROM }
+		FROM = {
+			annex_country = { target = ROOT }
+		}
+		FROM = { country_event = { id = u_fra.19 hours = 1 } }
+	}
+	option = { # no
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 1.5 #if you are in a faction with a major, probably fight
+				is_faction_leader = no
+				is_in_faction = yes
+				any_allied_country = {
+					is_major = yes
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_global_flag = BEL_benelux_faction_formed
+				OR = {
+					is_in_faction_with = BEL
+					is_in_faction_with = LUX
+					is_in_faction_with = HOL
+				}
+			}
+			modifier = {
+				factor = 0.5
+				strength_ratio = {
+					tag = FROM
+					ratio < 0.5
+				}
+			}
+		}
+		name = u_fra.18.b
+		FROM = { country_event = { id = u_fra.20 hours = 1 } }
+	}
+}
+
+country_event = { # BEL / LUX surrender
+	id = u_fra.19
+	title = u_fra.19.t
+	desc = u_fra.19.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { # Yes
+		name = u_fra.19.a
+
+	}
+}
+
+country_event = { # BEL / LUX dont surrender
+	id = u_fra.20
+	title = u_fra.20.t
+	desc = u_fra.20.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = { # Okay then
+		name = u_fra.20.a
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+			expire = 0
+		}
+	}
+}
+
+# Soviets Sign MR Pact
+country_event = {
+	id = u_fra.21
+	title = u_fra.21.t
+	desc = u_fra.21.d
+	picture = GFX_report_event_molotov_signing_pact
+
+	fire_only_once = yes
+
+	trigger = {
+		tag = FRA
+		has_global_flag = sov_yes_pact
+		has_government = communism
+		SOV = { exists = yes }
+		GER = { exists = yes }
+		NOT =  { has_war_with = SOV }
+		NOT =  { has_war_with = GER }
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = u_fra.21.a	#yes
+		every_other_country = {
+			limit = {
+				NOT = { tag = GER }
+				has_government = fascism
+			}
+			add_opinion_modifier = { target = FRA modifier = MR_pact_fascists }
+		}
+		diplomatic_relation = { country = GER relation = non_aggression_pact }
+		add_opinion_modifier = { target = GER modifier = MR_pact }
+		add_opinion_modifier = { target = SOV modifier = MR_pact }# pact
+	}
+	option = {
+		name = u_fra.21.b #no
+	}
+}
+
+# JOIN THE UNIONS
+country_event = {
+	id = u_fra.22
+	title = u_fra.22.t
+	desc = u_fra.22.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = { # Yes
+		name = u_fra.22.a
+
+		ai_chance = {
+			base = 20
+		}
+		transfer_navy = { target = FROM }
+		every_unit_leader = {
+			set_nationality = FROM
+		}
+		FROM = {
+			annex_country = { target = ROOT transfer_troops = yes  }
+		}
+		FROM = { country_event = { id = u_fra.23 hours = 1 } }
+	}
+	option = { # no
+		ai_chance = {
+			base = 5
+		}
+		name = u_fra.22.b
+		FROM = { country_event = { id = u_fra.24 hours = 1 } }
+	}
+}
+
+country_event = { # SOV ACCEPT
+	id = u_fra.23
+	title = u_fra.23.t
+	desc = u_fra.23.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { # Yes
+		name = u_fra.23.a
+
+	}
+}
+
+country_event = { # SOV REFUSES dont surrender
+	id = u_fra.24
+	title = u_fra.24.t
+	desc = u_fra.24.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = { # Okay then
+		name = u_fra.24.a
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+			expire = 0
+		}
+	}
+}
+
+# Event for Italy Offering Support for Coup
+country_event = {
+	id = u_fra.25
+	title = u_fra.25.t
+	desc = u_fra.25.d
+	picture = GFX_report_event_french_resistance_02
+
+	is_triggered_only = yes
+
+	# Accept
+	option = {
+		name = u_fra.25.a
+		ai_chance = {
+			base = 100
+		}
+		add_timed_idea = { idea = GER_preparing_ITA_coup days = 1095 }
+		FRA = {
+			country_event = { id = u_fra.26 days = 1 random_days = 2 }
+			hidden_effect = {
+				set_country_flag = FRA_italy_puppet_flag
+			}
+		}
+	}
+
+	# Decline
+	option = {
+		name = u_fra.25.b
+		ai_chance = {
+			base = 0
+		}
+		FRA = {
+			country_event = { id = u_fra.27 days = 1 random_days = 2 }
+		}
+	}
+}
+
+# French Notification Event for Italy Accepting Offer of Support for Coup
+country_event = {
+	id = u_fra.26
+	title = u_fra.26.t
+	desc = u_fra.26.d
+	picture = GFX_report_event_french_resistance_02
+
+	is_triggered_only = yes
+
+	# Great
+	option = {
+		name = u_fra.26.a
+	}
+}
+
+# French Notification Event for Italy Rejecting Offer of Support for Coup
+country_event = {
+	id = u_fra.27
+	title = u_fra.27.t
+	desc = u_fra.27.d
+	picture = GFX_report_event_french_resistance_02
+
+	is_triggered_only = yes
+
+	# Drat
+	option = {
+		name = u_fra.27.a
+	}
+}
+
+# Event for Italy Launching Coup
+country_event = {
+	id = u_fra.28
+	title = u_fra.28.t
+	desc = u_fra.28.d
+	picture = GFX_report_event_french_resistance_02
+
+	is_triggered_only = yes
+
+	# It is done (no choice needed because decision was taken in previous focus's events)
+	option = {
+		name = u_fra.28.a
+		set_politics = { ruling_party = neutrality elections_allowed = no }
+		add_popularity = { ideology = neutrality popularity = 0.1 }
+		swap_ideas = {
+			remove_idea = GER_preparing_ITA_coup
+			add_idea = GER_preparing_ITA_coup2
+		}
+		remove_ideas = vittorio_emanuele
+		ITA_vittorio_emanuele_iii = {
+			promote_character = { ideology = monarchism }
+		}
+
+		hidden_effect = {
+			retire_character = ITA_benito_mussolini
+			if = {
+				limit = {
+					has_any_power_balance = yes
+				}
+				set_power_balance = {
+					id = ITA_power_balance
+					right_side = ITA_king_side
+					set_value = 0.1
+				}
+			}
+		}
+
+		add_ai_strategy = {
+			type = alliance
+			id = "FRA"
+			value = 200
+		}
+		FRA = {
+			add_to_faction = ITA
+			country_event = { id = u_fra.29 }
+		}
+	}
+}
+
+# Notification event for France upon successful coup
+country_event = {
+	id = u_fra.29
+	title = u_fra.29.t
+	desc = u_fra.29.d
+	picture = GFX_report_event_french_resistance_02
+
+	is_triggered_only = yes
+
+	# Great
+	option = {
+		name = u_fra.29.a
+		hidden_effect = { news_event = { id = wtt_news.5 hours = 6 } }
+	}
+}
+
+# Jerusalem
+country_event = {
+	id = u_fra.30
+	title = u_fra.30.t
+	desc = u_fra.30.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	# Great
+	option = {
+		name = u_fra.30.a
+	}
+}
+
+#Hoare Laval
+country_event = {
+	id = u_fra.31
+	title = u_fra.31.t
+	desc = u_fra.31.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	# Great
+	option = {
+		name = u_fra.31.a
+		add_country_leader_trait = unpopular_politician
+		custom_effect_tooltip = conservatives_loss_10
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = -10 }
+		modify_parliament_seat = yes
+	}
+}
+
+#Elections
+country_event = {
+	id = u_fra.32
+	title = u_fra.32.t
+	desc = u_fra.32.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+	option = {
+		name = u_fra.32.a
+		complete_national_focus = UFRA_french_election
+
+		custom_effect_tooltip = FRA_parliment_election_tt
+		fra_parliament_gui_elections = yes #defined in common\scripted_effects\parliament_gui_scriped_effects
+	}
+}
+
+#Historical Maginot
+country_event = {
+	id = u_fra.33
+	title = u_fra.33.t
+	desc = u_fra.33.d
+	picture = GFX_report_event_sweden_tank
+
+	is_triggered_only = yes
+
+	# Yes
+	option = {
+		name = u_fra.33.a
+		set_global_flag = historical_maginot
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 0
+			}
+		}
+
+		custom_effect_tooltip = FRA_maginot_mod
+		28 = {
+			set_building_level = {
+				type = bunker
+				province = 6529
+				level = 6
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 678
+				level = 6
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 9503
+				level = 6
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 549
+				level = 10
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 3629
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 11502
+				level = 10
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 9559
+				level = 10
+				instant_build = yes
+			}
+		}
+
+		18 = {
+			set_building_level = {
+				type = bunker
+				province = 5291
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 3560
+				level = 8
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 9472
+				level = 2
+				instant_build = yes
+			}
+		}
+		29 = {
+			set_building_level = {
+				type = bunker
+				province = 11606
+				level = 2
+				instant_build = yes
+			}
+		}
+		735 = {
+			set_building_level = {
+				type = bunker
+				province = 9909
+				level = 10
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 3959
+				level = 5
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 6975
+				level = 6
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 3764
+				level = 8
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 764
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 9745
+				level = 5
+				instant_build = yes
+			}
+		}
+		1 = {
+			set_building_level = {
+				type = bunker
+				province = 3838
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 9851
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = coastal_bunker
+				province = 3838
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = coastal_bunker
+				province = 9851
+				level = 1
+				instant_build = yes
+			}
+		}
+
+		34 = {
+			set_building_level = {
+				type = bunker
+				province = 13081
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 11519
+				level = 8
+				instant_build = yes
+			}
+		}
+		6 = {
+			set_building_level = {
+				type = bunker
+				province = 13068
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 6598
+				level = 2
+				instant_build = yes
+			}
+		}
+		3 = {
+			set_building_level = {
+				type = bunker
+				province = 9638
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 6666
+				level = 2
+				instant_build = yes
+			}
+		}
+		151 = {
+			set_building_level = {
+				type = bunker
+				province = 663
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 11623
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 3641
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 9600
+				level = 2
+				instant_build = yes
+			}
+			set_building_level = {
+				type = bunker
+				province = 11623
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	# NO
+	option = {
+		name = u_fra.33.b
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+# Palace
+country_event = {
+	id = u_fra.34
+	title = u_fra.34.t
+	desc = u_fra.34.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	# Keep Elysée
+	option = {
+		name = u_fra.34.a
+		add_stability = 0.02
+		custom_effect_tooltip = MAN_expand_the_imperial_guards_tt
+		hidden_effect = {
+			division_template = {
+				name = "Palace Guards Division"
+				priority = 2
+				division_names_group = FRA_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+
+					infantry = { x = 2 y = 0 }
+					artillery_brigade = { x = 2 y = 1 }
+					artillery_brigade = { x = 2 y = 2 }
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { ROOT = { has_full_control_of_state = PREV } }
+				prioritize = { 16 }
+				create_unit = {
+					division = "name = \"1. Palace Guards Division\" division_template = \"Palace Guards Division\" start_experience_factor = 1.0"
+					owner = FRA
+				}
+				create_unit = {
+					division = "name = \"2. Palace Guards Division\" division_template = \"Palace Guards Division\" start_experience_factor = 1.0"
+					owner = FRA
+				}
+				create_unit = {
+					division = "name = \"3. Palace Guards Division\" division_template = \"Palace Guards Division\" start_experience_factor = 1.0"
+					owner = FRA
+				}
+				create_unit = {
+					division = "name = \"4. Palace Guards Division\" division_template = \"Palace Guards Division\" start_experience_factor = 1.0"
+					owner = FRA
+				}
+			}
+		}
+	}
+	#Change to the Louvre
+	option = {
+		name = u_fra.34.b
+		add_stability = -0.01
+		add_popularity = { ideology = neutrality popularity = 0.05 }
+		custom_effect_tooltip = MAN_expand_the_imperial_guards_tt
+		hidden_effect = {
+			division_template = {
+				name = "Palace Guards Division"
+				priority = 2
+				division_names_group = FRA_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+
+					infantry = { x = 2 y = 0 }
+					artillery_brigade = { x = 2 y = 1 }
+					artillery_brigade = { x = 2 y = 2 }
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { ROOT = { has_full_control_of_state = PREV } }
+				prioritize = { 16 }
+				create_unit = {
+					division = "name = \"1. Palace Guards Division\" division_template = \"Palace Guards Division\" start_experience_factor = 1.0"
+					owner = FRA
+				}
+				create_unit = {
+					division = "name = \"2. Palace Guards Division\" division_template = \"Palace Guards Division\" start_experience_factor = 1.0"
+					owner = FRA
+				}
+				create_unit = {
+					division = "name = \"3. Palace Guards Division\" division_template = \"Palace Guards Division\" start_experience_factor = 1.0"
+					owner = FRA
+				}
+				create_unit = {
+					division = "name = \"4. Palace Guards Division\" division_template = \"Palace Guards Division\" start_experience_factor = 1.0"
+					owner = FRA
+				}
+			}
+		}
+	}
+}
+
+
+# Vendéen
+country_event = {
+	id = u_fra.35
+	title = u_fra.35.t
+	desc = u_fra.35.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	# Great
+	option = {
+		name = u_fra.35.a
+		add_popularity = { ideology = neutrality popularity = 0.05 }
+	}
+}
+
+# Aggression Blum
+country_event = {
+	id = u_fra.36
+	title = u_fra.36.t
+	desc = u_fra.36.d
+	picture = GFX_news_FRA_blum_aggression
+
+	is_triggered_only = yes
+
+	# Let them be (Royalist + Bonapartist Path)
+	option = {
+		name = u_fra.36.a
+		trigger = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		add_ideas = FRA_political_violence
+		custom_effect_tooltip = FRA_action_francaise_keep_tt
+
+		ai_chance = {
+			base = 8
+			modifier = {
+				factor = 900
+				OR = {
+					has_country_flag = FRA_AI_ORLEANIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = ORLEANIST
+					}
+					has_country_flag = FRA_AI_LEGITIMIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = LEGITIMIST
+					}
+					has_country_flag = FRA_AI_BONAPARTIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = BONAPARTIST
+					}
+				}
+			}
+		}
+
+		add_popularity = { ideology = neutrality popularity = 0.05 }
+		FRA = { country_event = { id = u_fra.32 days = 53 }}
+		hidden_effect = {
+			FRA = { country_event = { id = u_fra.47 days = 54 }}
+		}
+
+		custom_effect_tooltip = nationalists_win_10
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 10 }
+		modify_parliament_seat = yes
+	}
+	# So you have chosen death (Other Paths)
+	option = {
+		name = u_fra.36.b
+
+		custom_effect_tooltip = FRA_action_francaise_ban_tt
+
+		ai_chance = {
+			base = 15
+			modifier = {
+				factor = 900
+				OR = {
+					AND = {
+						is_historical_focus_on = yes
+						has_game_rule = {
+							rule = FRA_ai_behavior
+							option = DEFAULT
+						}
+					}
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = DEMOCRATIC_HISTORICAL
+					}
+					has_country_flag = FRA_AI_DEMOCRATIC_HISTORICAL
+					has_country_flag = FRA_AI_DEMOCRATIC_ALTERNATE
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = DEMOCRATIC_ALTERNATE
+					}
+					has_country_flag = FRA_AI_COMMUNIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = COMMUNIST
+					}
+					has_country_flag = FRA_AI_FASCIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = FASCIST
+					}
+				}
+			}
+		}
+
+		add_popularity = { ideology = neutrality popularity = -0.10 }
+		FRA = { country_event = { id = u_fra.32 days = 53 }}
+		hidden_effect = {
+			FRA = { country_event = { id = u_fra.37 days = 10 }}
+		}
+
+		custom_effect_tooltip = nationalists_loss_10
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = -10 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Increase communist role
+country_event = {
+	id = u_fra.37
+	title = u_fra.37.t
+	desc = u_fra.37.d
+	picture = GFX_news_FRA_popular_front_intro
+
+	is_triggered_only = yes
+
+	# Agree to closer relation with PCF (Communist or Fascist Path)
+	option = {
+		name = u_fra.37.a
+		trigger = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		custom_effect_tooltip = FRA_radicalise_pop_front_tt
+
+		ai_chance = {
+			base = 7
+			modifier = {
+				factor = 900
+				OR = {
+					has_country_flag = FRA_AI_COMMUNIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = COMMUNIST
+					}
+					has_country_flag = FRA_AI_FASCIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = FASCIST
+					}
+				}
+			}
+		}
+
+		add_popularity = { ideology = communism popularity = 0.05 }
+		add_popularity = { ideology = democratic popularity = 0.05 }
+		set_party_name = {
+			ideology = communism
+			long_name = "Front Populaire"
+			name = "Front Populaire"
+		}
+		hidden_effect = {
+			FRA = { country_event = { id = u_fra.46 days = 10 }}
+		}
+
+		custom_effect_tooltip = socialists_win_10
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 10 }
+		modify_parliament_seat = yes
+
+	}
+	# Keep the front as is
+	option = {
+		name = u_fra.37.b
+
+		custom_effect_tooltip = FRA_keep_pop_front_tt
+
+		ai_chance = {
+			base = 12
+			modifier = {
+				factor = 900
+				is_historical_focus_on = yes
+				OR = {
+					has_country_flag = FRA_AI_DEMOCRATIC_ALTERNATE
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = DEMOCRATIC_ALTERNATE
+					}
+					AND = {
+						is_historical_focus_on = yes
+						has_game_rule = {
+							rule = FRA_ai_behavior
+							option = DEFAULT
+						}
+					}
+				}
+			}
+		}
+
+
+		add_popularity = { ideology = democratic popularity = -0.05 }
+		set_party_name = {
+			ideology = democratic
+			long_name = "Front Populaire"
+			name = "Front Populaire"
+		}
+		hidden_effect = {
+			FRA = { country_event = { id = u_fra.48 days = 44 }}
+		}
+
+		custom_effect_tooltip = social_liberals_win_5
+		set_temp_variable = { temp_member = 2 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+	}
+}
+
+# Re-establish Elections
+country_event = {
+	id = u_fra.38
+	title = u_fra.38.t
+	desc = u_fra.38.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	# Great
+	option = {
+		name = u_fra.38.a
+		add_ideas = FRA_prime_minister_lb
+
+		custom_effect_tooltip = socialists_win_10
+		custom_effect_tooltip = social_liberals_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 10 }
+		modify_parliament_seat = yes
+		set_temp_variable = { temp_member = 2 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+	option = {
+		name = u_fra.38.b
+		add_ideas = FRA_prime_minister_ed
+
+		custom_effect_tooltip = nationalists_win_10
+		custom_effect_tooltip = conservatives_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 10 }
+		modify_parliament_seat = yes
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+	option = {
+		name = u_fra.38.c
+		add_ideas = FRA_prime_minister_gv
+
+		custom_effect_tooltip = socialists_win_5
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+#intial event for FRA - France wants to buy wplanes for carabean
+country_event = {
+	id = u_fra.39
+	title = u_fra.39.t
+	desc = u_fra.39.desc
+	picture = GFX_report_event_generic_lend_lease
+	is_triggered_only = yes
+	option = {
+		name = u_fra.39.a #agree
+		ai_chance = {
+			base = 200
+		}
+		USA = {
+			country_event = u_fra.40
+		}
+	}
+
+	option = {
+		name = u_fra.39.b #refuse
+		ai_chance = {
+			base = 10
+			modifier = {
+				FRA = { has_war = yes }
+				factor = 0.5
+			}
+		}
+	}
+}
+
+#intial event for US - France wants to buy wplanes for carabean
+country_event = {
+	id = u_fra.40
+	title = u_fra.40.t
+	desc = u_fra.40.desc
+	picture = GFX_report_event_generic_lend_lease
+	is_triggered_only = yes
+	option = {
+		name = u_fra.40.a #agree
+		ai_chance = {
+			base = 200
+		}
+		FRA = {
+			country_event = u_fra.41
+		}
+		army_experience = 10
+	}
+
+	option = {
+		name = u_fra.40.b #refuse
+		ai_chance = {
+			base = 10
+			modifier = {
+				FRA = { has_war = yes }
+				factor = 0.5
+			}
+		}
+		FRA = {
+			country_event = u_fra.42
+		}
+	}
+}
+
+# rasponse event for France - country agrees
+country_event = {
+	id = u_fra.41
+	title = u_fra.41.t
+	desc = u_fra.41.desc
+	picture = GFX_report_event_merchant_ship_01
+	is_triggered_only = yes
+	option = {
+		name = u_fra.41.a #agree
+		ai_chance = {
+			base = 100
+		}
+		USA = { transfer_state = 694 }
+
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			UFRA_US_sell_planes = yes
+		}
+		else = {
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_1
+				amount = 500
+				producer = USA
+			}
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_1
+				amount = 200
+				producer = USA
+			}
+		}
+	}
+}
+#response event for France - US refuse
+country_event = {
+	id = u_fra.42
+	title = u_fra.42.t
+	desc = u_fra.42.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = u_fra.42.a #agree
+		ai_chance = {
+			base = 80
+		}
+	}
+}
+
+#intial event for UK - France wants to disunite germany
+country_event = {
+	id = u_fra.43
+	title = u_fra.43.t
+	desc = u_fra.43.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = u_fra.43.a #agree
+		ai_chance = {
+			base = 60
+		}
+		FRA = {
+			country_event = u_fra.44
+		}
+	}
+
+	option = {
+		name = u_fra.43.b #refuse
+		ai_chance = {
+			base = 40
+		}
+		FRA = {
+			country_event = u_fra.45
+		}
+	}
+}
+
+# response event for France - country agrees
+country_event = {
+	id = u_fra.44
+	title = u_fra.44.t
+	desc = u_fra.44.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = u_fra.44.a #agree
+		if = {
+			limit = {
+				51 = {
+					is_controlled_by = ROOT
+				}
+			}
+			transfer_state = 51
+		}
+		if = {
+			limit = {
+				42 = {
+					is_controlled_by = ROOT
+				}
+			}
+			transfer_state = 42
+		}
+		if = {
+			limit = {
+				4 = { is_owned_or_subject_trigger = yes }
+				152 = { is_owned_or_subject_trigger = yes }
+				153 = { is_owned_or_subject_trigger = yes }
+			}
+			AUS = {
+				transfer_state = 4
+				transfer_state = 152
+				transfer_state = 153
+			}
+			puppet = AUS
+		}
+		if = { #set up Wurtemberg puppet
+			limit = {
+				50 = {
+					is_owned_or_subject_trigger = yes
+				}
+			}
+			WUR = {
+				transfer_state = 50
+				add_state_core = 50
+			}
+			puppet = WUR
+		}
+		if = { #set up Saxony puppet
+			limit = {
+				65 = {
+					is_owned_or_subject_trigger = yes
+				}
+			}
+			SAX = {
+				transfer_state = 65
+				add_state_core = 65
+			}
+			puppet = SAX
+		}
+		if = { #set up Mecklenburg puppet
+			limit = {
+				61 = {
+					is_owned_or_subject_trigger = yes
+				}
+			}
+			MEK = {
+				transfer_state = 61
+				add_state_core = 61
+			}
+			ENG = {
+				puppet = MEK
+			}
+		}
+		if = { #set up Schleswig-Holstein puppet
+			limit = {
+				58 = {
+					is_owned_or_subject_trigger = yes
+				}
+			}
+			SHL = {
+				transfer_state = 58
+				add_state_core = 58
+			}
+			ENG = {
+				puppet = SHL
+			}
+		}
+		if = { #set up Bavaria puppet
+			limit = {
+				52 = {
+					is_owned_or_subject_trigger = yes
+				}
+				53 = {
+					is_owned_or_subject_trigger = yes
+				}
+				54 = {
+					is_owned_or_subject_trigger = yes
+				}
+			}
+			BAY = {
+				transfer_state = 52
+				transfer_state = 53
+				transfer_state = 54
+				add_state_core = 52
+				add_state_core = 53
+				add_state_core = 54
+			}
+			puppet = BAY
+		}
+		if = { #set up Hanover puppet
+			limit = {
+				59 = {
+					is_owned_or_subject_trigger = yes
+				}
+				56 = {
+					is_owned_or_subject_trigger = yes
+				}
+				57 = {
+					is_owned_or_subject_trigger = yes
+				}
+			}
+			HAN = {
+				transfer_state = 59
+				transfer_state = 56
+				transfer_state = 57
+				add_state_core = 59
+				add_state_core = 56
+				add_state_core = 57
+			}
+			ENG = {
+				puppet = HAN
+			}
+		}
+		if = {
+			limit = {
+				CZE = { exists = yes }
+				NOT = { has_war_with = CZE }
+			}
+			every_state = {
+				limit = {
+					is_core_of = CZE
+					is_owned_or_subject_trigger = yes
+				}
+				CZE = { transfer_state = PREV }
+			}
+		}
+		else = {
+			every_state = {
+				limit = {
+					is_core_of = CZE
+					is_owned_or_subject_trigger = yes
+				}
+				CZE = { transfer_state = PREV }
+			}
+			puppet = CZE
+		}
+		every_state = {
+			limit = {
+				is_core_of = GER
+				is_owned_or_subject_trigger = yes
+				CONTROLLER = {
+					NOT = {
+						OR = {
+							tag = BAY
+							tag = MEK
+							tag = SAX
+							tag = HAN
+							tag = SHL
+							tag = WUR
+							tag = CZE
+						}
+					}
+				}
+				NOT = {
+					state = 42
+					state = 51
+				}
+			}
+			PRE = {
+				transfer_state = PREV
+				add_state_core = PREV
+			}
+		}
+		if = {
+			limit = {
+				country_exists = PRE
+			}
+			puppet = PRE
+		}
+
+	}
+}
+#response event for France - US refuse
+country_event = {
+	id = u_fra.45
+	title = u_fra.45.t
+	desc = u_fra.45.desc
+	picture = GFX_report_event_generic_read_write
+	is_triggered_only = yes
+	option = {
+		name = u_fra.45.a #agree
+		ai_chance = {
+			base = 80
+		}
+	}
+}
+
+####################################
+####################################
+####################################
+## EVENTS FOR ELECTIONS           ##
+####################################
+####################################
+####################################
+
+
+# Communist Rise in France - Laval Opportunity
+country_event = {
+	id = u_fra.46
+	title = u_fra.46.t
+	desc = u_fra.46.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	# Form the National Bloc (Fascist Path)
+	option = {
+		name = u_fra.46.a
+
+		custom_effect_tooltip = FRA_ally_laval_tt
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 900
+				OR = {
+					has_country_flag = FRA_AI_FASCIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = FASCIST
+					}
+				}
+			}
+		}
+
+		add_country_leader_trait = tenacious_negotiator
+		remove_country_leader_trait = unpopular_politician
+
+		add_popularity = { ideology = communism popularity = -0.05 }
+		add_popularity = { ideology = democratic popularity = 0.05 }
+		add_popularity = { ideology = fascism popularity = 0.05 }
+		set_party_name = {
+			ideology = democratic
+			long_name = "National Bloc"
+			name = "National Bloc"
+		}
+		hidden_effect = {
+			FRA = { country_event = { id = u_fra.50 days = 34 }}
+		}
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = conservatives_win_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+	}
+	# We cannot trust Laval (Communist Path)
+	option = {
+		name = u_fra.46.b
+
+		custom_effect_tooltip = FRA_distrust_laval_tt
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 900
+				OR = {
+					has_country_flag = FRA_AI_COMMUNIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = COMMUNIST
+					}
+				}
+			}
+		}
+
+		add_popularity = { ideology = communism popularity = 0.05 }
+		hidden_effect = {
+			FRA = { country_event = { id = u_fra.49 days = 34 }}
+		}
+
+		custom_effect_tooltip = nationalists_loss_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = -5 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = conservatives_loss_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = -5 }
+		modify_parliament_seat = yes
+
+	}
+}
+
+# Action Française Coup
+country_event = {
+	id = u_fra.47
+	title = u_fra.47.t
+	desc = u_fra.47.d
+	picture = GFX_report_event_french_resistance_02
+
+	is_triggered_only = yes
+
+	# The army stand with Maurras
+	option = {
+		name = u_fra.47.a
+
+		complete_national_focus = UFRA_royalist_coup
+		custom_effect_tooltip = FRA_af_coup_succeed_tt
+
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 900
+				OR = {
+					has_country_flag = FRA_AI_ORLEANIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = ORLEANIST
+					}
+					has_country_flag = FRA_AI_LEGITIMIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = LEGITIMIST
+					}
+				}
+			}
+		}
+		add_timed_idea = {
+			idea = FRA_coup
+			days = 80
+		}
+
+		add_popularity = { ideology = communism popularity = -0.05 }
+		add_popularity = { ideology = democratic popularity = -0.05 }
+	}
+	# The army intervene (Bonapartiste Path)
+	option = {
+		name = u_fra.47.b
+		complete_national_focus = UFRA_bonapartist_restauration
+		create_country_leader = {
+			name = "Philippe Pétain"
+			desc = "POLITICS_PHILIPPE_PÉTAIN_DESC"
+			picture = "Portrait_France_Philippe_Petain.dds"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+
+			}
+		}
+		# set_cosmetic_tag = FRA_VICHY
+		set_party_name = {
+			ideology = neutrality
+			long_name = "French Military Junta"
+			name = "French Military Junta"
+		}
+		set_party_name = {
+			ideology = democratic
+			long_name = "French Military Junta"
+			name = "French Military Junta"
+		}
+		add_timed_idea = {
+			idea = FRA_coup
+			days = 80
+		}
+		#set_politics = {
+			#	ruling_party = neutrality
+			#	elections_allowed = no
+			#}
+
+		custom_effect_tooltip = FRA_af_coup_fail
+
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 900
+				OR = {
+					has_country_flag = FRA_AI_BONAPARTIST
+					has_game_rule = {
+						rule = FRA_ai_behavior
+						option = BONAPARTIST
+					}
+				}
+			}
+		}
+	}
+}
+
+# Léon Blum Victory
+country_event = {
+	id = u_fra.48
+	title = u_fra.48.t
+	desc = u_fra.48.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	# Vive le Front
+	option = {
+		name = u_fra.48.a
+
+		complete_national_focus = UFRA_popular_front_win
+		add_popularity = { ideology = democratic popularity = 0.05 }
+		add_country_leader_role = {
+			character = FRA_leon_blum
+			country_leader = {
+				expire = "1965.1.1"
+				ideology = socialism
+				traits = {
+					reluctant_interventionist
+					stout_defender
+				}
+			}
+			promote_leader = yes
+		}
+		set_country_flag = { flag = FRA_popular_front_cooldown value = 1 days = 360 }
+
+		# PARLIAMENT EVENTS - FRONT POP
+
+		# Happy Strikes
+		hidden_effect = { FRA = {country_event = { id = u_fra.96 days = 35 random_days = 5 } } }
+		# Industr
+		hidden_effect = { FRA = {country_event = { id = u_fra.95 days = 50 random_days = 10 } } }
+		# Commies disag
+		hidden_effect = { FRA = {country_event = { id = u_fra.97 days = 125 random_days = 10 } } }
+		# AF hostile
+		hidden_effect = { FRA = {country_event = { id = u_fra.102 days = 225 random_days = 10 } } }
+		# Nat on the rise
+		hidden_effect = { FRA = {country_event = { id = u_fra.98 days = 275 random_days = 5 } } }
+		# tensions
+		hidden_effect = { FRA = {country_event = { id = u_fra.120 days = 365 random_days = 5 } } }
+		# cagoule
+		hidden_effect = { FRA = {country_event = { id = u_fra.106 days = 550 random_days = 5 } } }
+
+
+		# PARLIAMENT EVENTS - COMMON WITH NAT. BLOC
+		hidden_effect = { FRA = {country_event = { id = u_fra.116 days = 150 random_days = 15 } } }
+		hidden_effect = { FRA = {country_event = { id = u_fra.99 days = 30 random_days = 1 } } }
+		hidden_effect = { FRA = {country_event = { id = u_fra.114 days = 300 random_days = 5 } } }
+		hidden_effect = { FRA = {country_event = { id = u_fra.113 days = 440 random_days = 2 } } }
+		hidden_effect = { FRA = {country_event = { id = u_fra.94 days = 395 random_days = 5 } } }
+		hidden_effect = {
+			set_country_flag = UFRA_republic_won_elections_flag
+		}
+
+	}
+}
+
+# Communist Victory
+country_event = {
+	id = u_fra.49
+	title = u_fra.49.t
+	desc = u_fra.49.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	# Vive la Commune
+	option = {
+		name = u_fra.49.a
+
+		complete_national_focus = UFRA_communist_win
+		add_popularity = { ideology = communism popularity = 0.05 }
+		add_country_leader_role = {
+			character = FRA_leon_blum
+			country_leader = {
+				expire = "1965.1.1"
+				ideology = socialism
+				traits = {
+					reluctant_interventionist
+					stout_defender
+				}
+			}
+			promote_leader = yes
+		}
+		set_country_flag = { flag = FRA_popular_front_cooldown value = 1 days = 360 }
+	}
+}
+
+# National Bloc Victory
+country_event = {
+	id = u_fra.50
+	title = u_fra.50.t
+	desc = u_fra.50.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	# Start the National Regeneration (Fascist Path)
+	option = {
+		name = u_fra.50.a
+		trigger = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		complete_national_focus = UFRA_fascist_win
+		custom_effect_tooltip = FRA_national_regen_laval_tt
+
+		add_popularity = { ideology = communism popularity = -0.05 }
+		add_popularity = { ideology = democratic popularity = -0.05 }
+	}
+	# Keep the Republic
+	option = {
+		name = u_fra.50.b
+
+		complete_national_focus = UFRA_popular_front_win
+		custom_effect_tooltip = FRA_republic_laval_tt
+
+		add_popularity = { ideology = democratic popularity = 0.05 }
+		add_popularity = { ideology = communism popularity = -0.05 }
+
+		custom_effect_tooltip = nationalists_win_10
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 10 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = conservatives_win_10
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 10 }
+		modify_parliament_seat = yes
+
+		# PARLIAMENT EVENTS - NAT. BLOC
+		# Larocque
+		hidden_effect = { FRA = {country_event = { id = u_fra.88 days = 15 random_days = 5 } } }
+		# Workers strikes
+		hidden_effect = { FRA = {country_event = { id = u_fra.91 days = 60 random_days = 10 } } }
+		# land owners
+		hidden_effect = { FRA = {country_event = { id = u_fra.90 days = 150 random_days = 10 } } }
+		# commies join force
+		hidden_effect = { FRA = {country_event = { id =  u_fra.92 days = 265 random_days = 10 } } }
+
+		# PARLIAMENT EVENTS - COMMON WITH FRONT POP.
+		hidden_effect = { FRA = {country_event = { id = u_fra.116 days = 175 random_days = 15 } } }
+		hidden_effect = { FRA = {country_event = { id = u_fra.99 days = 35 random_days = 1 } } }
+		hidden_effect = { FRA = {country_event = { id = u_fra.114 days = 335 random_days = 5 } } }
+		hidden_effect = { FRA = {country_event = { id = u_fra.113 days = 440 random_days = 2 } } }
+		hidden_effect = {
+			set_country_flag = UFRA_republic_won_elections_flag
+		}
+	}
+}
+
+####################################
+####################################
+####################################
+## EVENTS FOR FLAVOUR             ##
+####################################
+####################################
+####################################
+
+# Follow us mr blum
+country_event = {
+	id = u_fra.51
+	title = u_fra.51.t
+	desc = u_fra.51.d
+	picture = GFX_report_event_fascist_gathering
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.51.a
+	}
+}
+
+# Under the burning sun of Africa
+country_event = {
+	id = u_fra.52
+	title = u_fra.52.t
+	desc = u_fra.52.d
+	picture = GFX_report_event_generic_communist_congress
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.52.a
+	}
+}
+
+# Workers Are disgrunteled
+country_event = {
+	id = u_fra.53
+	title = u_fra.53.t
+	desc = u_fra.53.d
+	picture = GFX_report_event_worker_protests
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.53.a
+		add_ideas = FRA_disgruntled_workers_I
+	}
+}
+
+
+####################################
+####################################
+####################################
+## EVENTS FRENCH-GERMAN RELATIONS ##
+####################################
+####################################
+####################################
+
+# Germany - France Forbid French Language
+# Our new ally, but old ennemy, has today dared a bold and scandalous move. They dared to forbid German language in the contested province of Alsace-Lorraine.
+# Already our diplomats have asked for the repeal of the law, but French foreign representatives are staying silent.
+# Waves of immigrants are flocking to Germany, where they can be protected and proud of their heritage.
+country_event = {
+	id = u_fra.54
+	title = u_fra.54.t
+	desc = u_fra.54.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.54.a
+		add_manpower = 50000
+	}
+}
+
+# In the heart of darkness
+country_event = {
+	id = u_fra.55
+	title = u_fra.55.t
+	desc = u_fra.55.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.55.a
+	}
+}
+
+# Italy - France transfer Tunisia
+country_event = {
+	id = u_fra.56
+	title = u_fra.56.t
+	desc = u_fra.56.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# We must thread carefully
+		name = u_fra.56.a
+		transfer_state = 665
+		transfer_state = 458
+	}
+}
+
+# Italy - France Asks for backing
+# France is asking for our backing in their influence wrestle with Germany. They ask us to support them in their historical claim of Alsace-Lorraine.
+# But our diplomats are warning about the risk of war between the two super powers. As such we should carefully consider which side shall we take.
+country_event = {
+	id = u_fra.57
+	title = u_fra.57.t
+	desc = u_fra.57.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.57.a
+		ai_chance = { base = 99 }
+		FRA = {
+			country_event = u_fra.75
+		}
+		set_global_flag = FRA_ITA_backup_al
+	}
+	option = {
+		name = u_fra.57.b
+		ai_chance = { base = 1 }
+		FRA = {
+			country_event = u_fra.76
+		}
+	}
+}
+
+# Hungary - France Asks for backing
+country_event = {
+	id = u_fra.58
+	title = u_fra.58.t
+	desc = u_fra.58.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.58.a
+		ai_chance = { base = 25 }
+		FRA = {
+			country_event = u_fra.75
+		}
+		set_global_flag = FRA_HUN_backup_al
+	}
+	option = {
+		name = u_fra.58.b
+		ai_chance = { base = 75 }
+		FRA = {
+			country_event = u_fra.76
+		}
+	}
+}
+
+# Romania - France Asks for backing
+country_event = {
+	id = u_fra.59
+	title = u_fra.59.t
+	desc = u_fra.59.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.59.a
+		ai_chance = { base = 75 }
+		FRA = {
+			country_event = u_fra.75
+		}
+		set_global_flag = FRA_ROM_backup_al
+	}
+	option = {
+		name = u_fra.59.b
+		ai_chance = { base = 25 }
+		FRA = {
+			country_event = u_fra.76
+		}
+	}
+}
+
+# Spain - France Asks for Backing
+country_event = {
+	id = u_fra.60
+	title = u_fra.60.t
+	desc = u_fra.60.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Marocco
+		name = u_fra.60.a
+		ai_chance = { base = 75 }
+		FRA = {
+			country_event = u_fra.70
+		}
+	}
+	option = {
+		name = u_fra.60.b
+		ai_chance = { base = 10 }
+		FRA = {
+			country_event = u_fra.75
+		}
+		set_global_flag = FRA_SPA_backup_al
+	}
+	option = {
+		name = u_fra.60.c
+		ai_chance = { base = 15 }
+		FRA = {
+			country_event = u_fra.76
+		}
+	}
+}
+
+# France - Spain asks for Compensations
+# Spain has agree to support us. On one condition. They ask for the transfer of Marocco to their colonial administration.
+# We should consider if we need them or not in our struggle against Germany...
+country_event = {
+	id = u_fra.70
+	title = u_fra.70.t
+	desc = u_fra.70.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.70.a
+		ai_chance = { base = 50 }
+		every_other_country = {
+			limit = {
+				original_tag = SPR
+				has_government = ROOT
+			}
+			country_event = u_fra.71
+			transfer_state = 461
+			transfer_state = 462
+		}
+		set_global_flag = FRA_SPA_backup_al
+	}
+	option = {
+		name = u_fra.70.b
+		ai_chance = { base = 50 }
+		every_other_country = {
+			limit = {
+				original_tag = SPR
+				has_government = ROOT
+			}
+			country_event = u_fra.77
+		}
+	}
+}
+
+# Spain - France transfers Marocco
+country_event = {
+	id = u_fra.71
+	title = u_fra.71.t
+	desc = u_fra.71.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.71.a
+	}
+}
+
+# Japan - France Asks for Backing
+country_event = {
+	id = u_fra.72
+	title = u_fra.72.t
+	desc = u_fra.72.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.72.a
+		ai_chance = { base = 65 }
+		FRA = {
+			country_event = u_fra.73
+		}
+	}
+	option = {
+		name = u_fra.72.b
+		ai_chance = { base = 10 }
+		FRA = {
+			country_event = u_fra.75
+		}
+		set_global_flag = FRA_JAP_backup_al
+	}
+	option = {
+		name = u_fra.72.c
+		ai_chance = { base = 25 }
+		FRA = {
+			country_event = u_fra.76
+		}
+	}
+}
+
+# France - Japan Asks for Compensations
+country_event = {
+	id = u_fra.73
+	title = u_fra.73.t
+	desc = u_fra.73.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Yes
+		name = u_fra.73.a
+		ai_chance = { base = 50 }
+		set_global_flag = FRA_JAP_backup_al
+		JAP = {
+			country_event = u_fra.74
+			transfer_state = 671
+			transfer_state = 670
+			transfer_state = 286
+			transfer_state = 741
+		}
+	}
+	option = {
+		name = u_fra.73.b
+		ai_chance = { base = 50 }
+		JAP = {
+			country_event = u_fra.77
+		}
+	}
+}
+
+# Japan - France transfers French Polynesia
+country_event = {
+	id = u_fra.74
+	title = u_fra.74.t
+	desc = u_fra.74.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.74.a
+	}
+}
+
+# France - *Country* Accepts to back us
+country_event = {
+	id = u_fra.75
+	title = u_fra.75.t
+	desc = u_fra.75.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.75.a
+		custom_effect_tooltip = FRA_fra_ger_10_augment
+		FRA = { add_to_variable = { var = france_and_germany_diplomatic_influence value = 10 } }
+	}
+}
+
+# France - *Country* Refuses to back us
+country_event = {
+	id = u_fra.76
+	title = u_fra.76.t
+	desc = u_fra.76.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.76.a
+	}
+}
+
+# Country - France Refuses to transfer territory
+country_event = {
+	id = u_fra.77
+	title = u_fra.77.t
+	desc = u_fra.77.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.77.a
+	}
+}
+
+# Germany - What of Elsass-Lothringen
+country_event = {
+	id = u_fra.78
+	title = u_fra.78.t
+	desc = u_fra.78.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Ask for them to submit
+		name = u_fra.78.a
+		ai_chance = { base = 100 }
+		FRA = {
+			country_event = u_fra.79
+		}
+	}
+	option = {
+		# Let it go
+		name = u_fra.78.b
+		ai_chance = { base = 0 }
+		add_political_power = -50
+		FRA = {
+			country_event = u_fra.83
+		}
+	}
+}
+
+# Germany asks for submission - Puppet and transfer 28
+country_event = {
+	id = u_fra.79
+	title = u_fra.79.t
+	desc = u_fra.79.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Transfer
+		name = u_fra.79.a
+		add_political_power = -50
+		ai_chance = { base = 35 }
+		GER = {
+			country_event = u_fra.81
+		}
+		GER = {
+			puppet = FRA
+			if = {
+				limit = {
+					NOT = { has_dlc = "Death or Dishonor" }
+				}
+				set_autonomy = { target = PREV autonomy_state = autonomy_integrated_puppet }
+			}
+			else = {
+				set_autonomy = { target = PREV autonomy_state = autonomy_reichskommissariat }
+			}
+		}
+	}
+	option = {
+		# They can come and get it
+		name = u_fra.79.b
+		ai_chance = { base = 65 }
+		GER = {
+			country_event = u_fra.80
+		}
+	}
+}
+
+# France refuses to transfer Elsass-Lothringen
+country_event = {
+	id = u_fra.80
+	title = u_fra.80.t
+	desc = u_fra.80.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Break Diplomatic Relations
+		name = u_fra.80.a
+		ai_chance = { base = 85 }
+		FRA = {
+			country_event = u_fra.85
+		}
+	}
+	option = {
+		# We cannot do anything
+		name = u_fra.80.b
+		add_political_power = -50
+		ai_chance = { base = 15 }
+		FRA = {
+			country_event = u_fra.83
+		}
+	}
+}
+
+# France transfer Alsace-Lorraine
+country_event = {
+	id = u_fra.81
+	title = u_fra.81.t
+	desc = u_fra.81.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Good
+		name = u_fra.81.a
+		set_global_flag = FRA_fra_ger_condition_submission
+		ai_chance = { base = 100 }
+		GER = {
+			transfer_state = 28
+		}
+		diplomatic_relation = {
+			country = FRA
+			relation = non_aggression_pact
+			active = yes
+		}
+		hidden_effect = {
+			FRA = {
+				diplomatic_relation = {
+					country = GER
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+		}
+	}
+	option = {
+		# Refuse and Break Diplomatic Relations
+		name = u_fra.81.b
+		ai_chance = { base = 0 }
+		FRA = {
+			country_event = u_fra.85
+		}
+	}
+}
+
+# France asks for full recognition of French Alsace-Lorraine
+country_event = {
+	id = u_fra.82
+	title = u_fra.82.t
+	desc = u_fra.82.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Transfer
+		name = u_fra.82.a
+		ai_chance = { base = 40 }
+		add_political_power = -50
+		FRA = {
+			country_event = u_fra.83
+		}
+	}
+	option = {
+		# They can come and get it
+		name = u_fra.82.b
+		ai_chance = { base = 60 }
+		FRA = {
+			country_event = u_fra.84
+		}
+	}
+}
+
+# Germany recognise Alsace-Lorraine as French
+country_event = {
+	id = u_fra.83
+	title = u_fra.83.t
+	desc = u_fra.83.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Good
+		name = u_fra.83.a
+		set_global_flag = fra_ger_asked_germany_to_remove_its_claims
+		add_political_power = 50
+		diplomatic_relation = {
+			country = GER
+			relation = non_aggression_pact
+			active = yes
+		}
+		hidden_effect = {
+			GER = {
+				diplomatic_relation = {
+					country = FRA
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+		}
+	}
+}
+
+# Germany refuses to recognise Alsace-Lorraine as French
+country_event = {
+	id = u_fra.84
+	title = u_fra.84.t
+	desc = u_fra.84.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Break relation
+		name = u_fra.84.a
+		FRA = {
+			country_event = u_fra.85
+		}
+	}
+}
+
+# France and Germany break diplomatic relations - GER = { prepare_for_war = FRA } + Flags
+country_event = {
+	id = u_fra.85
+	title = u_fra.85.t
+	desc = u_fra.85.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# That's not good
+		name = u_fra.85.a
+		set_global_flag = fra_ger_asked_germany_to_remove_its_claims
+		GER = {
+			country_event=u_fra.87
+		}
+		create_faction = "French Axis"
+		if = {
+			limit = {
+				has_global_flag=FRA_JAP_backup_al
+				JAP = { exists = yes }
+			}
+			JAP = {
+				add_to_faction = FRA
+			}
+		}
+		if = {
+			limit = {
+				has_global_flag=FRA_SPA_backup_al
+				any_other_country = {
+					original_tag = SPR
+					OR = {
+						has_government = fascism
+						has_country_leader = { ruling_only = yes name = "Francisco Franco" }
+					}
+				}
+			}
+			every_other_country = {
+				limit = {
+					original_tag = SPR
+					has_government = ROOT
+				}
+				add_to_faction = FRA
+			}
+		}
+		if = {
+			limit = {
+				has_global_flag=FRA_ROM_backup_al
+				ROM = { exists = yes }
+			}
+			ROM = {
+				add_to_faction = FRA
+			}
+		}
+		if = {
+			limit = {
+				has_global_flag=FRA_HUN_backup_al
+				HUN = { exists = yes }
+			}
+			HUN = {
+				add_to_faction = FRA
+			}
+		}
+		if = {
+			limit = {
+				has_global_flag=FRA_ITA_backup_al
+				ITA = { exists = yes }
+			}
+			ITA = {
+				add_to_faction = FRA
+			}
+		}
+	}
+}
+
+# France and Germany at war - war
+country_event = {
+	id = u_fra.86
+	title = u_fra.86.t
+	desc = u_fra.86.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Pour la France
+		name = u_fra.86.a
+		FRA = {
+			declare_war_on = {
+				target = GER
+				type = annex_everything
+			}
+		}
+	}
+}
+
+# France cut diplomatic relations
+country_event = {
+	id = u_fra.87
+	title = u_fra.87.t
+	desc = u_fra.87.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.87.a
+	}
+}
+
+##############################
+##############################
+##############################
+## EVENTS DEMOCRATIC BRANCH ##
+##############################
+##############################
+##############################
+
+# Larocque National Bloc
+country_event = {
+	id = u_fra.88
+	title = u_fra.88.t
+	desc = u_fra.88.d
+	picture = GFX_news_FRA_larocque_minister
+
+	is_triggered_only = yes
+
+	option = {
+		# Replace
+		name = u_fra.88.a
+
+		create_country_leader = {
+			name = "François de la Rocque"
+			desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+			picture = GFX_portrait_fra_francois_de_la_rocque
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+				retired_officer
+			}
+		}
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+	option = {
+		# Keep Laval
+		name = u_fra.88.b
+
+		custom_effect_tooltip = conservatives_win_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# UNUSED
+country_event = {
+	id = u_fra.89
+	title = u_fra.89.t
+	desc = u_fra.89.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.89.a
+	}
+}
+
+# Land Owners and Industrialist ally - Support
+country_event = {
+	id = u_fra.90
+	title = u_fra.90.t
+	desc = u_fra.90.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.90.a
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = conservatives_win_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Workers Strikes - Not happy :(
+country_event = {
+	id = u_fra.91
+	title = u_fra.91.t
+	desc = u_fra.91.d
+	picture = GFX_report_event_worker_protests
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.91.a
+
+		add_popularity = { ideology = communism popularity = 0.05 }
+
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Communists Join Force PopFront
+country_event = {
+	id = u_fra.92
+	title = u_fra.92.t
+	desc = u_fra.92.d
+	picture = GFX_report_event_generic_communist_congress
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.92.a
+
+		add_popularity = { ideology = communism popularity = 0.05 }
+
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Doriot PPF Anniversary
+country_event = {
+	id = u_fra.93
+	title = u_fra.93.t
+	desc = u_fra.93.d
+	picture = GFX_news_FRA_anniversay_psf
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.93.a
+
+		add_popularity = { ideology = fascism popularity = 0.05 }
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Freedom Front
+country_event = {
+	id = u_fra.94
+	title = u_fra.94.t
+	desc = u_fra.94.d
+	picture = GFX_report_event_fascist_speech
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.94.a
+
+		add_popularity = { ideology = fascism popularity = 0.05 }
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = conservatives_win_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Landowners and Industrialists ally - Opposition
+country_event = {
+	id = u_fra.95
+	title = u_fra.95.t
+	desc = u_fra.95.d
+	picture = GFX_news_FRA_industrial_hostile
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.95.a
+
+		add_popularity = { ideology = fascism popularity = 0.05 }
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = conservatives_win_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Happy Strikes :)
+country_event = {
+	id = u_fra.96
+	title = u_fra.96.t
+	desc = u_fra.96.d
+	picture = GFX_news_FRA_greves_joyeuses
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.96.a
+
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Communists disagreements
+country_event = {
+	id = u_fra.97
+	title = u_fra.97.t
+	desc = u_fra.97.d
+	picture = GFX_report_event_generic_communist_congress
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.97.a
+
+		add_popularity = { ideology = communism popularity = 0.05 }
+
+		custom_effect_tooltip = socialists_loss_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = -5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Nationalism on the rise
+country_event = {
+	id = u_fra.98
+	title = u_fra.98.t
+	desc = u_fra.98.d
+	picture = GFX_report_event_fascist_gathering
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.98.a
+
+		add_popularity = { ideology = fascism popularity = 0.05 }
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# First May
+country_event = {
+	id = u_fra.99
+	title = u_fra.99.t
+	desc = u_fra.99.d
+	picture = GFX_news_FRA_1st_may
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.99.a
+
+		add_popularity = { ideology = communism popularity = 0.05 }
+
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# 6 Fevrier
+country_event = {
+	id = u_fra.100
+	title = u_fra.100.t
+	desc = u_fra.100.d
+	picture = GFX_news_FRA_6_fevrier_celeb
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.100.a
+
+		add_popularity = { ideology = fascism popularity = 0.05 }
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = conservatives_win_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# GFX_news_FRA_14_juillet
+country_event = {
+	id = u_fra.101
+	title = u_fra.101.t
+	desc = u_fra.101.d
+	picture = GFX_news_FRA_14_juillet
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.101.a
+	}
+}
+
+# AF hostile to FP
+country_event = {
+	id = u_fra.102
+	title = u_fra.102.t
+	desc = u_fra.102.d
+	picture = GFX_news_FRA_af_hostile_to_frontpop
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.102.a
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# PSF creation
+country_event = {
+	id = u_fra.103
+	title = u_fra.103.t
+	desc = u_fra.103.d
+	picture = GFX_news_FRA_cdf_victory
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.103.a
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+		hidden_effect = { FRA = {country_event = { id = u_fra.104 days = 75 random_days = 2 } } }
+	}
+}
+
+# Clichy SHooting 1
+country_event = {
+	id = u_fra.104
+	title = u_fra.104.t
+	desc = u_fra.104.d
+	picture = GFX_news_FRA_the_leagues
+
+	is_triggered_only = yes
+
+	option = {
+		# Leave
+		name = u_fra.104.a
+		hidden_effect = { FRA = {country_event = { id = u_fra.105 days = 2 random_days = 1 } } }
+	}
+	option = {
+		# Prevent
+		name = u_fra.104.b
+		add_political_power = -25
+
+		custom_effect_tooltip = conservatives_win_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Clichy SHooting 2
+country_event = {
+	id = u_fra.105
+	title = u_fra.105.t
+	desc = u_fra.105.d
+	picture = GFX_news_FRA_clichy_shooting
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.105.a
+
+		add_manpower = -50
+		add_popularity = { ideology = fascism popularity = 0.05 }
+
+		custom_effect_tooltip = socialists_loss_10
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = -10 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Attentat la Cagoule
+country_event = {
+	id = u_fra.106
+	title = u_fra.106.t
+	desc = u_fra.106.d
+	picture = GFX_news_FRA_la_cagoule_violence
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.106.a
+
+		add_manpower = -50
+
+		add_popularity = { ideology = fascism popularity = -0.05 }
+
+		custom_effect_tooltip = nationalists_loss_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = -5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Larocque Address
+country_event = {
+	id = u_fra.107
+	title = u_fra.107.t
+	desc = u_fra.107.d
+	picture = GFX_news_FRA_larocque_minister
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.107.a
+
+		add_popularity = { ideology = fascism popularity = 0.05 }
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# UNUSED
+country_event = {
+	id = u_fra.108
+	title = u_fra.108.t
+	desc = u_fra.108.d
+	picture = GFX_news_FRA_colonial1
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.10.a
+	}
+}
+
+# News from our Empire 2
+country_event = {
+	id = u_fra.109
+	title = u_fra.109.t
+	desc = u_fra.109.d
+	picture = GFX_news_FRA_colonial2
+
+	is_triggered_only = yes
+
+	option = {
+		# nice
+		name = u_fra.109.a
+		add_manpower = 15000
+
+		hidden_effect = { FRA = {country_event = { id = u_fra.110 days = 365 random_days = 5 } } }
+		hidden_effect = { FRA = {country_event = { id = u_fra.118 days = 107 random_days = 5 } } }
+	}
+}
+
+# News from our Empire 3
+country_event = {
+	id = u_fra.110
+	title = u_fra.110.t
+	desc = u_fra.110.d
+	picture = GFX_news_FRA_colonial3
+
+	is_triggered_only = yes
+
+	option = {
+		# nice
+		name = u_fra.110.a
+		add_political_power = 50
+
+		hidden_effect = { FRA = {country_event = { id = u_fra.111 days = 365 random_days = 5 } } }
+	}
+}
+
+#  News from our Empire 4
+country_event = {
+	id = u_fra.111
+	title = u_fra.111.t
+	desc = u_fra.111.d
+	picture = GFX_news_FRA_colonial4
+
+	is_triggered_only = yes
+
+	option = {
+		# nice
+		name = u_fra.111.a
+		add_manpower = 15000
+	}
+}
+
+# The French Communist Party
+country_event = {
+	id = u_fra.112
+	title = u_fra.112.t
+	desc = u_fra.112.d
+	picture = GFX_news_FRA_communists_intro
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.112.a
+
+		add_popularity = { ideology = communism popularity = 0.05 }
+
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Communist Youth Rally
+country_event = {
+	id = u_fra.113
+	title = u_fra.113.t
+	desc = u_fra.113.d
+	picture = GFX_news_FRA_communists_rally
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.113.a
+
+		add_popularity = { ideology = communism popularity = 0.05 }
+
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Daladier address the French Republic
+country_event = {
+	id = u_fra.114
+	title = u_fra.114.t
+	desc = u_fra.114.d
+	picture = GFX_news_FRA_daladier_soclib_adress
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.114.a
+
+		custom_effect_tooltip = social_liberals_win_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# UNUSED
+country_event = {
+	id = u_fra.115
+	title = u_fra.115.t
+	desc = u_fra.115.d
+	picture = GFX_news_FRA_industrial_hostile
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.115.a
+	}
+}
+
+# Le Partie Populaire Français
+country_event = {
+	id = u_fra.116
+	title = u_fra.116.t
+	desc = u_fra.116.d
+	picture = GFX_news_FRA_doriot_july_1936
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.116.a
+
+		add_popularity = { ideology = fascism popularity = 0.05 }
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Front Populaire Victory
+country_event = {
+	id = u_fra.117
+	title = u_fra.117.t
+	desc = u_fra.117.d
+	picture = GFX_news_FRA_front_populaire_victory
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.117.a
+
+		custom_effect_tooltip = social_liberals_win_5
+		set_temp_variable = { temp_member = 2 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Indochine and Ho Chi Minh
+country_event = {
+	id = u_fra.118
+	title = u_fra.118.t
+	desc = u_fra.118.d
+	picture = GFX_news_FRA_indochine_1
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.118.a
+		hidden_effect = { FRA = {country_event = { id = u_fra.13 days = 3000 random_days = 5 } } }
+
+	}
+}
+
+# UNUSED
+country_event = {
+	id = u_fra.119
+	title = u_fra.119.t
+	desc = u_fra.119.d
+	picture = GFX_news_FRA_popular_front_intro
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.119.a
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# Radicals and Socialists Divisions
+country_event = {
+	id = u_fra.120
+	title = u_fra.120.t
+	desc = u_fra.120.d
+	picture = GFX_news_FRA_radicals_seek_power
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.120.a
+
+		add_popularity = { ideology = communism popularity = 0.05 }
+
+
+		custom_effect_tooltip = socialists_loss_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = -5 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = social_liberals_loss_5
+		set_temp_variable = { temp_member = 2 }
+		set_temp_variable = { temp_seats = -5 }
+		modify_parliament_seat = yes
+	}
+}
+
+# The Leagues
+country_event = {
+	id = u_fra.121
+	title = u_fra.121.t
+	desc = u_fra.121.d
+	picture = GFX_news_FRA_the_leagues
+
+	is_triggered_only = yes
+
+	option = {
+		# Traitors
+		name = u_fra.121.a
+
+		add_popularity = { ideology = fascism popularity = 0.05 }
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+
+		custom_effect_tooltip = conservatives_win_5
+		set_temp_variable = { temp_member = 3 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+################################
+###
+### NAPOLEON UPDATE
+###
+################################
+
+# Parade Under the Brandebourg Gates
+country_event = {
+	id = u_fra.122
+	title = u_fra.122.t
+	desc = u_fra.122.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.122.a
+	}
+}
+
+# La Victoire est à Nous
+country_event = {
+	id = u_fra.123
+	title = u_fra.123.t
+	desc = u_fra.123.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.123.a
+	}
+}
+
+# A meeting of two Emperors
+country_event = {
+	id = u_fra.124
+	title = u_fra.124.t
+	desc = u_fra.124.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# The future is now old man
+		name = u_fra.124.a
+	}
+}
+
+# The new Tzar
+country_event = {
+	id = u_fra.125
+	title = u_fra.125.t
+	desc = u_fra.125.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Slavs will always be under French protection
+		name = u_fra.125.a
+	}
+}
+
+# Ottoman Campain
+country_event = {
+	id = u_fra.126
+	title = u_fra.126.t
+	desc = u_fra.126.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.126.a
+	}
+}
+
+# Our own Cossack
+country_event = {
+	id = u_fra.127
+	title = u_fra.127.t
+	desc = u_fra.127.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.127.a
+	}
+}
+
+# The question of Italy
+country_event = {
+	id = u_fra.128
+	title = u_fra.128.t
+	desc = u_fra.128.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Meet with the king
+		name = u_fra.128.a
+	}
+	option = {
+		# War is the only option
+		name = u_fra.128.a
+	}
+}
+
+# A meeting with the king
+country_event = {
+	id = u_fra.129
+	title = u_fra.129.t
+	desc = u_fra.129.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# It is the only way to save the old order
+		name = u_fra.129.a
+	}
+}
+
+# A meeting with the Emperor
+country_event = {
+	id = u_fra.137
+	title = u_fra.137.t
+	desc = u_fra.137.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Accept
+		name = u_fra.137.a
+	}
+	option = {
+		# Refuse
+		name = u_fra.137.b
+	}
+}
+
+# The Kings takes over
+country_event = {
+	id = u_fra.130
+	title = u_fra.130.t
+	desc = u_fra.130.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Alliance is enough for now
+		name = u_fra.130.a
+	}
+	option = {
+		# Special rights must be given to France
+		name = u_fra.130.b
+	}
+}
+
+# France asks for special rights
+country_event = {
+	id = u_fra.131
+	title = u_fra.131.t
+	desc = u_fra.131.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Accept
+		name = u_fra.131.a
+	}
+	option = {
+		# Refuse
+		name = u_fra.131.b
+	}
+}
+
+# Italy accepts
+country_event = {
+	id = u_fra.138
+	title = u_fra.138.t
+	desc = u_fra.138.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.138.a
+	}
+}
+
+# Italy refuses
+country_event = {
+	id = u_fra.132
+	title = u_fra.132.t
+	desc = u_fra.132.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.132.a
+	}
+}
+
+# Visegrad Conference
+country_event = {
+	id = u_fra.133
+	title = u_fra.133.t
+	desc = u_fra.133.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.133.a
+	}
+}
+
+# A deal with Albion
+country_event = {
+	id = u_fra.134
+	title = u_fra.134.t
+	desc = u_fra.134.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Peace
+		name = u_fra.134.a
+	}
+	option = {
+		# Attack
+		name = u_fra.134.b
+	}
+}
+
+# Napoleon the Vi wants peace
+country_event = {
+	id = u_fra.135
+	title = u_fra.135.t
+	desc = u_fra.135.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Yes
+		name = u_fra.135.a
+	}
+	option = {
+		# No
+		name = u_fra.135.b
+	}
+}
+
+# England Accepts
+country_event = {
+	id = u_fra.136
+	title = u_fra.136.t
+	desc = u_fra.136.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.136.a
+	}
+}
+
+# 137 is up
+# 138 same
+
+# France Asks for Piedmont
+country_event = {
+	id = u_fra.139
+	title = u_fra.139.t
+	desc = u_fra.139.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Accept
+		name = u_fra.139.a
+	}
+	option = {
+		# Refuse
+		name = u_fra.139.a
+	}
+}
+
+# Italy Accepts
+country_event = {
+	id = u_fra.140
+	title = u_fra.140.t
+	desc = u_fra.140.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.140.a
+	}
+}
+
+# Italy Refuses
+country_event = {
+	id = u_fra.141
+	title = u_fra.141.t
+	desc = u_fra.141.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.141.a
+	}
+}
+
+# Iraq Deal
+country_event = {
+	id = u_fra.142
+	title = u_fra.142.t
+	desc = u_fra.142.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		# Send them the proposition
+		ai_chance = { base = 90 }
+		name = u_fra.142.a
+		IRQ = {
+			country_event = { id = u_fra.143 hours = 6 }
+		}
+	}
+
+	option = {
+		# Attack
+		ai_chance = { base = 10 }
+		create_wargoal = {
+			target = IRQ
+			type = annex_everything
+			expire = 0
+		}
+		name = u_fra.142.b
+	}
+}
+
+
+
+# France deal
+country_event = {
+	id = u_fra.143
+	title = u_fra.143.t
+	desc = u_fra.143.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	option = {
+		# Accept
+		name = u_fra.143.a
+		ai_chance = { base = 100 }
+		add_equipment_to_stockpile = {
+
+			type = infantry_equipment_1
+
+			amount = 2500
+
+		}
+		add_political_power=150
+		random_owned_state = {
+			limit = {
+				is_controlled_by = IRQ
+				is_core_of = IRQ
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+		FRA = {
+			country_event = { id = u_fra.144 hours = 6 }
+		}
+	}
+	option = {
+		# Refuse
+		ai_chance = { base = 1 }
+		name = u_fra.143.b
+		FRA = {
+			country_event = { id = u_fra.145 hours = 6 }
+		}
+	}
+}
+
+# Iraq accepts
+country_event = {
+	id = u_fra.144
+	title = u_fra.144.t
+	desc = u_fra.144.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		name = u_fra.144.a
+		IRQ = {
+			add_ai_strategy = {
+				type = alliance
+				id = "FRA"
+				value = 200
+			}
+		}
+		FRA = {
+			add_to_faction = IRQ
+		}
+		if = {
+			limit = {
+				has_dlc = "Man the Guns"
+			}
+			IRQ = {
+				give_resource_rights = { receiver = FRA state = 291 }
+				give_resource_rights = { receiver = FRA state = 676 }
+			}
+		}
+		else = {
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 33
+				}
+			}
+		}
+	}
+}
+
+# Iraq refuses
+country_event = {
+	id = u_fra.145
+	title = u_fra.145.t
+	desc = u_fra.145.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		# Vive l'Empereur
+		ai_chance = { base = 40 }
+		name = u_fra.145.a
+	}
+	option = {
+		# Attack
+		ai_chance = { base = 60 }
+		create_wargoal = {
+			target = IRQ
+			type = annex_everything
+			expire = 0
+		}
+		name = u_fra.142.b
+	}
+}
+
+########### By Blood Alone event UPDATE ###########
+#Nuclear agreement with allies
+
+country_event = {
+	id = u_fra.146
+	title = u_fra.146.t
+	desc = u_fra.146.d
+
+	is_triggered_only = yes
+
+	option = { # Accept agreement
+		name = u_fra.146.a
+		ai_chance = { base = 70 }
+		add_ideas = FRA_nuketreaty
+	}
+	option = { # Refuse
+		name = u_fra.146.b
+		ai_chance = { base = 30 }
+	}
+}
+
+
+#Wargames
+country_event = {
+	id = u_fra.147
+	title = u_fra.147.t
+	desc = u_fra.147.d
+	picture = GFX_report_event_worried_french
+
+	is_triggered_only = yes
+
+	option = { # focus longer
+		name = u_fra.147.a
+		ai_chance = { base = 20 }
+
+		add_timed_idea = {
+			idea = FRA_prolonged_wargames
+			days = 70
+		}
+
+		random_army_leader = {
+			limit = {
+				NOT = { has_trait = infantry_officer }
+			}
+
+			add_attack = 1
+			add_defense = 2
+
+			add_unit_leader_trait = infantry_officer
+		}
+
+		random_army_leader = {
+			limit = {
+				skill < 3
+				NOT = { has_trait = armor_officer }
+			}
+
+			add_skill_level = 1
+
+			add_attack = 1
+			add_planning = 1
+			add_logistics = 1
+
+			add_unit_leader_trait = armor_officer
+		}
+	}
+
+	option = { # focus on tactics
+		name = u_fra.147.b
+		ai_chance = { base = 80 }
+		army_experience = 25
+
+		random_army_leader = {
+			limit = {
+				NOT = { has_trait = career_officer }
+			}
+
+			add_planning = 1
+			add_logistics = 1
+
+			add_unit_leader_trait = career_officer
+		}
+
+		add_doctrine_cost_reduction = {
+			cost_reduction = 1.5
+			uses = 1
+			category = land_doctrine
+		}
+	}
+
+	option = { # focus on forts
+		name = u_fra.147.e
+		ai_chance = { base = 5 }
+
+		custom_effect_tooltip = FRA_reinforce_maginot_tt
+
+		random_army_leader = {
+			limit = {
+				skill < 3
+				NOT = { has_trait = trait_engineer }
+			}
+
+			add_skill_level = 1
+
+			add_attack = 1
+			add_planning = 2
+
+			add_unit_leader_trait = trait_engineer
+			add_unit_leader_trait = fortress_buster
+		}
+
+		random_army_leader = {
+			limit = {
+				skill < 4
+				NOT = { has_trait = career_officer }
+				NOT = { has_trait = defensive_doctrine }
+			}
+
+			add_skill_level = 1
+
+			add_defense = 1
+			add_planning = 1
+			add_logistics = 1
+
+			add_unit_leader_trait = career_officer
+			add_unit_leader_trait = defensive_doctrine
+		}
+		set_country_flag = FRA_maginot_realise
+	}
+}
+
+country_event = { #chamber of deputies dissolvement
+	id = u_fra.148
+	title = u_fra.148.t
+	desc = u_fra.148.d
+	picture = GFX_report_event_poland_rejects
+
+	is_triggered_only = yes
+
+	option = { # re-election time
+		name = u_fra.148.a
+		add_stability = -0.1
+		set_country_flag = FRA_first_disolve_gov
+		add_timed_idea = {
+			idea = FRA_political_violence
+			days = 200
+		}
+	}
+}
+
+########### HEAVY WATER EVENTS ###########
+#Ask Norwegia for heavy water
+country_event = {
+	id = u_fra.149
+	title = u_fra.149.t
+	desc = u_fra.149.d
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = { # sell heavy water to france
+		name = u_fra.149.a
+		ai_chance = { base = 50 }
+		trigger = {
+			NOT = {
+				has_war_with = GER
+			}
+		}
+		add_timed_idea = {
+			idea = NOR_fra_buying_heavy_water
+			days = 250
+		}
+		FRA = {
+			country_event = { id = u_fra.150 }
+			add_opinion_modifier = {
+				target = NOR
+				modifier =  medium_increase
+			}
+		}
+	}
+
+	option = { # sell heavy water to germany
+		name = u_fra.149.b
+		ai_chance = { base = 150 }
+		trigger = {
+			NOT = {
+				is_subject_of = FRA
+				is_ally_with = FRA
+				has_war_with = GER
+			}
+			has_opinion = {
+				target = GER
+				value > 14
+			}
+		}
+		add_timed_idea = {
+			idea = NOR_fra_buying_heavy_water
+			days = 250
+		}
+		FRA = {
+			country_event = { id = u_fra.151 }
+			add_opinion_modifier = {
+				target = NOR
+				modifier =  medium_decrease
+			}
+		}
+		GER = {
+			country_event = { id = u_fra.152 }
+			add_opinion_modifier = {
+				target = NOR
+				modifier =  medium_increase
+			}
+		}
+	}
+
+	option = { # operation to give heavy water to france
+		name = u_fra.149.c
+		trigger = {
+			has_dlc = "La Resistance"
+			OR = {
+				has_war_with = GER
+				has_opinion = {
+					target = GER
+					value < -34
+				}
+				GER = {
+					has_wargoal_against = NOR
+				}
+			}
+		}
+		ai_chance = { base = 500 }
+		FRA = {
+			country_event = { id = u_fra.153 }
+		}
+		GER = {
+			add_opinion_modifier = {
+				target = NOR
+				modifier =  medium_decrease
+			}
+		}
+	}
+}
+
+#Norwegia sell heavy water to France
+country_event = {
+	id = u_fra.150
+	title = u_fra.150.t
+	desc = u_fra.150.d
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.150.a
+		add_timed_idea = {
+			idea = FRA_norway_buying_heavy_water
+			days = 120
+		}
+		remove_ideas = FRA_no_moderator_nuke
+	}
+}
+
+#Germany recieve norwegian heavy water - France
+country_event = {
+	id = u_fra.151
+	title = u_fra.151.t
+	desc = u_fra.151.d
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.151.a
+		custom_effect_tooltip = FRA_heavy_water_steal_operation_tt
+
+		set_country_flag = fra_want_norway_heavy_water
+		NOR = {
+			set_country_flag = nor_gonna_be_robbed
+		}
+	}
+}
+
+#Germany recieve norwegian heavy water - Germany
+country_event = {
+	id = u_fra.152
+	title = u_fra.152.t
+	desc = u_fra.152.d
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.152.a
+		add_timed_idea = {
+			idea = FRA_norway_buying_heavy_water
+			days = 120
+		}
+		add_tech_bonus = {
+			name = GER_nuk_interest
+			bonus = 0.5
+			uses = 1
+			category = nuclear
+		}
+	}
+}
+
+#Norway give heavy water to France
+country_event = {
+	id = u_fra.153
+	title = u_fra.153.t
+	desc = u_fra.153.d
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.153.a
+		set_country_flag = norway_wanna_give_heavy_water_to_fra
+		NOR = {
+			set_country_flag = nor_gonna_be_robbed
+		}
+		custom_effect_tooltip = FRA_heavy_water_operation_tt
+	}
+}
+
+#Operation France steal the heavy water - Norway
+country_event = {
+	id = u_fra.154
+	title = u_fra.154.t
+	desc = u_fra.154.d
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.154.a
+		FRA = {
+			clr_country_flag = norway_wanna_give_heavy_water_to_fra
+			clr_country_flag = fra_want_norway_heavy_water
+		}
+		GER = {
+			add_opinion_modifier = {
+				target = NOR
+				modifier =  medium_decrease
+			}
+			country_event = u_fra.155
+		}
+	}
+}
+
+#Operation France steal the heavy water - Germany
+country_event = {
+	id = u_fra.155
+	title = u_fra.155.t
+	desc = u_fra.155.d
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.155.a
+		add_timed_idea = { idea = FRA_no_moderator_nuke days = 300 }
+	}
+}
+
+################ Aeropostale ################
+
+#Saint Exupéry survives
+country_event = {
+	id = u_fra.156
+	title = u_fra.156.t
+	desc = u_fra.156.d
+	picture = GFX_news_FRA_saint_exupery_plane
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.156.a
+		add_stability = 0.01
+		set_global_flag = UFRA_exupery_survive
+	}
+}
+
+#Saint Exupéry dies
+country_event = {
+	id = u_fra.157
+	title = u_fra.157.t
+	desc = u_fra.157.d
+	picture = GFX_news_FRA_saint_exupery_plane
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.157.a
+		add_stability = -0.01
+	}
+}
+
+#Mermoz survives
+country_event = {
+	id = u_fra.158
+	title = u_fra.158.t
+	desc = {
+		text = u_fra.158.d
+		trigger = {
+			OR = {
+				has_completed_focus = UFRA_freedom_front
+				has_completed_focus = UFRA_ban_the_leagues
+			}
+		}
+	}
+	desc = u_fra.158.b
+
+	picture = GFX_news_FRA_croix_du_sud
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.158.a
+		air_experience = 5
+		set_global_flag = UFRA_mermoz_survive
+
+		custom_effect_tooltip = nationalists_win_5
+		set_temp_variable = { temp_member = 4 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+#Mermoz dies
+country_event = {
+	id = u_fra.159
+	title = u_fra.159.t
+	desc = u_fra.159.d
+	picture = GFX_news_FRA_croix_du_sud
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.159.a
+		add_stability = -0.01
+	}
+}
+
+#Guillaumet race setup
+country_event = {
+	id = u_fra.160
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = {
+				or = {
+					has_tech = engines_3
+					has_tech = basic_large_airframe
+					has_tech = strategic_bomber1
+					has_tech = tactical_bomber2
+				}
+			}
+			country_event = u_fra.161
+		}
+		else = {
+			random_list = {
+				10 = {
+					country_event = u_fra.162
+				}
+				4 = {
+					country_event = u_fra.163
+				}
+			}
+		}
+	}
+}
+
+#Guillaumet race win
+country_event = {
+	id = u_fra.161
+	title = u_fra.161.t
+	desc = u_fra.161.d
+	picture = GFX_news_FRA_paris_damas_race
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.161.a
+		air_experience = 5
+		add_stability = 0.01
+		set_global_flag = UFRA_guillaumet_survive
+	}
+}
+
+#Guillaumet race lose
+country_event = {
+	id = u_fra.162
+	title = u_fra.162.t
+	desc = u_fra.162.d
+
+	picture = GFX_news_FRA_paris_damas_race
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.162.a
+		add_stability = -0.01
+		set_global_flag = UFRA_guillaumet_survive
+	}
+}
+
+#Guillaumet race die
+country_event = {
+	id = u_fra.163
+	title = u_fra.163.t
+	desc = u_fra.163.d
+
+	picture = GFX_news_FRA_paris_damas_race
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.163.a
+		add_stability = -0.02
+	}
+}
+
+################################
+#Commandant Teste create
+country_event = {
+	id = u_fra.164
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = {
+				has_dlc = "Man the Guns"
+			}
+			create_equipment_variant = {
+				name = "Commandant Teste Class"
+				type = ship_hull_carrier_conversion_ca
+				name_group = FRA_CV_HISTORICAL
+				parent_version = 0
+				modules = {
+					fixed_ship_deck_slot_1 = ship_deck_space
+					fixed_ship_deck_slot_2 = empty
+					fixed_ship_anti_air_slot = ship_anti_air_1
+					fixed_ship_radar_slot = empty
+					fixed_ship_engine_slot = carrier_ship_engine_1
+					fixed_ship_secondaries_slot = ship_secondaries_1
+				}
+			}
+			add_equipment_production = {
+				equipment = {
+					type = ship_hull_carrier_conversion_ca
+					creator = "FRA"
+					version_name = "Commandant Teste Class"
+				}
+				requested_factories = 1
+				progress = 0.99
+				amount = 1
+			}
+		}
+	}
+}
+
+
+
+################ 14 juillet ################
+
+
+
+#Prepare 14 of july
+country_event = {
+	id = u_fra.165
+	title = u_fra.165.t
+	desc = u_fra.165.d
+
+	picture = GFX_news_FRA_14_juillet
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = FRA_start_year
+			if = {
+				limit = {
+					has_country_flag = FRA_holiday_14_july
+				}
+				FRA = { country_event = { id = u_fra.169 days = 203 }} ###############REMEMBER + 31 days
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_6_february #6 février League try to seize the parliament
+				}
+				FRA = { country_event = { id = u_fra.169 days = 361 }}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_1_may #1 mai fête du travail  ppl dies in chicago
+				}
+				FRA = { country_event = { id = u_fra.169 days = 277 }}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_8_may #8 mai jeanne d'arc liberate Orléan
+				}
+				FRA = { country_event = { id = u_fra.169 days = 270 }}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_28_may #28 mai End of the Paris commune by death
+				}
+				FRA = { country_event = { id = u_fra.169 days = 250 }}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_23_june #23 Juin Saint Jean (for jean 3)
+				}
+				FRA = { country_event = { id = u_fra.169 days = 224 }}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_27_july #27 juillet france won a battle
+				}
+				FRA = { country_event = { id = u_fra.169 days = 190 }}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_1_august #1 aout Saint Alphonse (for Alphonse)
+				}
+				FRA = { country_event = { id = u_fra.169 days = 185 }}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_15_august #15 août  birthday of Napoléon
+				}
+				FRA = { country_event = { id = u_fra.169 days = 171 }}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_11_november #11 novembre German Armistice
+				}
+				FRA = { country_event = { id = u_fra.169 days = 83 }}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = FRA_holiday_25_december #25 décembre Charlemagne become emperor
+				}
+				FRA = { country_event = { id = u_fra.169 days = 39 }}
+			}
+		}
+	}
+
+	option = { #No defilé
+		name = u_fra.165.a
+		add_war_support = -0.01
+	}
+
+	option = { #Small defilé
+		name = u_fra.165.b
+		trigger = {
+			has_full_control_of_state = 16
+		}
+		add_manpower = -1000
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = -1000
+		}
+
+		hidden_effect  = {
+			random_list = {
+				5 = {
+					FRA = { country_event = { id = u_fra.166 days = 31 }}
+				}
+				5 = {
+					FRA = { country_event = { id = u_fra.167 days = 31 }}
+				}
+				5 = {
+					FRA = { country_event = { id = u_fra.168 days = 31 }}
+				}
+			}
+		}
+		add_timed_idea = { idea = FRA_14_july_prep0 days = 31 }
+		set_variable = { FRA_bastille_day_bonus_duration = 31 }
+		UFRA_propaganda_cinema_script = yes
+		set_country_flag  = FRA_14_july_fired
+	}
+
+	option = { #Big defilé
+		name = u_fra.165.c
+		trigger = {
+			has_full_control_of_state = 16
+		}
+		add_manpower = -2500
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = -2500
+		}
+		hidden_effect  = {
+			random_list = {
+				5 = {
+					FRA = { country_event = { id = u_fra.166 days = 31 }}
+				}
+				5 = {
+					FRA = { country_event = { id = u_fra.167 days = 31 }}
+				}
+				5 = {
+					FRA = { country_event = { id = u_fra.168 days = 31 }}
+				}
+			}
+		}
+		add_timed_idea = { idea = FRA_14_july_prep1 days = 31 }
+		set_variable = { FRA_bastille_day_bonus_duration = 62 }
+		UFRA_propaganda_cinema_script = yes
+		set_country_flag  = FRA_14_july_fired
+	}
+	option = { #exiled defilé
+		name = u_fra.165.e
+
+		trigger = {
+			NOT = {
+				has_full_control_of_state = 16
+			}
+		}
+		if = {
+			limit = {
+				has_power_balance = {
+					id = FRA_gaulle_vs_giraud_bop
+				}
+			}
+			add_power_balance_value = {
+				id = FRA_gaulle_vs_giraud_bop
+				value = -0.15
+			}
+		}
+
+		add_legitimacy = 5
+		add_manpower = -1000
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = -1000
+		}
+		hidden_effect  = {
+			random_list = {
+				5 = {
+					FRA = { country_event = { id = u_fra.166 days = 31 }}
+				}
+				5 = {
+					FRA = { country_event = { id = u_fra.167 days = 31 }}
+				}
+				5 = {
+					FRA = { country_event = { id = u_fra.168 days = 31 }}
+				}
+			}
+		}
+		add_timed_idea = { idea = FRA_14_july_prep0 days = 31 }
+		set_variable = { FRA_bastille_day_bonus_duration = 31 }
+		UFRA_propaganda_cinema_script = yes
+		set_country_flag  = FRA_14_july_fired
+	}
+}
+
+#14th of july Armies honor
+country_event = {
+	id = u_fra.166
+	title = u_fra.166.t
+	desc = u_fra.166.d
+
+	picture = GFX_news_FRA_14_juillet
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_flag  = FRA_14_july_fired
+	}
+	immediate = {
+		clr_country_flag  = FRA_14_july_fired
+	}
+
+	option = { #Honor to the aviators
+		name = u_fra.166.a
+		add_timed_idea = { idea = FRA_honor_aviators days = FRA_bastille_day_bonus_duration }
+	}
+	option = { #Honor to the Navy
+		name = u_fra.166.b
+		add_timed_idea = { idea = FRA_honor_navy days = FRA_bastille_day_bonus_duration }
+	}
+	option = { #Honor to the common soldier
+		name = u_fra.166.c
+		add_timed_idea = { idea = FRA_honor_soldier days = FRA_bastille_day_bonus_duration }
+		add_war_support = 0.01
+	}
+	option = { #Honor to the workers
+		name = u_fra.166.e
+		add_stability = 0.02
+		add_timed_idea = { idea = FRA_honor_worker days = FRA_bastille_day_bonus_duration }
+
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+}
+
+#14th of july first Infantry honors
+country_event = {
+	id = u_fra.167
+	title = u_fra.166.t
+	desc = u_fra.166.d
+
+	picture = GFX_news_FRA_14_juillet
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_flag  = FRA_14_july_fired
+	}
+	immediate = {
+		clr_country_flag  = FRA_14_july_fired
+	}
+
+	option = { #Honor to the mobiles
+		name = u_fra.166.f
+		add_timed_idea = { idea = FRA_honor_mobiles_units days = FRA_bastille_day_bonus_duration }
+	}
+	option = { #Honor to the maginot
+		name = u_fra.166.g
+		add_timed_idea = { idea = FRA_honor_maginot_soldier days = FRA_bastille_day_bonus_duration }
+	}
+	option = { #Honor to the common soldier
+		name = u_fra.166.c
+		add_timed_idea = { idea = FRA_honor_soldier days = FRA_bastille_day_bonus_duration }
+		add_war_support = 0.01
+	}
+	option = { #Honor to the Foreign fighter
+		name = u_fra.166.h
+		add_timed_idea = { idea = FRA_honor_foreign_soldier days = FRA_bastille_day_bonus_duration }
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				is_controlled_by = ROOT
+				NOT = {
+					is_core_of = ROOT
+				}
+				NOT = {
+					is_on_continent = europe
+				}
+			}
+			add_compliance = 5
+		}
+	}
+}
+
+#14th of july first others
+country_event = {
+	id = u_fra.168
+	title = u_fra.166.t
+	desc = u_fra.166.d
+
+	picture = GFX_news_FRA_14_juillet
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_country_flag  = FRA_14_july_fired
+	}
+	immediate = {
+		clr_country_flag  = FRA_14_july_fired
+	}
+
+	option = { #Honor to the specialists
+		name = u_fra.166.i
+		add_timed_idea = { idea = FRA_honor_specialist days = FRA_bastille_day_bonus_duration }
+	}
+	option = { #Honor to our allies
+		name = u_fra.166.j
+		add_legitimacy = 10
+		every_other_country = {
+			limit = {
+				is_in_faction_with = ROOT
+				NOT = { is_subject_of = ROOT }
+			}
+			add_opinion_modifier = {
+				target = FRA
+				modifier = medium_increase
+			}
+		}
+
+		set_variable = { FRA_bastille_day_d = num_days }
+	}
+	option = { #Honor to the workers
+		name = u_fra.166.e
+		add_stability = 0.02
+		add_timed_idea = { idea = FRA_honor_worker days = FRA_bastille_day_bonus_duration }
+
+		custom_effect_tooltip = socialists_win_5
+		set_temp_variable = { temp_member = 1 }
+		set_temp_variable = { temp_seats = 5 }
+		modify_parliament_seat = yes
+	}
+	option = { #Honor to the Foreign fighter
+		name = u_fra.166.h
+		add_timed_idea = { idea = FRA_honor_foreign_soldier days = FRA_bastille_day_bonus_duration }
+
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				is_controlled_by = ROOT
+				NOT = {
+					is_core_of = ROOT
+				}
+				NOT = {
+					is_on_continent = europe
+				}
+			}
+			add_compliance = 5
+		}
+	}
+}
+
+#new year
+country_event = {
+	id = u_fra.169
+
+	hidden = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		set_country_flag = FRA_start_year
+		if = {
+			limit = {
+				has_country_flag = FRA_holiday_14_july #14 juillet Bastille
+			}
+			FRA = { country_event = { id = u_fra.165 days = 162 }} #######REMEMBER -31 days for all national holidays
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_6_february #6 février League try to seize the parliament
+			}
+			FRA = { country_event = { id = u_fra.165 days = 4 }}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_1_may #1 mai fête du travail  ppl dies in chicago
+			}
+			FRA = { country_event = { id = u_fra.165 days = 88 }}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_8_may #8 mai jeanne d'arc liberate Orléan
+			}
+			FRA = { country_event = { id = u_fra.165 days = 95 }}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_28_may #28 mai End of the Paris commune by death
+			}
+			FRA = { country_event = { id = u_fra.165 days = 115 }}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_23_june #23 Juin Saint Jean (for jean 3)
+			}
+			FRA = { country_event = { id = u_fra.165 days = 141 }}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_27_july #27 juillet france won a battle
+			}
+			FRA = { country_event = { id = u_fra.165 days = 175 }}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_1_august #1 aout Saint Alphonse (for Alphonse)
+			}
+			FRA = { country_event = { id = u_fra.165 days = 180 }}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_15_august #15 août  birthday of Napoléon
+			}
+			FRA = { country_event = { id = u_fra.165 days = 194 }}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_11_november #11 novembre German Armistice
+			}
+			FRA = { country_event = { id = u_fra.165 days = 282 }}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = FRA_holiday_25_december #25 décembre Charlemagne become emperor
+			}
+			FRA = { country_event = { id = u_fra.165 days = 326 }}
+		}
+	}
+}
+
+#Royalist change holiday
+country_event = {
+	id = u_fra.170
+	title = u_fra.170.t
+	desc = u_fra.170.d
+
+	picture = GFX_report_event_french_tanks
+
+	is_triggered_only = yes
+
+
+	option = { #Jeanne d'arc
+		name = u_fra.170.c
+
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_8_may
+
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+		add_war_support = 0.025
+	}
+
+	option = { #Jean III fête
+		name = u_fra.170.a
+
+		trigger = {
+			has_country_leader = {
+				name = "Jean III"
+				ruling_only = yes
+			}
+		}
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_23_june
+
+		add_stability = 0.025
+
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.05
+		}
+	}
+
+	option = { #Won battle
+		name = u_fra.170.f
+
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_27_july
+
+		add_war_support = 0.05
+	}
+
+	option = { #Alphonse I fête
+		name = u_fra.170.b
+
+		trigger = {
+			has_country_leader = {
+				name = "Alphonse I"
+				ruling_only = yes
+			}
+		}
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_1_august
+
+		add_stability = 0.025
+
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.05
+		}
+	}
+
+	option = { #Charlemagne
+		name = u_fra.170.e
+
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_25_december
+
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.1
+		}
+	}
+}
+
+#Nationalist Change holiday
+country_event = {
+	id = u_fra.171
+	title = u_fra.170.t
+	desc = u_fra.171.d
+
+	picture = GFX_report_event_french_tanks
+
+	is_triggered_only = yes
+
+	option = { #Death of nationalist
+		name = u_fra.171.a
+
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_6_february
+
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+		add_stability = 0.025
+	}
+
+	option = { #Jeanne d'arc
+		name = u_fra.170.c
+
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_8_may
+
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+		add_war_support = 0.025
+	}
+
+	option = { #11 novembre
+		name = u_fra.171.b
+
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_11_november
+
+		add_stability = 0.025
+		add_war_support = 0.025
+	}
+}
+
+
+#Communist Change holiday
+country_event = {
+	id = u_fra.172
+	title = u_fra.170.t
+	desc = u_fra.172.d
+
+	picture = GFX_news_FRA_14_juillet
+
+	is_triggered_only = yes
+
+	option = { #fête du travail
+		name = u_fra.172.a
+
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_1_may
+
+		add_popularity = {
+			ideology = communism
+			popularity = 0.05
+		}
+		add_stability = 0.05
+	}
+
+	option = { #End of commune bloody week
+		name = u_fra.172.b
+
+		trigger = {
+			has_completed_focus = UFRA_celebrate_the_commune
+		}
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_28_may
+
+		add_popularity = {
+			ideology = communism
+			popularity = 0.05
+		}
+		add_war_support = 0.05
+	}
+
+	option = { #Keep 14 july
+		name = u_fra.172.c
+
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+		add_stability = 0.05
+		add_war_support = 0.025
+	}
+}
+
+#Bonapartist Change holiday
+country_event = {
+	id = u_fra.173
+	title = u_fra.170.t
+	desc = u_fra.173.d
+
+	picture = GFX_report_event_french_tanks
+
+	is_triggered_only = yes
+
+	option = { #Napoleon BDAY
+		name = u_fra.173.a
+
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_15_august
+
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.05
+		}
+		add_stability = 0.025
+	}
+
+	option = { #Jeanne d'arc
+		name = u_fra.170.c
+
+		clr_country_flag = FRA_holiday_14_july
+		set_country_flag = FRA_holiday_8_may
+
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+		add_war_support = 0.025
+	}
+
+	option = { #Keep 14 july
+		name = u_fra.173.b
+
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.05
+		}
+		add_stability = 0.05
+		add_war_support = 0.025
+	}
+}
+
+
+
+################ Royalist sucession ################
+
+
+
+#Alphonse XIII dies
+country_event = {
+	id = u_fra.174
+	title = u_fra.174.t
+	desc = u_fra.174.d
+	trigger = {
+		has_completed_focus = UFRA_the_legitimate_heir
+	}
+	picture = GFX_news_FRA_important_death
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.174.a
+
+		create_country_leader = {
+			name = "Jacques II"
+			desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+			picture = GFX_portrait_fra_infante_jaime
+			expire = "1965.1.1"
+			ideology = monarchism
+			traits = {
+				ufra_deaf_mute
+			}
+		}
+		add_stability = -0.06
+
+		hidden_effect = {
+			FRA = { country_event = { id = u_fra.176 } }
+		}
+	}
+
+	option = {
+		name = u_fra.174.b
+
+		create_country_leader = {
+			name = "Juan I"
+			desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+			picture = GFX_FRA_juan_bourbon
+			expire = "1965.1.1"
+			ideology = monarchism
+			traits = {
+			}
+		}
+		add_stability = -0.04
+		add_popularity = {
+			ideology = neutrality
+			popularity = -0.1
+		}
+		hidden_effect = {
+			FRA = { country_event = { id = u_fra.176 } }
+		}
+	}
+}
+
+#Jean III dies
+country_event = {
+	id = u_fra.175
+	title = u_fra.175.t
+	desc = u_fra.175.d
+	trigger = {
+		has_completed_focus = UFRA_orleanist_restoration
+	}
+	picture = GFX_news_FRA_important_death
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.175.a
+
+		create_country_leader = {
+			name = "Henri VI"
+			desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+			picture = GFX_portrait_fra_henry_count_of_paris
+			expire = "1965.1.1"
+			ideology = moderatism
+			traits = {
+				count_of_paris
+			}
+		}
+		add_stability = -0.03
+
+		hidden_effect = {
+			FRA = { country_event = { id = u_fra.176 } }
+		}
+	}
+}
+
+#Leader traits sucession
+country_event = {
+	id = u_fra.176
+
+	hidden = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		if = {
+			limit = {
+				has_completed_focus = UFRA_royal_dictatorship
+			}
+			add_country_leader_trait = dictator
+		}
+		if = {
+			limit = {
+				has_completed_focus = UFRA_the_first_citizen_of_the_state
+			}
+			add_country_leader_trait = constitutional_monarch
+		}
+	}
+}
+
+################ Trans saharian ################
+
+
+
+# Trans Saharian fail
+country_event = {
+	id = u_fra.177
+	title = u_fra.177.t
+	desc = u_fra.177.d
+	picture = GFX_report_event_france_parade
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_global_flag = FRA_transaharian_construction
+	}
+
+	option = {
+		name = u_fra.177.a
+
+		every_state = {
+			limit = {
+				OR = {
+					state = 459 #ALGIERS
+					state = 513
+					state = 514
+					state = 782
+					state = 786
+					state = 898
+					state = 899
+					state = 272
+					state = 557
+					state = 78
+					state = 515
+					state = 780
+					state = 556
+					state = 779
+					state = 778
+					state = 460
+				}
+				state_is_fully_controlled_by_ROOT_or_subject = yes
+				has_resistance = yes
+			}
+			add_compliance = -15
+		}
+		clr_global_flag = FRA_transaharian_construction
+	}
+}
+
+################ Vichy France end occupation ################
+
+
+#initial event for Germany - vichy wants to end the occupation and join the axis
+country_event = {
+	id = u_fra.179
+	title = lar_end_the_occupation.1.t
+	desc = lar_end_the_occupation.1.desc
+	picture = GFX_report_event_pierre_laval
+
+	is_triggered_only = yes
+
+	option = {
+		name = lar_end_the_occupation.1.a #agree
+		ai_chance = {
+			base = 80
+		}
+		FROM = { country_event = u_fra.180 }
+		effect_tooltip = {
+			every_state = {
+				limit = {
+					is_core_of = FROM
+					is_controlled_by = ROOT
+				}
+				FROM = { transfer_state = PREV }
+			}
+		}
+	}
+	option = {
+		name = lar_end_the_occupation.1.b #refuse
+		ai_chance = {
+			base = 20
+			modifier = {
+				is_in_faction_with = FROM
+				factor = 0
+			}
+			modifier = {
+				FROM = {
+					has_war = yes
+					any_enemy_country = {
+						has_war_with = ROOT
+					}
+				}
+				factor = 0
+			}
+		}
+		FROM = { country_event = u_fra.181 }
+	}
+}
+
+# Germany approves
+country_event = {
+	id = u_fra.180
+	title = lar_end_the_occupation.2.t
+	desc = lar_end_the_occupation.2.desc
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+
+	option = {
+		name = lar_end_the_occupation.2.a
+		ai_chance = {
+			base = 50
+		}
+		hidden_effect = { news_event = { id = lar_news.4 days = 3 random_days = 5 } }
+		every_state = { #take over core french territory that is being held by Germany
+			limit = {
+				is_core_of = ROOT
+				NOT = { state = 28 } #Elsass-Lothringen ist deutsch!
+				NOT = { state = 735 } #Savoy is Italian
+				OR = {
+					is_controlled_by = FROM
+					CONTROLLER = {
+						is_in_faction_with = FROM
+					}
+				}
+			}
+			ROOT = { transfer_state = PREV }
+		}
+		if = {
+			limit = {
+				NOT = { is_in_faction_with = FROM }
+			}
+			FROM = { add_to_faction = ROOT }
+		}
+	}
+}
+
+# Germany refuses
+country_event = {
+	id = u_fra.181
+	title = lar_end_the_occupation.3.t
+	desc = lar_end_the_occupation.3.desc
+	picture = GFX_report_event_german_reichstag_gathering
+
+	is_triggered_only = yes
+
+	option = {
+		name = lar_end_the_occupation.3.a #let's talk to Free France
+		ai_chance = {
+			base = 50
+		}
+		random_other_country = {
+			limit = {
+				original_tag = FRA
+				has_government = democratic
+			}
+			country_event = u_fra.182 #lar_end_the_occupation.4
+			effect_tooltip = { annex_country = { target = VIC transfer_troops = yes } }
+		}
+	}
+	option = {
+		name = lar_end_the_occupation.3.b #fine, we'll do it ourselves
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+# Vichy wants to join after germany refuses to hand back territory
+country_event = {
+	id = u_fra.182
+	title = lar_end_the_occupation.4.t
+	desc = lar_end_the_occupation.4.desc
+	picture = GFX_report_event_degaulle_inspect_troops
+
+	is_triggered_only = yes
+
+	option = {
+		name = lar_end_the_occupation.4.a #agree
+		ai_chance = {
+			base = 80
+		}
+		FROM = { country_event = u_fra.183 }
+		effect_tooltip = {
+			annex_country = { target = VIC transfer_troops = yes }
+		}
+	}
+	option = {
+		name = lar_end_the_occupation.4.b #refuse
+		ai_chance = {
+			base = 20
+			modifier = {
+				FROM = { is_ai = no }
+				factor = 0
+			}
+		}
+		FROM = { country_event = u_fra.184 }
+	}
+}
+
+# Vichy joins Free France after germany refuses to hand back territory
+country_event = {
+	id = u_fra.183
+	title = lar_end_the_occupation.5.t
+	desc = lar_end_the_occupation.5.desc
+	picture = GFX_report_event_degaulle_inspect_troops
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			FROM = {
+				if = {
+					limit = {
+						is_ai = yes
+						VIC = { is_ai = no }
+					}
+					change_tag_from = VIC
+				}
+			}
+		}
+	}
+
+	option = {
+		name = lar_end_the_occupation.5.a #agree
+		ai_chance = {
+			base = 80
+		}
+		FRA = {
+			annex_country = { target = VIC transfer_troops = yes }
+			load_focus_tree = french_democratic_focus
+			unlock_national_focus = UFRA_national_bloc_victory
+		}
+	}
+}
+
+# Free France refuses, Vichy goes at it alone after all
+country_event = {
+	id = u_fra.184
+	title = lar_end_the_occupation.6.t
+	desc = lar_end_the_occupation.6.desc
+	picture = GFX_report_event_degaulle_churchill
+
+	is_triggered_only = yes
+
+	option = {
+		name = lar_end_the_occupation.6.a #agree
+		ai_chance = {
+			base = 80
+		}
+	}
+}
+
+####################################
+#SWITZERLAND ANNEX
+
+# Ask switzerland to submit to Napoleon
+country_event = {
+	id = u_fra.185
+	title = u_fra.185.t
+	desc = u_fra.185.d
+	picture = GFX_report_event_SWI_soldier_gathering
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.185.a #agree
+		ai_chance = {
+			base = 50
+			modifier = {
+				OR = {
+					is_guaranteed_by = ITA
+					is_guaranteed_by = GER
+					is_in_faction = yes
+				}
+				factor = 0
+			}
+		}
+		FRA = {
+			add_state_core = 845
+			set_autonomy = {
+				target = SWI
+				autonomy_state = autonomy_dominion
+			}
+			country_event = u_fra.186
+		}
+		845 = { transfer_state_to = FRA }
+
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			SWI = {
+				set_cosmetic_tag = SWI_FRA_puppet_democratic
+				SWI_remove_militia_recruitment_law = yes
+				SWI_turn_militias_into_regulars = yes
+				country_lock_all_division_template = no
+				unlock_national_focus = SWI_the_second_helvetic_republic
+				unlock_national_focus = SWI_join_france
+			}
+		}
+	}
+
+	option  = {
+		name = u_fra.185.b #refuse
+		ai_chance = {
+			base = 20
+		}
+		FRA = {
+			country_event = u_fra.187
+			add_state_core = 845
+		}
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			SWI = {
+				unlock_national_focus = SWI_purchase_german_planes
+				unlock_national_focus = SWI_the_petition_of_the_200
+			}
+		}
+	}
+}
+
+#Swiss Accept
+country_event = {
+	id = u_fra.186
+	title = u_fra.186.t
+	desc = u_fra.186.d
+	picture = GFX_report_event_SWI_assembly_hall
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.186.a
+		ai_chance = { base = 1 }
+	}
+}
+
+#Swiss Refuse
+country_event = {
+	id = u_fra.187
+	title = u_fra.187.t
+	desc = u_fra.187.d
+	picture = GFX_report_event_SWI_soldier_gathering
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.187.a
+		ai_chance = { base = 1 }
+
+		create_wargoal = {
+			type = puppet_wargoal_focus
+			target = SWI
+		}
+	}
+}
+
+# Ask switzerland to submit to FRA ITA
+country_event = {
+	id = u_fra.188
+	title = u_fra.188.t
+	desc = u_fra.188.d
+	picture = GFX_report_event_SWI_soldier_gathering
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.185.a #agree
+		ai_chance = {
+			base = 50
+			modifier = {
+				OR = {
+					is_guaranteed_by = GER
+					is_in_faction = yes
+				}
+				factor = 0
+			}
+		}
+		845 = { transfer_state_to = FRA }
+		847 = { transfer_state_to = FRA }
+		3 = { transfer_state_to = FRA }
+		846 = { transfer_state_to = ITA }
+		151 = { transfer_state_to = ITA }
+	}
+
+	option = {
+		name = u_fra.188.b #refuse
+		ai_chance = {
+			base = 20
+		}
+		FRA = {
+			country_event = u_fra.187
+		}
+		ITA = {
+			country_event = u_fra.187
+		}
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			SWI = {
+				unlock_national_focus = SWI_purchase_german_planes
+				unlock_national_focus = SWI_the_petition_of_the_200
+			}
+		}
+	}
+}
+
+# Ask switzerland to submit to FRA GER
+country_event = {
+	id = u_fra.189
+	title = u_fra.189.t
+	desc = u_fra.189.d
+	picture = GFX_report_event_SWI_soldier_gathering
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.185.a #agree
+		ai_chance = {
+			base = 50
+			modifier = {
+				OR = {
+					is_guaranteed_by = ITA
+					is_in_faction = yes
+				}
+				factor = 0
+			}
+		}
+		if = {
+			limit = {
+				ITA = {
+					is_in_faction_with = FRA
+				}
+			}
+			846 = { transfer_state_to = ITA }
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					ITA = {
+						is_in_faction_with = FRA
+					}
+				}
+			}
+			846 = { transfer_state_to = FRA }
+		}
+		845 = { transfer_state_to = FRA }
+		847 = { transfer_state_to = FRA }
+		3 = { transfer_state_to = GER }
+		151 = { transfer_state_to = GER }
+	}
+
+	option = {
+		name = u_fra.189.b #refuse
+		ai_chance = {
+			base = 20
+		}
+		FRA = {
+			country_event = u_fra.187
+		}
+		GER = {
+			country_event = u_fra.187
+		}
+		if = {
+			limit = {
+				ITA = {
+					is_ally_with = FRA
+				}
+			}
+			ITA = {
+				country_event = u_fra.187
+			}
+		}
+		if = {
+			limit = {
+				has_dlc = "By Blood Alone"
+			}
+			SWI = {
+				unlock_national_focus = SWI_purchase_german_planes
+				unlock_national_focus = SWI_the_petition_of_the_200
+			}
+		}
+	}
+}
+
+########################################
+#Evacuation / Exode / Exodus
+
+country_event = {
+	id = u_fra.190
+	title = u_fra.190.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			28 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 28 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				28 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		28 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			28 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		28 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.191
+	title = u_fra.191.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			17 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 17 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				17 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		17 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			17 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		17 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.192
+	title = u_fra.192.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			785 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 785 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				785 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		785 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			785 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		785 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.193
+	title = u_fra.193.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			27 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 27 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				27 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		27 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			27 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		27 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.194
+	title = u_fra.194.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			18 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 18 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				18 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		18 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			18 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		18 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.195
+	title = u_fra.195.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			16 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 16 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				16 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		16 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			16 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		16 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.196
+	title = u_fra.196.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			29 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 29 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				29 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		29 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			29 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		29 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.197
+	title = u_fra.197.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			15 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 15 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				15 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		15 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			15 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		15 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.198
+	title = u_fra.198.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			24 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 24 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				24 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		24 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			24 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		24 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.199
+	title = u_fra.199.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			20 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 20 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				20 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		20 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			20 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		20 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.200
+	title = u_fra.200.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			34 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 34 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				34 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		34 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			34 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		34 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+country_event = {
+	id = u_fra.201
+	title = u_fra.201.t
+	is_triggered_only = yes
+	desc = {
+		text = u_fra.190.d
+		trigger = {
+			6 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } }
+		}
+	}
+	desc = {
+		text = u_fra.190.d2
+		trigger = {
+			NOT = { 6 = { has_dynamic_modifier = { modifier = FRA_partial_abandoned_state } } }
+		}
+	}
+	picture = GFX_news_FRA_exode
+	timeout_days = 3
+	major = no
+	trigger = {
+		ROOT = { has_capitulated = no }
+	}
+	option = {
+		name = u_fra.190.a
+		trigger = {
+			NOT = {
+				6 = { has_state_flag = FRA_partial_abandoned_state_flag }
+			}
+		}
+		add_stability = -0.03
+		6 = {
+			add_dynamic_modifier = { modifier = FRA_catastrophic_fleeing_citizens days = 5 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+	option = {
+		name = u_fra.190.b
+		trigger = {
+			6 = { has_state_flag = FRA_partial_abandoned_state_flag }
+		}
+		add_stability = -0.02
+		6 = {
+			add_dynamic_modifier = { modifier = FRA_fleeing_citizens days = 7 scope = FRA }
+			remove_dynamic_modifier = { modifier = FRA_partial_abandoned_state }
+			add_dynamic_modifier = { modifier = FRA_abandoned_state}
+			clr_state_flag = FRA_partial_abandoned_state_flag
+		}
+	}
+}
+
+##################################################
+#Free france events
+
+#Test case Anton fail for VIC
+country_event = {
+	id = u_fra.202
+	desc = u_fra.201.d
+	title = u_fra.201.t
+	is_triggered_only = yes
+
+	picture = GFX_news_FRA_exode
+
+	option = {
+		name = u_fra.190.a
+		VIC = {
+			transfer_units_fraction = {
+				target = FRA
+				navy_ratio = 0.1
+				size = 0.5
+				stockpile_ratio = 0
+				army_ratio = 0
+				air_ratio = 0
+			}
+		}
+		every_state  = {
+			limit = {
+				is_controlled_by = VIC
+				NOT = {
+					is_on_continent = europe
+				}
+				GER = { divisions_in_state = { size > 5 } }
+				ITA = { divisions_in_state = { size > 5 } }
+			}
+			transfer_state_to = FRA
+			add_dynamic_modifier = { modifier = FRA_CCFM scope = FRA }
+		}
+		VIC = {
+			transfer_navy = { target = GER }
+		}
+		GER = { annex_country = { target = VIC } }
+		if = {
+			limit = {
+				NOT = { VIC = { has_country_flag = scuttled_fleet } }
+			}
+			GER = { news_event = { id = wtt_news.23 hours = 6 } }
+		}
+		if = {
+			limit = {
+				VIC = { has_country_flag = scuttled_fleet }
+			}
+			GER = { news_event = { id = wtt_news.24 hours = 6 } }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+}
+
+######################## Attack on François Darlan
+country_event = {
+	id = u_fra.203
+	title = u_fra.203.t
+	desc = u_fra.203.d
+	picture = GFX_report_event_europe_funeral
+
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_global_flag = Attack_on_darlan
+			kill_ideology_leader = fascism
+		}
+	}
+	trigger = {
+		NOT = {
+			has_global_flag = Attack_on_darlan
+		}
+	}
+	option = {
+		name = u_fra.203.a #agree
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+########################## Allies create their own french government
+country_event = {
+	id = u_fra.204
+	title = u_fra.204.t
+	desc = u_fra.204.d
+	picture = GFX_report_event_worried_french
+
+	is_triggered_only = yes
+
+	trigger = {
+		has_global_flag = UFRA_torch_complete
+		NOT = {
+			has_global_flag = UFRA_independant_france
+		}
+		has_focus_tree = free_french_focus
+	}
+	option = {
+		name = u_fra.204.a #agree
+		ai_chance = {
+			base = 1
+		}
+		set_global_flag = UFRA_independant_france #so that it does not re-fire
+
+		complete_national_focus = FRA_form_the_provisional_government_of_the_republic
+		if = {
+			limit = {
+				is_in_faction_with = ENG
+			}
+			unlock_national_focus = UFRA_go_with_britain
+		}
+		if = {
+			limit = {
+				USA = {
+					is_in_faction_with = ROOT
+				}
+			}
+			USA = {
+				set_autonomy = {
+					target = ROOT
+					autonomy_state = autonomy_supervised_state
+					freedom_level = 0.3
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				ENG = {
+					is_in_faction_with = ROOT
+				}
+			}
+			ENG = {
+				set_autonomy = {
+					target = ROOT
+					autonomy_state = autonomy_supervised_state
+					freedom_level = 0.3
+				}
+			}
+		}
+	}
+}
+
+# Economic Crisis
+#country_event = {
+	#	id = u_fra.9999
+	#	title = u_fra.9999.t
+	##	desc = u_fra.9999.d
+	#	picture = GFX_report_event_generic_conference
+	#
+	#	trigger = {
+		#		date > 1936.3.1
+		#		tag = FRA
+		#		NOT = {	has_country_flag = devalation }
+		#	}
+	#
+	#	fire_only_once = yes
+	#
+	#	option = {
+		#		ai_chance = { base = 100 }
+		#		name = u_fra.146.a
+		#		add_ideas = FRA_economic_crisis_1
+		#		if = {
+			#			limit = {
+				#				NOT = {
+					#					has_idea = FRA_union_and_labor_strikes
+					#				}
+				#			}
+			#			add_timed_idea = {
+				#           	idea = FRA_union_and_labor_strikes
+				#          	days = 620
+				#         }
+			#	}
+		#		unlock_decision_tooltip = { decision = FRA_economic_crisis show_effect_tooltip = yes }
+		#		set_country_flag = devalation
+		#	}
+	#}
+
+#Centralize the Union - Demand
+country_event = {
+	id = u_fra.2000
+	title = u_fra.2000.t
+	desc = u_fra.2000.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.2000.a #agree
+		ai_chance = {
+			base = 8
+		}
+		add_stability = -0.05
+		FROM = { puppet = ROOT }
+		FROM = { country_event = { id = u_fra.2001 hours = 6 } }
+	}
+
+	option = {
+		name = u_fra.2000.b #refuse
+		ai_chance = {
+			base = 10
+		}
+		add_political_power = 25
+		FROM = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = rejected_demands
+			}
+			hidden_effect = {
+				add_ai_strategy = {
+					type = befriend
+					id = ROOT
+					value = -10
+				}
+			}
+		}
+		FROM = { country_event = { id = u_fra.2002 hours = 6 } }
+	}
+}
+
+#Centralize the Union - FROM Accepts
+country_event = {
+	id = u_fra.2001
+	title = u_fra.2001.t
+	desc = u_fra.2001.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.2001.a
+	}
+}
+
+#Centralize the Union - FROM Refuses
+country_event = {
+	id = u_fra.2002
+	title = u_fra.2002.t
+	desc = u_fra.2002.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.2002.a #Nothing
+	}
+
+	option = {
+		name = u_fra.2002.b #Kick
+		ROOT = { remove_from_faction = FROM }
+	}
+}
+
+country_event = {
+	id = u_fra.205
+	title = u_fra.205.t
+	desc = u_fra.205.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = u_fra.205.a
+	}
+}
+
+# Event for Mexico Offering Support for Coup
+country_event = {
+	id = u_fra.206
+	title = u_fra.206.t
+	desc = u_fra.206.d
+	picture = GFX_report_event_french_resistance_02
+
+	is_triggered_only = yes
+
+	# Accept
+	option = {
+		name = u_fra.206.a
+		add_timed_idea = { idea = GER_preparing_ITA_coup days = 1095 }
+		FRA = {
+			country_event = { id = u_fra.207 days = 1 random_days = 2 }
+		}
+	}
+
+	# Decline
+	option = {
+		name = u_fra.206.b
+		FRA = {
+			country_event = { id = u_fra.208 days = 1 random_days = 2 }
+		}
+		hidden_effect = {
+			FRA = {
+				set_country_flag = FRA_mexico_declined_assassination_of_flag
+			}
+		}
+	}
+}
+
+# French Notification Event for Mexico Accepting Offer of Support for Coup
+country_event = {
+	id = u_fra.207
+	title = u_fra.207.t
+	desc = u_fra.207.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.207.a
+	}
+}
+
+# French Notification Event for Mexico Rejecting Offer of Support for Coup
+country_event = {
+	id = u_fra.208
+	title = u_fra.208.t
+	desc = u_fra.208.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.208.a
+	}
+}
+
+# Event for Mexico Launching Coup
+country_event = {
+	id = u_fra.209
+	title = u_fra.209.t
+	desc = u_fra.209.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.209.a
+		MEX = {
+			create_country_leader = {
+				name = "Otto von Habsburg"
+				desc = "POLITICS_OTTO_VON_HABSBURG_DESC"
+				picture = GFX_Portrait_hungary_otto_von_hapsburg
+				expire = "1965.1.1"
+				ideology = monarchism
+				traits = {
+
+				}
+			}
+
+			set_party_name = {
+				ideology = neutrality
+				long_name = "Habsburg Monarchy"
+				name = "Habsburg Monarchy"
+			}
+
+			set_politics = { ruling_party = neutrality elections_allowed = no }
+			add_popularity = { ideology = neutrality popularity = 0.1 }
+
+			add_ai_strategy = {
+				type = alliance
+				id = "FRA"
+				value = 200
+			}
+		}
+		if = {
+			limit = {
+				HUN = {
+					has_country_leader = { ruling_only = yes name = "Otto von Habsburg" }
+				}
+			}
+			HUN = {
+				puppet = MEX
+				country_event = { id = generic.5 hours = 6 }
+			}
+		}
+		else = {
+			FRA = {
+				puppet = MEX
+				country_event = { id = u_fra.210 }
+			}
+		}
+	}
+}
+
+# Notification event for France upon successful coup
+country_event = {
+	id = u_fra.210
+	title = u_fra.210.t
+	desc = u_fra.210.d
+	picture = GFX_report_event_french_resistance_02
+
+	is_triggered_only = yes
+
+	option = {
+		name = u_fra.210.a
+	}
+}

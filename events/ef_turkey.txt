@@ -1,0 +1,751 @@
+﻿add_namespace = ef_tur
+add_namespace = ef_tur_news
+
+country_event = {
+	id = ef_tur.1
+	title = "Get the Support of the People"
+	desc = "We must embrace different views in our country. We can follow ataturk's path or we can get the support of traditionalists behind us."
+
+	is_triggered_only = yes
+
+	option = {
+		name = "We will go in ataturk's footsteps."	#kemalist
+		ai_chance = { base = 50 }
+		set_party_name = {
+			ideology = fascism
+			long_name = TUR_neutrality_party_long
+			name = TUR_neutrality_party
+		}
+		set_country_flag = road_to_kemalist
+		TUR = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_dynamic_modifier = { modifier = islamist_opposition }
+						has_dynamic_modifier = { modifier = islamist_sedition }
+						has_dynamic_modifier = { modifier = islamist_insurgency }
+						has_dynamic_modifier = { modifier = islamists_placated }
+						has_dynamic_modifier = { modifier = devout_islamists }
+						has_dynamic_modifier = { modifier = kemalist_loyalties }
+						has_dynamic_modifier = { modifier = kemalist_schemers }
+						has_dynamic_modifier = { modifier = separatist_fatigue }
+						has_dynamic_modifier = { modifier = kurdish_rebellion}
+						has_dynamic_modifier = { modifier = kurdish_separatism }
+						has_dynamic_modifier = { modifier = kurdish_agitation }
+					}
+				}
+				add_dynamic_modifier = { modifier = kemalist_loyalties }
+			}
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_dynamic_modifier = { modifier = islamist_opposition }
+						has_dynamic_modifier = { modifier = islamist_sedition }
+						has_dynamic_modifier = { modifier = islamist_insurgency }
+						has_dynamic_modifier = { modifier = islamists_placated }
+						has_dynamic_modifier = { modifier = devout_islamists }
+						has_dynamic_modifier = { modifier = kemalist_loyalties }
+						has_dynamic_modifier = { modifier = kemalist_schemers }
+						has_dynamic_modifier = { modifier = separatist_fatigue }
+						has_dynamic_modifier = { modifier = kurdish_rebellion}
+						has_dynamic_modifier = { modifier = kurdish_separatism }
+						has_dynamic_modifier = { modifier = kurdish_agitation }
+					}
+				}
+				add_dynamic_modifier = { modifier = kemalist_loyalties }
+			}
+		}
+		set_cosmetic_tag = TUR_kemalist
+	}
+
+	option = {
+		name = "I'm going to support traditionalists."	#traditionalists
+		ai_chance = { base = 50 }
+		set_party_name = {
+			ideology = fascism
+			long_name = "Büyük Türkistan Partisi"
+			name = "BTP"
+		}
+		TUR_kemalist_turn_hostile_effect = yes
+		set_country_flag = road_to_traditionalist
+		custom_effect_tooltip = TUR_unlock_reconciliation_occupation_law_tt
+		effect_tooltip = { TUR_placate_fundamentalist_state_all_targets_effect = yes }
+		TUR = {
+			random_owned_state = {
+				limit = {
+					NOT = {
+						has_dynamic_modifier = { modifier = islamist_opposition }
+						has_dynamic_modifier = { modifier = islamist_sedition }
+						has_dynamic_modifier = { modifier = islamist_insurgency }
+						has_dynamic_modifier = { modifier = islamists_placated }
+						has_dynamic_modifier = { modifier = devout_islamists }
+						has_dynamic_modifier = { modifier = kemalist_loyalties }
+						has_dynamic_modifier = { modifier = kemalist_schemers }
+						has_dynamic_modifier = { modifier = separatist_fatigue }
+						has_dynamic_modifier = { modifier = kurdish_rebellion}
+						has_dynamic_modifier = { modifier = kurdish_separatism }
+						has_dynamic_modifier = { modifier = kurdish_agitation }
+					}
+				}
+				add_dynamic_modifier = { modifier = islamists_placated }
+			}
+		}
+		hidden_effect = {
+			mark_focus_tree_layout_dirty = yes
+			TUR = {
+				every_owned_state = {
+					limit = {
+						OR = {
+							has_dynamic_modifier = { modifier = islamist_opposition }
+							has_dynamic_modifier = { modifier = islamist_sedition }
+							has_dynamic_modifier = { modifier = islamist_insurgency }
+						}
+					}
+					remove_dynamic_modifier = { modifier = islamist_opposition }
+					remove_dynamic_modifier = { modifier = islamist_sedition }
+					remove_dynamic_modifier = { modifier = islamist_insurgency }
+					add_dynamic_modifier = { modifier = islamists_placated }
+				}
+				set_country_flag = TUR_truce_with_government_called_flag
+				if = {
+					limit = {
+						has_variable = TUR_kemalist_officers_loyalty
+						check_variable = { TUR_kemalist_officers_loyalty > 1 }
+					}
+					subtract_from_variable = { var = TUR_kemalist_officers_loyalty value = 1 }
+					TUR_kemalist_loyalty_and_power_update_effect = yes
+				}
+			}
+		}
+	}
+}
+
+#The Fading Father - Ataturk Health Crisis
+country_event = {
+	id = ef_tur.2
+	title = "Methods of treatment of the disease"
+	desc = "Atatürk's illness is progressing every day. Doctors recommend some treatments that can be applied. Which ones should we implement?"
+	picture = GFX_report_event_tur_ataturk_determined
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			TUR_random_variables = yes
+		}
+	}
+
+	option = {
+		name = "Serum Treatment"
+		add_to_variable = {
+			var = ataturk_health
+			value = select_1
+		}
+		clear_variable = select_1
+		clear_variable = select_2
+		clear_variable = select_3
+		clamp_variable = {
+			var = ataturk_health
+			min = -0.6
+			max = 1
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						var = ataturk_health
+						value = 0.99
+						compare = greater_than_or_equals
+					}
+				}
+				country_event = { id = ef_tur.9 hours = 8 }
+			}
+		}
+	}
+
+	option = {
+		name = "Drug Treatment"
+		add_to_variable = {
+			var = ataturk_health
+			value = select_2
+		}
+		clear_variable = select_1
+		clear_variable = select_2
+		clear_variable = select_3
+		clamp_variable = {
+			var = ataturk_health
+			min = -0.6
+			max = 1
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						var = ataturk_health
+						value = 0.99
+						compare = greater_than_or_equals
+					}
+				}
+				country_event = { id = ef_tur.9 hours = 8 }
+			}
+		}
+	}
+
+	option = {
+		name = "Surgical Treatment"
+		add_to_variable = {
+			var = ataturk_health
+			value = select_3
+		}
+		clear_variable = select_1
+		clear_variable = select_2
+		clear_variable = select_3
+		clamp_variable = {
+			var = ataturk_health
+			min = -0.6
+			max = 1
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						var = ataturk_health
+						value = 0.99
+						compare = greater_than_or_equals
+					}
+				}
+				country_event = { id = ef_tur.9 hours = 8 }
+			}
+		}
+	}
+}
+
+#The Caliph Dispute
+country_event = { #Dinamik için event target yapılabilir
+	id = ef_tur.3
+	title = ef_tur.3.t
+	desc = ef_tur.3.d
+	picture = GFX_report_event_tur_sultan_and_pashas
+
+	fire_only_once = yes
+
+	mean_time_to_happen = { days = 10 }
+
+	immediate = {
+		set_global_flag = TUR_caliphate_dispute_started
+	}
+
+	trigger = {
+		original_tag = TUR
+		is_neighbor_of = SAU
+		has_completed_focus = TUR_pivot_to_the_past
+		OR = {
+			has_country_leader_with_trait = caliph
+			has_country_leader_with_trait = calipha
+		}
+		SAU = { has_country_leader_with_trait = caliph }
+	}
+
+	option = { #Demand
+		name = "Demand it"
+		ai_chance = { base = 10 }
+		SAU = {
+			country_event = { id = ef_tur.4 hours = 12 }
+		}
+		custom_effect_tooltip = may_end_in_war
+	}
+
+	option = { #Abandon the Caliph Title
+		name = "There's nothing else to do"
+		ai_chance = { base = 2 }
+		add_stability = -0.15
+		if = {
+			limit = {
+				has_country_leader_with_trait = caliph
+			}
+			remove_country_leader_trait = caliph
+		}
+		else_if = {
+			limit = {
+				has_country_leader_with_trait = calipha
+			}
+			remove_country_leader_trait = calipha
+		}
+		add_opinion_modifier = { target = SAU modifier = sanctions_relations }
+		send_embargo = SAU
+		custom_effect_tooltip = embargo_relation_tt
+		hidden_effect = {
+			clr_global_flag = TUR_caliphate_dispute_started
+			add_ai_strategy = {
+				type = antagonize
+				id = "SAU"
+				value = 200
+			}
+			add_ai_strategy = {
+				type = consider_weak
+				id = SAU
+				value = 25
+			}
+		}
+	}
+}
+
+#The Caliph Dispute - Ottoman Demand
+country_event = {
+	id = ef_tur.4
+	title = ef_tur.4.t
+	desc = ef_tur.4.d
+	picture = GFX_report_event_generic_conference
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Okay
+		name = "We have to accept"
+		ai_chance = { base = 4 }
+		add_stability = -0.1
+		if = {
+			limit = {
+				has_country_leader_with_trait = caliph
+			}
+			remove_country_leader_trait = caliph
+		}
+		add_opinion_modifier = { target = TUR modifier = sanctions_relations }
+		hidden_effect = {
+			clr_global_flag = TUR_caliphate_dispute_started
+			add_ai_strategy = {
+				type = antagonize
+				id = "TUR"
+				value = 75
+			}
+		}
+	}
+
+	option = { #Nope
+		name = "Fuck it"
+		ai_chance = { base = 10 }
+		TUR = {
+			country_event = { id = ef_tur.5 hours = 12 }
+		}
+		custom_effect_tooltip = may_end_in_war
+	}
+}
+
+#The Caliph Dispute - Saudi Rejects
+country_event = {
+	id = ef_tur.5
+	title = ef_tur.5.t
+	desc = ef_tur.5.d
+	picture = GFX_report_event_tur_turkish_soldiers
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = "Declare war" #Declare War
+		trigger = {
+			original_tag = TUR
+		}
+		if = {
+			limit = {
+				is_in_faction = yes
+			}
+			leave_faction = yes
+		}
+		declare_war_on = { target = SAU type = annex_everything }
+		country_event = ef_tur.6
+		hidden_effect = {
+			set_global_flag = EF_caliph_dispute_war_option_flag
+			SAU = {
+				country_event = ef_tur.6
+				if = {
+					limit = {
+						is_in_faction = yes
+					}
+					leave_faction = yes
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "Declare war" #Declare War
+		trigger = {
+			original_tag = SAU
+		}
+		if = {
+			limit = {
+				is_in_faction = yes
+			}
+			leave_faction = yes
+		}
+		declare_war_on = { target = TUR type = annex_everything }
+		country_event = ef_tur.6
+		hidden_effect = {
+			set_global_flag = EF_caliph_dispute_war_option_flag
+			TUR = {
+				country_event = ef_tur.6
+				if = {
+					limit = {
+						is_in_faction = yes
+					}
+					leave_faction = yes
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "Keep the peace" #Peace
+		trigger = {
+			original_tag = TUR
+		}
+		add_stability = -0.1
+		hidden_effect = {
+			SAU = { country_event = { id = ef_tur.5 hours = 6 } }
+		}
+	}
+}
+
+#The Caliph Dispute - Declare Jihad
+country_event = {
+	id = ef_tur.6
+	title = ef_tur.6.t
+	desc = ef_tur.6.d
+	picture = GFX_report_event_tur_machine_gunners
+
+	is_triggered_only = yes
+
+	option = { #Declare
+		name = "Declare Jihad"
+		add_war_support = 0.05
+		add_ideas = EF_Jihad_idea
+		hidden_effect = {
+			if = {
+				limit = {
+					is_in_faction = yes
+				}
+				leave_faction = yes
+			}
+		}
+	}
+
+	option = { #No Need
+		name = "No Need"
+		add_political_power = 25
+		add_manpower = 15000
+		set_country_flag = EF_caliph_dispute_no_jihad_flag
+	}
+}
+
+#The Caliph Dispute - Other Side Surrenders - Receiver is Winner
+country_event = {
+	id = ef_tur.7
+	title = ef_tur.7.t
+	desc = ef_tur.7.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			remove_ideas = EF_Jihad_idea
+			remove_ideas = EF_public_unrest
+			remove_ideas = EF_public_unrest2
+			remove_ideas = EF_public_unrest3
+			clr_global_flag = TUR_caliphate_dispute_started
+			TUR = {
+				white_peace = SAU
+				set_truce = { target = SAU days = 180 }
+			}
+			SAU = { white_peace = TUR }
+		}
+	}
+
+	option = {
+		name = "Nice"
+		trigger = {
+			original_tag = TUR
+		}
+		SAU = {
+			add_stability = -0.2
+			if = {
+				limit = {
+					has_country_leader_with_trait = caliph
+				}
+				remove_country_leader_trait = caliph
+			}
+			give_resource_rights = { receiver = TUR state = 292 }
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 183
+						state = 291
+						state = 293
+						state = 446
+						state = 447
+						state = 452
+						state = 453
+						state = 454
+						state = 455
+						state = 456
+						state = 457
+						state = 552
+						state = 553
+						state = 554
+						state = 656
+						state = 675
+						state = 676
+						state = 677
+						state = 679
+						state = 680
+						state = 799
+						state = 855
+						state = 856
+						state = 907
+					}
+				}
+				transfer_state_to = TUR
+			}
+		}
+		set_autonomy = { target = SAU autonomy_state = autonomy_personal_union }
+	}
+
+	option = {
+		name = "Nice"
+		trigger = {
+			original_tag = SAU
+		}
+		TUR = {
+			add_stability = -0.2
+			if = {
+				limit = {
+					has_country_leader_with_trait = caliph
+				}
+				remove_country_leader_trait = caliph
+			}
+			else_if = {
+				limit = {
+					has_country_leader_with_trait = calipha
+				}
+				remove_country_leader_trait = calipha
+			}
+			give_resource_rights = { receiver = SAU state = 342 }
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 183
+						state = 291
+						state = 353
+						state = 354
+						state = 446
+						state = 453
+						state = 454
+						state = 455
+						state = 553
+						state = 554
+						state = 656
+						state = 675
+						state = 676
+						state = 677
+						state = 680
+						state = 350
+						state = 352
+						state = 344
+						state = 799
+						state = 800
+					}
+				}
+				transfer_state_to = SAU
+			}
+			hidden_effect = {
+				clr_country_flag = TUR_ott_unified_flag
+				TUR_set_appropriate_cosmetic_tag = yes
+			}
+		}
+		set_autonomy = { target = TUR autonomy_state = autonomy_protectorate }
+	}
+}
+
+#HMS Inconstant - TCG Muavenet
+country_event = {
+	id = ef_tur.8
+	title = ef_tur.8.t
+	desc = ef_tur.8.d
+	picture = GFX_report_event_destroyers
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = TUR
+		date > 1946.3.7
+		OR = {
+			has_government = democratic
+			has_government = neutrality
+		}
+		ENG = {
+			has_war_with_major = no
+			NOT = { has_war_with = ROOT }
+			has_government = democratic
+		}
+	}
+
+	option = {
+		name = "Nice"
+		create_equipment_variant = {
+			name = "I Class"
+			type = ship_hull_light_2
+			name_group = TUR_DD_HISTORICAL
+			parent_version = 0
+			allow_without_tech = yes
+			modules = { #Düzenlenecek
+				fixed_ship_battery_slot = ship_light_battery_2
+				fixed_ship_anti_air_slot = ship_anti_air_1
+				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+				fixed_ship_radar_slot = ship_radar_1
+				fixed_ship_torpedo_slot = ship_torpedo_2
+				fixed_ship_engine_slot = light_ship_engine_2
+				mid_1_custom_slot = empty
+				rear_1_custom_slot = empty
+			}
+		}
+		hidden_effect = {
+			create_ship = {
+				type = ship_hull_light_2
+				equipment_variant = "I Class"
+				creator = TUR
+				name = "TCG Muavenet"
+			}
+		}
+	}
+}
+
+#The Father of the Turks Recovers!
+country_event = {
+	id = ef_tur.9
+	title = ef_tur.9.t
+	desc = ef_tur.9.d
+	picture = GFX_report_event_tur_ataturk_determined
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			TUR_set_ataturks_vision_modifier = yes
+			set_country_flag = ataturk_enabled
+			mark_focus_tree_layout_dirty = yes
+			clr_country_flag = TUR_ataturk_getting_sickly
+			clear_variable = TUR_ataturk_sickness_factor_var
+			clear_variable = TUR_ataturk_health_bar
+		}
+	}
+
+	option = {
+		name = ef_tur.9.a
+		if = {
+			limit = {
+				has_country_leader_with_trait = father_of_the_turks
+			}
+			swap_ruler_traits = { remove = father_of_the_turks add = father_of_the_turks_improved }
+		}
+		else_if = {
+			limit = {
+				has_country_leader_with_trait = father_of_the_turks_1
+			}
+			swap_ruler_traits = { remove = father_of_the_turks_1 add = father_of_the_turks_1_improved }
+		}
+		else_if = {
+			limit = {
+				has_country_leader_with_trait = father_of_the_turks_2
+			}
+			swap_ruler_traits = { remove = father_of_the_turks_2 add = father_of_the_turks_2_improved }
+		}
+		else_if = {
+			limit = {
+				has_country_leader_with_trait = father_of_the_turks_3
+			}
+			swap_ruler_traits = { remove = father_of_the_turks_3 add = father_of_the_turks_3_improved }
+		}
+		else_if = {
+			limit = {
+				has_country_leader_with_trait = father_of_the_turks_4
+			}
+			swap_ruler_traits = { remove = father_of_the_turks_4 add = father_of_the_turks_4_improved }
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_country_leader_trait = absolute_impartiality
+
+		if = {
+			limit = {
+				has_completed_focus = TUR_assess_our_future
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			TUR_remove_legacy_of_ataturk = yes
+		}
+
+		add_dynamic_modifier = {
+			modifier = TUR_ataturks_vision_modifier
+		}
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = TUR_fully_integrate_the_is_bank }
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			unlock_national_focus = TUR_fully_integrate_the_is_bank
+		}
+
+		if = {
+			limit = {
+				has_idea = father_of_turks_is_sick
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			remove_ideas = father_of_turks_is_sick
+		}
+
+		hidden_effect = {
+			add_to_variable = { var = TUR_kemalist_officers_loyalty value = 1 }
+			add_to_variable = { var = TUR_kemalist_power_variable value = 1 }
+			TUR_kemalist_loyalty_and_power_update_effect = yes
+
+			remove_country_leader_trait = dislikes_major_powers #Necessary to keep the traits order
+			add_country_leader_trait = dislikes_major_powers
+		}
+	}
+}
+
+
+#### NEWS ####
+
+news_event = {
+	id = ef_tur_news.1
+	title = ef_tur_news.1.t
+	desc = ef_tur_news.1.d
+	picture = GFX_news_event_montreux_convention_succeeds
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = TUR
+		has_country_leader = { character = TUR_mustafa_kemal_ataturk ruling_only = yes }
+		has_country_flag = ataturk_enabled
+		OR = {
+			AND = {
+				date > 1938.11.1
+				date < 1938.11.25
+			}
+			date > 1939.11.1
+		}
+	}
+
+	option = {
+		name = ef_tur_news.1.a
+		add_political_power = 10
+	}
+}

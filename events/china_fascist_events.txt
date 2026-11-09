@@ -1,0 +1,2020 @@
+###########################
+# China Fascist Events
+###########################
+
+add_namespace = china_fascism
+add_namespace = china_fascist_news
+
+# Warlord War
+country_event = {
+	id = china_fascism.1
+	title = china_fascism.1.t
+	desc = china_fascism.1.d
+
+	picture = GFX_report_event_journalists_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.1.a
+		if = {
+			limit = {  country_exists = PRC }
+			PRC = {
+				save_global_event_target_as = CHI_warlord_war_united_leader
+				set_country_flag = WARLORD_warlord_wars_begins
+				set_rule = { can_create_factions = yes }
+				create_faction = chinese_united_front
+				if = {
+					limit = {
+						SHX = {
+							exists = yes
+							is_puppet = no
+							is_in_faction = no
+							NOT = {
+								has_war_with = ROOT
+							}
+						}
+					}
+					add_to_faction = SHX
+					SHX = {
+						add_ai_strategy = {
+							type = alliance
+							id = "PRC"
+							value = 200
+						}
+					}
+					SHX = {
+						add_ai_strategy = {
+							type = alliance
+							id = "SIK"
+							value = 200
+						}
+					}
+				}
+				if = {
+					limit = {
+						XSM = {
+							exists = yes
+							is_puppet = no
+							is_in_faction = no
+							NOT = {
+								has_war_with = ROOT
+							}
+						}
+					}
+					add_to_faction = XSM
+					XSM = {
+						add_ai_strategy = {
+							type = alliance
+							id = "PRC"
+							value = 200
+						}
+					}
+					XSM = {
+						add_ai_strategy = {
+							type = alliance
+							id = "SIK"
+							value = 200
+						}
+					}
+				}
+				if = {
+					limit = {
+						YUN = {
+							exists = yes
+							is_puppet = no
+							is_in_faction = no
+							NOT = {
+								has_war_with = ROOT
+							}
+						}
+					}
+					add_to_faction = YUN
+					YUN = {
+						add_ai_strategy = {
+							type = alliance
+							id = "PRC"
+							value = 200
+						}
+					}
+					YUN = {
+						add_ai_strategy = {
+							type = alliance
+							id = "SIK"
+							value = 200
+						}
+					}
+				}
+				if = {
+					limit = {
+						GXC = {
+							exists = yes
+							is_puppet = no
+							is_in_faction = no
+							NOT = {
+								has_war_with = ROOT
+							}
+						}
+					}
+					add_to_faction = GXC
+					GXC = {
+						add_ai_strategy = {
+							type = alliance
+							id = "PRC"
+							value = 200
+						}
+					}
+					GXC = {
+						add_ai_strategy = {
+							type = alliance
+							id = "SIK"
+							value = 200
+						}
+					}
+				}
+				if = {
+					limit = {
+						SIK = {
+							exists = yes
+							is_puppet = no
+							is_in_faction = no
+							NOT = {
+								has_war_with = ROOT
+							}
+						}
+					}
+					add_to_faction = SIK
+					SIK = {
+						add_ai_strategy = {
+							type = alliance
+							id = "PRC"
+							value = 200
+						}
+					}
+				}
+				add_ideas = CHI_suprise_attack_warlords
+				for_each_scope_loop = {
+					array = faction_members
+					if = {
+						limit = {
+							NOT = { tag = ROOT }
+							OR = {
+								original_tag = SHX
+								original_tag = XSM
+								original_tag = YUN
+								original_tag = GXC
+								original_tag = SIK
+							}
+						}
+						add_ideas = CHI_suprise_attack_warlords
+					}
+				}
+			}
+			PRC = {
+				declare_war_on = {
+					type = annex_everything
+					target = CHI
+				}
+				custom_effect_tooltip = PRC_emergency_milita_army_tt
+				set_country_flag = PRC_warlord_wars_begins
+			}
+			# SHX = {
+				# 	custom_effect_tooltip = SHX_emergency_milita_army_tt
+				# }
+			# GXC = {
+				# 	custom_effect_tooltip = GXC_emergency_milita_army_tt
+				# }
+			CHI = {
+				add_ideas = CHI_suprise_attack
+				remove_ideas = CHI_communist_uprisings
+				set_country_flag = CHI_warlord_wars_begins
+			}
+			hidden_effect = {
+				PRC = {
+					for_each_scope_loop = {
+						array = faction_members
+						if = {
+							limit = {
+								NOT = { tag = ROOT }
+								OR = {
+									original_tag = SHX
+									original_tag = XSM
+									original_tag = YUN
+									original_tag = GXC
+									original_tag = SIK
+								}
+							}
+							add_to_war = {
+								targeted_alliance = PREV
+								enemy = CHI
+								hostility_reason = asked_to_join
+							}
+						}
+					}
+					load_oob = "PRC_milita_reinforcements"
+					load_oob = "PRC_milita_reinforcements"
+				}
+				SHX = {
+					load_oob = "SHX_milita_reinforcements"
+					load_oob = "SHX_milita_reinforcements"
+				}
+				GXC = {
+					load_oob = "GXC_milita_reinforcements"
+					load_oob = "GXC_milita_reinforcements"
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					country_exists = PRC
+				}
+				count_triggers = {
+					amount = 3
+					country_exists = SHX
+					country_exists = XSM
+					country_exists = YUN
+					country_exists = GXC
+					country_exists = SIK
+				}
+			}
+			random_other_country = {
+				limit = {
+					OR = {
+						tag = SHX
+						tag = XSM
+						tag = YUN
+						tag = GXC
+						tag = SIK
+					}
+				}
+				save_global_event_target_as = CHI_warlord_war_united_leader
+				set_rule = { can_create_factions = yes }
+				set_country_flag = WARLORD_warlord_wars_begins
+				create_faction = chinese_united_front
+				add_to_faction = SHX
+				add_to_faction = XSM
+				add_to_faction = YUN
+				add_to_faction = GXC
+				add_to_faction = SIK
+				THIS = {
+					add_ideas = CHI_suprise_attack_warlords
+					declare_war_on = {
+						type = annex_everything
+						target = CHI
+					}
+					for_each_scope_loop = {
+						array = faction_members
+						if = {
+							limit = {
+								NOT = { tag = THIS }
+								OR = {
+									original_tag = SHX
+									original_tag = XSM
+									original_tag = YUN
+									original_tag = GXC
+									original_tag = SIK
+								}
+							}
+							add_ideas = CHI_suprise_attack_warlords
+							add_to_war = {
+								targeted_alliance = PREV
+								enemy = CHI
+								hostility_reason = asked_to_join
+							}
+						}
+					}
+				}
+			}
+			CHI = {
+				add_ideas = CHI_suprise_attack
+				remove_ideas = CHI_communist_uprisings
+				set_country_flag = CHI_warlord_wars_begins
+			}
+		}
+		else_if = {
+			limit = {
+				NOT = {
+					country_exists = PRC
+				}
+				NOT = {
+					count_triggers = {
+						amount = 3
+						country_exists = SHX
+						country_exists = XSM
+						country_exists = YUN
+						country_exists = GXC
+						country_exists = SIK
+					}
+				}
+			}
+			start_civil_war = {
+				ruling_party = fascism
+				ideology = neutrality
+				size = 0.5
+				capital = 622
+				states = {
+					615 621 746 756 616 283 753 754 755 756 604 760 617 618 752 751 747 352 744 605 748 603
+				}
+				keep_political_leader = yes
+				keep_political_party_members = yes
+			}
+			hidden_effect = {
+				random_other_country = {
+					limit = {
+						original_tag = CHI
+						has_government = neutrality
+					}
+					save_global_event_target_as = CHI_warlord_war_united_leader
+					set_country_flag = WARLORD_warlord_wars_begins
+					load_focus_tree = {
+						tree = china_nationalist_focus
+						keep_completed = yes
+					}
+					if = {
+						limit = {
+							has_completed_focus = KMT_promote_nationalism
+						}
+						uncomplete_national_focus = {
+							focus = KMT_promote_nationalism
+							uncomplete_children = yes
+						}
+					}
+					add_popularity = {
+						ideology = neutrality
+						popularity = 0.1
+					}
+					unlock_national_focus = KMT_political_effort
+					complete_national_focus = KMT_unitary_semi_presidential_republic
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+			mark_focus_tree_layout_dirty = yes
+			country_lock_all_division_template = yes
+		}
+		CHI = {
+			if = {
+				limit = {
+					NOT = { has_completed_focus = KMT_promote_nationalism }
+				}
+				unlock_national_focus = KMT_political_effort
+				unlock_national_focus = KMT_promote_nationalism
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.1
+				}
+				add_ideas = KMT_into_fascism
+				set_country_flag = CHI_promote_fascism_flag
+				set_country_flag = CHI_warlord_wars_begins
+				set_country_flag = CHI_divisions_locked_flag #Double check
+			}
+		}
+		set_global_flag = CHI_fascist_civil_war_flag
+	}
+}
+
+
+#Chinese Pro Japanese
+country_event = {
+	id = china_fascism.2 #220
+	title = china_fascism.2.t
+	desc = china_fascism.2.d
+
+	picture = GFX_report_event_journalists_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.2.a
+		add_opinion_modifier = { target = CHI modifier = medium_increase }
+	}
+}
+
+#Chinese Request Navy Asisst
+country_event = {
+	id = china_fascism.3 #224
+	title = china_fascism.3.t
+	desc = china_fascism.3.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_usa_destroyers
+
+	option = {
+		name = china_fascism.3.a
+		ai_chance = { base = 10 }
+		FROM = {
+			country_event = { id = china_fascism.4 }
+		}
+	}
+
+	option = {
+		name = china_fascism.3.b
+		ai_chance = { base = 1 }
+		FROM = {
+			country_event = { id = china_fascism.5 }
+		}
+	}
+}
+
+# Chinese Request Navy Asisst - Japan Accepts
+country_event = {
+	id = china_fascism.4
+	title = china_fascism.4.t
+	desc = china_fascism.4.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_sign_treaty1
+
+	immediate = {
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				set_state_flag = KMT_jap_navy_indus_assist
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				set_state_flag = KMT_jap_navy_indus_assist
+			}
+			add_tech_bonus = {
+				name = dd_bonus
+				ahead_reduction = 1
+				uses = 1
+				bonus = 0.5
+				category = naval_equipment
+			}
+			if = {
+				limit = {
+					FROM = { tag = JAP }
+					JAP = { has_idea = the_long_lance }
+				}
+				add_ideas = the_long_lance
+			}
+			if = {
+				limit = {
+					FROM = { tag = USA }
+					USA = { has_idea = bureau_of_ships_focus }
+				}
+				add_ideas = bureau_of_ships_focus
+			}
+			if = {
+				limit = {
+					FROM = { tag = USA }
+					USA = { has_idea = liberty_ships_focus }
+				}
+				add_ideas = liberty_ships_focus
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_navy
+				}
+				remove_ideas = incompetent_industry_real_navy
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_2_navy
+				}
+				remove_ideas = incompetent_industry_real_2_navy
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_3_navy
+				}
+				remove_ideas = incompetent_industry_real_3_navy
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_4_navy
+				}
+				remove_ideas = incompetent_industry_real_4_navy
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_5_navy
+				}
+				remove_ideas = incompetent_industry_real_5_navy
+			}
+		}
+	}
+
+	option = {
+		name = kmt.225.a
+		effect_tooltip = {
+			every_state = {
+				limit = {
+					has_state_flag = KMT_jap_navy_indus_assist
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = dd_bonus
+				ahead_reduction = 1
+				uses = 1
+				bonus = 0.5
+				category = naval_equipment
+			}
+			if = {
+				limit = {
+					FROM = { tag = JAP }
+					JAP = { has_idea = the_long_lance }
+				}
+				add_ideas = the_long_lance
+			}
+			if = {
+				limit = {
+					FROM = { tag = USA }
+					USA = { has_idea = bureau_of_ships_focus }
+				}
+				add_ideas = bureau_of_ships_focus
+			}
+			if = {
+				limit = {
+					FROM = { tag = USA }
+					USA = { has_idea = liberty_ships_focus }
+				}
+				add_ideas = liberty_ships_focus
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_navy
+				}
+				remove_ideas = incompetent_industry_real_navy
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_2_navy
+				}
+				remove_ideas = incompetent_industry_real_2_navy
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_3_navy
+				}
+				remove_ideas = incompetent_industry_real_3_navy
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_4_navy
+				}
+				remove_ideas = incompetent_industry_real_4_navy
+			}
+			if = {
+				limit = {
+					has_idea = incompetent_industry_real_5_navy
+				}
+				remove_ideas = incompetent_industry_real_5_navy
+			}
+		}
+	}
+}
+
+# Chinese Request Navy Asisst - Japan Rejects
+country_event = {
+	id = china_fascism.5
+	title = china_fascism.5.t
+	desc = china_fascism.5.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_merchant_ship_01
+
+	option = {
+		name = china_fascism.5.a
+		add_opinion_modifier = {
+			target = FROM
+			modifier = selfish
+		}
+	}
+}
+
+# Demand Indochina
+country_event = {
+	id = china_fascism.6
+	title = china_fascism.6.t
+	desc = china_fascism.6.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 0
+				ROOT = {
+					has_war_with = FROM
+				}
+			}
+			modifier = {
+				add = 95
+				ROOT = {
+					tag = FRA
+				}
+				16 = { NOT = { is_controlled_by = FRA } } #Paris
+			}
+			modifier = {
+				factor = 10
+				ROOT = {
+					tag = JAP
+				}
+			}
+			modifier = {
+				factor = 100
+				ROOT = {
+					is_puppet_of = FROM
+				}
+			}
+		}
+
+		name = china_fascism.6.a
+		FROM = {
+			country_event = { id = china_fascism.7 }
+		}
+		effect_tooltip = {
+			every_controlled_state = {
+				limit = {
+					region = 142
+					NOT = {
+						state = 724
+						state = 289
+					}
+				}
+				FROM = {
+					transfer_state = PREV
+				}
+			}
+		}
+	}
+
+	option = {
+		ai_chance = {
+			base = 80
+			modifier = {
+				factor = 5
+				tag = FRA
+				16 = { NOT = { is_controlled_by = FRA } } #Paris
+			}
+		}
+		name = china_fascism.6.b
+		effect_tooltip = {
+			FROM = {
+				create_wargoal = {
+					target = ROOT
+					type = annex_everything
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				id = china_fascism.8
+				hours = 8
+			}
+		}
+	}
+}
+
+# Demand Accepted
+country_event = {
+	id = china_fascism.7
+	title = china_fascism.7.t
+	desc = china_fascism.7.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.7.a
+		FROM = {
+			every_controlled_state = {
+				limit = {
+					region = 142
+					NOT = {
+						state = 724
+						state = 289
+					}
+				}
+				ROOT = {
+					transfer_state = PREV
+				}
+			}
+		}
+	}
+}
+
+# Demand Rejected
+country_event = {
+	id = china_fascism.8
+	title = china_fascism.8.t
+	desc = china_fascism.8.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.8.a
+		set_country_flag = CHI_indochina_demand_rejected
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
+		}
+	}
+}
+
+# Demand Main Central Steppe
+country_event = {
+	id = china_fascism.9
+	title = china_fascism.9.t
+	desc = china_fascism.9.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		ai_chance = {
+			base = 95
+			modifier = {
+				factor = 0.2
+				OR = {
+					is_in_faction_with = SOV
+					tag = SOV
+					is_subject_of = SOV
+				}
+			}
+			modifier = {
+				factor = 0
+				NOT = {
+					tag = TAN
+					tag = MON
+					tag = SIK
+				}
+				has_war_with = FROM
+			}
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					all_neighbor_state = {
+						NOT = {
+							owner = { tag = FROM }
+						}
+					}
+				}
+			}
+		}
+		name = china_fascism.9.a
+		effect_tooltip = {
+			every_controlled_state = {
+				limit = {
+					OR = {
+						region = 152
+						region = 145
+					}
+				}
+				FROM = {
+					transfer_state = PREV
+				}
+			}
+		}
+		FROM = {
+			country_event = { id = china_fascism.10 }
+		}
+	}
+
+	option = {
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 50
+				is_in_faction_with = SOV
+			}
+		}
+		name = china_fascism.9.b
+		FROM = { country_event = { id = china_fascism.11 hours = 8 }}
+		effect_tooltip = {
+			FROM = {
+				create_wargoal = {
+					target = ROOT
+					type = annex_everything
+				}
+			}
+		}
+	}
+}
+
+# Demand Accepted
+country_event = {
+	id = china_fascism.10
+	title = china_fascism.10.t
+	desc = china_fascism.10.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.10.a
+		FROM = {
+			every_controlled_state = {
+				limit = {
+					OR = {
+						region = 152
+						region = 145
+					}
+				}
+				ROOT = {
+					transfer_state = PREV
+				}
+			}
+		}
+	}
+}
+
+# Demand Rejected
+country_event = {
+	id = china_fascism.11
+	title = china_fascism.11.t
+	desc = china_fascism.11.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.11.a
+		create_wargoal = {
+			target = FROM
+			type = annex_everything
+		}
+	}
+}
+
+# Colonizers Demand
+country_event = {
+	id = china_fascism.12
+	title = china_fascism.12.t
+	desc = china_fascism.12.d
+	picture = GFX_report_event_lithuania_army
+
+	is_triggered_only = yes
+
+	option = {
+		ai_chance = {
+			base = 100
+		}
+		name = china_fascism.12.a
+		HOL = {
+			transfer_state = 721
+		}
+		721 = {
+			remove_core_of = POR
+		}
+		RAJ = {
+			transfer_state = 321
+		}
+		321 = {
+			add_core_of = RAJ
+			remove_core_of = POR
+		}
+		CHI = {
+			transfer_state = 729
+		}
+	}
+	option = {
+		name = china_fascism.12.b
+		hidden_effect = {
+			CHI = {
+				create_wargoal = {
+					target = POR
+					type = take_state_focus
+					generator = { 721 729 321 }
+				}
+			}
+		}
+	}
+}
+
+# Sino-German Joint
+country_event = {
+	id = china_fascism.13
+	title = china_fascism.13.t
+	desc = china_fascism.13.d
+
+	picture = GFX_report_event_chinese_soldiers
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.13.a
+		ai_chance = { base = 10 }
+		add_opinion_modifier = {
+			target = CHI
+			modifier = sino_german_cooperation
+		}
+		CHI = {
+			add_opinion_modifier = {
+				target = GER
+				modifier = sino_german_cooperation
+			}
+			if = {
+				limit = {
+					OR = {
+						has_idea = german_advisors
+					}
+				}
+				add_ideas = CHI_sino_german_coop_idea
+			}
+			country_event = {
+				id = china_fascism.14
+			}
+		}
+	}
+
+	option = {
+		name = china_fascism.13.b
+		ai_chance = { base = 1 }
+		CHI = {
+			country_event = {
+				id = china_fascism.155
+			}
+		}
+	}
+}
+
+# Sino-German Joint - Germany Accepted
+country_event = {
+	id = china_fascism.14
+	title = china_fascism.14.t
+	desc = china_fascism.14.d
+
+	picture = GFX_report_event_chinese_soldiers
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.14.a
+		effect_tooltip = {
+			GER = {
+				add_opinion_modifier = {
+					target = CHI
+					modifier = sino_german_cooperation
+				}
+			}
+			add_opinion_modifier = {
+				target = GER
+				modifier = sino_german_cooperation
+			}
+			if = {
+				limit = {
+					OR = {
+						has_idea = german_advisors
+					}
+				}
+				add_ideas = CHI_sino_german_coop_idea
+			}
+		}
+	}
+}
+
+# Sino-German Joint - Germany Refuses
+country_event = {
+	id = china_fascism.155
+	title = china_fascism.144.t
+	desc = china_fascism.144.d
+
+	picture = GFX_report_event_chinese_army_training
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.144.a
+		add_political_power = -25
+	}
+}
+
+# Join the Axis
+country_event = {
+	id = china_fascism.15
+	title = china_fascism.15.t
+	desc = china_fascism.15.d
+	picture = GFX_report_event_fascist_gathering
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.15.a
+		ai_chance = { base = 6 }
+		GER = { add_to_faction = CHI }
+		CHI = {
+			add_ai_strategy = {
+				type = alliance
+				id = "GER"
+				value = 200
+			}
+		}
+		add_ai_strategy = {
+			type = alliance
+			id = "CHI"
+			value = 200
+		}
+		hidden_effect = {
+			news_event = { hours = 6 id = china_fascist_news.1 }
+		}
+	}
+	option = {
+		name = china_fascism.15.b
+		ai_chance = { base = 4 }
+		CHI = {
+			add_opinion_modifier = {
+				target = GER
+				modifier = CHI_germany_rejected
+			}
+		}
+		hidden_effect = {
+			news_event = { hours = 6 id = china_fascist_news.2 }
+		}
+	}
+}
+
+#China Request German To Calm Japan
+country_event = {
+	id = china_fascism.16
+	title = china_fascism.16.t
+	desc = china_fascism.16.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_german_advisors_remain
+
+	option = {
+		name = china_fascism.16.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				add = 40
+				CHI = {
+					has_government = fascism
+				}
+			}
+		}
+		JAP = {
+			country_event = { id = china_fascism.17 days = 1 }
+		}
+	}
+
+	option = {
+		name = china_fascism.16.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 95
+				has_war_with = SOV
+				JAP = {
+					has_war_with = SOV
+				}
+			}
+		}
+		CHI = {
+			country_event = { id = china_fascism.18 days = 1 }
+		}
+		custom_effect_tooltip = CHI_german_army_support_tt
+		send_equipment = {
+			equipment = infantry_equipment
+			amount = 5000
+			target = CHI
+		}
+		send_equipment = {
+			equipment = support_equipment
+			amount = 500
+			target = CHI
+		}
+		send_equipment = {
+			equipment = artillery_equipment
+			amount = 500
+			target = CHI
+		}
+		send_equipment = {
+			equipment = light_tank_chassis
+			amount = 250
+			target = CHI
+		}
+	}
+}
+
+#Japan Decides
+country_event = {
+	id = china_fascism.17
+	title = china_fascism.17.t
+	desc = china_fascism.17.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_chinese_soldiers_fighting
+
+	option = {
+		name = china_fascism.17.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				add = 45
+				CHI = {
+					has_government = fascism
+				}
+			}
+			modifier = {
+				add = 30
+				CHI = {
+					surrender_progress < 0.1
+				}
+			}
+		}
+		GER = {
+			country_event = { id = china_fascism.19 }
+		}
+		CHI = {
+			country_event = { id = china_fascism.19 }
+		}
+		white_peace = CHI
+	}
+
+	option = {
+		name = china_fascism.17.b
+		GER = {
+			country_event = { id = china_fascism.20 }
+		}
+		CHI = {
+			country_event = { id = china_fascism.20 }
+		}
+	}
+}
+
+#Germany Refuses But Supports
+country_event = {
+	id = china_fascism.18
+	title = china_fascism.18.t
+	desc = china_fascism.18.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_chinese_soldiers_fighting
+
+	option = {
+		name = china_fascism.18.a
+		add_political_power = -25
+		#add_equipment_to_stockpile = { type = infantry_equipment amount = 2500 producer = GER }
+		#add_equipment_to_stockpile = { type = artillery_equipment amount = 1000 producer = GER }
+		#add_equipment_to_stockpile = { type = light_tank_chassis amount = 250 producer = GER }
+		effect_tooltip = {
+			GER = {
+				send_equipment = {
+					equipment = infantry_equipment
+					amount = 5000
+					target = CHI
+				}
+				send_equipment = {
+					equipment = support_equipment
+					amount = 500
+					target = CHI
+				}
+				send_equipment = {
+					equipment = artillery_equipment
+					amount = 500
+					target = CHI
+				}
+				send_equipment = {
+					equipment = light_tank_chassis
+					amount = 250
+					target = CHI
+				}
+			}
+		}
+		division_template = {
+			name = "Infanterie-Division"
+			priority = 2
+			#template_counter = 0
+			division_names_group = GER_Inf_01
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+				infantry = { x = 2 y = 0 }
+				infantry = { x = 2 y = 1 }
+				infantry = { x = 2 y = 2 }
+			}
+			support = {
+				engineer = { x = 0 y = 0 }
+				artillery = { x = 0 y = 1 }
+			}
+		}
+		random_owned_controlled_state = {
+			limit = { ROOT = { has_full_control_of_state = PREV } }
+			prioritize = { 10 }
+			create_unit = {
+				division = "name = \"1. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+			create_unit = {
+				division = "name = \"2. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+			create_unit = {
+				division = "name = \"3. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+			create_unit = {
+				division = "name = \"4. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+			create_unit = {
+				division = "name = \"5. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+		}
+	}
+}
+
+#Japan Accepted
+country_event = {
+	id = china_fascism.19
+	title = china_fascism.19.t
+	desc = {
+		text = china_fascism.19.d
+		trigger = { tag = CHI }
+	}
+	desc = {
+		text = china_fascism.19.d_2
+		trigger = { tag = GER }
+	}
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_japanese_chinese_surrender
+
+	option = {
+		name = china_fascism.19.a
+		trigger = { tag = CHI }
+		effect_tooltip = {
+			JAP = {
+				white_peace = CHI
+			}
+		}
+	}
+
+	option = {
+		name = china_fascism.19.b
+		trigger = { tag = GER }
+	}
+}
+
+#Japan Refuses
+country_event = {
+	id = china_fascism.20
+	title = china_fascism.20.t
+	desc = china_fascism.20.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_chinese_soldiers_fighting
+
+	option = {
+		ai_chance = {
+			base = 75
+		}
+		name = china_fascism.20.a
+		trigger = {
+			tag = GER
+		}
+	}
+
+	option = {
+		ai_chance = {
+			base = 25
+		}
+		name = china_fascism.20.b
+		GER = {
+			remove_from_faction = JAP
+			create_wargoal = {
+				target = JAP
+				type = puppet_wargoal_focus
+			}
+		}
+		trigger = {
+			tag = GER
+		}
+	}
+
+	option = {
+		name = china_fascism.18.a
+		trigger = {
+			tag = CHI
+		}
+	}
+}
+
+# Warlord War - China Wins - Event
+country_event = {
+	id = china_fascism.210
+	title = china_fascism.210.t
+	desc = china_fascism.210.d
+
+	picture = GFX_report_event_japanese_chinese_surrender
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = CHI
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+		has_country_flag = CHI_warlord_wars_begins
+		exists = yes
+		NOT = { has_country_flag = PRC_warlord_war_accept_peace }
+		event_target:CHI_warlord_war_united_leader = {
+			has_country_flag = WARLORD_warlord_wars_begins #Double check
+			exists = no
+		}
+	}
+
+	immediate = {
+		hidden_effect = {
+			CHI = {
+				if = {
+					limit = {
+						has_idea = CHI_suprise_attack_alt
+					}
+					swap_ideas = {
+						remove_idea = CHI_suprise_attack_alt
+						add_idea = CHI_collapse_imminent
+					}
+				}
+				else = {
+					swap_ideas = {
+						remove_idea = CHI_suprise_attack
+						add_idea = CHI_collapse_imminent
+					}
+				}
+				country_lock_all_division_template = yes
+			}
+			event_target:CHI_warlord_war_united_leader = {
+				clr_country_flag = WARLORD_warlord_wars_begins
+				clear_global_event_target = CHI_warlord_war_united_leader
+			}
+		}
+	}
+
+	option = {
+		name = china_fascism.210.a
+		effect_tooltip = {
+			activate_mission_tooltip = CHI_collapse_coming
+			if = {
+				limit = {
+					has_idea = CHI_suprise_attack_alt
+				}
+				swap_ideas = {
+					remove_idea = CHI_suprise_attack_alt
+					add_idea = CHI_collapse_imminent
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = CHI_suprise_attack
+					add_idea = CHI_collapse_imminent
+				}
+			}
+			country_lock_all_division_template = yes
+		}
+	}
+}
+
+#Send Peace Offer To Chinese
+country_event = {
+	id = china_fascism.21
+	title = china_fascism.21.t
+	desc = china_fascisms.21.d
+
+	picture = GFX_report_event_japanese_chinese_surrender
+
+	fire_only_once = yes
+	trigger = {
+		original_tag = CHI
+		has_war_with = PRC
+		has_country_flag = CHI_warlord_wars_begins
+		surrender_progress > 0.45
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+	}
+
+	#Send Peace Offer
+	option = {
+		name = china_fascisms.21.a
+		ai_chance = { base = 10 }
+		custom_effect_tooltip = if_they_accept
+		effect_tooltip = {
+			PRC = {
+				white_peace = CHI
+				add_ideas = CHI_peace_treaty_idea
+			}
+			unlock_decision_tooltip = CHI_peace_treaty_coming
+			add_ideas = CHI_peace_treaty_idea
+		}
+		PRC = {
+			country_event = { id = china_fascism.22 }
+		}
+	}
+
+	#No! We Will Continue to Fight
+	option = {
+		name = china_fascisms.21.b
+		ai_chance = { base = 1 }
+		custom_effect_tooltip = CHI_no_peace_continue_to_fighting_tt
+		add_stability = 0.10
+		add_war_support = 0.10
+		add_manpower = 100000
+	}
+}
+
+#Peace Offer Communist China Decides
+country_event = {
+	id = china_fascism.22
+	title = china_fascism.22.t
+	desc = china_fascism.22.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_japanese_chinese_surrender
+
+	#Accept Peace Offer
+	option = {
+		name = china_fascism.22.a
+		ai_chance = { base = 10 }
+		white_peace = CHI
+		CHI = {
+			add_ideas = CHI_peace_treaty_idea
+			unlock_decision_tooltip = CHI_peace_treaty_coming
+			set_country_flag = PRC_warlord_war_accept_peace
+			hidden_effect = {
+				country_event = { id = china_fascism.23 }
+			}
+		}
+		add_ideas = CHI_peace_treaty_idea
+		hidden_effect = {
+			PRC = {
+				set_country_flag = PRC_warlord_war_accept_peace
+			}
+		}
+	}
+
+	#No! We Will Continue to Fight
+	option = {
+		name = china_fascism.21.b
+		ai_chance = { base = 1 }
+		add_stability = 0.10
+		add_war_support = 0.10
+		CHI = {
+			country_event = { id = china_fascism.24 }
+		}
+	}
+}
+
+#Communist China Accepted
+country_event = {
+	id = china_fascism.23
+	title = china_fascism.23.t
+	desc = china_fascism.23.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_japanese_chinese_surrender
+
+	#Yes!
+	option = {
+		name = china_fascism.23.a
+	}
+}
+
+#Communist China Rejected
+country_event = {
+	id = china_fascism.24
+	title = china_fascism.24.t
+	desc = china_fascism.24.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_japanese_chinese_surrender
+
+	#No!
+	option = {
+		name = china_fascism.24.a
+	}
+}
+
+# Invitation to Faction
+country_event = {
+	id = china_fascism.25
+	title = china_fascism.25.t
+	desc = china_fascism.25.d
+	picture = GFX_report_event_worried_french
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.25.a
+		ai_chance = { base = 6 }
+		CHI = {
+			country_event = china_fascism.26
+			add_to_faction = ROOT
+		}
+		add_ai_strategy = {
+			type = alliance
+			id = "CHI"
+			value = 200
+		}
+	}
+
+	option = {
+		name = china_fascism.25.b
+		ai_chance = { base = 2 }
+		CHI = { country_event = china_fascism.27 }
+	}
+}
+
+# [Country] Accepts
+country_event = {
+	id = china_fascism.26
+	title = china_fascism.26.t
+	desc = china_fascism.26.d
+	picture = GFX_report_event_soldiers_in_france
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.26.a
+		effect_tooltip = {
+			add_to_faction = FROM
+		}
+	}
+}
+
+# [Country] Refuses
+country_event = {
+	id = china_fascism.27
+	title = china_fascism.27.t
+	desc = china_fascism.27.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.27.a
+	}
+}
+
+# Request Army Platoon
+country_event = {
+	id = china_fascism.28
+	title = china_fascism.28.t
+	desc = china_fascism.28.d
+	picture = GFX_report_event_worried_french
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.28.a
+		ai_chance = { base = 6 }
+		CHI = {
+			country_event = china_fascism.29
+		}
+		effect_tooltip = {
+			custom_effect_tooltip = CHI_germany_army_platoon_tt
+			division_template = {
+				name = "Infanterie-Division"
+				priority = 2
+				#template_counter = 0
+				division_names_group = GER_Inf_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					artillery = { x = 0 y = 1 }
+				}
+			}
+			division_template = {
+				name = "Panzer-Division"
+
+				division_names_group = GER_Arm_01
+
+				regiments = {
+					light_armor = { x = 0 y = 0 }
+					light_armor = { x = 0 y = 1 }
+					light_armor = { x = 1 y = 0 }
+					light_armor = { x = 1 y = 1 }
+					motorized = { x = 2 y = 0 }
+					motorized = { x = 2 y = 1 }
+				}
+				support = {
+					mot_recon = { x = 0 y = 0 }
+					engineer = { x = 0 y = 1 }
+					artillery = { x = 0 y = 2 }
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { ROOT = { has_full_control_of_state = PREV } }
+				prioritize = { 10 }
+				create_unit = {
+					division = "name = \"1. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = CHI
+				}
+				create_unit = {
+					division = "name = \"2. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = CHI
+				}
+				create_unit = {
+					division = "name = \"3. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = CHI
+				}
+				create_unit = {
+					division = "name = \"1. Panzer-Division\" division_template = \"Panzer-Division\" start_experience_factor = 1.0"
+					owner = CHI
+				}
+				create_unit = {
+					division = "name = \"2. Panzer-Division\" division_template = \"Panzer-Division\" start_experience_factor = 1.0"
+					owner = CHI
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { ROOT = { has_full_control_of_state = PREV } }
+				prioritize = { 88 }
+				create_unit = {
+					division = "name = \"4. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = CHI
+				}
+				create_unit = {
+					division = "name = \"5. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = CHI
+				}
+			}
+		}
+	}
+
+	option = {
+		name = china_fascism.28.b
+		ai_chance = { base = 2 }
+		CHI = { country_event = china_fascism.30 }
+	}
+}
+
+# [Country] Accepts
+country_event = {
+	id = china_fascism.29
+	title = china_fascism.29.t
+	desc = china_fascism.29.d
+	picture = GFX_report_event_soldiers_in_france
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.29.a
+		army_experience = 50
+		division_template = {
+			name = "Infanterie-Division"
+			priority = 2
+			#template_counter = 0
+			division_names_group = GER_Inf_01
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+				infantry = { x = 2 y = 0 }
+				infantry = { x = 2 y = 1 }
+				infantry = { x = 2 y = 2 }
+			}
+			support = {
+				engineer = { x = 0 y = 0 }
+				artillery = { x = 0 y = 1 }
+			}
+		}
+		division_template = {
+			name = "Panzer-Division"
+
+			division_names_group = GER_Arm_01
+
+			regiments = {
+				light_armor = { x = 0 y = 0 }
+				light_armor = { x = 0 y = 1 }
+				light_armor = { x = 1 y = 0 }
+				light_armor = { x = 1 y = 1 }
+				motorized = { x = 2 y = 0 }
+				motorized = { x = 2 y = 1 }
+			}
+			support = {
+				mot_recon = { x = 0 y = 0 }
+				engineer = { x = 0 y = 1 }
+				artillery = { x = 0 y = 2 }
+			}
+		}
+		random_owned_controlled_state = {
+			limit = { ROOT = { has_full_control_of_state = PREV } }
+			prioritize = { 10 }
+			create_unit = {
+				division = "name = \"1. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+			create_unit = {
+				division = "name = \"2. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+			create_unit = {
+				division = "name = \"3. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+			create_unit = {
+				division = "name = \"1. Panzer-Division\" division_template = \"Panzer-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+			create_unit = {
+				division = "name = \"2. Panzer-Division\" division_template = \"Panzer-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+		}
+		random_owned_controlled_state = {
+			limit = { ROOT = { has_full_control_of_state = PREV } }
+			prioritize = { 88 }
+			create_unit = {
+				division = "name = \"4. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+			create_unit = {
+				division = "name = \"5. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+				owner = CHI
+			}
+		}
+	}
+}
+
+# [Country] Refuses
+country_event = {
+	id = china_fascism.30
+	title = china_fascism.30.t
+	desc = china_fascism.30.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.30.a
+	}
+}
+
+# Contact Puyi
+country_event = {
+	id = china_fascism.31
+	title = china_fascism.31.t
+	desc = china_fascism.31.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	# Accept
+	option = {
+		name = china_fascism.31.a
+		ai_chance = { base = 10 }
+		add_stability = -0.05
+		CHI = { country_event = china_fascism.32 }
+	}
+
+	# Refuse
+	option = {
+		name = china_fascism.31.b
+		ai_chance = { base = 1 }
+		add_stability = 0.05
+		add_political_power = 50
+		CHI = { country_event = china_fascism.33 }
+
+	}
+}
+
+# Puyi Accepts
+country_event = {
+	id = china_fascism.32
+	title = china_fascism.32.t
+	desc = china_fascism.32.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.32.a
+		set_country_flag = CHI_puyi_accepts_offer
+		set_country_flag = KMT_party_chosen
+		add_ideas = KMT_qing_dream_idea
+	}
+}
+
+# Puyi Refuses
+country_event = {
+	id = china_fascism.33
+	title = china_fascism.33.t
+	desc = china_fascism.33.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.33.a
+		uncomplete_national_focus = {
+			focus = KMT_contact_puyi
+			uncomplete_children = yes
+			refund_political_power = no
+		}
+		set_country_flag = CHI_puyi_refuses_offer
+	}
+}
+
+# Chiang Placed Under House Arrest
+country_event = {
+	id = china_fascism.34
+	title = china_fascism.34.t
+	desc = china_fascism.34.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = china_fascism.34.a
+		if = {
+			limit = {
+				has_country_leader = {
+					name = "Chiang Kai-Shek"
+					ruling_only = yes
+				}
+			}
+			add_country_leader_trait = KMT_under_house_arrest
+		}
+		#news event
+	}
+}
+
+# Ask Puyi - China
+country_event = {
+	id = china_fascism.35
+	title = china_fascism.35.t
+	desc = china_fascism.35.d
+	picture = GFX_report_event_finnish_letter
+
+	fire_only_once = yes
+	trigger = {
+		original_tag = CHI
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+		JAP = {
+			OR = {
+				has_completed_focus = JAP_the_unthinkable_option
+				has_completed_focus = JAP_strengthen_civilian_government
+			}
+		}
+		AND = {
+			date > 1938.1.1
+			MAN = {
+				is_puppet = no
+			}
+			has_completed_focus = KMT_promote_nationalism
+			AND = {
+				NOT = {
+					has_completed_focus = KMT_into_despotism
+					has_completed_focus = KMT_centralizing_power
+				}
+			}
+			NOT = {
+				has_completed_focus = KMT_implement_parliamentary_system
+			}
+		}
+	}
+
+	option = {
+		name = china_fascism.35.a
+		ai_chance = { base = 1 }
+		add_stability = -0.02
+		add_political_power = -25
+		set_country_flag = CHI_ask_puyi_for_qing
+		custom_effect_tooltip = FRA_national_tree_change
+		hidden_effect = {
+			load_focus_tree = {
+				tree = china_nationalist_focus
+				keep_completed = yes
+			}
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+
+	option = {
+		name = china_fascism.35.b
+		ai_chance = { base = 50 }
+		add_stability = 0.02
+		add_political_power = 25
+	}
+}
+
+#China Joins the [From.GetFaction] (Germany)
+news_event = {
+	id = china_fascist_news.1
+	title = china_fascist_news.1.t
+	desc = china_fascist_news.1.d
+	picture = GFX_news_event_fascist_gathering
+
+	is_triggered_only = yes
+
+	#Nothing can threaten the [From.GetFaction]!
+	option = {
+		name = news.182.a
+		trigger = {
+			is_in_faction_with = GER
+		}
+	}
+
+	#European diplomacy realigns along the Neijing-Berlin Axis.
+	option = {
+		name = china_fascist_news.1.c
+		trigger = {
+			NOT = {
+				is_in_faction_with = GER
+			}
+		}
+	}
+}
+
+
+#[From.GetName] Rejects Chinese Offer of Alliance!
+news_event = {
+	id = china_fascist_news.2
+	title = china_fascist_news.2.t
+	desc = china_fascist_news.2.d
+	picture = GFX_news_event_fascist_gathering
+
+	major = yes
+
+	is_triggered_only = yes
+
+
+	option = {
+		name = news.183.a
+		trigger = {
+			tag = CHI
+		}
+	}
+
+
+	option = {
+		name = china_fascist_news.2.b
+		trigger = {
+			tag = GER
+		}
+	}
+
+
+	option = {
+		name = news.10.a
+		trigger = {
+			NOT = {
+				tag = CHI
+				tag = GER
+			}
+		}
+	}
+}

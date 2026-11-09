@@ -1,0 +1,1027 @@
+IRE_bop_decisions = {
+	IRE_bop_praise_the_army = {
+		priority = 113
+		icon = GFX_decision_generic_prepare_civil_war
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		visible = {
+		}
+
+		available = {
+			hidden_trigger = {
+				NOT = { has_country_flag = IRE_praise_cooldown_flag }
+			}
+		}
+
+		cost = 25
+
+		days_re_enable = 365
+
+		complete_effect = {
+			custom_effect_tooltip = GER_praise_decision_cooldown_tt
+			IRE_bop_very_low_increase_effect = yes
+			set_country_flag = { flag = IRE_praise_cooldown_flag value = 1 days = 365 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value < 0.3
+				}
+			}
+			modifier = {
+				factor = 15
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value < 0.15
+				}
+			}
+			modifier = {
+				factor = 5
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value < 0.8
+				}
+			}
+		}
+	}
+
+	IRE_bop_praise_the_royal_army = {
+		priority = 113
+		icon = GFX_decision_generic_prepare_civil_war
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		visible = {
+		}
+
+		available = {
+			hidden_trigger = {
+				NOT = { has_country_flag = IRE_praise_cooldown_flag }
+			}
+		}
+
+		cost = 25
+
+		days_re_enable = 365
+
+		complete_effect = {
+			custom_effect_tooltip = GER_praise_decision_cooldown_tt
+			IRE_bop_very_low_decrease_effect = yes
+			set_country_flag = { flag = IRE_praise_cooldown_flag value = 1 days = 365 }
+			set_country_flag = { flag = IRE_praise_royal_cooldown_flag value = 1 days = 365 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value > 0.3
+				}
+			}
+			modifier = {
+				factor = 5
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value > 0.8
+				}
+			}
+		}
+	}
+
+	IRE_bop_deal_with_britains = {
+		priority = 113
+		icon = GFX_decision_eng_imperial_federation
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		visible = {
+		}
+
+		available = {
+
+		}
+
+		cost = 50
+
+		days_remove = 30
+		days_re_enable = 125
+
+		complete_effect = {
+			add_political_power = 25
+
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+
+			ENG = {
+				add_opinion_modifier = { target = ROOT modifier = medium_increase }
+			}
+			add_opinion_modifier = { target = ENG modifier = medium_increase }
+
+			IRE_bop_very_low_decrease_effect = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value > 0.3
+				}
+			}
+			modifier = {
+				factor = 5
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value > 0.8
+				}
+			}
+		}
+	}
+
+	IRE_bop_empower_the_government = {
+		priority = 113
+		icon = GFX_decision_eng_trade_unions_support
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		visible = {
+		}
+
+		available = {
+
+		}
+
+		cost = 30
+
+		days_re_enable = 100
+
+		complete_effect = {
+			if = {
+				limit = {
+					has_completed_focus = IRE_red_island
+				}
+				add_popularity = {
+					ideology = communism
+					popularity = 0.1
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = IRE_military_junta_movement
+				}
+				add_popularity = {
+					ideology = communism
+					popularity = 0.1
+				}
+			}
+			else = {
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.1
+				}
+			}
+
+			IRE_bop_very_low_increase_effect = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value < 0.3
+				}
+			}
+			modifier = {
+				factor = 15
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value < 0.15
+				}
+			}
+			modifier = {
+				factor = 5
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value < 0.8
+				}
+			}
+		}
+	}
+
+	IRE_bop_open_british_factories = {
+		priority = 113
+		icon = GFX_decision_eng_install_government
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		visible = {
+		}
+
+		available = {
+
+		}
+
+		cost = 75
+
+		days_remove = 60
+		days_re_enable = 125
+
+		complete_effect = {
+			if = {
+				limit = {
+					controls_state = 113
+				}
+				113 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+
+			IRE_bop_low_decrease_effect = yes
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value > 0.3
+				}
+			}
+			modifier = {
+				factor = 5
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value > 0.8
+				}
+			}
+		}
+	}
+
+	IRE_bop_increase_the_services = {
+		priority = 113
+		icon = GFX_decision_generic_political_address
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		visible = {
+		}
+
+		available = {
+
+		}
+
+		cost = 30
+
+		days_remove = 60
+		days_re_enable = 100
+
+		complete_effect = {
+			if = {
+				limit = {
+					controls_state = 113
+				}
+				113 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+
+			IRE_bop_low_increase_effect = yes
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.05
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value < 0.3
+				}
+			}
+			modifier = {
+				factor = 15
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value < 0.15
+				}
+			}
+			modifier = {
+				factor = 5
+				power_balance_value = {
+					id = IRE_balance_of_power
+					value < 0.8
+				}
+			}
+		}
+	}
+
+}
+
+IRE_IOAS_category = {
+
+	IRE_agricultural_state_reform = {
+
+		icon = GFX_decision_eng_trade_unions_support
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = iaos_infrastructure_decision_tooltip
+				check_variable = {
+					var = iaos_infrastructure_decision
+					value = 5
+					compare = less_than_or_equals
+				}
+			}
+			has_completed_focus = IRE_fund_to_IAOS
+		}
+
+		visible = {
+			has_completed_focus = IRE_fund_to_IAOS
+		}
+
+		cost = 50
+
+		days_remove = 30
+
+		days_re_enable = 150
+
+		ai_will_do = {
+			base = 0
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.15
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_to_variable = {
+					var = iaos_infrastructure_decision
+					value = 1
+					tooltip = iaos_infrastructure_decision_tt
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		remove_effect = {
+			IRE_equality_of_farmers_var_low_increase_effect = yes
+		}
+
+	}
+
+	IRE_develop_dublin = {
+
+		icon = GFX_decision_generic_disband_irregulars
+
+		available = {
+			has_completed_focus = IRE_develop_dublin
+		}
+
+		visible = {
+			has_completed_focus = IRE_develop_dublin
+		}
+
+		fire_only_once = yes
+
+		cost = 150
+
+		days_remove = 70
+
+		ai_will_do = {
+			base = 0
+		}
+
+		modifier = {
+			political_power_factor = -0.1
+		}
+
+		complete_effect = {
+			IRE_equality_of_farmers_var_medium_increase_effect = yes
+		}
+
+		remove_effect = {
+			IRE_equality_of_farmers_var_medium_increase_effect = yes
+			113 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				add_dynamic_modifier = {
+					modifier = DEN_development_projects_mainland_state_modifier
+				}
+			}
+		}
+
+	}
+
+	IRE_develop_galway = {
+
+		icon = GFX_decision_hol_inundate_water_lines
+
+		available = {
+			has_completed_focus = IRE_develop_galway
+		}
+
+		visible = {
+			has_completed_focus = IRE_develop_galway
+		}
+
+		cost = 150
+
+		days_remove = 70
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 0
+		}
+
+		modifier = {
+
+		}
+
+		complete_effect = {
+			IRE_equality_of_farmers_var_medium_increase_effect = yes
+		}
+
+		remove_effect = {
+			IRE_equality_of_farmers_var_medium_increase_effect = yes
+			134 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_dynamic_modifier = {
+					modifier = DEN_development_projects_mainland_state_modifier
+				}
+			}
+		}
+	}
+
+	IRE_produce_local_food = {
+
+		icon = GFX_decision_hol_inundate_water_lines
+
+		available = {
+			has_completed_focus = IRE_produce_local_food
+		}
+
+		visible = {
+			has_completed_focus = IRE_produce_local_food
+		}
+
+		cost = 50
+
+		days_remove = 15
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 0
+		}
+
+		modifier = {
+
+		}
+
+		complete_effect = {
+			IRE_equality_of_farmers_var_medium_increase_effect = yes
+		}
+
+		remove_effect = {
+			add_ideas = IRE_produce_local_food
+		}
+	}
+}
+
+IRE_war_cabinet_category = {
+	IRE_declare_the_emergency = {
+		priority = 100
+
+		icon = GFX_decision_generic_political_address
+
+		ai_will_do = {
+			base = 2
+		}
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		available = {
+			date > 1939.01.01
+		}
+
+		visible = {
+
+		}
+
+		cancel_if_not_visible = yes
+
+		fire_only_once = yes
+
+		cost = 100
+
+		days_remove = 30
+
+		modifier = {
+			stability_weekly_factor = -0.005
+		}
+
+		remove_effect = {
+			add_ideas = IRE_declare_the_emergency
+			custom_effect_tooltip = IRE_declare_the_emergency_tt
+			hidden_effect = { set_country_flag = ire_state_of_emergency }
+		}
+	}
+
+	IRE_coastal_defence = {
+		icon = GFX_decision_generic_coastal_fortification
+
+		ai_will_do = {
+			base = 2
+		}
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		available = {
+			has_completed_focus = IRE_coastal_defence
+		}
+
+		visible = {
+		}
+
+		cancel_if_not_visible = yes
+
+		fire_only_once = yes
+
+		cost = 150
+
+		days_remove = 60
+
+		modifier = {
+			political_power_factor = -0.1
+		}
+
+		remove_effect = {
+			every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_coastal = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_coastal = yes
+						limit_to_victory_point = yes
+					}
+				}
+			}
+		}
+	}
+
+	IRE_homeland_defence = {
+		icon = GFX_decision_generic_fortification
+
+		ai_will_do = {
+			base = 2
+		}
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		available = {
+			has_completed_focus = IRE_coastal_defence
+		}
+
+		visible = {
+
+		}
+
+		cancel_if_not_visible = yes
+
+		fire_only_once = yes
+
+		cost = 150
+
+		days_remove = 60
+
+		modifier = {
+			political_power_factor = -0.1
+		}
+
+		complete_effect = {
+			add_timed_idea = {
+				days = 1165
+				idea = IRE_homeland_defence
+			}
+		}
+
+		remove_effect = {
+			113 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 3359
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11303
+				}
+				if = {
+					limit = {
+						anti_air_building < 5
+					}
+					add_building_construction = {
+						type = anti_air_building
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			135 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11237
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9310
+				}
+				if = {
+					limit = {
+						anti_air_building < 5
+					}
+					add_building_construction = {
+						type = anti_air_building
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			134 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 3396
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11287
+				}
+				if = {
+					limit = {
+						anti_air_building < 5
+					}
+					add_building_construction = {
+						type = anti_air_building
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	IRE_increase_arms_production = {
+		icon = GFX_decision_SWE_set_army_budget
+
+		ai_will_do = {
+			base = 2
+		}
+
+		allowed = {
+			original_tag = IRE
+		}
+
+		available = {
+
+		}
+
+		visible = {
+
+		}
+
+		cancel_if_not_visible = yes
+
+		fire_only_once = yes
+
+		cost = 100
+
+		days_remove = 30
+
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+
+		remove_effect = {
+			every_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				random_select_amount = 2
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+IRE_fascist_norway_category = {
+	IRE_march_in_NOR_state = {
+
+		icon = NOR_prepare_state_fasc_3
+
+		state_target = yes
+
+		available = {
+			FROM = {
+				is_core_of = NOR
+				owner = {
+					tag = NOR
+					NOT = { has_country_flag = banned_fascism_flag }
+				}
+				is_capital = no
+			}
+			NOT = { has_country_flag = IRE_marching_in_state_flag }
+		}
+		target_trigger = {
+			FROM = {
+				is_core_of = NOR
+				owner = { tag = NOR }
+				controller = { tag = NOR }
+				is_capital = no
+				hidden_trigger = {
+					owner = {
+						NOT = { has_country_flag = IRE_vikings_takeover_norway }
+					}
+				}
+				NOT = { has_state_flag = vikings_march_has_happened_here_flag }
+			}
+		}
+		target_root_trigger = {
+			ROOT = {
+				has_completed_focus = IRE_viking_militants
+			}
+			NOR = {
+				NOT = { has_government = fascism }
+				NOT = { has_country_flag = banned_fascism_flag }
+			}
+		}
+
+		fire_only_once = no
+		cost = 25
+
+		days_remove = 20
+		#on_map_mode = map_only
+
+		cancel_if_not_visible = yes
+
+		cancel_effect = {
+			clr_country_flag = IRE_marching_in_state_flag
+		}
+
+		complete_effect = {
+			set_country_flag = IRE_marching_in_state_flag
+		}
+
+		remove_effect = {
+			FROM = {
+				set_state_flag = IRE_viking_state
+				set_state_flag = vikings_march_has_happened_here_flag
+			}
+			random_list = {
+				45 = {
+					effect_tooltip = {
+						add_to_variable = {
+							var = IRE_viking_militants_power_war
+							value = 5
+							tooltip = IRE_viking_militants_power_war_low_increase
+						}
+						NOR = {
+							add_popularity = {
+								ideology = fascism
+								popularity = 0.05
+							}
+						}
+						NOR = { country_event = EST_events.803 }
+					}
+					hidden_effect = {
+						NOR = {
+							add_popularity = {
+								ideology = fascism
+								popularity = 0.05
+							}
+						}
+						add_to_variable = {
+							var = IRE_viking_militants_power_war
+							value = 5
+							tooltip = IRE_viking_militants_power_war_low_increase
+						}
+					}
+				}
+				30 = {
+					effect_tooltip = {
+						add_to_variable = {
+							var = IRE_viking_militants_power_war
+							value = 5
+							tooltip = IRE_viking_militants_power_war_medium_increase
+						}
+						NOR = {
+							add_popularity = {
+								ideology = fascism
+								popularity = 0.1
+							}
+						}
+						NOR = { country_event = EST_events.803 }
+					}
+					hidden_effect = {
+						NOR = {
+							add_popularity = {
+								ideology = fascism
+								popularity = 0.1
+							}
+						}
+						add_to_variable = {
+							var = IRE_viking_militants_power_war
+							value = 5
+							tooltip = IRE_viking_militants_power_war_medium_increase
+						}
+					}
+				}
+				25 = {
+					effect_tooltip = {
+						add_to_variable = {
+							var = IRE_viking_militants_power_war
+							value = 5
+							tooltip = IRE_viking_militants_power_war_high_increase
+						}
+						NOR = {
+							add_popularity = {
+								ideology = fascism
+								popularity = 0.15
+							}
+						}
+						NOR = { country_event = EST_events.803 }
+					}
+					hidden_effect = {
+						NOR = { country_event = EST_events.803 }
+						NOR = {
+							add_popularity = {
+								ideology = fascism
+								popularity = 0.15
+							}
+						}
+						add_to_variable = {
+							var = IRE_viking_militants_power_war
+							value = 5
+							tooltip = IRE_viking_militants_power_war_high_increase
+						}
+					}
+				}
+			}
+			clr_country_flag = IRE_marching_in_state_flag
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+}
+
+IRE_blueshirts_movement_category = {
+	IRE_equip_blueshirts = {
+		icon = GFX_decision_SWE_set_army_budget
+
+		allowed = {
+			tag = IRE
+		}
+
+		visible = {
+			has_completed_focus = IRE_equip_blueshirts
+			FROM = {
+				NOT = { has_state_flag = blueshirts_activated }
+			}
+		}
+
+		available = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		cancel_trigger = {
+			NOT = {
+				FROM = {
+					is_fully_controlled_by = ROOT
+				}
+			}
+		}
+		on_map_mode = map_and_decisions_view
+		state_target = yes
+		target_array = ROOT.controlled_states
+		target_root_trigger = {
+			has_completed_focus = IRE_equip_blueshirts
+		}
+		custom_cost_trigger = {
+			command_power > 35
+		}
+		custom_cost_text = decision_cost_CP_35
+		days_remove = 25
+		target_trigger = {
+			FROM = {
+				is_core_of = IRE
+				controller = {
+					tag = IRE
+				}
+				check_variable = { IRE_blueshirts_equiped < 2 }
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -35 }
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = IRE_equip_blueshirts_tt
+			FROM = {
+				add_to_variable = { IRE_blueshirts_equiped = 1 }
+			}
+		}
+	}
+}

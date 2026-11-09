@@ -1,0 +1,946 @@
+ideas = {
+	country = {
+
+		ECU_hostile_church = {
+			picture = ECU_hostile_church_icon
+
+			available = {
+				has_country_leader = {
+					character = ECU_federico_páez
+					ruling_only = yes
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.03
+				conscription_factor = -0.1
+				custom_modifier_tooltip = ECU_removed_if_paez_leaves_office_tt
+			}
+		}
+
+		# Aftermath of the four day civil war
+		ECU_aftermath_of_4_day_civil_war_1 = {
+			name = ECU_aftermath_of_4_day_civil_war
+			picture = ECU_scars_of_4_day_civil_waR_icon
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.15
+				stability_factor = -0.2
+				custom_modifier_tooltip = ECU_siding_too_much_with_liberals_will_cause_conservative_insurrection_tt
+			}
+		}
+
+		ECU_la_gloriosa = {
+			picture = ECU_velasquismo_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				drift_defence_factor = -0.25
+				political_power_gain = -0.05
+				command_power_gain_mult = -0.25
+				stability_factor = -0.02
+				custom_modifier_tooltip = ECU_once_velasco_gains_enough_support_he_will_take_over_tt
+			}
+		}
+
+		ECU_partial_gold_standard_abandonment = {
+			picture = ECU_partial_gold_standard_abandonment_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.05
+				consumer_goods_factor = 0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		ECU_funded_the_AFE = {
+			name = ECU_funded_the_AFE
+			picture = ECU_funded_AFE_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_weekly = 0.0015
+				production_lack_of_resource_penalty_factor = -0.1
+				research_speed_factor = 0.04
+			}
+		}
+
+		ECU_full_gold_standard_abandonment_1 = {
+			name = ECU_full_gold_standard_abandonment
+			picture = ECU_full_gold_standard_abandonment_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.1
+				consumer_goods_factor = 0.1
+				production_speed_buildings_factor = -0.1
+			}
+		}
+
+		ECU_full_gold_standard_abandonment_2 = {
+			name = ECU_full_gold_standard_abandonment
+			picture = ECU_full_gold_standard_abandonment_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		ECU_returned_to_the_gold_standard = { ## will take longer to develop
+			picture = SPR_seize_the_gold_reserves
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.05
+				political_power_factor = 0.05
+				consumer_goods_factor = -0.1
+				production_speed_buildings_factor = 0.1
+				custom_modifier_tooltip = ECU_will_cost_more_to_reignite_economy_tt ## multiple variables by 0.75
+			}
+		}
+
+		ECU_devalue_the_sucre_idea = {
+			name = ECU_devalue_the_sucre
+			picture = ECU_devalue_sucre_ic
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			on_remove = {
+				swap_ideas = {
+					remove_idea = ECU_full_gold_standard_abandonment_1
+					add_idea = ECU_full_gold_standard_abandonment_2
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.05
+				industrial_capacity_factory = -0.05
+				consumer_goods_factor = 0.1
+			}
+		}
+
+		ECU_open_banana_trading = {
+			picture = ECU_banana_trade_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				trade_opinion_factor = 0.5
+			}
+		}
+
+		ECU_liberal_agitation_1 = {
+			picture = ECU_liberal_agitation_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+				has_idea = ECU_aftermath_of_4_day_civil_war_1
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.05
+				stability_factor = -0.03
+				custom_modifier_tooltip = ECU_cant_improve_liberal_opinion_tt
+			}
+		}
+
+		ECU_liberal_agitation_2 = {
+			picture = ECU_liberal_agitation_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+				has_idea = ECU_aftermath_of_4_day_civil_war_1
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.1
+				stability_factor = -0.05
+				custom_modifier_tooltip = ECU_cant_improve_liberal_opinion_tt
+			}
+		}
+
+		ECU_liberal_agitation_3 = {
+			picture = ECU_liberal_agitation_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+				has_idea = ECU_aftermath_of_4_day_civil_war_1
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.15
+				stability_factor = -0.1
+				custom_modifier_tooltip = ECU_looming_liberal_insurrection_tt
+			}
+		}
+
+		ECU_conservative_agitation_1 = {
+			picture = ECU_conservative_agitation_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+				has_idea = ECU_aftermath_of_4_day_civil_war_1
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.05
+				stability_factor = -0.03
+				custom_modifier_tooltip = ECU_cant_improve_conservative_opinion_tt
+			}
+		}
+
+		ECU_conservative_agitation_2 = {
+			picture = ECU_conservative_agitation_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+				has_idea = ECU_aftermath_of_4_day_civil_war_1
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.1
+				stability_factor = -0.05
+				custom_modifier_tooltip = ECU_cant_improve_conservative_opinion_tt
+			}
+		}
+
+		ECU_conservative_agitation_3 = {
+			picture = ECU_conservative_agitation_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+				has_idea = ECU_aftermath_of_4_day_civil_war_1
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.15
+				stability_factor = -0.05
+				custom_modifier_tooltip = ECU_looming_conservative_insurrection_tt
+			}
+		}
+
+		ECU_pro_conservative_navy = {
+			picture = ECU_conservative_navy_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				navy_capital_ship_attack_factor = 0.05
+				navy_advisor_cost_factor = -0.1
+				experience_gain_navy_factor = 0.1
+				production_speed_dockyard_factor = -0.05
+				custom_modifier_tooltip = ECU_improve_conservative_lead_to_liberal_agitation_tt
+				custom_modifier_tooltip = ECU_conservative_cooperation_decrease_cost_tt
+			}
+		}
+
+		ECU_active_inflationary_crisis = {
+			picture = chi_hyper_inflation2
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.09
+				political_power_factor = -0.08
+				production_speed_buildings_factor = -0.08
+			}
+		}
+
+		ECU_the_constituent_assembly = {
+			picture = ECU_constituent_assembly_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.05
+				communism_drift = -0.01
+				fascism_drift = -0.01
+				neutrality_drift = -0.01
+				custom_modifier_tooltip = ECU_stability_below_20_assembly_takes_over_tt
+			}
+		}
+
+		ECU_socialist_support_idea = {
+			picture = ARG_social_welfare_fund_ns
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.05
+				communism_drift = 0.03
+			}
+		}
+
+		ECU_leftist_agitation_idea = {
+			name = ECU_leftist_agitation
+			picture = generic_communism_drift_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = -0.05
+				communism_drift = 0.15
+			}
+		}
+
+		ECU_1936_status_quo = {
+			name = EUYL_1936_status_quo
+			picture = ECU_1936_status_quo_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				NOT = {
+					has_war_with = PRU
+				}
+			}
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = PRU
+				generate_wargoal_tension_against = 1
+			}
+		}
+
+		PRU_1936_status_quo = {
+			name = EUYL_1936_status_quo
+			picture = ECU_1936_status_quo_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				NOT = {
+					has_war_with = ECU
+				}
+			}
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = ECU
+				generate_wargoal_tension_against = 1
+			}
+		}
+
+		EUYL_blockaded = {
+			picture = EUYL_blockade_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = -0.1
+				stability_factor = -0.05
+			}
+		}
+
+		ECU_national_recovery = {
+			picture = ECU_recovery_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.25
+				production_speed_buildings_factor = 0.15
+				stability_weekly = 0.002
+				war_support_weekly = 0.002
+			}
+		}
+
+		ECU_victor_of_peru_ecuador_war_idea = {
+			picture = ECU_winner_of_war_icon
+			name = ECU_victor_of_the_peru_ecuador_war
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_weekly = 0.001
+				war_support_weekly = 0.002
+				weekly_manpower = 350
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+
+		ECU_in_conflict_with_assembly = {
+			picture = ECU_hostile_assembly_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+
+		ECU_operation_americas_idea = {
+			name = ECU_operation_americas
+			picture = BRA_us_of_south_america
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				command_power_gain_mult = 0.1
+			}
+		}
+
+		ECU_italian_military_advisors_idea = {
+			name = VEN_italian_military_advisors
+			picture = VEN_italian_advisor
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				ITA = {
+					exists = yes
+				}
+				NOT = {
+					has_war_with = ITA
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				cavalry_attack_factor = 0.05
+				cavalry_defence_factor = 0.05
+				army_attack_factor = 0.03
+				army_defence_factor = 0.03
+				command_power_gain_mult = 0.1
+				experience_gain_army_factor = 0.1
+			}
+		}
+
+		ECU_brutal_repression_idea = {
+			name = ECU_brutal_repression
+			picture = ECU_brutal_repression_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_weekly = 0.005
+				monthly_population = -0.2
+			}
+		}
+
+		ECU_the_ambition_of_jose_juan_flores_1 = {
+			name = ECU_the_ambition_of_jose_juan_flores
+			picture = ECU_juan_jose_flores_idea_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				compliance_growth = 0.1
+				resistance_decay = 0.1
+			}
+
+			targeted_modifier = {
+				tag = PRU
+				attack_bonus_against = 0.075
+				defense_bonus_against = 0.075
+			}
+
+			targeted_modifier = {
+				tag = BOL
+				attack_bonus_against = 0.075
+				defense_bonus_against = 0.075
+			}
+		}
+
+		ECU_the_ambition_of_jose_juan_flores_2 = {
+			name = ECU_the_ambition_of_jose_juan_flores
+			picture = ECU_juan_jose_flores_idea_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.075
+				army_defence_factor = 0.075
+				compliance_growth = 0.1
+				resistance_decay = 0.1
+				political_power_factor = 0.05
+			}
+		}
+
+		ECU_the_ambition_of_jose_juan_flores_3 = {
+			name = ECU_the_ambition_of_jose_juan_flores
+			picture = ECU_juan_jose_flores_idea_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				conscription = 0.02
+				non_core_manpower = 0.05
+				compliance_growth = 0.1
+				resistance_decay = 0.1
+				political_power_factor = 0.05
+				experience_gain_army_unit_factor = 0.1
+			}
+		}
+
+		ECU_repression = {
+			picture = FRA_scw_intervention_nationalists_focus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				conscription_factor = -0.05
+				political_power_factor = 0.1
+			}
+		}
+
+		ECU_freedom_at_home_freedom_in_the_world_idea = {
+			name = ECU_freedom_at_home_freedom_in_the_world
+			picture = generic_democratic_drift_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				democratic_acceptance = 50
+				democratic_drift = 0.03
+				conscription = 0.01
+				drift_defence_factor = 0.2
+				trade_opinion_factor = 0.1
+				trade_laws_cost_factor = -0.1
+				opinion_gain_monthly_factor = 0.1
+				improve_relations_maintain_cost_factor = -0.5
+			}
+		}
+
+		ECU_the_legacy_of_cosme_renella_barbatto_idea = {
+			name = ECU_the_legacy_of_cosme_renella_barbatto
+			picture = generic_aircraft_support
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				air_ace_generation_chance_factor = 0.15
+				air_ace_bonuses_factor = 0.1
+				air_accidents_factor = -0.1
+				stability_factor = 0.03
+				war_support_factor = 0.05
+				ai_focus_aviation_factor = 0.5
+			}
+		}
+
+		ECU_the_global_enterprise_zone_idea = {
+			name = ECU_the_global_enterprise_zone
+			picture = ECU_the_global_enterprise_zone_idea_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = 0.10
+				justify_war_goal_time = -0.75
+				ai_focus_war_production_factor = 0.5
+				ai_focus_aggressive_factor = 1
+			}
+		}
+
+		ECU_mutinies = {
+			name = mutiny_1
+			allowed = {
+				always = no
+			}
+
+			removal_cost = -1
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_army_problems
+
+			modifier = {
+				army_morale_factor = -0.2
+				training_time_factor = 0.2
+				army_attack_factor = -0.25
+				experience_gain_army = -0.1
+				army_org_factor = -0.1
+			}
+		}
+	}
+
+	industrial_concern = {
+		ECU_united_fruit_company = {
+			name = "United Fruit Company"
+			picture = ECU_fruit_company_icon
+
+			allowed = {
+				original_tag = ECU
+			}
+
+			cost = 100
+
+			available = {
+				has_completed_focus = ECU_local_banana_production_focus
+				has_completed_focus = ECU_steel_for_the_allies
+				USA = {
+					exists = yes
+					has_civil_war = no
+				}
+				NOT = {
+					has_country_leader = {
+						character = ECU_banana_company_administration
+						ruling_only = yes
+					}
+				}
+			}
+
+			research_bonus = {
+				industry = 0.1
+			}
+
+			traits = { industrial_concern }
+
+			modifier = {
+				local_building_slots_factor = 0.05
+				local_resources_factor = 0.1
+				production_speed_buildings_factor = 0.05
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+
+		ECU_IESS = {
+			name = "Instituto Ecuatoriano de Seguridad Social"
+			picture = generic_industrial_concern_1
+
+			cost = 25
+
+			allowed = {
+				original_tag = ECU
+			}
+
+			available = {
+				has_completed_focus = ECU_nationwide_development
+			}
+
+			research_bonus = {
+				industry = 0.15
+			}
+
+			traits = { industrial_concern }
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+				consumer_goods_factor = 0.05
+			}
+		}
+	}
+}

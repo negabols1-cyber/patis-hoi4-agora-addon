@@ -1,0 +1,316 @@
+﻿capital = 305
+set_stability = 0.64
+oob = "ECU_1936"
+
+# Starting tech
+set_technology = {
+	infantry_weapons = 1
+	tech_support = 1
+	tech_trucks = 1
+	motorised_infantry = 1
+	tech_mountaineers = 1
+	gw_artillery = 1
+	interwar_antiair = 1
+	basic_train = 1
+	fuel_silos = 1
+}
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	set_naval_oob = "ECU_1936_naval_mtg"
+	else = {
+		set_naval_oob = "ECU_1936_naval_legacy"
+	}
+}
+
+recruit_character = ECU_jacinto_jijon_y_caamano
+recruit_character = ECU_federico_páez
+recruit_character = ECU_neptali_bonifaz
+#recruit_character = ECU_juan_toro
+recruit_character = ECU_ricardo_paredes_romero
+recruit_character = ECU_jorge_luna_yepez
+recruit_character = ECU_andrés_guilarte
+recruit_character = ECU_josé_la_mar
+recruit_character = ECU_cosme_renella_barbatto
+recruit_character = ECU_benigno_andrade_flores
+#recruit_character = ECU_uriarte_fanquil_del_ponte
+recruit_character = ECU_julio_salem_gallegos
+recruit_character = ECU_jorge_escobedo_duarte
+recruit_character = ECU_carlos_hidalgo_garcia
+recruit_character = ECU_luis_cabrera_sevilla
+recruit_character = ECU_ramon_baquerizo_davila
+recruit_character = ECU_federico_paez_chiriboaga
+recruit_character = ECU_gustavo_becerra_paz
+recruit_character = ECU_juan_bayardo_tobar
+recruit_character = ECU_ramon_moran_valverde
+recruit_character = ECU_ramon_castro_jijon
+recruit_character = ECU_juan_pablo_martinez_iguarte
+recruit_character = ECU_hugo_endara_penaherrera
+recruit_character = ECU_juan_ramon_castro
+recruit_character = ECU_gilberto_enriquez_gallo
+recruit_character = ECU_davide_flores
+recruit_character = ECU_carlos_arosemena_tola
+recruit_character = ECU_alberto_enriquez_gallo
+recruit_character = ECU_conservative_army
+recruit_character = ECU_liberal_army
+recruit_character = ECU_manuel_gomez_morin
+recruit_character = ECU_asamblea_constituyente
+recruit_character = ECU_manuel_maria_borrero
+recruit_character = ECU_armed_civilians
+recruit_character = ECU_aurelio_mosquera_narvaez
+recruit_character = ECU_jose_velasco_ibarra
+recruit_character = ECU_carlos_arroyo_del_rio
+recruit_character = ECU_provisional_junta
+recruit_character = ECU_juan_de_borbon
+recruit_character = ECU_banana_company_administration
+recruit_character = ECU_edmundo_chiriboga ## historically dies in the Peru-Ecuador war
+recruit_character = ECU_francisco_urrutia_suarez
+recruit_character = ECU_marco_tulio_leon
+recruit_character = ECU_larrea_alba
+recruit_character = ECU_cesar_d_andrade
+recruit_character = ECU_enrique_gil_gilbert
+recruit_character = ECU_manuel_munoz_borrero
+recruit_character = ECU_vicente_haro
+recruit_character = ECU_rafael_moran_v
+recruit_character = ECU_luis_noboa_naranjo
+recruit_character = ECU_aurelio_bayas_argudo
+recruit_character = ECU_alfredo_enrique_cunhe
+recruit_character = ECU_rosa_borja_de_icaza
+
+ECU_federico_páez = {
+	set_character_flag = ECU_liberal
+}
+ECU_alberto_enriquez_gallo = {
+	set_character_flag = ECU_liberal
+}
+ECU_liberal_army = {
+	set_character_flag = ECU_liberal
+}
+ECU_conservative_army = {
+	set_character_flag = ECU_conservative
+}
+ECU_neptali_bonifaz = {
+	set_character_flag = ECU_conservative
+	set_character_flag = ECU_not_actively_in_politics_flag
+}
+ECU_manuel_maria_borrero = {
+	set_character_flag = ECU_liberal
+}
+ECU_aurelio_mosquera_narvaez = {
+	set_character_flag = ECU_liberal
+}
+ECU_jacinto_jijon_y_caamano = {
+	set_character_flag = ECU_conservative
+}
+ECU_carlos_arroyo_del_rio = {
+	set_character_flag = ECU_liberal
+}
+
+ECU_jose_velasco_ibarra = {
+	set_character_flag = BRA_living_in_the_exterior
+}
+every_controlled_state = {
+	ROOT = {
+		add_to_array = { controlled_states_at_game_start = PREV }
+	}
+}
+
+add_ideas = {
+	ECU_the_constituent_assembly
+	ECU_aftermath_of_4_day_civil_war_1
+	ECU_alberto_enriquez_gallo_idea
+	ECU_partial_gold_standard_abandonment
+	ECU_pro_conservative_navy
+	ECU_hostile_church
+	ECU_1936_status_quo
+	EUYL_lackluster_industrial_complex
+}
+
+PRU = {
+	add_ideas = {
+		PRU_1936_status_quo
+	}
+	activate_mission = EUYL_conflict_escalation
+	set_variable = { EUYL_peru_ecuador_attack_bonus = 0 }
+	set_variable = { EUYL_peru_ecuador_defense_bonus = 0 }
+}
+
+for_each_scope_loop = {
+	array = controlled_states
+
+	set_state_flag = ECU_starting_state
+	add_dynamic_modifier = {
+		modifier = ECU_rural_state
+	}
+}
+
+# KEYS #
+# -3 = Actively Antagonizing
+# -2 = Significant Resentment
+# -1 = Slight Resentment
+# 0 = Neutral
+# 1 = Slight Support
+# 2 = Significant Support
+# 3 = Active Cooperation
+
+### Conservative - Liberal Tug of War ###
+set_variable = { ECU_conservative_opinion = -1 } ## Slight Resentment
+set_variable = { ECU_liberal_opinion = 1 } ## Slight Support
+set_variable = { ECU_cooperate_conservative_cost = 40 }
+set_variable = { ECU_cooperate_liberal_cost = 40 }
+
+activate_mission = ECU_gallos_looming_coup
+
+ECU_calculate_conservative_cost = yes
+
+### Ecuadorian Economy ###
+set_variable = { ECU_economy_consumer_goods = 0.4 }
+set_variable = { ECU_economy_production_speeds_buildings_factor = -0.2 }
+set_variable = { ECU_economy_industrial_capacity = -0.1 }
+# Later Bonuses #
+set_variable = { ECU_economy_production_factory_efficiency_gain_factor = 0 }
+set_variable = { ECU_economy_production_factory_max_efficiency_factor = 0 }
+set_variable = { ECU_economy_global_buildings_factor = 0 }
+set_variable = { ECU_economy_production_speed_arms_factory_factor = 0 }
+set_variable = { ECU_economy_production_speed_civilian_factory_factor = 0 }
+set_variable = { ECU_economy_resources_factor = 0 }
+set_variable = { ECU_economy_production_speed_supply_node_factor = 0 }
+set_variable = { ECU_economy_production_speed_rail_way_factor = 0 }
+set_variable = { ECU_economy_production_speed_dockyard_factor = 0 }
+set_variable = { ECU_economy_industrial_capacity_dockyard = 0 }
+set_variable = { ECU_economy_political_power_gain = 0 }
+
+#Army
+set_variable = { ECU_army_unit_limit_bonus = 5 }
+
+country_event = { ## Inflation strikes!
+	id = ecu.2
+	days = 560
+	random_days = 80
+	hours = 4
+	random_hours = 8
+}
+
+country_event = { ## Velasco's return to Ecuador
+	id = ecu.14
+	days = 1345
+	random_days = 100
+	hours = 6
+}
+
+### Ecuador - Peru Conflict ###
+set_variable = { EUYL_peru_ecuador_threat_level = 0 }
+set_variable = { EUYL_peru_ecuador_attack_bonus = 0 }
+set_variable = { EUYL_peru_ecuador_defense_bonus = 0 }
+activate_mission = EUYL_conflict_escalation
+
+## National Mobilization ##
+set_variable = { ECU_national_mobilization_conscription = 0.01 }
+
+add_dynamic_modifier = {
+	modifier = ECU_economic_reignition
+}
+
+## DEMILITARIZED ZONES ##
+490 = {
+	set_demilitarized_zone = yes
+}
+
+set_country_flag = monroe_doctrine
+set_war_support = 0.1
+set_convoys = 5
+
+
+if = {
+	limit = { not = { has_dlc = "Man the Guns" } }
+	set_technology = {
+		early_submarine = 1
+		early_destroyer = 1
+		early_light_cruiser = 1
+		transport = 1
+	}
+}
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	set_technology = {
+		early_ship_hull_light = 1
+		basic_ship_hull_light = 1
+		early_ship_hull_submarine = 1
+		early_ship_hull_cruiser = 1
+		early_ship_hull_heavy = 1
+		basic_battery = 1
+		coastal_defense_ships = 1
+		mtg_transport = 1
+		basic_torpedo = 1
+		basic_depth_charges = 1
+		coastal_defense_ships = 1
+	}
+}
+
+set_politics = {
+	ruling_party = democratic
+	last_election = "1933.12.15"
+	election_frequency = 84
+	elections_allowed = yes
+}
+set_popularities = {
+	democratic = 55
+	communism = 17
+	fascism = 4
+	neutrality = 24
+}
+
+### VARIANTS ###
+# 1936 Start #
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	# Light Cruiser #
+	create_equipment_variant = {
+		name = "Clase Victoria"
+		type = ship_hull_cruiser_coastal_defense_ship
+		name_group = ECU_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_medium_battery_1
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			fixed_ship_armor_slot = empty
+			fixed_ship_secondaries_slot = empty
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = empty
+			rear_1_custom_slot = ship_torpedo_1
+		}
+	}
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Clase Quito"
+		type = ship_hull_light_1
+		name_group = ECU_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = empty
+			rear_1_custom_slot = empty
+		}
+	}
+	# Submarines #
+	create_equipment_variant = {
+		name = "Clase Quito"
+		type = ship_hull_submarine_1
+		name_group = ECU_SS_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_torpedo_slot = ship_torpedo_sub_1
+			fixed_ship_engine_slot = sub_ship_engine_1
+			rear_1_custom_slot = empty
+		}
+	}
+}

@@ -1,0 +1,87 @@
+###########################################################################
+# Syria (SYR) scripted triggers
+#
+# Shared checks for the Syrian focus tree (common/national_focus/SYR.txt),
+# the National Struggle decisions (common/decisions/SYR.txt) and the Syrian
+# events (events/SYR_events.txt).
+#
+# National Resistance is stored in the SYR country variable SYR_resistance.
+# It is full at @SYR_RESISTANCE_GOAL, which must match the value in
+# common/scripted_effects/SYR_scripted_effects.txt.
+# Design notes: docs/systems/syria_focus_tree.md
+###########################################################################
+
+@SYR_RESISTANCE_GOAL = 100
+@SYR_FRANCE_SURRENDER_WEAK = 0.1
+
+# SYR scope. True when the National Resistance meter is full.
+SYR_resistance_is_ready = {
+	custom_trigger_tooltip = {
+		tooltip = SYR_resistance_is_ready_tt
+		check_variable = {
+			var = SYR_resistance
+			value = @SYR_RESISTANCE_GOAL
+			compare = greater_than_or_equals
+		}
+	}
+}
+
+# Any scope. True when France is busy or beaten: capitulated, losing ground,
+# or at war with a major power.
+SYR_france_is_weakened = {
+	custom_trigger_tooltip = {
+		tooltip = SYR_france_is_weakened_tt
+		OR = {
+			NOT = { country_exists = FRA }
+			FRA = {
+				OR = {
+					has_capitulated = yes
+					surrender_progress > @SYR_FRANCE_SURRENDER_WEAK
+					any_enemy_country = {
+						is_major = yes
+						NOT = { original_tag = SYR }
+					}
+				}
+			}
+		}
+	}
+}
+
+# Any scope. True when the French government is no longer a democracy.
+SYR_france_is_not_democratic = {
+	custom_trigger_tooltip = {
+		tooltip = SYR_france_is_not_democratic_tt
+		OR = {
+			NOT = { country_exists = FRA }
+			FRA = { NOT = { has_government = democratic } }
+		}
+	}
+}
+
+# SYR scope. True while Syria is still governed from Paris.
+SYR_is_french_mandate = {
+	is_subject_of = FRA
+}
+
+# SYR scope. True once Syria has left the French mandate by any route.
+SYR_is_free_syria = {
+	custom_trigger_tooltip = {
+		tooltip = SYR_is_free_syria_tt
+		has_country_flag = SYR_independent
+		is_subject = no
+	}
+}
+
+# SYR scope. True when Syria is on the loyalist route.
+SYR_is_loyalist = {
+	has_completed_focus = SYR_ratify_the_franco_syrian_treaty
+}
+
+# SYR scope. True when the National Struggle decisions apply.
+SYR_struggle_is_active = {
+	OR = {
+		has_completed_focus = SYR_reject_the_treaty
+		has_country_flag = SYR_treaty_betrayed
+	}
+	NOT = { has_country_flag = SYR_independent }
+}

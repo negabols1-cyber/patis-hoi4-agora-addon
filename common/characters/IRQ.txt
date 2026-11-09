@@ -1,0 +1,1283 @@
+characters={
+	IRQ_ghazi_i = { #Died in 1939, event?
+		name = IRQ_ghazi_i
+		portraits = {
+			civilian = {
+				large = GFX_portrait_iraq_ghazi
+				small = GFX_portrait_IRQ_ghazi_i_small
+			}
+		}
+		country_leader = {
+			ideology = monarchism
+			expire = "1965.1.1.1"
+			id = -1
+			traits = {
+				irq_nationalist_king
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = IRQ_ghazi_i
+			can_be_fired = no
+			allowed = {
+				original_tag = IRQ
+				has_dlc = "Graveyard of Empires"
+			}
+			visible = {
+				# Ghazi has to have NOT died
+				NOT = {
+					has_government = fascism
+					has_country_flag = IRQ_ghazi_died_flag
+				}
+				IRQ_faisal_ii = {
+					is_hired_as_advisor = no
+				}
+				IRQ_abd_al_ilah = {
+					is_hired_as_advisor = no
+				}
+			}
+			available = {
+				# Ghazi has to have NOT died, should prob be locked in from the start
+			}
+			traits = {
+				IRQ_king_of_iraq_ghazi
+			}
+		}
+	}
+	IRQ_rashid_ali_algaylani={
+		instance = {
+			allowed = {
+				has_dlc = "Graveyard of Empires"
+			}
+			name = IRQ_rashid_ali_algaylani
+			portraits = {
+				civilian = {
+					large = GFX_portrait_iraq_rashid_al_gaylani
+				}
+			}
+			country_leader = {
+				ideology = fascism_ideology
+				traits = {
+					IRQ_arab_fascist_politician
+				}
+				expire = "1965.1.1.1"
+				id = -1
+			}
+		}
+		instance = {
+			allowed = {
+				NOT = { has_dlc = "Graveyard of Empires" }
+			}
+			name = IRQ_rashid_ali_algaylani
+			portraits = {
+				civilian = {
+					large="GFX_portrait_iraq_rashid_al_gaylani"
+				}
+			}
+			country_leader = {
+				ideology = fascism_ideology
+				expire = "1965.1.1.1"
+				id = -1
+			}
+		}
+	}
+	IRQ_yusuf_salman_yusuf={
+		name="Yusuf Salman Yusuf"
+		portraits={
+			civilian={
+				large="gfx/leaders/IRQ/Portrait_yusuf_salman_yusuf.dds"
+			}
+		}
+		country_leader={
+			ideology=leninism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	IRQ_faisal_ii = {
+		instance = {
+			allowed = {
+				has_dlc = "Graveyard of Empires"
+			}
+			name = IRQ_faisal_ii
+			portraits = {
+				civilian = {
+					large = GFX_portrait_Faisal_II
+					small = GFX_portrait_IRQ_faisal_ii_small
+				}
+			}
+			country_leader = {
+				ideology = despotism
+				expire = "1949.1.1.12"
+				id = -1
+			}
+			advisor = {
+				slot = political_advisor
+				idea_token = IRQ_faisal_ii
+				can_be_fired = no
+				allowed = {
+					original_tag = IRQ
+				}
+				visible = {
+					# Ghazi has to have died
+					IRQ_ghazi_i = {
+						is_hired_as_advisor = no
+					}
+					IRQ_abd_al_ilah = {
+						is_hired_as_advisor = no
+					}
+
+				}
+				available = {
+					# Ghazi has to have died
+					NOT = {
+						has_government = fascism
+					}
+				}
+				traits = {
+					# Underaged monarch, maybe some stab but other malueses? Should be a locked advisor if you are pro-hashemite monarchy once Ghazi dies
+					underage_monarch
+				}
+			}
+		}
+		instance = {
+			allowed = {
+				NOT = { has_dlc = "Graveyard of Empires" }
+			}
+			name = IRQ_faisal_ii
+			portraits = {
+				civilian = {
+					large="gfx/leaders/IRQ/Portrait_II_faisal.dds"
+				}
+			}
+			country_leader = {
+				ideology = despotism
+				expire = "1949.1.1.12"
+				traits = {
+					child_king
+				}
+				id = -1
+			}
+		}
+	}
+	IRQ_yasin_al_hashimi={
+		instance = {
+			allowed = {
+				has_dlc = "Graveyard of Empires"
+			}
+			name="Yasin al-Hashimi"
+			portraits={
+				civilian={
+					large="gfx/leaders/IRQ/Portrait_yasin_al_hashimi.dds"
+					small = "gfx/interface/ideas/IRQ/IRQ_yasin_al_hashimi.dds"
+				}
+			}
+			country_leader = {
+				ideology = despotism
+				expire = "1965.1.1.1"
+				traits = {
+					IRQ_bismarck_of_the_arabs
+				}
+				id = -1
+			}
+			country_leader={
+				ideology=conservatism
+				expire="1965.1.1.12"
+				id=-1
+				traits = { social_reformer }
+			}
+			advisor = {
+				slot = political_advisor
+				idea_token = IRQ_yasin_al_hashimi
+				allowed = {
+					original_tag = IRQ
+				}
+				available = {
+					is_country_leader = no
+				}
+				cost = 150
+				traits = { silent_workhorse }
+				ai_will_do = {
+					factor = 1
+				}
+				available = {
+				}
+			}
+		}
+		instance = {
+			allowed = {
+				NOT = { has_dlc = "Graveyard of Empires" }
+			}
+			name="Yasin al-Hashimi"
+			portraits={
+				civilian={
+					large="gfx/leaders/IRQ/Portrait_yasin_al_hashimi.dds"
+					small = "gfx/interface/ideas/IRQ/IRQ_yasin_al_hashimi.dds"
+				}
+			}
+			country_leader={
+				ideology=conservatism
+				expire="1965.1.1.12"
+				id=-1
+				traits = { social_reformer }
+			}
+			advisor = {
+				slot = political_advisor
+				idea_token = IRQ_yasin_al_hashimi
+				allowed = {
+					original_tag = IRQ
+				}
+				cost = 150
+				traits = { silent_workhorse }
+				ai_will_do = {
+					factor = 1
+				}
+				available = {
+					is_country_leader = no
+					IRQ_hikmat_sulayman = { is_political_advisor = no }
+				}
+				can_be_fired = no
+			}
+		}
+	}
+
+	IRQ_hikmat_sulayman={
+		instance = {
+			allowed = {
+				has_dlc = "Graveyard of Empires"
+			}
+			name="Hikmat Sulayman"
+			portraits={
+				civilian={
+					large="gfx/leaders/IRQ/Portrait_hikmat_sulayman.dds"
+					small = "gfx/interface/ideas/IRQ/IRQ_hikmat_sulayman.dds"
+				}
+			}
+			#country_leader={
+				#	ideology = fascism_ideology
+				#	expire = "1965.1.1.1"
+				#	id = -1
+				#}
+			country_leader={
+				ideology=conservatism
+				expire="1965.1.1.12"
+				id=-1
+				traits = {
+				}
+			}
+			advisor = {
+				slot = political_advisor
+				idea_token = IRQ_hikmat_sulayman
+				allowed = {
+					original_tag = IRQ
+				}
+				available = {
+					is_country_leader = no
+				}
+				traits = {
+					IRQ_minister_of_the_interior
+				}
+			}
+		}
+		instance = {
+			allowed = {
+				NOT = { has_dlc = "Graveyard of Empires" }
+			}
+			name="Hikmat Sulayman"
+			portraits={
+				civilian={
+					large="gfx/leaders/IRQ/Portrait_hikmat_sulayman.dds"
+					small = "gfx/interface/ideas/IRQ/IRQ_hikmat_sulayman.dds"
+				}
+			}
+			country_leader={
+				ideology=conservatism
+				expire="1965.1.1.12"
+				id=-1
+				traits = {
+				}
+			}
+			advisor = {
+				slot = political_advisor
+				idea_token = IRQ_hikmat_sulayman
+				allowed = {
+					original_tag = IRQ
+					has_government = neutrality
+				}
+				cost = 150
+				traits = { propaganda_minister }
+				ai_will_do = {
+					factor = 1
+				}
+				available = {
+					IRQ_yasin_al_hashimi = { is_political_advisor = no }
+				}
+				can_be_fired = no
+			}
+		}
+	}
+	IRQ_khazal_ibn_jabir={
+		name="Khazal Ibn Jabir"
+		portraits={
+			civilian={
+				large="gfx/leaders/IRQ/Portrait_khazal_ibn_jabir.dds"
+			}
+		}
+		country_leader={
+			ideology=despotism
+			desc = "IRQ_khazal_ibn_jabir_desc"
+			expire="1965.1.1.12"
+			id=-1
+			traits = { prominent_figure }
+		}
+	}
+	IRQ_sharaf_bin_rajeh = {
+		instance = {
+			allowed = {
+				has_dlc = "Graveyard of Empires"
+			}
+			name = IRQ_sharaf_bin_rajeh
+			portraits = {
+				army = {
+					small = GFX_portrait_IRQ_sharaf_bin_rajeh_small
+				}
+			}
+			advisor = {
+				slot = political_advisor
+				idea_token = IRQ_sharaf_bin_rajeh
+
+				traits  = {
+					IRQ_emir_of_taif
+				}
+				available = {
+					#Under Golden Square path
+					has_government = fascism
+				}
+				allowed = {
+					original_tag = IRQ
+				}
+				ai_will_do = {
+					factor = 0.000
+				}
+			}
+		}
+
+		instance = {
+			allowed = {
+				NOT = { has_dlc = "Graveyard of Empires" }
+			}
+
+			name=IRQ_sharaf_bin_rajeh
+			portraits={
+				army={
+					small="GFX_idea_generic_political_advisor_arab_2"
+				}
+			}
+
+			advisor = {
+				slot = political_advisor
+				idea_token = IRQ_sharaf_bin_rajeh
+
+				traits  = {
+					backroom_backstabber
+				}
+				allowed = {
+					original_tag = IRQ
+				}
+				ai_will_do  = {
+					factor  = 0.000
+				}
+			}
+		}
+	}
+	IRQ_naji_al_suwaidi = {
+		name = IRQ_naji_al_suwaidi
+		portraits = {
+			army = {
+				small = GFX_portrait_IRQ_naji_al_suwaidi_small
+			}
+		}
+
+		advisor = {
+			allowed = {
+				has_dlc = "Graveyard of Empires"
+			}
+			slot = political_advisor
+			idea_token = IRQ_naji_al_suwaidi
+
+			traits  = {
+				IRQ_great_iraqi_statesman
+			}
+			available = {
+
+			}
+			ai_will_do  = {
+				factor  = 0.000
+			}
+		}
+	}
+
+	IRQ_muhammad_ali_jawad = {
+		name = IRQ_muhammad_ali_jawad
+		portraits = {
+			army = {
+				small = GFX_portrait_IRQ_muhammad_ali_jawad_small
+			}
+		}
+		advisor = {
+			slot = theorist
+			idea_token = IRQ_muhammad_ali_jawad
+			ledger = air
+			traits = {
+				assault_avaition
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+			allowed = {
+				original_tag = IRQ
+				has_dlc = "Graveyard of Empires"
+			}
+		}
+	}
+
+	IRQ_nuri_as_said = {
+		instance = {
+			allowed = {
+				has_dlc = "Graveyard of Empires"
+			}
+			name = IRQ_nuri_as_said
+			portraits = {
+				civilian = {
+					large = GFX_portrait_IRQ_nuri_as_said
+					small = GFX_portrait_IRQ_nuri_as_said_small
+				}
+			}
+			country_leader = {
+				ideology = conservatism
+				traits = { IRQ_pro_western_iraqi_nationalist }
+				expire = "1949.1.1.12"
+				id = -1
+			}
+		}
+		instance = {
+			allowed = {
+				NOT = { has_dlc = "Graveyard of Empires" }
+			}
+			name = IRQ_nuri_as_said
+			portraits = {
+				civilian = {
+					large = GFX_Portrait_Arabia_Generic_2
+					small = GFX_idea_generic_political_advisor_arab_1
+				}
+			}
+			country_leader = {
+				ideology = conservatism
+				expire = "1949.1.1.12"
+				id = -1
+			}
+			advisor = { #We might want to reconsider this?
+				slot = political_advisor
+				idea_token = IRQ_nuri_as_said
+				traits  = {
+					armaments_organizer
+				}
+				available = {
+					NOT = {
+						has_country_leader = {
+							ruling_only = yes
+							character = IRQ_nuri_as_said
+						}
+					}
+				}
+			}
+		}
+	}
+	############################## ############################## ##############################
+	##### POLITICAL ADVISORS ##### ##### POLITICAL ADVISORS ##### ##### POLITICAL ADVISORS #####
+	############################## ############################## ##############################
+	IRQ_ali_jawdat_al_aiyubi = {
+		name = "Ali Jawdat al-aiyubi"
+		portraits = {
+			civilian = {
+				small = "gfx/interface/ideas/IRQ/IRQ_ali_jawdat_al_aiyubi.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = IRQ_ali_jawdat_al_aiyubi
+			allowed = {
+				original_tag = IRQ
+			}
+			cost = 150
+			traits = { democratic_reformer }
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					is_historical_focus_on = no
+					factor = 100
+				}
+			}
+		}
+	}
+	IRQ_amin_al_husseini = {
+		name = "Amin al-Husseini"
+		portraits = {
+			civilian = {
+				small = "gfx/interface/ideas/IRQ/IRQ_amin_al_husseini.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = IRQ_amin_al_husseini
+			allowed = {
+				original_tag = IRQ
+			}
+			available = {
+				has_completed_focus = IRQ_refuge_for_the_grand_mufti
+				NOT = {
+					SAU = { has_completed_focus = SAU_invite_amin_al_husseini }
+				}
+			}
+			cost = 150
+			traits = { freedom_fighter_al_husseini }
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	IRQ_hamdi_al_pachachi = {
+		name = "Hamid al-Pachaci"
+		portraits = {
+			civilian = {
+				small = "gfx/interface/ideas/IRQ/IRQ_hamdi_al_pachachi.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = IRQ_hamdi_al_pachachi
+			allowed = {
+				original_tag = IRQ
+			}
+			cost = 150
+			traits = { continental_diplomat }
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	IRQ_jamil_al_midfai = {
+		name = "Jamil al-Midfai"
+		portraits = {
+			civilian = {
+				small = "gfx/interface/ideas/IRQ/IRQ_jamil_al_midfai.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = IRQ_jamil_al_midfai
+			allowed = {
+				original_tag = IRQ
+			}
+			cost = 150
+			traits = { anti-british_nationalist }
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	IRQ_naji_shawkat = {
+		name = "Naji Shawkat"
+		portraits = {
+			civilian = {
+				small = "gfx/interface/ideas/IRQ/IRQ_naji_shawkat.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = IRQ_naji_shawkat
+			allowed = {
+				original_tag = IRQ
+			}
+			cost = 200
+			traits = { industry_expert }
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	IRQ_tawfiq_al_suwaidi = {
+		name = "Tawfiq al-Suwaidi"
+		portraits = {
+			civilian = {
+				small = "gfx/interface/ideas/IRQ/IRQ_tawfiq_al_suwaidi.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = IRQ_tawfiq_al_suwaidi
+			allowed = {
+				original_tag = IRQ
+			}
+			cost = 150
+			traits = { the_banker_tawfiq }
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	IRQ_saib_shawkat = {
+		name = IRQ_saib_shawkat
+		portraits = {
+			civilian = {
+				small= GFX_portrait_IRQ_saib_shawkat_small
+			}
+		}
+
+		advisor = {
+			allowed = { has_dlc = "Graveyard of Empires"  }
+
+			slot = political_advisor
+			idea_token = IRQ_saib_shawkat
+
+			traits  = {
+				# led the Arab nationalist party/group Nadi al-Muthanna
+				IRQ_al_muthanna_leader
+			}
+			available = {
+				# Very fascist so somewhere there
+				has_completed_focus = IRQ_al_muthanna_club
+			}
+			ai_will_do  = {
+				factor  = 0.000
+			}
+		}
+	}
+	#################### #################### #################### ####################
+	##### GENERALS ##### ##### GENERALS ##### ##### GENERALS ##### ##### GENERALS #####
+	#################### #################### #################### ####################
+	IRQ_bakr_sidqi_al_askari={
+		name="Bakr Sidqi al-Askari"
+		portraits={
+			army={
+				large="gfx/leaders/IRQ/Portrait_bakr_sidqi_al_askari.dds"
+				small="gfx/interface/ideas/IRQ/IRQ_bakr_sidqi_al_askari.dds"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = IRQ_bakr_sidqi_pm
+			can_be_fired = no
+			allowed = {
+				original_tag = IRQ
+			}
+			visible = {
+				has_completed_focus = IRQ_bakr_sidqi_coup
+			}
+			available = {
+			}
+			traits = {
+				IRQ_nationalist
+			}
+		}
+		advisor={
+			slot = army_chief
+			cost = 100
+			idea_token = IRQ_bakr_sidqi_al_askari
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				army_chief_defensive_2
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		field_marshal={
+			traits = { old_guard desert_fox }
+			skill=2
+			attack_skill=1
+			defense_skill=3
+			planning_skill=1
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	IRQ_fahmi_said={
+		name="Fahmi Said"
+		portraits={
+			army={
+				large="gfx/leaders/IRQ/Portrait_fahmi_said.dds"
+				small="gfx/interface/ideas/IRQ/IRQ_fahmi_said.dds"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			cost = 100
+			idea_token = IRQ_fahmi_said
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				navy_chief_reform_1
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		corps_commander={
+			traits = { trait_cautious }
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	IRQ_fawzi_al_qawuqji={
+		name="Fawzi al-Qawuqji"
+		portraits={
+			army={
+				large="gfx/leaders/IRQ/Portrait_fawzi_al_qawuqji.dds"
+				small="gfx/interface/ideas/IRQ/IRQ_fawzi_al_qawuqji.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			cost = 100
+			idea_token = IRQ_fawzi_al_qawuqji
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				army_infantry_1
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		corps_commander={
+			traits = { brilliant_strategist infantry_officer desert_fox war_hero }
+			skill=3
+			attack_skill=2
+			defense_skill=2
+			planning_skill=3
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	IRQ_kamil_shabib={
+		name="Kamil Shabib"
+		portraits={
+			army={
+				large="gfx/leaders/IRQ/Portrait_kamil_shabib.dds"
+				small="gfx/interface/ideas/IRQ/IRQ_kamil_shabib.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			cost = 100
+			idea_token = IRQ_kamil_shabib
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				army_logistics_1
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		corps_commander={
+			traits = { }
+			skill=1
+			attack_skill=1
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	IRQ_mahmud_salman={
+		name="Mahmud Salman"
+		portraits={
+			army={
+				large="gfx/leaders/IRQ/Portrait_mahmud_salman.dds"
+				small="gfx/interface/ideas/IRQ/IRQ_mahmud_salman.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			cost = 100
+			idea_token = IRQ_mahmud_salman
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				army_chief_morale_1
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		corps_commander={
+			traits = { }
+			skill=1
+			attack_skill=2
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	IRQ_nuri_pasha_al_said={
+		name="Nuri Pasha al-Said"
+		portraits={
+			army={
+				large="gfx/leaders/IRQ/Portrait_nuri_pasha_al_said.dds"
+				small="gfx/interface/ideas/IRQ/IRQ_nuri_pasha_al_said.dds"
+			}
+		}
+		country_leader={
+			ideology=militarism
+			expire="1965.1.1.1"
+			id=-1
+			traits = { CHL_military_leader }
+		}
+		advisor={
+			slot = army_chief
+			cost = 100
+			idea_token = IRQ_nuri_pasha_al_said
+			allowed = {
+				original_tag = IRQ
+				is_country_leader = no
+			}
+			traits = {
+				army_chief_offensive_2
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		field_marshal={
+			traits = { old_guard media_personality desert_fox  }
+			skill=3
+			attack_skill=3
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	IRQ_salah_al_din_al_sabbagh={
+		name="Salah al-Din al-Sabbagh"
+		portraits={
+			army={
+				large="gfx/leaders/IRQ/Portrait_salah_al_din_al_sabbagh.dds"
+				small="gfx/interface/ideas/IRQ/IRQ_salah_al_din_al_sabbagh.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			cost = 100
+			idea_token = IRQ_salah_al_din_al_sabbagh
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				army_cavalry_1
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		advisor={
+			slot = theorist
+			ledger = army
+			cost = 100
+			idea_token = IRQ_salah_al_din_al_sabbagh
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				military_theorist
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		corps_commander={
+			traits = { harsh_leader }
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	IRQ_taha_al_hashimi={
+		name="Taha al-Hashimi"
+		portraits={
+			army={
+				large="gfx/leaders/IRQ/Portrait_taha_al_hashimi.dds"
+				small="gfx/interface/ideas/IRQ/IRQ_taha_al_hashimi.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			cost = 100
+			idea_token = IRQ_taha_al_hashimi
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				army_regrouping_1
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		corps_commander={
+			traits = { }
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	TAG_hans_jeschonnek={
+		name="Hans Jeschonnek"
+		portraits={
+			army={
+				small="gfx/interface/ideas/hans_jeschonnek.dds"
+			}
+		}
+		advisor={
+			slot = air_chief
+			cost = 100
+			idea_token = TAG_hans_jeschonnek_air_chief
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				air_chief_ground_support_2
+			}
+			ai_will_do = {
+				factor = 1
+			}
+			available = {
+				IF = {
+					limit = {
+						has_dlc = "Arms Against Tyranny"
+					}
+					OR = {
+						mio:fliegerfuhrer_irak_organization = {
+							has_mio_size > 3
+						}
+						mio:fliegerfuhrer_irak2_organization = {
+							has_mio_size > 3
+						}
+					}
+				}
+				else = {
+					OR = {
+						has_idea = fliegerfuhrer_irak
+						has_idea = fliegerfuhrer_irak2
+					}
+				}
+			}
+		}
+		advisor={
+			slot = theorist
+			ledger = air
+			cost = 100
+			idea_token = TAG_hans_jeschonnek_theorist
+			allowed = {
+				original_tag = IRQ
+			}
+			traits = {
+				air_warfare_theorist
+			}
+			ai_will_do = {
+				base = 0
+			}
+			available = {
+				IF = {
+					limit = {
+						has_dlc = "Arms Against Tyranny"
+					}
+					OR = {
+						mio:fliegerfuhrer_irak_organization = {
+							has_mio_size > 3
+						}
+						mio:fliegerfuhrer_irak2_organization = {
+							has_mio_size > 3
+						}
+					}
+				}
+				else = {
+					OR = {
+						has_idea = fliegerfuhrer_irak
+						has_idea = fliegerfuhrer_irak2
+					}
+				}
+			}
+		}
+	}
+	TAG_werner_junck={
+		name="Werner Junck"
+		portraits={
+			army={
+				small="gfx/interface/ideas/werner_junck.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			cost = 100
+			idea_token = TAG_werner_junck_high_command
+			allowed = {
+				original_tag = IRQ
+				NOT = { has_dlc = "Graveyard of Empires" }
+			}
+			traits = {
+				air_air_superiority_1
+			}
+			ai_will_do = {
+				factor = 1
+			}
+			available = {
+				IF = {
+					limit = {
+						has_dlc = "Arms Against Tyranny"
+					}
+					OR = {
+						mio:fliegerfuhrer_irak_organization = {
+							has_mio_size > 3
+						}
+						mio:fliegerfuhrer_irak2_organization = {
+							has_mio_size > 3
+						}
+					}
+				}
+				else = {
+					OR = {
+						has_idea = fliegerfuhrer_irak
+						has_idea = fliegerfuhrer_irak2
+					}
+				}
+			}
+		}
+		advisor={
+			slot = theorist
+			ledger = air
+			cost = 100
+			idea_token = TAG_werner_junck_theorist
+			allowed = {
+				original_tag = IRQ
+				NOT = { has_dlc = "Graveyard of Empires" }
+			}
+			traits = {
+				close_air_support_proponent
+			}
+			ai_will_do = {
+				base = 0
+			}
+			available = {
+				IF = {
+					limit = {
+						has_dlc = "Arms Against Tyranny"
+					}
+					OR = {
+						mio:fliegerfuhrer_irak_organization = {
+							has_mio_size > 3
+						}
+						mio:fliegerfuhrer_irak2_organization = {
+							has_mio_size > 3
+						}
+					}
+				}
+				else = {
+					OR = {
+						has_idea = fliegerfuhrer_irak
+						has_idea = fliegerfuhrer_irak2
+					}
+				}
+			}
+		}
+	}
+
+	#GoE DLC
+	IRQ_fawsi_al_kaukji = { #Lebanese-born, resigned from the Iraqi army to go fight in Palestine, not with dlc
+		name = IRQ_fawsi_al_kaukji
+		portraits = {
+			army = {
+				small = GFX_portrait_IRQ_fawsi_al_kaukji_small
+			}
+		}
+
+		advisor = {
+			allowed = {
+				original_tag = IRQ
+			}
+
+			slot = army_chief
+			idea_token = IRQ_fawsi_al_kaukji
+			traits = {
+				army_chief_offensive_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+			available = {
+				has_completed_focus = IRQ_arab_free_legion
+			}
+		}
+	}
+
+	IRQ_harry_george_smart = {
+		name = IRQ_harry_george_smart
+		portraits = {
+			army = {
+				small = GFX_portrait_IRQ_harry_george_smart_small
+			}
+		}
+
+		advisor = {
+			allowed = {
+				original_tag = IRQ
+				has_dlc = "Graveyard of Empires"
+			}
+			slot = high_command
+			idea_token = IRQ_harry_george_smart
+			ledger = air
+
+			traits  = {
+				IRQ_air_vice_marshal
+			}
+			cost = 100
+			available = {
+				OR = {
+					has_government = democratic
+					has_completed_focus = IRQ_allied_training
+				}
+			}
+			ai_will_do  = {
+				factor  = 0.000
+			}
+		}
+	}
+
+	IRQ_werner_junck = {
+		name = IRQ_werner_junck
+		portraits = {
+			army = {
+				small = GFX_portrait_IRQ_werner_junck_small
+			}
+		}
+
+		advisor = {
+			allowed = {
+				original_tag = IRQ
+				has_dlc = "Graveyard of Empires"
+			}
+			slot = high_command
+			idea_token = IRQ_werner_junck
+			ledger = air
+
+			traits  = {
+				IRQ_fliegerfuhrer
+			}
+			cost = 100
+			available = {
+				has_government = fascism
+				has_completed_focus = IRQ_fligerfuhrer_irak
+			}
+			ai_will_do  = {
+				factor  = 0.000
+			}
+		}
+	}
+
+	IRQ_abd_al_ilah = {
+		name = IRQ_abd_al_ilah
+		portraits = {
+			civilian = {
+				large = GFX_portrait_IRQ_abd_al_ilah
+				small = GFX_portrait_IRQ_abd_al_ilah_small
+			}
+		}
+
+		#country_leader = {
+			#	ideology = despotism
+			#	expire = "1965.1.1.1"
+			#	id = -1
+			#}
+
+		advisor = {
+			slot = political_advisor
+			idea_token = IRQ_abd_al_ilah_regent
+			can_be_fired = no
+			allowed = {
+				original_tag = IRQ
+			}
+			visible = {
+				# Ghazi has to have died
+				has_country_flag = IRQ_has_abd_al_illah_regent_flag
+
+			}
+			available = {
+				# Ghazi has to have died
+				NOT = {
+					has_government = fascism
+					has_government = communism
+				}
+				is_country_leader = no
+			}
+			traits = {
+				IRQ_hashemite_regent
+			}
+		}
+
+		field_marshal = {
+			traits = { politically_connected organizer }
+			skill = 3
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 2
+			legacy_id = -1
+			visible = {
+				#has_completed_focus = IRQ_commander_of_the_faithful
+				always = no
+			}
+		}
+
+	}
+
+	##### POLITICAL ADVISORS #####
+	#IRQ_ = {
+		#	name = ""
+		#	portraits = {
+			#		army = {
+				#			small = "gfx/interface/ideas/idea_generic_political_advisor_africa_3.dds"
+				#		}
+			#	}
+		#	advisor={
+			#		slot = political_advisor
+			#		idea_token = BRA_carlos_m
+			#		traits  = {
+				#			connected_citizen
+				#		}
+			#		ai_will_do  = {
+				#			factor  = 1.000
+				#		}
+			#	}
+		#}
+}

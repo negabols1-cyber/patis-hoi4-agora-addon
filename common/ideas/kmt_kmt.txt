@@ -1,0 +1,2854 @@
+ideas = {
+
+	hidden_ideas = {
+
+		cg_true = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				stability_factor = 0.1
+				political_power_gain = 0.4
+			}
+			on_add = {
+				country_event = claim_central.2
+			}
+		}
+
+		cg_warlords = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			cancel = {
+				is_valid_power_struggle_participant = no
+			}
+
+			modifier = {
+				conscription = 0.03
+				non_core_manpower = 0.05
+				training_time_factor = -0.1
+				political_power_factor = -0.1
+				stability_factor = -0.15
+				consumer_goods_factor = -0.05
+				military_leader_cost_factor = 5
+				ai_focus_aggressive_factor = 1
+			}
+
+			rule = {
+				can_create_factions = no
+				can_join_factions = no
+				can_puppet = no
+			}
+		}
+
+		KMT_spread_independence_war = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+				has_war = no
+			}
+
+			modifier = {
+			}
+		}
+
+		KMT_joined_central_against_prc = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+				NOT = {
+					has_war_with = PRC
+				}
+			}
+
+			modifier = {
+			}
+		}
+
+		JAP_weak_east_asia = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+				OR = {
+					is_ai = no
+					date > 1942.7.2
+				}
+			}
+
+			modifier = {
+				training_time_factor = 5000
+			}
+		}
+
+		KMT_militia_hidden_idea = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+				has_war = no
+			}
+
+			on_remove = {
+				delete_unit = {
+					division_template = "Lin-shih Min-ping"
+					disband = yes
+				}
+			}
+
+			modifier = {
+			}
+		}
+	}
+
+	country = {
+
+
+		KMT_collaborate_with_collaborators = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_deal_with_the_devil2
+
+			modifier = {
+				stability_weekly = -0.002
+				communism_drift = -0.05
+				drift_defence_factor = 0.5
+				conscription = 0.01
+				research_speed_factor = 0.025
+				experience_gain_army = 0.025
+				experience_gain_navy = 0.025
+				experience_gain_air = 0.025
+			}
+		}
+
+		KMT_harsh_takeover_prc = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = prc_low_popular_support2
+
+			modifier = {
+				conscription_factor = 0.25
+				army_morale_factor = 0.15
+			}
+		}
+
+		KMT_purge_collaborators = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_purge
+
+			modifier = {
+				conscription_factor = -0.23
+				war_support_weekly = 0.002
+				political_power_factor = 0.25
+			}
+		}
+
+		KMT_harsh_takeover_prc_purge = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = prc_low_popular_support3
+
+			modifier = {
+				conscription_factor = 0.3
+				army_morale_factor = 0.25
+			}
+		}
+
+		GXC_bribed_men = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = SOV_scientist_defect
+
+			modifier = {
+				conscription_factor = -0.20
+				land_reinforce_rate = -0.01
+				army_morale_factor = -0.2
+				army_org_factor = -0.15
+			}
+		}
+
+		KMT_jinyuanquan_inflation_2 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = chi_hyper_inflation4
+
+			modifier = {
+				stability_factor = -0.12
+				war_support_factor = -0.20
+				war_support_weekly = -0.001
+				consumer_goods_factor = 0.3
+				production_speed_buildings_factor = -0.2
+				local_resources_factor = -0.2
+				industrial_capacity_factory = -0.2
+				army_morale_factor = -0.12
+				army_org_factor = -0.08
+				army_attack_factor = -0.04
+				army_defence_factor = -0.04
+				conscription_factor = -0.45
+			}
+		}
+
+		KMT_jinyuanquan_inflation_3 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = chi_hyper_inflation2
+
+			modifier = {
+				stability_factor = -0.09
+				war_support_factor = -0.15
+				war_support_weekly = -0.001
+				consumer_goods_factor = 0.2
+				production_speed_buildings_factor = -0.1
+				local_resources_factor = -0.15
+				industrial_capacity_factory = -0.1
+				army_morale_factor = -0.08
+				army_org_factor = -0.06
+				army_attack_factor = -0.03
+				army_defence_factor = -0.03
+				conscription_factor = -0.4
+			}
+		}
+
+		KMT_jinyuanquan_inflation_4 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = chi_hyper_inflation
+
+			modifier = {
+				stability_factor = -0.06
+				war_support_factor = -0.1
+				war_support_weekly = -0.001
+				consumer_goods_factor = 0.1
+				local_resources_factor = -0.08
+				army_morale_factor = -0.04
+				army_org_factor = -0.04
+				army_attack_factor = -0.02
+				army_defence_factor = -0.02
+				conscription_factor = -0.35
+			}
+		}
+
+		KMT_usa_aid_remove_inflation = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_foreign_capital
+
+			modifier = {
+			}
+		}
+
+		KMT_chiang_li_rivalry = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = anti_soviet_pact
+
+			modifier = {
+				army_morale_factor = -0.2
+				army_attack_factor = -0.2
+				army_defence_factor = -0.2
+			}
+		}
+
+		KMT_li_chiang_rivalry = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = anti_soviet_pact
+
+			modifier = {
+				land_reinforce_rate = -0.02
+				army_org_factor = -0.05
+				max_command_power = -20
+				political_power_cost = 0.5
+			}
+		}
+
+		KMT_li_chiang_rivalry_2 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = anti_soviet_pact
+
+			modifier = {
+				land_reinforce_rate = -0.05
+				army_org_factor = -0.15
+				experience_gain_army = -0.1
+				max_command_power = -50
+				political_power_cost = 1
+			}
+		}
+
+		KMT_fyx_democratic_focus = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+				NOT = {
+					has_country_leader = {
+						character = CHI_feng_yuxiang
+						ruling_only = yes
+					}
+				}
+			}
+
+			picture = anti_soviet_pact
+
+			modifier = {
+				democratic_drift = 0.05
+			}
+		}
+
+		KMT_jz_anti_communism_campaign = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = anti_soviet_pact
+
+			modifier = {
+				communism_drift = -0.08
+			}
+		}
+
+		KMT_lzr_army_reform = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+				NOT = {
+					has_country_leader = {
+						character = GXC_li_zongren
+						ruling_only = yes
+					}
+				}
+			}
+
+			picture = anti_soviet_pact
+
+			modifier = {
+				experience_gain_army_factor = 0.15
+				experience_gain_army = 0.05
+			}
+		}
+
+
+		KMT_PRC_bandits = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = FRA_scw_intervention_nationalists_focus
+
+			modifier = {
+				conscription_factor = -0.05
+			}
+		}
+
+		KMT_PRC_crack_down_on_deserters = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = anti_soviet_pact
+
+			modifier = {
+				conscription_factor = -0.1
+				political_power_factor = -0.2
+			}
+		}
+
+		KMT_PRC_deserters = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = anti_soviet_pact
+
+			modifier = {
+				conscription_factor = -0.25
+			}
+		}
+
+		KMT_ex_commie_partisans = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+				has_war = no
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				resistance_target_on_our_occupied_states = 0.05
+			}
+		}
+
+		KMT_promote_pro_jap_idea = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = fascism
+			}
+
+			cancel = {
+			}
+
+			picture = jap_militarism_shogun
+
+			modifier = {
+				fascism_drift = 0.2
+			}
+		}
+
+		KMT_more_concession = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = HUN_treaty_of_triannon
+
+			modifier = {
+				stability_factor = -0.1
+				political_power_factor = -0.7
+				army_morale_factor = -0.1
+				conscription_factor = -0.05
+				drift_defence_factor = -1
+				communism_drift = 0.05
+			}
+		}
+
+		KMT_pro_jap_propaganda = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+				OR = {
+					NOT = {
+						focus_progress = {
+							focus = KMT_support_pro_japanese_faction
+							progress > 0
+						}
+					}
+					has_completed_focus = KMT_support_pro_japanese_faction
+				}
+			}
+
+			picture = jap_militarism_shogun
+
+			modifier = {
+				fascism_drift = 0.2
+			}
+		}
+
+		KMT_national_resources_committee = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = generic_exploit_mines
+
+			modifier = {
+				local_resources_factor = 0.1
+			}
+		}
+
+		KMT_faster_fortification = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = generic_fortify_the_borders
+
+			modifier = {
+				production_speed_bunker_factor = 0.2
+			}
+		}
+
+		KMT_more_appeasement = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = HUN_treaty_of_triannon
+
+			modifier = {
+				communism_drift = 0.07
+				political_power_factor = -0.1
+			}
+		}
+
+		KMT_more_appeasement_shanghai = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = HUN_treaty_of_triannon
+
+			modifier = {
+				communism_drift = 0.1
+				political_power_factor = -0.2
+			}
+		}
+
+		KMT_pro_jap_propaganda_2 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+				OR = {
+					NOT = {
+						focus_progress = {
+							focus = KMT_support_pro_japanese_faction
+							progress > 0
+						}
+					}
+					has_completed_focus = KMT_support_pro_japanese_faction
+				}
+			}
+
+			picture = jap_militarism_showa
+
+			modifier = {
+				fascism_drift = 0.25
+			}
+		}
+
+		KMT_lack_popular_support = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = generic_disjointed_gov
+
+			modifier = {
+				political_power_factor = -0.05
+				conscription_factor = -0.2
+				army_morale_factor = -0.05
+			}
+		}
+
+		KMT_pro_jap_HYQ_penalty_unexpected = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = generic_purge
+
+			modifier = {
+				army_org_factor = -0.05
+			}
+		}
+
+		KMT_pro_jap_HYQ_penalty_unexpected_2 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = generic_purge
+
+			modifier = {
+				army_org_factor = -0.08
+			}
+		}
+
+		KMT_pro_jap_infiltrated_gov_idea = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_disjointed_gov
+
+			modifier = {
+				political_power_factor = -0.1
+				stability_factor = -0.15
+				war_support_factor= -0.05
+			}
+		}
+
+		KMT_pro_jap_contacted_hyq_idea = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = chi_incompetent_officers
+
+			modifier = {
+				conscription_factor = -0.1
+				training_time_factor = 0.1
+				war_support_factor= -0.1
+				army_org_factor = -0.05
+			}
+		}
+
+
+		KMT_xian_firm_stance = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+				NOT = {
+					has_war_with = CHI
+				}
+			}
+
+			picture = generic_pp_unity_bonus
+
+			modifier = {
+				war_support_factor= 0.5
+			}
+		}
+
+
+		KMT_into_mao_2 = {
+			name = KMT_into_mao
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						AND = {
+							NOT = { has_government = communism }
+							any_country = {
+								original_tag = CHI
+								has_government = communism
+							}
+						}
+					}
+				}
+			}
+
+			cancel = {
+			}
+
+			picture = generic_communism_drift_bonus
+
+			modifier = {
+				communism_drift = 0.2
+			}
+		}
+
+
+		KMT_peasants_revolution_1 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.01
+				army_morale_factor = 0.01
+			}
+		}
+
+
+		KMT_peasants_revolution_2 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.01
+				army_morale_factor = 0.02
+			}
+		}
+
+
+		KMT_peasants_revolution_3 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.02
+				army_morale_factor = 0.03
+			}
+		}
+
+
+		KMT_peasants_revolution_4 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.02
+				army_morale_factor = 0.04
+				training_time_factor = -0.05
+			}
+		}
+
+
+		KMT_peasants_revolution_5 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.03
+				army_morale_factor = 0.06
+				training_time_factor = -0.2
+			}
+		}
+
+
+		KMT_peasants_revolution_6 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.04
+				army_morale_factor = 0.08
+				training_time_factor = -0.09
+			}
+		}
+
+
+		KMT_peasants_revolution_7 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.05
+				army_morale_factor = 0.1
+				training_time_factor = -0.1
+			}
+		}
+
+
+		KMT_revolution_1 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.01
+				army_morale_factor = 0.01
+			}
+		}
+
+
+		KMT_revolution_2 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.01
+				army_morale_factor = 0.02
+			}
+		}
+
+
+		KMT_revolution_3 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.01
+				army_morale_factor = 0.03
+			}
+		}
+
+		KMT_revolution_4 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.02
+				army_morale_factor = 0.04
+				army_org_factor = 0.01
+			}
+		}
+
+		KMT_revolution_5 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.02
+				army_morale_factor = 0.06
+				army_org_factor = 0.03
+			}
+		}
+
+		KMT_revolution_6 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.02
+				army_morale_factor = 0.08
+				army_org_factor = 0.05
+			}
+		}
+
+		KMT_revolution_7 = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				communism_drift = 0.1
+				conscription = 0.02
+				army_morale_factor = 0.1
+				army_org_factor = 0.08
+			}
+		}
+
+		KMT_triumphant_revolution = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			cancel = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			picture = home_of_revolution
+
+			modifier = {
+				communism_drift = 0.1
+				political_power_factor = 0.25
+				army_morale_factor = 0.05
+				army_core_attack_factor = 0.1
+				army_core_defence_factor = 0.1
+			}
+		}
+
+		KMT_from_each_to_each = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			cancel = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			picture = FRA_national_mobilization_focus
+
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				industrial_capacity_factory = 0.05
+				political_power_factor = 0.1
+				stability_factor = 0.1
+				war_support_factor = 0.1
+			}
+		}
+
+		KMT_soviet_knowledge = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+			}
+
+			picture = send_attache
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+				production_speed_buildings_factor = 0.1
+				land_reinforce_rate = 0.02
+				land_doctrine_cost_factor = -0.1
+			}
+		}
+
+
+		KMT_into_mao_3 = {
+			name = KMT_into_mao
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						AND = {
+							NOT = { has_government = communism }
+							any_country = {
+								original_tag = CHI
+								has_government = communism
+							}
+						}
+					}
+				}
+			}
+
+			cancel = {
+			}
+
+			picture = generic_communism_drift_bonus
+
+			modifier = {
+				communism_drift = 0.15
+			}
+		}
+
+		KMT_new_officers = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_infantry_bonus
+
+			modifier = {
+				experience_gain_army = 0.05
+				experience_gain_navy = 0.05
+				experience_gain_air = 0.05
+				land_doctrine_cost_factor = -0.05
+				naval_doctrine_cost_factor = -0.05
+				air_doctrine_cost_factor = -0.05
+			}
+		}
+
+		KMT_reorganising_military = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				army_org_factor = -0.05
+				experience_gain_army = 2
+				navy_max_range_factor = -0.10
+				experience_gain_navy = 0.75
+				air_ace_generation_chance_factor = -0.1
+				experience_gain_air = 0.75
+			}
+		}
+
+		KMT_rebellious_warlord_forces = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_communist_army
+
+			modifier = {
+				army_org_factor = -0.05
+				army_attack_factor = -0.05
+				army_defence_factor = -0.05
+			}
+		}
+
+		KMT_new_constitution_democratic = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_constitutional_guarantees
+
+			modifier = {
+				stability_factor = 0.05
+				democratic_drift = 0.01
+			}
+		}
+
+		KMT_new_constitution_democratic_ccotm = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_constitutional_guarantees
+
+			modifier = {
+				stability_factor = 0.1
+				democratic_drift = 0.03
+				conscription = 0.02
+			}
+		}
+
+		KMT_ministry_of_national_defense_idea = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = ast_volunteer_defence_corps
+
+			modifier = {
+				max_planning = 0.1
+				experience_gain_army = 0.05
+				experience_gain_navy = 0.05
+				experience_gain_air = 0.05
+			}
+		}
+
+		KMT_communism_allowed = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_deal_with_the_devil2
+
+			modifier = {
+				communism_drift = 0.01
+				stability_factor = 0.05
+				political_power_factor = 0.05
+				foreign_subversive_activites = -0.65
+			}
+		}
+
+		KMT_military_dictatorship_idea = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_intel_bonus
+
+			modifier = {
+				fascism_drift = 0.07
+			}
+		}
+
+		KMT_new_constitution_fascism = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_constitutional_guarantees
+
+			modifier = {
+				war_support_factor = 0.05
+				fascism_drift = 0.03
+			}
+		}
+
+		KMT_battleship_supremacy_idea = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_navy_bonus
+
+			research_bonus = {
+				cat_fleet_in_being = 0.1
+			}
+
+			modifier = {
+				navy_capital_ship_attack_factor = 0.1
+				navy_capital_ship_defence_factor = 0.1
+				navy_anti_air_attack_factor = 0.1
+				experience_gain_navy_factor = 0.15
+			}
+		}
+
+		KMT_naval_aviation_idea = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+			}
+
+			cancel = {
+			}
+
+			picture = generic_navy_carrier_bonus
+
+			research_bonus = {
+				cat_base_strike = 0.1
+			}
+
+			modifier = {
+				navy_carrier_air_targetting_factor = 0.1
+				navy_carrier_air_agility_factor = 0.1
+				sortie_efficiency = 0.15
+				experience_gain_navy_factor = 0.15
+			}
+		}
+
+		KMT_static_defense_focus = {
+			removal_cost = -1
+			picture = generic_wall_line
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				max_dig_in = 2
+				production_speed_bunker_factor = 0.2
+				production_speed_coastal_bunker_factor = 0.2
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_sov_advisor_ssnap = {
+			removal_cost = -1
+			picture = saf_soviet_advisers
+
+			cancel = {
+				has_war_with = SOV
+			}
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				experience_gain_army = 0.01
+				experience_gain_army_factor = 0.05
+				experience_gain_air_factor = 0.05
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+
+		test_naval_range_infinity = {
+			removal_cost = -1
+			picture = man_five_year_plan_air
+
+			allowed = {
+				always = no
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+			equipment_bonus = {
+				ship_hull_light = {
+					naval_range = 100 instant = yes
+				}
+				ship_hull_heavy = {
+					naval_range = 100 instant = yes
+				}
+				ship_hull_cruiser = {
+					naval_range = 100 instant = yes
+				}
+				ship_hull_carrier = {
+					naval_range = 100 instant = yes
+				}
+				ship_hull_submarine = {
+					naval_range = 100 instant = yes
+				}
+			}
+		}
+
+		KMT_camco_assembly_plants_1 = {
+			removal_cost = -1
+			picture = man_five_year_plan_air
+
+			allowed = {
+				always = no
+			}
+
+			cancel = {
+				NOT = {
+					has_idea = incompetent_industry_real
+					has_idea = incompetent_industry_fake
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+			equipment_bonus = {
+				large_plane_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				small_plane_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				cv_small_plane_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				small_plane_cas_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				cv_small_plane_cas_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				small_plane_naval_bomber_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				cv_small_plane_naval_bomber_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				medium_plane_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				medium_plane_fighter_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+
+		KMT_camco_assembly_plants_2 = {
+			removal_cost = -1
+			picture = man_five_year_plan_air
+
+			allowed = {
+				always = no
+			}
+
+			cancel = {
+				NOT = {
+					has_idea = incompetent_industry_real_2
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+			equipment_bonus = {
+				large_plane_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				small_plane_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				cv_small_plane_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				small_plane_cas_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				cv_small_plane_cas_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				small_plane_naval_bomber_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				cv_small_plane_naval_bomber_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				medium_plane_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				medium_plane_fighter_airframe = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+
+		KMT_camco_assembly_plants_3 = {
+			removal_cost = -1
+			picture = man_five_year_plan_air
+
+			cancel = {
+				NOT = {
+					has_idea = incompetent_industry_real_3
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+			equipment_bonus = {
+				large_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				small_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				cv_small_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				small_plane_cas_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				cv_small_plane_cas_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				small_plane_naval_bomber_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				cv_small_plane_naval_bomber_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				medium_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				medium_plane_fighter_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+		}
+
+		KMT_camco_assembly_plants_4 = {
+			removal_cost = -1
+			picture = man_five_year_plan_air
+
+			cancel = {
+				NOT = {
+					has_idea = incompetent_industry_real_4
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+			equipment_bonus = {
+				large_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				small_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				cv_small_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				small_plane_cas_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				cv_small_plane_cas_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				small_plane_naval_bomber_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				cv_small_plane_naval_bomber_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				medium_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				medium_plane_fighter_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+		}
+
+		KMT_the_hump_idea = {
+			removal_cost = -1
+			picture = can_wartime_prices_and_trade_board
+
+			cancel = {
+				OR = {
+					has_war = no
+					USA = {
+						NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT }}
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_the_hump_idea_closed = {
+			removal_cost = -1
+			picture = can_wartime_prices_and_trade_board
+
+			cancel = {
+				OR = {
+					has_war = no
+					USA = {
+						NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_burma_road_idea = {
+			removal_cost = -1
+			picture = can_wartime_prices_and_trade_board
+
+			cancel = {
+				OR = {
+					has_war = no
+					ENG = {
+						NOT = {has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT }}
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_burma_road_idea_closed = {
+			removal_cost = -1
+			picture = can_wartime_prices_and_trade_board
+
+			cancel = {
+				OR = {
+					has_war = no
+					ENG = {
+						NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT }}
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_ledo_road_idea = {
+			removal_cost = -1
+			picture = can_wartime_prices_and_trade_board
+
+			cancel = {
+				OR = {
+					has_war = no
+					USA = {
+						NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_ledo_road_idea_closed = {
+			removal_cost = -1
+			picture = can_wartime_prices_and_trade_board
+
+			cancel = {
+				OR = {
+					has_war = no
+					USA = {
+						NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_yunnan_bahn_idea = {
+			removal_cost = -1
+			picture = can_wartime_prices_and_trade_board
+
+			cancel = {
+				OR = {
+					has_war = no
+					FRA = {
+						NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_yunnan_bahn_idea_closed = {
+			removal_cost = -1
+			picture = can_wartime_prices_and_trade_board
+
+			cancel = {
+				OR = {
+					has_war = no
+					FRA = {
+						NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_cadet_in_GER_idea_mw = {
+			removal_cost = -1
+			picture = general_staff
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_army = 0.03
+			}
+
+			research_bonus = {
+				cat_mobile_warfare = 0.07
+				cat_superior_firepower = -0.2
+				cat_grand_battle_plan = -0.2
+				cat_mass_assault = -0.2
+			}
+		}
+
+		KMT_cadet_in_GER_idea_sf = {
+			removal_cost = -1
+			picture = general_staff
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_army = 0.03
+			}
+
+			research_bonus = {
+				cat_mobile_warfare = -0.2
+				cat_superior_firepower = 0.07
+				cat_grand_battle_plan = -0.2
+				cat_mass_assault = -0.2
+			}
+		}
+
+		KMT_cadet_in_GER_idea_gb = {
+			removal_cost = -1
+			picture = general_staff
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_army = 0.03
+			}
+
+			research_bonus = {
+				cat_mobile_warfare = -0.2
+				cat_superior_firepower = -0.2
+				cat_grand_battle_plan = 0.07
+				cat_mass_assault = -0.2
+			}
+		}
+
+		KMT_cadet_in_GER_idea_ma = {
+			removal_cost = -1
+			picture = general_staff
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_army = 0.03
+			}
+
+			research_bonus = {
+				cat_mobile_warfare = -0.2
+				cat_superior_firepower = -0.2
+				cat_grand_battle_plan = -0.2
+				cat_mass_assault = 0.07
+			}
+		}
+
+		KMT_cadet_in_GER_idea_fib = {
+			removal_cost = -1
+			picture = generic_sea_focused_navy
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_navy = 0.03
+			}
+
+			research_bonus = {
+				cat_fleet_in_being = 0.07
+				cat_trade_interdiction = -0.2
+				cat_base_strike = -0.2
+			}
+		}
+
+		KMT_cadet_in_GER_idea_ti = {
+			removal_cost = -1
+			picture = generic_sea_focused_navy
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_navy = 0.03
+			}
+
+			research_bonus = {
+				cat_fleet_in_being = -0.2
+				cat_trade_interdiction = 0.07
+				cat_base_strike = -0.2
+			}
+		}
+
+		KMT_cadet_in_GER_idea_bs = {
+			removal_cost = -1
+			picture = generic_sea_focused_navy
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_navy = 0.03
+			}
+
+			research_bonus = {
+				cat_fleet_in_being = -0.2
+				cat_trade_interdiction = -0.2
+				cat_base_strike = 0.07
+			}
+		}
+
+		KMT_cadet_in_GER_idea_sd = {
+			removal_cost = -1
+			picture = generic_air_research
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_air = 0.03
+			}
+
+			research_bonus = {
+				cat_strategic_destruction = 0.07
+				cat_battlefield_support = -0.2
+				cat_operational_integrity = -0.2
+			}
+		}
+
+		KMT_cadet_in_GER_idea_battlefield_support = {
+			removal_cost = -1
+			picture = generic_air_research
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_air = 0.03
+			}
+
+			research_bonus = {
+				cat_strategic_destruction = -0.2
+				cat_battlefield_support = 0.07
+				cat_operational_integrity = -0.2
+			}
+		}
+
+		KMT_cadet_in_GER_idea_oi = {
+			removal_cost = -1
+			picture = generic_air_research
+
+			cancel = {
+				GER = {
+					NOT = { has_relation_modifier = { modifier = KMT_industrial_assistance target = ROOT } }
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				max_command_power = -5
+				experience_gain_air = 0.03
+			}
+
+			research_bonus = {
+				cat_strategic_destruction = -0.2
+				cat_battlefield_support = -0.2
+				cat_operational_integrity = 0.07
+			}
+		}
+
+		KMT_defectors_PRC = {
+			removal_cost = -1
+			picture = prc_low_popular_support3
+
+			cancel = {
+				has_war = no
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription_factor = -0.75
+				army_org_factor = -0.25
+				army_morale_factor = -0.25
+			}
+		}
+
+		KMT_socialist_science = {
+			removal_cost = -1
+			picture = generic_army_war_college
+
+			cancel = {
+				NOT = { has_government = communism }
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = communism
+			}
+
+			modifier = {
+				political_power_factor = 0.1
+				communism_drift = 0.05
+				drift_defence_factor = 0.35
+			}
+		}
+
+		KMT_popular_discontent = {
+			removal_cost = -1
+			picture = generic_army_war_college
+
+			cancel = {
+				OR = {
+					has_country_flag = KMT_ps_highest_pop_sup_tag
+					is_valid_power_struggle_participant = no
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = no
+			}
+
+			modifier = {
+				political_power_factor = -0.35
+				stability_factor = -0.1
+				war_support_factor = -0.2
+				conscription_factor = -0.1
+			}
+		}
+
+		KMT_assistance_to_CHI = {
+			removal_cost = -1
+			picture = FRA_factory_strikes
+
+			cancel = {
+				OR = {
+					has_war_with = CHI
+					NOT = { country_exists = CHI }
+					is_puppet = yes
+					CHI = {
+						is_puppet = yes
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			targeted_modifier = {
+				tag = CHI
+				cic_to_target_factor = 0.01
+				mic_to_target_factor = 0.02
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_assistance_to_MEN = {
+			removal_cost = -1
+			picture = FRA_factory_strikes
+
+			cancel = {
+				OR = {
+					has_war_with = MEN
+					NOT = { country_exists = MEN }
+					is_puppet = yes
+					MEN = {
+						is_puppet = yes
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			targeted_modifier = {
+				tag = MEN
+				cic_to_target_factor = 0.01
+				mic_to_target_factor = 0.02
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_assistance_to_SHX = {
+			removal_cost = -1
+			picture = FRA_factory_strikes
+
+			cancel = {
+				OR = {
+					has_war_with = SHX
+					NOT = { country_exists = SHX }
+					is_puppet = yes
+					SHX = {
+						is_puppet = yes
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			targeted_modifier = {
+				tag = SHX
+				cic_to_target_factor = 0.01
+				mic_to_target_factor = 0.02
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_assistance_to_PRC = {
+			removal_cost = -1
+			picture = FRA_factory_strikes
+
+			cancel = {
+				OR = {
+					has_war_with = PRC
+					NOT = { country_exists = PRC }
+					is_puppet = yes
+					PRC = {
+						is_puppet = yes
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			targeted_modifier = {
+				tag = PRC
+				cic_to_target_factor = 0.01
+				mic_to_target_factor = 0.02
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_assistance_to_XSM = {
+			removal_cost = -1
+			picture = FRA_factory_strikes
+
+			cancel = {
+				OR = {
+					has_war_with = XSM
+					NOT = { country_exists = XSM }
+					is_puppet = yes
+					XSM = {
+						is_puppet = yes
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			targeted_modifier = {
+				tag = XSM
+				cic_to_target_factor = 0.01
+				mic_to_target_factor = 0.02
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_assistance_to_SIK = {
+			removal_cost = -1
+			picture = FRA_factory_strikes
+
+			cancel = {
+				OR = {
+					has_war_with = SIK
+					NOT = { country_exists = SIK }
+					is_puppet = yes
+					SIK = {
+						is_puppet = yes
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			targeted_modifier = {
+				tag = SIK
+				cic_to_target_factor = 0.01
+				mic_to_target_factor = 0.02
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_assistance_to_YUN = {
+			removal_cost = -1
+			picture = FRA_factory_strikes
+
+			cancel = {
+				OR = {
+					has_war_with = YUN
+					NOT = { country_exists = YUN }
+					is_puppet = yes
+					YUN = {
+						is_puppet = yes
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			targeted_modifier = {
+				tag = YUN
+				cic_to_target_factor = 0.01
+				mic_to_target_factor = 0.02
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_assistance_to_GXC = {
+			removal_cost = -1
+			picture = FRA_factory_strikes
+
+			cancel = {
+				OR = {
+					has_war_with = GXC
+					NOT = { country_exists = GXC }
+					is_puppet = yes
+					GXC = {
+						is_puppet = yes
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			targeted_modifier = {
+				tag = GXC
+				cic_to_target_factor = 0.01
+				mic_to_target_factor = 0.02
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_reparation_to_jap = {
+			removal_cost = -1
+			picture = rom_carol_emptied_accounts
+
+			cancel = {
+				OR = {
+					has_war_with = JAP
+					JAP = { is_subject = yes }
+					NOT = {
+						country_exists = JAP
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			modifier = { consumer_goods_factor = 0.1 }
+
+			targeted_modifier = {
+				tag = JAP
+				cic_to_target_factor = 0.35
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_reparation_from_chi = {
+			removal_cost = -1
+			picture = tur_balkan_central_bank_wealthy_greece
+
+			cancel = {
+				NOT = {
+					any_country = {
+						has_idea = KMT_reparation_to_jap
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			modifier = { consumer_goods_factor = -0.1 }
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_trautmann_peace = {
+			removal_cost = -1
+			picture = generic_constitutional_guarantees
+
+			cancel = {
+				OR = {
+					any_country = {
+						OR = {
+							tag = JAP
+							is_subject_of = JAP
+							is_in_faction_with = JAP
+						}
+						has_war_with = ROOT
+					}
+					JAP = { is_subject = yes }
+					NOT = {
+						country_exists = JAP
+					}
+				}
+			}
+
+			on_add = {
+				every_other_country = {
+					limit = {
+						OR = {
+							tag = JAP
+							is_subject_of = JAP
+							is_in_faction_with = JAP
+							OVERLORD = {
+								OR = {
+									is_subject_of = JAP
+									is_in_faction_with = JAP
+								}
+							}
+						}
+					}
+					ROOT = {
+						add_relation_modifier = {
+							target = PREV
+							modifier = KMT_harder_justification
+						}
+					}
+				}
+				every_other_country = {
+					limit = {
+						has_relation_modifier = {
+							modifier = KMT_industrial_assistance
+							target = ROOT
+						}
+						has_government = communism
+					}
+					remove_relation_modifier = {
+						modifier = KMT_industrial_assistance
+						target = ROOT
+					}
+				}
+				event_target:KMT_central_gov_tag = { remove_opinion_modifier = { target = JAP modifier = hostile_status }}
+				JAP = { remove_opinion_modifier = { target = event_target:KMT_central_gov_tag modifier = hostile_status }}
+			}
+
+			on_remove = {
+				every_other_country = {
+					limit = {
+						ROOT = {
+							has_relation_modifier = {
+								target = PREV
+								modifier = KMT_harder_justification
+							}
+						}
+					}
+					ROOT = {
+						remove_relation_modifier = {
+							target = PREV
+							modifier = KMT_harder_justification
+						}
+					}
+				}
+			}
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				political_power_cost = 0.25
+				communism_drift = -0.1
+				communism_acceptance = -2000
+				custom_modifier_tooltip = KMT_harder_justification_against_japan
+			}
+
+			targeted_modifier = {
+				tag = JAP
+				extra_trade_to_target_factor = 0.5
+				trade_cost_for_target_factor = -0.5
+			}
+
+			targeted_modifier = {
+				tag = PRC
+				attack_bonus_against = 0.15
+				defense_bonus_against = 0.15
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+
+		KMT_low_legitimacy = {
+			removal_cost = -1
+			picture = prc_low_popular_support
+
+			cancel = {
+			}
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				stability_factor = -0.25
+				war_support_factor = -0.5
+				army_morale_factor = -0.5
+				conscription_factor = -0.5
+				industrial_capacity_factory = -0.5
+				consumer_goods_factor = 0.25
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+		}
+	}
+
+}

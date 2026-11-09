@@ -1,0 +1,298 @@
+#####################################################################################################################
+# COMENTARIOS HAN SIDO AÑADIDOS EN ARAS DE LA EXPLICACIÓN, PUEDEN SER REMOVIDOS #
+# ID's no deben incluir espacios!
+#####################################################################################################################
+
+oposicion_politica_col = {
+	priority = 90
+	picture = GFX_category_oposicion
+
+	icon = GFX_decision_category_COL_oposicion
+
+	visible = {
+		has_country_flag = oposicion_politica_activa_flag
+	}
+
+	on_map_area = {
+		state = 306
+		name = oposicion_politica_col_map_name
+		zoom = 150
+	}
+
+	allowed = {
+		tag = COL
+	}
+}
+
+cupula_militar_col = {
+	priority = 100
+
+	icon = GFX_decision_category_army_reform
+
+	allowed = {
+		tag = COL
+	}
+}
+
+gestionar_bipartidismo_col = {		#This is the type of category used for the spanish civil war.
+	priority = 8
+	icon = spr_the_seeds_of_revolution
+
+	allowed = {
+		original_tag = COL
+	}
+
+	visible = {
+		OR = {
+			has_completed_focus = COL_bienestar_general
+			has_completed_focus = COL_la_patria_por_encima_de_los_partidos
+		}
+	}
+}
+
+escuela_combate = {
+	priority = 9
+	icon = military_operation
+
+	allowed = {
+		original_tag = COL
+	}
+	visible = {
+		has_completed_focus = COL_escuela_superior_de_guerra
+		any_army_leader = {
+			OR = {
+				NOT = { has_trait = desert_fox }
+				NOT = { has_trait = swamp_fox }
+				NOT = { has_trait = trait_mountaineer }
+				NOT = { has_trait = hill_fighter }
+				NOT = { has_trait = jungle_rat }
+				NOT = { has_trait = ranger }
+				NOT = { has_trait = urban_assault_specialist }
+			}
+		}
+	}
+}
+
+col_terrain_bonus = {
+	priority = 100
+
+	allowed = {
+		OR = {
+			#original_tag = VEN
+			original_tag = COL
+		}
+	}
+
+	visible = {
+		OR = {
+			has_completed_focus = COL_topografia_militar
+			#has_completed_focus = VEN_study_venezuelan_topography
+		}
+	}
+}
+
+col_ligas_campesinas  = {
+	priority = 5
+	icon = generic_formable_nations
+
+	visible = {
+		has_completed_focus = COL_las_ligas_campesinas
+	}
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				OR = {
+					has_state_category = pastoral
+					has_state_category = rural
+				}
+			}
+		}
+		name = col_ligas_campesinas_category_name
+		zoom = 150
+	}
+
+	allowed = {
+		tag = COL
+	}
+}
+
+col_pugna_religiosa = {
+	priority = 80
+	icon = GFX_PRU_cooperating_with_the_church
+
+	scripted_gui = col_pugna_religiosa_ui
+
+	visible = {
+		NOT = {
+			has_country_flag = col_deleted_interference
+		}
+	}
+
+	allowed = {
+		tag = COL
+	}
+}
+
+col_mandato_unificacion = {
+	priority = 80
+	icon = GFX_decision_category_mandato_unificacion
+
+	picture = GFX_decision_cat_generic_gran_colombia
+
+	visible = {
+		OR = {
+			#has_completed_focus = VEN_unification_mandate
+			has_completed_focus = COL_mandato_de_unificacion
+			has_completed_focus = ECU_recovering_what_was_forgotten
+		}
+	}
+
+	allowed = {
+		OR = {
+			original_tag = COL
+			#original_tag = VEN
+			original_tag = ECU
+		}
+	}
+}
+
+col_gestion_estatal_laureanista_category  = {
+	priority = 100
+	icon = GFX_decision_category_generic_crisis
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				COL_is_laureanist_state = yes
+			}
+		}
+		name = col_gestion_estatal_laureanista_map_category_name
+		zoom = 150
+	}
+
+	visible = {
+		has_country_flag = derecha_dividida_flag
+	}
+
+	allowed = {
+		tag = COL
+	}
+}
+
+col_encrucijada_anticomunista  = {
+	priority = 5
+	icon = GFX_decision_category_saf_anti_colonialist_crusade
+
+	visible = {
+		has_completed_focus = COL_el_enemigo_de_la_civilizacion
+	}
+
+	allowed = {
+		tag = COL
+	}
+}
+
+conflictos_fronterizos_col = {
+	priority = 100
+
+	icon = GFX_decision_category_border_conflicts
+
+	allowed = {
+		OR = {
+			#original_tag = VEN
+			original_tag = COL
+			original_tag = ECU
+		}
+	}
+}
+
+concesiones_petroleo_col = {
+	priority = 100
+
+	icon = GFX_decision_category_generic_prospect_for_resources
+	allowed = {
+		tag = COL
+	}
+
+	visible = {
+		has_completed_focus = COL_concesiones_de_petroleo
+	}
+}
+
+crisis_social_col = {
+	priority = 100
+	icon = GFX_decision_category_generic_crisis
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				OR = {
+					has_dynamic_modifier = { modifier = COL_road_blockades }
+					has_dynamic_modifier = { modifier = COL_general_strike }
+					has_state_flag = oligarquia_state_flag
+				}
+			}
+		}
+		name = crisis_social_col_map_category_name
+		zoom = 150
+	}
+
+	visible = {
+		OR = {
+			has_country_flag = oligarquia_insatisfecha_flag
+			has_country_flag = pueblo_insatisfecho_flag
+		}
+	}
+
+	allowed = {
+		tag = COL
+	}
+}
+
+tratado_col_usa_cat = {
+	priority = 100
+	icon = GFX_decision_category_usa_congress
+	allowed = {
+		tag = COL
+	}
+
+	visible = {
+		OR = {
+			has_idea = COL_tratado_colombo_americano1
+			has_idea = COL_tratado_colombo_americano2
+			has_idea = COL_tratado_colombo_americano3
+			has_idea = COL_tratado_colombo_americano4
+		}
+	}
+}
+
+COL_tierra_de_colon_cat = {
+	icon = generic_formable_nations
+	priority = 200
+
+	allowed = {
+		tag = COL
+	}
+
+	visible = {
+		has_completed_focus = COL_tierra_de_colon
+	}
+}
+
+COL_guardia_civil_cat = {
+	icon = GFX_decision_category_eng_organize_the_blackshirts
+	priority = 100
+
+	allowed = {
+		tag = COL
+	}
+
+	visible = {
+		has_completed_focus = COL_fundar_la_guardia_civil
+	}
+}

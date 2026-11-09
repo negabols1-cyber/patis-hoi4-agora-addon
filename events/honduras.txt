@@ -1,0 +1,663 @@
+﻿add_namespace = hon
+
+country_event = {
+	id = hon.1
+	title = "Honduras seeks support"
+	desc = "United fruit companies in Honduras are asking us for help to overthrow the country"
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		add_political_power = -25
+		HON = {
+			country_event = { hours = 2 id = hon.2 }
+			add_political_power = 100
+			add_popularity = { ideology = fascism popularity = 0.15 }
+		}
+	}
+	option = {
+		name = "No"
+		add_political_power = 25
+		HON = {
+			country_event = { hours = 2 id = hon.3 }
+		}
+	}
+}
+#accept
+country_event = {
+	id = hon.2
+	title = "They accepted"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		add_political_power = 5
+	}
+}
+#refuse
+country_event = {
+	id = hon.3
+	title = "They refuse"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		add_political_power = 5
+	}
+}
+country_event = {
+	id = hon.4
+	title = "Honduras wants our land!"
+	desc = "Honduras needs to grow and expand its companies	"
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ai_chance = { base = 25
+			modifier = {
+				HON = { has_army_size = { size < 10 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size > 10 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.5 }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 75
+			modifier = {
+				HON = { has_army_size = { size > 10 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size < 5 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.6 }
+		}
+	}
+}
+country_event = {
+	id = hon.5
+	title = "They accepted"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "For Fruits!"
+		314 = { add_core_of = HON }
+		annex_country = { target = ELS }
+	}
+}
+
+country_event = {
+	id = hon.6
+	title = "They refuse"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Then war"
+		314 = { add_core_of = HON }
+		declare_war_on = {
+			target = ELS
+			type = take_state
+			generator = { 314 }
+		}
+	}
+	option = {
+		name = "Lets wait"
+		314 = { add_core_of = HON }
+	}
+}
+
+country_event = {
+	id = hon.7
+	title = "Honduras wants our land"
+	desc = "Honduras needs to grow and expand its companies"
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ai_chance = { base = 25
+			modifier = {
+				HON = { has_army_size = { size < 10 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size > 10 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.8 }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 75
+			modifier = {
+				HON = { has_army_size = { size > 10 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size < 10 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.9 }
+		}
+	}
+}
+# Nicaragua accepts
+
+country_event = {
+	id = hon.8
+	title = "They accepted"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "For Fruits!"
+		317 = { add_core_of = HON }
+		annex_country = { target = NIC }
+	}
+}
+
+# Nicaragua declines
+country_event = {
+	id = hon.9
+	title = "They refuse"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Then War"
+		317 = { add_core_of = HON }
+		declare_war_on = {
+			target = NIC
+			type = take_state
+			generator = { 317 }
+		}
+	}
+	option = {
+		name = "Lets wait"
+		317 = { add_core_of = HON }
+	}
+}
+
+country_event = {
+	id = hon.40
+	title = "Honduras wants our land"
+	desc = "Honduras needs to grow and expand its companies"
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ai_chance = { base = 25
+			modifier = {
+				HON = { has_army_size = { size < 10 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size > 10 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.41 }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 75
+			modifier = {
+				HON = { has_army_size = { size > 10 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size < 10 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.42 }
+		}
+	}
+}
+
+country_event = {
+	id = hon.41
+	title = "They accepted"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "For Fruits!"
+		313 = { add_core_of = HON }
+		annex_country = { target = GUA }
+	}
+}
+
+country_event = {
+	id = hon.42
+	title = "They refuse"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Then War"
+		313 = { add_core_of = HON }
+		declare_war_on = {
+			target = GUA
+			type = take_state
+			generator = { 313  }
+		}
+	}
+	option = {
+		name = "Lets wait"
+		313 = { add_core_of = HON }
+	}
+}
+country_event = {
+	id = hon.13
+	title = "Honduras wants to buy land"
+	desc = "Honduras wants to buy the land of Belize from us"
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ai_chance = { base = 80}
+		HON = {
+			country_event = { hours = 2 id = hon.14 }
+		}
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 20 }
+		HON = {
+			country_event = { hours = 2 id = hon.15 }
+		}
+	}
+}
+
+# UK Accepts
+country_event = {
+	id = hon.14
+	title = "UK accepts"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "For Fruits!"
+		311 = { add_core_of = HON }
+		HON = { transfer_state = 311 }
+		give_military_access = ENG
+		send_equipment = { target = ENG type = convoy amount = 100 }
+		add_timed_idea = { idea = HON_banana_boat_payment days = 100 }
+	}
+}
+# UK Declines
+country_event = {
+	id = hon.15
+	title = "UK Declines"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "We will back!"
+		311 = { add_core_of = HON }
+	}
+}
+
+country_event = {
+	id = hon.16
+	title = "Honduras wants our land"
+	desc = "Honduras needs to grow and expand its companies"
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ai_chance = { base = 25
+			modifier = {
+				HON = { has_army_size = { size < 20 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size > 20 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.17 }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 75
+			modifier = {
+				HON = { has_army_size = { size > 20 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size < 20 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.18 }
+		}
+	}
+}
+# Panama accepts
+
+country_event = {
+	id = hon.17
+	title = "Panama accepts"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "For Fruits!"
+		304 = { add_core_of = HON }
+		864 = { add_core_of = HON }
+		annex_country = { target = PAN }
+	}
+}
+
+# Panama declines
+country_event = {
+	id = hon.18
+	title = "Panama declines"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "This war then"
+		304 = { add_core_of = HON }
+		864 = { add_core_of = HON }
+		declare_war_on = {
+			target = PAN
+			type = take_state
+			generator = { 304 864 }
+		}
+	}
+	option = {
+		name = "Lets wait"
+		304 = { add_core_of = HON }
+		864 = { add_core_of = HON }
+	}
+}
+country_event = {
+	id = hon.10
+	title = "Honduras wants our land"
+	desc = "Honduras needs to grow and expand its companies"
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ai_chance = { base = 25
+			modifier = {
+				HON = { has_army_size = { size < 15 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size > 15 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.11 }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 75
+			modifier = {
+				HON = { has_army_size = { size > 15 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size < 15 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.12 }
+		}
+	}
+}
+# Costa Rica accepts
+
+country_event = {
+	id = hon.11
+	title = "Costa Rica accepts"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "For Fruits"
+		316 = { add_core_of = HON }
+		annex_country = { target = COS }
+	}
+}
+
+# Costa Rica declines
+country_event = {
+	id = hon.12
+	title = "Costa Rica declines"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "WAR"
+		316 = { add_core_of = HON }
+		declare_war_on = {
+			target = COS
+			type = take_state
+			generator = { 316 }
+		}
+	}
+	option = {
+		name = "Lets wait"
+		316 = { add_core_of = HON }
+	}
+}
+country_event = {
+	id = hon.19
+	title = "Honduras offers to purchase the Panama Canal"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ai_chance = { base = 80 }
+		HON = { country_event = { hours = 2 id = hon.20 } }
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 20 }
+		HON = {
+			country_event = { hours = 2 id = hon.21 }
+		}
+	}
+}
+
+# USA Accepts
+country_event = {
+	id = hon.20
+	title = "USA Accepts"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Nice!"
+		685 = { add_core_of = HON }
+		HON = { transfer_state = 685 }
+		give_military_access = USA
+		send_equipment = { target = USA type = convoy amount = 200 }
+		add_timed_idea = { idea = HON_banana_boat_payment2 days = 365 }
+	}
+}
+
+# USA Declines
+country_event = {
+	id = hon.21
+	title = "USA Declines"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sad"
+		685 = { add_core_of = HON }
+		HON= {
+			add_opinion_modifier = { target = USA modifier = rejected_demands }
+		}
+	}
+}
+country_event = {
+	id = hon.43
+	title = "Honduras wants our land"
+	desc = "Honduras needs to grow and expand its companies"
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ai_chance = { base = 25
+			modifier = {
+				HON = { has_army_size = { size < 15 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size > 15 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.44 }
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 75
+			modifier = {
+				HON = { has_army_size = { size > 15 } }
+				factor = 0.5
+			}
+			modifier = {
+				add = 25
+				HON = { has_army_size = { size < 15 } }
+			}
+		}
+		HON = {
+			country_event = { hours = 2 id = hon.45 }
+		}
+	}
+}
+
+country_event = {
+	id = hon.44
+	title = "Mexico accepts"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "For Fruits"
+		474 = { add_core_of = HON }
+		475 = { add_core_of = HON }
+		annex_country = { target = MEX }
+	}
+}
+
+country_event = {
+	id = hon.45
+	title = "Mexico declines"
+	desc = ""
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = "WAR"
+		474 = { add_core_of = HON }
+		475 = { add_core_of = HON }
+		declare_war_on = {
+			target = MEX
+			type = take_state
+			generator = { 474 475 }
+		}
+	}
+	option = {
+		name = "Lets wait"
+		474 = { add_core_of = HON }
+		475 = { add_core_of = HON }
+	}
+}

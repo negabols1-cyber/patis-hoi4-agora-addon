@@ -1,0 +1,1643 @@
+characters={
+	URG_gabriel_terra_c = {
+		name="Gabriel Terra"
+		
+		portraits={
+			civilian={
+				large="GFX_portrait_uruguay_portrait_gabriel_terra"
+			}
+			army={
+				large="GFX_portrait_uruguay_portrait_gabriel_terra"
+				small="gfx/interface/ideas/idea_URG_gabriel_terra.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = URG_gabriel_terra_idea
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				OR = {
+					has_country_leader = { ruling_only = yes name = "Alfredo Baldomir" }
+					has_country_leader = { ruling_only = yes name = "Luis Alberto de Herrera" }
+				}
+				NOT = {
+					has_completed_focus = URG_go_against_terra
+				}
+			}
+			on_add = {
+				URG = {
+					URG_move_5_colorado = yes
+				}
+			}
+			can_be_fired = no
+			traits  = {
+				financial_expert
+			}
+		}
+		country_leader={
+			desc = "GABRIEL_TERRA_DESC"
+			expire = "1965.1.1"
+			ideology = despotism
+			traits = {
+				URG_authoritarian_liberal
+			}
+		}
+	}
+	
+	URG_luis_alberta_de_herrera_c = {
+		name="Luis Alberto de Herrera"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_urg_Luis_Alberto_De_Herrera.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_urg_Luis_Alberto_De_Herrera.dds"
+			}
+		}
+		country_leader={
+			desc = "POLITICS_LUIS_ALBERTO_DE_HERRERA_DESC"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+				URG_herrerist
+			}
+		}
+	}
+
+	URG_adolfo_agorio_c = {
+		name="Adolfo Agorio"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_URG_adolfo_agorio.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_URG_adolfo_agorio.dds"
+			}
+		}
+		country_leader={
+			desc = "POLITICS_ADOLFO_AGORIO_DESC"
+			expire = "1965.1.1"
+			ideology = fascism_ideology
+			traits = {
+				#
+			}
+		}
+	}
+
+	URG_basilio_munoz_c = {
+		name="Basilio Muñoz"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/South America/portrait_UL_South_America_political_1.dds"
+			}
+			army={
+				small="GFX_idea_south_america_generic_3"
+				large="gfx/leaders/South America/portrait_UL_South_America_political_1.dds"
+			}
+		}
+
+		advisor={
+			slot = political_advisor
+			idea_token = URG_basilio_munoz
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				has_completed_focus = URG_the_will_of_the_people
+			}
+			traits  = {
+				URG_el_guerrillero 
+			}
+		}
+	}
+
+	URG_emilio_frugoni_c = {
+		name="Emilio Frugoni"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_urg_Emilio_Frugoni.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_urg_Emilio_Frugoni.dds"
+				small="gfx/interface/ideas/emilio_frugoni.dds"
+			}
+		}
+
+		advisor={
+			slot = political_advisor
+			idea_token = URG_emilio_frugoni
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				has_government = democratic
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Luis Alberto de Herrera" }
+					has_country_leader = { ruling_only = yes name = "Emilio Frugoni" }
+				}
+			}
+			traits  = {
+				voice_of_restraint
+			}
+		}
+	}
+
+	URG_andres_martinez_trueba_c = {
+		name="Andrés Martínez Trueba"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_URG_andres_martinez_treuba.dds"
+			}
+			army={
+				small = "GFX_idea_URG_andres_martinez"
+			}
+		}
+
+		advisor={
+			slot = political_advisor
+			idea_token = URG_andres_martinez_trueba
+			allowed  = {
+				original_tag  = URG
+			}
+			cost = 25
+			available = {
+				NOT = {	
+					OR = {
+						has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+						has_country_leader = { ruling_only = yes name = "Andrés Martínez Trueba" }
+					}
+				}	
+			}
+			traits  = {
+				backroom_backstabber
+			}
+		}
+	}
+
+	URG_consejo_de_estado_provisorio_c = {
+		name="Consejo de Estado Provisorio"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_palacio_legislativo.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_palacio_legislativo.dds"
+			}
+		}
+	}
+
+	URG_consejo_nacional_de_gobierno_c = {
+		name="Consejo Nacional de Gobierno"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_palacio_legislativo.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_palacio_legislativo.dds"
+			}
+		}
+	}
+
+	URG_virginia_bolten_c = {
+		name="Virginia Bolten"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_URG_virginia_bolten.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_URG_virginia_bolten.dds"
+			}
+		}
+	}
+
+	URG_collapsed_government_c = {
+		name="Collapsed Government"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_urg_collapsed_government.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_urg_collapsed_government.dds"
+			}
+		}
+	}
+
+	URG_luis_batlle_berres_c = {
+		name="Luis Batlle Berres"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_urg_Luis_Batlle_Berres.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_urg_Luis_Batlle_Berres.dds"
+			}
+		}
+	}
+	
+	URG_alfredo_baldomir_c = {
+		name="Alfredo Baldomir"
+		advisor={
+			slot = political_advisor
+			idea_token = URG_alfredo_baldomir
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				NOT = { 
+					OR = {
+						has_idea = URG_alfredo_baldomir_army 
+						has_completed_focus = URG_go_against_terra
+					}
+				}
+			}
+			traits  = {
+				war_industrialist 
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = URG_alfredo_baldomir_army
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				NOT = { 
+					OR = {
+						has_idea = URG_alfredo_baldomir 
+						has_completed_focus = URG_go_against_terra
+					}	
+				}
+			}
+			traits  = {
+				army_chief_old_guard
+			}
+		}
+		portraits={
+			army={
+				large="gfx/leaders/URG/URG_alfredo_baldomir_general.dds"
+				small="gfx/interface/ideas/alfredo_baldomir_army.dds"
+			}
+			civilian={
+				large="gfx/leaders/URG/portrait_urg_alfredo_baldomir.dds"
+			}
+		}
+		
+		country_leader={
+			desc="POLITICS_ALFREDO_BALDOMIR_FERRARI_DESC"
+			expire = "1965.1.1"
+			ideology = despotism
+			traits = {
+				retired_officer
+				URG_la_dictablanda
+			}
+		}
+
+		corps_commander={
+			traits = { harsh_leader politically_connected }
+			skill = 3
+			attack_skill = 4
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 1
+		}
+	}
+	
+	URG_pedro_sicco_c = {
+		name="Pedro Sicco"
+		portraits={
+			army={
+				large="gfx/leaders/South America/Portrait_South_America_Generic_land_4.dds"
+				small="GFX_idea_generic_army_south_america_4"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = URG_pedro_sicco_idea
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				army_chief_defensive_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		field_marshal={
+			traits = { defensive_doctrine old_guard }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 2
+		}
+	}
+	
+	URG_cesarreo_l_barisso_c={
+		name="Cesáreo L. Berisso"
+		portraits={
+			army={
+				small="gfx/interface/ideas/cesareo_l_berisso.dds"
+				large="gfx/leaders/South America/Portrait_South_America_Generic_land_1.dds"
+			}
+		}
+		corps_commander={
+			traits = { brilliant_strategist }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 3
+			logistics_skill = 2
+		}
+		advisor={
+			slot = air_chief
+			idea_token = URG_cesarreo_l_barisso
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				air_chief_ground_support_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	
+	URG_tydeo_borges_c={
+		name="Tydeo Larre Borges"
+		portraits={
+			army={
+				small="gfx/interface/ideas/tydeo_borges.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_urg_tydeo_larre_borges.dds"
+			}
+		}
+		corps_commander={
+			skill = 2
+			attack_skill = 2
+			defense_skill = 3
+			planning_skill = 1
+			logistics_skill = 1
+		}
+		advisor={
+			slot = high_command
+			idea_token = URG_tydeo_borges
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				air_close_air_support_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	
+	URG_angel_cambior_c={
+		name="Ángel Camblor"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_5"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_urg_Angel_Camblor.dds"
+			}
+		}
+		corps_commander={
+			traits = { camouflage_expert }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+		advisor={
+			slot = high_command
+			idea_token = URG_angel_camblor
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				army_concealment_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	URG_oscar_diego_gestido_c={
+		name="Óscar Diego Gestido"
+		portraits={
+			army={
+				small="gfx/interface/ideas/oscar_diego_gestido.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_URG_Oscar_Diego_Gestido.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = URG_oscar_diego_gestido_infantry
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				has_completed_focus = URG_expand_the_escuela_militar
+				NOT = { 
+					has_idea = URG_oscar_diego_gestido_quartermaster 
+				}
+			}
+			traits = {
+				army_infantry_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+
+		advisor={
+			slot = political_advisor
+			idea_token = URG_oscar_diego_gestido_quartermaster
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				has_completed_focus = URG_expand_the_escuela_militar
+				NOT = { 
+					has_idea = URG_oscar_diego_gestido_quartermaster 
+				}
+			}
+			traits  = {
+				quartermaster_general
+			}
+		}
+	}
+
+	URG_arturo_campos_c={
+		name="Arturo R. Campos"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_5"
+				large="gfx/leaders/URG/portrait_URG_Alfredo_R_Campos.dds"
+			}
+		}
+		corps_commander={
+			traits = { offensive_doctrine }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 2
+		}
+		advisor={
+			slot = army_chief
+			idea_token = URG_arturo_campos
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				army_chief_offensive_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	URG_arturo_rios_c={
+		name="Arturo B. Rios"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_5"
+				large="gfx/leaders/USA/Portrait_USA_Generic_land_1.dds"
+			}
+		}
+		corps_commander={
+			traits = {  }
+			skill = 3
+			attack_skill = 3
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 1
+		}
+		advisor={
+			slot = theorist
+			idea_token = URG_arturo_rios
+			ledger = army
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				military_theorist
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	
+	URG_arturo_juambeltz_c={
+		name="Arturo Juambeltz"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_4"
+				large="gfx/leaders/South America/Portrait_UL_South_America_Generic_navy_1.dds"
+			}
+		}
+		navy_leader={
+			traits = { gunnery_expert }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 2
+			maneuvering_skill = 2
+			coordination_skill = 2
+			legacy_id=-1
+		}
+		advisor={
+			slot = theorist
+			idea_token = URG_arturo_juambeltz
+			ledger = navy
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				naval_theorist
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	URG_luis_tuya_c={
+		advisor={
+			slot = theorist
+			idea_token = URG_luis_tuya
+			ledger = air
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				air_warfare_theorist
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		name="Luis Tuya"
+		portraits={
+			army={
+				small="gfx/interface/ideas/luis_tuya.dds"
+			}
+		}
+	}
+
+	URG_federico_garcia_c={
+		advisor={
+			slot = high_command
+			idea_token = URG_federico_garcia
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				navy_capital_ship_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		name="Federico García"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_1"
+			}
+		}
+	}
+
+	URG_juan_viera_c={
+		advisor={
+			slot = high_command
+			idea_token = URG_juan_viera
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				air_air_superiority_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		name="Juan C. Viera"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+	}
+
+	URG_angel_adami_c={
+		advisor={
+			slot = high_command
+			idea_token = URG_juan_viera
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				air_air_superiority_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		name="Juan C. Viera"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+	}
+	
+	URG_julia_arevalo_de_roche_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_julia_arevalo_de_roche
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				OR = {
+					has_government = communism
+					has_country_flag = URG_communist_coalition
+				}	
+			}
+			traits  = {
+				red_suffragette
+			}
+		}
+		name="Julia Arevalo de Roche"
+		portraits={
+			army={
+				small="GFX_idea_URG_Julia_Arevalo"
+			}
+		}
+	}
+
+	URG_carlos_quijano_c={
+		name="Carlos Quijano"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_2"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = URG_carlos_quijano
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				liberal_journalist
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	URG_carlos_vaz_ferreira_c={
+		name="Carlos Vaz Ferreira"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_2"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = URG_carlos_vaz_ferreira
+			allowed = {
+				original_tag = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				has_completed_focus = URG_expand_the_universities
+			}
+			traits = {
+				URG_rector_of_the_udelar
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	
+	URG_horacio_arredondo_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_horacio_arredondo
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			modifier = {
+				custom_modifier_tooltip = URG_horacio_arredondo_tt
+			}
+			traits  = {
+				linchpin_of_infrastructure
+			}
+		}
+		
+		name="Horacio Arredondo"
+		portraits={
+			army={
+				small="GFX_idea_horacio_arredondo"
+			}
+		}
+	}
+
+	URG_augusto_cesar_bado_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_augusto_cesar_bado
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				NOT = {
+					has_completed_focus = URG_go_against_terra
+				}	
+			}
+			traits  = {
+				captain_of_industry
+			}
+		}
+		
+		name="Augusto César Bado"
+		portraits={
+			army={
+				small="GFX_idea_south_america_generic_4"
+			}
+		}
+	}
+
+	URG_juana_de_ibarbourou_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_juana_de_ibarbourou
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits  = {
+				popular_figurehead
+			}
+		}
+		
+		name="Juana de Ibarbourou"
+		portraits={
+			army={
+				small="gfx/interface/ideas/juana_de_ibarbourou.dds"
+			}
+		}
+	}
+
+	URG_hugo_fernandez_artucio_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_hugo_fernandez_artucio
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits  = {
+				anti_fascist_agent
+			}
+			available = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+			on_add = {
+				ROOT = { add_popularity = { ideology = communism popularity = 0.03 } }
+			}
+			can_be_fired = no
+		}
+		
+		name="Hugo Fernández Artucio"
+		portraits={
+			army={
+				small="GFX_idea_south_america_generic_2"
+			}
+		}
+	}
+	
+	URG_pedro_manini_rios_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_pedro_manini_rios
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits  = {
+				backroom_backstabber 
+			}
+		}
+		
+		name="Pedro Manini Rios"
+		portraits={
+			army={
+				small="GFX_idea_URG_pedro_manini_rios"
+			}
+		}
+	}
+	
+	URG_julius_dalldorf_c={
+		name="Julius Dalldorf"
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_urg_julius_dalldorf.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_urg_julius_dalldorf.dds"
+				small="gfx/interface/ideas/julius_dalldorf.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = URG_julius_dalldorf_idea
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				NOT = {
+					has_government = communism
+				}
+			}
+			traits  = {
+				fascist_militia_leader
+			}
+		}
+	}
+	
+	URG_rodney_arismendi_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_rodney_arismendi
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				OR = {
+					has_government = communism
+					has_country_flag = URG_communist_coalition
+				}	
+			}	
+			traits  = {
+				silent_mule
+			}
+		}
+		
+		name="Rodney Arismendi"
+		portraits={
+			civilian={
+				small="GFX_idea_rodney_arismendi"
+				large="GFX_idea_rodney_arismendi"
+			}
+		}
+	}
+
+	URG_jose_lazarraga_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_jose_lazarraga
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				OR = {
+					has_government = communism
+					has_country_flag = URG_communist_coalition
+				}	
+			}	
+			traits  = {
+				ambitious_union_boss
+			}
+		}
+		
+		name="José Lazarraga"
+		portraits={
+			civilian={
+				small="gfx/interface/ideas/jose_lazarraga.dds"
+			}
+		}
+	}
+
+	URG_paulina_luisi_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_paulina_luisi
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			available = {
+				OR = {
+					has_government = communism
+					has_country_flag = URG_communist_coalition
+				}	
+			}	
+			traits  = {
+				revolutionary_culture_minister
+			}
+		}
+		
+		name="Paulina Luisi"
+		portraits={
+			civilian={
+				small="gfx/interface/ideas/paulina_luisi.dds"
+			}
+		}
+	}
+
+	URG_alfeo_brum_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_alfeo_brum
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits  = {
+				democratic_reformer
+			}
+		}
+		
+		name="Alfeo Brum"
+		portraits={
+			army={
+				small="GFX_idea_south_america_generic_1"
+			}
+		}
+	}
+
+	URG_eugenio_gomez_c = {
+		name="Eugenio Gómez"
+		
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_URG_eugenio_gomez.dds"
+			}
+			army={
+				small="GFX_idea_south_america_generic_5"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = URG_eugenio_gomez_idea
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				communist_revolutionary
+			}
+		}
+		country_leader={
+			desc = "POLITICS_EUGENIO_GOMEZ_DESC"
+			expire = "1965.1.1"
+			ideology = marxism
+			traits = {
+				staunch_stalinist
+			}
+		}
+	}
+	
+	URG_serafino_mazzolini_c={
+		advisor={
+			slot = political_advisor
+			idea_token = URG_serafino_mazzolini
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits  = {
+				fascist_demagogue
+			}
+		}
+		
+		name="Serafino Mazzolini"
+		portraits={
+			army={
+				small="GFX_idea_serafino_mazzolini"
+			}
+		}
+	}
+
+	URG_juan_battione_c={
+		name="Juan Battione"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_2"
+				large="gfx/leaders/South America/Portrait_South_America_Generic_navy_2.dds"
+			}
+		}
+		navy_leader={
+			traits = { blue_water_expert }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			maneuvering_skill = 1
+			coordination_skill = 1
+			legacy_id=-1
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = URG_juan_battione
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				navy_fleet_logistics_1
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	URG_domingo_mendivil_c={
+		name="Domingo Mendívil"
+		portraits={
+			army={
+				small="GFX/interface/ideas/domingo_mendivil.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = URG_domingo_mendivil
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				army_artillery_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	URG_atilio_frigerio_c={
+		name="Atilio Frigerio"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_2"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = URG_atilio_frigerio
+			allowed  = {
+				original_tag  = URG
+				NOT = {
+					has_country_leader = { ruling_only = yes name = "Virginia Bolten" }
+				}
+			}
+			traits = {
+				navy_chief_maneuver_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	URG_council_of_theorists = { # Anarchists
+		name="Council of Theorists"
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			cost = 100
+			slot = theorist
+			idea_token = SPR_council_of_theorists
+			ledger = military
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { council_of_theorists }
+		}
+	}
+	URG_defensive_military_council = { # Anarchist
+		name="Defensive Military Council"
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = SPR_defensive_military_council
+			ledger = army
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { army_chief_defensive_2 }
+			cost = 100
+		}
+	}
+
+	URG_offensive_military_council = { # Anarchist
+		name="Offensive Military Council"
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={	
+			slot = army_chief
+			idea_token = SPR_offensive_military_council
+			ledger = army
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { army_chief_offensive_2 }
+			cost = 100
+		}
+	}
+
+	URG_organizational_military_council = { # Anarchist
+		name="Organizational Military Council"
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = SPR_organizational_military_council
+			ledger = army
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { army_chief_organizational_2 }
+			cost = 100
+		}
+	}
+
+	URG_all_weather_aviation_council = { # Anarchist
+		name=SPR_all_weather_aviation_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = air_chief
+			idea_token = SPR_all_weather_aviation_council
+			ledger = air
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { air_chief_all_weather_2 }
+			cost = 100
+		}
+	}
+
+	URG_air_safety_aviation_council = { # Anarchist
+		name=SPR_air_safety_aviation_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={	
+			slot = air_chief
+			idea_token = SPR_air_safety_aviation_council
+			ledger = air
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { air_chief_safety_2 }
+			cost = 100
+		}
+	}
+
+	URG_commerce_raiding_naval_council = { # Anarchist
+		name=SPR_commerce_raiding_naval_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = SPR_commerce_raiding_naval_council
+			ledger = navy
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { navy_chief_commerce_raiding_2 }
+			cost = 100
+		}
+	}
+
+	URG_reform_naval_council = { # Anarchist
+		name=SPR_reform_naval_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = SPR_reform_naval_council
+			ledger = navy
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { navy_chief_reform_2 }
+			cost = 100
+		}
+	}
+
+	URG_infantry_military_council = { # Anarchist
+		name=SPR_infantry_military_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = SPR_infantry_military_council
+			ledger = army
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { army_infantry_3 }
+			cost = 200
+		}
+	}
+
+	URG_army_regrouping_military_council = { # Anarchist
+		name=SPR_army_regrouping_military_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = SPR_army_regrouping_military_council
+			ledger = army
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { army_regrouping_2 }
+			cost = 100
+		}
+	}
+
+	URG_concealment_military_council = { # Anarchist
+		name=SPR_concealment_military_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = SPR_concealment_military_council
+			ledger = army
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { army_concealment_2 }
+			cost = 100
+		}
+	}
+
+	URG_naval_strike_aviation_council = { # Anarchist
+		name=SPR_naval_strike_aviation_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = SPR_naval_strike_aviation_council
+			ledger = navy
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { air_naval_strike_2 }
+			cost = 100
+		}
+	}
+
+	URG_close_air_support_aviation_council = { # Anarchist
+		name=SPR_close_air_support_aviation_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = SPR_close_air_support_aviation_council
+			ledger = air
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { air_close_air_support_2 }
+			cost = 100
+		}
+	}
+
+	URG_logistics_naval_council = { # Anarchist
+		name=SPR_logistics_naval_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = SPR_logistics_naval_council
+			ledger = navy
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { navy_fleet_logistics_2 }
+			cost = 100
+		}
+	}
+
+	URG_anti_submarine_naval_council = { # Anarchist
+		name=SPR_anti_submarine_naval_council
+		portraits={
+			army={
+				small="GFX_idea_SPR_anarchist_council"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = SPR_anti_submarine_naval_council
+			ledger = navy
+			allowed = {
+				original_tag = URG
+			}
+			visible = {
+				has_completed_focus = URG_anarchist_takeover
+			}
+			traits = { navy_anti_submarine_2 }
+			cost = 100
+		}
+	}
+
+	##### SCIENTISTS #####
+
+	URG_tydeo_borges_scientist = {
+		name = "Tydeo Larre Borges"
+		portraits = {
+			army = {
+				large = "gfx/leaders/URG/URG_tydeo_borges_portrait.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_aircraft_specialist }
+			skills = {
+				specialization_air = 2
+			}
+
+			visible = {
+				owner = {
+					has_character = URG_tydeo_borges_c
+				}
+			}
+		}
+	}
+
+	URG_atilio_frigeiro = {
+		name = "Atilio Frigerio"
+		portraits = {
+			army = {
+				large = "gfx/leaders/scientists/generic_scientists/portrait_generic_southamerica_male_03.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_surface_ship_specialist scientist_trait_bright }
+			skills = {
+				specialization_naval = 1
+			}
+		}
+	}
+
+	URG_felix_cernuschi = {
+		name = "Félix Cernuschi"
+		portraits = {
+			army = {
+				large = "gfx/leaders/URG/URG_felix_cernuschi_portrait.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_nuclear_specialist }
+			skills = {
+				specialization_nuclear = 1
+			}
+		}
+	}
+
+	URG_enrique_loedel_palumbo = {
+		name = "Enrique Loedel Palumbo"
+		portraits = {
+			army = {
+				large = "gfx/leaders/URG/URG_enrique_loedel_palumbo_portrait.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_nuclear_power_expert scientist_trait_fast_learner scientist_trait_brilliant_theorist }
+			skills = {
+				specialization_nuclear = 2
+			}
+		}
+	}
+}

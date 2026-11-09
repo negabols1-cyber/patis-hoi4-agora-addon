@@ -1,0 +1,116 @@
+on_actions = {
+	on_weekly_BEL = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = BEL
+					has_government = communism
+					has_idea = BEL_integration_campaign
+				}
+				add_to_variable = {
+					var = BEL_netherlands_integration_progress
+					value = 0.01
+				}
+				add_to_variable = {
+					var = BEL_luxembourg_integration_progress
+					value = 0.01
+				}
+				clamp_variable = {
+					var = BEL_netherlands_integration_progress
+					min = 0
+					max = 1
+				}
+				clamp_variable = {
+					var = BEL_luxembourg_integration_progress
+					min = 0
+					max = 1
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					original_tag = BEL
+					has_government = communism
+					has_country_flag = decision_checkbox_hol_completed_flag
+				}
+				add_to_variable = {
+					var = BEL_netherlands_integration_progress
+					value = 0.01
+				}
+				clamp_variable = {
+					var = BEL_netherlands_integration_progress
+					min = 0
+					max = 1
+				}
+			}
+			if = {
+				limit = {
+					original_tag = BEL
+					has_government = communism
+					has_country_flag = decision_checkbox_lux_completed_flag
+				}
+				add_to_variable = {
+					var = BEL_luxembourg_integration_progress
+					value = 0.01
+				}
+				clamp_variable = {
+					var = BEL_luxembourg_integration_progress
+					min = 0
+					max = 1
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					original_tag = HOL
+					has_government = communism
+					has_idea = BEL_supports_integration
+				}
+				BEL = {
+					add_to_variable = {
+						var = BEL_netherlands_integration_progress
+						value = 0.01
+					}
+					clamp_variable = {
+						var = BEL_netherlands_integration_progress
+						min = 0
+						max = 1
+					}
+				}
+			}
+			if = {
+				limit = {
+					original_tag = LUX
+					has_government = communism
+					has_idea = BEL_supports_integration
+				}
+				BEL = {
+					add_to_variable = {
+						var = BEL_luxembourg_integration_progress
+						value = 0.01
+					}
+					clamp_variable = {
+						var = BEL_luxembourg_integration_progress
+						min = 0
+						max = 1
+					}
+				}
+			}
+		}
+	}
+
+	on_ruling_party_change = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = BEL
+					has_government = fascism
+					has_country_leader = { character = BEL_leon_degrelle ruling_only = yes }
+				}
+				set_variable = { BEL_goverment_formed = 6 } #Rex
+			}
+		}
+	}
+}

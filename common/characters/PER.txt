@@ -1,0 +1,1298 @@
+characters={
+	PER_reza_shah_pahlavi={
+		name=PER_reza_shah_pahlavi
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_reza_shah_pahlavi
+			}
+		}
+		country_leader={
+			ideology=monarchism
+			expire="1965.1.1.1"
+			id=-1
+			traits = { PER_shah_of_iran PER_reformer }
+		}
+	}
+	PER_mohammed_reza_pahlavi={
+		name=PER_mohammed_reza_pahlavi
+		portraits={
+			army={
+				large=GFX_portrait_PER_mohammed_reza_pahlavi
+			}
+		}
+		country_leader={
+			ideology=monarchism
+			traits={ PER_shah_of_iran PER_modernist_and_reformer }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	PER_ali_reza_pahlavi={
+		name=PER_ali_reza_pahlavi
+		portraits={
+			army={
+				large=GFX_portrait_PER_ali_reza_pahlavi
+			}
+		}
+		country_leader={
+			ideology=monarchism
+			traits={ PER_shah_of_iran }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	PER_mohammad_hassan_mirza={
+		name=PER_mohammad_hassan_mirza
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_mohammad_mirza_qajar
+			}
+		}
+	}
+	PER_fereydoun_mirza_qajar={
+		name=PER_fereydoun_mirza_qajar
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_fereydoun_mirza_qajar
+			}
+		}
+	}
+	PER_iraj_eskandari={ #General secretary of tudeh party
+		name=PER_iraj_eskandari
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_Iraj_Eskandari
+			}
+		}
+		country_leader={
+			ideology=marxism
+			traits={ }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	PER_soleyman_mirza_eskandari={ #Leader of tudeh party
+		name=PER_soleyman_mirza_eskandari
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_soleyman_mirza_eskandari
+				small=GFX_idea_Soleiman_Mirza_Eskandari
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_soleyman_mirza_eskandari
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					NOT = {
+						has_autonomy_state = autonomy_supervised_state
+					}
+				}
+				has_completed_focus = PER_restart_jungle_movement
+			}
+			traits = {
+				communist_revolutionary
+			}
+		}
+	}
+	PER_davud_monshizadeh={
+		name=PER_davud_monshizadeh
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_Davud_Monshizadeh
+			}
+		}
+		country_leader={
+			ideology=nazism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	PER_abdul_hussein_dastghaib={ #Islamist
+		name=PER_abdul_hussein_dastghaib
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_abdul_hussein_dastghaib
+			}
+		}
+	}
+	PER_mohammad_ali_foroughi={
+		name=PER_mohammad_ali_foroughi
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_mohammad_ali_foroughi
+				small=GFX_idea_Mohammad_Ali_Foroughi
+			}
+		}
+		country_leader={
+			ideology=liberalism
+			traits={} #TODO headstrong?
+			expire="1965.1.1.1"
+			id=-1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_mohammad_ali_foroughi
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						OR = {
+							has_idea = PER_mahmud_djam
+							has_idea = PER_fazlollah_zahedi_minister
+							has_idea = PER_ali_mansur_prime_minister
+						}
+					}
+				}
+				NOT = { has_government = communism }
+				hidden_trigger = {
+					NOT = {
+						has_country_leader = {
+							character = PER_mohammad_ali_foroughi
+							ruling_only = yes
+						}
+					}
+					NOT = { has_completed_focus = PER_holy_purge }
+				}
+			}
+			visible = {
+				NOT = { has_government = communism }
+				NOT = {
+					has_country_leader = {
+						character = PER_mohammad_ali_foroughi
+						ruling_only = yes
+					}
+				}
+				NOT = { has_completed_focus = PER_holy_purge }
+			}
+			traits = {
+				prime_minister_foroughi
+			}
+			cost = 150
+			ai_will_do = {
+				base = 0.5
+				modifier = {
+					factor = 5
+					PER_is_historical_ai = yes
+				}
+			}
+		}
+	}
+	PER_mohammad_mosaddegh={
+		name=PER_mohammad_mosaddegh
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_mohammad_mosaddegh
+			}
+		}
+		country_leader={
+			ideology=conservatism
+			traits={ democratic_crusader }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	PER_fazlollah_zahedi={
+		name=PER_fazlollah_zahedi
+		portraits={
+			civilian={
+				large=GFX_portrait_PER_fazlollah_zahedi
+				small=GFX_idea_Fazlollah_Zahedi_civilian
+			}
+			army = {
+				small=GFX_idea_Fazlollah_Zahedi
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = PER_fazlollah_zahedi
+			ledger = army
+			allowed = {
+				original_tag = PER
+			}
+			traits = {
+				army_infantry_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_fazlollah_zahedi_minister
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						OR = {
+							has_idea = PER_mahmud_djam
+							has_idea = PER_mohammad_ali_foroughi
+							has_idea = PER_ali_mansur_prime_minister
+						}
+					}
+				}
+				NOT = { has_government = communism }
+				hidden_trigger = {
+					NOT = {
+						has_country_leader = {
+							character = PER_fazlollah_zahedi
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			visible = {
+				NOT = { has_government = communism }
+				NOT = {
+					has_country_leader = {
+						character = PER_fazlollah_zahedi
+						ruling_only = yes
+					}
+				}
+			}
+			traits = {
+				prime_minister_zahedi
+			}
+			cost = 150
+			ai_will_do = {
+				base = 0.5
+				modifier = {
+					factor = 5
+					PER_is_persian_ai = yes
+				}
+			}
+		}
+		corps_commander={ #TODO Belki?
+			traits={ harsh_leader }
+			skill=2
+			attack_skill=3
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+
+	#Advisors
+	PER_mahmud_djam={
+		name=PER_mahmud_djam
+		portraits={
+			army={
+				small=GFX_idea_PER_mahmud_jam
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_mahmud_djam
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						OR = {
+							has_idea = PER_fazlollah_zahedi_minister
+							has_idea = PER_mohammad_ali_foroughi
+							has_idea = PER_ali_mansur_prime_minister
+						}
+					}
+				}
+				NOT = { has_government = communism }
+				hidden_trigger = {
+					NOT = { has_completed_focus = PER_holy_purge }
+				}
+			}
+			visible = {
+				NOT = { has_government = communism }
+				NOT = { has_completed_focus = PER_holy_purge }
+			}
+			traits = {
+				prime_minister_jam
+			}
+			cost = 150
+			removal_cost = 150
+			can_be_fired = no
+		}
+	}
+
+	PER_ali_mansur={
+		name=PER_ali_mansur
+		portraits={
+			army={
+				small=GFX_idea_Ali_Mansur
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_ali_mansur
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				NOT = {
+					has_idea = PER_ali_mansur_prime_minister
+				}
+				NOT = { has_government = communism }
+				hidden_trigger = {
+					NOT = { has_completed_focus = PER_holy_purge }
+				}
+			}
+			visible = {
+				NOT = { has_government = communism }
+				NOT = { has_idea = PER_ali_mansur_prime_minister }
+				NOT = { has_completed_focus = PER_holy_purge }
+			}
+			traits = {
+				PER_minister_roads_railway
+			}
+		}
+	}
+
+	PER_ali_mansur_prime_minister={
+		name=PER_ali_mansur
+		portraits={
+			army={
+				small=GFX_idea_Ali_Mansur
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_ali_mansur_prime_minister
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				NOT = { has_government = communism }
+				custom_trigger_tooltip = {
+					tooltip = TUR_can_only_have_one_prime_minister_tt
+					NOT = {
+						OR = {
+							has_idea = PER_fazlollah_zahedi_minister
+							has_idea = PER_mohammad_ali_foroughi
+							has_idea = PER_mahmud_djam
+							has_idea = PER_ali_mansur
+						}
+					}
+				}
+				NOT = { has_government = communism }
+				hidden_trigger = {
+					NOT = { has_completed_focus = PER_holy_purge }
+				}
+			}
+			visible = {
+				NOT = { has_government = communism }
+				NOT = { has_completed_focus = PER_holy_purge }
+			}
+			traits = {
+				prime_minister_mansur
+			}
+			cost = 150
+		}
+	}
+
+	PER_hassan_taqizadeh={
+		name=PER_hassan_taqizadeh
+		portraits={
+			army={
+				small=GFX_idea_Hassan_Taqizadeh
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_hassan_taqizadeh
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					NOT = { has_autonomy_state = autonomy_supervised_state }
+				}
+				has_completed_focus = PER_democratic_principles
+			}
+			traits = {
+				democratic_reformer
+			}
+		}
+	}
+
+	PER_ali_soheili={
+		name=PER_ali_soheili
+		portraits={
+			army={
+				small=GFX_idea_Ali_Soheili
+			}
+		}
+		advisor={
+			cost = 150
+			slot = political_advisor
+			idea_token = PER_ali_soheili
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				NOT = { has_government = communism }
+				hidden_trigger = {
+					NOT = { has_completed_focus = PER_holy_purge }
+				}
+			}
+			visible = {
+				NOT = { has_completed_focus = PER_holy_purge }
+			}
+			traits = {
+				silent_workhorse
+			}
+			ai_will_do = {
+				factor = 3
+			}
+		}
+	}
+
+	PER_ahmad_qavam={
+		name=PER_ahmad_qavam
+		portraits={
+			army={
+				small=GFX_idea_Ahmad_Qavam
+			}
+		}
+		advisor={
+			cost = 150
+			slot = political_advisor
+			idea_token = PER_ahmad_qavam
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				NOT = { has_government = communism }
+				hidden_trigger = {
+					NOT = { has_completed_focus = PER_holy_purge }
+				}
+			}
+			visible = {
+				NOT = { has_completed_focus = PER_holy_purge }
+			}
+			traits = {
+				PER_master_of_politics
+			}
+			ai_will_do = {
+				base = 0
+			}
+		}
+	}
+
+	PER_ehsan_tabari={
+		name=PER_ehsan_tabari
+		portraits={
+			army={
+				small=GFX_idea_PER_ehsan_tabari
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_ehsan_tabari
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				has_completed_focus = PER_creation_of_tudeh_party
+				has_government = communism
+			}
+			traits = {
+				left_trade_unionist
+			}
+		}
+	}
+
+	PER_mohammad_tadayyon={
+		name=PER_mohammad_tadayyon
+		portraits={
+			army={
+				small=GFX_idea_Mohammad_Tadayyon
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_mohammad_tadayyon
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				NOT = { has_completed_focus = PER_death_to_the_king }
+			}
+			traits = {
+				minister_of_education
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	PER_seyyed_ziaeddin_tabatabai={
+		name=PER_seyyed_ziaeddin_tabatabai
+		portraits={
+			army={
+				small=GFX_idea_seyyed_ziaeddin_tabatabai
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_seyyed_ziaeddin_tabatabai
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				hidden_trigger = {
+					NOT = { has_completed_focus = PER_holy_purge }
+				}
+			}
+			visible = {
+				NOT = { has_completed_focus = PER_holy_purge }
+			}
+			traits = {
+				smooth_talking_charmer
+			}
+			ai_will_do = {
+				base = 0
+			}
+		}
+	}
+
+	PER_abdulaziz_mofti={ #Islamist
+		name=PER_abdulaziz_mofti
+		portraits={
+			army={
+				small=GFX_idea_Abdulaziz_Mofti
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_abdulaziz_mofti
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				NOT = {
+					has_completed_focus = PER_crush_illegal_religious_activity
+					has_completed_focus = PER_purge_clergy_members
+					has_completed_focus = PER_put_religious_affairs_under_state_control
+				}
+				OR = {
+					if = {
+						limit = {
+							has_any_power_balance = yes
+						}
+						is_power_balance_in_range = {
+							id = PER_clergy_balance
+							range > PER_clergy_low_control_range
+						}
+					}
+					has_completed_focus = PER_invite_islamists_to_government
+				}
+			}
+			visible = {
+				NOT = {
+					has_completed_focus = PER_purge_clergy_members
+					has_completed_focus = PER_put_religious_affairs_under_state_control
+				}
+			}
+			traits = {
+				PER_islamist_reformer
+			}
+			ai_will_do = {
+				base = 0.5
+			}
+		}
+	}
+
+	PER_abdulali_diba={ #Islamist
+		name=PER_abdulali_diba
+		portraits={
+			army={
+				small=GFX_idea_Abdulali_Diba
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_abdulali_diba
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				NOT = {
+					has_completed_focus = PER_crush_illegal_religious_activity
+					has_completed_focus = PER_purge_clergy_members
+					has_completed_focus = PER_put_religious_affairs_under_state_control
+				}
+				OR = {
+					if = {
+						limit = {
+							has_any_power_balance = yes
+						}
+						is_power_balance_in_range = {
+							id = PER_clergy_balance
+							range > PER_clergy_low_control_range
+						}
+					}
+					has_completed_focus = PER_invite_islamists_to_government
+				}
+			}
+			visible = {
+				NOT = {
+					has_completed_focus = PER_purge_clergy_members
+					has_completed_focus = PER_put_religious_affairs_under_state_control
+				}
+			}
+			traits = {
+				PER_pan_islamist
+			}
+			ai_will_do = {
+				base = 0.5
+			}
+		}
+	}
+
+	PER_Sayyid_Hasan_Mudarris={ #Islamist
+		name=PER_Sayyid_Hasan_Mudarris
+		portraits={
+			army={
+				small=GFX_idea_PER_Sayyid_Hasan_Mudarris
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_Sayyid_Hasan_Mudarris
+			allowed = {
+				original_tag  = PER
+			}
+			available = {
+				OR = {
+					has_completed_focus = PER_hold_the_coronation_ceremony
+					has_completed_focus = PER_islamic_state_of_iran
+				}
+				if = {
+					limit = {
+						has_any_power_balance = yes
+					}
+					is_power_balance_in_range = {
+						id = PER_clergy_balance
+						range > PER_clergy_low_control_range
+					}
+				}
+				hidden_trigger = {
+					NOT = {
+						has_completed_focus = PER_purge_clergy_members
+						has_completed_focus = PER_put_religious_affairs_under_state_control
+					}
+				}
+			}
+			visible = {
+				NOT = {
+					has_completed_focus = PER_purge_clergy_members
+					has_completed_focus = PER_put_religious_affairs_under_state_control
+				}
+			}
+			traits = {
+				PER_traditional_islamist
+			}
+		}
+	}
+
+	PER_Seyyed_Hossein_Borujerdi={ #Islamist
+		name=PER_Seyyed_Hossein_Borujerdi
+		portraits={
+			army={
+				small=GFX_idea_PER_Seyyed_Hossein_Borujerdi
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_Seyyed_Hossein_Borujerdi
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				OR = {
+					has_completed_focus = PER_hold_the_coronation_ceremony
+					has_completed_focus = PER_islamic_state_of_iran
+				}
+				if = {
+					limit = {
+						has_any_power_balance = yes
+					}
+					is_power_balance_in_range = {
+						id = PER_clergy_balance
+						range > PER_clergy_low_control_range
+					}
+				}
+				hidden_trigger = {
+					NOT = {
+						has_completed_focus = PER_purge_clergy_members
+						has_completed_focus = PER_put_religious_affairs_under_state_control
+					}
+				}
+			}
+			visible = {
+				NOT = {
+					has_completed_focus = PER_purge_clergy_members
+					has_completed_focus = PER_put_religious_affairs_under_state_control
+				}
+			}
+			traits = {
+				political_manipulator #TODO ?
+			}
+		}
+	}
+
+	PER_jalaluddin_ashtiani={
+		name=PER_jalaluddin_ashtiani
+		portraits={
+			army={
+				small=GFX_idea_PER_jalaluddin_ashtiani
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PER_jalaluddin_ashtiani
+			allowed = {
+				original_tag  = PER
+			}
+			available = {
+				has_completed_focus = PER_socialist_islamic_constitution
+			}
+			traits = {
+				socialist_novelist
+			}
+		}
+	}
+
+	#Armed Forces
+	PER_hasan_arfa={
+		name=PER_hasan_arfa
+		portraits={
+			army={
+				large=GFX_portrait_PER_hassan_arfa
+				small=GFX_idea_PER_Hassan_Arfa
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = PER_hasan_arfa
+			ledger = army
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				NOT = { has_government = communism }
+			}
+			traits = { army_radio_intelligence_2 }
+			cost = 100
+		}
+		corps_commander={
+			traits={ desert_fox }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	PER_karim_buzarjomehri={
+		name=PER_karim_buzarjomehri
+		portraits={
+			army={
+				large=GFX_portrait_PER_karim_buzarjomehri
+				small=GFX_idea_PER_Karim_Buzarjomehri
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = PER_karim_buzarjomehri
+			ledger = army
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+			}
+			traits = { army_commando_1 }
+			cost = 100
+		}
+		field_marshal={
+			traits={ war_hero infantry_officer }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+
+	PER_mohammad_shahbakhti={
+		name=PER_mohammad_shahbakhti
+		portraits={
+			army={
+				large=GFX_portrait_PER_Mohammad_Shahbakhti
+				small=GFX_idea_PER_Mohammad_Shahbakhti
+			}
+		}
+		corps_commander={
+			traits={ cavalry_leader desert_fox }
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			planning_skill=2
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+
+	PER_haj_ali_razmara={
+		name=PER_haj_ali_razmara
+		portraits={
+			army={
+				large=GFX_portrait_PER_Haj_Ali_Razmara
+				small=GFX_idea_PER_haj_ali_razmara
+			}
+		}
+		corps_commander={
+			traits={ infantry_leader hill_fighter }
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+
+	PER_abdollah_hedayat={
+		name=PER_abdollah_hedayat
+		portraits={
+			army={
+				large=GFX_portrait_PER_Abdollah_Hedayat
+				small=GFX_idea_PER_Abdollah_Hedayat
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = PER_abdollah_hedayat
+			ledger = army
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+			}
+			traits = { army_artillery_1 }
+		}
+		advisor={
+			slot = theorist
+			idea_token = PER_abdollah_hedayat_theorist
+			ledger = army
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				has_completed_focus = PER_update_our_tactics
+			}
+			traits = { superior_firepower_expert }
+			cost = 150
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		corps_commander={
+			traits={ old_guard }
+			skill=1
+			attack_skill=1
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+
+	PER_amanullah_jahanbani={
+		name=PER_amanullah_jahanbani
+		portraits={
+			army={
+				large=GFX_portrait_PER_Amanullah_Jahanbani
+				small=GFX_idea_PER_Amanullah_Jahanbani
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = PER_amanullah_jahanbani
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+			}
+			traits = { army_chief_drill_2 }
+			cost = 150
+		}
+		corps_commander={
+			traits={ old_guard trickster }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=3
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+
+	PER_ahmad_amir_ahmadi={
+		name=PER_ahmad_amir_ahmadi
+		portraits={
+			army={
+				large=GFX_portrait_PER_Ahmad_Amir_Ahmadi
+				small=GFX_idea_PER_Ahmad_Amir_Ahmadi
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = PER_ahmad_amir_ahmadi
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+			}
+			traits = { army_chief_offensive_2 }
+			cost = 150
+		}
+		corps_commander={
+			traits={ infantry_leader organizer }
+			skill=3
+			attack_skill=3
+			defense_skill=3
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+
+	PER_morteza_yazdanpanah={
+		name=PER_morteza_yazdanpanah
+		portraits={
+			army={
+				large=GFX_portrait_PER_morteza_yazdanpanah
+				small=GFX_idea_PER_morteza_yazdanpanah
+			}
+		}
+		corps_commander={
+			traits={ trait_cautious }
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+
+	PER_mahmoud_afshartous={
+		name=PER_mahmoud_afshartous
+		portraits={
+			army={
+				large=GFX_portrait_PER_mahmoud_afshartous
+				small=GFX_idea_Mahmoud_Afshartous
+			}
+		}
+		corps_commander={
+			traits={ }
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+
+	PER_gholamali_bayandor={
+		name=PER_gholamali_bayandor
+		portraits={
+			army={
+				large=GFX_portrait_PER_gholamali_bayandor
+				small=GFX_idea_PER_Gholamali_Bayandor
+			}
+		}
+		advisor={
+			slot = theorist
+			idea_token = gholamali_bayandor
+			ledger = navy
+			allowed = {
+				original_tag = PER
+			}
+			available = {
+				hidden_trigger = {
+					NOT = { has_completed_focus = PER_holy_purge }
+				}
+			}
+			visible = {
+				NOT = { has_completed_focus = PER_holy_purge }
+			}
+			traits = { naval_theorist }
+			cost = 100
+		}
+		navy_leader={
+			traits={ spotter green_water_expert }
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			maneuvering_skill=1
+			coordination_skill=2
+			legacy_id=-1
+		}
+	}
+
+	PER_abdollah_zelli={
+		name=PER_abdollah_zelli
+		portraits={
+			army={
+				large=GFX_portrait_PER_Abdollah_Zelli
+				small=GFX_idea_PER_Abdollah_Zelli
+			}
+		}
+		navy_leader={
+			traits={ navy_career_officer }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			maneuvering_skill=2
+			coordination_skill=2
+			legacy_id=-1
+		}
+	}
+
+	#Army Advisors
+
+	PER_ahmad_khan_nakhjavan={
+		name=PER_ahmad_khan_nakhjavan
+		portraits={
+			army={
+				small=GFX_idea_Ahmad_Nakhjavan
+			}
+		}
+		advisor={
+			slot = air_chief
+			idea_token = PER_ahmad_khan_nakhjavan
+			allowed = {
+				original_tag = PER
+			}
+			traits = { air_chief_ground_support_2 }
+			cost = 100
+		}
+		advisor={
+			slot = theorist
+			idea_token = PER_ahmad_khan_nakhjavan_theorist
+			ledger = air
+			allowed = {
+				original_tag = PER
+			}
+			traits = { close_air_support_proponent }
+			cost = 150
+		}
+	}
+
+	PER_ali_razmara={ #TODO
+		name=PER_ali_razmara
+		portraits={
+			army={
+				small="GFX_idea_generic_air_arab_3"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = PER_ali_razmara
+			ledger = air
+			allowed = {
+				original_tag = PER
+			}
+			traits = {
+				air_airborne_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	##### TODO HYPNO: altta kalan genericler düzenlenecek
+
+	PER_mir_afkhami={
+		advisor={
+
+
+			slot = high_command
+			idea_token = PER_mir_afkhami
+			ledger = army
+			allowed = {
+				original_tag = PER
+			}
+			traits = {
+				army_regrouping_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Mir Afkhami"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_arab_1"
+			}
+		}
+	}
+	PER_reza_mizani={
+		name="Reza Mizani"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_arab_3"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = PER_reza_mizani
+			allowed = {
+				original_tag = PER
+			}
+			traits = {
+				navy_chief_maneuver_2
+			}
+			cost = 100
+			ai_will_do = {
+				base = 0.25
+			}
+		}
+	}
+	PER_ahmad_mira_khosravani={
+		name="Ahmad Mira Khosravani"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_arab_1"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = PER_ahmad_mira_khosravani
+			ledger = navy
+			allowed = {
+				original_tag = PER
+			}
+			traits = {
+				navy_submarine_2
+			}
+			cost = 100
+			ai_will_do = {
+				base = 0
+			}
+		}
+	}
+	PER_abdolreza_afkhami={
+		advisor={
+
+
+			slot = army_chief
+			idea_token = PER_abdolreza_afkhami
+			allowed = {
+				original_tag = PER
+			}
+			traits = {
+				army_chief_organizational_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Abdolreza Afkhami"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_arab_3"
+			}
+		}
+	}
+	PER_ali_zohayli={
+		advisor={
+			slot = political_advisor
+			idea_token = PER_ali_zohayli
+			allowed  = {
+				original_tag  = PER
+			}
+			traits  = {
+				captain_of_industry
+			}
+		}
+		# TODO[ PORTRAIT LARGE ]: Missing large portrait please check!
+		name="Ali Zohayli"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_arab_3"
+			}
+		}
+	}
+	PER_mostafa_recai={
+		advisor={
+			slot = political_advisor
+			idea_token = PER_mostafa_recai
+			allowed  = {
+				original_tag  = PER
+			}
+			traits  = {
+				war_industrialist
+			}
+		}
+		name="Mostafa Recai"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_arab_3"
+			}
+		}
+	}
+
+	#####
+	#     #   ####   #  ######  #    #  #####  #   ####   #####   ####
+	#        #    #  #  #       ##   #    #    #  #         #    #
+	#####   #       #  #####   # #  #    #    #   ####     #     ####
+	#  #       #  #       #  # #    #    #       #    #         #
+	#     #  #    #  #  #       #   ##    #    #  #    #    #    #    #
+	#####    ####   #  ######  #    #    #    #   ####     #     ####
+
+	PER_mahmoud_hessabi = {
+		name = "Mahmoud Hessabi"
+		portraits = {
+			army = { large = "gfx/leaders/scientists/portrait_PER_mahmoud_hessabi.dds" }
+		}
+
+		scientist = {
+			traits = { scientist_trait_resourceful scientist_trait_bright }
+			skills = {
+				specialization_nuclear = 1
+			}
+		}
+	}
+
+}

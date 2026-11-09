@@ -1,0 +1,216 @@
+#####################
+
+###  ##  #  # # #  ##
+#  #  # ## # # # #
+#  #### # ## ##   #
+#  #  # #  # # #   #
+#  #  # #  # # # ##
+
+####################
+
+KMT_steel_lion_armour_organization = {
+	name = KMT_steel_lion_armour
+	include = generic_mobile_tank_organization
+	icon = GFX_idea_generic_tank_manufacturer_1
+	allowed = {
+		is_potential_power_struggle_participant = yes
+		NOT = { tag = PRC }
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+	}
+	visible = {
+		owner = {
+			OR = {
+				tag = event_target:KMT_central_gov_tag
+				has_country_flag = KMT_pro_japanese_coup
+			}
+		}
+	}
+	available = {
+		owner = { has_completed_focus = KMT_joint_tank_dev }
+	}
+}
+
+CHI_hanyang_arsenal_tank_organization = {
+	name = CHI_hanyang_arsenal_tank
+	include = generic_medium_tank_organization
+	icon = GFX_idea_generic_tank_manufacturer_1
+	allowed = {
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+		AND = {
+			is_literally_china = yes
+			NOT = {
+				original_tag = PRC
+			}
+		}
+	}
+	available = {
+		owner = { has_completed_focus = KMT_increase_funding_of_german_weaponary }
+	}
+}
+
+CHI_army_ordnance_department_organization = {
+	name = CHI_army_ordnance_department
+	include = generic_heavy_tank_organization
+	icon = GFX_idea_army_ordnance_department
+	allowed = {
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+		AND = {
+			is_literally_china = yes
+			NOT = {
+				original_tag = PRC
+			}
+		}
+	}
+	available = {
+		owner = {
+			has_completed_focus = KMT_national_defense_council
+			NOT = { has_war_with = USA }
+			country_exists = USA
+		}
+	}
+}
+
+#####################
+
+## #  # ### ###   ##
+#   #  #  #  #  # #
+#  ####  #  ###   #
+# #  #  #  #      #
+##  #  # ### #    ##
+
+#####################
+
+CHI_jiangnan_shipyard_group_organization = {
+	include = generic_task_force_ship_organization
+	icon = GFX_idea_generic_naval_manufacturer_3
+	allowed = {
+		OR = {
+			is_literally_china = yes
+			tag = MAN
+			tag = MEN
+		}
+		NOT = { original_tag = PRC }
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+	}
+	available = {
+		owner = { controls_state = 613 }
+		if = {
+			limit = {
+				FROM = { tag = CHI }
+			}
+			owner = { has_completed_focus = KMT_revive_jiangnan_shipyard }
+		}
+	}
+}
+
+CHI_dagu_shipyard_organization = {
+	include = generic_raider_ship_organization
+	icon = GFX_idea_generic_naval_manufacturer_3
+	allowed = {
+		OR = {
+			is_literally_china = yes
+			tag = MAN
+			tag = MEN
+		}
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+	}
+	available = {
+		owner = { controls_state = 608 }
+	}
+}
+
+###########################
+
+###  #    ##  #  # ###  ##
+#  # #   #  # ## # #   #
+###  #   #### # ## ##   #
+#    #   #  # #  # #     #
+#    ### #  # #  # ### ##
+
+###########################
+KMT_air_command_light_organization = {
+	name = KMT_air_command_light
+	include = generic_light_aircraft_organization
+	icon = GFX_idea_generic_air_manufacturer_2
+	allowed = {
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+		OR = {
+			is_potential_power_struggle_participant = yes
+			tag = RNG
+		}
+		NOT = { tag = PRC }
+	}
+	visible = {
+		owner = {
+			OR = {
+				tag = event_target:KMT_central_gov_tag
+				has_country_flag = KMT_pro_japanese_coup
+			}
+		}
+	}
+	available = {
+		owner = {
+			OR = {
+				has_completed_focus = KMT_ministry_of_national_defense
+				has_completed_focus = KMT_militarism_focus
+			}
+		}
+	}
+}
+
+###################################
+
+#   #  ##  ### ### ###  ### ### #
+## ## #  #  #  #   #  #  #  #   #
+# # # ####  #  ##  ###   #  ##  #
+#   # #  #  #  #   #  #  #  #   #
+#   # #  #  #  ### #  # ### ### ###
+
+
+###################################
+KMT_rheinmetall_organization = {
+	name = KMT_rheinmetall
+	include = generic_artillery_organization
+	icon = GFX_idea_rheinmetall
+	allowed = {
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+		AND = {
+			is_literally_china = yes
+			NOT = {
+				original_tag = PRC
+			}
+		}
+	}
+	visible = {
+		owner = { has_focus_tree = china_nationalist_focus }
+	}
+	available = {
+		owner = {
+			has_completed_focus = KMT_national_defense_council
+			NOT = { has_war_with = GER }
+		}
+	}
+}
+KMT_mauser_organization = {
+	name = KMT_mauser
+	include = generic_infantry_equipment_organization
+	icon = GFX_idea_mauser
+	allowed = {
+		NOT = { has_dlc = "No Compromise, No Surrender" }
+		AND = {
+			is_literally_china = yes
+			NOT = {
+				original_tag = PRC
+			}
+		}
+	}
+	visible = {
+		owner = { has_focus_tree = china_nationalist_focus }
+	}
+	available = {
+		owner = {
+			has_completed_focus = KMT_national_defense_council
+			NOT = { has_war_with = GER }
+		}
+	}
+}

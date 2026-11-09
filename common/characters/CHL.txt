@@ -1,0 +1,1817 @@
+characters={
+	EUYL_CHL_arturo_alessandri={
+		name="Arturo Alessandri"
+		portraits={
+			civilian={
+				large="GFX_Portrait_chile_arturo_alessandri"
+			}
+		}
+		country_leader={
+			desc="POLITICS_ARTURO_ALESSANDRI_DESC"
+			ideology=liberalism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	EUYL_CHL_carlos_contreras_labarca={
+		name="Carlos Contreras Labarca"
+		portraits={
+			army = {
+				small = "GFX_idea_CHL_labarca_icon"
+			}
+			civilian={
+				large="gfx/leaders/CHL/labarca.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = CHL_carlos_contreras_labarca_idea
+			allowed  = {
+				original_tag  = CHL
+			}
+			available = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+			traits = {
+				marxist_philosopher 
+			}
+		}
+		country_leader={
+			desc="POLITICS_CARLOS_CONTRERAS_LABARCA_DESC"
+			ideology=marxism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	EUYL_CHL_carlos_davila = {
+		name = "Carlos Dávila"
+		portraits = {
+			army = {
+				small = "GFX_CHL_carlos_davila_espinoza_icon"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = CHL_carlos_davila_idea
+			allowed  = {
+				original_tag  = CHL
+			}
+			available = {
+				NOT = {
+					OR = {
+						has_completed_focus = CHL_support_the_radicals
+						has_completed_focus = CHL_crush_the_communists
+						has_completed_focus = CHL_side_with_the_nacistas
+					}
+				}
+			}
+			cost = 100
+			traits = {
+				patriotic_socialist 
+			}
+		}
+	}
+	
+	CHL_ministerio_de_trabajadores = {
+		name = "Ministerio de Trabajadores"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/CHL/portrait_chl_anarchist_commune.dds"
+			}
+		}
+		country_leader = {
+			desc = "POLITICS_CHILEAN_COUNCIL_DESC"
+			expire = "1965.1.1"
+			ideology = anarchism
+			traits = {
+				CHL_the_council_of_workers
+			}
+		}
+	}
+	
+	EUYL_CHL_escudero_oscar_otárola={
+		name="Escudero Oscar Otárola"
+		portraits={
+			army={
+				small="GFX_CHL_oscar_escudero_idea"
+			}
+			army={
+				large="gfx/leaders/CHL/portrait_chl_oscar_escudero_otarola.dds"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = CHL_escudero_oscar
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+			traits  = {
+				army_chief_defensive_2 
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		corps_commander={
+			traits={ trait_CHL_loyalists trait_mountaineer }
+			skill=4
+			attack_skill=4
+			defense_skill=2
+			planning_skill=4
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	EUYL_CHL_carlos_fuentes_rabe={
+		name="Carlos Fuentes Rabe"
+		portraits={
+			army={
+				small="GFX_idea_CHL_carlos_fuente"
+			}
+			army={
+				large="gfx/leaders/CHL/Carlos_Fuentes_Rabe_Ptr.dds"
+			}
+		}
+		
+		advisor={
+			slot = theorist
+			idea_token = EUYL_CHL_carlos_fuentes_rabe
+			ledger = army
+			allowed = {
+				original_tag  = CHL
+			}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}		
+			
+			traits = { military_theorist }
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		corps_commander={
+			traits={ trait_CHL_loyalists hill_fighter urban_assault_specialist }
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	EUYL_CHL_arturo_espinoza_mujica={
+		name="Arturo Espinoza Mujica"
+		advisor={
+			slot = high_command
+			idea_token = EUYL_CHL_arturo_espinoza_mujica
+			ledger =  army
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+			traits  = {
+				army_commando_2 
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		portraits={
+			army={
+				small="GFX_idea_CHL_arturo_espinoza"
+			}
+			army={
+				large="gfx/leaders/CHL/Arturo_Espinoza_Mujica_Ptr.dds"
+			}
+		}
+		corps_commander={
+			traits={ trait_CHL_fascist_sympathies }
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=3
+			legacy_id=32123
+		}
+	}
+
+	EUYL_CHL_arturo_puga = {
+		name = "Arturo Puga"
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_CHL_arturo_puga_idea
+			allowed  = {
+				original_tag  = CHL
+			}
+			available = {
+				OR = {
+					has_government = fascism 
+					has_government = neutrality
+				}
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}
+			traits = {
+				EUYL_soldier_recruiter 
+			}
+			on_add = {
+				CHL = {
+					add_war_support = 0.02
+				}
+			}
+			can_be_fired = no
+		}	
+		corps_commander={
+			traits={ trait_CHL_communist_sympathies }
+			skill=2
+			attack_skill=3
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+		portraits={
+			army={
+				small="GFX_CHL_arturo_puga_icon"
+			}
+			army={
+				large="gfx/leaders/CHL/portrait_CHL_Arturo_Puga.dds"
+			}
+		}
+	}
+
+	CHL_jorge_gonzales_von_marées={
+		name="Jorge Gonzales Von Marées"
+		portraits={
+			army = {
+				small = "GFX_idea_CHL_von_marees_icon"
+			}
+			civilian={
+				large="gfx/leaders/CHL/portrait_chl_jorge_gonzales_von_mares.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = CHL_jorge_gonzales_von_marées_ideas
+			allowed  = {
+				original_tag  = CHL
+			}
+			available = {
+				has_completed_focus = CHL_take_over_via_diplomacy
+			}
+			traits = {
+				CHL_lider_nacista 
+			}
+			on_add = {
+				custom_effect_tooltip = CHL_increase_nacista_by_3
+				ROOT = { add_war_support = 0.03 }
+				hidden_effect = {
+					add_to_variable = { CHL_nacista_power = 3 }
+					set_temp_variable = { CHL_temp_power = 100 }
+					set_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+					add_to_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+					subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+					set_variable = { CHL_control_over_nation = CHL_temp_power }
+					set_variable = { CHL_fascist_drift = CHL_nacista_power }
+					set_variable = { CHL_communist_drift = CHL_communists_power }
+					divide_variable = { CHL_fascist_drift = 450 }
+					divide_variable = { CHL_communist_drift = 450 }
+				}
+			}
+			can_be_fired = no
+		}
+		country_leader={
+			desc="POLITICS_JORGE_GONZÁLEZ_VON_MARÉES_DESC"
+			ideology=nazism
+			traits={ CHL_el_jefe }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	CHL_carlos_ibáñez_del_campo={
+		name="Carlos Ibáñez del Campo"
+		portraits={
+			army={
+				small="GFX_idea_CHL_ibanez_icon"
+			}
+			civilian = {
+				large = "gfx/leaders/CHL/Portrait_CHL_Carlos_Ibanez_del_Campo.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = CHL_carlos_ibáñez_del_campo_idea
+			allowed  = {
+				original_tag  = CHL
+			}
+			available = {
+				has_completed_focus = CHL_take_over_via_blood
+			}
+			traits = {
+				SWI_corporatist 
+			}
+			on_add = {
+				custom_effect_tooltip = CHL_increase_nacista_by_3
+				ROOT = { add_war_support = 0.02 }
+				hidden_effect = {
+					add_to_variable = { CHL_nacista_power = 3 }
+					set_temp_variable = { CHL_temp_power = 100 }
+					set_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+					add_to_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+					subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+					set_variable = { CHL_control_over_nation = CHL_temp_power }
+					set_variable = { CHL_fascist_drift = CHL_nacista_power }
+					set_variable = { CHL_communist_drift = CHL_communists_power }
+					divide_variable = { CHL_fascist_drift = 450 }
+					divide_variable = { CHL_communist_drift = 450 }
+				}
+			}
+			can_be_fired = no
+		}
+		corps_commander={
+			traits={ trait_CHL_fascist_sympathies trait_mountaineer urban_assault_specialist }
+			skill=4
+			attack_skill=3
+			defense_skill=3
+			planning_skill=2
+			logistics_skill=4
+			legacy_id=-1
+		}
+		country_leader = {
+			desc="POLITICS_CARLOS_IBANEZ_DEL_CAMPO_DESC"
+			ideology=nazism
+			traits={ CHL_military_leader CHL_economist }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	CHL_bartolomé_guillermo_blanche_espejo={
+		name="Bartolomé Guillermo Blanche Espejo"
+		portraits={
+			army={
+				small="GFX_CHL_bartolome_blanche"
+			}
+			army={
+				large="gfx/leaders/CHL/Bartolome_Blanche_Espejo_V3_Ptr.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = CHL_bartolome_blanche_espejo
+			ledger  = army 
+			allowed  = {
+				original_tag = CHL
+			}
+			traits  = {
+				army_cavalry_2 
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		corps_commander={
+			traits={ trait_CHL_loyalists brilliant_strategist winter_specialist }
+			skill=3
+			attack_skill=1
+			defense_skill=3
+			planning_skill=3
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	CHL_francisco_javier_diaz = {
+		name = "Francisco Javier Díaz Valderrama"
+		portraits = {
+			army = {
+				small = "GFX_CHL_javier_diaz_id"
+			}
+			army = {
+				large = "gfx/leaders/CHL/CHL_javier_diaz.dds"
+			}
+		}
+		advisor = {
+			slot = army_chief
+			idea_token = CHL_francisco 
+			ledger = army 
+			allowed = { original_tag = CHL }
+			available = {
+				has_government = fascism
+			}
+			traits = {
+				army_logistics_2
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		corps_commander = {
+			traits = { trait_CHL_fascist_sympathies old_guard }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	EUYL_CHL_oscar_fuentes_pantoja={
+		name="Oscar Fuentes Pantoja"
+		portraits={
+			army={
+				small="gfx/interface/ideas/idea_south_america_generic_land_1.dds"
+			}
+			army={
+				large="gfx/leaders/CHL/Oscar_Fuentes_Pantoja_Ptr.dds"
+			}
+		}
+		corps_commander={
+			traits={ trait_CHL_communist_sympathies bearer_of_artillery }
+			skill=2
+			attack_skill=1
+			defense_skill=3
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	CHL_alfredo_portales={
+		name="Alfredo Portales"
+		portraits={
+			army={
+				large = GFX_portrait_CHL_alfredo_portales_mourgues
+				small = GFX_portrait_CHL_alfredo_portales_mourgues_small
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = CHL_alfredo_idea
+			ledger =  army
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+			traits  = {
+				army_logistics_2 
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=34119
+		}
+	}
+	EUYL_CHL_peter_hansen = {
+		name = "Peter Hansen" 
+		portraits = {
+			army = {
+				large = GFX_portrait_CHL_peter_hansen
+				small = GFX_portrait_CHL_peter_hansen_small
+			}
+		}
+
+		advisor = {
+			slot = army_chief 
+			idea_token = CHL_peter_hansen_idea
+			allowed = {
+				original_tag = CHL 
+			}
+			available = {
+				NOT = { has_completed_focus = CHL_our_own_fate }
+				custom_trigger_tooltip = {
+					tooltip = CHL_is_not_currently_in_germany_tt
+					NOT = { has_character_flag = CHL_living_in_germany }
+				}
+			}
+			traits  = {
+				army_chief_offensive_3 
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		corps_commander = {
+			traits = { trait_CHL_fascist_sympathies armor_officer harsh_leader }
+			skill=4
+			attack_skill=3
+			defense_skill=2
+			planning_skill=4
+			logistics_skill=3
+			legacy_id=-1
+			visible = { NOT = { has_character_flag = CHL_living_in_germany } }
+		}
+	}
+
+	CHL_venancio_conuepan = {
+		name = "Venancio Coñuepán Huenchual"
+		portraits = {
+			civilian = {
+				large = GFX_portrait_CHL_venancio_huenchual
+				small = GFX_portrait_CHL_venancio_huenchual_small
+			}
+			army = {
+				large = GFX_portrait_CHL_venancio_huenchual
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = CHL_venancio
+			allowed = {
+				original_tag = CHL
+			}
+			traits = {
+				BRA_bright_mind 
+			}
+		}
+	}
+
+	EUYL_CHL_silvestre_urizar_branders = {
+		name = "Silvestre Urizar Banderas"
+		portraits = {
+			army = {
+				small = "GFX_CHL_silvestre_icon"
+			}
+			army = {
+				large = "gfx/leaders/CHL/portrait_CHL_Silvestre_Urizar_Banderas.dds"
+			}
+		}
+		field_marshal = {
+			traits = {
+				bearer_of_artillery skilled_staffer
+			}
+			skill = 3
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 4
+			logistics_skill = 3
+		}
+		advisor={
+			slot = army_chief
+			idea_token = EUYL_CHL_silvestre_urizar_branders_idea
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+			traits  = {
+				army_artillery_2 
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+	}
+
+	EUYL_CHL_juan_pablo_bennett = {
+		name = "Juan Pablo Bennett"
+		portraits={
+			army={
+				small="GFX_CHL_juan_pablo_bennett_icon"
+			}
+			army={
+				large="gfx/leaders/CHL/portrait_CHL_Juan_Pablo_Bennett.dds"
+			}
+		}
+		corps_commander = {
+			traits = {
+				trait_mountaineer
+			}
+			skill = 2
+			attack_skill = 1
+			defense_skill = 3
+			planning_skill = 2
+			logistics_skill = 4
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_CHL_juan_pablo_bennett_idea
+			allowed  = {
+				original_tag  = CHL
+			}
+			traits = {
+				EUYL_war_minister 
+			}
+		}
+	}
+
+	CHL_Óscar_novoa_fuentes={
+		name="Óscar Novoa Fuentes"
+		portraits={
+			army={
+				large = GFX_portrait_CHL_e_novoa_fuentes
+				small = GFX_portrait_CHL_e_novoa_fuentes_small
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = CHL_e_novoa_fuentes
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+				NOT = {
+					has_government = fascism
+				}
+			}	
+			traits  = {
+				army_chief_reform_2 
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		corps_commander = {
+			traits={ old_guard trait_CHL_communist_sympathies }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=31111
+		}
+	}
+	CHL_ramon_cañas_montalva={
+		name="Ramon Cañas Montalva"
+		portraits={
+			army={
+				small="gfx/interface/ideas/idea_south_america_generic_land_3.dds"
+			}
+			army={
+				large="gfx/leaders/CHL/portrait_CHL_Ramon_Cañas_Montalva.dds"
+			}
+		}
+		corps_commander={
+			traits={ trait_CHL_fascist_sympathies trait_CHL_communist_sympathies trait_CHL_loyalists }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=3
+			legacy_id=32124
+		}
+	}
+	CHL_daniel_herrera={
+		name="Ariosto Herrera"
+		portraits={
+			army={
+				large = GFX_portrait_CHL_ariosto_herrera
+				small = GFX_portrait_CHL_ariosto_herrera_small
+			}
+		}
+		corps_commander={
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=34511
+		}
+	}
+	CHL_tomás_montt={
+		name="Tomás Montt"
+		portraits={
+			civilian={
+				large="gfx/leaders/leader_unknown.dds"
+			}
+		}
+		country_leader={
+			ideology=fascism
+			traits={ reluctant_interventionist ideological_crusader }
+			expire="1941.1.1.12"
+			id=-1
+		}
+	}
+	CHL_bartolomé_orbegoso={
+		name="Bartolomé Orbegoso"
+		portraits={
+			civilian={
+				large="gfx/leaders/South America/Portrait_South_America_Generic_3.dds"
+			}
+		}
+		country_leader={
+			ideology=oligarchism
+			traits={ editor appeaser }
+			expire="1941.1.1.12"
+			id=-1
+		}
+	}
+	
+	EUYL_CHL_pedro_aguirre_cerda={
+		name="Pedro Aguirre Cerda"
+		portraits={
+			army = {
+				small = "GFX_idea_CHL_cerda_icon"
+			}
+			civilian={
+				large="gfx/leaders/CHL/portrait_CHL_pedro_aguirre_cerda.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = CHL_pedro_aguirre_cerda_idea
+			allowed  = {
+				original_tag  = CHL
+			}
+			cost = 75
+			available = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = neutrality
+						has_country_leader = {
+							name = "Pedro Aguirre Cerda"
+							ruling_only = yes 
+						}
+					}
+				}
+			}
+			traits = {
+				SWI_democratic_capitalist 
+			}
+		}
+		country_leader={
+			ideology=social_democracy
+			traits={ CHL_leader_of_the_people }
+			expire="1965.1.1"
+			id=-1
+		}
+	}
+	
+	EUYL_CHL_jeronimo_mendez={
+		name="Jerónimo Méndez"
+		portraits={
+			army = {
+				small = "GFX_idea_CHL_jeronimo_mendez_icon"
+			}
+			civilian={
+				large="gfx/leaders/CHL/portrait_CHL_Jeronimo_Mendez.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = CHL_jeronimo_mendez_idea
+			allowed  = {
+				original_tag  = CHL
+			}
+			cost = 100
+			available = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = neutrality
+						has_country_leader = {
+							name = "Jerónimo Méndez"
+							ruling_only = yes 
+						}
+					}
+				}
+			}
+			traits = {
+				ARG_minister_of_interior 
+			}
+		}
+		country_leader={
+			ideology=socialism
+			traits={ CHL_leader_of_the_people }
+			expire="1965.1.1"
+			id=-1
+		}
+	}
+	
+	CHL_gustavo_ross={
+		name="Gustavo Ross Santa María"
+		advisor={
+			slot = political_advisor
+			idea_token = CHL_gustavo_ross_santa_maria
+				allowed  = {
+					original_tag  = CHL
+				}
+				traits  = {
+					armaments_organizer 
+				}
+		}
+		portraits={
+			army={
+				small="GFX_idea_CHL_gustavo"
+			}
+			civilian={
+				large="gfx/leaders/CHL/portrait_CHL_gustavo_ross.dds"
+			}
+		}
+		country_leader={
+			ideology=liberalism
+			traits={ economist }
+			expire="1965.1.1"
+			id=-1
+		}
+	}
+	
+	CHL_juan_antonio={
+		name="Juan Antonio Riós"
+		portraits={
+			army = {
+				small = "GFX_idea_CHL_juan_antonio_rios_icon"
+			}
+			civilian={
+				large="gfx/leaders/CHL/portrait_CHL_Jaun_Antonio_Riós.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = CHL_juan_antonio_idea
+			allowed  = {
+				original_tag  = CHL
+			}
+			available = {
+				NOT = {
+					has_government = communism
+				}
+			}
+			traits = {
+				voice_of_restraint 
+			}
+		}
+		country_leader={
+			desc = "POLITICS_JUAN_ANTONIO_DESC"
+			ideology=socialism
+			traits={ ARG_expert_commercialist }
+			expire="1965.1.1"
+			id=-1
+		}
+	}
+	
+	EUYL_CHL_miguel_cruchaga_tacomal={
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_CHL_miguel_cruchaga_tacomal
+			allowed  = {
+					original_tag  = CHL
+				}
+				traits  = {
+					war_industrialist 
+				}
+		}
+		name="Miguel Cruchaga Tacomal"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}
+	}
+	
+	EUYL_CHL_luis_alamos_barros={
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_CHL_luis_alamos_barros
+			allowed  = {
+					original_tag  = CHL
+				}
+				traits  = {
+					ideological_crusader 
+				}
+		}
+		name="Luis Alamos Barros"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_3"
+			}
+		}
+	}
+	
+	EUYL_CHL_pedro_dartnell={
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_CHL_pedro_dartnell
+			allowed  = {
+					original_tag  = CHL
+				}
+				traits  = {
+					captain_of_industry 
+				}
+		}
+		name="Pedro Dartnell"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+	}
+	
+	EUYL_CHL_carlos_prats = {
+		name = "Carlos Prats"
+		portraits = {
+			army = {
+				large = GFX_portrait_CHL_carlos_prats
+				small = GFX_portrait_CHL_carlos_prats_small
+			}
+		}
+		corps_commander = {
+			traits={ ambusher }
+			skill=2
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id = -1
+			visible = { has_character_flag = CHL_promoted }
+		}
+	}
+
+	EUYL_CHL_guillermo_barrios_tirado = {
+		name = "Guillermo Barrios Tirado"
+		portraits = {
+			army = {
+				small = "GFX_CHL_barrios_tirado_idea"
+				large = "gfx/leaders/CHL/CHL_guillermo_barrios.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = CHL_guillermo_barrios_idea
+			ledger =  army
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+			traits  = {
+				army_logistics_2 
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		corps_commander = {
+			traits={ infantry_expert }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=1
+			legacy_id = -1
+		}
+	}
+
+	CHL_vicente_merino_bielich = {
+		name = "Vicente Merino Bielich"
+		portraits = {
+			army = {
+				large = "gfx/leaders/CHL/CHL_vicente_merino.dds"
+			}
+		}
+		navy_leader={
+			traits={ chief_engineer }
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			maneuvering_skill=3
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+
+	CHL_navo_jorge_videla_cobo = {
+		name = "Navo Jorge Videla Cobo"
+		portraits = {
+			army = {
+				large = "gfx/leaders/CHL/CHL_navo_jorge.dds"
+			}
+		}
+		navy_leader={
+			traits={ gunnery_expert }
+			skill=2
+			attack_skill=3
+			defense_skill=1
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+	
+	EUYL_CHL_rene_schneider = {
+		name = "René Schneider"
+		portraits = {
+			army = {
+				large = GFX_portrait_CHL_rene_schneider
+				small = GFX_portrait_CHL_rene_schneider_small
+			}
+		}
+		corps_commander = {
+			traits={ }
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id = -1
+			visible = { has_character_flag = CHL_promoted }
+		}
+	}
+	
+	CHL_augusto_pinochet={
+		advisor={
+			slot = political_advisor
+			idea_token = CHL_augusto_pinochet
+			allowed  = {
+				original_tag  = CHL
+			}
+			available = {
+				has_government = fascism
+				date > 1941.1.1
+			}
+			traits  = {
+				national_integralist 
+			}
+		}
+		corps_commander={
+			traits={ trait_CHL_fascist_sympathies }
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=2
+			legacy_id = -1
+			visible = { has_character_flag = CHL_promoted }
+		}
+		name="Augusto Pinochet"
+		portraits={
+			army={
+				small="GFX_idea_CHL_pinochet"
+			}
+			army = {
+				large = "gfx/leaders/CHL/CHL_agusto_pinochet.dds"
+			}
+		}
+	}
+	
+	EUYL_CHL_dario_mujica_gamboa={
+		advisor={
+			slot = air_chief
+			idea_token = EUYL_CHL_dario_mujica_gamboa
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+				traits  = {
+					air_chief_ground_support_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Dario Mujica Gamboa"
+		portraits={
+			army={
+				small="GFX_idea_south_america_generic_5"
+			}
+		}
+	}
+	
+	EUYL_CHL_marmaduke_grove={
+		advisor={
+			slot = air_chief
+			idea_token = EUYL_CHL_marmaduke_grove
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+			traits  = {
+				air_chief_old_guard 
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Marmaduke Grove Vallejo"
+		portraits={
+			army = {
+				small = "GFX_CHL_marmaduke_grove_icon"
+			}
+			army = {
+				large = "gfx/leaders/CHL/portrait_CHL_Marmaduke_Grove.dds"
+			}
+		}
+	}
+	
+	EUYL_CHL_c_j_de_la_motte={
+		advisor={
+			slot = navy_chief
+			idea_token = EUYL_CHL_c_j_de_la_motte
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+				traits  = {
+					navy_chief_maneuver_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="C. J. de la Motte"
+		portraits={
+			army={
+				small="GFX_idea_south_america_generic_3"
+			}
+		}
+	}
+	
+	EUYL_CHL_francisco_o_ryan_orrego={
+		advisor={
+			slot = navy_chief
+			idea_token = EUYL_CHL_francisco_o_ryan_orrego
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+				traits  = {
+					navy_chief_decisive_battle_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Francisco O. Ryan Orrego"
+		portraits={
+			army={
+				small="GFX_idea_south_america_generic_1"
+			}
+		}
+	}
+	
+	EUYL_CHL_ernesto_m_orlando={
+		advisor={
+			slot = high_command
+			idea_token = EUYL_CHL_ernesto_m_orlando
+			ledger =  army
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+				traits  = {
+					army_infantry_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Ernesto M. Orlando"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_2"
+			}
+		}
+	}
+	
+	EUYL_CHL_jose_luis_sanchez_besa={
+		advisor={
+			slot = high_command
+			idea_token = EUYL_CHL_jose_luis_sanchez_besa
+			ledger =  air
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+				traits  = {
+					air_strategic_bombing_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Jose Luis Sanchez Besa"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+	}
+	
+	EUYL_CHL_carlos_puga_monsalve={
+		advisor={
+			slot = high_command
+			idea_token = EUYL_CHL_carlos_puga_monsalve
+			ledger =  navy
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+				traits  = {
+					air_naval_strike_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Carlos Puga Monslave"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_3"
+			}
+		}
+	}
+	
+	EUYL_CHL_gustavo_silva={
+		advisor={
+			slot = high_command
+			idea_token = EUYL_CHL_gustavo_silva
+			ledger =  navy
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+				traits  = {
+					navy_naval_air_defense_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Gustavo Silva"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_1"
+			}
+		}
+	}
+	
+	EUYL_CHL_dario_cellejas_rojas={
+		advisor={
+			slot = theorist
+			idea_token = EUYL_CHL_dario_cellejas_rojas
+			ledger =  navy
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+			research_bonus = {
+				naval_doctrine = 0.150
+			}
+			
+			traits = { naval_theorist }
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Dario Cellejas Rojas"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_2"
+			}
+		}
+	}
+	
+	EUYL_CHL_ariosto_herrera={
+		advisor={
+			slot = theorist
+			idea_token = EUYL_CHL_ariosto_herrera
+			ledger =  air
+			allowed  = {
+					original_tag  = CHL
+				}
+			available = {
+				NOT = {
+					has_completed_focus = CHL_our_own_fate
+				}
+			}	
+			research_bonus = {
+				air_doctrine = 0.150
+			}
+			
+			traits = { air_warfare_theorist }
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Ariosto Herrera"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_2"
+			}
+		}
+	}
+	
+	CHL_defensive_military_council={ #Anarchist
+		advisor={
+			slot = army_chief
+			idea_token = CHL_defensive_military_council
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					army_chief_defensive_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Defensive Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_offensive_military_council={ #Anarchist
+		advisor={
+			slot = army_chief
+			idea_token = CHL_offensive_military_council
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					army_chief_offensive_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Offensive Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_organizational_military_council={ #Anarchist
+		advisor={
+			slot = army_chief
+			idea_token = CHL_organizational_military_council
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					army_chief_organizational_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Organizational Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_air_safety_aviation_council={ #Anarchist
+		advisor={
+			slot = air_chief
+			idea_token = CHL_air_safety_aviation_council
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					air_chief_safety_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Air Safety Aviation Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_all_weather_aviation_council={ #Anarchist
+		advisor={
+			slot = air_chief
+			idea_token = CHL_all_weather_aviation_council
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					air_chief_all_weather_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="All Weather Aviation Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_commerce_raiding_naval_council={ #Anarchist
+		advisor={
+			slot = navy_chief
+			idea_token = CHL_commerce_raiding_naval_council
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					navy_chief_commerce_raiding_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Commerce Raiding Naval Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_reform_naval_council={ #Anarchist
+		advisor={
+			slot = navy_chief
+			idea_token = CHL_reform_naval_council
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					navy_chief_reform_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Reform Naval Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_infantry_military_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = CHL_infantry_military_council
+			ledger = army
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					army_infantry_3 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Infantry Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_army_regrouping_military_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = CHL_army_regrouping_military_council
+			ledger = army
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					army_regrouping_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Army Regrouping Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_concealment_military_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = CHL_concealment_military_council
+			ledger = army
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					army_concealment_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Concealment Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_naval_strike_aviation_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = CHL_naval_strike_aviation_council
+			ledger = navy
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					air_naval_strike_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Naval Strike Aviation Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_close_air_support_aviation_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = CHL_close_air_support_aviation_council
+			ledger = air
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					air_close_air_support_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Close Air Support Aviation Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_logistics_naval_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = CHL_logistics_naval_council
+			ledger = navy
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					navy_fleet_logistics_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Logistics Naval Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+	
+	CHL_anti_submarine_naval_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = CHL_anti_submarine_naval_council
+			ledger = navy
+			allowed  = {
+					original_tag  = CHL
+				}
+			visible = {
+				has_completed_focus = CHL_our_own_fate
+			}
+
+			available = {
+				has_completed_focus = CHL_our_own_fate
+				NOT = {
+					has_government = democratic
+				}
+			}
+				traits  = {
+					navy_anti_submarine_2 
+				}
+				ai_will_do  = {
+					factor  = 1.000
+				}
+		}
+		name="Anti-Submarine Naval Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+}

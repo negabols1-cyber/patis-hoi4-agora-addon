@@ -1,0 +1,2046 @@
+focus_tree = {
+	id = french_royalist_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = FRA
+		}
+	}
+
+	continuous_focus_position = {
+		x = 50 y = 3000
+	}
+
+	initial_show_position = {
+		x = 0
+	}
+
+	default = no
+	shared_focus = UFRA_nationalism
+	shared_focus = UFRA_open_to_the_world
+	shared_focus = UFRA_economic_policies
+	shared_focus = UFRA_devalue_the_franc
+	shared_focus = UFRA_begin_rearmament
+	shared_focus = UFRA_naval_rearmament
+	shared_focus = UFRA_air_focus
+
+	# ROYALISTE TREE
+	focus = {
+		id = UFRA_the_af_wins
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		x = 47
+		y = 0
+		offset = {
+			x = 0
+			y = 0
+		}
+		mutually_exclusive = { }
+		cost = 1
+
+		ai_will_do = {
+			base = 500
+		}
+
+		available = {
+		}
+
+		bypass = {
+			always = yes
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = FRA_pl_acfr_tt
+		}
+	}
+	focus = {
+		id = UFRA_the_council_of_rambouillet
+		icon = GFX_goal_generic_major_alliance
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		mutually_exclusive = { }
+		prerequisite = { focus =  UFRA_the_af_wins }
+		relative_position_id = UFRA_the_af_wins
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			remove_ideas = FRA_coup
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.1
+			}
+		}
+	}
+	focus = {
+		id = UFRA_revise_the_constitution
+		icon = GFX_focus_generic_treaty
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_the_council_of_rambouillet
+		}
+		relative_position_id = UFRA_the_council_of_rambouillet
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY}
+		completion_reward = {
+			add_timed_idea = { idea = FRA_constitutional_revision days = 170 }
+			add_stability = -0.05
+			custom_effect_tooltip = FRA_parliment_senate_reworked_tt
+			set_country_flag = FRA_senate_reworked
+			set_country_flag = FRA_veto_right
+			unlock_decision_tooltip = { decision = FRA_veto_right show_effect_tooltip = yes }
+		}
+	}
+	focus = {
+		id = UFRA_work_with_af
+		icon = GFX_focus_generic_treaty
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_revise_the_constitution
+		}
+		mutually_exclusive = { focus = UFRA_dismiss_af }
+		relative_position_id = UFRA_revise_the_constitution
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY}
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = UFRA_camelots_du_roi
+		icon = GFX_u_fra_camelots
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_work_with_af }
+		relative_position_id = UFRA_work_with_af
+		mutually_exclusive = { }
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = FRA_camelots_du_roi
+		}
+	}
+	focus = {
+		id = UFRA_royal_dictatorship
+		icon = GFX_focus_generic_home_defense
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_work_with_af }
+		relative_position_id = UFRA_work_with_af
+		mutually_exclusive = { }
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_country_leader_trait = dictator
+		}
+	}
+	focus = {
+		id = UFRA_restore_the_divine_right
+		icon = GFX_focus_spa_no_compromise_on_carlist_ideals
+		x = 4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_work_with_af }
+		relative_position_id = UFRA_work_with_af
+		mutually_exclusive = { }
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = FRA_absolute_monarchy_0
+		}
+	}
+	focus = {
+		id = UFRA_counter_revolution
+		icon = GFX_focus_up_joan_of_arc
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_restore_the_divine_right }
+		prerequisite = { focus = UFRA_royal_dictatorship }
+		relative_position_id = UFRA_restore_the_divine_right
+		mutually_exclusive = { }
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			ROOT = { country_event = { id = u_fra.3 } }
+			if = {
+				limit = {
+					NOT = {
+						has_idea = FRA_absolute_monarchy_0
+						has_idea = FRA_absolute_monarchy_1
+						has_idea = FRA_absolute_monarchy_2
+						has_idea = FRA_absolute_monarchy_3
+						has_idea = FRA_absolute_monarchy_4
+						has_idea = FRA_absolute_monarchy_5
+						has_idea = FRA_absolute_monarchy_6
+						has_idea = FRA_absolute_monarchy_7
+						has_idea = FRA_absolute_monarchy_8
+						has_idea = FRA_absolute_monarchy_9
+						has_idea = FRA_absolute_monarchy_10
+					}
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = FRA_absolute_monarchy_0
+						add_idea = FRA_absolute_monarchy_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_0
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_0
+					add_idea = FRA_absolute_monarchy_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_1
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_1
+					add_idea = FRA_absolute_monarchy_4
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_3
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_3
+					add_idea = FRA_absolute_monarchy_9
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_5
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_5
+					add_idea = FRA_absolute_monarchy_10
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_8
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_8
+					add_idea = FRA_absolute_monarchy_10
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_the_real_country
+		icon = GFX_focus_focus_fra_border
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_restore_the_divine_right }
+		prerequisite = { focus = UFRA_royal_dictatorship }
+		relative_position_id = UFRA_restore_the_divine_right
+		mutually_exclusive = { }
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_idea = FRA_absolute_monarchy_0
+						has_idea = FRA_absolute_monarchy_1
+						has_idea = FRA_absolute_monarchy_2
+						has_idea = FRA_absolute_monarchy_3
+						has_idea = FRA_absolute_monarchy_4
+						has_idea = FRA_absolute_monarchy_5
+						has_idea = FRA_absolute_monarchy_6
+						has_idea = FRA_absolute_monarchy_7
+						has_idea = FRA_absolute_monarchy_8
+						has_idea = FRA_absolute_monarchy_9
+						has_idea = FRA_absolute_monarchy_10
+					}
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = FRA_absolute_monarchy_0
+						add_idea = FRA_absolute_monarchy_3
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_0
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_0
+					add_idea = FRA_absolute_monarchy_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_1
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_1
+					add_idea = FRA_absolute_monarchy_5
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_2
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_2
+					add_idea = FRA_absolute_monarchy_7
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_6
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_6
+					add_idea = FRA_absolute_monarchy_10
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_4
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_4
+					add_idea = FRA_absolute_monarchy_10
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_authority_and_prestige
+		icon = GFX_goal_generic_demand_territory
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_restore_the_divine_right }
+		prerequisite = { focus = UFRA_royal_dictatorship }
+		relative_position_id = UFRA_restore_the_divine_right
+		mutually_exclusive = { }
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_idea = FRA_absolute_monarchy_0
+						has_idea = FRA_absolute_monarchy_1
+						has_idea = FRA_absolute_monarchy_2
+						has_idea = FRA_absolute_monarchy_3
+						has_idea = FRA_absolute_monarchy_4
+						has_idea = FRA_absolute_monarchy_5
+						has_idea = FRA_absolute_monarchy_6
+						has_idea = FRA_absolute_monarchy_7
+						has_idea = FRA_absolute_monarchy_8
+						has_idea = FRA_absolute_monarchy_9
+						has_idea = FRA_absolute_monarchy_10
+					}
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = FRA_absolute_monarchy_0
+						add_idea = FRA_absolute_monarchy_1
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_0
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_0
+					add_idea = FRA_absolute_monarchy_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_2
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_2
+					add_idea = FRA_absolute_monarchy_6
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_3
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_3
+					add_idea = FRA_absolute_monarchy_8
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_9
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_9
+					add_idea = FRA_absolute_monarchy_10
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_absolute_monarchy_7
+				}
+				swap_ideas = {
+					remove_idea = FRA_absolute_monarchy_7
+					add_idea = FRA_absolute_monarchy_10
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_local_democratie
+		icon = GFX_goal_tfv_strengthen_commonwealth_ties
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_royal_dictatorship
+			focus = UFRA_camelots_du_roi
+		}
+		relative_position_id = UFRA_royal_dictatorship
+		mutually_exclusive = { }
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_political_power = 100
+			random_owned_state = {
+				limit = {
+					is_core_of = FRA
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = FRA
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = FRA
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = FRA
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_dismiss_af
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_revise_the_constitution
+		}
+		mutually_exclusive = { focus = UFRA_work_with_af }
+		relative_position_id = UFRA_revise_the_constitution
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_timed_idea = { idea = FRA_counter_action days = 730 }
+		}
+	}
+	focus = {
+		id = UFRA_guarantee_the_constitution
+		icon = GFX_goal_generic_military_sphere
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_dismiss_af
+		}
+		relative_position_id = UFRA_dismiss_af
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_war_support = 0.1
+		}
+	}
+	focus = {
+		id = UFRA_reestablish_elections
+		icon = GFX_goal_support_democracy
+		x = -4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_dismiss_af
+		}
+		relative_position_id = UFRA_dismiss_af
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			set_country_flag = FRA_parliament_can_discuss
+			set_country_flag = FRA_maintain_election
+			custom_effect_tooltip = fra_parliament_maintain_tt
+			custom_effect_tooltip = FRA_parliment_election_tt
+
+			fra_parliament_gui_elections = yes
+
+			country_event = u_fra.38
+			add_ideas = FRA_constitutional_monarchy_0
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = yes
+			}
+		}
+	}
+	focus = {
+		id = UFRA_christian_democracy
+		icon = GFX_focus_generic_catholic_dominion
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_reestablish_elections
+		}
+		relative_position_id = UFRA_reestablish_elections
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_popularity = { ideology = democratic popularity = 0.10 }
+			if = {
+				limit = {
+					NOT = {
+						has_idea = FRA_constitutional_monarchy_0
+						has_idea = FRA_constitutional_monarchy_1
+						has_idea = FRA_constitutional_monarchy_2
+						has_idea = FRA_constitutional_monarchy_3
+						has_idea = FRA_constitutional_monarchy_4
+						has_idea = FRA_constitutional_monarchy_5
+						has_idea = FRA_constitutional_monarchy_6
+						has_idea = FRA_constitutional_monarchy_7
+						has_idea = FRA_constitutional_monarchy_8
+						has_idea = FRA_constitutional_monarchy_9
+						has_idea = FRA_constitutional_monarchy_10
+					}
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = FRA_constitutional_monarchy_0
+						add_idea = FRA_constitutional_monarchy_2
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_0
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_0
+					add_idea = FRA_constitutional_monarchy_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_1
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_1
+					add_idea = FRA_constitutional_monarchy_4
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_3
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_3
+					add_idea = FRA_constitutional_monarchy_9
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_5
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_5
+					add_idea = FRA_constitutional_monarchy_10
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_8
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_8
+					add_idea = FRA_constitutional_monarchy_10
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = FRA
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = FRA
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_egalite_monarchy
+		icon = GFX_focus_generic_treaty
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_reestablish_elections
+		}
+		relative_position_id = UFRA_reestablish_elections
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_idea = FRA_constitutional_monarchy_0
+						has_idea = FRA_constitutional_monarchy_1
+						has_idea = FRA_constitutional_monarchy_2
+						has_idea = FRA_constitutional_monarchy_3
+						has_idea = FRA_constitutional_monarchy_4
+						has_idea = FRA_constitutional_monarchy_5
+						has_idea = FRA_constitutional_monarchy_6
+						has_idea = FRA_constitutional_monarchy_7
+						has_idea = FRA_constitutional_monarchy_8
+						has_idea = FRA_constitutional_monarchy_9
+						has_idea = FRA_constitutional_monarchy_10
+					}
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = FRA_constitutional_monarchy_0
+						add_idea = FRA_constitutional_monarchy_3
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_0
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_0
+					add_idea = FRA_constitutional_monarchy_3
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_1
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_1
+					add_idea = FRA_constitutional_monarchy_5
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_2
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_2
+					add_idea = FRA_constitutional_monarchy_7
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_6
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_6
+					add_idea = FRA_constitutional_monarchy_10
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_4
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_4
+					add_idea = FRA_constitutional_monarchy_10
+				}
+			}
+
+			set_rule = {
+				can_generate_female_aces = yes
+			}
+		}
+	}
+	focus = {
+		id = UFRA_freedom_monarchy
+		icon = GFX_goal_continuous_def_against_influence
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_reestablish_elections
+		}
+		relative_position_id = UFRA_reestablish_elections
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_popularity = { ideology = communism popularity = 0.05 }
+			add_popularity = { ideology = democratic popularity = 0.05 }
+			if = {
+				limit = {
+					NOT = {
+						has_idea = FRA_constitutional_monarchy_0
+						has_idea = FRA_constitutional_monarchy_1
+						has_idea = FRA_constitutional_monarchy_2
+						has_idea = FRA_constitutional_monarchy_3
+						has_idea = FRA_constitutional_monarchy_4
+						has_idea = FRA_constitutional_monarchy_5
+						has_idea = FRA_constitutional_monarchy_6
+						has_idea = FRA_constitutional_monarchy_7
+						has_idea = FRA_constitutional_monarchy_8
+						has_idea = FRA_constitutional_monarchy_9
+						has_idea = FRA_constitutional_monarchy_10
+					}
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = FRA_constitutional_monarchy_0
+						add_idea = FRA_constitutional_monarchy_1
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_0
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_0
+					add_idea = FRA_constitutional_monarchy_1
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_2
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_2
+					add_idea = FRA_constitutional_monarchy_6
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_3
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_3
+					add_idea = FRA_constitutional_monarchy_8
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_9
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_9
+					add_idea = FRA_constitutional_monarchy_10
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_constitutional_monarchy_7
+				}
+				swap_ideas = {
+					remove_idea = FRA_constitutional_monarchy_7
+					add_idea = FRA_constitutional_monarchy_10
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_the_first_citizen_of_the_state
+		icon = GFX_focus_generic_military_mission
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_dismiss_af
+		}
+		relative_position_id = UFRA_dismiss_af
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_country_leader_trait = constitutional_monarch
+			custom_effect_tooltip = FRA_no_veto_tt
+			clr_country_flag = FRA_veto_right
+			add_stability = 0.1
+
+			add_to_variable = { fra_senate_support = 20 }
+			custom_effect_tooltip = senate_win_20
+
+		}
+	}
+	focus = {
+		id = UFRA_no_further_humiliations
+		icon = GFX_focus_generic_support_the_left_right
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_guarantee_the_constitution
+		}
+		relative_position_id = UFRA_guarantee_the_constitution
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_in_faction = no
+			OR = {
+				GER = {
+					has_government = fascism
+				}
+				ITA = {
+					has_government = fascism
+				}
+			}
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			set_rule = { can_create_factions = yes }
+			create_faction = FRA_orleanist_faction
+			if = {
+				limit = {
+					GER = { has_government = fascism }
+				}
+				create_wargoal = {
+					type = topple_government
+					target = GER
+					expire = 0
+				}
+			}
+			if = {
+				limit = {
+					ITA = { has_government = fascism }
+				}
+				create_wargoal = {
+					type = topple_government
+					target = ITA
+					expire = 0
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_repeal_the_law_of_exile
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		x = 0
+		y = 4
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_dismiss_af
+			focus = UFRA_work_with_af
+		}
+		relative_position_id = UFRA_revise_the_constitution
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			not = { has_idea = FRA_constitutional_revision }
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_political_power = 120
+			remove_ideas = { FRA_disjointed_government }
+		}
+	}
+	focus = {
+		id = UFRA_orleanist_restoration
+		icon = GFX_focus_focus_fra_orleans_restoration
+		x = -4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_repeal_the_law_of_exile
+		}
+		mutually_exclusive = {
+			focus = UFRA_the_legitimate_heir
+		}
+		relative_position_id = UFRA_repeal_the_law_of_exile
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			custom_effect_tooltip = FRA_end_of_parliment_decisions
+			if = {
+				limit = {
+					date < 1940.8.25
+				}
+				create_country_leader = {
+					name = "Jean III"
+					desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+					picture = GFX_portrait_fra_jean_duke_of_guise
+					expire = "1941.1.1"
+					ideology = moderatism
+					traits = {
+						duke_of_orleans
+					}
+				}
+			}
+			else = {
+				create_country_leader = {
+					name = "Henri VI"
+					desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+					picture = GFX_portrait_fra_henry_count_of_paris
+					expire = "1965.1.1"
+					ideology = moderatism
+					traits = {
+						count_of_paris
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = FRA_queen_kingdom
+				}
+				hidden_effect = {load_focus_tree = french_queenist_focus}
+			}
+			set_party_name = {
+				ideology = neutrality
+				long_name = FRA_orleanist_party_long
+				name = FRA_orleanist_party
+			}
+			set_politics = { ruling_party = neutrality }
+			set_cosmetic_tag = FRA_ORLEANS
+			hidden_effect = {
+				news_event = { id = lar_news.8 days = 3 random_days = 5 }
+				country_event = { id = u_fra.35 days = 20 }
+				country_event = { id = u_fra.34 }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_king_jean_urbanisation_program
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_orleanist_restoration }
+		relative_position_id = UFRA_orleanist_restoration
+		mutually_exclusive = { }
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					is_core_of = ROOT
+					infrastructure < 9
+					not = { has_state_flag = FRA_autoroutes_target }
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = ROOT
+					infrastructure < 9
+					not = { has_state_flag = FRA_autoroutes_target }
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = ROOT
+					infrastructure < 9
+					not = { has_state_flag = FRA_autoroutes_target }
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = ROOT
+					infrastructure < 9
+					not = { has_state_flag = FRA_autoroutes_target }
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+
+		}
+	}
+	focus = {
+		id = UFRA_kings_arsenal
+		icon = GFX_goal_generic_construct_mil_factory
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_king_jean_urbanisation_program }
+		relative_position_id = UFRA_king_jean_urbanisation_program
+		mutually_exclusive = { }
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_kings_grant
+		icon = GFX_focus_research
+		x = 1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_king_jean_urbanisation_program }
+		relative_position_id = UFRA_king_jean_urbanisation_program
+		mutually_exclusive = { }
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_kings_grant }
+		}
+	}
+	focus = {
+		id = UFRA_the_legitimate_heir
+		icon = GFX_u_fra_bourbon_france
+		x = 4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_repeal_the_law_of_exile
+		}
+		mutually_exclusive = {
+			focus = UFRA_orleanist_restoration
+		}
+		relative_position_id = UFRA_repeal_the_law_of_exile
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			custom_effect_tooltip = FRA_end_of_parliment_decisions
+			if = {
+				limit = {
+					date < 1941.1.1 #TODO_GABRIEL: coordinate with Drikus for death events
+				}
+				create_country_leader = {
+					name = "Alphonse Ier"
+					desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+					picture = GFX_portrait_SPA_alfonso_xiii
+					expire = "1942.1.1"
+					ideology = monarchism
+					traits = {
+						ufra_aircraft_enthusiast
+					}
+				}
+			}
+			else = {
+				create_country_leader = {
+					name = "Jacques II"
+					desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+					picture = GFX_portrait_fra_infante_jaime
+					expire = "1965.1.1"
+					ideology = monarchism
+					traits = {
+
+					}
+				}
+			}
+			set_party_name = {
+				ideology = neutrality
+				long_name = FRA_legitimist_party_long
+				name = FRA_legitimist_party
+			}
+			set_politics = { ruling_party = neutrality }
+			hidden_effect = {
+				news_event = { id = lar_news.8 days = 3 random_days = 5 }
+				country_event = { id = u_fra.35 days = 20 }
+				country_event = { id = u_fra.34 }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_operation_clovis
+		icon = GFX_focus_focus_fra_border
+		x = 4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_the_legitimate_heir focus = UFRA_orleanist_restoration }
+		relative_position_id = UFRA_orleanist_restoration
+		mutually_exclusive = { }
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+		will_lead_to_war_with = BEL
+		will_lead_to_war_with = LUX
+		will_lead_to_war_with = HOL
+		available = {
+			has_army_manpower = { size > 699999 }
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			BEL = {
+				country_event = { id = u_fra.18 }
+			}
+			HOL = {
+				country_event = { id = u_fra.18 }
+			}
+			LUX = {
+				country_event = { id = u_fra.18 }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_new_national_holiday
+		icon = GFX_focus_focus_fra_down_marianne
+		x = 6
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_the_legitimate_heir focus = UFRA_orleanist_restoration }
+		relative_position_id = UFRA_orleanist_restoration
+		mutually_exclusive = { }
+		cost = 2
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			country_event = { id = u_fra.170 }
+		}
+	}
+	focus = {
+		id = UFRA_state_catholism
+		icon = GFX_focus_mex_restore_the_army_of_christ
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_orleanist_restoration
+		}
+		relative_position_id = UFRA_orleanist_restoration
+		mutually_exclusive = { }
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_state_catholicism }
+		}
+	}
+	focus = {
+		id = UFRA_secure_the_crown_of_spain
+		icon = GFX_goal_generic_position_armies
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_the_legitimate_heir
+		}
+		relative_position_id = UFRA_the_legitimate_heir
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				is_subject_of = SPB
+			}
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					country_exists = SPB
+				}
+				set_rule = { can_create_factions = yes }
+				create_faction = FRA_legitimist_faction
+				SPB = { country_event = generic.5 }
+			}
+			else = {
+				41 = {
+					OWNER = {
+						ROOT = {
+							create_wargoal = {
+								type = annex_everything
+								target = PREV
+								expire = 0
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_send_aid_to_spain
+		icon = GFX_focus_spa_supremacy_of_the_communion
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_the_legitimate_heir
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_the_legitimate_heir
+		cost = 3
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			country_exists = SPB
+			SPB = {
+				NOT = { has_war_with = SPA }
+				NOT = { has_war_with = SPC }
+				NOT = { has_war_with = SPD }
+				OR = {
+					is_in_faction = no
+					is_in_faction_with = ROOT
+				}
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_political_power = -150
+			custom_effect_tooltip = FRA_send_help_to_spain_tt
+			if = {
+				limit = {
+					country_exists = SPB
+				}
+				SPB = {
+					add_political_power = 50
+					add_manpower = 1500
+					army_experience = 20
+					add_equipment_to_stockpile = {
+						type = infantry_equipment_1
+						amount = 2500
+					}
+					random_owned_state = {
+						limit = {
+							is_controlled_by = SPB
+							is_core_of = SPB
+						}
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_unite_the_crowns
+		icon =  GFX_focus_generic_royal_wedding
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_secure_the_crown_of_spain
+		}
+		mutually_exclusive = { focus = UFRA_two_countries_two_crowns }
+		relative_position_id = UFRA_secure_the_crown_of_spain
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			if = {
+				limit = {
+					country_exists = SPB
+				}
+				SPB = {
+					NOT = { has_war_with = SPA }
+					NOT = { has_war_with = SPC }
+					NOT = { has_war_with = SPD }
+					OR = {
+						is_in_faction = no
+						is_in_faction_with = ROOT
+					}
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+			}
+			else = {
+				any_controlled_state = {
+					is_core_of = SPB
+				}
+			}
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					country_exists = SPB
+				}
+				SPB = {
+					transfer_navy = { target = FRA }
+					every_unit_leader = {
+						set_nationality = FRA
+					}
+				}
+				annex_country = { target = SPB transfer_troops = yes }
+			}
+			every_state = {
+				limit = {
+					is_core_of = SPB
+				}
+				add_core_of = ROOT
+			}
+			add_stability = -0.1
+			set_cosmetic_tag = FRANCO_SPAIN
+		}
+	}
+	focus = {
+		id = UFRA_two_countries_two_crowns
+		icon = GFX_goal_tripartite_pact
+		x = 1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_secure_the_crown_of_spain
+		}
+		mutually_exclusive = { focus = UFRA_unite_the_crowns }
+		relative_position_id = UFRA_secure_the_crown_of_spain
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			country_exists = SPB
+			SPB = {
+				OR = {
+					is_in_faction = no
+					is_in_faction_with = ROOT
+				}
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					is_in_faction = no
+				}
+				set_rule = { can_create_factions = yes }
+				create_faction = FRA_legitimist_faction
+			}
+			if = {
+				limit = {
+					SPB = { is_in_faction = no }
+				}
+				add_to_faction = SPB
+			}
+			add_stability = 0.1
+			add_to_tech_sharing_group = FRA_legitimist_tech_sharing
+			SPB = { add_to_tech_sharing_group = FRA_legitimist_tech_sharing }
+		}
+	}
+	focus = {
+		id = UFRA_rebuild_the_spanish_fleet
+		available = {
+		}
+		bypass = {
+		}
+		prerequisite = {
+			focus = UFRA_unite_the_crowns focus = UFRA_two_countries_two_crowns
+		}
+
+
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = -1
+		y = 1
+		relative_position_id = UFRA_two_countries_two_crowns
+		cost = 10
+
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+				name = SPA_a_fleet_worthy_of_a_king
+				bonus = 1
+				uses = 1
+				category = dd_tech
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 2
+						include_locked = yes
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+				set_state_flag = SPA_a_fleet_worthy_of_a_king_3DY
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 2
+						include_locked = yes
+					}
+					is_core_of = ROOT
+					NOT = { has_state_flag = SPA_a_fleet_worthy_of_a_king_3DY }
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+				set_state_flag = SPA_a_fleet_worthy_of_a_king_3DY
+			}
+		}
+	}
+
+}

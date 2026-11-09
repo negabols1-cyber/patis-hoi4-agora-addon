@@ -1,0 +1,949 @@
+join_faction_category = {
+
+	creat_faction = {
+		icon = generic_army_support
+
+		allowed = {
+			original_tag = ROOT
+		}
+
+		available = {
+			custom_trigger_tooltip = { #Tooltip dont move to visible
+				tooltip = not_anarchist_leader_tt
+				NOT = {
+					has_country_flag = EF_anarchist_country
+				}
+			}
+		}
+
+		visible = {
+			is_ai = no
+			num_of_factories > 99
+			is_in_faction = no
+			NOT = {
+				has_country_flag = dont_join_faction_rule
+				has_rule = can_create_factions
+				has_idea = EF_Jihad_idea
+			}
+		}
+
+		cost = 0
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 0
+		}
+
+		complete_effect = {
+			set_country_flag = dont_join_faction_rule
+			set_rule = { can_create_factions = yes }
+		}
+	}
+
+	join_faction_FROM = {
+		icon = generic_army_support
+
+		allowed = {
+			original_tag = ROOT
+		}
+
+		targets = { GER ITA JAP SOV ENG FRA }
+		targets_dynamic = yes
+
+		available = {
+			custom_trigger_tooltip = { #Tooltip dont move to visible
+				tooltip = not_anarchist_leader_tt
+				NOT = {
+					has_country_flag = EF_anarchist_country
+				}
+			}
+			FROM = { #Tooltip dont move to visible
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		visible = {
+			is_ai = no
+		}
+
+		target_trigger = {
+			FROM = {
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		target_root_trigger = {
+			is_ai = no
+			has_civil_war = no
+			has_government = neutrality
+			is_in_faction = no
+			NOT = {
+				has_country_flag = dont_join_faction
+				has_idea = EF_Jihad_idea
+			}
+		}
+
+		cost = 0
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 0
+		}
+
+		complete_effect = {
+			set_country_flag = { flag = dont_join_faction value = 1 days = 30 }
+			FROM = {
+				country_event = { id = generic.2 }
+			}
+		}
+	}
+}
+
+ai_optimisation_category = {
+	ai_optimisation_decisions = {
+
+		icon = GFX_decision_eng_trade_unions_demand
+
+		available = {
+		}
+
+		visible = {
+			is_ai = no
+			has_idea = ai_optimisation
+		}
+
+		fire_only_once = no
+
+		modifier = {
+
+		}
+
+		cost = 0
+		days_remove = 0
+		days_re_enable = 0
+
+		complete_effect = {
+			remove_ideas = ai_optimisation
+			set_rule = {
+				can_not_declare_war = no
+			}
+			country_lock_all_division_template = no
+		}
+	}
+
+
+}
+
+Al_amain_war = {
+	Al_amain_italy = {
+		icon = generic_army_support
+
+		allowed = {
+			OR = {
+				tag = ITA
+				tag = ENG
+			}
+		}
+		activation = {
+			ITA = { has_war_with = ENG }
+			NOT = { has_global_flag = al_amain_war_end }
+		}
+		available = {
+			ITA = {
+				OR = {
+					AND = {
+						controls_state = 447
+						controls_state = 446
+						controls_state = 907
+					}
+					any_allied_country = {
+						has_full_control_of_state = 447
+						has_full_control_of_state = 446
+						has_full_control_of_state = 907
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 150
+		timeout_effect = {
+			set_global_flag = al_amain_war_end
+			if = {
+				limit = { tag = ITA }
+				if = {
+					limit = {
+						OR = {
+							has_global_flag = his_only
+
+						}
+					}
+					ITA = {
+						add_timed_idea = {
+							idea = al_amain_debuff_italy_hist
+							days = 360
+						}
+					}
+				}
+				else = {
+					ITA = {
+						add_timed_idea = {
+							idea = al_amain_debuff_italy
+							days = 360
+						}
+					}
+				}
+			}
+			if = {
+				limit = { tag = ENG }
+				ENG = {
+					add_timed_idea = {
+						idea = al_amain_buff_eng
+						days = 360
+					}
+				}
+			}
+		}
+		complete_effect = {
+			set_global_flag = al_amain_war_end
+			if = {
+				limit = { tag = ITA }
+				ITA = {
+					add_timed_idea = {
+						idea = al_amain_buff_italy
+						days = 360
+					}
+				}
+			}
+			if = {
+				limit = { tag = ENG }
+				if = {
+					limit = {
+						OR = {
+							has_global_flag = his_only
+
+						}
+					}
+					ENG = {
+						add_timed_idea = {
+							idea = al_amain_debuff_eng_hist
+							days = 360
+						}
+					}
+				}
+				else = {
+					ENG = {
+						add_timed_idea = {
+							idea = al_amain_debuff_eng
+							days = 360
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+EF_Jihad_Public_Unrest = {
+
+	EF_accept_demand_surrender = {
+		icon = GFX_decision_eng_trade_unions_demand
+
+		allowed = {
+			OR = {
+				original_tag = SAU
+				original_tag = TUR
+			}
+		}
+
+		available = {
+			has_active_mission = EF_tension_rises
+		}
+
+		visible = {
+			NOT = { has_global_flag = EF_Caliph_Dispute_accept_surrender }
+			if = {
+				limit = {
+					original_tag = TUR
+				}
+				has_completed_focus = TUR_pivot_to_the_past
+				has_war_with = SAU
+			}
+			if = {
+				limit = {
+					original_tag = SAU
+				}
+				has_completed_focus = SAU_dream_of_caliphate
+				has_war_with = TUR
+			}
+		}
+
+		fire_only_once = no
+		cost = 25
+
+		complete_effect = {
+			if = {
+				limit = {
+					original_tag = TUR
+				}
+				SAU = { country_event = { id = ef_tur.7 hours = 2 } }
+			}
+			if = {
+				limit = {
+					original_tag = SAU
+				}
+				TUR = { country_event = { id = ef_tur.7 hours = 2 } }
+			}
+			hidden_effect = {
+				set_global_flag = EF_Caliph_Dispute_accept_surrender
+			}
+		}
+	}
+
+	EF_tension_rises = {
+		icon = GFX_decision_eng_trade_unions_demand
+
+		allowed = {
+			OR = {
+				original_tag = SAU
+				original_tag = TUR
+			}
+		}
+
+		available = {
+			has_war = no
+		}
+
+		activation = {
+			has_war = yes
+			if = {
+				limit = {
+					has_idea = EF_Jihad_idea
+				}
+				surrender_progress > 0.15
+			}
+			else = {
+				surrender_progress > 0.25
+			}
+			has_global_flag = EF_caliph_dispute_war_option_flag
+			has_global_flag = TUR_caliphate_dispute_started
+			if = {
+				limit = {
+					original_tag = TUR
+				}
+				has_completed_focus = TUR_pivot_to_the_past
+				has_war_with = SAU
+			}
+			if = {
+				limit = {
+					original_tag = SAU
+				}
+				has_completed_focus = SAU_dream_of_caliphate
+				has_war_with = TUR
+			}
+		}
+
+		visible = {
+			if = {
+				limit = {
+					original_tag = TUR
+				}
+				has_completed_focus = TUR_pivot_to_the_past
+				has_war_with = SAU
+			}
+			if = {
+				limit = {
+					original_tag = SAU
+				}
+				has_completed_focus = SAU_dream_of_caliphate
+				has_war_with = TUR
+			}
+			has_global_flag = EF_caliph_dispute_war_option_flag
+		}
+		fire_only_once = no
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 100
+
+		timeout_effect = {
+			if = {
+				limit = {
+					NOT = { has_idea = EF_public_unrest }
+					NOT = { has_idea = EF_public_unrest2 }
+					NOT = { has_idea = EF_public_unrest3 }
+				}
+				add_ideas = EF_public_unrest
+			}
+			else_if = {
+				limit = {
+					has_idea = EF_public_unrest
+				}
+				swap_ideas = {
+					remove_idea = EF_public_unrest
+					add_idea = EF_public_unrest2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = EF_public_unrest2
+				}
+				add_stability = -0.05
+				swap_ideas = {
+					remove_idea = EF_public_unrest2
+					add_idea = EF_public_unrest3
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = EF_public_unrest3
+				}
+				remove_ideas = EF_public_unrest3
+				remove_ideas = EF_Jihad_idea
+				if = {
+					limit = {
+						original_tag = TUR
+					}
+					start_civil_war = {
+						ruling_party = ROOT
+						ideology = fascism
+						size = 0.5
+					}
+					effect_tooltip = {
+						TUR_huseyin_nihal_atsiz = {
+							add_country_leader_role = {
+								character = TUR_huseyin_nihal_atsiz
+								country_leader = {
+									expire = "1965.1.1"
+									ideology = turanist
+									traits = {
+										dictator grey_wolf_trait dislikes_germany
+									}
+								}
+								promote_leader = yes
+							}
+						}
+					}
+					hidden_effect = {
+						random_other_country = {
+							limit = {
+								original_tag = TUR
+								has_government = fascism
+							}
+							save_event_target_as = TUR_fascist_turkey_civil_war_nihal
+							TUR_caliph_dispute_fascist_civil_war = yes
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						original_tag = SAU
+					}
+					start_civil_war = {
+						ruling_party = ROOT
+						ideology = democratic
+						size = 0.5
+					}
+					hidden_effect = {
+						random_other_country = {
+							limit = {
+								original_tag = SAU
+								has_government = democratic
+							}
+							save_event_target_as = SAU_democratic_arabia_civil_war
+							SAU_saud_bin_abdulaziz_al_saud = {
+								set_nationality = event_target:SAU_democratic_arabia_civil_war
+								remove_country_leader_role = {
+									ideology = democratic_monarchy
+								}
+							}
+							add_country_leader_role = {
+								character = SAU_saud_bin_abdulaziz_al_saud
+								country_leader = {
+									expire = "1965.1.1"
+									ideology = democratic_monarchy
+									traits = {
+									}
+								}
+								promote_leader = yes
+							}
+						}
+					}
+				}
+				else = {
+					start_civil_war = {
+						ruling_party = ROOT
+						ideology = fascism
+						size = 0.5
+					}
+				}
+			}
+			hidden_effect = {
+				clr_global_flag = TUR_caliphate_dispute_started
+			}
+		}
+	}
+
+	EF_make_war_propaganda = {
+		icon = GFX_decision_eng_trade_unions_demand
+
+		allowed = {
+			OR = {
+				original_tag = SAU
+				original_tag = TUR
+			}
+		}
+
+		available = {
+			OR = {
+				has_idea = EF_public_unrest2
+				has_idea = EF_public_unrest3
+			}
+		}
+
+		visible = {
+			has_war = yes
+			OR = {
+				has_idea = EF_public_unrest
+				has_idea = EF_public_unrest2
+				has_idea = EF_public_unrest3
+			}
+			has_global_flag = EF_caliph_dispute_war_option_flag
+		}
+
+		fire_only_once = yes
+
+		cost = 150
+		days_remove = 40
+
+		remove_effect = {
+			add_war_support = 0.05
+			if = {
+				limit = {
+					has_idea = EF_public_unrest2
+				}
+				swap_ideas = {
+					remove_idea = EF_public_unrest2
+					add_idea = EF_public_unrest
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = EF_public_unrest3
+				}
+				swap_ideas = {
+					remove_idea = EF_public_unrest3
+					add_idea = EF_public_unrest2
+				}
+			}
+		}
+	}
+}
+
+TUR_gain_control_over_egypt = {
+	TUR_assassinate_the_egyptian_royal_family = {
+
+		icon = GFX_decision_hol_draw_up_staff_plans
+
+		allowed = {
+			original_tag = TUR
+		}
+
+		available = {
+
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+
+		cost = 75
+
+		days_remove = 30
+		fire_only_once = no
+		days_re_enable = 30
+
+		visible = {
+			NOT = { has_country_flag = TUR_abbas_hilmi_pasha_in_power_flag }
+			NOT = { EGY = { is_subject_of = ROOT } }
+		}
+
+		cancel_if_not_visible = yes
+
+		fixed_random_seed = no
+
+		remove_effect = {
+			if = {
+				limit = {
+					has_completed_focus = TUR_reestablish_the_yildiz_teskilati
+				}
+				custom_effect_tooltip = TUR_assassinate_egyptian_royal_family_alt_tt
+				hidden_effect = {
+					random_list = {
+						85 = {
+							country_event = { id = bftb_turkey.155 }
+						}
+						15 = {
+							country_event = { id = bftb_turkey.156 }
+						}
+					}
+				}
+			}
+			else = {
+				custom_effect_tooltip = TUR_assassinate_egyptian_royal_family_tt
+				custom_effect_tooltip = TUR_assassinate_egyptian_royal_family_agency_tt
+				hidden_effect = {
+					random_list = {
+						60 = {
+							country_event = { id = bftb_turkey.155 }
+						}
+						40 = {
+							country_event = { id = bftb_turkey.156 }
+						}
+					}
+				}
+			}
+
+			custom_effect_tooltip = TUR_if_assassinate_successful_tt
+			custom_effect_tooltip = TUR_assassinate_outcome_effect_tt
+			unlock_decision_tooltip = TUR_demand_egypt_decision
+		}
+	}
+
+	TUR_demand_egypt_decision = {
+		icon = GFX_decision_generic_confiscation
+
+		allowed = {
+			original_tag = TUR
+		}
+
+		available = {
+			has_country_flag = TUR_assassinate_egyptian_royal_family_successfull_flag
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+
+		cost = 25
+
+		fire_only_once = yes
+
+		visible = {
+			NOT = { EGY = { is_subject_of = ROOT } }
+			NOT = { has_country_flag = TUR_egypt_taken_flag }
+		}
+
+		complete_effect = {
+			every_other_country = {
+				limit = {
+					OR = {
+						owns_state = 452
+						owns_state = 447
+						owns_state = 907
+						owns_state = 552
+						owns_state = 456
+						owns_state = 457
+						owns_state = 453
+					}
+					NOT = {
+						is_subject_of = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				country_event = { id = bftb_turkey.158 hours = 1 }
+			}
+
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				custom_effect_tooltip = TUR_egypt_except_suez_tt
+
+				set_autonomy = {
+					target = EGY
+					autonomy_state = autonomy_personal_union
+				}
+
+				EGY = {
+					set_cosmetic_tag = EGY_misir_eyaleti
+					create_country_leader = {
+						name = "Abbas Hilmi Paşa"
+						desc = ""
+						picture = GFX_AFG_mohammed_zahir_shah
+						expire = "1965.1.1"
+						ideology = despotism
+						traits = {
+							TUR_beylerbeyi
+						}
+					}
+				}
+			}
+		}
+	}
+
+	TUR_demand_sudan_decision = {
+		icon = GFX_decision_generic_confiscation
+
+		allowed = {
+			original_tag = TUR
+		}
+
+		available = {
+			EGY = { is_subject_of = ROOT }
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+
+		cost = 25
+
+		fire_only_once = yes
+
+		visible = {
+		}
+
+		complete_effect = {
+			every_other_country = {
+				limit = {
+					OR = {
+						owns_state = 767
+						owns_state = 551
+						owns_state = 883
+						owns_state = 886
+						owns_state = 549
+						owns_state = 887
+						owns_state = 885
+						owns_state = 884
+					}
+					NOT = {
+						is_subject_of = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+				country_event = { id = bftb_turkey.161 hours = 1 }
+			}
+
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				if = {
+					limit = {
+						EGY = { is_subject_of = ROOT }
+					}
+					EGY = {
+						transfer_state = 767
+						transfer_state = 551
+						transfer_state = 883
+						transfer_state = 886
+						transfer_state = 549
+						transfer_state = 887
+						transfer_state = 885
+						transfer_state = 884
+					}
+				}
+				else = {
+					transfer_state = 767
+					transfer_state = 551
+					transfer_state = 883
+					transfer_state = 886
+					transfer_state = 549
+					transfer_state = 887
+					transfer_state = 885
+					transfer_state = 884
+				}
+			}
+		}
+	}
+
+	TUR_demand_suez_canal_decision = {
+		icon = GFX_decision_generic_confiscation
+
+		allowed = {
+			original_tag = TUR
+		}
+
+		available = {
+			EGY = { is_subject_of = ROOT }
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+
+		cost = 25
+
+		fire_only_once = yes
+
+		visible = {
+			446 = {
+				is_not_controlled_by_ROOT_or_subject = yes
+			}
+		}
+
+		complete_effect = {
+			446 = {
+				controller = {
+					country_event = { id = bftb_turkey.164 hours = 1 }
+				}
+			}
+
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				transfer_state = 446
+			}
+		}
+	}
+
+	TUR_incorporate_egypt_into_the_empire = {
+		icon = GFX_decision_generic_confiscation
+
+		allowed = {
+			original_tag = TUR
+		}
+
+		available = {
+			EGY = {
+				is_subject_of = ROOT
+				compare_autonomy_progress_ratio < 0.1
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+
+		cost = 25
+		days_remove = 80
+
+		fire_only_once = yes
+
+		visible = {
+			has_completed_focus = TUR_invest_in_egypt
+		}
+
+		remove_effect = {
+			add_political_power = 50
+			annex_country = {
+				target = EGY
+				transfer_troops = yes
+			}
+		}
+	}
+}
+
+EF_country_point_category = {
+	EF_country_point = {
+		icon = GFX_decision_generic_confiscation
+
+		allowed = {
+			always = no
+		}
+
+		available = {
+
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+
+		cost = 25
+
+		fire_only_once = no
+
+		visible = {
+
+		}
+
+		complete_effect = {
+
+		}
+	}
+}
+
+CYP_crusader_operations_category = {
+
+	CYP_crusader_operation_against = {
+		icon = GFX_decision_hol_draw_up_staff_plans
+
+		allowed = {
+			original_tag = CYP
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 5
+				has_war_with = FROM
+			}
+			modifier = {
+				factor = 2
+				FROM = {
+					is_major = yes
+				}
+			}
+		}
+
+		days_remove = 365
+
+		cost = 25
+
+		available = { #Can't be target_root_trigger
+			NOT = {	has_country_flag = CYP_crusader_operation_flag }
+			OR = {
+				has_war_with = FROM
+				has_wargoal_against = FROM
+			}
+		}
+
+		target_array = ROOT.CYP_war_targets_array
+
+		target_trigger = {
+			FROM = {
+				has_war_with = ROOT
+				any_controlled_state = {
+					OR = {
+						state = 164
+						state = 116
+						state = 454
+						state = 553
+						state = 677
+						state = 799
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = { flag = CYP_crusader_operation_flag days = 60 }
+			}
+			every_state = {
+				limit = {
+					is_controlled_by = FROM
+					OR = {
+						state = 164
+						state = 116
+						state = 454
+						state = 553
+						state = 677
+						state = 799
+					}
+				}
+				add_dynamic_modifier = {
+					modifier = CYP_holy_offensive_modifier
+					scope = CYP
+					days = 60
+				}
+			}
+		}
+	}
+}

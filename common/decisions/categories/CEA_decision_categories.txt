@@ -1,0 +1,48 @@
+######### CENTRAL AMERICA #########
+
+CEA_managing_the_banana_republic = {
+	priority = 135
+	icon = GFX_CEA_managing_banana_republic_icon
+
+	allowed = {
+		OR = {
+			original_tag = HON
+			original_tag = GUA
+			original_tag = NIC
+			original_tag = COS
+			original_tag = ELS
+		}
+	}
+
+	picture = GFX_CEA_managing_banana_republic_img
+
+	visible = {
+		OR = {
+			has_idea = CEA_the_banana_republic
+			has_idea = CEA_repaying_the_american_debt
+			any_controlled_state = {
+				OR = {
+					has_dynamic_modifier = {
+						modifier = CEA_local_banana_production
+					}
+					has_dynamic_modifier = {
+						modifier = CEA_improved_banana_production
+					}
+				}
+			}
+		}
+	}
+
+	visible_when_empty = yes
+
+	on_map_area = {
+		target_array = controlled_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = CEA_local_banana_production }
+			}
+		}
+		name = CEA_banana_plantations_tt
+		zoom = 150
+	}
+}

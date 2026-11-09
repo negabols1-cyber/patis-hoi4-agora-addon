@@ -1,0 +1,198 @@
+FRA_gaulle_vs_giraud_bop = {
+	initial_value = 0
+	left_side = FRA_gaullist_side
+	right_side = FRA_giraudist_side
+	decision_category = FRA_gaulle_vs_giraud_decisions_category
+
+	range = { #Balanced Range
+		id = FRA_centralization_bop_balanced
+		min = -0.25
+		max = 0.25
+		modifier = {
+			army_attack_factor = -0.1
+			political_power_gain = -0.15
+		}
+		on_activate = {
+			hidden_effect = {
+				add_country_leader_role = {
+					character = FRA_charles_de_gaulle
+					country_leader = {
+						expire = "1965.1.1"
+						ideology = conservatism
+						traits = {
+						}
+					}
+				}
+				add_country_leader_role = {
+					character = FRA_henri_giraud
+					country_leader = {
+						expire = "1965.1.1"
+						ideology = conservatism
+						traits = {
+							indecisive
+							divided_interests
+						}
+					}
+				}
+			}
+			USA = {
+				remove_opinion_modifier = {
+					target = FRA
+					modifier = medium_decrease
+				}
+			}
+		}
+	}
+
+
+	side = {
+		id = FRA_gaullist_side
+		icon = GFX_bop_UFRA_Gaulle
+
+		range = {
+			id = FRA_gaullist_side_small
+			min = -0.5
+			max = -0.25
+			modifier = {
+				army_attack_factor = -0.1
+				political_power_gain = -0.05
+			}
+			on_activate = {
+				promote_character = {
+					character = FRA_charles_de_gaulle
+					ideology = conservatism
+				}
+			}
+		}
+
+		range = {
+			id = FRA_gaullist_side_very
+			min =-0.9
+			max =-0.5
+			modifier = {
+				army_attack_factor = -0.1
+			}
+			on_activate = {
+				USA = {
+					add_opinion_modifier = {
+						target = FRA
+						modifier = medium_decrease
+					}
+				}
+			}
+		}
+
+		range = {
+			id = FRA_gaullist_side_full
+			min = -1
+			max = -0.9
+			on_activate = {
+				remove_power_balance = {
+					id = FRA_gaulle_vs_giraud_bop
+				}
+				hidden_effect = {
+					create_country_leader = {
+						name = "Henri VI"
+						picture = GFX_portrait_fra_henry_count_of_paris
+						expire = "1965.1.1"
+						ideology = moderatism
+						traits = {
+							count_of_paris
+						}
+					}
+					set_party_name = {
+						ideology = neutrality
+						long_name = FRA_orleanist_party_long
+						name = FRA_orleanist_party
+					}
+				}
+			}
+		}
+	}
+
+
+
+	side = {
+		id = FRA_giraudist_side
+		icon = GFX_bop_UFRA_Giraud
+
+		range = {
+			id = FRA_giraudist_side_small
+			min = 0.25
+			max = 0.5
+			modifier = {
+				army_attack_factor = -0.05
+				political_power_gain = -0.15
+			}
+			on_activate = {
+				promote_character = {
+					character = FRA_henri_giraud
+					ideology = conservatism
+				}
+			}
+		}
+
+		range = {
+			id = FRA_giraudist_side_very
+			min = 0.50
+			max = 0.9
+			modifier = {
+				political_power_gain = -0.15
+			}
+			on_activate = {
+				if = {
+					limit = {
+						NOT = { has_country_flag = FRA_giraudist_side_very_flag  }
+					}
+					add_equipment_to_stockpile = {
+						type = infantry_equipment_1
+						amount = 8000
+					}
+					set_country_flag = FRA_giraudist_side_very_flag
+				}
+			}
+		}
+
+		range = {
+			id = FRA_giraudist_side_full
+			min = 0.9
+			max = 1
+			on_activate = {
+				effect_tooltip = {
+					set_politics =  { ruling_party = neutrality }
+				}
+				hidden_effect = {
+					create_country_leader = {
+						name = "Henri Giraud"
+						picture = "portrait_france_henri_giraud.dds"
+						expire = "1965.1.1"
+						ideology = conservatism
+						traits = {
+							indecisive
+							divided_interests
+						}
+					}
+					set_politics =  { ruling_party = democratic }
+					create_country_leader = {
+						name = "Henri VI"
+						picture = GFX_portrait_fra_henry_count_of_paris
+						expire = "1965.1.1"
+						ideology = moderatism
+						traits = {
+							count_of_paris
+						}
+					}
+					set_party_name = {
+						ideology = neutrality
+						long_name = FRA_orleanist_party_long
+						name = FRA_orleanist_party
+					}
+				}
+
+				remove_power_balance = {
+					id = FRA_gaulle_vs_giraud_bop
+				}
+			}
+		}
+	}
+}

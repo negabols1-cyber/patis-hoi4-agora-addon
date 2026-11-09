@@ -1,0 +1,215 @@
+on_actions = {
+
+	on_monthly_PER = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_country_flag = PER_assassination_cooldown_flag }
+					NOT = { has_country_flag = PER_assassination_attempt_failed_flag }
+					has_any_power_balance = yes
+					is_power_balance_in_range = {
+						id = PER_clergy_balance
+						range > PER_clergy_low_control_range
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							var = PER_clergy_anger_level
+							value = 3
+							compare = greater_than
+						}
+					}
+					set_temp_variable = { PER_assassination_event_chance = 4 }
+				}
+				else = {
+					set_temp_variable = { PER_assassination_event_chance = 2 }
+				}
+				random = {
+					chance = PER_assassination_event_chance
+					country_event = { id = persia_clergy.11 days = 4 random_days = 8 }
+					set_country_flag = { flag = PER_assassination_cooldown_flag value = 1 days = 35 }
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					has_any_power_balance = yes
+					NOT = { has_country_flag = PER_random_event_cooldown_flag }
+				}
+				country_event = { id = persia_clergy.1 days = 4 random_days = 4 }
+				random_list = {
+					20 = {
+						set_country_flag = { flag = PER_random_event_cooldown_flag value = 1 days = 120 } #Every 4 months
+					}
+					80 = {
+						set_country_flag = { flag = PER_random_event_cooldown_flag value = 1 days = 90 } #Every 3 months
+					}
+				}
+			}
+		}
+	}
+
+
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = PER
+					has_completed_focus = PER_power_of_equality
+					FROM.FROM = {
+						has_resistance = yes
+						is_controlled_by = PER
+					}
+				}
+				FROM.FROM = {
+					add_compliance = 15
+				}
+			}
+		}
+	}
+
+	on_civil_war_end = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = PER
+					has_government = fascism
+					has_focus_tree = generic_focus
+					FROM = {
+						original_tag = PER
+						NOT = { has_government = fascism }
+					}
+				}
+				load_focus_tree = { tree = iran_focus keep_completed = no }
+				complete_national_focus = PER_dictatorship_of_reza_shah_pahlavi
+				complete_national_focus = PER_weakening_influence_clergy
+				complete_national_focus = PER_continued_reform
+				unlock_national_focus = PER_embrace_persian_identity
+				unlock_national_focus = PER_assign_fazlollah_zahedi
+				add_timed_idea = {
+					idea = PER_recover_from_civil_war
+					days = 90
+				}
+			}
+		}
+	}
+
+	on_puppet = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = PER
+					is_puppet_of = ENG
+					has_completed_focus = PER_exile_pahlavi_dynasty
+					NOT = { has_country_flag = PER_pahlavi_return_exile_flag }
+					FROM = {
+						original_tag = ENG
+						OR = {
+							has_government = neutrality
+							has_government = democratic
+						}
+					}
+				}
+				set_country_flag = PER_pahlavi_return_exile_flag
+				if = {
+					limit = {
+						has_character = PER_reza_shah_pahlavi
+						NOT = { has_country_flag = PER_reza_shah_pahlavi_died_flag }
+					}
+					PER_reza_shah_pahlavi = {
+						clr_character_flag = PER_exiled_flag
+						add_country_leader_role = {
+							country_leader = {
+								expire = "1965.1.1"
+								ideology = monarchism
+								traits = {
+									PER_shah_of_iran
+									PER_reformer
+								}
+							}
+							promote_leader = yes
+						}
+						add_country_leader_role = {
+							country_leader = {
+								expire = "1965.1.1"
+								ideology = democratic_monarchy
+								traits = {
+									PER_shah_of_iran
+									PER_reformer
+								}
+							}
+							promote_leader = yes
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						has_character = PER_mohammed_reza_pahlavi
+					}
+					PER_mohammed_reza_pahlavi = {
+						add_country_leader_role = {
+							country_leader = {
+								expire = "1965.1.1"
+								ideology = monarchism
+								traits = {
+									PER_shah_of_iran
+									PER_modernist_and_reformer
+								}
+							}
+							promote_leader = yes
+						}
+						add_country_leader_role = {
+							country_leader = {
+								expire = "1965.1.1"
+								ideology = democratic_monarchy
+								traits = {
+									PER_shah_of_iran
+									PER_modernist_and_reformer
+								}
+							}
+							promote_leader = yes
+						}
+					}
+				}
+				PER_mohammed_reza_pahlavi = {
+					clr_character_flag = PER_exiled_flag
+				}
+				PER_ali_reza_pahlavi = {
+					clr_character_flag = PER_exiled_flag
+				}
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					original_tag = PER
+					is_puppet_of = GER
+					NOT = { has_country_flag = PER_became_german_puppet_flag }
+					FROM = {
+						original_tag = GER
+						has_government = fascism
+					}
+				}
+				set_country_flag = PER_became_german_puppet_flag
+				if = {
+					limit = {
+						NOT = {
+							has_country_leader = {
+								character = PER_davud_monshizadeh
+								ruling_only = yes
+							}
+						}
+					}
+					promote_character = PER_davud_monshizadeh
+				}
+				set_party_name = {
+					ideology = fascism
+					long_name = PER_sumka_long
+					name = PER_sumka
+				}
+			}
+		}
+	}
+}

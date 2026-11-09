@@ -1,0 +1,88 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			FRA = {set_country_flag = FRA_holiday_14_july}
+			FRA = { news_event = { id = fra_news.1  days = 525 }}
+			#FRA = { country_event = { id = u_fra.33 days = 1 }}
+			FRA = { country_event = { id = u_fra.33}}
+			FRA = { country_event = { id = u_fra.164}}
+			FRA = { country_event = { id = u_fra.31 days = 15 }}
+			FRA = { set_country_flag = France_election }
+			FRA = { country_event = { id = u_fra.100 days = 36 }}
+			FRA = { country_event = { id = u_fra.109 days = 250 }}
+			FRA = { country_event = { id = u_fra.160 days = 600 }}
+			FRA = { country_event = { id = u_fra.169 days = 1 }}
+			FRA = { country_event = { id = u_fra.174 days = 1698 }}
+			FRA = { country_event = { id = u_fra.175 days = 1885 }}
+			random_list = {
+				10 = {
+					FRA = { country_event = { id = u_fra.156 days = 3 }}
+				}
+				10 = {
+					FRA = { country_event = { id = u_fra.157 days = 3 }}
+				}
+			}
+			random_list = {
+				9 = {
+					FRA = { country_event = { id = u_fra.158 days = 344 }}
+				}
+				6 = {
+					FRA = { country_event = { id = u_fra.159 days = 344 }}
+				}
+			}
+		}
+	}
+
+	on_war = {
+		effect = {
+			if = {
+				limit = {
+					FRA = {
+						has_war_with = GER
+					}
+				}
+				set_global_flag = UFRA_fra_ger_war_rhine
+			}
+			if = {
+				limit = {
+					FRA = {
+						has_war = yes
+						NOT = { has_global_flag = UFRA_at_war }
+					}
+				}
+				add_french_aces = yes
+			}
+		}
+	}
+
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = FRA
+					has_completed_focus = UFRA_modern_empire
+					FROM.FROM = {
+						has_resistance = yes
+						is_controlled_by = FRA
+					}
+				}
+				FROM.FROM = {
+					add_compliance = 5
+				}
+			}
+			if = {
+				limit = {
+					original_tag = FRA
+					has_completed_focus = UFRA_eternal_discipline
+					FROM.FROM = {
+						has_resistance = yes
+						is_controlled_by = FRA
+					}
+				}
+				FROM.FROM = {
+					add_resistance = -5
+				}
+			}
+		}
+	}
+}

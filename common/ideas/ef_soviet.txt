@@ -1,0 +1,452 @@
+ideas = {
+	country = {
+
+		SOV_duma = {
+
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = democratic
+			}
+
+			picture = ARG_reform_parliament
+
+			modifier = {
+				political_power_gain = 0.1
+				political_advisor_cost_factor = -0.15
+				stability_weekly = 0.002
+				democratic_drift = 0.05
+				drift_defence_factor = 0.25
+			}
+		}
+
+		SOV_autonomous_states_idea = {
+
+			removal_cost = -1
+
+			allowed = {
+				original_tag = SOV
+			}
+
+			allowed_civil_war = {
+				has_government = democratic
+			}
+
+			picture = generic_local_self_management
+
+			modifier = {
+				subjects_autonomy_gain = -0.6
+				stability_factor = 0.05
+			}
+		}
+
+		SOV_centralised_rule = {
+
+			removal_cost = -1
+
+			allowed = {
+				original_tag = SOV
+			}
+
+			allowed_civil_war = {
+				has_government = democratic
+			}
+
+			picture = generic_central_management
+
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.05
+			}
+		}
+
+		SOV_bureucratic_restructuring = {
+
+			removal_cost = -1
+
+			allowed = {
+				original_tag = SOV
+			}
+
+			allowed_civil_war = {
+				has_government = democratic
+			}
+
+			picture = generic_constitutional_guarantees
+
+			modifier = {
+				political_power_factor = -0.1
+				democratic_drift = 0.02
+			}
+		}
+
+		SOV_purge_religous_beurocracy = {
+
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_intel_bonus
+
+			modifier = {
+				conscription_factor = 0.05
+				fascism_drift = -0.03
+				neutrality_drift = -0.03
+			}
+		}
+
+		SOV_rebuilding_the_army = {
+
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = democratic
+			}
+
+			picture = generic_victors_of_ww1
+
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_org_factor = 0.1
+				max_planning = 0.1
+			}
+		}
+
+		SOV_new_russian_army = {
+
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = democratic
+			}
+
+			picture = generic_victors_of_ww1
+
+			modifier = {
+				experience_gain_army_factor = 0.1
+				army_org_factor = 0.1
+				army_core_defence_factor = 0.05
+				max_planning = 0.1
+				army_attack_factor = 0.05
+				attrition = -0.1
+			}
+		}
+
+		SOV_military_preparation = {
+
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = democratic
+			}
+
+			picture = generic_war_preparation
+
+			modifier = {
+				experience_gain_army = 0.05
+				training_time_army_factor = -0.1
+				production_factory_max_efficiency_factor = 0.1
+				line_change_production_efficiency_factor = 0.05
+				production_speed_arms_factory_factor = 0.05
+			}
+		}
+
+		SOV_guardian_orthodox = {
+			picture = FRA_matignon_agreements
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				has_government = democratic
+			}
+
+			modifier = {
+				army_morale_factor = 0.05
+				monthly_population = 0.15
+				offensive_war_stability_factor = 0.1
+				surrender_limit = 0.05
+			}
+		}
+
+		SOV_russian_revanchism = {
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			picture = generic_intel_bonus
+
+			modifier = {
+				justify_war_goal_time = -0.3
+				generate_wargoal_tension = -0.4
+				war_support_factor = 0.1
+				resistance_target = -0.15
+			}
+		}
+
+		SOV_guarded_by_russia = {
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+				NOT = { is_subject_of = SOV }
+			}
+
+			on_remove = {
+				if = {
+					limit = {
+						tag = AZR
+					}
+					SOV = { remove_resource_rights = 229 }
+				}
+			}
+
+			removal_cost = -1
+
+			picture = generic_victors_of_ww1
+
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.05
+				army_core_defence_factor = 0.05
+			}
+		}
+
+		SOV_russian_military_advisors = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+				NOT = { is_subject_of = SOV }
+			}
+
+			picture = RUS_general_school
+
+			modifier = {
+				army_morale_factor = 0.05
+				winter_attrition_factor = -0.1
+				training_time_army_factor = -0.05
+				land_doctrine_cost_factor = -0.1
+				conscription = 0.01
+			}
+		}
+
+		SOV_agrarian_socialism = {
+
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_agrarian_society
+
+			modifier = {
+				consumer_goods_factor = -0.1
+				#production_speed_arms_factory_factor = 0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+		SOV_agrarian_socialism2 = {
+			name = SOV_agrarian_socialism
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_agrarian_society
+
+			modifier = {
+				consumer_goods_factor = -0.15
+				production_speed_arms_factory_factor = 0.1
+				research_speed_factor = 0.05
+				industrial_capacity_factory = 0.1
+			}
+		}
+
+		SOV_agrarian_socialism3 = {
+			name = SOV_agrarian_socialism
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_agrarian_society
+
+			modifier = {
+				consumer_goods_factor = -0.15
+				production_speed_arms_factory_factor = 0.1
+				production_speed_industrial_complex_factor = 0.1
+				research_speed_factor = 0.05
+				industrial_capacity_factory = 0.1
+			}
+		}
+
+		SOV_agrarian_socialism4 = {
+			name = SOV_agrarian_socialism
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_agrarian_society
+
+			modifier = {
+				consumer_goods_factor = -0.15
+				production_speed_industrial_complex_factor = 0.1
+				research_speed_factor = 0.05
+				industrial_capacity_factory = 0.1
+			}
+		}
+
+		SOV_burning_for_revenge = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			cancel = {
+				is_in_faction_with = TUR
+			}
+
+			picture = ARM_Guerrillas
+
+			modifier = {
+				conscription_factor = 0.15
+				training_time_army_factor = -0.05
+			}
+
+			targeted_modifier = {
+				tag = TUR
+				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
+			}
+		}
+
+		SOV_changed_production_methods = {
+			picture = generic_production_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				line_change_production_efficiency_factor = 0.05
+				production_lack_of_resource_penalty_factor = -0.1
+			}
+		}
+
+		SOV_workers_morale_boosted = {
+			picture = FRA_idea_revenge
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_factory_max_efficiency_factor = 0.1
+				industrial_capacity_factory = 0.05
+				production_factory_efficiency_gain_factor = 0.05
+			}
+		}
+	}
+
+	hidden_ideas = {
+		SOV_duplicate_research_efforts = {
+			picture = generic_air_research
+			name = SOV_soviet_airforce_dynamic_modifier
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			research_bonus = { air_equipment = -0.10 }
+		}
+	}
+}

@@ -1,0 +1,8109 @@
+### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_RESEARCH}
+### search_filters = {FOCUS_FILTER_INDUSTRY}
+### search_filters = {FOCUS_FILTER_STABILITY}
+### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+### search_filters = {FOCUS_FILTER_MANPOWER}
+### search_filters = {FOCUS_FILTER_ANNEXATION}
+
+
+focus_tree = {
+	id = YEM_main
+	continuous_focus_position = { x = 900 y = 1200 }
+	country = {
+		factor = 0
+		modifier = {
+			add = 100
+			tag = YEM
+		}
+	}
+
+	shared_focus = ARB_united_arabia
+
+	#neutral foreign policy
+	focus = {
+		id = YEM_neutral_foreign_policy
+		icon = GFX_goal_generic_neutrality_focus
+		x = 28
+		y = 0
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL}
+		mutually_exclusive = { focus = YEM_give_up_neutral_foreign_policy }
+		ai_will_do = {
+			factor = 60
+			modifier = {
+				factor = 10
+				is_historical_focus_on = yes
+			}
+		}
+		allow_branch = {
+			NOT = { has_country_flag = YEM_yahya_assasinated }
+		}
+		available = {
+			is_puppet = no
+			#has_country_leader = {
+				#    name = "Imam Yahya"
+				#}
+		}
+		completion_reward = {
+			add_political_power = 200
+		}
+	}
+
+	#Give up neutral foreign policy
+	focus = {
+		id = YEM_give_up_neutral_foreign_policy
+		icon = GFX_goal_HOL_fires_of_revolution_faux
+		x = 37
+		y = 0
+		offset = {
+			x = -9
+			y = 0
+			trigger = {
+				has_country_flag = YEM_yahya_assasinated
+			}
+		}
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		mutually_exclusive = { focus = YEM_neutral_foreign_policy }
+		ai_will_do = { factor = 20 }
+		available = {
+		}
+		completion_reward = {
+			remove_ideas = neutrality_idea
+			add_political_power = -100
+			hidden_effect = {
+				country_event = { id = YEM.5630 }
+			}
+		}
+	}
+
+	#Give up neutral foreign policy
+	focus = {
+		id = YEM_stabilize_country
+		icon = GFX_goal_generic_military_sphere
+		x = 5
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY}
+		prerequisite = { focus = YEM_give_up_neutral_foreign_policy focus = YEM_neutral_foreign_policy  }
+		relative_position_id = YEM_neutral_foreign_policy
+		ai_will_do = { factor = 30 }
+		allow_branch = {
+			NOT = { has_country_flag = YEM_yahya_assasinated }
+		}
+		available = {
+			NOT = { has_idea = yem_political_turmoil }
+		}
+		completion_reward = {
+			add_stability = 0.05
+			if = {
+				limit = { has_government = neutrality }
+				add_popularity = {
+					ideology = neutrality
+					popularity = 0.10
+				}
+			}
+			else_if = {
+				limit = { has_government = democratic }
+				add_war_support = -0.05
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.10
+				}
+			}
+			else_if = {
+				limit = { has_government = fascism }
+				add_war_support = 0.05
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.10
+				}
+			}
+			else = {
+				add_political_power = 100
+			}
+		}
+	}
+
+	#Dissolve the Treaty
+	focus = {
+		id = YEM_dissolve_the_treaty
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		x = -1
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_stabilize_country }
+		mutually_exclusive = { focus = YEM_enforce_the_treaty }
+		relative_position_id = YEM_stabilize_country
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			NOT = { has_government = democratic }
+		}
+		completion_reward = {
+			add_stability = -0.1
+			remove_ideas = yem_treaty_taif
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			diplomatic_relation = {
+				country = SAU
+				relation = non_aggression_pact
+				active = no
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					SAU = {
+						exists = yes
+						NOT = {
+							is_subject_of = YEM
+							is_in_faction_with = YEM
+						}
+					}
+				}
+				add_timed_idea = {
+					idea = YEM_break_peace_sau
+					days = 150
+				}
+			}
+		}
+	}
+
+	#Enforce the Treaty
+	focus = {
+		id = YEM_enforce_the_treaty
+		icon = GFX_focus_hol_the_foundations_of_defense
+		x = 1
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL}
+		prerequisite = { focus = YEM_stabilize_country }
+		mutually_exclusive = { focus = YEM_dissolve_the_treaty }
+		relative_position_id = YEM_stabilize_country
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = YEM_agrarian_reform
+		icon = GFX_goal_generic_consumer_goods
+		x = -1
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_enforce_the_treaty focus = YEM_dissolve_the_treaty }
+		relative_position_id = YEM_enforce_the_treaty
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+		}
+		completion_reward = {
+			custom_effect_tooltip = YEM_fishing_industry_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_consumer_goods_factor = -0.05 }
+			}
+		}
+	}
+
+	#Research Slot
+	focus = {
+		id = YEM_research_slot
+		icon = GFX_focus_research
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		prerequisite = { focus = YEM_agrarian_reform }
+		relative_position_id = YEM_agrarian_reform
+		ai_will_do = { factor = 30 }
+		available = {
+			NOT = { amount_research_slots > 4 }
+		}
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = YEM_imam_stays_neutral
+		icon = GFX_goal_HOL_sustain_neutrality
+		x = 0
+		y = 1
+		cost = 9
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL}
+		prerequisite = { focus = YEM_neutral_foreign_policy }
+		relative_position_id = YEM_neutral_foreign_policy
+		ai_will_do = { factor = 55 }
+		available = {
+			has_country_leader = {
+				name = "Imam Yahya"
+			}
+		}
+		completion_reward = {
+			add_political_power = 50
+			swap_ruler_traits = {
+				remove = yem_imam_basic add = yem_imam_neutral
+			}
+		}
+	}
+
+	#Eliminate political rivals
+	focus = {
+		id = YEM_eliminate_political_rivals
+		icon = GFX_goal_generic_political_purge
+		x = 1
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY}
+		prerequisite = { focus = YEM_imam_stays_neutral }
+		relative_position_id = YEM_imam_stays_neutral
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			if = {
+				limit = { has_government = neutrality }
+				add_popularity = {
+					ideology = neutrality
+					popularity = 0.10
+				}
+				add_stability = 0.05
+				add_political_power = 50
+			}
+			else = {
+				add_political_power = 50
+				add_stability = 0.05
+				add_manpower = -1000
+			}
+		}
+	}
+
+	#Deterrence
+	focus = {
+		id = YEM_detereence
+		icon = GFX_goal_generic_defence
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_eliminate_political_rivals }
+		relative_position_id = YEM_eliminate_political_rivals
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_ideas = deterrence
+		}
+	}
+
+	#Faith in Allah
+	focus = {
+		id = YEM_faith_in_allah
+		icon = GFX_YEM_Faith_in_allah
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_detereence }
+		relative_position_id = YEM_detereence
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_ideas = yem_spread_islam
+		}
+	}
+
+	#Enforce Yemen Neutrality
+	focus = {
+		id = YEM_enforce_yemen_neutrality
+		icon = GFX_goal_generic_defence
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+		prerequisite = { focus = YEM_faith_in_allah }
+		relative_position_id = YEM_faith_in_allah
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_manpower = 20000
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_ideas = yem_enforced_neutrality
+		}
+	}
+
+	#Why We Fight
+	focus = {
+		id = YEM_why_we_fight
+		icon = GFX_HON_peace_in_our_time
+		x = -1
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL}
+		prerequisite = { focus = YEM_enforce_yemen_neutrality }
+		prerequisite = { focus = YEM_new_economic_plans }
+		relative_position_id = YEM_enforce_yemen_neutrality
+		ai_will_do = { factor = 30 }
+		available = {
+			NOT = { has_war = yes }
+		}
+		completion_reward = {
+			add_ideas = why_we_fight_focus
+			set_rule = {
+				can_create_factions = yes
+			}
+		}
+	}
+
+	#Purchase Aden
+	focus = {
+		id = YEM_purchase_aden
+		icon = GFX_YEM_Purchase_aden
+		x = 0
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION}
+		prerequisite = { focus = YEM_why_we_fight }
+		relative_position_id = YEM_why_we_fight
+		ai_will_do = { factor = 0 }
+		available = {
+			NOT = { has_war_with = ENG }
+			ENG = {
+				has_war_with_major = yes
+				has_opinion = {
+					target = ROOT
+					value > 49
+				}
+			}
+			date > 1940.1.1
+		}
+		bypass = {
+			controls_state = 659
+			controls_state = 992
+		}
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					OR = {
+						any_controlled_state = {
+							OR = {
+								state = 659
+								state = 992
+							}
+							is_controlled_by = PREV
+						}
+						any_subject_country = {
+							any_controlled_state = {
+								OR = {
+									state = 659
+									state = 992
+								}
+								is_controlled_by = PREV
+							}
+						}
+					}
+					is_subject = no
+				}
+				country_event = { id = YEM.5600 hours = 6 }
+			}
+		}
+	}
+
+	#Fortify Country
+	focus = {
+		id = YEM_fortify_country
+		icon = GFX_goal_generic_construct_military
+		x = -1
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_imam_stays_neutral }
+		relative_position_id = YEM_imam_stays_neutral
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			army_experience = 20
+			293 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					custom_effect_tooltip = YEM_wall_forts
+					hidden_effect = {
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 1920
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 4924
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 1973
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 10752
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#Boost Morale in Army
+	focus = {
+		id = YEM_boost_morale_in_army
+		icon = GFX_z_goal_YEM_defensive_army2
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
+		prerequisite = { focus = YEM_fortify_country }
+		relative_position_id = YEM_fortify_country
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_manpower = 50000
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_country_flag = YEM_irregular_army_flag
+				}
+				add_ideas = yem_army_buff_morale_alt
+			}
+			else = {
+				add_ideas = yem_army_buff_morale
+			}
+		}
+	}
+
+	#Public Adress
+	focus = {
+		id = YEM_public_address
+		icon = GFX_YEM_public_address
+		x = 0
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY}
+		prerequisite = { focus = YEM_boost_morale_in_army }
+		relative_position_id = YEM_boost_morale_in_army
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = -0.05
+			add_political_power = 100
+		}
+	}
+
+	#New Economic Plans
+	focus = {
+		id = YEM_new_economic_plans
+		icon = GFX_focus_generic_industry_3
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_public_address }
+		relative_position_id = YEM_public_address
+		ai_will_do = { factor = 30 }
+		available = {
+			num_of_factories > 10
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = yem_new_economic_plan
+				days = 360
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Coup detat
+	focus = {
+		id = YEM_coup_detat
+		icon = GFX_focus_r56_goal_generic_uprising
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_give_up_neutral_foreign_policy }
+		mutually_exclusive = { focus = YEM_agressive_king } mutually_exclusive = { focus = YEM_assasinate_yahya }
+		relative_position_id = YEM_give_up_neutral_foreign_policy
+		ai_will_do = { factor = 30 }
+		allow_branch = {
+			NOT = { has_country_flag = YEM_yahya_assasinated }
+		}
+		available = {
+			is_puppet = no
+		}
+		completion_reward = {
+			add_stability = -0.05
+			add_popularity = {
+				ideology = neutrality
+				popularity = -0.5
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_ideas = yem_political_turmoil
+			hidden_effect = {
+				country_lock_all_division_template = yes
+			}
+			if = {
+				limit = {
+					has_country_leader = {
+						name = "Imam Yahya"
+					}
+				}
+				custom_effect_tooltip = generic_skip_one_line_tt
+
+				swap_ruler_traits = {
+					remove = yem_imam_basic add = yem_imam_no_politics
+				}
+			}
+		}
+	}
+
+	#Republic Prevails
+	focus = {
+		id = YEM_republic
+		icon = GFX_z_goal_yemen_republic
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY}
+		prerequisite = { focus = YEM_coup_detat }
+		relative_position_id = YEM_coup_detat
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+		}
+		completion_reward = {
+			add_stability = 0.05
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = yes
+				election_frequency = 72
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.4
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_imprison_the_corrupt_high_ranks
+		icon = GFX_goal_DOM_The_Trial
+		x = 4
+		y = 1
+		cost = 5
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY}
+		prerequisite = { focus = YEM_republic focus = YEM_god_save_the_king }
+		relative_position_id = YEM_republic
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_manpower = -500
+			add_stability = 0.05
+			add_political_power = 50
+		}
+	}
+
+
+	focus = {
+		id = YEM_reform_the_armed_forces
+		icon = GFX_z_goal_YEM_reform_army_mutawakkili_kingdom
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = {FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER}
+		prerequisite = { focus = YEM_imprison_the_corrupt_high_ranks }
+		relative_position_id = YEM_imprison_the_corrupt_high_ranks
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_manpower = 15000
+			add_war_support = 0.05
+			#if = {
+				#	limit = {
+					#		has_country_flag = YEM_irregular_army_flag
+					#	}
+				#	add_ideas = yem_army_buff_alt
+				#}
+			#else = {
+				#	add_ideas = yem_army_buff
+				#}
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_completed_focus = YEM_modernization_of_the_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+			}
+			else = {
+				custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_army_org_regain
+				value = 0.05
+				tooltip = army_org_regain_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_heat_attrition_factor
+				value = -0.15
+				tooltip = heat_attrition_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_winter_attrition_factor
+				value = 0.05
+				tooltip = winter_attrition_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_land_doctrine_cost_factor
+				value = -0.05
+				tooltip = land_doctrine_cost_factor_tt
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_focus_on_the_economy
+		icon = GFX_goal_generic_construct_civilian
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_reform_the_armed_forces }
+		relative_position_id = YEM_reform_the_armed_forces
+		ai_will_do = { factor = 30 }
+		available = {
+			num_of_factories > 8
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_timed_idea = {
+				idea = yem_new_economic_plan
+				days = 360
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_democratize_the_country
+		icon = GFX_z_goal_yemen_republic2
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_republic }
+		relative_position_id = YEM_republic
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			has_completed_focus = YEM_imprison_the_corrupt_high_ranks
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = democratic_influence
+				days = 420
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			remove_ideas = yem_political_turmoil
+			hidden_effect = {
+				country_lock_all_division_template = no
+			}
+		}
+	}
+
+	#End Monarchy
+	focus = {
+		id = YEM_end_monarchy
+		icon = GFX_focus_rom_handle_king
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_STABILITY}
+		prerequisite = { focus = YEM_democratize_the_country }
+		relative_position_id = YEM_democratize_the_country
+		ai_will_do = { factor = 30 }
+		available = {
+			democratic > 0.55
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 50
+			if = {
+				limit = {
+					has_country_leader = {
+						name = "Imam Yahya"
+					}
+				}
+				custom_effect_tooltip = generic_skip_one_line_tt
+
+				add_ideas = yem_imam_no_politics
+			}
+		}
+	}
+
+	#Create Healthcare System
+	focus = {
+		id = YEM_create_healthcare_system
+		icon = GFX_z_goal_health_and_social_security_system
+		x = 1
+		y = 1
+		cost = 7
+		prerequisite = { focus = YEM_end_monarchy }
+		relative_position_id = YEM_end_monarchy
+		ai_will_do = { factor = 10 }
+		available = {
+		}
+		completion_reward = {
+			add_ideas = YEM_improving_quality_of_life
+		}
+	}
+
+	#Defense of the Revolution
+	focus = {
+		id = YEM_defense_revolution
+		icon = GFX_z_goal_fist_industry
+		x = -1
+		y = 1
+		cost = 7
+		prerequisite = { focus = YEM_end_monarchy }
+		relative_position_id = YEM_end_monarchy
+		ai_will_do = { factor = 10 }
+		available = {
+		}
+		completion_reward = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	#Go Alone
+	focus = {
+		id = YEM_go_alone
+		icon = GFX_goal_Centralised_Government
+		x = 0
+		y = 2
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_defense_revolution }
+		prerequisite = { focus = YEM_create_healthcare_system }
+		mutually_exclusive = { focus = YEM_agreement_with_british } mutually_exclusive = { focus = YEM_befriend_turkey }
+		relative_position_id = YEM_end_monarchy
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_political_power = 200
+			set_rule = {
+				can_create_factions = yes
+			}
+		}
+	}
+
+	#Purchase land from uk
+	focus = {
+		id = YEM_purchase_land_from_uk
+		icon = GFX_YEM_Purchase_aden
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_go_alone }
+		relative_position_id = YEM_go_alone
+		ai_will_do = { factor = 30 }
+		available = {
+			NOT = { has_war_with = ENG }
+		}
+		bypass = {
+			controls_state = 659
+		}
+		completion_reward = {
+			random_neighbor_country = {
+				limit = {
+					owns_state = 659
+				}
+				country_event = { id = YEM.5600 hours = 6 }
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_fortify_arabian_border
+		icon = GFX_goal_generic_construct_military
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		prerequisite = { focus = YEM_purchase_land_from_uk }
+		relative_position_id = YEM_purchase_land_from_uk
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+		}
+		completion_reward = {
+			army_experience = 20
+			293 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					custom_effect_tooltip = YEM_wall_forts_arab
+					hidden_effect = {
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 1920
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 4924
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_economic_treaty_with_allies
+		icon = GFX_SAU_Allied_Economical_Investments
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_fortify_arabian_border focus = YEM_integrate_oman }
+		relative_position_id = YEM_fortify_arabian_border
+		ai_will_do = { factor = 30 }
+		available = {
+			NOT = { has_war_with = ENG }
+			ENG = {
+				has_opinion = {
+					target = SAU
+					value > 29
+				}
+			}
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 1 }
+			add_ideas = yem_economic_buff
+		}
+	}
+
+	focus = {
+		id = YEM_befriend_turkey
+		icon = GFX_focus_generic_befriend_turkey
+		x = -2
+		y = 2
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_defense_revolution }
+		prerequisite = { focus = YEM_create_healthcare_system }
+		mutually_exclusive = { focus = YEM_agreement_with_british } mutually_exclusive = { focus = YEM_go_alone }
+		relative_position_id = YEM_end_monarchy
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+		}
+		completion_reward = {
+			TUR = {
+				add_opinion_modifier = { target = YEM modifier = tur_yem_alliance_focus }
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_agreement_with_british
+		icon = GFX_YEM_agreement_with_british
+		x = 2
+		y = 2
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_defense_revolution }
+		prerequisite = { focus = YEM_create_healthcare_system }
+		mutually_exclusive = { focus = YEM_befriend_turkey } mutually_exclusive = { focus = YEM_go_alone }
+		relative_position_id = YEM_end_monarchy
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			custom_trigger_tooltip = {
+				tooltip = yem_british_rejection_tt
+				NOT = {
+					has_country_flag = YEM_british_rejected
+				}
+			}
+		}
+		completion_reward = {
+			ENG = {
+				country_event = { id = YEM.5603 }
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_the_british_gave_us_middle_east
+		icon = GFX_YEM_the_british_gave_us_middle_east
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		prerequisite = { focus = YEM_agreement_with_british }
+		relative_position_id = YEM_agreement_with_british
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			has_idea = yem_secret_deals
+		}
+		completion_reward = {
+			ENG = {
+				country_event = { id = YEM.5607 }
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_integrate_oman
+		icon = GFX_ef_goal_generic_attack_oman
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION}
+		prerequisite = { focus = YEM_the_british_gave_us_middle_east }
+		relative_position_id = YEM_the_british_gave_us_middle_east
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			country_exists = OMA
+		}
+		bypass = {
+			OR = {
+				controls_state = 294
+				OMA = { is_puppet_of = YEM }
+			}
+		}
+		completion_reward = {
+			OMA = {
+				country_event = { id = YEM.5610 }
+			}
+		}
+		will_lead_to_war_with = OMA
+	}
+
+
+	focus = {
+		id = YEM_integrate_saudi_arabia
+		icon = GFX_YEM_attack_saudi_arabia
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION}
+		prerequisite = { focus = YEM_integrate_oman }
+		relative_position_id = YEM_integrate_oman
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			country_exists = SAU
+		}
+		bypass = {
+			OR = {
+				AND = {
+					controls_state = 678
+					controls_state = 679
+					controls_state = 292
+					controls_state = 858
+					controls_state = 856
+					controls_state = 854
+					controls_state = 855
+					controls_state = 857
+					controls_state = 859
+				}
+				SAU = { is_puppet_of = YEM }
+			}
+		}
+		completion_reward = {
+			SAU = {
+				country_event = { id = YEM.5613 }
+			}
+		}
+		will_lead_to_war_with = SAU
+	}
+
+	#Dominion of British Middle East
+	focus = {
+		id = YEM_protectore_of_britsh_middle_east
+		icon = GFX_focus_eng_the_sun_never_sets
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_STABILITY}
+		prerequisite = { focus = YEM_integrate_saudi_arabia }
+		relative_position_id = YEM_integrate_saudi_arabia
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			hidden_effect = {
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.10
+				}
+				ENG = { puppet = YEM }
+				retire_country_leader = yes
+				remove_ideas = yem_secret_deals
+				678 = { add_core_of = ROOT }
+				679 = { add_core_of = ROOT }
+				292 = { add_core_of = ROOT }
+				858 = { add_core_of = ROOT }
+				856 = { add_core_of = ROOT }
+				854 = { add_core_of = ROOT }
+				855 = { add_core_of = ROOT }
+				857 = { add_core_of = ROOT }
+				859 = { add_core_of = ROOT }
+				294 = { add_core_of = ROOT }
+				658 = { add_core_of = ROOT }
+				656 = { add_core_of = ROOT }
+				293 = { add_core_of = ROOT }
+				455 = { add_core_of = ROOT }
+				765 = { add_core_of = ROOT }
+			}
+			add_to_tech_sharing_group = commonwealth_research
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			set_cosmetic_tag = YEM_british_dominion
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_country_leader_role = {
+				character = YEM_arthur_grenfell
+				promote_leader = yes
+				country_leader = {
+					ideology = conservatism
+					expire ="1965.1.1.1"
+					traits = {
+						autocratic_imperialist imperial_connections
+					}
+				}
+			}
+			show_unit_leaders_tooltip = YEM_arthur_grenfell
+		}
+	}
+
+	#Open University of Sanaa
+	focus = {
+		id = YEM_open_university_of_sanaa
+		icon = GFX_focus_research
+		x = -1
+		y = 1
+		cost = 7
+		prerequisite = { focus = YEM_protectore_of_britsh_middle_east }
+		relative_position_id = YEM_protectore_of_britsh_middle_east
+		ai_will_do = { factor = 10 }
+		available = {
+			num_of_factories > 20
+		}
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	#Attack Iraq
+	focus = {
+		id = YEM_attack_iraq
+		icon = GFX_focus_generic_attack_iraq
+		x = 1
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION}
+		prerequisite = { focus = YEM_protectore_of_britsh_middle_east }
+		relative_position_id = YEM_protectore_of_britsh_middle_east
+		ai_will_do = { factor = 30 }
+		available = {
+			country_exists = IRQ
+		}
+		bypass = {
+			IRQ = {
+				exists = no
+			}
+		}
+		completion_reward = {
+			declare_war_on = {
+				target = IRQ
+				type = annex_everything
+			}
+		}
+		will_lead_to_war_with = IRQ
+	}
+
+
+	focus = {
+		id = YEM_join_sadabat_pact
+		icon = GFX_focus_TUR_treaty_of_saadabad
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_befriend_turkey }
+		relative_position_id = YEM_befriend_turkey
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			TUR = {
+				is_faction_leader = yes
+				exists = yes
+				NOT = {
+					has_government = communism
+					has_war_with = ROOT
+				}
+			}
+		}
+		bypass = {
+			AND = {
+				is_in_faction_with = TUR
+				TUR = { is_faction_leader = yes }
+			}
+		}
+		completion_reward = {
+			TUR = {
+				country_event = generic.2
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_invite_other_arab_countries
+		icon = GFX_YEM_expand_sabadab
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_join_sadabat_pact }
+		relative_position_id = YEM_join_sadabat_pact
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+		}
+		bypass = {
+			AND = {
+				is_in_faction_with = TUR
+				is_in_faction_with = SAU
+				is_in_faction_with = OMA
+				TUR = { is_faction_leader = yes }
+			}
+		}
+		completion_reward = {
+			SAU = {
+				country_event = YEM.5617
+			}
+			OMA = {
+				country_event = YEM.5617
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_strengthen_our_countries
+		icon = GFX_goal_generic_consumer_goods
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_invite_other_arab_countries }
+		relative_position_id = YEM_invite_other_arab_countries
+		ai_will_do = { factor = 30 }
+		available = {
+			OR = {
+				is_faction_leader = yes
+				AND = {
+					is_in_faction_with = TUR
+				}
+				AND = {
+					is_in_faction_with = IRQ
+				}
+				AND = {
+					is_in_faction_with = PER
+				}
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = GER_pool_technical_know_how_tt
+			add_ideas = yem_central_bank
+			for_each_scope_loop = {
+				array = faction_members
+				if = {
+					limit = {
+						NOT = { tag = ROOT }
+						OR = {
+							original_tag = TUR
+							original_tag = IRQ
+							original_tag = PER
+							original_tag = OMA
+							original_tag = SAU
+							original_tag = AFG
+						}
+					}
+					add_ideas = yem_central_bank
+				}
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_agressive_king
+		icon = GFX_YEM_Agressive_king
+		x = 8
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		prerequisite = { focus = YEM_give_up_neutral_foreign_policy }
+		mutually_exclusive = { focus = YEM_coup_detat } mutually_exclusive = { focus = YEM_assasinate_yahya }
+		relative_position_id = YEM_give_up_neutral_foreign_policy
+		ai_will_do = { factor = 30 }
+		allow_branch = {
+			NOT = { has_country_flag = YEM_yahya_assasinated }
+		}
+		available = {
+			is_puppet = no
+			has_war_support > 0.3
+			has_country_leader = {
+				name = "Imam Yahya"
+			}
+		}
+		completion_reward = {
+			add_war_support = 0.05
+			swap_ruler_traits = {
+				remove = yem_imam_basic add = yem_imam_agressive
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_god_save_the_king
+		icon = GFX_focus_eng_god_save_the_king
+		x = 0
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_STABILITY}
+		prerequisite = { focus = YEM_agressive_king }
+		relative_position_id = YEM_agressive_king
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			has_country_leader = {
+				name = "Imam Yahya"
+			}
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			if = {
+				limit = { has_idea = yem_treaty_taif }
+				remove_ideas = yem_treaty_taif
+			}
+			else = {
+				add_political_power = 100
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_militarist_youth
+		icon = GFX_z_goal_arab_military_school
+		x = -1
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		prerequisite = { focus = YEM_god_save_the_king }
+		relative_position_id = YEM_god_save_the_king
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_manpower = 10000
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_ideas = militarism_focus_2
+		}
+	}
+
+
+	focus = {
+		id = YEM_militarization_of_industry
+		icon = GFX_z_goal_YEM_local_production_of_equipment
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+		prerequisite = { focus = YEM_militarist_youth }
+		relative_position_id = YEM_militarist_youth
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_claim_lands
+		icon = GFX_goal_OTT_Land_Reform
+		x = 0
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_militarization_of_industry }
+		relative_position_id = YEM_militarization_of_industry
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		bypass = {
+			AND = {
+				controls_state = 659
+				controls_state = 294
+				controls_state = 658
+				controls_state = 679
+				controls_state = 678
+				controls_state = 292
+				controls_state = 656
+				controls_state = 455
+				controls_state = 765
+				controls_state = 856
+				controls_state = 855
+				controls_state = 857
+				controls_state = 859
+				controls_state = 858
+				controls_state = 854
+			}
+		}
+		completion_reward = {
+			add_state_claim = 659
+			add_state_claim = 294
+			add_state_claim = 658
+			add_state_claim = 679
+			add_state_claim = 678
+			add_state_claim = 292
+			add_state_claim = 656
+			add_state_claim = 455
+			add_state_claim = 765
+			add_state_claim = 856
+			add_state_claim = 855
+			add_state_claim = 857
+			add_state_claim = 859
+			add_state_claim = 858
+			add_state_claim = 854
+		}
+	}
+
+
+	focus = {
+		id = YEM_yemen_first
+		icon = GFX_goal_generic_political_pressure
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		mutually_exclusive = { focus = YEM_join_axis }
+		prerequisite = { focus = YEM_claim_lands }
+		relative_position_id = YEM_claim_lands
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_political_power = 100
+			add_war_support = 0.1
+			set_rule = {
+				can_create_factions = yes
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_closer_germans
+		icon = GFX_goal_ger_way_lead
+		x = 1
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_god_save_the_king }
+		relative_position_id = YEM_god_save_the_king
+		ai_will_do = { factor = 30 }
+		available = {
+			OR = {
+				is_in_faction_with = GER
+				AND = {
+					is_in_faction = no
+					is_puppet = no
+					GER = {
+						is_faction_leader = yes
+						exists = yes
+						NOT = {
+							has_government = communism
+							has_war_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		completion_reward = {
+			GER = {
+				add_opinion_modifier = { target = YEM modifier = ger_yem_alliance_focus }
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_german_advisors
+		icon = GFX_focus_ger_oppose_hitler
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_closer_germans }
+		relative_position_id = YEM_closer_germans
+		ai_will_do = { factor = 30 }
+		available = {
+			OR = {
+				is_in_faction_with = GER
+				AND = {
+					is_in_faction = no
+					is_puppet = no
+					GER = {
+						is_faction_leader = yes
+						exists = yes
+						NOT = {
+							has_government = communism
+							has_war_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		completion_reward = {
+			add_ideas = yem_german_advisors
+		}
+	}
+
+
+	focus = {
+		id = YEM_german_investments
+		icon = GFX_goal_ger_goring_werke
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_german_advisors }
+		relative_position_id = YEM_german_advisors
+		ai_will_do = { factor = 30 }
+		available = {
+			OR = {
+				is_in_faction_with = GER
+				AND = {
+					is_in_faction = no
+					is_puppet = no
+					GER = {
+						is_faction_leader = yes
+						exists = yes
+						NOT = {
+							has_government = communism
+							has_war_with = ROOT
+						}
+					}
+				}
+			}
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 1 }
+			add_ideas = yem_schachtplan_modified
+		}
+	}
+
+
+	focus = {
+		id = YEM_join_axis
+		icon = GFX_focus_chi_mission_to_germany
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		prerequisite = { focus = YEM_german_investments }
+		mutually_exclusive = { focus = YEM_yemen_first }
+		relative_position_id = YEM_german_investments
+		ai_will_do = { factor = 30 }
+		available = {
+			is_in_faction = no
+			is_puppet = no
+			GER = {
+				is_faction_leader = yes
+				exists = yes
+				NOT = {
+					has_government = communism
+					has_war_with = ROOT
+				}
+			}
+		}
+		bypass = {
+			is_in_faction_with = GER
+		}
+		completion_reward = {
+			GER = {
+				country_event = generic.2
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_start_border_war_with_uk
+		icon = GFX_focus_generic_provoke_border_clashes
+		x = -1
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_ANNEXATION}
+		prerequisite = { focus = YEM_join_axis focus = YEM_yemen_first }
+		relative_position_id = YEM_join_axis
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+		}
+		bypass = {
+			controls_state = 659
+		}
+		completion_reward = {
+			country_event = { id = YEM.5620 }
+			add_war_support = 0.05
+		}
+		will_lead_to_war_with = ENG
+	}
+
+
+	focus = {
+		id = YEM_attack_oman
+		icon = GFX_YEM_attack_oman
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_ANNEXATION}
+		prerequisite = { focus = YEM_start_border_war_with_uk }
+		relative_position_id = YEM_start_border_war_with_uk
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			country_exists = OMA
+		}
+		bypass = {
+			OR = {
+				controls_state = 294
+				OMA = { is_puppet_of = YEM }
+			}
+		}
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = OMA
+			}
+		}
+		will_lead_to_war_with = OMA
+	}
+
+
+	focus = {
+		id = YEM_attack_saudi_arabia
+		icon = GFX_YEM_attack_saudi_arabia
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_ANNEXATION}
+		prerequisite = { focus = YEM_attack_oman }
+		relative_position_id = YEM_attack_oman
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			country_exists = SAU
+		}
+		bypass = {
+			OR = {
+				AND = {
+					controls_state = 678
+					controls_state = 679
+					controls_state = 292
+					controls_state = 858
+					controls_state = 856
+					controls_state = 854
+					controls_state = 855
+					controls_state = 857
+					controls_state = 859
+				}
+				SAU = { is_puppet_of = YEM }
+			}
+		}
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SAU
+			}
+		}
+		will_lead_to_war_with = SAU
+	}
+
+
+	focus = {
+		id = YEM_greater_yemen
+		icon = GFX_YEM_greater_yemen
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_STABILITY}
+		prerequisite = { focus = YEM_attack_saudi_arabia }
+		relative_position_id = YEM_attack_saudi_arabia
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			controls_state = 294
+			controls_state = 678
+			controls_state = 679
+			controls_state = 292
+			controls_state = 858
+			controls_state = 856
+			controls_state = 854
+			controls_state = 855
+			controls_state = 857
+			controls_state = 859
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 100
+			set_cosmetic_tag = YEM_yemen_greater_agressive
+			custom_effect_tooltip = yem_greater_agressive_tt
+			hidden_effect = {
+				678 = { add_core_of = ROOT }
+				679 = { add_core_of = ROOT }
+				292 = { add_core_of = ROOT }
+				858 = { add_core_of = ROOT }
+				856 = { add_core_of = ROOT }
+				854 = { add_core_of = ROOT }
+				855 = { add_core_of = ROOT }
+				857 = { add_core_of = ROOT }
+				859 = { add_core_of = ROOT }
+				294 = { add_core_of = ROOT }
+				658 = { add_core_of = ROOT }
+				656 = { add_core_of = ROOT }
+				293 = { add_core_of = ROOT }
+				455 = { add_core_of = ROOT }
+				765 = { add_core_of = ROOT }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_assasinate_yahya
+		icon = GFX_z_goal_YEM_kill_imam
+		x = 14
+		y = 1
+		offset = {
+			x = -14
+			y = 0
+			trigger = {
+				has_country_flag = YEM_yahya_assasinated
+			}
+		}
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_give_up_neutral_foreign_policy }
+		mutually_exclusive = { focus = YEM_coup_detat } mutually_exclusive = { focus = YEM_agressive_king }
+		relative_position_id = YEM_give_up_neutral_foreign_policy
+		ai_will_do = { factor = 30 }
+		allow_branch = {
+			has_country_flag = YEM_yahya_assasinated
+		}
+		available = {
+			is_puppet = no
+		}
+		completion_reward = {
+			add_ideas = yem_political_turmoil
+			hidden_effect = {
+				country_lock_all_division_template = yes
+			}
+			if = {
+				limit = {
+					has_idea = yem_treaty_taif
+				}
+				remove_ideas = yem_treaty_taif
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_align_with_germans
+		icon = GFX_goal_ger_way_lead
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_assasinate_yahya }
+		mutually_exclusive = { focus = YEM_align_with_italy } mutually_exclusive = { focus = YEM_soviet_backed_coup }
+		relative_position_id = YEM_assasinate_yahya
+		ai_will_do = { factor = 30 }
+		allow_branch = {
+			NOT = { has_completed_focus = YEM_align_with_italy }
+			NOT = { has_completed_focus = YEM_soviet_backed_coup }
+			has_country_flag = YEM_yahya_assasinated
+		}
+		available = {
+			is_puppet = no
+			GER = {
+				is_faction_leader = yes
+				exists = yes
+				has_government = fascism
+				NOT = {
+					has_government = communism
+					has_war_with = ROOT
+				}
+			}
+		}
+		completion_reward = {
+			add_stability = -0.15
+			add_war_support = 0.15
+			add_political_power = 50
+			GER = {
+				add_opinion_modifier = { target = YEM modifier = ger_yem_alliance_focus }
+			}
+			add_timed_idea = {
+				idea = fascist_influence
+				days = 300
+			}
+			hidden_effect = {
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_germans_coming_for_help
+		icon = GFX_focus_chi_mission_to_germany
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_align_with_germans }
+		relative_position_id = YEM_align_with_germans
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_political_power = 75
+			remove_ideas = yem_political_turmoil
+			hidden_effect = {
+				country_lock_all_division_template = no
+			}
+			add_ideas = yem_german_influence
+			GER = {
+				diplomatic_relation = {
+					country = YEM
+					relation = guarantee
+					active = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_request_political_support
+		icon = GFX_focus_POL_beck_ribbentrop
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_germans_coming_for_help }
+		relative_position_id = YEM_germans_coming_for_help
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.4
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = YEM_fritz_bayerlein
+		}
+	}
+
+	focus = {
+		id = YEM_reichskommissariat_arabien
+		icon = GFX_YEM_reichkommisarat_arabien
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_request_political_support }
+		relative_position_id = YEM_request_political_support
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_country_leader_role = {
+				character = YEM_fritz_bayerlein
+				promote_leader = yes
+				country_leader = {
+					ideology = nazism
+					expire ="1965.1.1.1"
+					traits = {
+						dictator rearmer
+					}
+				}
+			}
+			show_unit_leaders_tooltip = YEM_fritz_bayerlein
+			GER = { puppet = YEM }
+			hidden_effect = {
+				set_politics = {
+					ruling_party = fascism
+					elections_allowed = no
+				}
+			}
+			set_cosmetic_tag = YEM_rk_arabien
+			swap_ideas = {
+				remove_idea = yem_german_influence
+				add_idea = yem_german_colonial_government
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_attract_german_companies
+		icon = GFX_goal_tripartite_pact
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_reichskommissariat_arabien }
+		relative_position_id = YEM_reichskommissariat_arabien
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+			IF = {
+				limit = {
+					has_dlc = "Arms Against Tyranny"
+				}
+				custom_effect_tooltip = available_mio_tt
+				show_mio_tooltip = GER_bmw_tank_industry_organisation
+				show_mio_tooltip = GER_bmw_air_organization
+				show_mio_tooltip = GER_bmw_inf_organization
+
+				mio:GER_bmw_tank_industry_organisation = {
+					add_mio_size = 1
+				}
+			}
+			else = {
+				custom_effect_tooltip = available_designer
+				show_ideas_tooltip = krupp_yem
+				show_ideas_tooltip = bmw_industry_yem
+				show_ideas_tooltip = mauser_yem
+				show_ideas_tooltip = bmw_inf_yem
+				show_ideas_tooltip = bmw_air_yem
+				show_ideas_tooltip = junkers_yem
+				show_ideas_tooltip = germaniawerft_yem
+				show_ideas_tooltip = blohm_und_voss_yem
+				show_ideas_tooltip = bmw_tank_industry_yem
+				show_ideas_tooltip = henschel_yem
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_request_military_integration
+		icon = GFX_focus_ger_oppose_hitler
+		x = -2
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_attract_german_companies }
+		relative_position_id = YEM_attract_german_companies
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			add_stability = -0.05
+			army_experience = 50
+			add_manpower = 10000
+			add_ideas = yem_german_advisors
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_mobile_warfare
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 0.25
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_strengthen_local_militas
+		icon = GFX_focus_generic_military_mission
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_request_military_integration }
+		relative_position_id = YEM_request_military_integration
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_manpower = 15000
+			division_template = {
+				name = "Milita Army"
+				priority = 2
+				#template_counter = 0
+				#division_names_group = SOV_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = {
+						has_full_control_of_state = PREV
+						is_in_home_area = yes
+					}
+				}
+				prioritize = { 10 }
+				create_unit = {
+					division = "name = \"1. Milita Division\" division_template = \"Milita Army\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"2. Milita Division\" division_template = \"Milita Army\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = {
+						has_full_control_of_state = PREV
+						is_in_home_area = yes
+					}
+				}
+				prioritize = { 88 }
+				create_unit = {
+					division = "name = \"3. Milita Division\" division_template = \"Milita Army\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"4. Milita Division\" division_template = \"Milita Army\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"5. Milita Division\" division_template = \"Milita Army\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+			custom_effect_tooltip = YEM_army_population_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_conscription_factor = 0.2 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_redistribute_the_forces
+		icon = GFX_goal_generic_axis_build_infantry
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_strengthen_local_militas }
+		relative_position_id = YEM_strengthen_local_militas
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			add_stability = -0.05
+			army_experience = 50
+			swap_ideas = {
+				remove_idea = yem_german_advisors
+				add_idea = yem_german_style_army
+			}
+			division_template = {
+				name = "Infanterie-Division"
+				priority = 2
+				#template_counter = 0
+				division_names_group = GER_Inf_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					artillery = { x = 0 y = 1 }
+				}
+			}
+			division_template = {
+				name = "Panzer-Division"
+
+				division_names_group = GER_Arm_01
+
+				regiments = {
+					light_armor = { x = 0 y = 0 }
+					light_armor = { x = 0 y = 1 }
+					light_armor = { x = 1 y = 0 }
+					light_armor = { x = 1 y = 1 }
+					motorized = { x = 2 y = 0 }
+					motorized = { x = 2 y = 1 }
+				}
+				support = {
+					mot_recon = { x = 0 y = 0 }
+					engineer = { x = 0 y = 1 }
+					artillery = { x = 0 y = 2 }
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = {
+						has_full_control_of_state = PREV
+					}
+				}
+				prioritize = { 10 }
+				create_unit = {
+					division = "name = \"1. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"2. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"3. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"1. Panzer-Division\" division_template = \"Panzer-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"2. Panzer-Division\" division_template = \"Panzer-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"3. Panzer-Division\" division_template = \"Panzer-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = {
+						has_full_control_of_state = PREV
+					}
+				}
+				prioritize = { 88 }
+				create_unit = {
+					division = "name = \"4. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"5. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"6. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"7. Infanterie-Division\" division_template = \"Infanterie-Division\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = cas_bomber
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_request_german_investments
+		icon = GFX_goal_ger_goring_werke
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_attract_german_companies }
+		relative_position_id = YEM_attract_german_companies
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			add_ideas = yem_schachtplan_modified
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_mandatory_transportation
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_request_german_investments }
+		relative_position_id = YEM_request_german_investments
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_stability = -0.05
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 0
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+					}
+					OR = {
+						is_in_home_area = yes
+						NOT = {
+							owner = {
+								any_owned_state = {
+									free_building_slots = {
+										building = infrastructure
+										size > 0
+									}
+									is_in_home_area = yes
+								}
+							}
+						}
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_militarize_industry
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_mandatory_transportation }
+		relative_position_id = YEM_mandatory_transportation
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 5
+				add_building_construction = {
+					type = arms_factory
+					level = 4
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = YEM_sanaa_steel_factory_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_industrial_capacity_factory = 0.05 }
+				add_to_variable = { YEM_pi_local_resources_factor = 0.05 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_invite_german_settlers
+		icon = GFX_goal_generic_propaganda
+		x = 2
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_attract_german_companies }
+		relative_position_id = YEM_attract_german_companies
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_ideas = yem_german_settlers
+			293 = { set_state_category = city }
+		}
+	}
+
+	focus = {
+		id = YEM_arabian_integration
+		icon = GFX_focus_ger_reichskommisariats
+		x = 0
+		y = 1
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_invite_german_settlers }
+		relative_position_id = YEM_invite_german_settlers
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		select_effect = {
+			add_ideas = yem_arabian_integrate
+		}
+		completion_reward = {
+			#Tooltip purposes (Select Effect)
+			custom_effect_tooltip = SOV_focus_select_effect_tt
+			effect_tooltip = {
+				add_ideas = yem_arabian_integrate
+			}
+
+			#(Complete Effect)
+			custom_effect_tooltip = SOV_focus_complete_effect_tt
+			effect_tooltip = {
+				remove_ideas = yem_arabian_integrate
+			}
+			hidden_effect = {
+				remove_ideas = yem_arabian_integrate
+			}
+
+			add_ideas = yem_arabs_integrated
+		}
+	}
+
+	focus = {
+		id = YEM_enforcing_german_literacy
+		icon = GFX_focus_research
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_arabian_integration }
+		relative_position_id = YEM_arabian_integration
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			add_stability = -0.05
+			add_ideas = yem_german_literacy
+			custom_effect_tooltip = YEM_fishing_industry_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_consumer_goods_factor = -0.05 }
+			}
+			if = {
+				limit = {
+					NOT = { amount_research_slots > 4 }
+				}
+				add_research_slot = 1
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_prepare_military_parade
+		icon = GFX_goal_Focus_Military_Mobilisation
+		x = 0
+		y = 1
+		cost = 4
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_enforcing_german_literacy focus = YEM_militarize_industry focus = YEM_redistribute_the_forces }
+		relative_position_id = YEM_militarize_industry
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			custom_effect_tooltip = YEM_htler_military_parade_tt
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = YEM_invite_hitler
+		icon = GFX_goal_ger_way_lead
+		x = 0
+		y = 1
+		cost = 4
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_prepare_military_parade }
+		relative_position_id = YEM_prepare_military_parade
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			custom_effect_tooltip = YEM_invite_htler_parade_tt
+			hidden_effect = {
+				GER = {
+					country_event = { id = YEM.5635 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_attack_other_arabs
+		icon = GFX_focus_generic_support_the_left_right
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_invite_hitler }
+		relative_position_id = YEM_invite_hitler
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		bypass = {
+			OR = {
+				AND = {
+					controls_state = 678
+					controls_state = 679
+					controls_state = 292
+					controls_state = 858
+					controls_state = 856
+					controls_state = 854
+					controls_state = 855
+					controls_state = 857
+					controls_state = 859
+					controls_state = 294
+				}
+				AND = {
+					SAU = { is_puppet_of = YEM }
+					OMA = { is_puppet_of = YEM }
+				}
+			}
+		}
+		completion_reward = {
+			declare_war_on = {
+				target = SAU
+				type = annex_everything
+			}
+			declare_war_on = {
+				target = OMA
+				type = annex_everything
+			}
+		}
+		will_lead_to_war_with = SAU
+		will_lead_to_war_with = OMA
+	}
+
+	focus = {
+		id = YEM_integrate_all_of_them
+		icon = GFX_focus_generic_military_academy
+		x = 0
+		y = 1
+		cost = 8
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_attack_other_arabs }
+		relative_position_id = YEM_attack_other_arabs
+		ai_will_do = { factor = 30 }
+		available = {
+			controls_state = 294
+			controls_state = 678
+			controls_state = 679
+			controls_state = 292
+			controls_state = 858
+			controls_state = 856
+			controls_state = 854
+			controls_state = 855
+			controls_state = 857
+			controls_state = 859
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 100
+			custom_effect_tooltip = yem_greater_agressive_tt
+			hidden_effect = {
+				678 = { add_core_of = ROOT }
+				679 = { add_core_of = ROOT }
+				292 = { add_core_of = ROOT }
+				858 = { add_core_of = ROOT }
+				856 = { add_core_of = ROOT }
+				854 = { add_core_of = ROOT }
+				855 = { add_core_of = ROOT }
+				857 = { add_core_of = ROOT }
+				859 = { add_core_of = ROOT }
+				294 = { add_core_of = ROOT }
+				658 = { add_core_of = ROOT }
+				656 = { add_core_of = ROOT }
+				293 = { add_core_of = ROOT }
+				455 = { add_core_of = ROOT }
+				765 = { add_core_of = ROOT }
+				hidden_effect = {
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_align_with_italy
+		icon = GFX_focus_mussolini
+		x = 6
+		y = 1
+		offset = {
+			x = -6
+			y = 0
+			trigger = {
+				has_completed_focus = YEM_align_with_italy
+			}
+		}
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_assasinate_yahya }
+		mutually_exclusive = { focus = YEM_align_with_germans } mutually_exclusive = { focus = YEM_soviet_backed_coup }
+		relative_position_id = YEM_assasinate_yahya
+		ai_will_do = { factor = 30 }
+		allow_branch = {
+			NOT = { has_completed_focus = YEM_align_with_germans }
+			NOT = { has_completed_focus = YEM_soviet_backed_coup }
+			has_country_flag = YEM_yahya_assasinated
+		}
+		available = {
+			is_puppet = no
+			ITA = {
+				exists = yes
+				has_government = fascism
+				NOT = {
+					has_government = communism
+					has_war_with = ROOT
+				}
+			}
+		}
+		completion_reward = {
+			add_stability = -0.10
+			add_war_support = 0.15
+			ITA = {
+				add_opinion_modifier = { target = YEM modifier = ita_yem_alliance_focus }
+			}
+			add_timed_idea = {
+				idea = fascist_influence
+				days = 300
+			}
+			hidden_effect = {
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_italians_coming_for_help
+		icon = GFX_focus_befriend_italy
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_align_with_italy }
+		relative_position_id = YEM_align_with_italy
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+		}
+		completion_reward = {
+			add_political_power = 100
+			remove_ideas = yem_political_turmoil
+			hidden_effect = {
+				country_lock_all_division_template = no
+			}
+			add_ideas = yem_italian_influence
+			ITA = {
+				diplomatic_relation = {
+					country = YEM
+					relation = guarantee
+					active = yes
+				}
+			}
+			hidden_effect = {
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.4
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_support_italian_ethiophian_war
+		icon = GFX_focus_por_luso_tropicalism
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_italians_coming_for_help }
+		relative_position_id = YEM_italians_coming_for_help
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+			ITA = { has_war_with = ETH }
+		}
+		bypass = {
+			OR = {
+				NOT = {
+					ITA = { has_war_with = ETH }
+				}
+				ETH = {
+					has_war_with = ITA
+					has_capitulated = yes
+				}
+			}
+		}
+		completion_reward = {
+			add_war_support = 0.05
+			army_experience = 50
+			ITA = {
+				add_timed_idea = {
+					idea = yem_support_italia
+					days = 120
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_request_italian_investments
+		icon = GFX_focus_generic_treaty
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_support_italian_ethiophian_war }
+		relative_position_id = YEM_support_italian_ethiophian_war
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet = no
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					ITA = { has_completed_focus = ITA_power_plants_in_terni }
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 5
+					add_building_construction = {
+						type = industrial_complex
+						level = 3
+						instant_build = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = infrastructure
+							size > 0
+						}
+						OR = {
+							is_in_home_area = yes
+							NOT = {
+								owner = {
+									any_owned_state = {
+										free_building_slots = {
+											building = infrastructure
+											size > 0
+										}
+										is_in_home_area = yes
+									}
+								}
+							}
+						}
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					ITA = {
+						has_idea = ITA_foggia_farm_fields
+					}
+				}
+				add_timed_idea = { idea = ITA_foggia_farm_fields days = 240 }
+			}
+			else_if = {
+				limit = {
+					ITA = { has_completed_focus = ITA_steel_industry_in_terni }
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+				random_owned_controlled_state = {
+					add_resource = {
+						type = aluminium
+						amount = 5
+					}
+				}
+				random_owned_controlled_state = {
+					add_resource = {
+						type = steel
+						amount = 8
+					}
+				}
+				random_owned_controlled_state = {
+					add_resource = {
+						type = chromium
+						amount = 5
+					}
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_italian_arabia
+		icon = GFX_focus_generic_italy_first
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_request_italian_investments }
+		relative_position_id = YEM_request_italian_investments
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 125
+			ITA = { puppet = YEM }
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "Military Junta"
+				desc = "POLITICS_MILITARY_JUNTA_DESC"
+				picture = "GFX_portrait_YEM_Military_Junta"
+				expire = "1965.1.1"
+				ideology = nazism
+				traits = {
+					divided_interests
+				}
+			}
+			set_cosmetic_tag = YEM_italiana_arabia
+			if = {
+				limit = {
+					OR = {
+						ITA = { has_idea = vittorio_emanuele }
+						ITA = { has_idea = vittorio_emanuele_emperor_of_ethiopia }
+						ITA = { has_idea = vittorio_emanuele_king_of_albania }
+						ITA = { has_idea = vittorio_emanuele_albania_ethiopia }
+					}
+				}
+				add_ideas = yem_victor_emmanuel
+			}
+			swap_ideas = {
+				remove_idea = yem_italian_influence
+				add_idea = yem_italian_colonial_government
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_ita_militarize_industry
+		icon = GFX_goal_generic_construct_mil_factory
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_italian_arabia }
+		relative_position_id = YEM_italian_arabia
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_ideas = yem_italian_advisors
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_invite_italian_companies
+		icon = GFX_goal_tripartite_pact
+		x = 0
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_ita_militarize_industry }
+		relative_position_id = YEM_ita_militarize_industry
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = ITA
+		}
+		completion_reward = {
+			IF = {
+				limit = {
+					has_dlc = "Arms Against Tyranny"
+				}
+				add_offsite_building = { type = arms_factory level = 1 }
+				add_offsite_building = { type = industrial_complex level = 4 }
+			}
+			else = {
+				add_offsite_building = { type = industrial_complex level = 2 }
+				custom_effect_tooltip = available_designer
+				show_ideas_tooltip = astaldi_yem
+				show_ideas_tooltip = danieli_yem
+				show_ideas_tooltip = breda_yem
+				show_ideas_tooltip = beretta_yem
+				show_ideas_tooltip = fratelli_nardi_yem
+				show_ideas_tooltip = macchi_yem
+				show_ideas_tooltip = cantiere_ansaldo_yem
+				show_ideas_tooltip = crda_yem
+				show_ideas_tooltip = officine_meccaniche_yem
+				show_ideas_tooltip = ansaldo_yem
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_university_of_mussolini
+		icon = GFX_focus_research
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		prerequisite = { focus = YEM_invite_italian_companies }
+		relative_position_id = YEM_invite_italian_companies
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_stability = -0.05
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = YEM_italian_army_tactics
+		icon = GFX_focus_generic_tank_production
+		x = 1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_italian_arabia }
+		relative_position_id = YEM_italian_arabia
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = ITA
+		}
+		completion_reward = {
+			add_manpower = 25000
+			if = {
+				limit = {
+					ITA = { has_completed_focus = ITA_preserve_army_traditions }
+				}
+				army_experience = 50
+				add_doctrine_cost_reduction = {
+					name = ITA_mobile_warfare_focus
+					cost_reduction = 0.5
+					uses = 2
+					category = cat_grand_battle_plan
+				}
+				if = {
+					limit = {
+						ITA = { has_completed_focus = ITA_bersaglieri }
+					}
+					add_tech_bonus = {
+						name = ITA_bersaglieri
+						bonus = 0.75
+						uses = 2
+						category = cat_special_forces_generic
+					}
+					set_technology = { bicycle_infantry = 1 popup = no }
+
+					division_template = {
+						name = "Reggimento Bersaglieri"
+						division_names_group = ITA_INF_01 #TODO_Manu: Namelist: 1º,2º... Reggimento Bersaglieri
+						regiments = {
+							bicycle_battalion = { x = 0 y = 0 }
+							bicycle_battalion = { x = 0 y = 1 }
+							bicycle_battalion = { x = 1 y = 0 }
+							bicycle_battalion = { x = 1 y = 1 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							artillery = { x = 0 y = 1 }
+							#anti_tank = { x = 0 y = 2 }
+						}
+					}
+					capital_scope = {
+						create_unit = {
+							division = "division_template = \"Reggimento Bersaglieri\" start_experience_factor = 0.6 start_equipment_factor = 0.9"
+							owner = ROOT
+							count = 3
+						}
+					}
+				}
+				random_core_state = {
+					limit = {
+						is_fully_controlled_by = ROOT
+						is_in_home_area = yes
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					ITA = { has_completed_focus = ITA_a_bandits_war }
+				}
+				army_experience = 25
+				add_doctrine_cost_reduction = {
+					name = ITA_a_bandits_war
+					cost_reduction = 0.75
+					uses = 2
+					category = cat_mobile_warfare
+				}
+				add_tech_bonus = {
+					name = ITA_a_bandits_war
+					uses = 2
+					bonus = 0.75
+					category = motorized_equipment
+					category = recon_tech
+				}
+				random_core_state = {
+					limit = {
+						is_fully_controlled_by = ROOT
+						is_in_home_area = yes
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				if = {
+					limit = {
+						has_dlc = "La Resistance"
+					}
+					add_tech_bonus = {
+						name = ITA_a_bandits_war
+						bonus = 1.5
+						uses = 1
+						category = cat_armored_cars
+					}
+					add_ideas = ITA_bandits_war
+				}
+				else = {
+					add_ideas = ITA_bandits_war_no_lar
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				add_tech_bonus = {
+					name = ITA_the_zb_53
+					bonus = 1.0
+					uses = 1
+					category = infantry_weapons
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_italian_air_support
+		icon = GFX_focus_generic_aircraft_production
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_italian_army_tactics }
+		relative_position_id = YEM_italian_army_tactics
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = ITA
+		}
+		completion_reward = {
+			air_experience = 50
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+			if = {
+				limit = {
+					ITA = { has_completed_focus = ITA_standardization }
+				}
+				add_tech_bonus = {
+					name = ITA_standardization
+					bonus = 0.75
+					uses = 2
+					category = tactical_bomber
+					category = light_fighter
+					category = cat_strategic_bomber
+				}
+				random_core_state = {
+					limit = {
+						is_fully_controlled_by = ROOT
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				if = {
+					limit = {
+						ITA = { has_completed_focus = ITA_bomber_designs }
+					}
+					random_core_state = {
+						limit = {
+							is_fully_controlled_by = ROOT
+							is_in_home_area = yes
+							free_building_slots = {
+								building = arms_factory
+								size > 0
+								include_locked = yes
+							}
+						}
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+							instant_build = yes
+						}
+					}
+					add_tech_bonus = {
+						name = ITA_standardization
+						bonus = 0.5
+						uses = 1
+						category = cat_strategic_bomber
+					}
+				}
+			}
+			if = {
+				limit = {
+					ITA = { has_completed_focus = ITA_specialization }
+				}
+				add_tech_bonus = {
+					name = ITA_specialization
+					bonus = 0.5
+					uses = 3
+					category = air_equipment
+				}
+				random_core_state = {
+					limit = {
+						is_fully_controlled_by = ROOT
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				if = {
+					limit = {
+						ITA = { has_completed_focus = ITA_fighter_designs }
+					}
+					random_core_state = {
+						limit = {
+							is_fully_controlled_by = ROOT
+							free_building_slots = {
+								building = arms_factory
+								size > 0
+								include_locked = yes
+							}
+						}
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+							instant_build = yes
+						}
+					}
+					add_tech_bonus = {
+						name = ITA_standardization
+						bonus = 0.5
+						uses = 1
+						category = light_fighter
+					}
+				}
+			}
+			else = {
+				add_doctrine_cost_reduction = {
+					name = air_doc_bonus
+					cost_reduction = 0.5
+					uses = 2
+					category = air_doctrine
+				}
+				add_tech_bonus = {
+					name = ITA_air_innovations_bba #fighter_bonus
+					bonus = 0.75
+					uses = 1
+					category = light_fighter
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_italian_navy_support
+		icon = GFX_focus_generic_navy_battleship2
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_italian_air_support }
+		relative_position_id = YEM_italian_air_support
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = ITA
+		}
+		completion_reward = {
+			navy_experience = 50
+			add_breakthrough_progress = {
+				specialization = specialization_naval
+				value = 0.25
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+			if = {
+				limit = {
+					ITA = { has_completed_focus = ITA_incrociatori_leggeri }
+				}
+				add_doctrine_cost_reduction = {
+					name = ITA_incrociatori_leggeri
+					cost_reduction = 0.75
+					uses = 3
+					category = cat_trade_interdiction
+				}
+
+				add_tech_bonus = {
+					name = ITA_incrociatori_leggeri
+					bonus = 1.5
+					uses = 1
+					category = ca_tech
+				}
+				if = {
+					limit = {
+						ITA = {
+							OR = {
+								has_completed_focus = ITA_cruiser_submarines
+								has_completed_focus = ITA_midget_submarines
+							}
+						}
+					}
+					add_tech_bonus = {
+						name = ITA_midget_submarines
+						bonus = 1.0
+						uses = 1
+						category = ss_tech
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					ITA = { has_completed_focus = ITA_incrociatori_pesanti }
+				}
+				add_doctrine_cost_reduction = {
+					name = ITA_incrociatori_pesanti
+					cost_reduction = 0.75
+					uses = 3
+					category = cat_fleet_in_being
+				}
+
+				add_tech_bonus = {
+					name = ITA_incrociatori_pesanti
+					bonus = 1.5
+					uses = 1
+					category = ca_tech
+				}
+				if = {
+					limit = {
+						ITA = { has_completed_focus = ITA_proper_carriers }
+					}
+					add_tech_bonus = {
+						name = ITA_proper_carriers
+						bonus = 1.0
+						uses = 1
+						category = cv_tech
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					ITA = { has_completed_focus = ITA_stockpile_fuel }
+				}
+				add_timed_idea = { idea = ITA_stockpiling_fuel days = 360 }
+			}
+			else = {
+				add_tech_bonus = {
+					name = ITA_ispettorato_dei_mezzi_antisommergibili
+					ahead_reduction = 2
+					uses = 1
+					category = asw_tech
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_unite_with_italian_east_africa
+		icon = GFX_focus_generic_strike_at_democracy1
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_italian_navy_support }
+		prerequisite = { focus = YEM_university_of_mussolini }
+		relative_position_id = YEM_italian_navy_support
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = ITA
+		}
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.05
+			add_war_support = 0.05
+			set_cosmetic_tag = YEM_africa_orientale_italiana_arabia
+			if = {
+				limit = { ETH = { has_cosmetic_tag = ETH_italian } }
+				ETH = {
+					every_unit_leader = {
+						set_nationality = YEM
+					}
+				}
+				every_state = {
+					limit = {
+						is_core_of = ETH
+					}
+					add_core_of = ROOT
+				}
+				annex_country = { target = ETH transfer_troops = yes }
+				hidden_effect = {
+					set_party_name = { ideology = fascism long_name = "Partito Nazionale Fascista" name = "Partito Nazionale Fascista"}
+					create_country_leader = {
+						name = AOI_prince_amedeo
+						picture = GFX_portrait_AOI_amedeo_di_savoia_aosta
+						ideology = fascism_ideology
+						traits = {
+							duke_of_aosta iron_duke empire_builder
+						}
+					}
+					AOI = {
+						every_unit_leader = {
+							set_nationality = YEM
+						}
+					}
+					set_global_flag = italian_east_africa_flag
+				}
+				add_ideas = AOI_africa_orientale_italiana_idea
+			}
+			else_if = {
+				limit = { AOI = { has_cosmetic_tag = AOI_Italian } }
+				AOI = {
+					every_unit_leader = {
+						set_nationality = YEM
+					}
+				}
+				every_state = {
+					limit = {
+						is_core_of = ETH
+						is_core_of = AOI
+					}
+					add_core_of = ROOT
+				}
+				annex_country = { target = AOI transfer_troops = yes }
+				hidden_effect = {
+					set_party_name = { ideology = fascism long_name = "Partito Nazionale Fascista" name = "Partito Nazionale Fascista"}
+					create_country_leader = {
+						name = AOI_prince_amedeo
+						picture = GFX_portrait_AOI_amedeo_di_savoia_aosta
+						ideology = fascism_ideology
+						traits = {
+							duke_of_aosta iron_duke empire_builder
+						}
+					}
+					set_global_flag = italian_east_africa_flag
+				}
+				add_ideas = AOI_africa_orientale_italiana_idea
+			}
+			else_if = {
+				limit = {
+					any_country = {
+						OR = {
+							has_cosmetic_tag = AOI_Italian
+							AND = {
+								original_tag = ETH
+								is_subject_of = ITA
+							}
+						}
+					}
+				}
+				YEM = {
+					transfer_state = 271
+					transfer_state = 844
+					transfer_state = 843
+					transfer_state = 842
+					transfer_state = 841
+					transfer_state = 840
+					transfer_state = 839
+					transfer_state = 838
+					transfer_state = 908
+					transfer_state = 835
+					transfer_state = 836
+					transfer_state = 837
+					transfer_state = 550
+					transfer_state = 559
+				}
+				271 = { add_core_of = ROOT }
+				844 = { add_core_of = ROOT }
+				843 = { add_core_of = ROOT }
+				842 = { add_core_of = ROOT }
+				841 = { add_core_of = ROOT }
+				840 = { add_core_of = ROOT }
+				839 = { add_core_of = ROOT }
+				838 = { add_core_of = ROOT }
+				908 = { add_core_of = ROOT }
+				835 = { add_core_of = ROOT }
+				836 = { add_core_of = ROOT }
+				837 = { add_core_of = ROOT }
+				550 = { add_core_of = ROOT }
+				559 = { add_core_of = ROOT }
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = HAR
+							is_core_of = ORO
+							is_core_of = SID
+							is_core_of = ETH
+						}
+						is_controlled_by = ITA
+					}
+					YEM = {
+						transfer_state = PREV
+					}
+				}
+				hidden_effect = {
+					set_party_name = { ideology = fascism long_name = "Partito Nazionale Fascista" name = "Partito Nazionale Fascista"}
+					create_country_leader = {
+						name = AOI_prince_amedeo
+						picture = GFX_portrait_AOI_amedeo_di_savoia_aosta
+						ideology = fascism_ideology
+						traits = {
+							duke_of_aosta iron_duke empire_builder
+						}
+					}
+					ETH = {
+						every_unit_leader = {
+							set_nationality = YEM
+						}
+					}
+					AOI = {
+						every_unit_leader = {
+							set_nationality = YEM
+						}
+					}
+					set_global_flag = italian_east_africa_flag
+				}
+				add_ideas = AOI_africa_orientale_italiana_idea
+			}
+			else_if = {
+				limit = {
+					ITA = {
+						controls_state = 271
+						controls_state = 844
+						controls_state = 843
+						controls_state = 842
+						controls_state = 841
+						controls_state = 840
+						controls_state = 839
+						controls_state = 838
+						controls_state = 908
+						controls_state = 835
+						controls_state = 836
+						controls_state = 837
+						controls_state = 550
+						controls_state = 559
+					}
+				}
+				YEM = {
+					transfer_state = 271
+					transfer_state = 844
+					transfer_state = 843
+					transfer_state = 842
+					transfer_state = 841
+					transfer_state = 840
+					transfer_state = 839
+					transfer_state = 838
+					transfer_state = 908
+					transfer_state = 835
+					transfer_state = 836
+					transfer_state = 837
+					transfer_state = 550
+					transfer_state = 559
+				}
+				271 = { add_core_of = ROOT }
+				844 = { add_core_of = ROOT }
+				843 = { add_core_of = ROOT }
+				842 = { add_core_of = ROOT }
+				841 = { add_core_of = ROOT }
+				840 = { add_core_of = ROOT }
+				839 = { add_core_of = ROOT }
+				838 = { add_core_of = ROOT }
+				908 = { add_core_of = ROOT }
+				835 = { add_core_of = ROOT }
+				836 = { add_core_of = ROOT }
+				837 = { add_core_of = ROOT }
+				550 = { add_core_of = ROOT }
+				559 = { add_core_of = ROOT }
+				hidden_effect = {
+					set_party_name = { ideology = fascism long_name = "Partito Nazionale Fascista" name = "Partito Nazionale Fascista"}
+					create_country_leader = {
+						name = AOI_prince_amedeo
+						picture = GFX_portrait_AOI_amedeo_di_savoia_aosta
+						ideology = fascism_ideology
+						traits = {
+							duke_of_aosta iron_duke empire_builder
+						}
+					}
+					AOI = {
+						every_unit_leader = {
+							set_nationality = YEM
+						}
+					}
+					set_global_flag = italian_east_africa_flag
+				}
+				add_ideas = AOI_africa_orientale_italiana_idea
+			}
+			else_if = {
+				limit = {
+					AND = {
+						ITA = {
+							controls_state = 550
+							controls_state = 559
+						}
+						NOT = {
+							AOI = {
+								exists = yes
+							}
+						}
+					}
+				}
+				transfer_state = 550
+				transfer_state = 559
+				550 = { add_core_of = ROOT }
+				559 = { add_core_of = ROOT }
+				hidden_effect = {
+					set_party_name = { ideology = fascism long_name = "Partito Nazionale Fascista" name = "Partito Nazionale Fascista"}
+					create_country_leader = {
+						name = AOI_prince_amedeo
+						picture = GFX_portrait_AOI_amedeo_di_savoia_aosta
+						ideology = fascism_ideology
+						traits = {
+							duke_of_aosta iron_duke empire_builder
+						}
+					}
+					AOI = {
+						every_unit_leader = {
+							set_nationality = YEM
+						}
+					}
+				}
+				add_ideas = AOI_africa_orientale_italiana_idea
+			}
+			else = {
+				every_state = {
+					limit = {
+						is_core_of = ETH
+					}
+					add_claim_by = YEM
+				}
+				hidden_effect = {
+					set_party_name = { ideology = fascism long_name = "Partito Nazionale Fascista" name = "Partito Nazionale Fascista"}
+					create_country_leader = {
+						name = "Pietro Badoglio"
+						picture = "gfx/leaders/ITA/Portrait_Italy_Pietro_Badoglio.dds"
+						ideology = fascism_ideology
+						traits = {
+							emergency_powers empire_builder
+						}
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_attack_saudi_arabia_ita
+		icon = GFX_YEM_attack_saudi_arabia
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_unite_with_italian_east_africa }
+		relative_position_id = YEM_unite_with_italian_east_africa
+		ai_will_do = { factor = 30 }
+		available = {
+			country_exists = SAU
+		}
+		bypass = {
+			OR = {
+				AND = {
+					controls_state = 678
+					controls_state = 679
+					controls_state = 292
+					controls_state = 858
+					controls_state = 856
+					controls_state = 854
+					controls_state = 855
+					controls_state = 857
+					controls_state = 859
+				}
+				SAU = { is_puppet_of = YEM }
+			}
+		}
+		completion_reward = {
+			hidden_effect = {
+				678 = { add_core_of = ROOT }
+				679 = { add_core_of = ROOT }
+				292 = { add_core_of = ROOT }
+				858 = { add_core_of = ROOT }
+				856 = { add_core_of = ROOT }
+				854 = { add_core_of = ROOT }
+				855 = { add_core_of = ROOT }
+				857 = { add_core_of = ROOT }
+				859 = { add_core_of = ROOT }
+			}
+			declare_war_on = {
+				target = SAU
+				type = annex_everything
+			}
+		}
+		will_lead_to_war_with = SAU
+	}
+
+	focus = {
+		id = YEM_ita_redistribute_the_forces
+		icon = GFX_goal_generic_axis_build_infantry
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_unite_with_italian_east_africa }
+		relative_position_id = YEM_unite_with_italian_east_africa
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = ITA
+		}
+		completion_reward = {
+			add_manpower = 25000
+			swap_ideas = {
+				remove_idea = yem_italian_advisors
+				add_idea = yem_italian_style_army
+			}
+			division_template = {
+				name = "Divisione di Fanteria"
+				division_names_group = ITA_INF_01
+
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = {
+						has_full_control_of_state = PREV
+						is_in_home_area = yes
+					}
+				}
+				prioritize = { 10 }
+				create_unit = {
+					division = "name = \"1a Divisione di Fanteria\" division_template = \"Divisione di Fanteria\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"2a Divisione di Fanteria\" division_template = \"Divisione di Fanteria\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = {
+						has_full_control_of_state = PREV
+						is_in_home_area = yes
+					}
+				}
+				prioritize = { 88 }
+				create_unit = {
+					division = "name = \"3a Divisione di Fanteria\" division_template = \"Divisione di Fanteria\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"4a Divisione di Fanteria\" division_template = \"Divisione di Fanteria\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_long_live_our_king
+		icon = GFX_focus_eng_god_save_the_king
+		x = 2
+		y = 1
+		cost = 5
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_unite_with_italian_east_africa }
+		relative_position_id = YEM_unite_with_italian_east_africa
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = ITA
+			has_cosmetic_tag = YEM_africa_orientale_italiana_arabia
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+			swap_ideas = {
+				remove_idea = yem_victor_emmanuel
+				add_idea = yem_victor_emmanuel_2
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_request_control_libya
+		icon = GFX_focus_jap_strike_south
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_ita_redistribute_the_forces }
+		relative_position_id = YEM_ita_redistribute_the_forces
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = ITA
+			OR = {
+				any_controlled_state = {
+					is_core_of = LBA
+					is_fully_controlled_by = ITA
+				}
+				ITA = {
+					any_subject_country = {
+						any_controlled_state = {
+							is_core_of = LBA
+							is_fully_controlled_by = PREV
+						}
+					}
+				}
+			}
+		}
+		completion_reward = {
+			ITA = {
+				country_event = { id = YEM.5631 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_integration_of_libya
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+		x = 2
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		prerequisite = { focus = YEM_request_control_libya }
+		relative_position_id = YEM_request_control_libya
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_stability = -0.05
+			add_political_power = 50
+			custom_effect_tooltip = yem_integrate_libya_tt
+			hidden_effect = {
+				273 = { add_core_of = ROOT }
+				663 = { add_core_of = ROOT }
+				461 = { add_core_of = ROOT }
+				450 = { add_core_of = ROOT }
+				451 = { add_core_of = ROOT }
+				662 = { add_core_of = ROOT }
+				449 = { add_core_of = ROOT }
+				661 = { add_core_of = ROOT }
+				448 = { add_core_of = ROOT }
+			}
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 273
+						state = 663
+						state = 461
+						state = 450
+						state = 451
+						state = 662
+						state = 449
+						state = 661
+						state = 448
+					}
+				}
+				add_dynamic_modifier = { modifier = semi_autonomous_state_yem }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_extract_libyan_ethiophian_soil
+		icon = GFX_goal_generic_construction
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_integration_of_libya }
+		relative_position_id = YEM_integration_of_libya
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = YEM_ita_resource_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_local_resources_factor = 0.1 }
+			}
+			if = {
+				limit = {
+					controls_state = 550
+				}
+				add_resource = {
+					type = rubber
+					amount = 10
+					state = 550
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 271
+				}
+				add_resource = {
+					type = rubber
+					amount = 10
+					state = 271
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 559
+				}
+				add_resource = {
+					type = rubber
+					amount = 10
+					state = 559
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 448
+				}
+				add_resource = {
+					type = oil
+					amount = 10
+					state = 448
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 451
+				}
+				add_resource = {
+					type = oil
+					amount = 10
+					state = 451
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 450
+				}
+				add_resource = {
+					type = oil
+					amount = 10
+					state = 450
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_push_for_canal
+		icon = GFX_focus_RAJ_lions_of_the_great_war
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_request_control_libya }
+		relative_position_id = YEM_request_control_libya
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		bypass = {
+			OR = {
+				YEM = {
+					controls_state = 453
+					controls_state = 446
+					controls_state = 447
+					controls_state = 907
+				}
+				ITA = {
+					controls_state = 453
+					controls_state = 446
+					controls_state = 447
+					controls_state = 907
+				}
+			}
+		}
+		completion_reward = {
+			army_experience = 10
+			add_timed_idea = {
+				idea = yem_pushing_canal
+				days = 120
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_integration_of_egypt
+		icon = GFX_focus_por_luso_tropicalism
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		prerequisite = { focus = YEM_push_for_canal }
+		relative_position_id = YEM_push_for_canal
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_stability = -0.05
+			add_political_power = 50
+			custom_effect_tooltip = yem_integrate_egypt_tt
+			hidden_effect = {
+				552 = { add_core_of = ROOT }
+				456 = { add_core_of = ROOT }
+				457 = { add_core_of = ROOT }
+				446 = { add_core_of = ROOT }
+				453 = { add_core_of = ROOT }
+				447 = { add_core_of = ROOT }
+				452 = { add_core_of = ROOT }
+				551 = { add_core_of = ROOT }
+				907 = { add_core_of = ROOT }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_ita_build_forts
+		icon = GFX_goal_generic_construct_military
+		x = -2
+		y = 1
+		cost = 5
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_request_control_libya }
+		relative_position_id = YEM_request_control_libya
+		ai_will_do = { factor = 30 }
+		available = {
+			controls_state = 293
+		}
+		completion_reward = {
+			293 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					custom_effect_tooltip = YEM_wall_forts
+					hidden_effect = {
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 1920
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 4924
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 1973
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = bunker
+							level = 1
+							province = 10752
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_ita_build_railways
+		icon = GFX_focus_POL_warsaw_main_station
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_ita_build_forts }
+		relative_position_id = YEM_ita_build_forts
+		ai_will_do = { factor = 30 }
+		available = {
+			controls_state = 550
+			controls_state = 271
+			controls_state = 551
+			controls_state = 453
+			controls_state = 446
+			controls_state = 447
+			controls_state = 446
+			controls_state = 447
+			controls_state = 452
+			controls_state = 451
+			controls_state = 450
+			controls_state = 449
+			controls_state = 448
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					controls_state = 293
+					controls_state = 679
+					controls_state = 856
+					controls_state = 292
+					controls_state = 455
+					controls_state = 454
+					controls_state = 855
+				}
+				build_railway = {
+					#level = 1
+					path = { 10840 5006 10786 2090 10748 7934 12758 5099 7970 12455 11976 4017 7176 4088 }
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 292
+				}
+				build_railway = {
+					#level = 1
+					path = { 7970 10901 10815 }
+				}
+				292 = {
+					add_building_construction = {
+						type = supply_node
+						level = 1
+						province = 10815
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 271
+					controls_state = 550
+				}
+				build_railway = {
+					#level = 1
+					path = { 5010 5097 7944 2072 12766 }
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 271
+					controls_state = 551
+				}
+				build_railway = {
+					#level = 1
+					path = { 2072 12723 2088 2046 }
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 271
+				}
+				build_railway = {
+					#level = 1
+					path = { 5010 8036 10775 }
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 456
+					controls_state = 551
+				}
+				build_railway = {
+					#level = 1
+					path = { 8105 10844 11999 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_hegemon_over_africa
+		icon = GFX_focus_generic_little_entente
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_integration_of_egypt }
+		prerequisite = { focus = YEM_ita_build_railways }
+		prerequisite = { focus = YEM_extract_libyan_ethiophian_soil }
+		relative_position_id = YEM_integration_of_egypt
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = ITA
+		}
+		completion_reward = {
+			add_political_power = 75
+			add_stability = 0.05
+			add_ideas = yem_golden_era_colony
+			if = {
+				limit = { has_idea = yem_victor_emmanuel_2 }
+				swap_ideas = {
+					remove_idea = yem_victor_emmanuel_2
+					add_idea = yem_victor_emmanuel_3
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_claim_rest_of_the_africa
+		icon = GFX_goal_generic_attack_allies
+		x = 0
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_hegemon_over_africa }
+		relative_position_id = YEM_hegemon_over_africa
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = yem_claim_rest_africa
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_on_continent = africa
+					}
+					add_claim_by = YEM
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_core_rest_of_the_africa
+		icon = GFX_goal_generic_major_war
+		x = 0
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_claim_rest_of_the_africa }
+		relative_position_id = YEM_claim_rest_of_the_africa
+		ai_will_do = { factor = 30 }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = africa_formable_requirement_tt
+				OR = {
+					AND = {
+						all_state = {
+							OR = {
+								AND = {
+									is_on_continent = africa
+									NOT = {
+										OR = {
+											state = 697
+											state = 178
+											state = 702
+											state = 703
+											state = 704
+											state = 297
+											state = 705
+											state = 708
+											state = 709
+											state = 706
+											state = 707
+											state = 713
+											state = 543
+											state = 906
+										}
+									}
+									is_controlled_by = ROOT
+								}
+								NOT = { is_on_continent = africa }
+								state = 697
+								state = 178
+								state = 702
+								state = 703
+								state = 704
+								state = 297
+								state = 705
+								state = 708
+								state = 709
+								state = 706
+								state = 707
+								state = 713
+								state = 543
+								state = 906
+							}
+						}
+					}
+					AND = {
+						is_ai = no
+						has_global_flag = debug_mode
+					}
+				}
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = yem_core_rest_africa
+			hidden_effect = {
+				every_state = {
+					limit = {
+						is_on_continent = africa
+						is_claimed_by = YEM
+					}
+					add_core_of = YEM
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_soviet_backed_coup
+		icon = GFX_focus_fra_loyalty_stalin
+		x = 12
+		y = 1
+		offset = {
+			x = -12
+			y = 0
+			trigger = {
+				has_completed_focus = YEM_soviet_backed_coup
+			}
+		}
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_assasinate_yahya }
+		mutually_exclusive = { focus = YEM_align_with_germans } mutually_exclusive = { focus = YEM_align_with_italy }
+		relative_position_id = YEM_assasinate_yahya
+		ai_will_do = { factor = 30 }
+		allow_branch = {
+			NOT = { has_completed_focus = YEM_align_with_italy }
+			NOT = { has_completed_focus = YEM_align_with_germans }
+			has_country_flag = YEM_yahya_assasinated
+		}
+		available = {
+			is_puppet = no
+			SOV = {
+				is_faction_leader = yes
+				exists = yes
+				has_government = communism
+				NOT = {
+					has_government = fascism
+					has_war_with = ROOT
+				}
+			}
+		}
+		completion_reward = {
+			add_stability = -0.20
+			add_war_support = 0.05
+			add_timed_idea = {
+				idea = communist_influence
+				days = 300
+			}
+			set_politics = {
+				ruling_party = communism
+				elections_allowed = no
+			}
+			SOV = { puppet = YEM }
+			add_country_leader_role = {
+				character = YEM_dmitry_pavlov
+				promote_leader = yes
+				country_leader = {
+					ideology = stalinism
+					expire ="1965.1.1.1"
+					traits = {
+						headstrong stalins_puppet
+					}
+				}
+			}
+			show_unit_leaders_tooltip = YEM_dmitry_pavlov
+			hidden_effect = {
+				add_popularity = {
+					ideology = communism
+					popularity = 0.4
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_soviet_sends_red_army
+		icon = GFX_focus_SOV_mobilization_plan
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_soviet_backed_coup }
+		relative_position_id = YEM_soviet_backed_coup
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = SOV
+		}
+		completion_reward = {
+			add_stability = -0.05
+			army_experience = 15
+			add_ideas = yem_red_army
+			division_template = {
+				name = "Strelkovaya Diviziya"
+				priority = 2
+				#template_counter = 0
+				division_names_group = SOV_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+				}
+				support = {
+					artillery = { x = 0 y = 0 } 	# Heavy Arty Regiment had 1x 152mm bn + 2x 122mm bn
+				}
+			}
+			division_template = {
+				name = "Mekhanizirovaniy Korpus"
+				priority = 2
+				division_names_group = SOV_MEC_01
+				regiments = {
+					light_armor = { x = 0 y = 0 }
+					light_armor = { x = 0 y = 1 }
+					light_armor = { x = 1 y = 0 }
+					light_armor = { x = 1 y = 1 }
+					light_armor = { x = 1 y = 2 }
+					motorized = { x = 2 y = 0 }
+					motorized = { x = 2 y = 1 }
+					motorized = { x = 2 y = 2 }
+					motorized = { x = 2 y = 3 }
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = {
+						has_full_control_of_state = PREV
+						is_in_home_area = yes
+					}
+				}
+				prioritize = { 10 }
+				create_unit = {
+					division = "name = \"1ya Strelkovaya Diviziya\" division_template = \"Strelkovaya Diviziya\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"2ya Strelkovaya Diviziya\" division_template = \"Strelkovaya Diviziya\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"1ya Mekhanizirovaniy Korpus\" division_template = \"Mekhanizirovaniy Korpus\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = {
+						has_full_control_of_state = PREV
+						is_in_home_area = yes
+					}
+				}
+				prioritize = { 88 }
+				create_unit = {
+					division = "name = \"3ya Strelkovaya Diviziya\" division_template = \"Strelkovaya Diviziya\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+				create_unit = {
+					division = "name = \"4ya Strelkovaya Diviziya\" division_template = \"Strelkovaya Diviziya\" start_experience_factor = 1.0"
+					owner = YEM
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_nkvd_in_action
+		icon = GFX_goal_generic_military_deal
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_soviet_sends_red_army }
+		relative_position_id = YEM_soviet_sends_red_army
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = SOV
+		}
+		completion_reward = {
+			add_war_support = 0.05
+			add_political_power = 75
+			add_ideas = yem_soviet_nkvd
+		}
+	}
+
+	focus = {
+		id = YEM_com_stabilize_country
+		icon = GFX_goal_generic_military_sphere
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_nkvd_in_action }
+		relative_position_id = YEM_nkvd_in_action
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = SOV
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+			remove_ideas = yem_political_turmoil
+			hidden_effect = {
+				country_lock_all_division_template = no
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_appoint_communist_ministers
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_com_stabilize_country }
+		relative_position_id = YEM_com_stabilize_country
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_political_power = 25
+			add_popularity = {
+				ideology = communism
+				popularity = 0.10
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = YEM_dmitry_pavlov
+		}
+	}
+
+	focus = {
+		id = YEM_state_atheism
+		icon = GFX_goal_athrizim
+		x = 1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_com_stabilize_country }
+		relative_position_id = YEM_com_stabilize_country
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_political_power = 50
+			add_ideas = yem_state_atheism
+		}
+	}
+
+	focus = {
+		id = YEM_rebuild_the_industry
+		icon = GFX_focus_generic_industry_3
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_state_atheism }
+		prerequisite = { focus = YEM_appoint_communist_ministers }
+		relative_position_id = YEM_state_atheism
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_ideas = yem_soviet_economy
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_invite_soviet_companies
+		icon = GFX_goal_tripartite_pact
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_rebuild_the_industry }
+		relative_position_id = YEM_rebuild_the_industry
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = SOV
+		}
+		completion_reward = {
+			custom_effect_tooltip = YEM_invite_soviet_comp_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_industrial_capacity_factory = 0.05 }
+				add_to_variable = { YEM_pi_production_factory_max_efficiency_factor = 0.1 }
+			}
+			IF = {
+				limit = {
+					has_dlc = "Arms Against Tyranny"
+				}
+				add_offsite_building = { type = arms_factory level = 1 }
+				add_offsite_building = { type = industrial_complex level = 4 }
+			}
+			else = {
+				add_offsite_building = { type = industrial_complex level = 2 }
+				custom_effect_tooltip = available_designer
+				show_ideas_tooltip = stalingrad_tractor_factory_yem
+				show_ideas_tooltip = leningrad_polytechnical_institute_yem
+				show_ideas_tooltip = grabin_design_bureau_yem
+				show_ideas_tooltip = tula_arms_plant_yem
+				show_ideas_tooltip = mig_design_bureau_yem
+				show_ideas_tooltip = ilyushin_design_bureau_yem
+				show_ideas_tooltip = nevskoye_design_bureau_yem
+				show_ideas_tooltip = rubin_design_bureau_yem
+				show_ideas_tooltip = astrov_design_bureau_yem
+				show_ideas_tooltip = okmo_yem
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_focus_on_civilian_industry
+		icon = GFX_goal_reichsautobahn
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_invite_soviet_companies }
+		mutually_exclusive = { focus = YEM_focus_on_militarization }
+		relative_position_id = YEM_invite_soviet_companies
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = industry
+				category = electronics
+			}
+			swap_ideas = {
+				remove_idea = yem_soviet_economy
+				add_idea = yem_soviet_economy_civ
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_focus_on_militarization
+		icon = GFX_focus_generic_tank_production
+		x = 1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_invite_soviet_companies }
+		mutually_exclusive = { focus = YEM_focus_on_civilian_industry }
+		relative_position_id = YEM_invite_soviet_companies
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				ahead_reduction = 2
+				uses = 1
+				category = infantry_weapons
+			}
+			swap_ideas = {
+				remove_idea = yem_soviet_economy
+				add_idea = yem_soviet_economy_mil
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 0.25
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_open_unniversity_of_dmitry
+		icon = GFX_z_goal_communist_brain
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		prerequisite = { focus = YEM_focus_on_militarization focus = YEM_focus_on_civilian_industry }
+		relative_position_id = YEM_focus_on_militarization
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			add_research_slot = 1
+			custom_effect_tooltip = YEM_secret_weapons_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_research_speed_factor = 0.04 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_became_assr
+		icon = GFX_focus_generic_soviet_politics
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_open_unniversity_of_dmitry }
+		relative_position_id = YEM_open_unniversity_of_dmitry
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = SOV
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 50
+			add_ideas = SOV_the_local_soviets_idea
+			set_cosmetic_tag = YEM_arabian_soviet_sr
+		}
+	}
+
+	focus = {
+		id = YEM_attack_sauds
+		icon = GFX_YEM_attack_saudi_arabia
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		prerequisite = { focus = YEM_became_assr }
+		relative_position_id = YEM_became_assr
+		ai_will_do = { factor = 30 }
+		available = {
+			country_exists = SAU
+		}
+		bypass = {
+			OR = {
+				AND = {
+					controls_state = 678
+					controls_state = 679
+					controls_state = 292
+				}
+				SAU = { is_puppet_of = YEM }
+			}
+		}
+		completion_reward = {
+			declare_war_on = {
+				target = SAU
+				type = annex_everything
+			}
+		}
+		will_lead_to_war_with = SAU
+	}
+
+	focus = {
+		id = YEM_attack_oman_soviet
+		icon = GFX_YEM_attack_oman
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		prerequisite = { focus = YEM_attack_sauds }
+		relative_position_id = YEM_attack_sauds
+		ai_will_do = { factor = 30 }
+		available = {
+			country_exists = OMA
+		}
+		bypass = {
+			OR = {
+				controls_state = 294
+				OMA = { is_puppet_of = YEM }
+			}
+		}
+		completion_reward = {
+			declare_war_on = {
+				target = OMA
+				type = annex_everything
+			}
+		}
+		will_lead_to_war_with = OMA
+	}
+
+	focus = {
+		id = YEM_attack_iraq_soviet
+		icon = GFX_focus_generic_attack_iraq
+		x = 1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		prerequisite = { focus = YEM_became_assr }
+		relative_position_id = YEM_became_assr
+		ai_will_do = { factor = 30 }
+		available = {
+			country_exists = IRQ
+		}
+		bypass = {
+			OR = {
+				IRQ = {
+					exists = no
+				}
+				IRQ = { is_puppet_of = YEM }
+			}
+		}
+		completion_reward = {
+			declare_war_on = {
+				target = IRQ
+				type = annex_everything
+			}
+		}
+		will_lead_to_war_with = IRQ
+	}
+
+	focus = {
+		id = YEM_demand_english_colonies
+		icon = GFX_focus_attack_britain
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		prerequisite = { focus = YEM_attack_iraq_soviet }
+		relative_position_id = YEM_attack_iraq_soviet
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		bypass = {
+			controls_state = 659
+			controls_state = 658
+			controls_state = 765
+			controls_state = 656
+			controls_state = 455
+		}
+		completion_reward = {
+			ENG = {
+				country_event = YEM.5638
+			}
+		}
+		will_lead_to_war_with = ENG
+	}
+
+	focus = {
+		id = YEM_soviet_integrate_arabs
+		icon = GFX_YEM_greater_yemen
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_demand_english_colonies }
+		prerequisite = { focus = YEM_attack_oman_soviet }
+		relative_position_id = YEM_demand_english_colonies
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = SOV
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 100
+			custom_effect_tooltip = yem_greater_agressive_tt
+			hidden_effect = {
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = SAU
+							is_core_of = OMA
+						}
+					}
+					add_core_of = ROOT
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_merge_the_lines
+		icon = GFX_focus_generic_attack_iran
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		prerequisite = { focus = YEM_soviet_integrate_arabs }
+		relative_position_id = YEM_soviet_integrate_arabs
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		bypass = {
+			OR = {
+				PER = {
+					exists = no
+				}
+				PER = { is_puppet_of = YEM }
+			}
+		}
+		completion_reward = {
+			declare_war_on = {
+				target = PER
+				type = annex_everything
+			}
+		}
+		will_lead_to_war_with = PER
+	}
+
+	focus = {
+		id = YEM_supreme_asr
+		icon = GFX_focus_SOV_the_supreme_soviet
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_merge_the_lines }
+		relative_position_id = YEM_merge_the_lines
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = SOV
+		}
+		completion_reward = {
+			add_ideas = SOV_puppet_international_of_soviet_republics_idea
+		}
+	}
+
+	focus = {
+		id = YEM_the_model_colony
+		icon = GFX_focus_ger_reichskommisariats
+		x = 58
+		y = 14
+		offset = {
+			x = -24
+			y = 0
+			trigger = {
+				has_country_flag = YEM_yahya_assasinated
+			}
+		}
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = { factor = 30 }
+		allow_branch = {
+			has_idea = yem_model_colony
+			has_completed_focus = YEM_integrate_all_of_them
+		}
+		available = {
+			is_puppet_of = GER
+			has_idea = yem_model_colony
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 75
+		}
+	}
+
+	focus = {
+		id = YEM_start_to_germanize_the_people
+		icon = GFX_focus_generic_military_academy
+		x = 0
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_the_model_colony }
+		relative_position_id = YEM_the_model_colony
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			add_stability = -0.10
+			add_political_power = 100
+			swap_ideas = {
+				remove_idea = yem_arabs_integrated
+				add_idea = yem_aryan_race
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_attack_last_arabs
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_start_to_germanize_the_people }
+		relative_position_id = YEM_start_to_germanize_the_people
+		ai_will_do = { factor = 30 }
+		available = {
+		}
+		completion_reward = {
+			declare_war_on = {
+				target = IRQ
+				type = annex_everything
+			}
+			if = {
+				limit = {
+					SYR = {
+						exists = yes
+						NOT = {
+							is_in_faction_with = ROOT
+							is_puppet_of = ROOT
+							is_puppet_of = GER
+						}
+					}
+				}
+				declare_war_on = {
+					target = SYR
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					LEB = {
+						exists = yes
+						NOT = {
+							is_in_faction_with = ROOT
+							is_puppet_of = ROOT
+							is_puppet_of = GER
+						}
+					}
+				}
+				declare_war_on = {
+					target = LEB
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					JOR = {
+						exists = yes
+						NOT = {
+							is_in_faction_with = ROOT
+							is_puppet_of = ROOT
+							is_puppet_of = GER
+						}
+					}
+				}
+				declare_war_on = {
+					target = JOR
+					type = annex_everything
+				}
+			}
+			if = {
+				limit = {
+					PAL = {
+						exists = yes
+						NOT = {
+							is_in_faction_with = ROOT
+							is_puppet_of = ROOT
+							is_puppet_of = GER
+						}
+					}
+				}
+				declare_war_on = {
+					target = PAL
+					type = annex_everything
+				}
+			}
+		}
+		will_lead_to_war_with = IRQ
+		will_lead_to_war_with = LEB
+		will_lead_to_war_with = SYR
+		will_lead_to_war_with = JOR
+		will_lead_to_war_with = PAL
+	}
+
+	focus = {
+		id = YEM_integrate_the_remaining_arabs
+		icon = GFX_goal_generic_attack_allies
+		x = 0
+		y = 1
+		cost = 5
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_attack_last_arabs }
+		relative_position_id = YEM_attack_last_arabs
+		ai_will_do = { factor = 30 }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = remaining_arabs_tt
+				count_triggers = {
+					amount = 3
+					SYR = {
+						OR = {
+							exists = no
+							AND = {
+								is_subject_of = ROOT
+								exists = yes
+							}
+						}
+					}
+					IRQ = {
+						OR = {
+							exists = no
+							AND = {
+								is_subject_of = ROOT
+								exists = yes
+							}
+						}
+					}
+					JOR = {
+						OR = {
+							exists = no
+							AND = {
+								is_subject_of = ROOT
+								exists = yes
+							}
+						}
+					}
+					LEB = {
+						OR = {
+							exists = no
+							AND = {
+								is_subject_of = ROOT
+								exists = yes
+							}
+						}
+					}
+					PAL = {
+						OR = {
+							exists = no
+							AND = {
+								is_subject_of = ROOT
+								exists = yes
+							}
+						}
+					}
+				}
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					SYR = {
+						OR = {
+							AND = {
+								is_puppet_of = YEM
+								exists = yes
+							}
+							exists = no
+							any_controlled_state = {
+								is_core_of = SYR
+								is_owned_and_controlled_by = ROOT
+							}
+						}
+					}
+				}
+				if = {
+					limit = { SYR = { is_puppet_of = YEM } }
+					annex_country = { target = SYR transfer_troops = yes }
+				}
+				every_state = {
+					limit = {
+						is_core_of = SYR
+					}
+					add_core_of = ROOT
+				}
+			}
+			if = {
+				limit = {
+					IRQ = {
+						OR = {
+							AND = {
+								is_puppet_of = YEM
+								exists = yes
+							}
+							exists = no
+							any_controlled_state = {
+								is_core_of = IRQ
+								is_owned_and_controlled_by = ROOT
+							}
+						}
+					}
+				}
+				if = {
+					limit = { IRQ = { is_puppet_of = YEM } }
+					annex_country = { target = IRQ transfer_troops = yes }
+				}
+				every_state = {
+					limit = {
+						is_core_of = IRQ
+					}
+					add_core_of = ROOT
+				}
+			}
+			if = {
+				limit = {
+					LEB = {
+						OR = {
+							AND = {
+								is_puppet_of = YEM
+								exists = yes
+							}
+							exists = no
+							any_controlled_state = {
+								is_core_of = LEB
+								is_owned_and_controlled_by = ROOT
+							}
+						}
+					}
+				}
+				if = {
+					limit = { LEB = { is_puppet_of = YEM } }
+					annex_country = { target = LEB transfer_troops = yes }
+				}
+				every_state = {
+					limit = {
+						is_core_of = LEB
+					}
+					add_core_of = ROOT
+				}
+			}
+			if = {
+				limit = {
+					JOR = {
+						OR = {
+							AND = {
+								is_puppet_of = YEM
+								exists = yes
+							}
+							exists = no
+							any_controlled_state = {
+								is_core_of = JOR
+								is_owned_and_controlled_by = ROOT
+							}
+						}
+					}
+				}
+				if = {
+					limit = { JOR = { is_puppet_of = YEM } }
+					annex_country = { target = JOR transfer_troops = yes }
+				}
+				every_state = {
+					limit = {
+						is_core_of = JOR
+					}
+					add_core_of = ROOT
+				}
+			}
+			if = {
+				limit = {
+					PAL = {
+						OR = {
+							AND = {
+								is_puppet_of = YEM
+								exists = yes
+							}
+							exists = no
+							any_controlled_state = {
+								is_core_of = PAL
+								is_owned_and_controlled_by = ROOT
+							}
+						}
+					}
+				}
+				if = {
+					limit = { PAL = { is_puppet_of = YEM } }
+					annex_country = { target = PAL transfer_troops = yes }
+				}
+				every_state = {
+					limit = {
+						is_core_of = PAL
+					}
+					add_core_of = ROOT
+				}
+			}
+			every_state = {
+				limit = {
+					is_core_of = EGY
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_go_after_persian_oil_wells
+		icon = GFX_focus_generic_attack_iran
+		x = 0
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_integrate_the_remaining_arabs }
+		relative_position_id = YEM_integrate_the_remaining_arabs
+		ai_will_do = { factor = 30 }
+		available = {
+			PER = {
+				exists = yes
+				OR = {
+					NOT = { is_in_faction_with = ROOT }
+					NOT = { is_subject_of = GER }
+				}
+			}
+		}
+		completion_reward = {
+			413 = { add_claim_by = YEM }
+			412 = { add_claim_by = YEM }
+			411 = { add_claim_by = YEM }
+			declare_war_on = {
+				target = PER
+				type = annex_everything
+			}
+		}
+		will_lead_to_war_with = PER
+	}
+
+	focus = {
+		id = YEM_german_general_staff
+		icon = GFX_focus_ger_oppose_hitler
+		x = 2
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_the_model_colony }
+		relative_position_id = YEM_the_model_colony
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			army_experience = 25
+			add_manpower = 25000
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_mobile_warfare
+			}
+			add_tech_bonus = {
+				bonus = 1
+				uses = 2
+				category = cat_medium_armor
+			}
+			add_ideas = general_staff
+		}
+	}
+
+	focus = {
+		id = YEM_arabian_autarky
+		icon = GFX_goal_ger_goring_werke
+		x = -2
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		prerequisite = { focus = YEM_the_model_colony }
+		relative_position_id = YEM_the_model_colony
+		ai_will_do = { factor = 30 }
+		available = {
+			is_puppet_of = GER
+		}
+		completion_reward = {
+			add_ideas = GER_autarky_idea
+			custom_effect_tooltip = YEM_new_construction_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_production_speed_buildings_factor = 0.05 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_muzaffer_army
+		icon = GFX_goal_YEM_Army
+		x = 10
+		y = 0
+		cost = 8
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_XP}
+
+		available_if_capitulated = yes
+		completion_reward = {
+			army_experience = 25
+			custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_experience_gain_army_factor
+				value = 0.05
+				tooltip = experience_gain_army_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_max_command_power
+				value = 10
+				tooltip = max_command_power_tt
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_expand_royal_guards
+		icon = GFX_z_goal_arab_guard
+		x = 3
+		y = 1
+		cost = 5
+		prerequisite = { focus = YEM_muzaffer_army }
+		relative_position_id = YEM_muzaffer_army
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_MANPOWER}
+		completion_reward = {
+			add_manpower = 10000
+			division_template = {
+				name = "Royal Guards"
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+				}
+			}
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Royal Guards\" division_template = \"Royal Guards\" start_experience_factor = 0.1"
+					owner = PREV
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_further_arming_the_tribal_army
+		icon = GFX_z_goal_arab_warlike_tribes
+		x = 0
+		y = 1
+		cost = 8
+		prerequisite = { focus = YEM_expand_royal_guards }
+		mutually_exclusive = { focus = YEM_footsteps_of_the_modern_army }
+		relative_position_id = YEM_expand_royal_guards
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {}
+		completion_reward = {
+			custom_effect_tooltip = YEM_further_arming_the_tribal_army_tt
+			custom_effect_tooltip = YEM_irregular_army_spawn_tt
+			hidden_effect = {
+				load_oob = "YEM_irregular_army"
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_use_camels
+		icon = GFX_z_goal_arab_camal
+		x = 1
+		y = 1
+		cost = 5
+		prerequisite = { focus = YEM_further_arming_the_tribal_army }
+		relative_position_id = YEM_further_arming_the_tribal_army
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {}
+		completion_reward = {
+			if = {
+				limit = {
+					has_dlc = "Battle for the Bosporus"
+				}
+				custom_effect_tooltip = YEM_use_camels_tt
+				hidden_effect = {
+					load_oob = "YEM_camel_army"
+				}
+			}
+			else_if = {
+				limit = {
+					NOT = { has_dlc = "Battle for the Bosporus" }
+				}
+				if = {
+					limit = {
+						has_completed_focus = YEM_modernization_of_the_army
+					}
+					custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+				}
+				else = {
+					custom_effect_tooltip = YEM_armed_forces_dmod_tt
+				}
+				add_to_variable = {
+					var = YEM_armed_forces_dmod_supply_consumption_factor
+					value = -0.05
+					tooltip = supply_consumption_factor_tt
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_send_officers_to_iraq
+		icon = GFX_z_goal_iraqi_military
+		x = -2
+		y = 1
+		cost = 8
+		prerequisite = { focus = YEM_muzaffer_army }
+		relative_position_id = YEM_muzaffer_army
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_ARMY_XP FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			army_experience = 10
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_completed_focus = YEM_modernization_of_the_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+			}
+			else = {
+				custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_land_doctrine_cost_factor
+				value = -0.1
+				tooltip = land_doctrine_cost_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_produce_modern_small_arms
+		icon = GFX_z_goal_artisanal_production_of_weapons2
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = { focus = YEM_send_officers_to_iraq }
+		relative_position_id = YEM_send_officers_to_iraq
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 0.75
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_modernize_artillery
+		icon = GFX_focus_SWE_let_fly_all_guns
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = { focus = YEM_send_officers_to_iraq }
+		relative_position_id = YEM_send_officers_to_iraq
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 0.75
+				uses = 2
+				category = artillery
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_completed_focus = YEM_modernization_of_the_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+			}
+			else = {
+				custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_army_artillery_attack
+				value = 0.05
+				tooltip = army_artillery_attack_factor_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 0.25
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_open_new_factories_for_ammunation
+		icon = GFX_z_goal_arab_arsenal
+		x = 0
+		y = 1
+		cost = 7
+		prerequisite = { focus = YEM_produce_modern_small_arms }
+		prerequisite = { focus = YEM_modernize_artillery }
+		relative_position_id = YEM_produce_modern_small_arms
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_military_schools
+		icon = GFX_z_goal_arab_military_school
+		x = 0
+		y = 1
+		cost = 8
+		prerequisite = { focus = YEM_muzaffer_army }
+		relative_position_id = YEM_muzaffer_army
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_ARMY_XP FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			army_experience = 10
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_completed_focus = YEM_modernization_of_the_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+			}
+			else = {
+				custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_military_leader_cost_factor
+				value = -0.50
+				tooltip = military_leader_cost_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_footsteps_of_the_modern_army
+		icon = GFX_z_goal_arab_control_over_the_tribes
+		x = 1
+		y = 1
+		cost = 8
+		prerequisite = { focus = YEM_military_schools }
+		mutually_exclusive = { focus = YEM_further_arming_the_tribal_army }
+		relative_position_id = YEM_military_schools
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {}
+		completion_reward = {
+			custom_effect_tooltip = YEM_footsteps_of_the_modern_army_tt
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_completed_focus = YEM_modernization_of_the_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+			}
+			else = {
+				custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_land_reinforce_rate
+				value = 0.02
+				tooltip = land_reinforce_rate_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_max_command_power
+				value = 10
+				tooltip = max_command_power_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = available_chief_of_army
+			show_ideas_tooltip = YEM_hassan_tahsin_alfaqir
+		}
+	}
+
+	focus = {
+		id = YEM_lift_the_aircraft_ban
+		icon = GFX_GENERIC_International_Airport
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = { focus = YEM_footsteps_of_the_modern_army }
+		relative_position_id = YEM_footsteps_of_the_modern_army
+
+		available = {
+		}
+
+		bypass = {
+			NOT = { has_idea = yem_aircraft_ban }
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_AIR_XP}
+		completion_reward = {
+			air_experience = 10
+			remove_ideas = yem_aircraft_ban
+		}
+	}
+
+	focus = {
+		id = YEM_foundation_of_the_defense_army
+		icon = GFX_z_goal_YEM_defensive_army
+		x = 0
+		y = 2
+		cost = 9
+		prerequisite = { focus = YEM_military_schools }
+		relative_position_id = YEM_military_schools
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER}
+		completion_reward = {
+			add_war_support = 0.05
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_army_org
+				value = 0.05
+				tooltip = army_org_factor_tt
+			}
+			#add_to_variable = {
+				#	var = YEM_armed_forces_dmod_army_morale_factor
+				#	value = 0.05
+				#	tooltip = army_morale_factor_tt
+				#}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_experience_gain_army_factor
+				value = 0.2
+				tooltip = experience_gain_army_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_conscription
+				value = 0.01
+				tooltip = conscription_tt
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_modernization_of_the_army
+		icon = GFX_z_goal_arab_creation_of_a_modern_army
+		x = -1
+		y = 1
+		cost = 10
+		prerequisite = { focus = YEM_foundation_of_the_defense_army }
+		prerequisite = { focus = YEM_open_new_factories_for_ammunation }
+		mutually_exclusive = { focus = YEM_continue_with_irregular_army }
+		relative_position_id = YEM_foundation_of_the_defense_army
+
+		available = {
+			OR = {
+				has_completed_focus = YEM_footsteps_of_the_modern_army
+				has_completed_focus = YEM_further_arming_the_tribal_army
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {}
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = YEM_footsteps_of_the_modern_army
+				}
+				add_stability = 0.05
+			}
+			custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_army_org
+				value = 0.1
+				tooltip = army_org_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_army_morale_factor
+				value = 0.1
+				tooltip = army_morale_factor_tt
+			}
+			#add_to_variable = {
+				#	var = YEM_armed_forces_dmod_army_attack_against_minor
+				#	value = 0.05
+				#	tooltip = army_attack_against_minor_factor_tt
+				#}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_experience_gain_army_factor
+				value = 0.5
+				tooltip = experience_gain_army_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_training_time_factor
+				value = 0.20
+				tooltip = training_time_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_land_reinforce_rate
+				value = 0.03
+				tooltip = land_reinforce_rate_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_conscription
+				value = -0.05
+				tooltip = conscription_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_modernization_of_the_army_tt
+			hidden_effect = {
+				remove_dynamic_modifier = { modifier = YEM_armed_forces_dmod }
+				add_dynamic_modifier = { modifier = YEM_armed_forces_dmod_modern }
+				clr_country_flag = YEM_irregular_army_flag
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_continue_with_irregular_army
+		icon = GFX_z_goal_arming_loyal_tribes
+		x = 1
+		y = 1
+		cost = 10
+		prerequisite = { focus = YEM_foundation_of_the_defense_army }
+		mutually_exclusive = { focus = YEM_modernization_of_the_army }
+		relative_position_id = YEM_foundation_of_the_defense_army
+
+		available = {
+			OR = {
+				has_completed_focus = YEM_footsteps_of_the_modern_army
+				has_completed_focus = YEM_further_arming_the_tribal_army
+			}
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {}
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = YEM_footsteps_of_the_modern_army
+				}
+				add_stability = -0.15
+
+				custom_effect_tooltip = generic_skip_one_line_tt
+			}
+			if = {
+				limit = {
+					has_completed_focus = YEM_further_arming_the_tribal_army
+				}
+				IF = {
+					limit = {
+						NOT = { has_template = "Baranî Division" }
+					}
+					division_template = {
+						name = "Baranî Division"
+						is_locked = yes
+						force_allow_recruiting = yes
+						# Note: Represents both regular infantry and militia units
+						regiments = {
+							irregular_infantry = { x = 0 y = 0 }
+							irregular_infantry = { x = 0 y = 1 }
+							irregular_infantry = { x = 1 y = 0 }
+							irregular_infantry = { x = 1 y = 1 }
+						}
+						division_cap = 10
+					}
+					PREV = {
+						capital_scope = {
+							create_unit = {
+								division = "name = \"Baranî Division\" division_template = \"Baranî Division\" start_experience_factor = 0.02 start_equipment_factor = 0.95"
+								owner = PREV
+								count = 3
+							}
+						}
+					}
+				}
+				custom_effect_tooltip = YEM_continue_with_irregular_army_tt
+				hidden_effect = {
+					set_division_template_cap = { division_template = "Baranî Division" division_cap = 24 }
+					IF = {
+						limit = { has_tech = tech_engineers }
+						add_units_to_division_template = {
+							template_name = "Baranî Division"
+							support = {
+								engineer = 0
+							}
+						}
+					}
+					add_units_to_division_template = {
+						template_name = "Baranî Division"
+						regiments = {
+							irregular_infantry = 0
+							irregular_infantry = 1
+							irregular_infantry = 2
+						}
+					}
+				}
+
+				custom_effect_tooltip = generic_skip_one_line_tt
+			}
+			custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_army_morale_factor
+				value = 0.15
+				tooltip = army_morale_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_experience_gain_army_factor
+				value = 0.2
+				tooltip = experience_gain_army_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_cas_damage_reduction
+				value = 0.1
+				tooltip = cas_damage_reduction_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_conscription
+				value = 0.01
+				tooltip = conscription_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_irregular_infantry_max_org_factor
+				value = 0.10
+				tooltip = modifier_army_sub_unit_irregular_infantry_max_org_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_irregular_infantry_attack_factor
+				value = 0.05
+				tooltip = modifier_army_sub_unit_irregular_infantry_attack_factor_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_land_reinforce_rate
+				value = 0.01
+				tooltip = land_reinforce_rate_tt
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = remove_chief_of_army
+			show_ideas_tooltip = YEM_hassan_tahsin_alfaqir
+		}
+	}
+
+	focus = {
+		id = YEM_introduction_of_support_units
+		icon = GFX_focus_FIN_weapon_caches
+		x = -1
+		y = 1
+		cost = 8
+		prerequisite = { focus = YEM_continue_with_irregular_army focus = YEM_modernization_of_the_army }
+		relative_position_id = YEM_continue_with_irregular_army
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				name = engineers_tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = engineers_tech
+			}
+			add_tech_bonus = {
+				name = recon_tech_bonus
+				bonus = 3
+				uses = 1
+				category = recon_tech
+			}
+			if = {
+				limit = {
+					has_completed_focus = YEM_modernization_of_the_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+				add_to_variable = {
+					var = YEM_armed_forces_dmod_recon_factor_while_entrenched
+					value = 0.1
+					tooltip = recon_factor_while_entrenched_tt
+				}
+				add_to_variable = {
+					var = YEM_armed_forces_dmod_dig_in_speed_factor
+					value = 0.05
+					tooltip = dig_in_speed_factor_tt
+				}
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = YEM_continue_with_irregular_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_tt
+				add_to_variable = {
+					var = YEM_armed_forces_dmod_recon_factor_while_entrenched
+					value = 0.05
+					tooltip = recon_factor_while_entrenched_tt
+				}
+			}
+
+			effect_tooltip = {
+				if = {
+					limit = {
+						NOT = {
+							has_completed_focus = YEM_modernization_of_the_army
+							has_completed_focus = YEM_continue_with_irregular_army
+						}
+					}
+					custom_effect_tooltip = YEM_effects_modernization_tt
+					custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+					add_to_variable = {
+						var = YEM_armed_forces_dmod_recon_factor_while_entrenched
+						value = 0.1
+						tooltip = recon_factor_while_entrenched_tt
+					}
+					add_to_variable = {
+						var = YEM_armed_forces_dmod_dig_in_speed_factor
+						value = 0.05
+						tooltip = dig_in_speed_factor_tt
+					}
+
+					custom_effect_tooltip = YEM_effects_irregular_tt
+					custom_effect_tooltip = YEM_armed_forces_dmod_tt
+					add_to_variable = {
+						var = YEM_armed_forces_dmod_recon_factor_while_entrenched
+						value = 0.05
+						tooltip = recon_factor_while_entrenched_tt
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_special_forces
+		icon = GFX_focus_prc_infiltration
+		x = 0
+		y = 1
+		cost = 8
+		prerequisite = { focus = YEM_introduction_of_support_units }
+		relative_position_id = YEM_introduction_of_support_units
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				name = special_forces_bonus
+				bonus = 1.00
+				uses = 1
+				category = cat_special_forces_generic
+			}
+			add_doctrine_cost_reduction = {
+				name = YEM_special_forces
+				cost_reduction = 0.25
+				uses = 1
+				category = special_forces_doctrine
+			}
+			if = {
+				limit = {
+					has_completed_focus = YEM_modernization_of_the_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+				add_to_variable = {
+					var = YEM_armed_forces_dmod_org_special_forces_cap
+					value = 0.02
+					tooltip = special_forces_cap_tt
+				}
+			}
+			effect_tooltip = {
+				if = {
+					limit = {
+						NOT = {
+							has_completed_focus = YEM_modernization_of_the_army
+							has_completed_focus = YEM_continue_with_irregular_army
+						}
+					}
+					custom_effect_tooltip = YEM_effects_modernization_tt
+					custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+					add_to_variable = {
+						var = YEM_armed_forces_dmod_org_special_forces_cap
+						value = 0.02
+						tooltip = special_forces_cap_tt
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_motorization_of_the_army
+		icon = GFX_USA_Mechanized_Infantry
+		x = -1
+		y = 1
+		cost = 8
+		prerequisite = { focus = YEM_modernization_of_the_army }
+		relative_position_id = YEM_modernization_of_the_army
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			#add_ideas = Tank_con_2
+			add_tech_bonus = {
+				name = motorized_bonus
+				ahead_reduction = 2
+				uses = 1
+				category = motorized_equipment
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_completed_focus = YEM_modernization_of_the_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+			}
+			else = {
+				custom_effect_tooltip = YEM_armed_forces_dmod_tt
+			}
+			add_to_variable = {
+				var = YEM_armed_forces_dmod_org_loss_when_moving
+				value = -0.1
+				tooltip = org_loss_when_moving_tt
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_armor_effort
+		icon = GFX_goal_generic_heavy_armour_german
+		x = 0
+		y = 1
+		cost = 7
+		prerequisite = { focus = YEM_motorization_of_the_army }
+		relative_position_id = YEM_motorization_of_the_army
+
+		available = {
+		}
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 1.00
+				uses = 2
+				category = armor
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 0.25
+			}
+		}
+	}
+
+	###################Generic Focus Ağacı#######################
+	focus = {
+		id = YEM_naval_effort
+		icon = GFX_goal_YEM_Navy
+		x = 3
+		y = 0
+		cost = 8
+
+		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_NAVY_XP}
+		available = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+
+		completion_reward = {
+			navy_experience = 25
+			if = {
+				limit = {
+
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 2
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = dockyard
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+
+		}
+	}
+
+	focus = {
+		id = YEM_submarine_effort
+		icon = GFX_goal_generic_naval_submarine2
+		prerequisite = { focus = YEM_naval_effort }
+		x = -1
+		y = 1
+		relative_position_id = YEM_naval_effort
+		cost = 6
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_XP}
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+				name = ss_bonus
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_submarine_effort_2
+		icon = GFX_goal_generic_navy_submarine
+		prerequisite = { focus = YEM_submarine_effort }
+		x = -1
+		y = 2
+		relative_position_id = YEM_naval_effort
+		cost = 6
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = ss_bonus
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_destroyer_effort
+		icon = GFX_focus_generic_destroyer
+		prerequisite = { focus = YEM_naval_effort}
+		x = 1
+		y = 1
+		relative_position_id = YEM_naval_effort
+		cost = 6
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_XP}
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 1.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_destroyer_effort_2
+		icon = GFX_goal_generic_wolf_pack
+		prerequisite = { focus = YEM_destroyer_effort}
+		x = 1
+		y = 2
+		relative_position_id = YEM_naval_effort
+		cost = 6
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 1.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+
+	focus = {
+		id = YEM_flexible_navy
+		icon = GFX_goal_generic_build_navy
+		prerequisite = { focus = YEM_submarine_effort_2 focus = YEM_destroyer_effort_2 }
+		x = 0
+		y = 3
+		relative_position_id = YEM_naval_effort
+		cost = 8
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+
+			add_doctrine_cost_reduction = {
+				name = naval_doctrine
+				cost_reduction = 0.5
+				uses = 1
+				category = naval_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_flexible_navy_2
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = YEM_flexible_navy }
+		x = -1
+		y = 4
+		relative_position_id = YEM_naval_effort
+		cost = 6
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+
+			add_doctrine_cost_reduction = {
+				name = naval_doctrine
+				cost_reduction = 0.5
+				uses = 1
+				category = naval_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_flexible_navy_3
+		icon = GFX_z_goal_generic_naval
+		prerequisite = { focus = YEM_flexible_navy_2 }
+		x = -1
+		y = 5
+		relative_position_id = YEM_naval_effort
+		cost = 6
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = naval_doctrine
+				cost_reduction = 0.5
+				uses = 1
+				category = naval_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_naval_effort_2
+		icon = GFX_focus_generic_refit_civilian_ships
+		prerequisite = { focus = YEM_naval_effort}
+		x = 3
+		y = 1
+		cost = 9
+		relative_position_id = YEM_naval_effort
+		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_NAVY_XP}
+		available = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+
+
+		completion_reward = {
+			navy_experience = 25
+			if = {
+				limit = {
+
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 2
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = dockyard
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+
+		}
+	}
+	focus = {
+		id = YEM_Naval_eq
+		icon = GFX_goal_generic_design_equipment_standards
+		prerequisite = { focus = YEM_flexible_navy }
+		x = 1
+		y = 4
+		relative_position_id = YEM_naval_effort
+		cost = 6
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = sub_op_bonus
+				bonus = 1.0
+				uses = 4
+				technology = basic_battery
+				technology = basic_light_battery
+				technology = improved_light_battery
+				technology = advanced_light_battery
+				#technology = basic_medium_battery
+				#technology = improved_medium_battery
+				#technology = advanced_medium_battery
+				technology = basic_heavy_battery
+				technology = improved_heavy_battery
+				technology = advanced_heavy_battery
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_Naval_landing
+		icon = GFX_goal_ENG_Assault_Landing_Crafts
+		prerequisite = { focus = YEM_Naval_eq }
+		x = 1
+		y = 5
+		relative_position_id = YEM_naval_effort
+		cost = 6
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+
+			add_tech_bonus = {
+				name = fleet_in_being_bonus
+				bonus = 1.0
+				uses = 1
+				category = tp_tech
+			}
+			add_tech_bonus = {
+				name = fleet_in_being_bonus
+				bonus = 1.0
+				uses = 1
+				ahead_reduction = 2
+				category = tp_tech
+			}
+			add_tech_bonus = {
+				name = sub_op_bonus
+				bonus = 1.0
+				uses = 1
+				technology = amphibious_tank
+				technology = amphibious_tank_2
+				technology = amphibious_mechanized_infantry
+				technology = amphibious_mechanized_infantry_2
+
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_Naval_end
+		icon = GFX_focus_generic_naval_discipline
+		prerequisite = { focus = YEM_Naval_landing focus = YEM_flexible_navy_3 }
+		x = 0
+		y = 6
+		relative_position_id = YEM_naval_effort
+		cost = 8
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_ideas = hull_end
+		}
+	}
+
+	###Air###
+
+	focus = {
+		id = YEM_rebuild_the_airforce
+		icon = GFX_z_goal_YEM_air_force
+		x = 1
+		y = 1
+		cost = 9
+		prerequisite = { focus = YEM_lift_the_aircraft_ban }
+		relative_position_id = YEM_lift_the_aircraft_ban
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIR_XP}
+		available_if_capitulated = yes
+		completion_reward = {
+			air_experience = 25
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.75
+				uses = 2
+				category = air_doctrine
+			}
+			if = {
+				limit = {
+					has_completed_focus = YEM_modernization_of_the_army
+				}
+				custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+				add_to_variable = {
+					var = YEM_armed_forces_dmod_experience_gain_air_factor
+					value = 0.1
+					tooltip = experience_gain_air_factor_tt
+				}
+			}
+			effect_tooltip = {
+				if = {
+					limit = {
+						NOT = {
+							has_completed_focus = YEM_modernization_of_the_army
+							has_completed_focus = YEM_continue_with_irregular_army
+						}
+					}
+					custom_effect_tooltip = YEM_effects_modernization_tt
+					custom_effect_tooltip = YEM_armed_forces_dmod_modern_tt
+					add_to_variable = {
+						var = YEM_armed_forces_dmod_experience_gain_air_factor
+						value = 0.1
+						tooltip = experience_gain_air_factor_tt
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_fighter_focus
+		icon = GFX_goal_generic_air_fighter2
+		prerequisite = { focus = YEM_rebuild_the_airforce }
+		x = -1
+		y = 1
+		relative_position_id = YEM_rebuild_the_airforce
+		cost = 7
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		available_if_capitulated = yes
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = YEM_CAS_effort
+				}
+				add_tech_bonus = {
+					name = fighter_bonus
+					bonus = 0.75
+					uses = 1
+					category = light_fighter
+				}
+			}
+			else = {
+				add_tech_bonus = {
+					name = fighter_bonus
+					bonus = 1.25
+					uses = 1
+					category = light_fighter
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_CAS_effort
+		icon = GFX_focus_generic_cas_aircraft
+		prerequisite = { focus = YEM_rebuild_the_airforce }
+		x = 1
+		y = 1
+		relative_position_id = YEM_rebuild_the_airforce
+		cost = 7
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			#TOOLTIP
+			if = {
+				limit = {
+					has_completed_focus = YEM_fighter_focus
+				}
+				add_tech_bonus = {
+					name = CAS_bonus
+					bonus = 0.75
+					uses = 1
+					category = cas_bomber
+				}
+			}
+			else = {
+				add_tech_bonus = {
+					name = CAS_bonus
+					bonus = 1.25
+					uses = 1
+					category = cas_bomber
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_aviation_effort_2
+		icon = GFX_focus_generic_air_bases
+		prerequisite = { focus = YEM_fighter_focus }
+		prerequisite = { focus = YEM_CAS_effort }
+		x = 1
+		y = 1
+		relative_position_id = YEM_fighter_focus
+		cost = 7
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIR_XP}
+		complete_tooltip = {
+			air_experience = 25
+			if = { limit = { has_country_flag = aviation_effort_2_AB }
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+		completion_reward = {
+			air_experience = 25
+			if = {
+				limit = {
+					capital_scope = {
+						OR = {
+							NOT = { is_controlled_by = ROOT }
+							NOT = {
+								free_building_slots = {
+									building = air_base
+									size > 1
+								}
+							}
+						}
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					ROOT = { set_country_flag = aviation_effort_2_AB }
+				}
+			}
+			if = {
+				limit = {
+					capital_scope = {
+						is_controlled_by = ROOT
+						free_building_slots = {
+							building = air_base
+							size > 1
+						}
+					}
+				}
+				capital_scope = {
+					add_building_construction = {
+						type = air_base
+						level = 2
+						instant_build = yes
+					}
+					ROOT = { set_country_flag = aviation_effort_2_AB }
+				}
+			}
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_aircraft_production_focus
+		icon = GFX_focus_generic_aircraft_production
+		prerequisite = { focus = YEM_CAS_effort }
+		x = 0
+		y = 1
+		relative_position_id = YEM_aviation_effort_2
+		cost = 6
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIR_XP}
+
+		available_if_capitulated = yes
+		completion_reward = {
+			air_experience = 10
+			add_tech_bonus = {
+				name = YEM_aircraft_production_focus
+				bonus = 0.5
+				uses = 1
+				category = plane_modules_tech
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.5
+			}
+		}
+	}
+
+	###industrial###
+
+	focus = {
+		id = YEM_industrial_effort
+		icon = GFX_goal_generic_production
+		x = 21
+		y = 0
+		cost = 6
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = YEM_industrial_effort
+				bonus = 1
+				uses = 2
+				category = industry
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_support_urbanization
+		icon = GFX_goal_generic_construction
+		prerequisite = { focus = YEM_industrial_effort }
+		x = -1
+		y = 1
+		relative_position_id = YEM_industrial_effort
+		cost = 6
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					293 = {
+						free_building_slots = {
+							building = industrial_complex
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				293 = {
+					add_extra_state_shared_building_slots = 3
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_develop_our_infrastructures
+		icon = GFX_z_goal_arab_infrastructure
+		x = 1
+		y = 1
+		cost = 6
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_industrial_effort }
+
+		relative_position_id = YEM_industrial_effort
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			293 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_develop_our_infrastructures_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_industrial_capacity_factory = 0.05 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_new_construction_companies
+		icon = GFX_goal_generic_construct_civilian
+		x = -4
+		y = 2
+		cost = 9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_support_urbanization }
+
+		relative_position_id = YEM_industrial_effort
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_new_construction_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_production_speed_buildings_factor = 0.05 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_develop_aden
+		icon = GFX_goal_generic_construct_civ_factory
+		x = -1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_new_construction_companies }
+		available = {
+			controls_state = 659
+		}
+
+		relative_position_id = YEM_new_construction_companies
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 659
+				}
+				659 = {
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = naval_base
+						level = 2
+						province = 5074
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_open_new_dockyards
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_develop_aden }
+		available = {
+			controls_state = 659
+		}
+
+		relative_position_id = YEM_develop_aden
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 659
+				}
+				659 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+				custom_effect_tooltip = generic_skip_one_line_tt
+			}
+			custom_effect_tooltip = YEM_open_new_dockyards_ns_tt
+			hidden_effect = {
+				set_variable = { YEM_pi_industrial_capacity_dockyard = 0.05 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_militarization_of_aden
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_open_new_dockyards }
+		available = {
+			controls_state = 659
+		}
+
+		relative_position_id = YEM_open_new_dockyards
+		available_if_capitulated = yes
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 659
+				}
+				659 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_autarky
+		icon = GFX_goal_generic_construction2
+		x = 1
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+		prerequisite = { focus = YEM_new_construction_companies }
+
+		relative_position_id = YEM_new_construction_companies
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = GER_autarky
+				bonus = 1.0
+				uses = 2
+				technology = excavation1
+				technology = excavation2
+				technology = excavation3
+				technology = excavation4
+				technology = excavation5
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_open_new_oil_wells
+		icon = GFX_goal_generic_oil_refinery
+		x = 0
+		y = 1
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_autarky }
+		available = {
+			controls_state = 293
+		}
+
+		relative_position_id = YEM_autarky
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			293 = {
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = oil
+					amount = 6
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_oil_production_ns_tt
+			hidden_effect = {
+				set_variable = { YEM_pi_fuel_gain_factor_from_states = 0.05 }
+				set_variable = { YEM_pi_production_oil_factor = 0.05 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_industrialize_sanaa
+		icon = GFX_goal_generic_construct_civ_factory
+		x = -1
+		y = 2
+		cost = 6
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_develop_our_infrastructures focus = YEM_support_urbanization }
+		available = {
+			controls_state = 293
+		}
+
+		relative_position_id = YEM_industrial_effort
+		available_if_capitulated = yes
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 293
+				}
+				293 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_further_industrialization_of_sanaa
+		icon = GFX_goal_generic_construct_civ_factory
+		x = -1
+		y = 4
+		cost = 6
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_industrialize_sanaa }
+		available = {
+			controls_state = 293
+		}
+
+		relative_position_id = YEM_industrial_effort
+		available_if_capitulated = yes
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 293
+				}
+				293 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_new_construction_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_production_speed_buildings_factor = 0.05 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_extra_research_slot
+		icon = GFX_focus_research
+		x = 0
+		y = 3
+		cost = 6
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		prerequisite = { focus = YEM_industrialize_sanaa }
+		prerequisite = { focus = YEM_militarize_sanaa }
+
+		relative_position_id = YEM_industrial_effort
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = YEM_militarize_sanaa
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 1
+		y = 2
+		cost = 6
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_develop_our_infrastructures focus = YEM_support_urbanization }
+		available = {
+			controls_state = 293
+		}
+
+		relative_position_id = YEM_industrial_effort
+		available_if_capitulated = yes
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 293
+				}
+				293 = {
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = arms_factory
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_further_militarization_of_sanaa
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 1
+		y = 4
+		cost = 6
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_militarize_sanaa }
+		available = {
+			controls_state = 293
+		}
+
+		relative_position_id = YEM_industrial_effort
+		available_if_capitulated = yes
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 293
+				}
+				293 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = arms_factory
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_modernization_of_the_industry
+		icon = GFX_focus_generic_industry_3
+		x = 0
+		y = 5
+		cost = 8
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_further_industrialization_of_sanaa }
+		prerequisite = { focus = YEM_further_militarization_of_sanaa }
+		available = {
+			controls_state = 293
+			has_completed_focus = YEM_new_construction_companies
+			has_completed_focus = YEM_expand_the_industrial_zones
+		}
+
+		relative_position_id = YEM_industrial_effort
+		available_if_capitulated = yes
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_modernization_industry_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_conscription_factor = 0.1 }
+				add_to_variable = { YEM_pi_industrial_capacity_factory = 0.05 }
+				add_to_variable = { YEM_pi_consumer_goods_factor = -0.05 }
+				remove_dynamic_modifier = { modifier = YEM_underdeveloped_industry_dynamic_modifier }
+				add_dynamic_modifier = { modifier = YEM_underdeveloped_industry_dynamic_modifier_civilian }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_nuclear_effort
+		icon = GFX_focus_wonderweapons
+		x = -1
+		y = 1
+		relative_position_id = YEM_modernization_of_the_industry
+		prerequisite = { focus = YEM_modernization_of_the_industry }
+		cost = 8
+		available = {
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+		completion_reward = {
+			add_tech_bonus = {
+				name = secret_bonus
+				bonus = 1.0
+				uses = 1
+				category = nuclear
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_secret_weapons
+		icon = GFX_goal_generic_secret_weapon
+		prerequisite = { focus = YEM_modernization_of_the_industry }
+		x = 1
+		y = 1
+		relative_position_id = YEM_modernization_of_the_industry
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		available = {
+			NOT = { has_government = democratic }
+		}
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = secret_bonus
+				bonus = 1.0
+				uses = 3
+				category = electronics
+				category = nuclear
+				category = rocketry
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_secret_weapons_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_research_speed_factor = 0.04 }
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+
+	focus = {
+		id = YEM_modern_factory_tools
+		icon = GFX_focus_SOV_organize_wreckers
+		x = 3
+		y = 2
+		cost = 9
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_develop_our_infrastructures }
+
+		relative_position_id = YEM_industrial_effort
+		available_if_capitulated = yes
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_modern_factory_tools_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_production_factory_efficiency_gain_factor = 0.1 }
+				add_to_variable = { YEM_pi_production_factory_max_efficiency_factor = 0.05 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_fishing_industry
+		icon = GFX_goal_generic_construction
+		x = 2
+		y = 3
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_modern_factory_tools }
+
+		relative_position_id = YEM_industrial_effort
+		available_if_capitulated = yes
+
+		completion_reward = {
+			custom_effect_tooltip = YEM_fishing_industry_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_consumer_goods_factor = -0.05 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_expand_the_industrial_zones
+		icon = GFX_focus_SOV_merge_plants
+		x = 4
+		y = 3
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_modern_factory_tools }
+
+		relative_position_id = YEM_industrial_effort
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			every_owned_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_expand_the_industrial_zones_ns_tt
+			hidden_effect = {
+				set_variable = { YEM_pi_production_factory_efficiency_gain_factor = 0 }
+			}
+		}
+	}
+
+	focus = {
+		id = YEM_sanaa_steel_factory
+		icon = GFX_focus_generic_steel
+		x = 3
+		y = 4
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		prerequisite = { focus = YEM_fishing_industry }
+		prerequisite = { focus = YEM_expand_the_industrial_zones }
+		available = {
+			controls_state = 293
+		}
+
+		relative_position_id = YEM_industrial_effort
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 293
+				}
+				293 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_resource = {
+						type = steel
+						amount = 8
+					}
+				}
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = YEM_sanaa_steel_factory_ns_tt
+			hidden_effect = {
+				add_to_variable = { YEM_pi_industrial_capacity_factory = 0.05 }
+				add_to_variable = { YEM_pi_local_resources_factor = 0.05 }
+			}
+		}
+	}
+}

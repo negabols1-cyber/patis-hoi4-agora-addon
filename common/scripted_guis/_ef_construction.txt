@@ -1,0 +1,242 @@
+scripted_gui = {
+	ElizarV_construction_speed_view_menu_opening = {
+		context_type = player_context
+
+		window_name = "ElizarV_construction_speed_view_open"
+		parent_window_token = construction_tab
+
+		visible = {
+			is_ai = no
+		}
+
+		ai_enabled = {
+			always = no
+		}
+
+		effects = {
+			ElizarV_construction_speed_open_click = {
+				if = {
+					limit = { NOT = { has_country_flag = ElizarV_show_construction_speed } }
+					set_country_flag = ElizarV_show_construction_speed
+				}
+				else = { clr_country_flag = ElizarV_show_construction_speed }
+			}
+		}
+	}
+
+	ElizarV_construction_speed_view_menu = {
+		context_type = player_context
+
+		window_name = "ElizarV_construction_speed_view_menu_containers"
+		parent_window_token = construction_tab
+
+		visible = {
+			is_ai = no
+			NOT = { has_country_flag = ElizarV_show_construction_speed }
+		}
+
+		triggers = {
+			stronghold_network_speed_visible = {
+				is_special_project_completed = sp:sp_land_stronghold_network
+			}
+			mega_gun_emplacement_speed_visible = {
+				is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+				is_special_project_completed = sp:sp_land_stronghold_network
+				is_special_project_completed = sp:sp_nuclear_reactor
+				is_special_project_completed = sp:sp_commercial_nuclear_reactor
+			}
+			nuclear_reactor_speed_visible = {
+				is_special_project_completed = sp:sp_nuclear_reactor
+				is_special_project_completed = sp:sp_land_stronghold_network
+				is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+				is_special_project_completed = sp:sp_commercial_nuclear_reactor
+			}
+			commercial_nuclear_reactor_speed_visible = {
+				is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				is_special_project_completed = sp:sp_land_stronghold_network
+				is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+				is_special_project_completed = sp:sp_nuclear_reactor
+			}
+			supply_node_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			rail_way_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			naval_base_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			coastal_bunker_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			naval_supply_hub_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			naval_headquarters_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			bunker_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			supply_node_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			rail_way_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			naval_base_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			bunker_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			coastal_bunker_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			naval_supply_hub_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			naval_headquarters_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			naval_facility_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			nuclear_facility_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			air_facility_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			land_facility_speed_visible = {
+				NOT = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			naval_facility_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			nuclear_facility_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			air_facility_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+			land_facility_speed2_visible = {
+				OR = {
+					is_special_project_completed = sp:sp_land_stronghold_network
+					is_special_project_completed = sp:sp_land_multi_charge_large_caliber_gun
+					is_special_project_completed = sp:sp_nuclear_reactor
+					is_special_project_completed = sp:sp_commercial_nuclear_reactor
+				}
+			}
+		}
+
+		ai_enabled = {
+			always = no
+		}
+	}
+}

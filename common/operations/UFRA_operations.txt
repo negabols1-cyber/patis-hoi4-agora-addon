@@ -1,0 +1,66 @@
+ufra_heavy_water_raid = { ### 1/50
+	icon = GFX_historical_heavy_water
+	map_icon = GFX_historical_heavy_water_small
+	name = ufra_heavy_water_raid
+	desc = ufra_heavy_water_raid_desc
+	days = 40
+	allowed = {
+		original_tag = FRA
+	}
+	available = {
+	}
+	visible = {
+		OR = {
+			has_country_flag = norway_wanna_give_heavy_water_to_fra
+			has_country_flag = fra_want_norway_heavy_water
+		}
+		FROM = {
+			has_country_flag = nor_gonna_be_robbed
+		}
+	}
+	operatives = 1
+	# Integer [0-100] - Every operation has a hard requirement of network strength in the target country
+	network_strength = 25
+
+	equipment = {
+		#support_equipment = 20
+	}
+
+	on_start = {  # SCOPE_OPERATION
+
+	}
+
+	outcome_modifiers = { operation_outcome }
+	cost_modifiers = { operation_cost }
+	risk_modifiers = { operation_risk }
+
+	outcome_potential = {
+		custom_effect_tooltip = ufra_heavy_water_raid_outcome_tt
+	}
+	risk_chance = 0.25
+	experience = 0
+	# outcome is an effect that runs when the operation has completed
+	outcome_execute = { # SCOPE_OPERATION
+		IF = {
+			limit = {
+				ROOT = { has_country_flag = fra_want_norway_heavy_water }
+			}
+			FROM = { country_event = u_fra.154 }
+		}
+		ROOT = {
+			remove_ideas = FRA_no_moderator_nuke
+		}
+	}
+
+	# This is where all the separate phases are defined
+	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+	phases = { #infiltration
+		ufra_heavy_water_infiltration = { base = 100 }
+	}
+	phases = {
+		ufra_heavy_water_attack = { base = 100 }
+	}
+	phases = {
+		ufra_heavy_water_exfiltration = { base = 100 }
+	}
+}

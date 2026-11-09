@@ -1,0 +1,47 @@
+#####-----> COL: Historical AI Behavior <><> <><> <><> <><> <><>
+
+COL_historical_plan = {
+	name = "Colombia Hisorical Plan"
+	desc = "Historical behavior for Colombia."
+	allowed = {
+		original_tag = COL
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = COL_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = COL_AI_HISTORICAL
+			has_game_rule = {
+				rule = COL_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	focus_factors = {
+		COL_expulsar_a_los_politicos = 0
+		COL_oponerse_al_cambio = 0
+		COL_apoyar_la_unir = 0
+		COL_priorizar_europa = 0
+		COL_el_buen_vecino = 0
+		COL_mantener_el_proteccionismo = 0
+		COL_nacionalizacion_del_credito = 0
+		COL_mantener_los_privilegios_patronales = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

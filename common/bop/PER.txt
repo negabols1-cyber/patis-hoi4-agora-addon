@@ -1,0 +1,194 @@
+PER_clergy_balance = {
+	initial_value = 0.15
+	left_side = PER_shah_side
+	right_side = PER_clergy_side
+	decision_category = PER_clergy_balance_category
+
+	## Neutral status
+	range = {
+		id = PER_balance_range
+		min = -0.05
+		max = 0.05
+		modifier = {
+		}
+		on_activate = {
+			custom_effect_tooltip = PER_power_of_clergy_changing_tt
+			set_variable = { PER_power_of_clergy_level = 5 }
+			PER_check_power_of_clergy_level = yes
+		}
+		on_deactivate = {
+
+		}
+	}
+
+	#SHAH
+	side = {
+		id = PER_shah_side
+		icon = GFX_PER_bop_shah
+
+		range = {
+			id = PER_shah_side_low_control_range
+			min = -0.25
+			max = -0.05
+			modifier = {
+			}
+			on_activate = {
+				custom_effect_tooltip = PER_power_of_clergy_changing_tt
+				set_variable = { PER_power_of_clergy_level = 4 }
+				PER_check_power_of_clergy_level = yes
+			}
+			on_deactivate = {
+			}
+		}
+
+		range = {
+			id = PER_shah_side_medium_control_range
+			min = -0.6
+			max = -0.25
+			modifier = {
+			}
+			on_activate = {
+				custom_effect_tooltip = PER_power_of_clergy_changing_tt
+				set_variable = { PER_power_of_clergy_level = 3 }
+				PER_check_power_of_clergy_level = yes
+			}
+			on_deactivate = {
+			}
+		}
+
+		range = {
+			id = PER_shah_side_high_control_range
+			min = -0.8
+			max = -0.6
+			modifier = {
+			}
+			on_activate = {
+				custom_effect_tooltip = PER_power_of_clergy_changing_tt
+				set_variable = { PER_power_of_clergy_level = 2 }
+				PER_check_power_of_clergy_level = yes
+			}
+			on_deactivate = {
+			}
+		}
+
+		range = {
+			id = PER_shah_side_total_control_range
+			min = -1
+			max = -0.8
+			modifier = {
+			}
+			on_activate = {
+				custom_effect_tooltip = PER_power_of_clergy_changing_tt
+				set_variable = { PER_power_of_clergy_level = 1 }
+				PER_check_power_of_clergy_level = yes
+				set_power_balance_gfx = {
+					id = PER_clergy_balance
+					side = PER_shah_side
+					gfx = GFX_PER_bop_shah_shine
+				}
+			}
+			on_deactivate = {
+				set_power_balance_gfx = {
+					id = PER_clergy_balance
+					side = PER_shah_side
+					gfx = GFX_PER_bop_shah
+				}
+			}
+		}
+	}
+
+	#CLERGY
+	side = {
+		id = PER_clergy_side
+		icon = GFX_PER_bop_clergy
+
+		range = {
+			id = PER_clergy_very_low_control_range
+			min = 0.05
+			max = 0.20
+			modifier = {
+			}
+			on_activate = {
+				custom_effect_tooltip = PER_power_of_clergy_changing_tt
+				set_variable = { PER_power_of_clergy_level = 6 }
+				PER_check_power_of_clergy_level = yes
+			}
+			on_deactivate = {
+			}
+		}
+
+		range = {
+			id = PER_clergy_low_control_range
+			min = 0.20
+			max = 0.40
+			modifier = {
+			}
+			on_activate = {
+				custom_effect_tooltip = PER_power_of_clergy_changing_tt
+				set_variable = { PER_power_of_clergy_level = 7 }
+				PER_check_power_of_clergy_level = yes
+			}
+			on_deactivate = {
+			}
+		}
+
+		range = {
+			id = PER_clergy_medium_control_range
+			min = 0.40
+			max = 0.60
+			modifier = {
+			}
+			on_activate = {
+				custom_effect_tooltip = PER_power_of_clergy_changing_tt
+				set_variable = { PER_power_of_clergy_level = 8 }
+				PER_check_power_of_clergy_level = yes
+				custom_effect_tooltip = PER_clergy_assassination_attempt_info_tt
+			}
+			on_deactivate = {
+			}
+		}
+
+		range = {
+			id = PER_clergy_high_control_range
+			min = 0.60
+			max = 0.80
+			modifier = {
+			}
+			on_activate = {
+				custom_effect_tooltip = PER_power_of_clergy_changing_tt
+				set_variable = { PER_power_of_clergy_level = 9 }
+				PER_check_power_of_clergy_level = yes
+				custom_effect_tooltip = PER_clergy_assassination_attempt_info_tt
+			}
+			on_deactivate = {
+			}
+		}
+
+		range = {
+			id = PER_clergy_total_control_range
+			min = 0.80
+			max = 1
+			modifier = {
+
+			}
+			on_activate = {
+				custom_effect_tooltip = PER_power_of_clergy_changing_tt
+				set_variable = { PER_power_of_clergy_level = 10 }
+				PER_check_power_of_clergy_level = yes
+				custom_effect_tooltip = PER_clergy_assassination_attempt_info_tt
+				set_power_balance_gfx = {
+					id = PER_clergy_balance
+					side = PER_clergy_side
+					gfx = GFX_PER_bop_clergy_shine
+				}
+			}
+			on_deactivate = {
+				set_power_balance_gfx = {
+					id = PER_clergy_balance
+					side = PER_clergy_side
+					gfx = GFX_PER_bop_clergy
+				}
+			}
+		}
+	}
+}

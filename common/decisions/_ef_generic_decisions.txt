@@ -1,0 +1,212 @@
+political_actions = {
+	Political_right_decisions = { #kullanılmıyor şuan
+		priority = 99
+		icon = eng_trade_unions_support
+		allowed = {
+			always = no
+		}
+		available = {
+			tag = ROOT
+			custom_trigger_tooltip = {
+				tooltip = Political_right_decisions_trigger_tt
+				check_variable = { global_stability_right > 0 }
+			}
+		}
+
+		visible = {
+			check_variable = { global_stability_right > 0 }
+			OR = {
+				AND = {
+					is_major = yes
+					has_stability < 0.6
+				}
+				is_major = no
+				tag = MEX
+			}
+		}
+
+		cost = 10
+
+		fire_only_once = no
+
+		remove_effect = {
+			if = {
+				limit = {
+					check_variable = { global_stability_right > 4 }
+				}
+				add_stability = 0.05
+				set_temp_variable = {
+					var = political_right_svar
+					value = 5
+				}
+				add_to_variable = {
+					var = global_stability_right
+					value = -5
+					tooltip = Political_right_subtract
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { global_stability_right = 4 }
+				}
+				add_stability = 0.04
+				set_temp_variable = {
+					var = political_right_svar
+					value = 4
+				}
+				add_to_variable = {
+					var = global_stability_right
+					value = -4
+					tooltip = Political_right_subtract
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { global_stability_right = 3 }
+				}
+				add_stability = 0.03
+				set_temp_variable = {
+					var = political_right_svar
+					value = 3
+				}
+				add_to_variable = {
+					var = global_stability_right
+					value = -3
+					tooltip = Political_right_subtract
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { global_stability_right = 2 }
+				}
+				add_stability = 0.02
+				set_temp_variable = {
+					var = political_right_svar
+					value = 2
+				}
+				add_to_variable = {
+					var = global_stability_right
+					value = -2
+					tooltip = Political_right_subtract
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { global_stability_right = 1 }
+				}
+				add_stability = 0.01
+				set_temp_variable = {
+					var = political_right_svar
+					value = 1
+				}
+				add_to_variable = {
+					var = global_stability_right
+					value = -1
+					tooltip = Political_right_subtract
+				}
+			}
+		}
+
+		days_remove = 10
+	}
+
+	FRA_election = {
+		priority = 100
+		allowed = {
+			original_tag = FRA
+		}
+		activation = {
+			has_country_flag = France_election
+		}
+		available = {
+			hidden_trigger = {
+				NOT = { has_country_flag = France_election }
+			}
+		}
+		icon = eng_propaganda_campaigns
+		is_good = yes
+		days_mission_timeout = 46
+		timeout_effect = {
+			country_event = { id = u_fra.36 }
+			clr_country_flag = France_election
+		}
+	}
+
+	FRA_postpone_selection = {
+		priority = 99
+		icon = eng_trade_unions_support
+		allowed = {
+			original_tag = FRA
+		}
+		available = {
+			has_active_mission = FRA_election
+		}
+
+		visible = {
+			has_active_mission = FRA_election
+		}
+
+		fire_only_once = no
+
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = FRA_election
+				days = 30
+			}
+		}
+
+		days_remove = 7
+	}
+}
+
+CAN_civil_war_category = {
+	CAN_quebec_civil_war = {
+		activation = {
+			OR = {
+				has_completed_focus = CAN_Lionel_Groulx_path
+				has_completed_focus = CAN_Paul_Bouchard_path
+			}
+			NOT = {
+				has_completed_focus = CAN_quebec_cuop
+			}
+		}
+		available = {
+			always = no
+		}
+		icon = eng_propaganda_campaigns
+		is_good = no
+		days_mission_timeout = 90
+		timeout_effect = {
+			complete_national_focus = CAN_quebec_cuop
+		}
+	}
+
+	CAN_gain_time = {
+		allowed = {
+			tag = CAN
+		}
+		visible = {
+			OR = {
+				has_completed_focus = CAN_Lionel_Groulx_path
+				has_completed_focus = CAN_Paul_Bouchard_path
+			}
+			NOT = {
+				has_completed_focus = CAN_quebec_cuop
+			}
+		}
+		icon = eng_propaganda_campaigns
+		fire_only_once = no
+		cost = 50
+		days_remove = 20
+		days_re_enable = 0
+		modifier = {
+			political_power_factor = -0.3
+		}
+		remove_effect = {
+			add_days_mission_timeout = {
+				mission = CAN_quebec_civil_war
+				days = 15
+			}
+		}
+	}
+}

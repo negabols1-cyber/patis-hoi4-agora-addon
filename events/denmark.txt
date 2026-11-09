@@ -1,0 +1,452 @@
+add_namespace = DEN
+
+country_event = {
+	id = DEN.1
+	title = "Denmark colonial sale"
+	desc = "Denmark wants to buy our nigeria colony"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ENG = {
+			136 = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		DEN = {
+			transfer_state = 558
+			37 ={
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+		}
+	}
+	option = {
+		name = "Nope"
+	}
+}
+
+country_event = {
+	id = DEN.20
+	title = "Denmark Wants To Buy German Planes"
+	desc = ""
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+	}
+	option = {
+		name = "Nope"
+	}
+}
+
+country_event = {
+	id = DEN.3
+	title = "They Accept Our Demand"
+	desc = ""
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = "We Won !"
+		add_stability = 0.10
+		add_war_support = 0.20
+	}
+}
+
+country_event = {
+	id = DEN.4
+	title = "They Refuse Our Demand"
+	desc = ""
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = "They Refuse !"
+		create_wargoal = {
+			type = annex_everything
+			target = HOL
+			expire = 0
+		}
+	}
+}
+
+country_event = {
+	id = DEN.2
+	title = "Denmark Demands Suriname"
+	desc = "Denmark wants land in South America"
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = "We have no other choice"
+		309 = {
+			transfer_state_to = DEN
+		}
+		add_stability = -0.05
+		hidden_effect = { DEN = {country_event = DEN.3 } }
+	}
+
+	option = {
+		name = "No,we won't surrender"
+		hidden_effect = { DEN = {country_event = DEN.4 } }
+	}
+}
+
+country_event = {
+	id = DEN.5
+	title = "Denmark expands to where we have claim"
+	desc = "We must do something"
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = "We can't allow this!"
+		create_wargoal = {
+			type = annex_everything
+			target = DEN
+			expire = 0
+		}
+		add_stability = -0.20
+	}
+
+	option = {
+		name = "We have nothing to do."
+	}
+}
+
+country_event = {
+	id = DEN.6
+	title = "Frits Clausen Visits Berlin"
+	desc = "Frits Clausen, leader of Denmark's rising fascist party in recent days visited Hitler in Berlin"
+	picture = GFX_report_event_nazis_in_danzig
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Help Them Economic"
+		custom_effect_tooltip = "Be careful choosing financial aid may help you in the future."
+		DEN = {
+			99 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			hidden_effect = {add_ideas = DEN_German_Economic_Help}
+		}
+		GER = {
+			763 ={
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "Political Help Enought to them"
+		DEN = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.25
+			}
+		}
+	}
+}
+
+country_event = {
+	id = DEN.7
+	title = "Denmark Sell Greenland"
+	desc = ""
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		DEN = {
+			99 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		USA = {
+			transfer_state = 101
+			373 ={
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+		}
+	}
+	option = {
+		name = "Nope"
+	}
+}
+
+country_event = {
+	id = DEN.8
+	title = "Democrat Party Leader Dead !"
+	desc = "Thorvald Stauning killed in Jutland as a result of sabotage"
+	picture = GFX_report_event_stalin_propaganda
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Communist Party !"
+		DEN = {
+			kill_ideology_leader = democratic
+			set_politics = {
+				ruling_party = communism
+				elections_allowed = no
+			}
+		}
+	}
+}
+
+country_event = {
+	id = DEN.15
+	title = "Help Against To German"
+	desc = "Allies member denmark seeks help from british"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Give Them To Ecomonic Help"
+		ENG = {
+			if = {
+				limit = {
+					130 = {
+						free_building_slots = {
+							building = industrial_complex
+							size > 1
+							include_locked = yes
+						}
+					}
+				}
+				130 = {
+					remove_building = {
+						type = industrial_complex
+						level = 2
+					}
+				}
+			}
+		}
+		DEN = {
+			99 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		add_to_variable = {
+			var = DEN_British_var
+			value = 10
+		}
+	}
+	option = {
+		name = "NO"
+	}
+}
+
+country_event = {
+	id = DEN.9
+	title = "Revolutionary North Faction"
+	desc = ""
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		DEN = { add_to_faction = ROOT }
+	}
+	option = {
+		name = "Nope"
+	}
+}
+
+country_event = {
+	id = DEN.10
+	title = "Revolutionary Denmark Demands Communism"
+	desc = ""
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		DEN = {puppet = ROOT}
+		ai_chance = {
+			base = 30
+		}
+	}
+	option = {
+		name = "Nope"
+		DEN = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+				expire = 0
+			}
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+}
+
+country_event = {
+	id = DEN.14
+	title = "Danish Kingdom Demand Our Submissions"
+	desc = ""
+	picture = GFX_report_event_spr_franco_victory
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Anything to do..."
+		annex_country = {
+			target = ROOT
+			transfer_troops = yes
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = {
+		name = "Nope"
+		DEN = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+				expire = 0
+			}
+		}
+		ai_chance = {
+			base = 90
+		}
+	}
+}
+
+country_event = {
+	id = DEN.11
+	title = "Denmark Wants Guarantee"
+	desc = ""
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ROOT = {
+			give_guarantee = DEN
+		}
+	}
+	option = {
+		name = "Nope"
+	}
+}
+
+country_event = {
+	id = DEN.16
+	title = "The Krupp family was sent from the country by Germany"
+	desc = "The Krupp firm was founded in 1811 by Friedrich Krupp (1787-1826). At that time, Krupp was a small steel casting factory. Friedrich's son Alfred Krupp (1812-1887) expanded it and made it the largest steel casting factory in the world. In addition, he began the manufacture of weapons. Starting from coal and iron mining to steel production, all operations were started to be done in one hand. The wide application of the Bessemer method to iron ore was pioneered during the reign of Alfred Krupp.
+	Shall we take them to our country ?"
+	picture = GFX_report_event_aid_pact
+
+	is_triggered_only = yes
+
+	trigger = {
+		tag = DEN
+		GER = {
+			has_completed_focus = GER_destory_barons
+		}
+		NOT = {
+			has_completed_focus = DEN_Empower_the_Nationalist
+			has_completed_focus = DEN_Pan_Ger
+			has_completed_focus = DEN_Politik
+		}
+		has_completed_focus = DEN_Nationalist_Radicalizm
+	}
+
+	option = {
+		name = "Yes,our countries economy economy can develop by them."
+		hidden_effect = {
+			set_country_flag = DEN_called_krupp
+		}
+		random = {
+			chance = 50
+			GER = {
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = DEN
+				}
+			}
+		}
+		add_ideas = DEN_fugitive
+		custom_effect_tooltip = DEN_wargoal
+	}
+	option = {
+		name = "No, we cannot bring fugitives into our country and violate the constitution."
+		add_stability = 0.10
+	}
+}
+
+country_event = {
+	id = DEN.12
+	title = "Denmark Wants Non-Aggression"
+	desc = ""
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		diplomatic_relation = {
+			country = DEN
+			relation = non_aggression_pact
+		}
+	}
+	option = {
+		name = "Nope"
+	}
+}

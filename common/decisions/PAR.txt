@@ -1,0 +1,2419 @@
+PAR_february_revolution = { #FEBRUARY REVOLUTION
+
+	PAR_the_february_revolution = {
+		priority = 100
+		icon = generic_ignite_civil_war
+
+		available = {
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0.1
+			}
+		}
+
+		activation = {
+			always = no
+		}
+
+		cancel_trigger = {
+			OR = {
+				exists = no
+				has_civil_war = yes
+			}
+		}
+
+		cancel_effect = {
+			set_country_flag = PAR_february_revolution_avoided
+		}
+
+		is_good = no
+
+		fire_only_once = yes
+
+		days_mission_timeout = 55
+
+		timeout_effect = {
+			if = {
+				limit = {
+					has_completed_focus = PAR_fight_for_our_freedom
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							NOT = {
+								has_template = "Milicias"
+							}
+						}
+						division_template = {
+							name = "Milicias"
+							division_names_group = SPAN_INF_02
+							template_counter = 3
+							is_locked = yes
+							regiments = {
+								infantry = { x = 0 y = 0 }
+								infantry = { x = 0 y = 1 }
+								infantry = { x = 0 y = 2 }
+							}
+						}
+					}
+				}
+				start_civil_war = {
+					ideology = neutrality
+					size = 0.45
+					capital = 301
+					states = { 301 }
+				}
+				hidden_effect = {
+					every_controlled_state = {
+						create_unit = {
+							division = "name = \"Milicias Leales\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+							owner = ROOT
+							count = 2
+						}
+					}
+					random_other_country = {
+						limit = {
+							has_government = neutrality
+							original_tag = PAR
+						}
+						every_controlled_state = {
+							create_unit = {
+								division = "name = \"Milicias Comunistas\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+								owner = PREV
+								count = 2
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Milicias Comunistas\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.5"
+								owner = PREV
+								count = 2
+							}
+						}
+						retire_country_leader = yes
+						promote_character = EUYL_PAR_rafael_franco
+						load_focus_tree = {
+							tree = paraguay_focus
+							keep_completed = no
+						}
+						complete_national_focus = PAR_support_the_revolution
+					}
+				}
+			}
+			else = {
+				country_event = paraguay.3
+				if = {
+					limit = {
+						NOT = {
+							has_completed_focus = PAR_support_the_revolution
+						}
+					}
+					unlock_national_focus = PAR_support_the_revolution
+				}
+				set_country_flag = PAR_february_revolution_happened
+
+				hidden_effect = {
+					country_event = {
+						id = paraguay.7
+						days = 20
+						random_days = 20
+					}
+
+					country_event = {
+						id = paraguay.6
+						days = 50
+						random_days = 30
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			add_political_power = 25
+			PAR_move_10_leader = yes
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+		}
+	}
+
+	# Delay Revolution
+	PAR_delay_revolution = {
+		icon = generic_police_action
+		cost = 15
+
+		visible = {
+			has_completed_focus = PAR_fight_for_our_freedom
+			has_active_mission = PAR_the_february_revolution
+		}
+
+		days_remove = 20
+		cancel_trigger = {
+			NOT = {
+				has_active_mission = PAR_the_february_revolution
+			}
+		}
+
+		complete_effect = {
+			add_days_mission_timeout = {
+				mission = PAR_the_february_revolution
+				days = 12
+			}
+		}
+	}
+}
+
+PAR_committee_of_civilian_mobilization_cat = {
+	PAR_invest_more_into_the_committee = {
+		icon = generic_fundraising
+
+		cost = 100
+
+		visible = {
+			OR = {
+				has_idea = PAR_committee_of_civilian_mobilization
+				has_idea = PAR_committee_of_civilian_mobilization_1
+			}
+		}
+
+		available = {
+			has_civil_war = no
+			is_subject = no
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		days_remove = 100
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					has_idea = PAR_committee_of_civilian_mobilization
+					has_idea = PAR_committee_of_civilian_mobilization_1
+				}
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					has_idea = PAR_committee_of_civilian_mobilization
+				}
+				swap_ideas = {
+					remove_idea = PAR_committee_of_civilian_mobilization
+					add_idea = PAR_committee_of_civilian_mobilization_1
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = PAR_committee_of_civilian_mobilization_1
+					add_idea = PAR_committee_of_civilian_mobilization_2
+				}
+			}
+		}
+	}
+
+	PAR_invest_in_the_construction_of_an_arms_factory = {
+		icon = generic_prepare_civil_war
+
+		cost = 150
+
+		available = {
+			NOT = { has_country_flag = PAR_investing_in_construction }
+		}
+
+		visible = {
+			has_completed_focus = PAR_commence_the_armament_project
+			exists = yes
+		}
+
+		days_remove = 125
+
+		cancel_trigger = { exists = no }
+
+		modifier = {
+			consumer_goods_factor = 0.1
+			production_speed_buildings_factor = -0.1
+		}
+
+		complete_effect = { set_country_flag = PAR_investing_in_construction }
+		remove_effect = {
+			clr_country_flag = PAR_investing_in_construction
+			EUYL_add_1_military = yes
+		}
+	}
+
+	PAR_invest_in_the_construction_of_a_civilian_factory = {
+		icon = generic_factory
+
+		cost = 175
+
+		available = {
+			NOT = { has_country_flag = PAR_investing_in_construction }
+		}
+
+		visible = {
+			has_completed_focus = PAR_economic_reactivaiton
+			exists = yes
+		}
+
+		days_remove = 135
+
+		modifier = {
+			consumer_goods_factor = 0.1
+			production_speed_buildings_factor = -0.1
+		}
+
+		cancel_trigger = { exists = no }
+
+		complete_effect = { set_country_flag = PAR_investing_in_construction }
+		remove_effect = {
+			clr_country_flag = PAR_investing_in_construction
+			EUYL_add_1_civilian = yes
+		}
+	}
+
+	PAR_invest_in_railway_construction_from_FROM_to_the_capital = {
+		icon = railroad_construction
+
+		cost = 75
+
+		days_remove = 65
+
+		state_target = yes
+
+		target_array = core_states
+
+		target_trigger ={
+			FROM = {
+				is_fully_controlled_by = ROOT
+				is_capital = no
+			}
+		}
+
+		fire_only_once = yes
+
+		visible = {
+			has_completed_focus = PAR_economic_reactivaiton
+			can_build_railway = {
+				start_state = FROM
+				target_state = ROOT.capital
+				build_only_on_allied = yes
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		modifier = {
+			consumer_goods_factor = 0.075
+			production_speed_buildings_factor = -0.075
+		}
+
+		cancel_trigger = {
+			OR = {
+				exists = no
+				NOT = { controls_state = FROM }
+			}
+		}
+
+		complete_effect = { set_country_flag = PAR_investing_in_construction }
+		remove_effect = {
+			clr_country_flag = PAR_investing_in_construction
+			build_railway = {
+				level = 1
+				start_state = FROM
+				target_state = ROOT.capital
+			}
+		}
+	}
+}
+
+PAR_a_change_in_course = {
+	PAR_march_in_FROM = {
+		icon = eng_blackshirt_march
+
+		cost = 40
+
+		state_target = yes
+
+		target_array = core_states
+
+		target_trigger = {
+			FROM = {
+				has_state_flag = paraguayan_starting_state
+				NOT = { has_state_flag = PAR_marched_in_FROM_flag }
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		days_remove = 50
+
+		ai_will_do = { factor = 435 }
+
+		visible = {
+			OR = {
+				has_completed_focus = PAR_support_right_wing
+				has_completed_focus = PAR_go_against_right_wing
+			}
+			FROM = {
+				NOT = {
+					has_state_flag = PAR_marched_in_FROM_flag
+				}
+			}
+		}
+
+		available = {
+			NOT = { has_country_flag = PAR_marching_flag }
+			has_full_control_of_state = FROM
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_government = communism
+				has_government = fascism
+				FROM = { NOT = { is_fully_controlled_by = ROOT } }
+			}
+		}
+
+		cancel_effect = { add_political_power = 20 }
+
+		complete_effect = { set_country_flag = PAR_marching_flag }
+
+		remove_effect = {
+			clr_country_flag = PAR_marching_flag
+			custom_effect_tooltip = PAR_well_march_in_FROM_tt
+			if = {
+				limit = { has_completed_focus = PAR_support_right_wing }
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.05
+				}
+			}
+			else = {
+				add_popularity = {
+					ideology = communism
+					popularity = 0.05
+				}
+			}
+			hidden_effect = {
+				FROM = { set_state_flag = PAR_marched_in_FROM_flag }
+			}
+		}
+	}
+}
+
+PAR_bop = { # BALANCE OF POWER
+
+	## Promote Nationalism ## <--- extra decision for BoP if you go down Solano lopez path
+	PAR_promote_nacionalism = {
+		icon = generic_nationalism
+
+		custom_cost_trigger = {
+			command_power > 24
+		}
+
+		custom_cost_text = decision_cost_CP_25
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				has_war = yes
+				factor = 10
+			}
+			modifier = {
+				factor = 10
+				power_balance_value = {
+					id = PAR_military_leader_bop
+					value < 0
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = PAR_demand_rightful_territory
+			has_country_flag = PAR_solano_lopez_active_flag
+		}
+
+		available = {
+			OR = {
+				has_war = yes
+				has_war_support > 0.8
+			}
+		}
+
+		days_re_enable = 180
+
+		complete_effect = {
+			PAR_move_15_leader = yes
+			add_war_support = 0.01
+			hidden_effect = { add_command_power = -25 }
+			custom_effect_tooltip = EUYL_decision_will_reappear_in_180_days_tt
+		}
+	}
+
+	# slightly support leader
+	PAR_bop_slightly_support_leader = {
+		icon = eng_propaganda_campaigns
+		cost = PAR_slight_support_cost
+
+		visible = {
+			if = {
+				limit = { has_completed_focus = PAR_go_against_franco }
+				OR = {
+					has_completed_focus = PAR_promote_barthe
+					has_completed_focus = PAR_promote_morinigo
+				}
+			}
+			NOT = {
+				has_country_leader = {
+					ruling_only = yes
+					name = "Junta Militar Paraguaya"
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 125
+			modifier = {
+				factor = 2
+				OR = {
+					has_completed_focus = PAR_fight_for_our_freedom
+					has_completed_focus = PAR_go_with_franco
+				}
+			}
+			modifier = {
+				factor = 2.5
+				power_balance_value = {
+					id = PAR_military_leader_bop
+					value < -0.1
+				}
+			}
+			modifier = {
+				factor = 2.5
+				has_country_flag = PAR_capable_of_removing_political_instability_flag
+			}
+		}
+
+		days_remove = 40
+
+		modifier = {
+			political_power_factor = -0.03
+		}
+
+		complete_effect = {
+			PAR_move_10_leader = yes
+		}
+	}
+
+	# greatly support leader
+	PAR_bop_greatly_support_leader = {
+		icon = generic_civil_support
+		cost = PAR_major_support_cost
+
+		visible = {
+			if = {
+				limit = { has_completed_focus = PAR_go_against_franco }
+				OR = {
+					has_completed_focus = PAR_promote_barthe
+					has_completed_focus = PAR_promote_morinigo
+				}
+			}
+			NOT = {
+				has_country_leader = {
+					ruling_only = yes
+					name = "Junta Militar Paraguaya"
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 125
+			modifier = {
+				factor = 2
+				OR = {
+					has_completed_focus = PAR_fight_for_our_freedom
+					has_completed_focus = PAR_go_with_franco
+				}
+			}
+			modifier = {
+				factor = 2.5
+				power_balance_value = {
+					id = PAR_military_leader_bop
+					value < -0.1
+				}
+			}
+			modifier = {
+				factor = 2.5
+				has_country_flag = PAR_capable_of_removing_political_instability_flag
+			}
+		}
+
+		days_re_enable = 90
+
+		complete_effect = {
+			custom_effect_tooltip = EUYL_decision_will_reappear_in_90_days_tt
+			random_list = {
+				50 = {
+					PAR_move_15_leader = yes
+				}
+				50 = {
+					modifier = {
+						factor = 1.5
+						OR = {
+							has_completed_focus = PAR_focus_on_national_matters
+							has_completed_focus = PAR_la_patria_ante_todo
+						}
+					}
+					PAR_move_25_leader = yes
+					add_political_power = -25
+				}
+			}
+		}
+	}
+
+	#empower the army
+	PAR_empower_the_army = {
+		icon = generic_military
+		cost = 25
+
+		visible = {
+			has_completed_focus = PAR_go_against_franco
+			NOT = {
+				OR = {
+					has_government = democratic
+					has_government = fascism
+					has_government = communism
+					has_country_leader = {
+						character = PAR_junta
+						ruling_only = yes
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 250
+			modifier = {
+				factor = 0
+				power_balance_value = {
+					id = PAR_military_leader_bop
+					value < -0.85
+				}
+			}
+		}
+
+		days_re_enable = 90
+
+		complete_effect = {
+			PAR_move_15_military = yes
+			army_experience = 5
+			add_command_power = 5
+			custom_effect_tooltip = EUYL_decision_will_reappear_in_90_days_tt
+		}
+	}
+
+	# question the military
+	PAR_question_the_military = {
+		icon = generic_military
+		custom_cost_trigger = {
+			command_power > 9
+		}
+		custom_cost_text = CHL_cost_10_cp
+
+		visible = {
+			has_active_mission = PAR_the_february_revolution
+			has_completed_focus = PAR_fight_for_our_freedom
+
+			NOT = {
+				OR = {
+					has_government = neutrality
+					has_government = communism
+				}
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = { factor = 320 }
+
+		complete_effect = {
+			PAR_move_5_leader = yes
+
+			hidden_effect = {
+				add_command_power = -10
+			}
+		}
+	}
+
+	# slander Rafael Franco
+	PAR_slander_franco = {
+		icon = generic_speech
+		custom_cost_trigger = {
+			command_power > 14
+		}
+		custom_cost_text = CHL_cost_15_cp
+
+		ai_will_do = { factor = 320 }
+
+		visible = {
+			has_active_mission = PAR_the_february_revolution
+			has_completed_focus = PAR_limit_francos_power
+
+			NOT = {
+				OR = {
+					has_government = neutrality
+					has_government = communism
+				}
+			}
+		}
+		fire_only_once = yes
+
+		complete_effect = {
+			PAR_move_10_leader = yes
+
+			hidden_effect = {
+				add_command_power = -15
+			}
+		}
+	}
+}
+
+PAR_subsidizing_paraguayan_industry = { #SUBSIDIZATION
+
+	# minor subsidizations to small companies uwu
+	PAR_subsidizing_paraguayan_industry_small = {
+		icon = hol_exchange_intelligence_data
+		cost = 25
+
+		available = {
+			has_civil_war = no
+			NOT = {
+				OR = {
+					has_decision = PAR_subsidizing_paraguayan_industry_medium
+					has_decision = PAR_subsidizing_paraguayan_industry_large
+				}
+			}
+		}
+
+		days_remove = 55
+
+		ai_will_do = {
+			base = 195
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = { has_idea = PAR_stagnated_economy_1 }
+			}
+		}
+
+		cancel_effect = { add_political_power = 20 }
+
+		modifier = {
+			consumer_goods_factor = 0.1
+			political_power_factor = -0.075
+		}
+		remove_effect = {
+			custom_effect_tooltip = PAR_subsidize_15_tt
+			hidden_effect = {
+				add_to_variable = {
+					PAR_percent_subsidize = 15
+				}
+				clamp_variable = {
+					var = PAR_percent_subsidize
+					min = 0
+					max = 100
+				}
+			}
+		}
+
+	}
+
+	# subsidizations for local industries owo
+	PAR_subsidizing_paraguayan_industry_medium = {
+		icon = hol_attract_foreign_investors
+		cost = 50
+
+		available = {
+			has_civil_war = no
+			NOT = {
+				OR = {
+					has_decision = PAR_subsidizing_paraguayan_industry_small
+					has_decision = PAR_subsidizing_paraguayan_industry_large
+				}
+			}
+		}
+
+		days_remove = 70
+
+		ai_will_do = {
+			base = 250
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = { has_idea = PAR_stagnated_economy_1 }
+			}
+		}
+
+		cancel_effect = { add_political_power = 40 }
+
+		modifier = {
+			consumer_goods_factor = 0.2
+			political_power_factor = -0.15
+		}
+		remove_effect = {
+			custom_effect_tooltip = PAR_subsidize_30_tt
+			hidden_effect = {
+				add_to_variable = {
+					PAR_percent_subsidize = 30
+				}
+				clamp_variable = {
+					var = PAR_percent_subsidize
+					min = 0
+					max = 100
+				}
+			}
+		}
+
+	}
+
+	# large scale subsidizations for the industry OWO
+	PAR_subsidizing_paraguayan_industry_large = {
+		icon = generic_factory
+		cost = 75
+
+		available = {
+			has_civil_war = no
+			NOT = {
+				OR = {
+					has_decision = PAR_subsidizing_paraguayan_industry_small
+					has_decision = PAR_subsidizing_paraguayan_industry_medium
+				}
+			}
+		}
+
+		days_remove = 100
+
+		ai_will_do = {
+			base = 375
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = { has_idea = PAR_stagnated_economy_1 }
+			}
+		}
+
+		cancel_effect = { add_political_power = 60 }
+
+		modifier = {
+			consumer_goods_factor = 0.35
+			political_power_factor = -0.2
+		}
+		remove_effect = {
+			custom_effect_tooltip = PAR_subsidize_50_tt
+			hidden_effect = {
+				add_to_variable = {
+					PAR_percent_subsidize = 50
+				}
+				clamp_variable = {
+					var = PAR_percent_subsidize
+					min = 0
+					max = 100
+				}
+			}
+		}
+
+	}
+
+	PAR_sell_equipment_to_subsidize_our_economy = {
+		icon = generic_prepare_civil_war
+
+		custom_cost_text = PAR_25_pol_500_guns
+
+		custom_cost_trigger = {
+			has_political_power > 24
+			has_equipment = { infantry_equipment > 499 }
+		}
+
+		days_re_enable = 180
+
+		ai_will_do = { factor = 400 }
+
+		available = {
+			has_civil_war = no
+			has_equipment = { infantry_equipment > 499 }
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_political_power = -25
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -500
+				}
+			}
+			custom_effect_tooltip = PAR_subsidize_25_tt
+			hidden_effect = {
+				add_to_variable = {
+					PAR_percent_subsidize = 25
+				}
+				clamp_variable = {
+					var = PAR_percent_subsidize
+					min = 0
+					max = 100
+				}
+			}
+		}
+	}
+}
+
+PAR_poltical_actions = {
+
+	PAR_perform_a_search_within_the_country = {
+		icon = generic_operation
+
+		cost = 50
+
+		visible = {
+			OR = {
+				has_idea = PAR_agitated_right_wing_revs
+				has_idea = PAR_liberal_remnants_idea
+			}
+			has_completed_focus = PAR_focus_on_national_matters
+		}
+
+		ai_will_do = { factor = 275 }
+
+		available = {
+			has_country_leader = {
+				character = EUYL_PAR_rafael_franco
+				ruling_only = yes
+			}
+			has_civil_war = no
+		}
+
+		days_remove = 60
+
+		modifier = {
+			political_power_factor = -0.03
+			weekly_manpower = -10
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = {
+					has_country_leader = {
+						character = EUYL_PAR_rafael_franco
+						ruling_only = yes
+					}
+				}
+			}
+		}
+
+		cancel_effect = { add_political_power = 25 }
+
+		remove_effect = {
+			random_list = {
+				40 = {
+					modifier = {
+						factor = 0
+						NOT = { has_idea = PAR_agitated_right_wing_revs }
+					}
+					remove_ideas = PAR_agitated_right_wing_revs
+					hidden_effect = { country_event = paraguay.22 }
+				}
+				40 = {
+					modifier = {
+						factor = 0
+						NOT = { has_idea = PAR_liberal_remnants_idea }
+					}
+					remove_ideas = PAR_liberal_remnants_idea
+					hidden_effect = { country_event = paraguay.21 }
+				}
+				15 = {
+					custom_effect_tooltip = PAR_failed_search_tt
+					add_political_power = 15
+					hidden_effect = { country_event = paraguay.23 }
+				}
+			}
+		}
+	}
+
+	PAR_improve_the_army = {
+		icon = generic_military
+
+		cost = 50
+
+		fire_only_once = yes
+
+		visible = {
+			has_idea = PAR_worn_out_army_2
+			has_completed_focus = PAR_new_training_regiments
+		}
+
+		ai_will_do = { factor = 300 }
+
+		available = { has_civil_war = no }
+
+		complete_effect = {
+			remove_ideas = PAR_worn_out_army_2
+			army_experience = 5
+		}
+	}
+
+	PAR_days_until_the_elections = {
+		icon = SWI_no_elected_president
+
+		days_mission_timeout = 720
+
+		activation = { always = no }
+
+		available = {
+			OR = {
+				has_government = communism
+				has_government = fascism
+			}
+		}
+
+		fire_only_once = yes
+
+		cancel_trigger = { has_civil_war = yes }
+
+		timeout_effect = { country_event = paraguay.10 }
+	}
+
+	#rush the elections
+	PAR_rush_elections = {
+		icon = SWI_dismiss_council
+
+		cost = 15
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		visible = { has_active_mission = PAR_days_until_the_elections }
+
+		days_re_enable = 90
+
+		complete_effect = {
+			add_days_mission_timeout = {
+				mission = PAR_days_until_the_elections
+				days = -35
+			}
+			custom_effect_tooltip = EUYL_decision_will_reappear_in_90_days_tt
+		}
+	}
+
+	PAR_appease_the_people = {
+		icon = GFX_EUYL_attract_refugees
+		cost = 75
+
+		days_remove = 140
+
+		visible = {
+			has_idea = PAR_dissatisfied_population
+		}
+
+		ai_will_do = { factor = 265 }
+
+		available = {
+			exists = yes
+			has_civil_war = no
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = { has_idea = PAR_dissatisfied_population }
+			}
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			remove_ideas = PAR_dissatisfied_population
+		}
+	}
+
+	PAR_invest_in_our_military = {
+		icon = generic_factory
+		cost = PAR_decision_cost
+
+		days_remove = 40
+
+		visible = {
+			has_dynamic_modifier = {
+				modifier = PAR_paraguayan_military_production
+			}
+		}
+
+		available = {
+			has_civil_war = no
+		}
+
+		complete_effect = {
+			add_to_variable = { PAR_decision_cost = 25 }
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = {
+					has_dynamic_modifier = {
+						modifier = PAR_paraguayan_military_production
+					}
+				}
+			}
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = PAR_improve_military_production_tt
+			add_to_variable = { PAR_arms_factory_construction_speed = 0.025 }
+			add_to_variable = { PAR_factory_output = 0.025 }
+			if = {
+				limit = {
+					check_variable = {
+						PAR_decision_cost > 99
+					}
+				}
+				EUYL_add_1_military = yes
+			}
+		}
+	}
+}
+
+## Legacy of Solano Lopez | Expansionist Path ##
+PAR_legacy_of_solano_lopez_cat = {
+	PAR_impending_civilian_takeover = {
+		icon = generic_ignite_civil_war
+
+		activation = { always = no }
+
+		available = {
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > -0.85
+			}
+		}
+
+		days_mission_timeout = 60
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = {
+					has_country_flag = PAR_solano_lopez_active_flag
+				}
+				power_balance_value = {
+					id = PAR_military_leader_bop
+					value > -0.84
+				}
+				has_any_power_balance = no
+			}
+		}
+
+		complete_effect = { add_political_power = 5 }
+
+		timeout_effect = {
+			country_event = paraguay.13
+		}
+	}
+
+	PAR_growing_public_concern = {
+		icon = revolt
+
+		activation = {
+			has_completed_focus = PAR_the_legacy_of_selano_lopez
+			OR = {
+				has_war = yes
+				has_stability < 0.25
+				has_war_support < 0.55
+				has_manpower < 59999
+				custom_trigger_tooltip = {
+					tooltip = PAR_is_not_in_control_of_every_core_state_tt
+					any_core_state = {
+						NOT = { is_fully_controlled_by = ROOT }
+					}
+				}
+			}
+		}
+
+		days_mission_timeout = 195
+
+		is_good = no
+
+		available = {
+			AND = {
+				has_war = no
+				has_stability > 0.25
+				has_war_support > 0.55
+				has_manpower > 59999
+				all_core_state = { is_fully_controlled_by = ROOT }
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = {
+					has_country_flag = PAR_solano_lopez_active_flag
+				}
+				has_any_power_balance = no
+			}
+		}
+
+		complete_effect = { PAR_move_5_leader = yes }
+
+		timeout_effect = {
+			PAR_worsen_public_concern = yes
+			hidden_effect = { activate_mission = PAR_growing_public_concern }
+		}
+	}
+
+	PAR_calm_down_the_public = {
+		icon = generic_political_address
+		cost = PAR_cost_to_lower_public_concern
+
+		visible = {
+			PAR_active_public_concern = yes
+		}
+
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 3
+				power_balance_value = {
+					id = PAR_military_leader_bop
+					value < 0
+				}
+			}
+		}
+
+		available = {
+			has_civil_war = no
+			surrender_progress < 0.2
+			exists = yes
+			is_subject = no
+		}
+
+		days_re_enable = 60
+
+		complete_effect = {
+			PAR_improve_public_concern = yes
+			PAR_move_5_leader = yes
+			custom_effect_tooltip = EUYL_will_be_available_60_tt
+		}
+	}
+
+
+	PAR_conscript_the_women_and_children = {
+		icon = ITA_reorganize_ascari
+
+		cost = 75
+
+		visible = { has_completed_focus = PAR_unrestricted_conscription }
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 220
+				surrender_progress > 0.1
+			}
+			modifier = {
+				factor = 400
+				AND = {
+					has_war_with = BRA
+					has_war_with = ARG
+				}
+			}
+		}
+
+		available = {
+			OR = {
+				surrender_progress > 0.1
+				casualties_k > 100
+				AND = {
+					has_war_with = BRA
+					has_war_with = ARG
+				}
+			}
+		}
+
+		complete_effect = {
+			add_manpower = 115000
+			if = {
+				limit = {
+					NOT = {
+						has_template = "Brigada Paraguaya"
+					}
+				}
+				division_template = {
+					name = "Brigada Paraguaya"
+					division_names_group = SPAN_INF_02
+					template_counter = 3
+
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+					}
+				}
+			}
+			every_controlled_state = {
+				create_unit = {
+					division = "name = \"Brigada Paraguaya\" division_template = \"Brigada Paraguaya\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+					owner = ROOT
+					count = 2
+				}
+			}
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 2000
+					producer = ROOT
+				}
+			}
+			add_ideas = PAR_women_and_children_in_the_army
+			custom_effect_tooltip = PAR_public_concern_will_worsen_tt
+			PAR_worsen_public_concern = yes
+			PAR_move_10_military = yes
+		}
+	}
+
+	PAR_desperate_defense = {
+		icon = generic_protection
+
+		custom_cost_trigger = {
+			command_power > 49
+		}
+
+		custom_cost_text = decision_cost_CP_50
+
+		visible = {
+			has_completed_focus = PAR_our_war_of_vengeance
+			has_war = yes
+		}
+
+		ai_will_do = { factor = 350 }
+
+		available = {
+			surrender_progress > 0.1
+		}
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -50 }
+		}
+
+		days_remove = 100
+
+		modifier = {
+			political_power_factor = -0.1
+			army_core_defence_factor = 0.15
+		}
+	}
+
+	PAR_focus_our_military_efforts_against_FROM = {
+		icon = generic_operation
+
+		custom_cost_trigger = {
+			command_power > 24
+		}
+
+		custom_cost_text = decision_cost_CP_25
+
+		ai_will_do = {
+			base = 150
+			modifier = {
+				factor = 2.5
+				FROM = { has_army_manpower = { size > 199999 } }
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				has_war_with = ROOT
+			}
+		}
+
+		visible = {
+			has_country_flag = PAR_solano_lopez_active_flag
+			has_completed_focus = PAR_demand_rightful_territory
+		}
+
+		available = {
+			exists = yes
+			has_civil_war = no
+			hidden_trigger = {
+				NOT = { has_country_flag = PAR_focusing_mil }
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				FROM = {
+					NOT = { has_war_with = ROOT }
+				}
+				has_civil_war = yes
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+			}
+		}
+
+		targeted_modifier = {
+			tag = FROM
+			attack_bonus_against = 0.1
+			defense_bonus_against = 0.1
+		}
+
+		modifier = { political_power_factor = -0.2 }
+
+		days_remove = 60
+	}
+
+	PAR_demand_our_rightful_land_from_FROM = {
+		icon = generic_nationalism
+
+		cost = 50
+
+		days_remove = 25
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					original_tag = BOL
+					original_tag = ARG
+					original_tag = BRA
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		ai_will_do = { factor = 325 }
+
+		visible = {
+			FROM = {
+				exists = yes
+				NOT = { has_war_with = ROOT }
+			}
+			any_core_state = {
+				is_controlled_by = FROM
+			}
+			has_completed_focus = PAR_demand_rightful_territory
+			has_country_flag = PAR_solano_lopez_active_flag
+		}
+
+		available = {
+			surrender_progress < 0.2
+			has_civil_war = no
+			hidden_trigger = {
+				NOT = { has_country_flag = PAR_demanding_land_flag }
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = { has_country_flag = PAR_solano_lopez_active_flag }
+				has_any_power_balance = no
+				has_civil_war = yes
+				NOT = {
+					any_core_state = {
+						is_controlled_by = FROM
+					}
+				}
+			}
+			FROM = {
+				OR = {
+					exists = no
+					has_capitulated = yes
+				}
+			}
+		}
+
+		cancel_effect = { add_political_power = 25 }
+
+		complete_effect = { set_country_flag = PAR_demanding_land_flag }
+
+		modifier = { political_power_factor = -0.1 }
+
+		remove_effect = {
+			clr_country_flag = PAR_demanding_land_flag
+			FROM = {
+				country_event = {
+					id = paraguay.14
+					hours = 6
+				}
+				} ## generic
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				every_core_state = {
+					limit = {
+						NOT = { is_controlled_by = ROOT }
+						NOT = { has_state_flag = paraguayan_starting_state }
+						is_controlled_by = FROM
+					}
+					custom_effect_tooltip = EUYL_state_will_get_transferred_to_ROOT_tt
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_global_flag = triple_alliance_formed_flag }
+				}
+				custom_effect_tooltip = PAR_neighboring_countries_become_more_concerned_tt
+				add_to_variable = { PAR_global_concern = 1 }
+			}
+		}
+	}
+
+	PAR_build_up_in_FROM = {
+		icon = generic_construction
+
+		state_target = yes
+
+		target_array = core_states
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				NOT = { has_state_flag = paraguayan_starting_state }
+			}
+		}
+
+		visible = {
+			has_completed_focus = PAR_build_up_in_our_conquered_provinces
+			FROM = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			hidden_trigger ={
+				NOT = { has_country_flag = PAR_builduing_up_flag }
+			}
+		}
+
+		ai_will_do = { factor = 225 }
+
+		cancel_trigger = {
+			FROM = {
+				NOT = { is_fully_controlled_by = ROOT }
+			}
+		}
+
+		cancel_effect = { add_political_power = 35 }
+
+		cost = 75
+
+		days_remove = 75
+
+		fire_only_once = yes
+
+		modifier = { civilian_factory_use = 3 }
+
+		complete_effect = { set_country_flag = PAR_builduing_up_flag }
+
+		remove_effect = {
+			clr_country_flag = PAR_builduing_up_flag
+			FROM = {
+				EUYL_add_1_civilian = yes
+				EUYL_add_1_military = yes
+			}
+		}
+	}
+
+	PAR_conquer_FROM = {
+		icon = generic_prepare_civil_war
+
+		ai_will_do = {
+			base = 80
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		target_trigger = {
+			FROM = {
+				capital_scope = {
+					is_on_continent = south_america
+					is_fully_controlled_by = PREV
+				}
+				NOT = {
+					OR = {
+						has_war_with = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+		}
+
+		available = {
+			FROM = {
+				NOT = {
+					OR = {
+						has_war_with = ROOT
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = PAR_everyone_shall_pay
+			FROM = {
+				exists = yes
+				is_subject = no
+				is_neighbor_of = ROOT
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				exists = no
+				has_civil_war = yes
+				FROM = {
+					OR = {
+						exists = no
+						has_war_with = ROOT
+					}
+				}
+			}
+		}
+
+		cost = 25
+		days_remove = 15
+
+		fire_only_once = yes
+
+		modifier = { political_power_factor = -0.05 }
+
+		remove_effect = {
+			create_wargoal = {
+				type = annex_everything
+				target = FROM
+			}
+			random_list = {
+				50 = {
+					custom_effect_tooltip = PAR_public_concern_will_worsen_tt
+					PAR_worsen_public_concern = yes
+				}
+				50 = { }
+			}
+			if = { ### If it somehow still hasn't triggered lol
+				limit = {
+					NOT = { has_global_flag = triple_alliance_formed_flag }
+				}
+				custom_effect_tooltip = PAR_neighboring_countries_become_more_concerned_tt
+				add_to_variable = { PAR_global_concern = 1 }
+			}
+		}
+	}
+
+	PAR_demand_FROM_to_subjegate_to_us = {
+		icon = generic_civil_support
+
+		cost = 100
+
+		days_remove = 50
+
+		target_trigger = {
+			FROM = {
+				capital_scope = { is_on_continent = south_america }
+				has_war_with = ROOT
+			}
+		}
+
+		ai_will_do = { factor = 115 }
+
+		fire_only_once = yes
+
+		visible = { has_completed_focus = PAR_demand_our_enemies_to_surrender }
+
+		available = {
+			FROM = {
+				surrender_progress > 0.5
+				any_owned_state = {
+					is_fully_controlled_by = ROOT
+				}
+				casualties_k > 64
+			}
+			hidden_trigger = {
+				NOT = { has_country_flag = PAR_subjegating_other_country_flag }
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				FROM = {
+					NOT = { has_war_with = ROOT }
+				}
+				exists = no
+				has_civil_war = yes
+			}
+		}
+
+		modifier = { political_power_factor = -0.1 }
+
+		complete_effect = { set_country_flag = PAR_subjegating_other_country_flag }
+		remove_effect = {
+			clr_country_flag = PAR_subjegating_other_country_flag
+			FROM = {
+				country_event = {
+					id = paraguay.150
+					hours = 6
+				}
+			}
+			custom_effect_tooltip = ARG_iftheyaccept
+			custom_effect_tooltip = PAR_gain_control_of_every_core_or_claimed_state_tt
+			effect_tooltip = { puppet = FROM }
+		}
+	}
+}
+
+PAR_epua_arma_pe = {
+	PAR_impending_native_uprising = {
+		priority = 200
+		icon = generic_ignite_civil_war
+
+		activation = { always = no }
+
+		days_mission_timeout = 190
+
+		available = { always = no }
+
+		cancel_trigger = {
+			OR = {
+				exists = no
+				has_civil_war = yes
+			}
+		}
+
+		timeout_effect = {
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { has_template = "Brigada Paraguaya"}
+					}
+					division_template = {
+						name = "Brigada Paraguaya"
+						division_names_group = SPAN_INF_02
+						template_counter = 3
+
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+						}
+					}
+				}
+				set_temp_variable = { PAR_temp_stockpiled_guns = PAR_stockpiled_guns }
+			}
+			effect_tooltip = {
+				start_civil_war = {
+					ideology = neutrality
+				}
+				add_country_leader_role = {
+					character = PAR_juan_belaieff
+					promote_leader = yes
+					country_leader = {
+						ideology = theocracy
+						expire = "1965.1.1.1"
+					}
+				}
+				set_party_name = {
+					ideology = neutrality
+					long_name = PAR_native_party_long
+					name = PAR_native_party
+				}
+			}
+			country_event = paraguay.18
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = PAR_temp_stockpiled_guns
+				producer = ROOT
+			}
+			hidden_effect = {
+				every_controlled_state = {
+					limit = {
+						has_dynamic_modifier = { modifier = EUYL_native_population }
+					}
+					remove_dynamic_modifier = { modifier = EUYL_native_population }
+					add_dynamic_modifier = { modifier = EUYL_cooperating_natives }
+				}
+				start_civil_war = {
+					ruling_party = neutrality
+					ideology = ROOT
+					size = 0.5
+					capital = 301
+					states = all
+					states_filter = {
+						NOT = {
+							has_state_flag = PAR_native_controlled_flag
+						}
+					}
+					keep_all_characters = yes
+					PREV = {
+						EUYL_PAR_rafael_franco = { set_nationality = PREV.PREV }
+						EUYL_PAR_juan_stefanich = { set_nationality = PREV.PREV }
+						EUYL_PAR_eusebio_ayala = { set_nationality = PREV.PREV }
+						PAR_obdulio_barthe = { set_nationality = PREV.PREV }
+						if = {
+							limit = {
+								NOT = {
+									has_completed_focus = PAR_convince_the_experienced_soldiers
+								}
+							}
+							EUYL_PAR_higinio_morinigo = { set_nationality = PREV.PREV }
+							PAR_luis_irrazabal = { set_nationality = PREV.PREV }
+						}
+					}
+				}
+				add_country_leader_role = {
+					character = PAR_juan_belaieff
+					promote_leader = yes
+					country_leader = {
+						ideology = theocracy
+						traits = { COL_voice_of_the_people }
+						expire = "1965.1.1.1"
+					}
+				}
+				set_party_name = {
+					ideology = neutrality
+					long_name = PAR_native_party_long
+					name = PAR_native_party
+				}
+				set_cosmetic_tag = PAR_NATIVE
+				add_popularity = {
+					ideology = neutrality
+					popularity = 0.4
+				}
+				every_controlled_state = { ## Base militia spawning
+					create_unit = {
+						division = "name = \"Brigada Nativa\" division_template = \"Brigada Paraguaya\" start_experience_factor = 0.05 start_equipment_factor = 0.9"
+						owner = ROOT
+						count = 2
+					}
+					if = {
+						limit = {
+							check_variable = { PAR_extra_militia > 0 }
+						}
+						create_unit = {
+							division = "name = \"Brigada Nativa\" division_template = \"Brigada Paraguaya\" start_experience_factor = 0.05 start_equipment_factor = 0.9"
+							owner = ROOT
+							count = PAR_extra_militia
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_completed_focus = PAR_convince_the_experienced_soldiers
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria Nativa\" division_template = \"División de Infanteria\" start_experience_factor = 0.1 start_equipment_factor = 0.85"
+							owner = ROOT
+							count = 2
+						}
+					}
+				}
+				if = {
+					limit = {
+						has_completed_focus = PAR_seize_local_factories
+					}
+					EUYL_add_1_civilian = yes
+					EUYL_add_1_military = yes
+				}
+				every_controlled_state = {
+					clr_state_flag = PAR_native_controlled_flag
+					clear_variable = PAR_extra_militia
+				}
+				clear_variable = PAR_stockpiled_guns
+				random_other_country = {
+					limit = {
+						original_tag = PAR
+						has_civil_war = yes
+					}
+					if = {
+						limit = {
+							NOT = { has_government = democratic }
+						}
+						set_politics = {
+							ruling_party = neutrality
+							elections_allowed = no
+						}
+						promote_character = EUYL_PAR_rafael_franco
+					}
+					else = { promote_character = EUYL_PAR_eusebio_ayala }
+					every_controlled_state = { ## Base militia spawning
+						create_unit = {
+							division = "name = \"Brigada Paraguaya\" division_template = \"Brigada Paraguaya\" start_experience_factor = 0.05 start_equipment_factor = 0.65"
+							owner = PREV
+							count = 2
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.1 start_equipment_factor = 0.7"
+							owner = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+
+	PAR_arm_up_the_natives_in_FROM = {
+		icon = generic_prepare_civil_war
+
+		cost = 25
+
+		days_remove = 30
+
+		modifier = { political_power_factor = -0.15 }
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				has_state_flag = PAR_native_controlled_flag
+			}
+		}
+
+		ai_will_do = { factor = 250 }
+
+		visible = { has_completed_focus = PAR_take_up_arms }
+
+		available = {
+			NOT = { has_country_flag = PAR_arming_up_natives_flag }
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = { has_full_control_of_state = FROM }
+			}
+		}
+
+		cancel_effect = {
+			clr_country_flag = PAR_arming_up_natives_flag
+		}
+
+		complete_effect = { set_country_flag = PAR_arming_up_natives_flag }
+
+		remove_effect = {
+			clr_country_flag = PAR_arming_up_natives_flag
+			custom_effect_tooltip = EUYL_start_of_civil_war_gain_following_tt
+			effect_tooltip = {
+				FROM = {
+					create_unit = {
+						division = "name = \"Brigada Nativa\" division_template = \"Brigada Paraguaya\" start_experience_factor = 0.05 start_equipment_factor = 0.9"
+						owner = ROOT
+					}
+				}
+			}
+			hidden_effect = {
+				FROM = {
+					add_to_variable = { PAR_extra_militia = 1 }
+				}
+			}
+		}
+	}
+
+	PAR_steal_national_stockpiles_from_FROM = {
+		icon = generic_industry
+
+		cost = 35
+
+		days_remove = 35
+
+		modifier = { political_power_factor = -0.15 }
+
+		ai_will_do = { factor = 245 }
+
+		state_target = yes
+
+		target_array = core_states
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				arms_factory > 0
+			}
+		}
+
+		visible = { has_completed_focus = PAR_seize_national_stockpiles }
+
+		fire_only_once = yes
+
+		cancel_trigger = {
+			OR = {
+				has_civil_war = yes
+				NOT = { has_full_control_of_state = FROM }
+			}
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = ARG_add_500_guns_to_stockpile_tt
+			add_to_variable = { PAR_stockpiled_guns = 500 }
+		}
+	}
+}
+
+PAR_native_solidarity_cat = {
+	PAR_a_brotherhood_call = {
+		icon = eng_propaganda_campaigns
+
+		visible = {
+			has_completed_focus = PAR_native_solidarity
+		}
+
+		available = {
+			has_civil_war = no
+			surrender_progress < 0.15
+		}
+
+		ai_will_do = { factor = 175 }
+
+		cost = 25
+
+		days_remove = 75
+
+		modifier = {
+			political_power_factor = -0.1
+			production_speed_buildings_factor = -0.1
+			stability_weekly = 0.005
+			war_support_weekly = 0.005
+		}
+	}
+
+	PAR_intensify_native_resistance_in_FROM = {
+		icon = generic_nationalism
+
+		visible = { has_completed_focus = PAR_the_call_from_our_brothers }
+
+		target_trigger = {
+			FROM = {
+				capital_scope = { is_on_continent = south_america }
+				any_controlled_state = {
+					has_dynamic_modifier = { modifier = EUYL_native_population }
+				}
+			}
+		}
+
+		available = {
+			FROM = {
+				has_civil_war = no
+				NOT = { has_country_flag = PAR_already_intensified_flag }
+			}
+			has_civil_war = no
+		}
+
+		ai_will_do = { factor = 125 }
+
+		fire_only_once = yes
+
+		cost = 50
+
+		days_remove = 50
+
+		modifier = {
+			political_power_factor = -0.15
+			weekly_manpower = -200
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = PAR_every_native_state_will_become_agitated_tt
+			custom_effect_tooltip = PAR_chance_of_country_finding_out_tt
+			hidden_effect = {
+				FROM = {
+					set_country_flag = PAR_already_intensified_flag
+					every_controlled_state = {
+						limit = { has_dynamic_modifier = { modifier = EUYL_native_population } }
+						remove_dynamic_modifier = { modifier = EUYL_native_population }
+						add_dynamic_modifier = { modifier = EUYL_agitated_natives }
+					}
+					random_list = {
+						10 = {
+							country_event = {
+								id = paraguay.19
+								days = 2
+								random_hours = 4
+							}
+						}
+						95 = { }
+					}
+				}
+			}
+		}
+	}
+
+	PAR_arm_up_the_natives_found_in_FROM = {
+		icon = generic_prepare_civil_war
+
+		visible = { has_completed_focus = PAR_our_brothers_in_arms }
+
+		target_trigger = {
+			FROM = {
+				capital_scope = { is_on_continent = south_america }
+				any_controlled_state = {
+					OR = {
+						has_dynamic_modifier = { modifier = EUYL_native_population }
+						has_dynamic_modifier = { modifier = EUYL_agitated_natives }
+					}
+				}
+			}
+		}
+
+		ai_will_do = { factor = 125 }
+
+		custom_cost_text = PAR_50_pol_1000_guns
+
+		custom_cost_trigger = {
+			has_political_power > 49
+			has_equipment = { infantry_equipment > 1078 }
+		}
+
+		available = {
+			FROM = {
+				exists = yes
+				has_civil_war = no
+			}
+			has_civil_war = no
+			NOT = { has_country_flag = PAR_arming_up_natives_flag }
+		}
+
+		days_remove = 35
+
+		modifier = {
+			political_power_factor = -0.05
+			weekly_manpower = -75
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_political_power = -50
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -1079
+				}
+				set_country_flag = PAR_arming_up_natives_flag
+			}
+		}
+
+		remove_effect = {
+			clr_country_flag = PAR_arming_up_natives_flag
+			FROM = { add_stability = -0.03 }
+			custom_effect_tooltip = PAR_chance_of_country_finding_out_tt
+			hidden_effect = {
+				FROM = {
+					if = {
+						limit = {
+							any_controlled_state = {
+								has_dynamic_modifier = { modifier = EUYL_agitated_natives }
+							}
+						}
+						every_controlled_state = {
+							limit = { has_dynamic_modifier = { modifier = EUYL_agitated_natives } }
+							add_resistance = 20
+							add_compliance = -10
+						}
+					}
+					if = {
+						limit = {
+							any_controlled_state = {
+								has_dynamic_modifier = { modifier = EUYL_native_population }
+							}
+						}
+						every_controlled_state = {
+							limit = { has_dynamic_modifier = { modifier = EUYL_native_population } }
+							add_resistance = 10
+							add_compliance = -5
+						}
+					}
+					add_to_variable = { PAR_num_guns_to_natives = 1079 }
+					random_list = {
+						10 = {
+							country_event = {
+								id = paraguay.19
+								days = 2
+								random_hours = 4
+							}
+						}
+						90 = { }
+					}
+				}
+			}
+		}
+	}
+
+	PAR_instigate_a_native_uprising_in_FROM = {
+		icon = generic_ignite_civil_war
+
+		cost = 75
+
+		fire_only_once = yes
+
+		target_trigger = {
+			FROM = {
+				capital_scope = { is_on_continent = south_america }
+				has_war_with = ROOT
+			}
+		}
+
+		ai_will_do = { factor = 195 }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAR_intensified_res_and_1000_guns_tt
+				FROM = {
+					has_country_flag = PAR_already_intensified_flag
+					check_variable = { PAR_num_guns_to_natives > 1078 }
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = PAR_united_under_one_banner
+			FROM = {
+				NOT = { has_country_flag = PAR_uprising_triggered_flag }
+				exists = yes
+				has_civil_war = no
+				has_war_with = ROOT
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = PAR_natives_begin_uprising_in_controlled_states_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = { has_template = "Brigada Nativa" }
+					}
+					division_template = {
+						name = "Brigada Nativa"
+						division_names_group = SPAN_INF_02
+						template_counter = 3
+
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+							infantry = { x = 0 y = 3 }
+						}
+					}
+				}
+				FROM = {
+					set_country_flag = PAR_uprising_triggered_flag
+					every_controlled_state = {
+						limit = { has_dynamic_modifier = { modifier = EUYL_agitated_natives } }
+						create_unit = {
+							division = "division_template = \"Brigada Nativa\" start_experience_factor = 0.1"
+							owner = ROOT
+							count = 2
+							allow_spawning_on_enemy_provs = yes
+						}
+					}
+					random_owned_controlled_state = {
+						limit = { has_dynamic_modifier = { modifier = EUYL_agitated_natives } }
+						create_unit = {
+							division = "division_template = \"Brigada Nativa\" start_experience_factor = 0.1"
+							owner = ROOT
+							count = 2
+							allow_spawning_on_enemy_provs = yes
+						}
+					}
+					random_owned_controlled_state = {
+						limit = { has_dynamic_modifier = { modifier = EUYL_agitated_natives } }
+						create_unit = {
+							division = "division_template = \"Brigada Nativa\" start_experience_factor = 0.1"
+							owner = ROOT
+							allow_spawning_on_enemy_provs = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	PAR_conscript_the_natives_in_FROM = {
+		icon = generic_military
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				has_dynamic_modifier = { modifier = EUYL_cooperating_natives }
+			}
+		}
+
+		ai_will_do = { factor = 235 }
+
+		on_map_mode = map_only
+
+		visible = { has_completed_focus = PAR_native_conscription }
+
+		available = { has_civil_war = no }
+
+		fire_only_once = yes
+
+		cost = 35
+
+		modifier = { political_power_factor = -0.1 }
+
+		days_remove = 25
+
+		remove_effect = { add_manpower = 15000 }
+	}
+
+	PAR_focus_military_efforts_against_FROM = {
+		icon = generic_operation
+
+		custom_cost_trigger = {
+			command_power > 24
+		}
+
+		custom_cost_text = decision_cost_CP_25
+
+		ai_will_do = {
+			base = 150
+		}
+
+		target_trigger = {
+			FROM = {
+				has_war_with = ROOT
+			}
+		}
+
+		visible = {
+			has_completed_focus = PAR_our_expansion_begins
+		}
+
+		available = {
+			exists = yes
+			has_civil_war = no
+			hidden_trigger = {
+				NOT = { has_country_flag = PAR_focusing_mil }
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				FROM = {
+					NOT = { has_war_with = ROOT }
+				}
+				has_civil_war = yes
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = PAR_focusing_mil
+			hidden_effect = {
+				add_command_power = -25
+			}
+		}
+
+		targeted_modifier = {
+			tag = FROM
+			attack_bonus_against = 0.075
+			defense_bonus_against = 0.075
+		}
+
+		modifier = { political_power_factor = -0.2 }
+
+		days_remove = 60
+
+		remove_effect = { clr_country_flag = PAR_focusing_mil }
+	}
+
+	PAR_conquer_the_european_continent = {
+		priority = 100
+		icon = hol_draw_up_staff_plans
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PRU_conquered_every_european_nation_tt
+				controls_state = 41
+				controls_state = 112
+				controls_state = 16
+				controls_state = 126
+				controls_state = 113
+				controls_state = 8
+				controls_state = 6
+				controls_state = 7
+				controls_state = 64
+				controls_state = 37
+				controls_state = 2
+				controls_state = 151
+				controls_state = 4
+				controls_state = 9
+				controls_state = 110
+				controls_state = 141
+				controls_state = 111
+				controls_state = 10
+				controls_state = 43
+				controls_state = 107
+				controls_state = 44
+				controls_state = 47
+				controls_state = 797
+				controls_state = 48
+				controls_state = 46
+				controls_state = 11
+				controls_state = 12
+				controls_state = 13
+			}
+		}
+
+		activation = {
+			always = no
+		}
+
+		is_good = yes
+
+		days_mission_timeout = 2150
+
+		fire_only_once = yes
+
+		timeout_effect = {
+			add_stability = -0.15
+			add_war_support = -0.2
+			start_civil_war = {
+				ruling_party = democratic
+				ideology = ROOT
+				size = 0.6
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = PRU_conquered_europe_tt
+			add_stability = 0.2
+			add_war_support = 0.3
+		}
+	}
+}

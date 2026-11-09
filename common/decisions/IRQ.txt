@@ -1,0 +1,1648 @@
+IRQ_army_academy_category = {
+
+	IRQ_reading = {
+		icon  = GFX_decision_generic_decision
+		priority = 10
+		#days_re_enable = 5
+		fire_only_once = no
+		on_map_mode = map_and_decisions_view
+
+		is_good = yes
+		days_mission_timeout = 30
+
+		activation = {
+			OR = {
+				has_country_flag = learn_german_doctrine
+				has_country_flag = learn_british_doctrine
+				has_country_flag = learn_deceptive_tactics
+				has_country_flag = learn_defensive_tactics
+				has_country_flag = learn_offensive_tactics
+				has_country_flag = learn_law_of_war
+				has_country_flag = learn_chemical_weapons
+				has_country_flag = read_galipoli_campaign
+				has_country_flag = read_battle_of_france
+				has_country_flag = read_battle_of_the_somme
+				has_country_flag = read_first_battle_of_the_marne
+			}
+		}
+		available = {
+			hidden_trigger = { always = no }
+		}
+
+		timeout_effect = {
+			learn_something = yes
+		}
+	}
+	IRQ_train_the_elites_more = {
+
+		icon = GFX_decision_generic_intelligence_operation
+		days_remove = 30
+		days_re_enable = 90
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+			has_army_experience > 10
+		}
+		custom_cost_text = ARG_mobilize_elite
+
+		available = {
+			has_template_containing_unit = desertinfantry
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		complete_effect = {
+			hidden_effect = { army_experience = -10 }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 50 tooltip = gain_50_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+	IRQ_do_special_exercises = {
+
+		icon = GFX_decision_generic_military
+		days_remove = 60
+		days_re_enable = 120
+
+		custom_cost_trigger = {
+			has_army_experience > 10
+		}
+		custom_cost_text = ARG_mobilize_elite
+
+		available = {
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		complete_effect = {
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 50 tooltip = gain_50_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+	IRQ_rebuild_the_ranking_system = {
+
+		icon = GFX_decision_generic_decision
+		days_remove = 40
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+			command_power > 15
+		}
+		custom_cost_text = CHL_cost_15_cp
+
+		available = {
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		complete_effect = {
+			hidden_effect = { add_command_power = -15 }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 50 tooltip = gain_50_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+
+			custom_effect_tooltip = IRQ_rebuild_the_ranking_system_tooltip
+			add_to_variable = { var = this_planning_speed value = 0.05 }
+			add_to_variable = { var = this_max_planning_factor value = 0.05 }
+		}
+	}
+	IRQ_enhance_old_weapons = {
+
+		icon = GFX_decision_generic_industry
+		days_remove = 60
+		days_re_enable = 350
+
+		cost = 25
+		available = {
+			has_completed_focus = IRQ_improve_guns
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		modifier = {
+			industrial_capacity_factory = -0.1
+		}
+		complete_effect = {
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 50 tooltip = gain_50_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+	IRQ_modernize_the_military_school = {
+
+		icon = GFX_decision_hol_attract_foreign_investors
+		days_remove = 40
+		fire_only_once = yes
+
+		cost = 25
+
+		available = {
+			has_completed_focus = IRQ_open_military_school
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		modifier = {
+			consumer_goods_factor = 0.02
+			experience_gain_army = 0.02
+		}
+		complete_effect = {
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 50 tooltip = gain_50_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+	IRQ_modernize_military_service = {
+
+		icon = GFX_decision_hol_attract_foreign_investors
+		days_remove = 45
+		fire_only_once = yes
+
+		cost = 25
+
+		available = {
+			OR = {
+				has_completed_focus = IRQ_ground_force_only
+				has_completed_focus = IRQ_standard_army_system
+			}
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		modifier = {
+			consumer_goods_factor = 0.02
+			experience_gain_army = 0.02
+		}
+		complete_effect = {
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 25 tooltip = gain_25_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+	IRQ_increase_army_scientists = {
+
+		icon = GFX_decision_generic_research
+		days_remove = 60
+		days_re_enable = 180
+
+		cost = 50
+
+		available = {
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		modifier = {
+			research_speed_factor = 0.05
+			consumer_goods_factor = 0.03
+		}
+		complete_effect = {
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 25 tooltip = gain_25_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+	IRQ_listen_generals_suggestion = {
+
+		icon = GFX_decision_generic_army_support
+		days_remove = 30
+		days_re_enable = 120
+
+		cost = 50
+
+		available = {
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		modifier = {
+			experience_gain_army_factor = -0.1
+		}
+		complete_effect = {
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 10 tooltip = gain_10_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+	IRQ_strengthen_the_special_units = {
+
+		icon = GFX_decision_generic_intelligence_operation
+		days_remove = 60
+		days_re_enable = 180
+
+		cost = 25
+		#custom_cost_trigger = {
+			#    command_power > 14
+			#}
+		#custom_cost_text = decision_cost_CP_15
+
+		available = {
+			has_template_containing_unit = desertinfantry
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		modifier = {
+			training_time_army_factor = 0.2
+		}
+		complete_effect = {
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			army_experience = 30
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+	IRQ_gain_experience_from_recent_wars  = {
+
+		icon = GFX_decision_generic_police_action
+		days_remove = 60
+		fire_only_once = yes
+
+		cost = 25
+
+		available = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = IRQ_sino-japanese_war_happened
+					has_country_flag = sino-japanese_war_happened
+				}
+				custom_trigger_tooltip = {
+					tooltip = IRQ_winter_war_happened
+					has_country_flag = winter_war_happened
+				}
+			}
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		complete_effect = {
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 100 tooltip = gain_100_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+	IRQ_prosecute_the_corrupt_military_staffs  = {
+
+		icon = GFX_decision_generic_arrest
+		days_remove = 14
+		fire_only_once = yes
+
+		cost = 25
+
+		available = {
+			date > 1938.01.01
+			check_variable = { IRQ_army_academy_decision_select_limit < 2 }
+		}
+		visible = { NOT = { has_country_flag = hide_IRQ_army_academy_decisions } }
+
+		modifier = {
+			stability_weekly = -0.025
+		}
+		complete_effect = {
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = 1 }
+		}
+		remove_effect = {
+			add_to_variable = { var = army_learing_points value = 50 tooltip = gain_50_learing_points }
+			add_to_variable = { var = IRQ_army_academy_decision_select_limit value = -1 }
+		}
+	}
+}
+
+IRQ_race_for_dominance_category = {
+
+	IRQ_finish_conflicts_tt = {
+		icon = GFX_
+		priority = 10
+		#days_re_enable = 5
+		fire_only_once = no
+		on_map_mode = map_and_decisions_view
+
+		is_good = no
+		days_mission_timeout = 90
+
+		activation = {
+			has_country_flag = activate_race_for_dominance
+			NOT = { has_idea = IRQ_internal_crisis_6 }
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = IRQ_finish_conflicts_tt
+				NOT = {
+					has_country_flag = activate_race_for_dominance
+					has_idea = IRQ_internal_crisis_6
+				}
+			}
+		}
+
+		timeout_effect = {
+			if = {
+				limit = { has_idea = IRQ_internal_crisis_1 }
+				swap_ideas = {
+					remove_idea = IRQ_internal_crisis_1
+					add_idea = IRQ_internal_crisis_2
+				}
+			}
+			else_if = {
+				limit = { has_idea = IRQ_internal_crisis_2 }
+				swap_ideas = {
+					remove_idea = IRQ_internal_crisis_2
+					add_idea = IRQ_internal_crisis_3
+				}
+			}
+			else_if = {
+				limit = { has_idea = IRQ_internal_crisis_3 }
+				swap_ideas = {
+					remove_idea = IRQ_internal_crisis_3
+					add_idea = IRQ_internal_crisis_4
+				}
+			}
+			else_if = {
+				limit = { has_idea = IRQ_internal_crisis_4 }
+				swap_ideas = {
+					remove_idea = IRQ_internal_crisis_4
+					add_idea = IRQ_internal_crisis_5
+				}
+			}
+			else_if = {
+				limit = { has_idea = IRQ_internal_crisis_5 }
+				swap_ideas = {
+					remove_idea = IRQ_internal_crisis_5
+					add_idea = IRQ_internal_crisis_6
+				}
+			}
+		}
+	}
+
+	IRQ_communist_partisans_decision = {
+		icon = GFX_decision_generic_nationalism
+		priority = 10
+		#days_re_enable = 5
+		fire_only_once = no
+		on_map_mode = map_and_decisions_view
+
+		is_good = yes
+		days_mission_timeout = 20
+
+		activation = {
+			has_country_flag = activate_race_for_dominance
+			OR = {
+				has_country_flag = controling_baghdad_com
+				has_country_flag = controling_basrah_com
+				has_country_flag = controling_sulaymaniyah_com
+				has_country_flag = controling_karbala_com
+				has_country_flag = controling_west_al_hajara_com
+				has_country_flag = controling_east_al_hajara_com
+				has_country_flag = controling_erbil_com
+				has_country_flag = controling_mosul_com
+			}
+			check_variable = { IRQ_communists_influence > 12.4 }
+		}
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = activate_race_for_dominance
+				}
+			}
+		}
+		cancel_trigger = {
+			check_variable = { IRQ_communists_influence < 12.4 }
+		}
+
+		timeout_effect = {
+			random = {
+				chance = 50
+				set_communist_partisans_finish_plan = yes
+				set_communist_partisans_next_plan = yes
+			}
+			random_list = {
+				34 = {
+					675 = {
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+				33 = {
+					if = {
+						limit = {
+							has_idea = PER_workers
+						}
+						modify_timed_idea = {
+							idea = PER_workers
+							days = 40
+						}
+					}
+					else = {
+						add_timed_idea = {
+							idea = PER_workers
+							days = 40
+						}
+					}
+				}
+				33 = {
+					add_stability = 0.025
+				}
+			}
+		}
+	}
+
+	IRQ_nationalist_partisans_decision = {
+		icon = GFX_decision_generic_nationalism
+		priority = 10
+		#days_re_enable = 5
+		fire_only_once = no
+		on_map_mode = map_and_decisions_view
+
+		is_good = yes
+		days_mission_timeout = 20
+
+		activation = {
+			has_country_flag = activate_race_for_dominance
+			OR = {
+				has_country_flag = controling_baghdad_fas
+				has_country_flag = controling_basrah_fas
+				has_country_flag = controling_sulaymaniyah_fas
+				has_country_flag = controling_karbala_fas
+				has_country_flag = controling_west_al_hajara_fas
+				has_country_flag = controling_east_al_hajara_fas
+				has_country_flag = controling_erbil_fas
+				has_country_flag = controling_mosul_fas
+			}
+			check_variable = { IRQ_fascists_influence > 12.4 }
+		}
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = activate_race_for_dominance
+				}
+			}
+		}
+		cancel_trigger = {
+			check_variable = { IRQ_fascists_influence < 12.4 }
+		}
+
+		timeout_effect = {
+			random = {
+				chance = 50
+				set_fascist_partisans_finish_plan = yes
+				set_fascist_partisans_next_plan = yes
+			}
+			random_list = {
+				34 = {
+					675 = {
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+						}
+						add_extra_state_shared_building_slots = 1
+					}
+				}
+				33 = {
+					add_manpower = 1000
+				}
+				33 = {
+					add_war_support = 0.025
+				}
+			}
+		}
+	}
+
+	stop_the_communists = {
+
+		icon = GFX_decision_generic_police_action
+		#priority = 10
+		days_remove = 40
+		days_re_enable = 1
+		#fire_only_once = yes
+
+		#cost = 100
+		custom_cost_trigger = {
+			command_power > 14
+		}
+		custom_cost_text = decision_cost_CP_15
+
+		allowed = {
+		}
+		visible = {
+			hidden_trigger = {
+				OR = {
+					has_country_flag = controling_baghdad_com
+					has_country_flag = controling_mosul_com
+					has_country_flag = controling_erbil_com
+					has_country_flag = controling_karbala_com
+					has_country_flag = controling_west_al_hajara_com
+					has_country_flag = controling_east_al_hajara_com
+					has_country_flag = controling_basrah_com
+					has_country_flag = controling_sulaymaniyah_com
+				}
+			}
+		}
+		available = {
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -15
+				army_occupying_com_start = yes
+			}
+		}
+		remove_effect = {
+			random_list = {
+				75 = {
+					stop_the_communists = yes
+					army_occupying_com_end =yes
+				}
+				15 = {
+					stop_the_communists = yes
+					army_occupying_com_end =yes
+					add_manpower = -100
+					add_stability = -0.025
+				}
+				10 = {
+					army_occupying_com_end =yes
+					add_manpower = -100
+					add_stability = -0.025
+				}
+			}
+		}
+	}
+
+	stop_the_fascists = {
+
+		icon = GFX_decision_generic_police_action
+		#priority = 10
+		days_remove = 40
+		days_re_enable = 1
+		#fire_only_once = yes
+
+		#cost = 100
+		custom_cost_trigger = {
+			command_power > 14
+		}
+		custom_cost_text = decision_cost_CP_15
+
+		allowed = {
+		}
+		visible = {
+			hidden_trigger = {
+				OR = {
+					has_country_flag = controling_baghdad_fas
+					has_country_flag = controling_mosul_fas
+					has_country_flag = controling_erbil_fas
+					has_country_flag = controling_karbala_fas
+					has_country_flag = controling_west_al_hajara_fas
+					has_country_flag = controling_east_al_hajara_fas
+					has_country_flag = controling_basrah_fas
+					has_country_flag = controling_sulaymaniyah_fas
+				}
+			}
+		}
+		available = {
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -15
+				army_occupying_fas_start = yes
+			}
+		}
+		remove_effect = {
+			random_list = {
+				75 = {
+					stop_the_fascists = yes
+					army_occupying_fas_end = yes
+				}
+				15 = {
+					stop_the_fascists = yes
+					army_occupying_fas_end = yes
+					add_manpower = -100
+					add_stability = -0.025
+				}
+				10 = {
+					army_occupying_fas_end = yes
+					add_manpower = -100
+					add_stability = -0.025
+				}
+			}
+		}
+	}
+
+	IRQ_end_of_the_race_decision = {
+		icon = GFX_decision_generic_nationalism
+		priority = 10
+		#days_re_enable = 5
+		fire_only_once = no
+		on_map_mode = map_and_decisions_view
+
+		is_good = yes
+		days_mission_timeout = 50
+
+		activation = {
+			has_country_flag = activate_race_for_dominance
+			OR = {
+				check_variable = { IRQ_army_influence > 74.9 }
+				check_variable = { IRQ_communists_influence > 74.9 }
+				check_variable = { IRQ_fascists_influence > 74.9 }
+			}
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		cancel_trigger = {
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						check_variable = { IRQ_army_influence > 74.9 }
+						check_variable = { IRQ_communists_influence > 74.9 }
+						check_variable = { IRQ_fascists_influence > 74.9 }
+					}
+				}
+			}
+		}
+
+		timeout_effect = {
+			if = {
+				limit = { check_variable = { IRQ_army_influence > 74.9 } }
+				country_event = iraq_all.4
+				add_ideas = IRQ_weak_centrality
+				clr_country_flag = activate_race_for_dominance
+			}
+			else_if = {
+				limit = { check_variable = { IRQ_communists_influence > 74.9 } }
+				complete_national_focus = IRQ_new_star_in_middle_east
+				hidden_effect = {
+					set_politics = {
+						ruling_party = communism
+					}
+					clr_country_flag = activate_race_for_dominance
+				}
+			}
+			else_if = {
+				limit = { check_variable = { IRQ_fascists_influence > 74.9 } }
+				complete_national_focus = IRQ_a_new_era_for_us
+				hidden_effect = {
+					set_politics = {
+						ruling_party = fascism
+					}
+					clr_country_flag = activate_race_for_dominance
+				}
+			}
+		}
+	}
+}
+
+IRQ_election_category = {
+	IRQ_election = {
+		icon  = GFX_decision_generic_decision
+		#days_re_enable = 5
+		fire_only_once = no
+
+		is_good = yes
+		days_mission_timeout = 1460
+
+		activation = {
+			has_government = democratic
+			has_country_flag = IRQ_elections
+		}
+		available = {
+			always = no
+		}
+		cancel_if_not_visible = no
+		visible = {
+			always = no
+		}
+
+		timeout_effect = {
+			country_event = iraq_democratic.8
+		}
+	}
+}
+
+
+#####################
+#foreign_politics = {
+	#	IRQ_diplomacy_efforts = {
+		#
+		#		icon = generic_prepare_civil_war
+		#
+		#		available = {
+			#			has_completed_focus = IRQ_our_diplomacy
+			#		}
+		#
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#		fire_only_once = yes
+		#		visible = {
+			#			has_completed_focus = IRQ_our_diplomacy
+			#		}
+		#		cost = 100
+		#		days_remove = 100
+		#
+		#		remove_effect = {
+			#			unlock_decision_tooltip = IRQ_war_prepations
+			#			hidden_effect = {
+				#				set_country_flag = IRQ_war_prepations1
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_war_prepations = {
+		#
+		#		icon = generic_prepare_civil_war
+		#
+		#		available = {
+			#			has_country_flag = IRQ_war_prepations1
+			#		}
+		#
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_our_diplomacy
+			#		}
+		#		days_remove = 100
+		#		cost = 100
+		#		remove_effect = {
+			#			add_stability = 0.02
+			#			add_war_support = 0.02
+			#			unlock_decision_tooltip = IRQ_annex_arabia
+			#			hidden_effect = {
+				#				set_country_flag = IRQ_war_prepations2
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_annex_arabia = {
+		#
+		#		icon = generic_operation
+		#
+		#		available = {
+			#			has_country_flag = IRQ_war_prepations2
+			#		}
+		#
+		#		cost = 150
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_our_diplomacy
+			#		}
+		#		days_remove = 100
+		#		remove_effect = {
+			#			create_wargoal = {
+				#				target = SAU
+				#				type = annex_everything
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_annex_oman = {
+		#
+		#		icon = generic_operation
+		#
+		#		available = {
+			#			has_country_flag = IRQ_war_prepations2
+			#		}
+		#
+		#		cost = 150
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_our_diplomacy
+			#		}
+		#		days_remove = 100
+		#		remove_effect = {
+			#			create_wargoal = {
+				#				target = OMA
+				#				type = annex_everything
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_ultimatom_the_last_arabian_lands = {
+		#
+		#		icon = generic_operation
+		#
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			has_army_manpower = { size > 149999 }
+			#		}
+		#
+		#		cost = 200
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_our_diplomacy
+			#		}
+		#
+		#		days_remove = 100
+		#
+		#		remove_effect = {
+			#			every_country = {
+				#				limit = {
+					#					controls_state = 659
+					#					controls_state = 658
+					#					controls_state = 765
+					#				}
+				#				PREV = { country_event = { id = iraq.2 days = 2 } }
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_coupes_other_countries = {
+		#
+		#		icon = generic_operation
+		#
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			has_completed_focus = IRQ_prepare_interfere_the_countries
+			#		}
+		#
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_prepare_interfere_the_countries
+			#		}
+		#		days_remove = 100
+		#		cost = 100
+		#		remove_effect = {
+			#			add_political_power = 25
+			#			add_war_support = 0.05
+			#			unlock_decision_tooltip = IRQ_coup_in_saudi_arabia
+			#			unlock_decision_tooltip = IRQ_puppet_oman
+			#			unlock_decision_tooltip = IRQ_puppet_yemen
+			#		}
+		#	}
+	#
+	#	IRQ_coup_in_saudi_arabia = {
+		#
+		#		icon = generic_operation
+		#
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			SAU = { exists = yes }
+			#			SAU = { has_stability < 0.5 }
+			#			SAU = { has_war_support < 0.6 }
+			#			NOT = { has_war_with = SAU }
+			#		}
+		#
+		#		cost = 300
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_prepare_interfere_the_countries
+			#		}
+		#
+		#		days_remove = 100
+		#
+		#		remove_effect = {
+			#			SAU = {
+				#				start_civil_war = {
+					#					ruling_party = communism
+					#					ideology = neutrality
+					#					size = 0.6
+					#				}
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_puppet_oman = {
+		#
+		#		icon = generic_operation
+		#
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			OMA = { exists = yes }
+			#			OMA = { has_stability < 0.5 }
+			#			OMA = { has_war_support < 0.6 }
+			#			NOT = { has_war_with = OMA }
+			#		}
+		#
+		#		cost = 300
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_prepare_interfere_the_countries
+			#		}
+		#
+		#		days_remove = 100
+		#
+		#		remove_effect = {
+			#			add_war_support = 0.1
+			#			if = {
+				#				limit = {
+					#					OMA = { is_ai = yes }
+					#				}
+				#				IRQ = { puppet = OMA }
+				#			}
+			#			else_if = {
+				#				limit = {
+					#					OMA = { is_ai = no }
+					#				}
+				#				OMA = { country_event = { id = iraq.13 hours = 3 } }
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_puppet_yemen = {
+		#
+		#		icon = generic_operation
+		#
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			YEM = { exists = yes }
+			#			YEM = { has_stability < 0.5 }
+			#			YEM = { has_war_support < 0.6 }
+			#			NOT = { has_war_with = YEM }
+			#		}
+		#
+		#		cost = 300
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_prepare_interfere_the_countries
+			#		}
+		#		days_remove = 100
+		#		remove_effect = {
+			#			add_war_support = 0.1
+			#			if = {
+				#				limit = {
+					#					YEM = { is_ai = yes }
+					#				}
+				#				IRQ = { puppet = YEM }
+				#			}
+			#			else_if = {
+				#				limit = {
+					#					YEM = { is_ai = no }
+					#				}
+				#				YEM = { country_event = { id = iraq.14 hours = 3 } }
+				#			}
+			#		}
+		#	}
+	#}
+#
+#political_actions = {
+	#	IRQ_nationalise_the_oil = {
+		#
+		#		icon = generic_prepare_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#			controls_state = 676
+			#			controls_state = 291
+			#		}
+		#		visible = {
+			#
+			#		}
+		#		cost = 500
+		#		fire_only_once = yes
+		#		ai_will_do = {
+			#			factor = 0
+			#		}
+		#		complete_effect = { #TODO notification event for England
+			#			add_war_support = 0.1
+			#			ENG = {
+				#				remove_resource_rights = 676
+				#				remove_resource_rights = 291
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_political_cursed = {
+		#
+		#		priority = 10
+		#
+		#		icon = generic_ignite_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		activation = {
+			#			has_completed_focus = IRQ_death_of_the_ghazi
+			#		}
+		#		available = {
+			#			has_country_flag = IRQ_political_cursed_start
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_death_of_the_ghazi
+			#		}
+		#
+		#		is_good = no
+		#
+		#		days_mission_timeout = 120
+		#		fire_only_once = yes
+		#
+		#		ai_will_do = {
+			#			factor = 0
+			#		}
+		#		complete_effect = {
+			#			start_civil_war = {
+				#				ruling_party = fascism
+				#				ideology = neutrality
+				#				size = 0.5
+				#			}
+			#			add_political_power = -50
+			#			add_war_support = -0.1
+			#			add_stability = -0.1
+			#		}
+		#	}
+	#
+	#	IRQ_coup_dtat = {
+		#
+		#		priority = 10
+		#
+		#		icon = generic_ignite_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		activation = {
+			#			has_completed_focus = IRQ_communist_generals_and_army
+			#		}
+		#		available = {
+			#			has_country_flag = IRQ_started_coup_dtat
+			#		}
+		#
+		#		visible = {
+			#			has_completed_focus = IRQ_communist_generals_and_army
+			#		}
+		#
+		#		is_good = no
+		#
+		#		days_mission_timeout = 100
+		#		fire_only_once = yes
+		#		ai_will_do = {
+			#			factor = 0
+			#		}
+		#		timeout_effect = {
+			#			start_civil_war = {
+				#				ruling_party = communism
+				#				ideology = neutrality
+				#				size = 0.45
+				#			}
+			#			add_political_power = -50
+			#			add_war_support = -0.1
+			#			add_stability = -0.1
+			#		}
+		#	}
+	#
+	#	IRQ_kill_traitors = {
+		#
+		#		icon = generic_ignite_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#
+			#		}
+		#		visible = {
+			#			has_completed_focus = IRQ_death_of_the_ghazi
+			#		}
+		#		cost = 50
+		#		days_remove = 40
+		#		fire_only_once = yes
+		#
+		#		ai_will_do = {
+			#			factor = 0
+			#		}
+		#		remove_effect = {
+			#			add_days_mission_timeout = {
+				#				mission = IRQ_political_cursed
+				#				days = 40
+				#			}
+			#			add_manpower = -5000
+			#			add_stability = -0.05
+			#			if = {
+				#				limit = {
+					#					has_idea = IRQ_political_cursed
+					#				}
+				#				remove_ideas = IRQ_political_cursed
+				#				add_ideas = IRQ_political_cursed2
+				#			}
+			#			else_if = {
+				#				limit = {
+					#					has_idea = IRQ_political_cursed2
+					#				}
+				#				remove_ideas = IRQ_political_cursed2
+				#				add_ideas = IRQ_political_cursed3
+				#			}
+			#			else_if = {
+				#				limit = {
+					#					has_idea = IRQ_political_cursed3
+					#				}
+				#				remove_ideas = IRQ_political_cursed3
+				#				add_ideas = IRQ_political_cursed4
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_unity_the_workers = {
+		#
+		#		icon = generic_ignite_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#
+			#		}
+		#		visible = {
+			#			has_completed_focus = IRQ_communist_generals_and_army
+			#		}
+		#		cost = 50
+		#
+		#		fire_only_once = yes
+		#		days_remove = 40
+		#		ai_will_do = {
+			#			factor = 0
+			#		}
+		#		remove_effect = {
+			#			add_days_mission_timeout = {
+				#				mission = IRQ_coup_dtat
+				#				days = 20
+				#			}
+			#			add_stability = 0.05
+			#			if = {
+				#				limit = {
+					#					has_idea = IRQ_political_cursed
+					#				}
+				#				remove_ideas = IRQ_political_cursed
+				#				add_ideas = IRQ_political_cursed2
+				#			}
+			#			else_if = {
+				#				limit = {
+					#					has_idea = IRQ_political_cursed2
+					#				}
+				#				remove_ideas = IRQ_political_cursed2
+				#				add_ideas = IRQ_political_cursed3
+				#			}
+			#			else_if = {
+				#				limit = {
+					#					has_idea = IRQ_political_cursed3
+					#				}
+				#				remove_ideas = IRQ_political_cursed3
+				#				add_ideas = IRQ_political_cursed4
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_purge_fascists = {
+		#
+		#		icon = generic_ignite_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#
+			#		}
+		#		visible = {
+			#			has_completed_focus = IRQ_communist_generals_and_army
+			#		}
+		#		cost = 100
+		#
+		#		fire_only_once = yes
+		#
+		#		ai_will_do = {
+			#			factor = 0
+			#		}
+		#		days_remove = 40
+		#		remove_effect = {
+			#			add_days_mission_timeout = {
+				#				mission = IRQ_coup_dtat
+				#				days = 60
+				#			}
+			#			add_stability = -0.05
+			#			add_war_support = -0.1
+			#			if = {
+				#				limit = {
+					#					has_idea = IRQ_political_cursed
+					#				}
+				#				remove_ideas = IRQ_political_cursed
+				#				add_ideas = IRQ_political_cursed2
+				#			}
+			#			else_if = {
+				#				limit = {
+					#					has_idea = IRQ_political_cursed2
+					#				}
+				#				remove_ideas = IRQ_political_cursed2
+				#				add_ideas = IRQ_political_cursed3
+				#			}
+			#			else_if = {
+				#				limit = {
+					#					has_idea = IRQ_political_cursed3
+					#				}
+				#				remove_ideas = IRQ_political_cursed3
+				#				add_ideas = IRQ_political_cursed4
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_marching_the_baghdad = {
+		#
+		#		icon = generic_ignite_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#			has_idea = IRQ_political_cursed4
+			#		}
+		#		visible = {
+			#			has_completed_focus = IRQ_communist_generals_and_army
+			#		}
+		#		cost = 200
+		#
+		#		fire_only_once = yes
+		#
+		#		ai_will_do = {
+			#			factor = 0
+			#		}
+		#		days_remove = 40
+		#		remove_effect = {
+			#			remove_decision = IRQ_coup_dtat
+			#			add_popularity = {
+				#				ideology = communism
+				#				popularity = 0.5
+				#			}
+			#			set_politics = { ruling_party = communism elections_allowed = no }
+			#			remove_ideas = IRQ_political_cursed4
+			#		}
+		#	}
+	#
+	#	IRQ_peaceful_public_policy = {
+		#
+		#		icon = generic_ignite_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#
+			#		}
+		#		visible = {
+			#			has_completed_focus = IRQ_death_of_the_ghazi
+			#		}
+		#		cost = 100
+		#
+		#		fire_only_once = yes
+		#
+		#		ai_will_do = {
+			#			factor = 0
+			#		}
+		#		complete_effect = {
+			#			add_days_mission_timeout = {
+				#				mission = IRQ_political_cursed
+				#				days = 60
+				#			}
+			#			add_stability = 0.05
+			#			remove_ideas = IRQ_political_cursed
+			#			add_ideas = IRQ_political_cursed2
+			#			unlock_decision_tooltip = IRQ_ban_other_parties_radio_channels
+			#			hidden_effect = {
+				#				set_country_flag = coup_ended
+				#			}
+			#		}
+		#	}
+	#
+	#	IRQ_ban_other_parties_radio_channels = {
+		#
+		#		icon = generic_ignite_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#			has_country_flag = coup_ended
+			#		}
+		#		visible = {
+			#			has_completed_focus = IRQ_death_of_the_ghazi
+			#		}
+		#		cost = 125
+		#
+		#		fire_only_once = yes
+		#
+		#		ai_will_do = {
+			#			factor = 0
+			#		}
+		#		complete_effect = {
+			#			add_days_mission_timeout = {
+				#				mission = IRQ_political_cursed
+				#				days = 21
+				#			}
+			#			add_stability = 0.05
+			#			add_war_support = -0.05
+			#			remove_ideas = IRQ_political_cursed2
+			#		}
+		#	}
+	#}
+#
+#foreign_influence = {
+	#	IRQ_equipment_aggrements = {
+		#
+		#		icon = generic_industry
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			has_war = no
+			#		}
+		#
+		#		cost = 25
+		#		fire_only_once = yes
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			OR = {
+				#				has_completed_focus = IRQ_foregin_equipments_aggrements
+				#				has_completed_focus = IRQ_equipments_aggrements_with_fascists
+				#			}
+			#		}
+		#
+		#		complete_effect = {
+			#			add_political_power = 25
+			#			add_stability = 0.02
+			#			add_war_support = 0.02
+			#			unlock_decision_tooltip = IRQ_gun_aggrement_with_germany
+			#			unlock_decision_tooltip = IRQ_planes_aggrement_with_soviet_union
+			#			unlock_decision_tooltip = IRQ_gun_aggrement_with_england
+			#			unlock_decision_tooltip = IRQ_tank_aggrement_with_germany
+			#			unlock_decision_tooltip = IRQ_call_german_scientists
+			#		}
+		#	}
+	#
+	#	IRQ_gun_aggrement_with_germany = {
+		#
+		#		icon = generic_prepare_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			has_war = no
+			#			NOT = { has_war_with = GER }
+			#			NOT = { GER = { has_war_with = ENG } }
+			#			GER = { has_equipment = { infantry_equipment_1 > 1499 } }
+			#			GER = { exists = yes }
+			#			exists = yes
+			#		}
+		#
+		#		cost = 100
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#		fire_only_once = yes
+		#		visible = {
+			#			OR = {
+				#				has_completed_focus = IRQ_foregin_equipments_aggrements
+				#				has_completed_focus = IRQ_equipments_aggrements_with_fascists
+				#			}
+			#		}
+		#
+		#		complete_effect = {
+			#			GER = {
+				#				send_equipment = {
+					#					type = infantry_equipment_1
+					#					amount = 1500
+					#					target = ROOT
+					#				}
+				#			}
+			#			add_opinion_modifier = { target = GER modifier = small_increase }
+			#			GER = { add_opinion_modifier = { target = IRQ modifier = small_increase } }
+			#		}
+		#	}
+	#
+	#	IRQ_planes_aggrement_with_soviet_union = {
+		#
+		#		icon = generic_prepare_civil_war
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			has_war = no
+			#			NOT = { has_war_with = SOV }
+			#			NOT = { SOV = { has_war_with = GER } }
+			#			SOV = { has_equipment = { small_plane_airframe > 49 } }
+			#			SOV = { exists = yes }
+			#			exists = yes
+			#		}
+		#
+		#		cost = 75
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#		fire_only_once = yes
+		#		visible = {
+			#			OR = {
+				#				has_completed_focus = IRQ_foregin_equipments_aggrements
+				#				has_completed_focus = IRQ_equipments_aggrements_with_fascists
+				#			}
+			#		}
+		#
+		#		complete_effect = {
+			#			if = {
+				#				limit = {
+					#					NOT = {
+						#						has_dlc = "By Blood Alone"
+						#					}
+					#				}
+				#				add_equipment_to_stockpile = {
+					#					producer = SOV
+					#					type = fighter_equipment_1
+					#					amount = 50
+					#				}
+				#			}
+			#			else = {
+				#				add_equipment_to_stockpile = {
+					#					producer = SOV
+					#					type = small_plane_airframe_1
+					#					amount = 50
+					#					variant_name = "I-16"
+					#				}
+				#			}
+			#			add_opinion_modifier = { target = SOV modifier = small_increase }
+			#			SOV = { add_opinion_modifier = { target = IRQ modifier = small_increase } }
+			#		}
+		#	}
+	#
+	#	IRQ_gun_aggrement_with_england = {
+		#
+		#		icon = generic_prepare_civil_war
+		#
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			has_war = no
+			#			NOT = { has_war_with = ENG }
+			#			NOT = { ENG = { has_war_with = GER } }
+			#			ENG = { has_equipment = { infantry_equipment_1 > 749 } }
+			#			ENG = { exists = yes }
+			#			exists = yes
+			#		}
+		#		fire_only_once = yes
+		#		cost = 100
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			OR = {
+				#				has_completed_focus = IRQ_foregin_equipments_aggrements
+				#				has_completed_focus = IRQ_equipments_aggrements_with_fascists
+				#			}
+			#		}
+		#
+		#		complete_effect = {
+			#			ENG = {
+				#				send_equipment = {
+					#					type = infantry_equipment_1
+					#					amount = 750
+					#					target = ROOT
+					#				}
+				#			}
+			#			add_opinion_modifier = { target = ENG modifier = medium_increase }
+			#			ENG = { add_opinion_modifier = { target = IRQ modifier = medium_increase } }
+			#		}
+		#	}
+	#
+	#	IRQ_tank_aggrement_with_germany = {
+		#
+		#		icon = generic_prepare_civil_war
+		#
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			has_war = no
+			#			NOT = { has_war_with = GER }
+			#			NOT = { GER = { has_war_with = ENG } }
+			#			GER = { has_equipment = { light_tank_equipment_1 > 29 } }
+			#			has_tech = basic_light_tank
+			#			exists = yes
+			#		}
+		#		fire_only_once = yes
+		#		cost = 80
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			OR = {
+				#				has_completed_focus = IRQ_foregin_equipments_aggrements
+				#				has_completed_focus = IRQ_equipments_aggrements_with_fascists
+				#			}
+			#		}
+		#
+		#		complete_effect = {
+			#			GER = {
+				#				send_equipment = {
+					#					type = light_tank_equipment_1
+					#					amount = 30
+					#					target = ROOT
+					#				}
+				#			}
+			#			add_opinion_modifier = { target = GER modifier = medium_increase }
+			#			GER = { add_opinion_modifier = { target = IRQ modifier = medium_increase } }
+			#		}
+		#	}
+	#
+	#	IRQ_call_german_scientists = {
+		#
+		#		icon = generic_research
+		#
+		#		allowed = {
+			#			original_tag = IRQ
+			#		}
+		#		available = {
+			#			is_subject = no
+			#			has_capitulated = no
+			#			NOT = { has_war_with = GER }
+			#			exists = yes
+			#		}
+		#
+		#		days_remove = 180
+		#		fire_only_once = yes
+		#		cost = 200
+		#		ai_will_do = {
+			#			factor = 1
+			#		}
+		#
+		#		visible = {
+			#			OR = {
+				#				has_completed_focus = IRQ_foregin_equipments_aggrements
+				#				has_completed_focus = IRQ_equipments_aggrements_with_fascists
+				#			}
+			#		}
+		#
+		#        modifier = {
+			#            research_speed_factor = 0.05
+			#            stability_factor = 0.05
+			#			war_support_factor = 0.05
+			#        }
+		#	}
+	#}

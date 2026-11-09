@@ -1,0 +1,42 @@
+#####-----> ECU: Historical AI Behavior <><> <><> <><> <><> <><>
+
+ECU_historical_plan = {
+	name = "Ecuador Hisorical Plan"
+	desc = "Historical behavior for Ecuador."
+	allowed = {
+		original_tag = ECU
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = ECU_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = ECU_AI_HISTORICAL
+			has_game_rule = {
+				rule = ECU_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	focus_factors = {
+		ECU_the_elections_that_shouldve_been = 0
+		ECU_the_paez_dictatorship = 0
+		ECU_leftist_agitation = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

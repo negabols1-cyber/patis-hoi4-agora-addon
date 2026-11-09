@@ -1,0 +1,162 @@
+LIB_national_education_incrase = {
+	if = {
+		limit = {
+			NOT = {
+				has_country_flag = LIB_national_education_1
+			}
+		}
+		set_country_flag = LIB_national_education_1
+	}
+	else_if = {
+		limit = {
+			NOT = {
+				has_country_flag = LIB_national_education_2
+			}
+		}
+		set_country_flag = LIB_national_education_2
+	}
+	else_if = {
+		limit = {
+			NOT = {
+				has_country_flag = LIB_national_education_3
+			}
+		}
+		set_country_flag = LIB_national_education_3
+	}
+	else_if = {
+		limit = {
+			NOT = {
+				has_country_flag = LIB_national_education_4
+			}
+		}
+		set_country_flag = LIB_national_education_4
+	}
+	else_if = {
+		limit = {
+			NOT = {
+				has_country_flag = LIB_national_education_5
+			}
+		}
+		set_country_flag = LIB_national_education_5
+	}
+	else = {
+		set_country_flag = LIB_national_education_6
+	}
+}
+
+LIB_incrase_inflation_flag = {
+	if = {
+		limit = {
+			has_country_flag = LIB_inflation_flag3
+		}
+		swap_ideas = {
+			add_idea = LIB_dolarisation_idea_bad4
+			remove_idea = LIB_dolarisation_idea_bad3
+		}
+		set_country_flag = LIB_inflation_flag4
+	}
+	else_if = {
+		limit = {
+			has_country_flag = LIB_inflation_flag2
+		}
+		swap_ideas = {
+			add_idea = LIB_dolarisation_idea_bad3
+			remove_idea = LIB_dolarisation_idea_bad2
+		}
+		set_country_flag = LIB_inflation_flag3
+	}
+	else_if = {
+		limit = {
+			has_country_flag = LIB_inflation_flag
+		}
+		swap_ideas = {
+			add_idea = LIB_dolarisation_idea_bad2
+			remove_idea = LIB_dolarisation_idea_bad
+		}
+		set_country_flag = LIB_inflation_flag2
+	}
+	else = {
+		swap_ideas = {
+			add_idea = LIB_dolarisation_idea_bad
+			remove_idea = LIB_dolarisation_idea
+		}
+		set_country_flag = LIB_inflation_flag
+	}
+}
+
+LIB_decrease_inflation_flag = {
+	if = {
+		limit = {
+			has_country_flag = LIB_inflation_flag4
+		}
+		swap_ideas = {
+			add_idea = LIB_dolarisation_idea_bad3
+			remove_idea = LIB_dolarisation_idea_bad4
+		}
+		clr_country_flag = LIB_inflation_flag4
+	}
+	else_if = {
+		limit = {
+			has_country_flag = LIB_inflation_flag3
+		}
+		swap_ideas = {
+			add_idea = LIB_dolarisation_idea_bad2
+			remove_idea = LIB_dolarisation_idea_bad3
+		}
+		clr_country_flag = LIB_inflation_flag3
+	}
+	else_if = {
+		limit = {
+			has_country_flag = LIB_inflation_flag2
+		}
+		swap_ideas = {
+			add_idea = LIB_dolarisation_idea_bad
+			remove_idea = LIB_dolarisation_idea_bad2
+		}
+		clr_country_flag = LIB_inflation_flag2
+	}
+	else = {
+		swap_ideas = {
+			add_idea = LIB_dolarisation_idea
+			remove_idea = LIB_dolarisation_idea_bad
+		}
+		clr_country_flag = LIB_inflation_flag
+	}
+}
+
+LIB_increase_pearl_trade = {
+	if = {
+		limit = {
+			has_country_flag = LIB_pearl_trade_country_3
+		}
+		swap_ideas = {
+			add_idea = LIB_pearl_idea_4
+			remove_idea = LIB_pearl_idea_3
+		}
+		set_country_flag = LIB_pearl_trade_country_max
+	}
+	else_if = {
+		limit = {
+			has_country_flag = LIB_pearl_trade_country_2
+		}
+		swap_ideas = {
+			add_idea = LIB_pearl_idea_3
+			remove_idea = LIB_pearl_idea_2
+		}
+		set_country_flag = LIB_pearl_trade_country_3
+	}
+	else_if = {
+		limit = {
+			has_country_flag = LIB_pearl_trade_country_1
+		}
+		swap_ideas = {
+			add_idea = LIB_pearl_idea_2
+			remove_idea = LIB_pearl_idea_1
+		}
+		set_country_flag = LIB_pearl_trade_country_2
+	}
+	else = {
+		add_ideas = LIB_pearl_idea_1
+		set_country_flag = LIB_pearl_trade_country_1
+	}
+}

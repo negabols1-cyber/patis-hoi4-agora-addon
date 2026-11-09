@@ -1,0 +1,127 @@
+#scripted_diplomatic_actions =  { 
+#	offer_resource_allow = {
+#		allowed = { ROOT = { is_ai = no } }
+#		visible = {
+#			NOT = { 
+#				THIS = {has_war_with = ROOT}
+#			}
+#			if = {
+#				limit = {
+#					has_game_rule = {
+#						rule = remove_all_multiplayer_tools
+#						option = ALLOWED
+#					}
+#					NOT = { is_debug = yes }
+#				}
+#				always = no
+#			}
+#		}
+#		send_scripted_gui = give_state_resource_control
+#	}
+#	ask_resource_allow = {
+#		allowed = { ROOT = { is_ai = no } }
+#		visible = {
+#			NOT = { 
+#				THIS = {has_war_with = ROOT}
+#			}
+#			if = {
+#				limit = {
+#					has_game_rule = {
+#						rule = remove_all_multiplayer_tools
+#						option = ALLOWED
+#					}
+#					NOT = { is_debug = yes }
+#				}
+#				always = no
+#			}
+#		}
+#		on_sent_effect = {
+#			set_variable = { show_ask_resource_main = 1 }
+#			set_variable = { ROOT.selected_country_for_ask_res_rights_of_st = THIS }
+#		}
+#		reset_send_effect = { 
+#			clear_variable = show_ask_resource_main
+#			clear_variable = ROOT.selected_country_for_ask_res_rights_of_st 
+#		}
+#		send_scripted_gui = ask_for_state_resource_control
+#	}
+#}
+scripted_diplomatic_actions = {
+	white_peace= {
+		allowed = { ROOT = { is_ai = no } }
+		visible = {
+			THIS = {has_war_with = ROOT}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = remove_all_multiplayer_tools
+						option = ALLOWED
+					}
+					NOT = { is_debug = yes }
+				}
+				always = no
+			}
+		}
+
+		selectable = {
+			if = {
+				limit = {
+					has_global_flag = EF_multiplayer_tools_available_flag
+					NOT = { is_debug = yes }
+				}
+				THIS = {is_ai = no}
+			}
+			ROOT = {
+				custom_trigger_tooltip = {
+					tooltip = white_peace_flag_tt
+				}
+				check_variable = { ROOT.peace_var < 1 }
+				has_political_power > 99
+			}
+		}
+
+		requires_acceptance = yes
+		cost = 100
+		command_power = 0
+
+		show_acceptance_on_action_button = yes
+
+		icon = 4
+
+		send_description = white_peace_desc
+
+		reject_effect = {
+			ROOT = {
+				set_variable = {
+					var = ROOT.peace_var
+					value = 1
+				}
+			}
+		}
+
+		#reject_effect = {
+			#ROOT = {
+				#	set_variable = {
+					#		var = ROOT.peace_var
+					#		value = 1
+					#	}
+				#}
+			#}
+
+		complete_effect = {
+			FROM = {
+				white_peace = ROOT
+			}
+		}
+		ai_acceptance = {
+			condition = {
+				base =10
+			}
+		}
+
+		ai_desire = {
+			base = 1
+
+		}
+	}
+}

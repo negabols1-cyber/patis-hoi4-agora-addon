@@ -1,0 +1,157 @@
+﻿capital = 301
+
+oob = "PAR_1936"
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+	set_air_oob = "PAR_1936_air_bba"
+	else = {
+		set_air_oob = "PAR_1936_air_legacy"
+		set_technology = {
+			early_fighter = 1
+		}
+	}
+}
+for_each_scope_loop = {
+	array = core_states
+
+	set_state_flag = paraguayan_starting_state
+}
+every_core_state = {
+	ROOT = {
+		add_to_array = { cores_at_game_start = PREV }
+	}
+}
+
+add_ideas = {
+	EUYL_lackluster_industrial_complex
+}
+
+PAR_initiate_balance_of_power = yes
+
+### Subsidization mechanic
+set_variable = { PAR_percent_subsidize = 0 }
+
+### BoP Mechanic
+set_variable = { PAR_slight_support_cost = 20 }
+set_variable = { PAR_major_support_cost = 50 }
+
+### Heavy Military Investments Mechanic
+set_variable = { PAR_arms_factory_construction_speed = 0.05 }
+set_variable = { PAR_factory_output = 0.05 }
+set_variable = { PAR_decision_cost = 25 }
+
+set_variable = { PAR_cost_to_lower_public_concern = 75 }
+
+set_variable = { PAR_global_concern = 0 } ## keeps track of the concern caused by Paraguay
+set_variable = { PAR_government_changes = 0 }
+
+activate_mission = PAR_the_february_revolution
+
+add_ideas = {
+	PAR_worn_out_army_1
+	PAR_stagnated_economy_1
+	PAR_victor_of_the_chaco_war
+	PAR_political_instability
+	PAR_guarani_communications
+	extensive_conscription
+}
+
+688 = { add_dynamic_modifier = { modifier = EUYL_native_population } }
+
+### EUYL ###
+recruit_character = EUYL_PAR_eusebio_ayala
+recruit_character = EUYL_PAR_rafael_franco
+recruit_character = EUYL_PAR_emilio_melgarejo
+recruit_character = EUYL_PAR_francisco_daza
+recruit_character = EUYL_PAR_manuel_de_la_cruz
+recruit_character = EUYL_PAR_manuel_t_aponte
+recruit_character = EUYL_PAR_hector_velasquez
+recruit_character = EUYL_PAR_jesus_g_arraza
+recruit_character = EUYL_PAR_juan_manuel_frutos
+recruit_character = EUYL_PAR_isaias_baez_allende
+recruit_character = EUYL_PAR_vicente_almonacid
+recruit_character = EUYL_PAR_alfred_stroessner_matiauda
+recruit_character = EUYL_PAR_amancio_pampliega
+recruit_character = EUYL_PAR_hernan_rojas_baltassare
+#recruit_character = EUYL_PAR_higenio_morinigo_martinez
+recruit_character = EUYL_PAR_juan_natalicio_gonzalez
+recruit_character = EUYL_PAR_remigio_bastia_martin
+recruit_character = EUYL_PAR_francisco_esculies
+recruit_character = EUYL_PAR_riccardo_odriosola
+recruit_character = PAR_junta
+recruit_character = PAR_armed_civilians
+recruit_character = PAR_felix_paiva
+recruit_character = PAR_luis_alberto_riart
+recruit_character = PAR_jose_patricio_guggiari
+recruit_character = EUYL_PAR_higinio_morinigo
+recruit_character = PAR_obdulio_barthe
+recruit_character = PAR_juan_belaieff
+recruit_character = PAR_eugenio_a_garay
+recruit_character = PAR_luis_irrazabal
+recruit_character = PAR_oscar_creydt
+recruit_character = EUYL_PAR_emilio_gardel
+recruit_character = EUYL_PAR_juan_stefanich
+recruit_character = PAR_pedro_duarte_ortellando
+recruit_character = EUYL_PAR_felipe_molas_lopez
+recruit_character = PAR_german_soler
+recruit_character = EUYL_PAR_jose_felix_estigarribia
+recruit_character = PAR_ramon_l_parades
+recruit_character = PAR_carlos_pastore
+recruit_character = PAR_juan_sinforiano_bogarin
+recruit_character = PAR_revolutionary_army
+recruit_character = PAR_jose_bozzano
+### EUYL ###
+
+promote_character = PAR_obdulio_barthe
+promote_character = EUYL_PAR_higinio_morinigo
+promote_character = EUYL_PAR_eusebio_ayala
+
+# Starting tech
+set_technology = {
+	infantry_weapons = 1
+	infantry_weapons1 = 1
+	gw_artillery = 1
+	early_fighter = 1
+	tech_support = 1
+	tech_trucks = 1
+	basic_train = 1
+}
+set_country_flag = monroe_doctrine
+
+
+set_politics = {
+	ruling_party = democratic
+	last_election = "1932.1.1"
+	election_frequency = 48
+	elections_allowed = no
+}
+set_popularities = {
+	democratic = 45
+	communism = 38
+	fascism = 2
+	neutrality = 15
+}
+
+#create_country_leader = {
+	#	name = "Eusebio Ayala"
+	#	desc = "POLITICS_EUSEBIO_AYALA_DESC"
+	#	picture = "gfx/leaders/South America/Portrait_South_America_Generic_2.dds"
+	#	expire = "1965.1.1"
+	#	ideology = liberalism
+	#	traits = {
+		#		#
+		#	}
+	#}
+
+# Rafael Franco technically comes to and loses power slightly after/before the bookmarks, but is the go-to choice for a socialist leader
+# create_country_leader = {
+	# 	name = "Rafael Franco"
+	# 	desc = "POLITICS_RAFAEL_FRANCO_DESC"
+	# 	picture = "GFX_Portrait_paraguay_rafael_franco"
+	# 	expire = "1965.1.1"
+	# 	ideology = marxism
+	# 	traits = {
+		# 		#
+		# 	}
+	# }
+

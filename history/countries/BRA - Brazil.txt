@@ -1,0 +1,718 @@
+﻿capital = 500
+
+every_core_state = {
+	ROOT = {
+		add_to_array = { cores_at_game_start = PREV }
+	}
+}
+
+for_each_scope_loop = {
+	array = core_states
+
+	set_state_flag = brazilian_starting_state
+}
+
+add_ideas = {
+	BRA_scars_of_the_1930_revolution_1
+	BRA_police_brutality_1
+	BRA_low_literacy_rate
+	rural_economy
+	EUYL_focus_on_army
+}
+
+oob = "BRA_1936"
+
+### EUYL ###
+recruit_character = BRA_armando_sales
+recruit_character = EUYL_BRA_eurico_gaspar_dutra
+recruit_character = EUYL_BRA_mascarenhas_de_morais
+recruit_character = EUYL_BRA_augusto_rademaker
+recruit_character = EUYL_BRA_getulio_vargas
+recruit_character = EUYL_BRA_plinio_salgado
+recruit_character = EUYL_BRA_luis_carlos_prestes
+recruit_character = BRA_gastão_labatut
+recruit_character = EUYL_BRA_agliberto_vieira
+recruit_character = EUYL_BRA_eduardo_gomes
+recruit_character = EUYL_BRA_epaminondas_dos_santos
+recruit_character = EUYL_BRA_ismael_motta_paes
+recruit_character = EUYL_BRA_afranio_de_mello_franco
+recruit_character = EUYL_BRA_salgado_filho
+recruit_character = EUYL_BRA_floriano_peixoto
+recruit_character = EUYL_BRA_aristides_guilhem
+recruit_character = BRA_joao_neves_da_fontoura
+recruit_character = EUYL_BRA_moreira_lima
+recruit_character = EUYL_BRA_nero_fiuza_de_castro
+recruit_character = EUYL_BRA_artur_da_costa_e_silva
+recruit_character = EUYL_BRA_jorge_martins
+recruit_character = EUYL_BRA_washington_luis_pereira
+recruit_character = EUYL_BRA_osvaldo_aranha
+recruit_character = EUYL_BRA_newton_cavalcanti
+recruit_character = EUYL_BRA_gustavo_barroso
+recruit_character = BRA_antonio_alves_camara
+recruit_character = BRA_moyses_chahon
+recruit_character = BRA_congresso_do_brasil
+recruit_character = BRA_ewert_arthur
+recruit_character = BRA_benedito_valadares
+recruit_character = BRA_santiago_daltas
+recruit_character = BRA_mascarenhas_de_morais_advisor
+recruit_character = BRA_francisco_morato
+recruit_character = BRA_fabio_de_sa_earp
+recruit_character = BRA_dom_pedro_iii
+recruit_character = EUYL_BRA_filinto_muller
+recruit_character = BRA_juscelino_kubitschek
+recruit_character = BRA_joao_cafe_filho
+recruit_character = BRA_rui_moreira_lima
+recruit_character = BRA_armed_civilians
+recruit_character = BRA_juarez_tavora
+recruit_character = BRA_olimpio_mourao_filho
+recruit_character = BRA_bertoldo_klinger
+recruit_character = BRA_carlos_marighella
+recruit_character = BRA_samuel_kicis
+recruit_character = BRA_ernesto_geisel
+recruit_character = BRA_sylvio_frota
+recruit_character = BRA_joao_figueiredo
+recruit_character = BRA_amaro_soares_bittencourt
+recruit_character = BRA_golbery_do_couto_e_silva
+recruit_character = BRA_emilio_garratzu
+recruit_character = BRA_adalberto_pereira_do_santos
+recruit_character = BRA_aurelio_de_lira_traves
+recruit_character = EUYL_BRA_jose_americo_de_almeida
+recruit_character = BRA_basil_do_santos
+recruit_character = BRA_joao_mangabeira
+recruit_character = BRA_anti_submarine_naval_council
+recruit_character = BRA_logistics_naval_council
+recruit_character = BRA_close_air_support_aviation_council
+recruit_character = BRA_naval_strike_aviation_council
+recruit_character = BRA_concealment_military_council
+recruit_character = BRA_army_regrouping_military_council
+recruit_character = BRA_infantry_military_council
+recruit_character = BRA_anti_submarine_naval_imperial_council
+recruit_character = BRA_logistics_naval_imperial_council
+recruit_character = BRA_close_air_support_aviation_imperial_council
+recruit_character = BRA_naval_strike_aviation_imperial_council
+recruit_character = BRA_concealment_military_imperial_council
+recruit_character = BRA_army_regrouping_military_imperial_council
+recruit_character = BRA_infantry_military_imperial_council
+recruit_character = BRA_pedro_gastao_orleans
+recruit_character = EUYL_BRA_arlindo_veiga_dos_santos
+recruit_character = BRA_empress_maria_elisabeth
+recruit_character = EUYL_BRA_pedro_alcantrara
+recruit_character = EUYL_BRA_jose_pessoa
+recruit_character = EUYL_BRA_candido_rondon
+recruit_character = BRA_isaias_de_noronha
+recruit_character = BRA_protogenes_pereira_guimares
+recruit_character = BRA_augusto_do_espirito_santo_cardoso
+recruit_character = BRA_isidoro_dias_lopes
+recruit_character = BRA_alvaro_alberto
+### EUYL ###
+
+set_party_name = {
+	ideology = neutrality
+	long_name = "Governo Constitucional"
+	name = "Governo Constitucional"
+}
+
+set_country_flag = BRA_original_country # will be used to decipher Vargas's Faction in civil war #
+
+#Sao Paulo Seperatists
+501 = {
+	add_dynamic_modifier = { modifier = BRA_sao_paulo_seperatist_movement }
+}
+505 = {
+	add_dynamic_modifier = { modifier = EUYL_native_population }
+}
+504 = {
+	add_dynamic_modifier = { modifier = EUYL_native_population }
+}
+
+937 = { add_dynamic_modifier = { modifier = EUYL_native_population } }
+497 = { add_dynamic_modifier = { modifier = EUYL_native_population } }
+
+set_country_flag = {
+	flag = recently_started_game
+	days = 40
+	value = 1
+}
+
+activate_mission = BRA_the_1938_elections
+activate_mission = BRA_vargas_measure_for_dictatorship
+
+set_variable = { BRA_cost_to_stop_commies = 25 }
+
+set_variable = { BRA_chance_for_compromise = 0 }
+set_variable = { BRA_chance_for_no_compromise = 100 }
+
+#Coffee mechanic
+set_variable = { BRA_dependency_on_coffee = 55 }
+set_variable = { BRA_coffee_companies_opinion = 0 }
+496 = {
+	add_dynamic_modifier = { modifier = BRA_widespread_coffee_plantations }
+}
+501 = {
+	add_dynamic_modifier = { modifier = BRA_widespread_coffee_plantations }
+}
+943 = {
+	add_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+}
+500 = {
+	add_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+}
+499 = {
+	add_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+}
+BRA_set_dependency_on_coffee_idea = yes
+BRA_update_opinion_variable = yes
+
+
+#Setting up Communist subversive activity
+498 = {
+	add_dynamic_modifier = { modifier = BRA_subversive_communist_activity_in_state }
+}
+936 = {
+	add_dynamic_modifier = { modifier = BRA_subversive_communist_activity_in_state }
+}
+500 = {
+	add_dynamic_modifier = { modifier = BRA_subversive_communist_activity_in_state }
+}
+BRA_setting_up_subversive_communist_activity = yes
+### 1 - low  |  2 - medium  |  3 - high  |  4 - very high ###
+# Sets up the level of subversive activity (is dependent on number of states with the subversive activity modifier) #
+
+set_variable = { BRA_times_spies_were_sent_to_counter = 0 }
+
+set_variable = { BRA_cost_to_take_fascist_advisors = 100 }
+
+#Brazilian Economy
+set_variable = { BRA_civilian_factory_boost = 0.00 }
+set_variable = { BRA_military_factory_boost = 0.00 }
+set_variable = { BRA_dockyard_construction_boost = 0.00 }
+set_variable = { BRA_industrial_capacity_factory_speed = 0.00 }
+set_variable = { BRA_industrial_capacity_dockyard_speed = 0.00 }
+set_variable = { BRA_infrastructure_construction_speed = 0.00 }
+set_variable = { BRA_railway_construction_speed = 0.00 }
+set_variable = { BRA_supply_node_construction_speed = 0.00 }
+
+#Monarchist States
+set_variable = { BRA_monarchist_states = 0 }
+set_variable = { BRA_monarchist_support = 0 }
+
+#Costs for economy decisions
+set_variable = { BRA_cost_for_civ_boost = 75 }
+set_variable = { BRA_amount_cost_increase_civ = 75 }
+set_variable = { BRA_cost_for_mil_boost = 75 }
+set_variable = { BRA_amount_cost_increase_mil = 75 }
+set_variable = { BRA_cost_for_dock_boost = 70 }
+set_variable = { BRA_amount_cost_increase_dock = 70 }
+set_variable = { BRA_cost_for_infrastructure = 65 }
+set_variable = { BRA_amount_cost_increase_infra = 65 }
+set_variable = { BRA_cost_to_invest_in_railway_construction = 60 }
+set_variable = { BRA_increase_railway_cost_amount = 60 }
+
+
+#Brazilian Politics
+set_variable = { BRA_vargas_influence = 43 }
+BRA_initiate_balance_of_power = yes
+set_variable = { BRA_days_to_make_progress = 45 }      #Both of these will influence each other
+set_variable = { BRA_playing_as_vargas = 1 } #1 = true  0 = false
+set_variable = { BRA_playing_as_integralists = 0 } #1 = true  0 = false
+set_variable = { BRA_playing_as_congress = 0 } #1 = true  0 = false
+set_variable = { BRA_playing_as_communists = 0 }  #1 = true  0 = false
+set_variable = { BRA_congress_influence = 26 }
+set_variable = { BRA_integralist_influence = 24 }
+set_variable = { BRA_number_of_states_integralist_protesting = 0 }
+
+set_variable = { BRA_progress_to_a_civil_war = 0 } #Integralist / Congress route
+
+set_variable = { BRA_communist_civil_war_strength = 0.1 } #Communist Civil War Strength
+set_variable = { BRA_integralist_civil_war_strength = 0.2 } #Integralist Civil War Strength
+
+set_variable = { BRA_cost_to_disband_the_police_force = 20 } #will increase the more you increase your police brutality
+
+#Cost to deal with protestors
+set_variable = { BRA_cost_to_deal_with_protestors = 25 }
+set_variable = { BRA_manpower_cost_to_deal_with_protestors = -750 }
+
+#Progress to shutting down congress (will be available for historical Vargas path and post civil war Integralist and Imperialist)
+set_variable = { BRA_progress_to_destroy_congress = 0 }
+
+#This is for historical path / post civil war path
+set_variable = { BRA_penalty_for_no_active_congress = 0.20 }
+
+#These are when the player chooses to go imperialist or Portugal influences imperialism in Brazil
+set_variable = { BRA_imperial_influence = 0 }
+set_variable = { BRA_playing_as_imperialists = 0 } #1 = true  0 = false
+
+#Rapid Army Expansion
+set_variable = { BRA_army_expansion_conscription = 0.01 }
+set_variable = { BRA_army_expansion_stability = 0.00 }
+set_variable = { BRA_cost_to_improve_conscription = 40 }
+
+#This is for the dynamic modifier
+set_variable = { BRA_crisis_stability_factor = -0.25 }
+set_variable = { BRA_crisis_political_factor = -0.2 }
+set_variable = { BRA_crisis_advisor_cost = 0.2 }
+set_variable = { BRA_crisis_integralist_influence = 0 }
+set_variable = { BRA_crisis_vargas_influence = 0 }
+set_variable = { BRA_crisis_congress_influence = 0 }
+BRA_set_up_political_crisis = yes
+
+set_country_flag = BRA_active_congress
+set_country_flag = BRA_hostile_congress
+set_country_flag = BRA_neutral_integralists
+set_country_flag = BRA_hostile_communists
+
+#Post Civil War Resistance Mechanic
+set_variable = { BRA_post_civil_war_stabilitty = 0 }
+set_variable = { BRA_post_civil_war_pp = 0 }
+set_variable = { BRA_post_civil_war_buildings = 0 }
+set_variable = { BRA_post_civil_war_infrastructure = 0 }
+set_variable = { BRA_post_civil_war_rail_way = 0 }
+
+hidden_effect = { #National Spirit
+	add_dynamic_modifier = { modifier = BRA_brazilian_political_crisis }
+}
+
+### DYNAMIC COUNTRIES ###
+create_dynamic_country = {
+	original_tag = BRA
+	set_country_flag = BRA_imperial_brazil
+	set_politics = {
+		ruling_party = neutrality
+	}
+	set_cosmetic_tag = BRI_UNIFIED
+	set_research_slots = 4
+	reserve_dynamic_country = yes
+}
+
+create_dynamic_country = {
+	original_tag = BRA
+	set_country_flag = BRA_united_states_of_brazil
+	set_politics = {
+		ruling_party = democratic
+	}
+	set_cosmetic_tag = BRA_USA_UNIFIED
+	set_research_slots = 4
+	reserve_dynamic_country = yes
+}
+
+create_dynamic_country = {
+	original_tag = BRA
+	set_country_flag = BRA_communist_brazil
+	set_politics = {
+		ruling_party = communism
+	}
+	set_cosmetic_tag = BRA_COMMUNIST
+	set_research_slots = 4
+	reserve_dynamic_country = yes
+}
+
+create_dynamic_country = {
+	original_tag = BRA
+	set_country_flag = BRA_integralist_brazil
+	set_politics = {
+		ruling_party = fascism
+	}
+	set_cosmetic_tag = BRA_FASCIST
+	set_research_slots = 4
+	reserve_dynamic_country = yes
+}
+
+BRC = {
+	load_focus_tree = brazil_focus
+	add_ideas = USA_monroe_doctrine_idea
+}
+BZE = {
+	load_focus_tree = brazil_focus
+	add_ideas = USA_monroe_doctrine_idea
+}
+IBR = {
+	load_focus_tree = brazil_focus
+	add_ideas = USA_monroe_doctrine_idea
+}
+BUS = {
+	add_ideas = USA_monroe_doctrine_idea
+}
+
+BRC = {
+	set_variable = { BRA_chance_for_compromise = 0 }
+	set_variable = { BRA_chance_for_no_compromise = 100 }
+}
+
+promote_character = EUYL_BRA_getulio_vargas
+
+BRA = {
+	every_controlled_state = {
+		remove_core_of = BZE
+		remove_core_of = BUS
+		remove_core_of = BRC
+		remove_core_of = IBR
+	}
+}
+
+### SETTING UP CHARACTERS ###
+BRA_emilio_garratzu = {
+	set_character_flag = BRA_integralist
+}
+BRA_pedro_gastao_orleans = {
+	set_character_flag = BRA_imperialist
+}
+BRA_infantry_military_imperial_council = {
+	set_character_flag = BRA_imperialist
+}
+BRA_army_regrouping_military_imperial_council = {
+	set_character_flag = BRA_imperialist
+}
+BRA_concealment_military_imperial_council = {
+	set_character_flag = BRA_imperialist
+}
+BRA_naval_strike_aviation_imperial_council = {
+	set_character_flag = BRA_imperialist
+}
+BRA_close_air_support_aviation_imperial_council = {
+	set_character_flag = BRA_imperialist
+}
+BRA_logistics_naval_imperial_council = {
+	set_character_flag = BRA_imperialist
+}
+BRA_anti_submarine_naval_imperial_council = {
+	set_character_flag = BRA_imperialist
+}
+EUYL_BRA_jose_americo_de_almeida = {
+	BRA_neutral_character = yes
+}
+BRA_joao_mangabeira = {
+	BRA_neutral_character = yes
+}
+BRA_basil_do_santos = {
+	set_character_flag = BRA_communist
+}
+BRA_infantry_military_council = {
+	set_character_flag = BRA_communist
+}
+BRA_army_regrouping_military_council = {
+	set_character_flag = BRA_communist
+}
+BRA_concealment_military_council = {
+	set_character_flag = BRA_communist
+}
+BRA_naval_strike_aviation_council = {
+	set_character_flag = BRA_communist
+}
+BRA_close_air_support_aviation_council = {
+	set_character_flag = BRA_communist
+}
+BRA_logistics_naval_council = {
+	set_character_flag = BRA_communist
+}
+BRA_anti_submarine_naval_council = {
+	set_character_flag = BRA_communist
+}
+EUYL_BRA_washington_luis_pereira = {
+	set_character_flag = BRA_living_in_the_exterior
+	set_character_flag = BRA_congress_supporter
+}
+BRA_dom_pedro_iii = {
+	set_character_flag = BRA_living_in_the_exterior
+	set_character_flag = BRA_imperialist
+}
+EUYL_BRA_plinio_salgado = {
+	set_character_flag = BRA_integralist
+}
+EUYL_BRA_gustavo_barroso = {
+	set_character_flag = BRA_integralist
+}
+BRA_antonio_alves_camara = {
+	set_character_flag = BRA_vargas_supporter
+}
+BRA_moyses_chahon = {
+	set_character_flag = BRA_congress_supporter
+}
+EUYL_BRA_luis_carlos_prestes = {
+	set_character_flag = BRA_communist
+}
+EUYL_BRA_mascarenhas_de_morais = {
+	set_character_flag = BRA_vargas_supporter
+}
+BRA_mascarenhas_de_morais_advisor = {
+	set_character_flag = BRA_vargas_supporter
+}
+BRA_congresso_do_brasil = {
+	set_character_flag = BRA_congress_supporter #its literally the congress itself lmao
+}
+EUYL_BRA_afranio_de_mello_franco = {
+	set_character_flag = BRA_congress_supporter
+}
+BRA_ewert_arthur = {
+	set_character_flag = BRA_communist
+	set_character_flag = BRA_imprisoned
+}
+BRA_benedito_valadares = {
+	set_character_flag = BRA_vargas_supporter
+}
+EUYL_BRA_augusto_rademaker = {
+	set_character_flag = BRA_integralist
+}
+BRA_santiago_daltas = {
+	set_character_flag = BRA_integralist
+}
+EUYL_BRA_salgado_filho = {
+	set_character_flag = BRA_communist
+}
+EUYL_BRA_aristides_guilhem = {
+	BRA_neutral_character = yes
+}
+BRA_fabio_de_sa_earp = {
+	BRA_neutral_character = yes
+}
+BRA_bertoldo_klinger = {
+	BRA_neutral_character = yes
+}
+EUYL_BRA_artur_da_costa_e_silva = {
+	set_character_flag = BRA_integralist #while not a direct supporter, he did support the dictatorship that occured in the 60s
+	set_character_flag = BRA_imperialist
+}
+BRA_francisco_morato = {
+	set_character_flag = BRA_communist
+}
+EUYL_BRA_filinto_muller = {
+	set_character_flag = BRA_integralist
+	set_character_flag = BRA_vargas_supporter #he was both a nazi sympathizer and a co-founder of a pro-Vargas idea
+}
+EUYL_BRA_ismael_motta_paes = {
+	BRA_neutral_character = yes
+}
+BRA_juscelino_kubitschek = {
+	set_character_flag = BRA_vargas_supporter
+}
+BRA_joao_cafe_filho = {
+	BRA_neutral_character = yes
+}
+EUYL_BRA_osvaldo_aranha = {
+	set_character_flag = BRA_congress_supporter
+}
+BRA_rui_moreira_lima = {
+	BRA_neutral_character = yes
+}
+BRA_juarez_tavora = {
+	set_character_flag = BRA_imperialist
+}
+BRA_olimpio_mourao_filho = {
+	set_character_flag = BRA_integralist
+}
+BRA_carlos_marighella = {
+	set_character_flag = BRA_communist
+}
+BRA_samuel_kicis = {
+	BRA_neutral_character = yes
+}
+BRA_ernesto_geisel = {
+	set_character_flag = BRA_vargas_supporter
+}
+BRA_sylvio_frota = {
+	BRA_neutral_character = yes
+}
+BRA_joao_figueiredo = {
+	set_character_flag = BRA_congress_supporter
+}
+BRA_golbery_do_couto_e_silva = {
+	set_character_flag = BRA_integralist
+}
+BRA_armando_sales = {
+	set_character_flag = BRA_congress_supporter
+}
+EUYL_BRA_eurico_gaspar_dutra = {
+	set_character_flag = BRA_vargas_supporter
+}
+EUYL_BRA_getulio_vargas = {
+	set_character_flag = BRA_vargas_supporter #like congress, its vargas himself
+}
+EUYL_BRA_eduardo_gomes = {
+	set_character_flag = BRA_imperialist #while most likely not an actual imperialist supporter, he was against Vargas and I need more imperialist cabinet members :/
+}
+BRA_adalberto_pereira_do_santos = {
+	BRA_neutral_character = yes
+}
+BRA_aurelio_de_lira_traves = {
+	set_character_flag = BRA_integralist #he served under Rademaker, an openly integralist politician
+}
+EUYL_BRA_pedro_alcantrara = {
+	set_character_flag = BRA_imperialist
+}
+BRA_empress_maria_elisabeth = {
+	set_character_flag = BRA_imperialist
+}
+
+
+# Starting tech
+set_technology = {
+	infantry_weapons = 1
+	tech_support = 1
+	tech_engineers = 1
+	tech_trucks = 1
+	gw_artillery = 1
+	interwar_antiair = 1
+	basic_train = 1
+}
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+	set_air_oob = "BRA_1936_air_bba"
+	set_technology = {
+		iw_small_airframe = 1
+		aa_lmg = 1
+		engines_1 = 1
+		early_bombs = 1
+	}
+	else = {
+		set_air_oob = "BRA_1936_air_legacy"
+		set_technology = {
+			early_fighter = 1
+			CAS1 = 1
+		}
+	}
+}
+if = {
+	limit = {
+		has_dlc = "By Blood Alone"
+	}
+	create_equipment_variant = {
+		name = "F4B" #
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Avro 504" #
+		type = small_plane_cas_airframe_0
+		modules = {
+			fixed_main_weapon_slot = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		obsolete = yes
+	}
+}
+if = {
+	limit = {
+		not = { has_dlc = "Man the Guns"}
+	}
+	set_technology = {
+		early_submarine = 1
+		early_destroyer = 1
+		early_light_cruiser = 1
+		early_heavy_cruiser = 1
+		early_battleship = 1
+		transport = 1
+	}
+	set_naval_oob = "BRA_1936_naval_legacy"
+}
+if = {
+	limit = { has_dlc = "Man the Guns"}
+	set_technology = {
+		basic_naval_mines = 1
+		submarine_mine_laying = 1
+		early_ship_hull_submarine = 1
+		basic_ship_hull_submarine = 1
+		early_ship_hull_light = 1
+		early_ship_hull_cruiser = 1
+		early_ship_hull_heavy = 1
+		basic_battery = 1
+		basic_torpedo = 1
+		mtg_transport = 1
+	}
+	set_naval_oob = "BRA_1936_naval"
+}
+set_country_flag = monroe_doctrine
+
+set_politics = {
+	ruling_party = neutrality
+	last_election = "1934.7.17"
+	election_frequency = 42
+	elections_allowed = yes
+}
+
+set_popularities = {
+	neutrality = 42
+	democratic = 24
+	fascism = 29
+	communism = 5
+
+}
+
+set_research_slots = 4
+set_convoys = 40
+
+
+if = {
+	limit = {
+		has_dlc = "Man the Guns"
+	}
+	create_equipment_variant = {
+		name = "Minas Geras Class"
+		type = ship_hull_heavy_1
+		name_group = BRA_BB_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_heavy_battery_1
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = heavy_ship_engine_1
+			fixed_ship_secondaries_slot = ship_secondaries_1
+			fixed_ship_armor_slot = ship_armor_bb_1
+			front_1_custom_slot = empty
+			mid_1_custom_slot = ship_secondaries_1
+			mid_2_custom_slot = ship_secondaries_1
+			rear_1_custom_slot = ship_heavy_battery_1
+		}
+	}
+	create_equipment_variant = {
+		name = "Bahia Class"
+		type = ship_hull_cruiser_1
+		name_group = BRA_CL_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = cruiser_ship_engine_1
+			mid_1_custom_slot = empty
+			mid_2_custom_slot = ship_light_battery_1
+			rear_1_custom_slot = empty
+		}
+	}
+	create_equipment_variant = {
+		name = "Para Class"
+		type = ship_hull_light_1
+		name_group = BRA_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = empty
+			rear_1_custom_slot = empty
+		}
+		obsolete = yes
+	}
+	create_equipment_variant = {
+		name = "Humaytá Class"
+		type = ship_hull_submarine_2
+		name_group = BRA_SS_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_torpedo_slot = ship_torpedo_sub_1
+			fixed_ship_engine_slot = sub_ship_engine_2
+			rear_1_custom_slot = ship_mine_layer_sub
+		}
+	}
+}
+
+# 1939 Start #

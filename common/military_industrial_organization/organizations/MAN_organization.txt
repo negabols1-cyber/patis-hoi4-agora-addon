@@ -1,0 +1,143 @@
+#####################
+
+###  ##  #  # # #  ## 
+ #  #  # ## # # # #   
+ #  #### # ## ##   #  
+ #  #  # #  # # #   # 
+ #  #  # #  # # # ## 
+
+ #################### 
+MAN_dowa_automobile_company_tank_organization = {
+	include = generic_infantry_tank_organization
+	icon = GFX_idea_generic_tank_manufacturer_3
+	allowed = {	
+		original_tag = MAN
+	}
+}
+
+
+#####################
+
+ ## #  # ### ###   ## 
+#   #  #  #  #  # #   
+ #  ####  #  ###   #  
+  # #  #  #  #      # 
+##  #  # ### #    ##  
+ 
+#####################
+
+
+
+###########################
+
+###  #    ##  #  # ###  ## 
+#  # #   #  # ## # #   #   
+###  #   #### # ## ##   #  
+#    #   #  # #  # #     # 
+#    ### #  # #  # ### ##  
+
+###########################
+MAN_mamc_organization = {
+	include = generic_light_aircraft_organization
+	icon = GFX_idea_generic_air_manufacturer_1
+	
+	allowed = {	
+		original_tag = MAN
+		NOT = { has_dlc = "Waking the Tiger" }
+	}
+
+	available = {
+		owner = {
+			714 = { 
+				controller = {
+					OR = { 
+						tag = ROOT
+						has_subject = ROOT
+					}
+				}
+			}
+		}
+	}
+}
+
+MAN_mamc_light_organization = {
+	include = generic_light_aircraft_organization
+	icon = GFX_idea_generic_air_manufacturer_1
+	allowed = {	
+		original_tag = MAN
+		has_dlc = "Waking the Tiger"
+	}
+
+	available = {
+		owner = { 
+			custom_trigger_tooltip = {
+				tooltip = MAN_has_completed_mamc_focus_tt
+				OR = {
+					has_completed_focus = MAN_mamc 
+					has_completed_focus = MAN_tsr_mamc 
+				}
+			}
+		}
+	}
+}
+
+MAN_mamc_medium_organization = {
+	include = generic_medium_aircraft_organization
+	icon = GFX_idea_generic_air_manufacturer_1
+	allowed = {	
+		original_tag = MAN
+		has_dlc = "Waking the Tiger"
+	}
+
+	available = {
+		owner = { 
+			custom_trigger_tooltip = {
+				tooltip = MAN_has_completed_mamc_focus_tt
+				OR = {
+					has_completed_focus = MAN_mamc 
+					has_completed_focus = MAN_tsr_mamc 
+				}
+			}
+		}
+	}
+}
+
+MAN_mamc_heavy_organization = {
+	include = generic_heavy_aircraft_organization
+	icon = GFX_idea_generic_air_manufacturer_1
+	allowed = {	
+		original_tag = MAN
+		has_dlc = "Waking the Tiger"
+	}
+
+	available = {
+		owner = { 
+			custom_trigger_tooltip = {
+				tooltip = MAN_has_completed_mamc_focus_tt
+				OR = {
+					has_completed_focus = MAN_mamc 
+					has_completed_focus = MAN_tsr_mamc 
+				}
+			}
+		}
+	}
+}
+
+
+################################### 
+
+#   #  ##  ### ### ###  ### ### #   
+## ## #  #  #  #   #  #  #  #   #   
+# # # ####  #  ##  ###   #  ##  #   
+#   # #  #  #  #   #  #  #  #   #   
+#   # #  #  #  ### #  # ### ### ### 
+
+
+###################################
+MAN_dowa_automobile_company_organization = {
+	include = generic_motorized_mechanized_organization
+	icon = GFX_idea_generic_motorized_equipment_manufacturer_3
+	allowed = {	
+		always = no
+	}
+}

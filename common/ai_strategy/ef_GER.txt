@@ -1,0 +1,680 @@
+GER_on_start = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		OR = {
+			NOT = { has_tech = basic_medium_tank_chassis }
+			NOT = { has_tech = dispersed_industry }
+			NOT = { has_tech = construction1 }
+			NOT = { has_tech = basic_machine_tools }
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_machine_tools
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = dispersed_industry
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_tech
+		id = dispersed_industry
+		value = 5000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = construction1
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_medium_tank_chassis
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_tech
+		id = basic_medium_tank_chassis
+		value = 9999
+	}
+}
+GER_focus_on_europe1234 = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		is_historical_focus_on = yes
+		date < 1940.6.15
+		NOT = {
+			date > 1941.5.16
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = area_priority
+		id = asia
+		value = -200
+	}
+	ai_strategy = {
+		type = area_priority
+		id = africa
+		value = -200
+	}
+}
+GER_1936_techs = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+
+		date > 1936.3.1
+		OR = {
+			has_tech = concentrated_industry
+			has_tech = dispersed_industry
+		}
+		OR = {
+			NOT = { has_tech = interwar_antitank }
+			NOT = { has_tech = range_improvements }
+			NOT = { has_tech = mechanical_computing }
+			NOT = { has_tech = sp_armored_engineer_tech }
+			NOT = { has_tech = sp_armored_maintenance_tech }
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = sp_armored_engineer_tech
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = sp_armored_maintenance_tech
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = interwar_antitank
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = range_improvements
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = mechanical_computing
+		value = 9999
+	}
+}
+GER_1938_techs = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+
+		date > 1937.10.1
+		OR = {
+			NOT = { has_tech = computing_machine }
+			NOT = { has_tech = support_weapons2 }
+			NOT = { has_tech = infantry_weapons2 }
+			NOT = { has_tech = cavity_magnatron }
+			NOT = { has_tech = improved_radio }
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = computing_machine
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = support_weapons2
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = infantry_weapons2
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = cavity_magnatron
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_radio
+		value = 9999
+	}
+}
+GER_39_art_tech = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+
+		date > 1938.11.1
+		NOT = {
+			has_tech = artillery1
+			has_tech = antitank1
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = artillery1
+		value = 9999
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = antitank1
+		value = 9999
+	}
+}
+GER_40_antitank_tech = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+
+		date > 1939.11.1
+		NOT = {
+			has_tech = antitank2
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = antitank2
+		value = 9999
+	}
+}
+GER_armor_accessory_tech = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		OR = {
+			has_tech = concentrated_industry2
+			has_tech = dispersed_industry2
+		}
+		NOT = {
+			has_tech = armor_tech_1
+			has_tech = armor_tech_2
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_tech
+		id = armor_tech_1
+		value = 999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = armor_tech_1
+		value = 999
+	}
+	ai_strategy = {
+		type = research_tech
+		id = armor_tech_2
+		value = 999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = armor_tech_2
+		value = 999
+	}
+}
+GER_mech = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		OR = {
+			has_completed_focus = GER_panzergrenadier
+			date > 1939.11.1
+		}
+		NOT = { has_tech = mechanised_infantry }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = mechanised_infantry
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_tech
+		id = mechanised_infantry
+		value = 9999
+	}
+}
+GER_radio = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		NOT = {
+			has_tech = radio
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = radio
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_tech
+		id = radio
+		value = 9999
+	}
+}
+#lutfen al
+GER_ucak_ucak = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		is_historical_focus_on = yes
+		NOT = {
+			has_idea = industry_liasons_spirit
+		}
+		OR = {
+			has_game_rule = {
+				rule = GER_ai_behavior
+				option = DEFAULT
+			}
+			has_game_rule = {
+				rule = GER_ai_behavior
+				option = FASCIST
+			}
+			has_country_flag = GER_AI_RANDOM_FASCIST
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = air_xp_spend_priority
+		id = air_force_spirit
+		value = 100
+	}
+}
+GER_plane = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+
+		OR = {
+			has_completed_focus = GER_aeronautical_research_institute
+			date > 1939.10.1
+		}
+		OR = {
+			NOT = { has_tech = improved_small_airframe }
+			NOT = { has_tech = engines_3 }
+			NOT = { has_tech = survivability_studies }
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_tech
+		id = improved_small_airframe
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_small_airframe
+		value = 9999
+	}
+
+	ai_strategy = {
+		type = research_tech
+		id = engines_3
+		value = 9999
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = engines_3
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = survivability_studies
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = survivability_studies
+		value = 3000
+	}
+
+}
+GER_improved_medium_tank = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+
+		OR = {
+			date > 1939.10.1
+			has_completed_focus = GER_adopt_new_panzer_doctrine
+		}
+		NOT = { has_tech = improved_medium_tank_chassis }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_medium_tank_chassis
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_tech
+		id = improved_medium_tank_chassis
+		value = 9999
+	}
+}
+####
+GER_train_inf = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_army
+		id = infantry
+		value = 250
+	}
+}
+####
+GER_europe_is_our_priority  = {
+	allowed = {
+		original_tag = GER
+	}
+
+	enable = {
+		OR = {
+			NOT = { is_in_faction_with = SOV }
+			has_war_with = SOV
+		}
+		OR = {
+			AND = {
+				has_war_with = FRA
+				FRA = { has_capitulated = no }
+			}
+			has_completed_focus = GER_danzig_or_war
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = "AOI"
+		value = 100
+	}
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = "ITA"
+		value = 100
+	}
+
+	ai_strategy = {
+		type = area_priority
+		id = europe
+		value = 200
+	}
+
+	ai_strategy = {
+		type = area_priority
+		id = africa
+		value = -200
+	}
+
+}
+#production
+GER_mechanized_equipment_production = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+
+		has_tech = mechanised_infantry
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = mechanized_equipment
+		value = 15
+	}
+}
+GER_mechanized_equipment_production2 = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		date > 1941.1.1
+		has_tech = mechanised_infantry
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = mechanized_equipment
+		value = 5
+	}
+}
+GER_armored_engineer = {
+	enable = {
+
+		is_special_project_completed = sp:sp_land_military_engineering_vehicles
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = armored_support_vehicle
+		value = 3
+	}
+}
+GER_infantry= { #yanlışlıkla allowed koymamışım ama bunun şuanlık sorun oluşturacağını düşünmüyorum #hatta iyi
+	enable = {
+		date >1940.6.15
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype #Build these up over time, don't stall
+		id = infantry_equipment
+		value = 5
+	}
+
+}
+GER_1941_production = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		date > 1941.1.1
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype #Build these up over time, don't stall
+		id = anti_tank_equipment
+		value = 4
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = artillery_equipment
+		value = 3
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype
+		id = support_equipment
+		value = 3
+	}
+}
+#AGENCY
+GER_collaboration_on_POL = {
+	allowed = {
+		original_tag = GER
+	}
+
+	enable = {
+		date < 1941.1.1
+		POL = {
+			exists = yes
+			has_capitulated = no
+			NOT = { is_ally_with = GER }
+		}
+	}
+
+	abort = {
+		num_finished_operations = {
+			operation = operation_collaboration_government
+			target = POL
+			value > 1
+		}
+	}
+
+	ai_strategy = {
+		type = operative_operation
+		operation = operation_collaboration_government
+		value = 9999
+		operation_target = POL
+	}
+
+	ai_strategy = {
+		type = operative_mission
+		mission = build_intel_network
+		value = 2000
+		state = 10
+		num_operatives = 1
+		mission_target = POL
+	}
+	ai_strategy = {
+		type = operative_mission
+		mission = build_intel_network
+		value = 2000
+		state = 85
+		num_operatives = 1
+		mission_target = POL
+	}
+}
+GER_collaboration_on_FRA = {
+	allowed = {
+		original_tag = GER
+	}
+
+	enable = {
+		date < 1941.1.1
+		FRA = {
+			exists = yes
+			has_capitulated = no
+			NOT = { is_ally_with = GER }
+		}
+	}
+
+	abort = {
+		num_finished_operations = {
+			operation = operation_collaboration_government
+			target = FRA
+			value > 1
+		}
+	}
+
+	ai_strategy = {
+		type = operative_operation
+		operation = operation_collaboration_government
+		value = 5000
+		operation_target = FRA
+	}
+
+	ai_strategy = {
+		type = operative_mission
+		mission = build_intel_network
+		value = 1000
+		state = 29
+		num_operatives = 1
+		mission_target = FRA
+	}
+	ai_strategy = {
+		type = operative_mission
+		mission = build_intel_network
+		value = 1000
+		state = 16
+		num_operatives = 1
+		mission_target = FRA
+	}
+}
+GER_collaboration_on_SOV = {
+	allowed = {
+		original_tag = GER
+	}
+
+	enable = {
+		date > 1940.3.1
+		has_government = fascism
+		SOV = {
+			is_ai = no
+			exists = yes
+			has_capitulated = no
+			NOT = { is_ally_with = GER }
+		}
+		num_finished_operations = {
+			operation = operation_collaboration_government
+			target = SOV
+			value < 3
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = operative_operation
+		operation = operation_collaboration_government
+		value = 9999
+		operation_target = SOV
+	}
+
+	ai_strategy = {
+		type = operative_mission
+		mission = build_intel_network
+		value = 1000
+		mission_target = SOV
+	}
+}

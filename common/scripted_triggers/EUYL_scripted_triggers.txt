@@ -1,0 +1,335 @@
+#scripted triggers for latin america
+
+guerra_defensiva_contra_europa = {
+	ROOT = {
+		has_defensive_war = yes
+		any_enemy_country = {
+			capital_scope = {
+				is_on_continent = europe
+			}
+		}
+	}
+}
+
+COL_is_laureanist_state = {
+	custom_trigger_tooltip = {
+		tooltip = COL_is_laureanist_state_tt
+
+		#COL_laureanist_agitation
+
+		#306 - Cundinamarca
+		#486 - Meta
+		#932 - Caquetá
+		#928 - Nariño
+		#927 - Antioquia
+		#493 - Magdalena
+		#929 - Arauca
+
+		OR = {
+			AND = {
+				state = 306
+				has_dynamic_modifier = { modifier = COL_laureanist_agitation }
+			}
+			AND = {
+				state = 486
+				has_dynamic_modifier = { modifier = COL_laureanist_agitation }
+			}
+			AND = {
+				state = 493
+				has_dynamic_modifier = { modifier = COL_laureanist_agitation }
+			}
+		}
+	}
+}
+
+ARG_fm_monopoly = {
+	custom_trigger_tooltip = {
+		tooltip = ARG_fm_is_a_monopoly_tt
+		AND = {
+			has_idea = ARG_fm_air
+			has_idea = ARG_fm
+			has_idea = ARG_fm_material
+		}
+	}
+}
+
+BRA_isnt_industrializing_economy = {
+	custom_trigger_tooltip = {
+		tooltip = BRA_not_industrializing_tt
+		NOT = {
+			OR = {
+				has_idea = rural_economy
+				has_idea = semi_rural_economy
+				has_idea = industrializing_economy
+			}
+		}
+	}
+}
+
+BRA_coffee_plantations_active = {
+	OR = {
+		has_idea = BRA_very_slight_dependency_on_coffee
+		has_idea = BRA_slight_dependency_on_coffee
+		has_idea = BRA_dependent_on_coffee
+		has_idea = BRA_very_dependent_on_coffee
+		has_idea = BRA_extremely_dependent_on_coffee
+	}
+}
+
+ARG_is_suffering_from_inflation = {
+	custom_trigger_tooltip = {
+		tooltip = ARG_suffering_inflationary_crisis_tt
+		OR = {
+			has_idea = ARG_inflation_1
+			has_idea = ARG_inflation_2
+			has_idea = ARG_inflation_3
+			has_idea = ARG_inflation_4
+			has_idea = ARG_inflation_5
+			has_idea = ARG_inflation_6
+			has_idea = ARG_inflation_7
+			has_idea = ARG_inflation_8
+			has_idea = ARG_inflation_9
+			has_idea = ARG_inflation_10
+		}
+	}
+}
+
+PBC_check_for_war_focus = {
+	if = {
+		limit = {
+			COL = {
+				has_completed_focus = COL_revivir_la_confederacion
+			}
+		}
+		OR = {
+			has_civil_war = yes
+			has_war_with = BOL
+			has_war_with = PRU
+		}
+	}
+	else = {
+		OR = {
+			has_war_with = CHL
+			has_war_with = ARG
+			has_war_with = ECU
+			has_war_with = COL
+		}
+	}
+}
+
+BRA_is_the_commune_of_brazil = {
+	custom_trigger_tooltip = {
+		tooltip = BRA_is_commune_of_brasil_tt
+		tag = BRC
+	}
+}
+BRA_is_NOT_the_empire_of_brazil = {
+	custom_trigger_tooltip = {
+		tooltip = BRA_not_empire_of_brasil_tt
+		NOT = {
+			OR = {
+				has_cosmetic_tag = BRA_TEMPORARY_MONARCHIST_STATE
+				has_cosmetic_tag = BRA_SECOND_EMPIRE
+				has_cosmetic_tag = KPB_kingdom_portugal_and_brazil
+			}
+		}
+	}
+}
+
+BRA_is_the_empire_of_brazil = {
+	custom_trigger_tooltip = {
+		tooltip = BRA_is_the_empire_of_brazil_tt
+		OR = {
+			has_cosmetic_tag = BRA_TEMPORARY_MONARCHIST_STATE
+			has_cosmetic_tag = BRA_SECOND_EMPIRE
+			has_cosmetic_tag = KPB_kingdom_portugal_and_brazil
+		}
+	}
+}
+
+BRA_an_emperor_has_been_chosen = {
+	custom_trigger_tooltip = {
+		tooltip = BRA_an_emperor_has_been_chosen_tt
+		OR = {
+			has_completed_focus = BRA_emperor_pedro_gastao
+			has_completed_focus = BRA_emperor_pedro_henrique
+			has_completed_focus = BRA_empress_maria_elisabeth_focus
+			has_completed_focus = BRA_emperor_pedro_alcantara
+		}
+	}
+}
+
+ARG_check_if_ps_dominant = {
+	AND = {
+		check_variable = { ARG_ps_subversive_influence > ARG_marxist_subversive_influence }
+		check_variable = { ARG_ps_subversive_influence > ARG_posadist_subversive_influence }
+	}
+}
+
+ARG_check_if_marxism_dominant = {
+	AND = {
+		check_variable = { ARG_marxist_subversive_influence > ARG_ps_subversive_influence }
+		check_variable = { ARG_marxist_subversive_influence > ARG_posadist_subversive_influence }
+	}
+}
+
+ARG_check_if_posadist_dominant = {
+	AND = {
+		check_variable = { ARG_posadist_subversive_influence > ARG_marxist_subversive_influence }
+		check_variable = { ARG_posadist_subversive_influence > ARG_ps_subversive_influence }
+	}
+}
+
+ARG_is_the_argentine_confederation = {
+	custom_trigger_tooltip = {
+		tooltip = ARG_is_the_confederation_tt
+		OR = {
+			has_cosmetic_tag = ARCC
+			has_cosmetic_tag = ARG_greater_confederation
+		}
+		NOT = { has_active_mission = ARG_federlist_takeover }
+		has_country_leader = {
+			character = ARG_leopoldo_lugones_federal
+			ruling_only = yes
+		}
+	}
+}
+
+PAR_marched_in_every_state = {
+	custom_trigger_tooltip = {
+		tooltip = PAR_marched_in_every_state_tt
+		301 = { has_state_flag = PAR_marched_in_FROM_flag }
+		688 = { has_state_flag = PAR_marched_in_FROM_flag }
+	}
+}
+
+EUYL_every_SA_country_same_ideology_as_you ={
+	custom_trigger_tooltip = {
+		tooltip = EUYL_every_SA_country_same_ideology_as_you_tt
+		NOT = {
+			any_other_country = {
+				capital_scope = { is_on_continent = south_america }
+				NOT = { has_government = ROOT }
+			}
+		}
+	}
+}
+
+PAR_active_public_concern = {
+	OR = {
+		has_idea = PAR_public_concern_1
+		has_idea = PAR_public_concern_2
+		has_idea = PAR_public_concern_3
+		has_idea = PAR_public_concern_4
+		has_idea = PAR_public_concern_5
+	}
+}
+
+### VEN ###
+
+# VEN_abrupt_government_transition_active = {
+	# 	OR = {
+		# 		has_idea = VEN_abrupt_government_transition_1
+		# 		has_idea = VEN_abrupt_government_transition_2
+		# 		has_idea = VEN_abrupt_government_transition_3
+		# 		has_idea = VEN_abrupt_government_transition_4
+		# 	}
+	# }
+
+# VEN_has_negative_oil_extraction_state = {
+	# 	FROM = {
+		# 		is_fully_controlled_by = ROOT
+		# 		OR = {
+			# 			has_dynamic_modifier = { modifier = VEN_inefficient_oil_extraction_1 }
+			# 			has_dynamic_modifier = { modifier = VEN_inefficient_oil_extraction_2 }
+			# 			has_dynamic_modifier = { modifier = VEN_inefficient_oil_extraction_3 }
+			# 		}
+		# 	}
+	# }
+
+# VEN_our_side_active = {
+	# 	VEN = { has_any_power_balance = yes }
+	# 	if = {
+		# 		limit = { original_tag = GER }
+		# 		VEN = {
+			# 			is_power_balance_side_active = {
+				# 				id = VEN_foreign_influence_BoP
+				# 				side = VEN_axis_side
+				# 			}
+			# 		}
+		# 	}
+	# 	else_if = {
+		# 		limit = {
+			# 			OR = {
+				# 				original_tag = ENG
+				# 				original_tag = USA
+				# 			}
+			# 		}
+		# 		VEN = {
+			# 			is_power_balance_side_active = {
+				# 				id = VEN_foreign_influence_BoP
+				# 				side = VEN_allied_side
+				# 			}
+			# 		}
+		# 	}
+	# }
+
+## Ecuador ##
+ECU_has_active_conservative_agitation = {
+	custom_trigger_tooltip = {
+		tooltip = ECU_has_active_conservative_agitation_tt
+		OR = {
+			has_idea = ECU_conservative_agitation_1
+			has_idea = ECU_conservative_agitation_2
+			has_idea = ECU_conservative_agitation_3
+		}
+	}
+}
+
+ECU_has_active_liberal_agitation = {
+	custom_trigger_tooltip = {
+		tooltip = ECU_has_active_liberal_agitation_tt
+		OR = {
+			has_idea = ECU_liberal_agitation_1
+			has_idea = ECU_liberal_agitation_2
+			has_idea = ECU_liberal_agitation_3
+		}
+	}
+}
+
+EUYL_formed_gran_colombia = {
+	custom_trigger_tooltip = {
+		tooltip = VEN_formed_gran_colombia_tt
+		has_country_flag = EUYL_formed_gran_colombia_flag
+	}
+}
+
+## Central America ##
+CEA_is_central_american = {
+	OR = {
+		original_tag = GUA
+		original_tag = HON
+		original_tag = NIC
+		original_tag = PAN
+		original_tag = ELS
+		original_tag = COS
+		original_tag = BLZ
+	}
+}
+
+is_central_america_or_caribbean = {
+	OR = {
+		original_tag = GUA
+		original_tag = NIC
+		original_tag = ELS
+		original_tag = HON
+		original_tag = COS
+		original_tag = PAN
+		original_tag = CUB
+		original_tag = HAI
+		original_tag = DOM
+		original_tag = JAM
+		original_tag = BLZ
+		original_tag = BAH
+	}
+}

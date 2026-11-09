@@ -1,0 +1,1292 @@
+characters={
+	BEL_paul_van_zeeland={
+		name=BEL_paul_van_zeeland
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_paul_van_zeeland
+				small=GFX_idea_BEL_paul_van_zeeland
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_paul_van_zeeland
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				NOT = { has_country_flag = BEL_kbp_wins_flag }
+				NOT = { has_country_flag = BEL_nationalists_wins_flag }
+				NOT = { has_character_flag = BEL_character_imprisoned_flag } #For flavor purposes only
+			}
+			traits = {
+				silent_workhorse
+			}
+		}
+		country_leader={
+			ideology=conservatism
+			expire="1965.1.1.1"
+			traits = {
+				finance_graduate
+			}
+			id=-1
+		}
+	}
+	BEL_paul_emile_janson={
+		name=BEL_paul_emile_janson
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_Paul_Emile_Janson
+			}
+		}
+	}
+	BEL_emile_vandervelde={
+		name=BEL_emile_vandervelde
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_Emile_Vandervelde
+			}
+		}
+	}
+	BEL_paul-henri_spaak={
+		name=BEL_paul_henri_spaak
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_Paul_Henri_Spaak
+				small=GFX_idea_BEL_paul_henri_spaak_small
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_paul-henri_spaak
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				NOT = { has_country_flag = BEL_nationalists_wins_flag }
+			}
+			traits = {
+				ideological_crusader
+			}
+		}
+	}
+	BEL_hubert_pierlot={
+		name=BEL_hubert_pierlot
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_hubert_pierlot
+			}
+		}
+		country_leader={
+			ideology=conservatism
+			expire="1965.1.1.1"
+			traits={tenacious_negotiator}
+			id=-1
+		}
+	}
+	BEL_achille_van_acker={
+		name=BEL_achille_van_acker
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_Achille_Van_Acker
+				small=GFX_idea_BEL_achille_van_acker
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_achille_van_acker
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					NOT = { has_autonomy_state = autonomy_supervised_state }
+				}
+				if = {
+					limit = {
+						has_character_flag = BEL_character_imprisoned_flag
+					}
+					NOT = { has_character_flag = BEL_character_imprisoned_flag } #For flavor purposes only
+				}
+			}
+			traits = {
+				democratic_reformer
+			}
+			ai_will_do = {
+				base = 0
+			}
+		}
+	}
+	BEL_camille_huysmans={
+		name=BEL_camille_huysmans
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_Camille_Huysmans
+			}
+		}
+	}
+	BEL_joseph_jacquemotte={
+		name=BEL_joseph_jacquemotte
+		portraits={
+			civilian={
+				large=GFX_portrait_Belgium_joseph_jacquemotte
+			}
+		}
+		country_leader={
+			ideology=stalinism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	BEL_julien_lahaut={
+		name=BEL_julien_lahaut
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_Julien_Lahaut
+				small=GFX_idea_BEL_julien_lahaut
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_julien_lahaut
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					NOT = {
+						has_autonomy_state = autonomy_supervised_state
+					}
+				}
+				if = {
+					limit = {
+						original_tag = BEL
+					}
+					has_country_flag = BEL_kbp_wins_flag
+				}
+				if = {
+					limit = {
+						has_character_flag = BEL_character_imprisoned_flag
+					}
+					NOT = { has_character_flag = BEL_character_imprisoned_flag } #For flavor purposes only
+				}
+			}
+			traits = {
+				communist_revolutionary
+			}
+			ai_will_do = {
+				base = 0
+				modifier = {
+					add = 2
+					BEL_is_communist_ai = yes
+				}
+			}
+		}
+		country_leader={
+			ideology=stalinism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	BEL_xavier_relecom={
+		name=BEL_xavier_relecom
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_Xavier_Relecom
+				small=GFX_idea_BEL_xavier_relecom
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = BEL_xavier_relecom
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				OR = {
+					has_government = communism
+					AND = {
+						has_country_flag = BEL_social_demo_wins_flag
+						has_completed_focus = BEL_integrate_communists
+					}
+				}
+				if = {
+					limit = {
+						has_character_flag = BEL_character_imprisoned_flag
+					}
+					NOT = { has_character_flag = BEL_character_imprisoned_flag } #For flavor purposes only
+				}
+			}
+			traits = { prince_of_terror }
+			ai_will_do = {
+				factor = 2
+			}
+		}
+		country_leader={
+			ideology=stalinism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	BEL_staf_de_clercq={
+		name=BEL_staf_de_clercq
+		portraits={
+			army = {
+				large=GFX_portrait_BEL_Staf_De_Clercq
+			}
+		}
+		country_leader={
+			ideology=nazism
+			expire="1965.1.1.1"
+			traits={ }
+			id=-1
+		}
+	}
+
+	BEL_hendrik_elias={
+		name=BEL_hendrik_elias
+		portraits={
+			army = {
+				large=GFX_portrait_BEL_Hendrik_Elias
+			}
+		}
+	}
+
+	BEL_leon_degrelle={
+		name=BEL_leon_degrelle
+		portraits={
+			army = {
+				large=GFX_portrait_BEL_Leon_Degrelle
+				small=GFX_idea_BEL_leon_degrelle_small
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = BEL_leon_degrelle
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				is_country_leader = no
+				has_government = fascism
+				NOT = { has_country_flag = BEL_kbp_wins_flag }
+			}
+			visible = {
+				always = no
+			}
+			traits = {
+				army_chief_defensive_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		country_leader={
+			ideology=rexism
+			expire="1965.1.1.1"
+			traits={fascist_militia_leader}
+			id=-1
+		}
+	}
+
+	BEL_joris_van_severen={
+		name=BEL_joris_van_severen
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_Joris_Van_Severen
+				small=GFX_idea_BEL_joris_van_severen_small
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_joris_van_severen
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				is_country_leader = no
+				if = {
+					limit = {
+						has_dlc = "Man the Guns"
+					}
+					NOT = {
+						has_autonomy_state = autonomy_supervised_state
+					}
+				}
+				has_country_flag = BEL_nationalists_wins_flag
+			}
+			traits = {
+				fascist_demagogue
+			}
+			ai_will_do = {
+				base = 0
+				modifier = {
+					add = 2
+					BEL_is_fascist_any_ai = yes
+				}
+			}
+		}
+		country_leader={
+			ideology=rexism
+			expire="1965.1.1.1"
+			traits={}
+			id=-1
+		}
+	}
+
+	BEL_leopold_iii={
+		name=BEL_leopold_iii
+		portraits={
+			army = {
+				large=GFX_portrait_BEL_Leopold_III
+				small=GFX_idea_Leopold_III
+			}
+		}
+		country_leader={
+			ideology=monarchism
+			traits={ BEL_king_of_belgium }
+			expire="1965.1.1"
+			id=-1
+		}
+	}
+
+	BEL_princess_lilian={
+		name=BEL_princess_lilian
+		portraits={
+			army = {
+				large=GFX_portrait_BEL_Princess_Lilian
+			}
+		}
+	}
+
+	BEL_prince_charles={
+		name=BEL_prince_charles
+		portraits={
+			army = {
+				large=GFX_portrait_BEL_Prince_Charles
+			}
+		}
+	}
+
+	BEL_gilles_wyvekens={
+		name=BEL_gilles_wyvekens
+		portraits={
+			civilian={
+				large=GFX_portrait_BEL_gilles_wyvekens
+			}
+		}
+		country_leader={
+			ideology=centrism
+			traits={ financial_expert }
+			expire="1945.1.1.12"
+			id=-1
+		}
+	}
+
+	#Political Advisors
+	BEL_gaston_eyskens={
+		name=BEL_gaston_eyskens
+		portraits={
+			army={
+				small=GFX_idea_BEL_gaston_eyskens
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_gaston_eyskens
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				#has_government = democratic
+			}
+			traits = {
+				backroom_backstabber
+			}
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	BEL_henri_denis={
+		name=BEL_henri_denis
+		portraits={
+			army={
+				small=GFX_idea_BEL_henri_denis_small
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_henri_denis
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_capitulated = no
+				NOT = { has_government = communism }
+				if = {
+					limit = {
+						has_character_flag = BEL_character_imprisoned_flag
+					}
+					NOT = { has_character_flag = BEL_character_imprisoned_flag } #For flavor purposes only
+				}
+			}
+			traits = {
+				fortification_engineer
+			}
+			ai_will_do = {
+				base = 0.75
+			}
+		}
+	}
+
+	BEL_victor_matthys={
+		name=BEL_victor_matthys
+		portraits={
+			army={
+				small=GFX_idea_BEL_victor_matthys
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_victor_matthys
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = fascism
+				#custom_trigger_tooltip = {
+					#	tooltip = BEL_rex_government_tt #belgium.36
+					#	check_variable = { BEL_goverment_formed = 6 } #Rex
+					#}
+			}
+			traits = {
+				BEL_propaganda_expert
+			}
+			on_add = {
+				hidden_effect = {
+					owner = {
+						add_to_variable = { THIS.prca_newspaper_tokens_weekly = 0.25 }
+						THIS_recalc_weekly_tokens_gain = yes
+					}
+				}
+			}
+			on_remove = {
+				hidden_effect = {
+					owner = {
+						add_to_variable = { THIS.prca_newspaper_tokens_weekly = -0.25 }
+						THIS_recalc_weekly_tokens_gain = yes
+					}
+				}
+			}
+			ai_will_do = {
+				base = 0
+			}
+		}
+	}
+
+	BEL_albert_de_vleeschauwer={
+		name=BEL_albert_de_vleeschauwer
+		portraits={
+			army={
+				small=GFX_idea_BEL_albert_de_vleeschauwer
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_albert_de_vleeschauwer
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = democratic
+			}
+			traits = {
+				BEL_minister_of_colonies
+			}
+			cost = 175
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	BEL_camille_gutt={
+		name=BEL_camille_gutt
+		portraits={
+			army={
+				small=GFX_idea_BEL_camille_gutt
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_camille_gutt
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = democratic
+				if = {
+					limit = {
+						has_character_flag = BEL_character_imprisoned_flag
+					}
+					NOT = { has_character_flag = BEL_character_imprisoned_flag } #For flavor purposes only
+				}
+			}
+			traits = {
+				BEL_minister_of_finance
+			}
+			ai_will_do = {
+				factor = 1.25
+			}
+		}
+	}
+
+	BEL_alexandre_galopin={
+		name=BEL_alexandre_galopin
+		portraits={
+			army={
+				small=GFX_idea_BEL_alexandre_galopin
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_alexandre_galopin
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+				}
+				has_capitulated = no
+			}
+			traits = {
+				captain_of_industry
+			}
+			ai_will_do = {
+				factor = 1.25
+			}
+		}
+	}
+
+	BEL_gustave_joassart={
+		name=BEL_gustave_joassart
+		portraits={
+			army={
+				small=GFX_idea_BEL_gustave_joassart
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_gustave_joassart
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_completed_focus = BEL_invest_arms_production
+				NOT = { has_government = communism }
+			}
+			traits = {
+				war_industrialist
+			}
+			ai_will_do = {
+				factor = 1.25
+			}
+		}
+	}
+
+	BEL_jef_francois={
+		name=BEL_jef_francois
+		portraits={
+			army={
+				small=GFX_idea_BEL_jef_francois
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_jef_francois
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = fascism
+				custom_trigger_tooltip = {
+					tooltip = BEL_verdinaso_government_tt
+					check_variable = { BEL_goverment_formed = 5 } #Verdinaso
+				}
+			}
+			traits = {
+				ideological_crusader
+			}
+			ai_will_do = {
+				base = 0
+			}
+		}
+	}
+
+	BEL_robert_jan_verbelen={ #Head of DeVlag
+		name=BEL_robert_jan_verbelen
+		portraits={
+			army={
+				small=GFX_idea_BEL_robert_jan_verbelen
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_robert_jan_verbelen
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = fascism
+				NOT = { has_completed_focus = BEL_crush_devlag }
+			}
+			traits = {
+				prince_of_terror
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	BEL_jose_streel={
+		name=BEL_jose_streel
+		portraits={
+			army={
+				small=GFX_idea_BEL_josé_streel
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_jose_streel
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = fascism
+				custom_trigger_tooltip = {
+					tooltip = BEL_rex_government_tt #belgium.36
+					check_variable = { BEL_goverment_formed = 6 } #Rex
+				}
+			}
+			traits = {
+				backroom_backstabber
+			}
+			ai_will_do = {
+				base = 0
+			}
+		}
+	}
+
+	BEL_robert_de_foy={
+		name=BEL_robert_de_foy
+		portraits={
+			army={
+				small=GFX_idea_BEL_robert_de_foy
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_robert_de_foy
+			allowed = {
+				original_tag = BEL
+				has_dlc = "La Resistance"
+			}
+			available = {
+				has_intelligence_agency = yes
+			}
+			traits = {
+				head_of_intelligence
+			}
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					has_intelligence_agency = no
+					factor = 0
+				}
+			}
+		}
+	}
+
+	BEL_edgar_lalmand={
+		name=BEL_edgar_lalmand
+		portraits={
+			army={
+				small=GFX_idea_BEL_edgar_lalmand
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_edgar_lalmand
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = communism
+				has_country_flag = BEL_kbp_wins_flag
+			}
+			traits = {
+				captain_of_industry
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	BEL_henri_glineur={
+		name=BEL_henri_glineur
+		portraits={
+			army={
+				small=GFX_idea_BEL_henri_glineur
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_henri_glineur
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = communism
+				has_country_flag = BEL_kbp_wins_flag
+				if = {
+					limit = {
+						has_character_flag = BEL_character_imprisoned_flag
+					}
+					NOT = { has_character_flag = BEL_character_imprisoned_flag } #For flavor purposes only
+				}
+			}
+			traits = {
+				comintern_workhorse
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	BEL_rene_magritte={
+		name=BEL_rene_magritte
+		portraits={
+			army={
+				small=GFX_idea_BEL_rene_magritte
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = BEL_rene_magritte
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = communism
+				has_country_flag = BEL_kbp_wins_flag
+				if = {
+					limit = {
+						has_character_flag = BEL_character_imprisoned_flag
+					}
+					NOT = { has_character_flag = BEL_character_imprisoned_flag } #For flavor purposes only
+				}
+			}
+			traits = {
+				popular_figurehead3
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	#Army Commanders
+	BEL_edouard_van_den_bergen={
+		name=BEL_edouard_van_den_bergen
+		portraits={
+			army={
+				large=GFX_portrait_Belgium_Edouard_van_den_Bergen
+				small=GFX_idea_BEL_edouard_van_den_bergen_small
+			}
+		}
+		corps_commander={
+			traits={ artillery_commander }
+			skill=3
+			attack_skill=2
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=4
+			legacy_id=-1
+		}
+	}
+
+	BEL_mcl_keyaerts={
+		name=BEL_mcl_keyaerts
+		portraits={
+			army={
+				large=GFX_portrait_Belgium_Maurice_Keyaerts
+				small=GFX_idea_BEL_maurice_keyaerts_small
+			}
+		}
+		corps_commander={
+			traits={ hill_fighter }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=4
+			legacy_id=-1
+		}
+	}
+	BEL_georges_deffontaine={
+		name=BEL_georges_deffontaine
+		portraits={
+			army={
+				large=GFX_portrait_Belgium_Georges_Deffontaine
+				small=GFX_idea_BEL_georges_deffontaine_small
+			}
+		}
+		corps_commander={
+			traits = { }
+			skill = 2
+			attack_skill = 1
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 2
+			legacy_id=-1
+		}
+	}
+	BEL_maximilien_de_neve_de_roden={
+		name=BEL_maximilien_de_neve_de_roden
+		portraits={
+			army={
+				large=GFX_portrait_Belgium_Maximilien_de_Neve_de_Roden
+				small=GFX_idea_BEL_maximilien_de_neve_de_roden_small
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = BEL_maximilien_de_neve_de_roden
+			ledger = army
+			allowed = {
+				OR = {
+					original_tag = BEL
+					original_tag = FLA
+				}
+			}
+			visible = {
+				if = {
+					limit = {
+						tag = FLA
+					}
+					NOT = { country_exists = BEL }
+				}
+			}
+			traits = {
+				army_cavalry_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		corps_commander={
+			traits = { cavalry_officer }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 1
+			legacy_id=-1
+		}
+	}
+	BEL_alexis_vander_veken={
+		name=BEL_alexis_vander_veken
+		portraits={
+			army={
+				large=GFX_portrait_Belgium_alexis_vander_veken
+				small=GFX_idea_BEL_alexis_vander_veken_small
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = BEL_alexis_vander_veken
+			ledger = army
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				army_infantry_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		corps_commander={
+			traits = { cavalry_officer }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 1
+			legacy_id=-1
+		}
+	}
+	BEL_lambert_chardome={
+		name=BEL_lambert_chardome
+		portraits={
+			army={
+				large=GFX_portrait_Belgium_Lambert_Chardome
+				small=GFX_idea_BEL_lambert_chardome_small
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = BEL_lambert_chardome
+			ledger = army
+			allowed = {
+				original_tag = BEL
+			}
+			available = {
+				has_government = fascism
+			}
+			traits = {
+				army_chief_offensive_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		corps_commander={
+			traits = { infantry_officer }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 2
+			legacy_id=-1
+		}
+	}
+	BEL_oscar_michiels={
+		name=BEL_oscar_michiels
+		portraits={
+			army={
+				small=GFX_idea_BEL_oscar_michiels_small
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = BEL_oscar_michiels
+			ledger = army
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				army_chief_defensive_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	BEL_victor_strydonck_burkel={
+		name=BEL_victor_strydonck_burkel
+		portraits={
+			army={
+				large=GFX_portrait_Belgium_Victor_van_Strydonck_de_Burkel
+				small=GFX_idea_BEL_victor_van_strydonck_de_burkel_small
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = BEL_victor_strydonck_burkel
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				army_chief_maneuver_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		corps_commander={
+			traits = { career_officer cavalry_leader }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 2
+			legacy_id=-1
+		}
+	}
+	BEL_jules_pire={
+		name=BEL_jules_pire
+		portraits={
+			army={
+				large=GFX_portrait_Belgium_Jules_Pire
+				small=GFX_idea_BEL_jules_pire_small
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = BEL_jules_pire
+			ledger = army
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				army_entrenchment_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		corps_commander={
+			traits = { ranger }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 1
+			legacy_id=-1
+		}
+	}
+	BEL_georges_timmermans={
+		name=BEL_georges_timmermans
+		portraits={
+			army={
+				large=GFX_portrait_Belgium_Georges_Timmermans
+				small=GFX_idea_BEL_georges_timmermans_small
+			}
+		}
+		advisor={
+			slot = theorist
+			idea_token = BEL_georges_timmermans
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				naval_theorist
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		navy_leader={
+			traits={ bold }
+			skill=4
+			attack_skill=4
+			defense_skill=2
+			maneuvering_skill=3
+			coordination_skill=4
+			legacy_id=-1
+		}
+	}
+	BEL_fritz_conrad={ #TODO Check
+		advisor={
+			slot = navy_chief
+			idea_token = BEL_fritz_conrad
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				navy_chief_naval_aviation_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		name=BEL_fritz_conrad
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_europe_2"
+			}
+		}
+	}
+	BEL_raoul_overstraeten={
+		name=BEL_raoul_overstraeten
+		portraits={
+			army={
+				small="GFX_idea_BEL_raoul_van_overstraeten"
+			}
+		}
+		advisor={
+			slot = theorist
+			idea_token = BEL_raoul_overstraeten
+			ledger = army
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				military_theorist
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		advisor={
+			slot = air_chief
+			idea_token = BEL_raoul_overstraeten_air
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				air_chief_old_guard
+			}
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	BEL_georges_vereecken={
+		name=BEL_georges_vereecken
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_europe_1"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = BEL_georges_vereecken
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				navy_chief_maneuver_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	BEL_charles_bastin={
+		name=BEL_charles_bastin
+		portraits={
+			army={
+				small="GFX_idea_generic_army_europe_4"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = BEL_charles_bastin
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				army_chief_morale_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	BEL_yvan_gerard={
+		name=BEL_yvan_gerard
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_europe_2"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = BEL_yvan_gerard
+			ledger = navy
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				navy_naval_air_defense_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	BEL_rene_lagrou={
+		name=BEL_rene_lagrou
+		portraits={
+			army={
+				small="GFX_idea_generic_air_europe_3"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = BEL_rene_lagrou
+			ledger = air
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				air_air_combat_training_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	BEL_fritz_lob={
+		name=BEL_fritz_lob
+		portraits={
+			army={
+				small="GFX_idea_generic_air_europe_1"
+			}
+		}
+		advisor={
+			slot = theorist
+			idea_token = BEL_fritz_lob
+			ledger = air
+			allowed = {
+				original_tag = BEL
+			}
+
+			traits = {
+				air_warfare_theorist
+			}
+			cost = 100
+		}
+	}
+	BEL_jules_iserentant={
+		name=BEL_jules_iserentant
+		portraits={
+			army={
+				small="GFX_idea_generic_air_europe_3"
+			}
+		}
+		advisor={
+			slot = air_chief
+			idea_token = BEL_jules_iserentant
+			allowed = {
+				original_tag = BEL
+			}
+			traits = {
+				air_chief_ground_support_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+}

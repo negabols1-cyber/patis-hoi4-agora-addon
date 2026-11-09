@@ -1,0 +1,71 @@
+#IRQ_diplomacy_category = {
+	#
+	#	allowed = {
+		#		original_tag = IRQ
+		#	}
+	#
+	#	visible = {
+		#		has_completed_focus = IRQ_our_diplomacy
+		#	}
+	#}
+#
+#IRQ_war_prepations = {
+	#
+	#	allowed = {
+		#		original_tag = IRQ
+		#	}
+	#
+	#	visible = {
+		#
+		#	}
+	#}
+##########################
+IRQ_army_academy_category = {
+	icon = GFX_
+	priority = 100000
+	scripted_gui = army_academy_scripted_gui
+
+	allowed = {
+		original_tag = IRQ
+	}
+
+	visible_when_empty = yes
+	visible = {
+		NOT = { has_idea = IRQ_modern_army }
+	}
+}
+IRQ_race_for_dominance_category = {
+
+	icon = GFX_decision_category_race_for_dominance
+	priority = 100001
+	scripted_gui = race_for_dominance_scripted_gui
+
+	allowed = {
+		original_tag = IRQ
+		#has_country_flag = activate_race_for_dominance
+	}
+
+	visible = {
+		#has_completed_focus = IRQ_race_for_dominance
+		OR = {
+			NOT = {
+				has_completed_focus = IRQ_a_new_era_for_us
+				has_completed_focus = IRQ_new_star_in_middle_east
+			}
+		}
+		has_country_flag = activate_race_for_dominance
+	}
+}
+IRQ_election_category = {
+
+	icon = GFX_
+	priority = 110000
+
+	allowed = {
+		original_tag = IRQ
+	}
+
+	visible = {
+		always = no
+	}
+}

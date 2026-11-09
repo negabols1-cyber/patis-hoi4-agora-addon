@@ -1,0 +1,1240 @@
+add_namespace = SIA
+add_namespace = SIA_news
+country_event = {
+	id = SIA.1
+	title = "Siamese Government Approach to Emperor"
+	desc = SIA.1.d
+	picture = GFX_report_event_japanese_transport_soldiers
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = SIA.1.A
+		JAP = {
+			add_opinion_modifier = {
+				target = SIA
+				modifier = medium_increase
+			}
+			add_political_power = 25
+		}
+	}
+	option = {
+		name = SIA.1.B
+		JAP = {
+			add_opinion_modifier = {
+				target = SIA
+				modifier = sanctions_relations
+			}
+		}
+	}
+}
+
+country_event = {
+	id = SIA.2
+	title = SIA.2.t
+	desc = SIA.2.d
+	picture = GFX_report_event_japanese_transport_soldiers
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = SIA.2.A
+		SIA = {
+			add_tech_bonus = {
+				name = SIA_Join_Sino_German_Cooperation
+				bonus = 1.0
+				uses = 2
+				category = air_equipment
+			}
+			add_tech_bonus = {
+				name = SIA_Join_Sino_German_Cooperation
+				bonus = 0.5
+				uses = 2
+				category = tactical_bomber
+			}
+			add_tech_bonus = {
+				name = SIA_Join_Sino_German_Cooperation
+				bonus = 1.0
+				uses = 2
+				category = artillery
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = infantry_weapons
+			}
+			army_experience = 25
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}
+		}
+		ROOT = {
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+			add_opinion_modifier = { target = SIA modifier = medium_increase }
+		}
+	}
+	option = {
+		name = SIA.2.B
+		add_opinion_modifier = { target = SIA modifier = sanctions_relations }
+	}
+}
+
+country_event = {
+	id = SIA.3
+	title = "Siamese Government Wants Economic Aid Against to Emperor"
+	desc = SIA.3.d
+	picture = GFX_report_event_japanese_transport_soldiers
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = SIA.3.A
+		SIA = {
+			add_timed_idea = {
+				days = 800
+				idea = SIA_allied_Investment
+			}
+			add_opinion_modifier = { target = ENG modifier = medium_increase }
+			diplomatic_relation = {
+				country = RAJ
+				relation = non_aggression_pact
+				active = no
+			}
+			diplomatic_relation = {
+				country = NZL
+				relation = non_aggression_pact
+				active = no
+			}
+			diplomatic_relation = {
+				country = AST
+				relation = non_aggression_pact
+				active = no
+			}
+			diplomatic_relation = {
+				country = MAL
+				relation = non_aggression_pact
+				active = no
+			}
+		}
+		add_opinion_modifier = { target = SIA modifier = medium_increase }
+		add_political_power = 50
+	}
+	option = {
+		name = SIA.3.B
+		add_opinion_modifier = { target = SIA modifier = embargo }
+		SIA = {
+			add_stability = -0.05
+			add_opinion_modifier = { target = ENG modifier = embargo }
+		}
+	}
+}
+country_event = {
+	id = SIA.9
+	title = SIA.9.t
+	desc = SIA.9.desc
+	picture = GFX_report_event_spr_franco_victory
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "Anything to do..."
+		every_state = {
+			limit = {
+				OR = {
+					state = 670
+					state = 671
+					state = 286
+					state = 741
+				}
+				is_controlled_by_ROOT_or_subject = yes
+			}
+			transfer_state_to = FROM
+		}
+		ai_chance = {
+			base = 30
+		}
+	}
+	option = {
+		name = "Nope"
+		SIA = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+				expire = 0
+			}
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+}
+country_event = {
+	id = SIA.10
+	title = SIA.10.t
+	desc = SIA.10.desc
+	picture = GFX_report_event_spr_franco_victory
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "Anything to do..."
+		SIA = {
+			transfer_state  = 333
+		}
+		ai_chance = {
+			base = 30
+		}
+	}
+	option = {
+		name = "Nope"
+		SIA = {
+			create_wargoal = {
+				type = annex_everything
+				target = ROOT
+				expire = 0
+			}
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+}
+country_event = {
+	id = SIA.11
+	title = SIA.11.t
+	desc = SIA.11.desc
+	picture = GFX_report_event_spr_franco_victory
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "Looks Close To Us..."
+		add_war_support = 0.05
+		add_political_power = 25
+	}
+}
+country_event = {
+	id = SIA.12
+	title = SIA.12.t
+	desc = SIA.12.d
+	picture = GFX_report_event_dutch_soldiers_indonesia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "Long Live Kingdom"
+		add_stability = 0.05
+		add_political_power = 50
+	}
+}
+country_event = {
+	id = SIA.13
+	title = "Thai National Anthem"
+	desc = SIA.13.d
+	picture = GFX_report_event_dutch_soldiers_indonesia
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = "Long Live Kingdom"
+	}
+}
+country_event = {
+	id = SIA.14
+	title = SIA.14.t
+	desc = SIA.14.desc
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		diplomatic_relation = {
+			country = SIA
+			relation = non_aggression_pact
+		}
+	}
+	option = {
+		name = "Nope"
+	}
+}
+country_event = {
+	id = SIA.15
+	title = SIA.15.t
+	desc = SIA.15.d
+	picture = GFX_report_event_french_resistance_01
+
+	fire_only_once = yes
+
+	trigger = {
+		always = no
+		tag = SIA
+		SIA = {
+			NOT = {
+				has_completed_focus = SIA_Authorize_Khana_Ratsadon
+				has_completed_focus = SIA_Free_Thai_Movement
+				has_completed_focus = SIA_Italian_Companies
+				has_completed_focus = SIA_Industry_investigative
+				has_completed_focus = SIA_City_infrastructure
+				has_completed_focus = SIA_Open_Military_Factories
+				has_completed_focus = SIA_Give_Importance_To_Civilian_Economy
+			}
+			has_completed_focus = SIA_Do_Nothing_Against_To_Japan
+			has_opinion = {
+				target = JAP
+				value > 50
+			}
+		}
+		JAP = {
+			has_country_leader = {
+				character = JAP_emperor_hirohito
+				ruling_only = yes
+			}
+			has_war_with = CHI
+			NOT = {
+				has_wargoal_against = SIA
+				is_justifying_wargoal_against = SIA
+			}
+		}
+		date < 1938.01.01
+	}
+
+	option = {
+		name = "Glory To Queen..."
+		ai_chance = { base = 0 }
+		hidden_effect = {
+			set_country_flag = SIA_hirohitos_wife_called
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+}
+country_event = {
+	id = SIA.16
+	title = SIA.16.t
+	desc = SIA.16.d
+	picture = GFX_report_event_french_resistance_01
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = "Farewell To King"
+		ai_chance = { base = 100 }
+		hidden_effect = {
+			SIA = {
+				set_country_flag = SIA_king_called
+			}
+		}
+	}
+}
+country_event = {
+	id = SIA.17
+	title = SIA.17.t
+	desc = SIA.17.desc
+	picture = GFX_report_event_french_resistance_01
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = "Accept"
+		SIA = {
+			transfer_state = 326
+			289 = {
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+		}
+		ENG = {
+			125 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = "Nope"
+		FROM = {
+			add_opinion_modifier = { target = SIA modifier = sanctions_relations }
+		}
+	}
+}
+country_event = {
+	id = SIA.18
+	title = SIA.18.t
+	desc = SIA.18.d
+	picture = GFX_report_event_german_italian_pact
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = "Accept The Contact"
+		ai_chance = { base = 100 }
+		SIA = {
+			add_opinion_modifier = { target = USA modifier = medium_increase }
+			if= {
+				limit = {
+					has_full_control_of_state = 868
+				}
+				868 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			if= {
+				limit = {
+					has_full_control_of_state = 869
+				}
+				869 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			add_political_power = 150
+		}
+		USA = {
+			add_political_power = 75
+			add_opinion_modifier = { target = SIA modifier = medium_increase }
+		}
+	}
+}
+country_event = {
+	id = SIA.19
+	title = "Siamese Emperor Supporters Wants Support"
+	desc = SIA.18.d
+	picture = GFX_report_event_german_italian_pact
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = "Contact With Them"
+		ROOT = {
+			add_opinion_modifier = { target = SIA modifier = medium_increase }
+		}
+	}
+	option = {
+		name = "Silly Jobs"
+		ROOT = {
+			add_opinion_modifier = { target = SIA modifier = sanctions_relations }
+		}
+		SIA = {
+			country_event = SIA.20
+			hidden_effect = {
+				uncomplete_national_focus = {
+					focus = SIA_Kneel_to_the_Emperor
+					uncomplete_children = no
+					refund_political_power = no
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = SIA.20
+	title = "Parting Of The Ways"
+	desc = SIA.19.d
+	picture = GFX_report_event_japanese_transport_soldiers
+
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = "People's Party!"
+		complete_national_focus  = SIA_Authorize_Khana_Ratsadon
+	}
+	option = {
+		name = "Time To Second Revolation..."
+		complete_national_focus = SIA_Bangkok_Field
+	}
+}
+country_event = {
+	id = SIA.21
+	title = "Siamese Empire Requests Japanese Army Staff"
+	desc = SIA.21.d
+	picture = GFX_report_event_generic_conference
+	is_triggered_only = yes
+	#Agree to send advisors
+	option = {
+		name = "Acceptable"
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {
+						has_government = fascism
+						has_government = neutrality
+					}
+					has_civil_war = yes
+					NOT = {
+						SIA = {has_war_with = JAP}
+					}
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				hours = 1
+				id = SIA.22
+			}
+		}
+		custom_effect_tooltip = ETH_send_ita_generals_tt
+	}
+	#Refuse to send advisors
+	option = {
+		name = "Our Generals Are Not For Sale"
+		ai_chance = {
+			base = 0
+			modifier = {
+				factor = 10
+				OR = {
+					NOT = {
+						has_government = fascism
+						has_government = neutrality
+					}
+					has_civil_war = yes
+					NOT = {FROM = {is_subject_of = JAP}}
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				hours = 1
+				id = SIA.23
+			}
+		}
+	}
+}
+country_event = {
+	id = SIA.22
+	title = "Japanese Government Accept The Send Officers"
+	desc = SIA.22.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+	option = {
+		name = "Good News"
+		ai_chance = {
+			base = 10
+		}
+		hidden_effect = {
+			JAP = {
+				JAP_shigeru_honjo = {
+					set_nationality = SIA
+					set_character_flag = JAP_advisor_sia
+				}
+				JAP_iwane_matsui = {
+					set_nationality = SIA
+					set_character_flag = JAP_advisor_sia
+				}
+				JAP_kuniaki_koiso = {
+					set_nationality = SIA
+					set_character_flag = JAP_advisor_sia
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = SIA.23
+	title = "Japanese Government Refuse The Send Officers"
+	desc = SIA.23.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+	option = {
+		name = "Not Good"
+		add_political_power = -50
+	}
+}
+country_event = {
+	id = SIA.24
+	title = "Siamese Empire Requests Japanese Navy Staff"
+	desc = SIA.24.d
+	picture = GFX_report_event_generic_conference
+	is_triggered_only = yes
+	#Agree to send advisors
+	option = {
+		name = "Acceptable"
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0
+				OR = {
+					NOT = {
+						has_government = fascism
+						has_government = neutrality
+					}
+					has_civil_war = yes
+					NOT = {
+						SIA = {has_war_with = JAP}
+					}
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				hours = 1
+				id = SIA.25
+			}
+		}
+		custom_effect_tooltip = ETH_send_ita_generals_tt
+	}
+	#Refuse to send advisors
+	option = {
+		name = "Our Generals Are Not For Sale"
+		ai_chance = {
+			base = 0
+			modifier = {
+				factor = 10
+				OR = {
+					NOT = {
+						has_government = fascism
+						has_government = neutrality
+					}
+					has_civil_war = yes
+					NOT = {FROM = {is_subject_of = JAP}}
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				hours = 1
+				id = SIA.23
+			}
+		}
+	}
+}
+country_event = {
+	id = SIA.25
+	title = "Japanese Government Accept The Send Officers"
+	desc = SIA.22.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+	option = {
+		name = "Good News"
+		ai_chance = {
+			base = 10
+		}
+		hidden_effect = {
+			JAP = {
+				JAP_zengo_yoshida = {
+					set_nationality = SIA
+					set_character_flag = JAP_advisor_sia
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = SIA.26
+	title = "Siamese Empire Wants Investments!"
+	desc = SIA.26.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+	option = {
+		name = "Sure"
+		ai_chance = {
+			base = 10
+		}
+		JAP = {
+			add_timed_idea = {
+				days = 30
+				idea = SIA_emperor_investment_idea
+			}
+		}
+		custom_effect_tooltip = emperor_investment_tt
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_core_of = SIA
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	option = {
+		name = "Refuse"
+		ai_chance = {
+			base = 0
+			modifier = {
+				factor = 10
+				OR = {
+					NOT = {
+						has_government = fascism
+						has_government = neutrality
+					}
+					has_civil_war = yes
+					NOT = {FROM = {is_subject_of = JAP}}
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				hours = 1
+				id = SIA.27
+			}
+		}
+	}
+}
+country_event = {
+	id = SIA.27
+	title = "Japanese Government Refuse The Make Investments!"
+	desc = SIA.27.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+	option = {
+		name = "Bad News"
+		JAP = {add_political_power = -50}
+		ROOT = {add_political_power = -50}
+	}
+}
+
+country_event = {
+	id = SIA.28
+	title = SIA.28.t
+	desc = SIA.28.d
+	picture = GFX_report_event_generic_army
+	is_triggered_only = yes
+	option = {
+		name = "Sure"
+
+	}
+	option = {
+		name = "Refuse"
+
+	}
+}
+
+country_event = {
+	id = SIA.29
+	title = SIA.29.t
+	desc = SIA.29.desc
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	#Accept
+	option = {
+		name = SIA.29.a
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					target = FROM
+					value > 24
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					target = FROM
+					value > 49
+				}
+			}
+			modifier = {
+				factor = 3
+				has_opinion = {
+					target = FROM
+					value > 89
+				}
+			}
+			modifier = {
+				factor = 1.5
+				is_guaranteed_by = FROM
+			}
+			modifier = {
+				factor = 1.2
+				has_non_aggression_pact_with = FROM
+			}
+			modifier = {
+				factor = 10
+				is_in_faction_with = FROM
+			}
+			modifier = {
+				factor = 100
+				is_subject_of = FROM
+			}
+			modifier = {
+				factor = 100
+				FROM = { is_ai = no }
+				OR = {
+					is_in_faction_with = FROM
+					is_subject_of = FROM
+				}
+			}
+		}
+
+		effect_tooltip = {
+			every_controlled_state = {
+				limit = {
+					OR = {
+						state = 741
+						state = 670
+					}
+				}
+				FROM = {
+					transfer_state = PREV
+				}
+			}
+		}
+		hidden_effect = {
+			FROM = { country_event = { id = SIA.30 hours = 1 } }
+		}
+	}
+
+	#Nope
+	option = {
+		name = SIA.29.b
+
+		ai_chance = {
+			base = 200
+			modifier = {
+				factor = 0
+				is_subject_of = FROM
+			}
+		}
+
+		custom_effect_tooltip = generic_could_lead_to_tt
+
+		#Set up array to store all the states requested by Finland that this country controls
+		hidden_effect = {
+			every_controlled_state = {
+				limit = {
+					OR = {
+						state = 741
+						state = 670
+					}
+				}
+				add_to_array = { PREV.target_states_array = THIS }
+			}
+		}
+
+		effect_tooltip = {
+			every_controlled_state = {
+				limit = {
+					OR = {
+						state = 741
+						state = 670
+					}
+				}
+				add_claim_by = FROM
+			}
+			FROM = {
+				create_wargoal = {
+					type = take_state_focus
+					target = PREV
+					generator = PREV.target_states_array
+				}
+			}
+		}
+		hidden_effect = {
+			FROM = { country_event = { id = SIA.31 hours = 1 } }
+		}
+	}
+}
+
+country_event = {
+	id = SIA.30
+	title = SIA.30.t
+	desc = SIA.30.desc
+	picture = GFX_report_event_spr_occupation_of_tangiers
+
+	is_triggered_only = yes
+
+	#COOL!
+	option = {
+		name = SIA.30.a
+
+		FROM = {
+			every_controlled_state = {
+				limit = {
+					OR = {
+						state = 741
+						state = 670
+					}
+				}
+				ROOT = {
+					transfer_state = PREV
+				}
+				add_compliance = 50
+			}
+		}
+	}
+}
+
+country_event = {
+	id = SIA.31
+	title = SIA.31.t
+	desc = SIA.31.desc
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	#We respect their decision (lame)
+	option = {
+		name = "Bad News.."
+
+		ai_chance = {
+			base = 1
+		}
+	}
+
+	#Inte chicken
+	option = {
+		name = "Fire Of Revenge.."
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 0
+				FROM = {
+					is_ai = no
+				}
+			}
+		}
+
+		FROM = {
+			every_controlled_state = {
+				limit = {
+					OR = {
+						state = 741
+						state = 670
+					}
+				}
+				add_claim_by = ROOT
+			}
+		}
+		create_wargoal = {
+			type = take_state_focus
+			target = FROM
+			generator = FROM.target_states_array
+		}
+
+		clear_array = FROM.target_states_array
+	}
+}
+
+country_event = {
+	id = SIA.32
+	title = SIA.32.t
+	desc = SIA.32.desc
+	picture = GFX_report_event_usa_macarthur_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Acceptable"
+
+		ai_chance = {
+			base = 1
+		}
+
+		effect_tooltip = {
+			USA = {
+				diplomatic_relation = {
+					country = SIA
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+			SIA = {
+				diplomatic_relation = {
+					country = USA
+					relation = non_aggression_pact
+					active = yes
+				}
+			}
+
+			SIA = {
+				add_timed_idea = {
+					days = 1095
+					idea = SIA_american_support
+				}
+			}
+
+			USA = {
+				add_political_power = 25
+			}
+		}
+
+		SIA = {
+			country_event = { id = SIA.33 hours =  1 }
+		}
+	}
+
+	option = {
+		name = "We Have No Interest.."
+
+		effect_tooltip = {
+			USA = { add_opinion_modifier = { target = SIA modifier = medium_decrease } }
+		}
+	}
+}
+
+country_event = {
+	id = SIA.33
+	title = SIA.33.t
+	desc = SIA.33.desc
+	picture = GFX_report_event_usa_macarthur_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = SIA.33.a
+
+		ai_chance = {
+			base = 1
+		}
+
+		USA = {
+			diplomatic_relation = {
+				country = SIA
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+		SIA = {
+			diplomatic_relation = {
+				country = USA
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+
+		SIA = {
+			add_timed_idea = {
+				days = 1095
+				idea = SIA_american_support
+			}
+		}
+
+		USA = {
+			add_political_power = 25
+		}
+	}
+}
+
+country_event = {
+	id = SIA.34
+	title = SIA.34.t
+	desc = SIA.34.desc
+	picture = GFX_report_event_usa_macarthur_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Bad News"
+
+		ai_chance = {
+			base = 1
+		}
+
+		USA = { add_opinion_modifier = { target = SIA modifier = medium_decrease } }
+	}
+}
+
+country_event = {
+	id = SIA.35
+	title = SIA.35.t
+	desc = SIA.35.desc
+	picture = GFX_report_event_usa_macarthur_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Acceptable"
+
+		ai_chance = {
+			base = 1
+		}
+
+		effect_tooltip = {
+			SIA = {
+				create_dynamic_country = {
+					original_tag = THIS
+					set_variable = { SIA.create_puppet = THIS }
+					transfer_state  = 670
+					transfer_state  = 671
+					transfer_state  = 286
+					transfer_state  = 741
+					set_popularities = {
+						democratic = SIA.party_popularity_100@democratic
+						neutrality = SIA.party_popularity_100@neutrality
+						fascism = SIA.party_popularity_100@fascism
+						communism = SIA.party_popularity_100@communism
+					}
+					set_politics = {
+						ruling_party = SIA
+					}
+					create_country_leader = {
+						name = "Siamese International Government"
+						desc = ""
+						picture = GFX_Portrait_international_indochina_state
+						expire = "1965.1.1"
+						ideology = socialism
+						traits = {
+							cabinet_crisis
+						}
+					}
+					set_cosmetic_tag = SIA_indochina_tag
+				}
+				SIA = {
+					puppet = SIA.create_puppet
+				}
+				clear_variable = SIA.create_puppet
+				hidden_effect = {
+					set_country_flag = SIA_international_state_formed
+				}
+			}
+		}
+
+		SIA = {
+			country_event = { id = SIA.36 hours =  1 }
+		}
+	}
+
+	option = {
+		name = "No Deal"
+
+		effect_tooltip = {
+			ROOT = { add_opinion_modifier = { target = PREV modifier = medium_decrease } }
+		}
+
+		SIA = {
+			country_event = { id = SIA.37 hours =  1 }
+		}
+	}
+}
+
+country_event = {
+	id = SIA.36
+	title = SIA.36.t
+	desc = SIA.36.desc
+	picture = GFX_report_event_usa_macarthur_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Glorious Day.."
+
+		ai_chance = {
+			base = 1
+		}
+
+		create_dynamic_country = {
+			original_tag = THIS
+			set_variable = { SIA.create_puppet = THIS }
+			transfer_state  = 670
+			transfer_state  = 671
+			transfer_state  = 286
+			transfer_state  = 741
+			set_popularities = {
+				democratic = SIA.party_popularity_100@democratic
+				neutrality = SIA.party_popularity_100@neutrality
+				fascism = SIA.party_popularity_100@fascism
+				communism = SIA.party_popularity_100@communism
+			}
+			set_politics = {
+				ruling_party = SIA
+			}
+			create_country_leader = {
+				name = "Siamese International Government"
+				desc = ""
+				picture = GFX_Portrait_international_indochina_state
+				expire = "1965.1.1"
+				ideology = socialism
+				traits = {
+					cabinet_crisis
+				}
+			}
+			set_cosmetic_tag = SIA_indochina_tag
+		}
+		SIA = {
+			set_autonomy = {
+				target = SIA.create_puppet
+				autonomous_state = autonomy_personal_union
+				freedom_level = 0.2
+			}
+		}
+		clear_variable = SIA.create_puppet
+		hidden_effect = {
+			set_country_flag = SIA_international_state_formed
+		}
+	}
+}
+
+country_event = {
+	id = SIA.37
+	title = SIA.37.t
+	desc = SIA.37.desc
+	picture = GFX_report_event_usa_macarthur_speech
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Bad News.."
+
+		ai_chance = {
+			base = 1
+		}
+
+		ROOT = { add_opinion_modifier = { target = PREV modifier = medium_decrease } }
+	}
+}
+
+######
+######
+news_event = {
+	id = SIA_news.1
+	title = SIA_news.1.t
+	desc = SIA_news.1.d
+	picture = GFX_news_event_generic_funeral
+
+	major = yes
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = "Like 16th Century..."
+	}
+}

@@ -1,0 +1,66 @@
+TUR_ataturk_economy = {
+
+	if = {
+		limit = {
+			democratic > TUR.party_popularity@communism
+		}
+		if = {
+			limit = {
+				democratic > 0.10
+			}
+			add_to_variable = { popularity_level = 1 }
+		}
+		else_if = {
+			limit = {
+				democratic > 0.20
+			}
+			add_to_variable = { popularity_level = 2 }
+		}
+		else_if = {
+			limit = {
+				democratic > 0.30
+			}
+			add_to_variable = { popularity_level = 3 }
+		}
+	}
+
+	if = {
+		limit = {
+			communism > TUR.party_popularity@democratic
+		}
+		if = {
+			limit = {
+				communism > 0.10
+			}
+			add_to_variable = { popularity_level = -1 }
+		}
+		else_if = {
+			limit = {
+				communism > 0.20
+			}
+			add_to_variable = { popularity_level = -2 }
+		}
+		else_if = {
+			limit = {
+				communism > 0.30
+			}
+			add_to_variable = { popularity_level = -3 }
+		}
+	}
+
+	else_if = {
+		limit = {
+			communism < 0.10
+			democratic < 0.10
+		}
+		set_variable = { popularity_level = 4 }
+	}
+
+	TUR_economy_icon_frames = yes
+}
+
+TUR_economy_icon_frames = {
+	set_variable = { current_religion_icon_frame = popularity_level }
+	set_variable = { religion_current_tooltip = prestige_current }
+	set_variable = { current_religion_icon_frame = popularity_level }
+}

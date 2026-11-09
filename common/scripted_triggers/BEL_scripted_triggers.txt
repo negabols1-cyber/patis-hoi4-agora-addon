@@ -1,0 +1,159 @@
+BEL_rapid_mob_manpower_law_trigger = {
+	if = {
+		limit = {
+			hidden_trigger = {
+				original_tag = BEL
+				has_government = democratic
+			}
+		}
+
+		has_completed_focus = BEL_rapid_mobilization
+	}
+	else = {
+		hidden_trigger = { always = no }  #NEED TO HAVE AN ALWAYS AS AN END STATEMENT IF URE USING AN IF ELSE IN AN OR STATEMENT OTHERWISE THE EVALUATION BREAKS!!
+	}
+}
+
+BEL_check_great_depression_idea = {
+	OR = {
+		has_idea = BEL_great_depression1
+		has_idea = BEL_great_depression2
+		has_idea = BEL_great_depression3
+		#has_idea = BEL_great_depression4
+	}
+}
+
+BEL_is_historical_ai = {
+	OR = {
+		AND = {
+			is_historical_focus_on = yes
+			has_game_rule = {
+				rule = BEL_ai_behavior
+				option = DEFAULT
+			}
+		}
+		has_country_flag = BEL_AI_RANDOM_HISTORICAL
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = HISTORICAL
+		}
+	}
+}
+
+BEL_is_alternate_democratic_ai = {
+	OR = {
+		has_country_flag = BEL_AI_RANDOM_DEMOCRATIC_ALTERNATE
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = DEMOCRATIC_ALTERNATE
+		}
+	}
+}
+
+BEL_is_fascist_puppet_ai = {
+	OR = {
+		has_country_flag = BEL_AI_RANDOM_FASCIST_PUPPET
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = FASCIST_PUPPET
+		}
+	}
+}
+
+BEL_is_fascist_dutchland_ai = {
+	OR = {
+		has_country_flag = BEL_AI_RANDOM_FASCIST_DUTCHLAND
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = FASCIST_DUTCHLAND
+		}
+	}
+}
+
+BEL_is_fascist_any_ai = {
+	OR = {
+		has_country_flag = BEL_AI_RANDOM_FASCIST_DUTCHLAND
+		has_country_flag = BEL_AI_RANDOM_FASCIST_PUPPET
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = FASCIST_DUTCHLAND
+		}
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = FASCIST_PUPPET
+		}
+	}
+}
+
+BEL_is_communist_ai = {
+	OR = {
+		has_country_flag = BEL_AI_RANDOM_COMMUNIST
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = COMMUNIST
+		}
+	}
+}
+
+BEL_is_social_democratic_ai = {
+	OR = {
+		has_country_flag = BEL_AI_RANDOM_SOCIAL_DEMOCRACY
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = SOCIAL_DEMOCRACY
+		}
+	}
+}
+
+BEL_is_socialist_ai = {
+	OR = {
+		has_country_flag = BEL_AI_RANDOM_SOCIAL_DEMOCRACY
+		has_country_flag = BEL_AI_RANDOM_COMMUNIST
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = SOCIAL_DEMOCRACY
+		}
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = COMMUNIST
+		}
+	}
+}
+
+BEL_is_monarchy_ai = {
+	OR = {
+		has_country_flag = BEL_AI_RANDOM_MONARCHY
+		has_game_rule = {
+			rule = BEL_ai_behavior
+			option = MONARCHY
+		}
+	}
+}
+
+BEL_state_or_vp_name_should_change = {
+	OR = {
+		AND = {
+			ROOT = { original_tag = BEL }
+			NOT = { FROM = { original_tag = BEL } } #Not civil wars
+		}
+		AND = {
+			FROM = { original_tag = BEL }
+			NOT = { ROOT = { original_tag = BEL } } #Not civil wars
+		}
+	}
+	OR = {
+		FROM.FROM = { state = 29 } # Dunkerque / Lille // (Duunkerke / Rysel)
+		FROM.FROM = { state = 34 } # Charleroi / Liége // (Tchålerwè / Lîdje)
+	}
+}
+
+BEL_is_benelux_nation = {
+	custom_trigger_tooltip = {
+		tooltip = BEL_is_benelux_nation_tt
+		OR = {
+			original_tag = HOL
+			original_tag = BEL
+			original_tag = LUX
+		}
+	}
+}

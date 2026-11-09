@@ -1,0 +1,809 @@
+﻿add_namespace = SWE
+
+#Germany
+country_event = {
+	id = SWE.1
+	title = "Swedish trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		add_ideas = SWE_GER_trade
+		SWE = {add_ideas = SWE_GER_trade
+			country_event = SWE.4
+		}
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE_trade.5}
+		country_event = SWE.5
+
+	}
+}
+#England
+country_event = {
+	id = SWE.2
+	title = "Swedish trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		add_ideas = SWE_ENG_trade
+		SWE = {add_ideas = SWE_ENG_trade
+			country_event = SWE.4
+		}
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+
+	}
+}
+#soviet
+country_event = {
+	id = SWE.3
+	title = "Swedish trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		add_ideas = SWE_SOV_trade
+		SWE = {add_ideas = SWE_SOV_trade
+			country_event = SWE.4
+		}
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+
+	}
+}
+#accept
+country_event = {
+	id = SWE.4
+	title = "Swedish trade"
+	desc = "They accepted our trade request"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Nice"
+	}
+}
+#refuse
+country_event = {
+	id = SWE.5
+	title = "Swedish trade"
+	desc = "They refuse our trade request"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Darn"
+	}
+}
+#investment
+country_event = {
+	id = SWE.6
+	title = "Sweden wants investment"
+	desc = ""
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Civil factory investment"
+		add_political_power = -100
+		SWE = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Military factory investment"
+		add_political_power = -100
+		SWE = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+
+	}
+	option = {
+		name = "No we will not invest"
+		SWE = {country_event = SWE.5}
+		add_political_power = 50
+		if = {
+			limit = {
+				ROOT = {has_idea = SWE_ENG_trade}
+			}
+			remove_ideas = SWE_ENG_trade
+			SWE = {remove_ideas = SWE_ENG_trade}
+		}
+		if = {
+			limit = {
+				ROOT = {has_idea = SWE_GER_trade}
+			}
+			remove_ideas = SWE_GER_trade
+			SWE = {remove_ideas = SWE_GER_trade}
+		}
+		if = {
+			limit = {
+				ROOT = {has_idea = SWE_SOV_trade}
+			}
+			remove_ideas = SWE_SOV_trade
+			SWE = {remove_ideas = SWE_SOV_trade}
+		}
+
+	}
+}
+country_event = {
+	id = SWE.7
+	title = "Swedish ship trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		SWE = {add_ideas = the_long_lance}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.8
+	title = "Sweden wants investment"
+	desc = ""
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Naval base investment"
+		SWE = {
+			138 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					province = 11215
+					instant_build = yes
+				}
+			}
+		}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Dockyard investment"
+		SWE = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+
+	}
+	option = {
+		name = "No we will not invest"
+		SWE = {country_event = SWE.5}
+		add_political_power = 150
+
+	}
+}
+country_event = {
+	id = SWE.9
+	title = "Swedish ship trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		SWE = {add_ideas = british_convoy_discount}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.10
+	title = "Swedish ship trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		SWE = {add_ideas = liberty_ships_focus}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.11
+	title = "Swedish tank trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		SWE = {add_ideas = SWE_usa_tanks}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.12
+	title = "Swedish gun trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ROOT = {add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+		SWE = {	add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1000
+			}
+			141 = {
+				remove_building = {
+					type = industrial_complex
+					level = 1
+					}}
+		}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.13
+	title = "Swedish tank trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		SWE = {add_ideas = GER_standard_panzer}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.14
+	title = "Swedish tank trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		SWE = {add_ideas = SOV_the_iron_wall_of_russian_resolve}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.15
+	title = "Swedish air trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		#SWE = {add_ideas = ITA_local_development_buff}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.16
+	title = "Swedish fighter trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ROOT = {add_equipment_to_stockpile = {
+				type = fighter_equipment_1
+				amount = -1000
+			}
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+		SWE = {	add_equipment_to_stockpile = {
+				type = fighter_equipment_1
+				amount = 1000
+			}
+			141 = {
+				remove_building = {
+					type = industrial_complex
+					level = 2
+					}}
+		}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.17
+	title = "Swedish air trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		SWE = {add_ideas = british_fighter_discount}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.18
+	title = "Swedish air trade"
+	desc = "Sweden wants to strengthen its trade with us"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		SWE = {
+			custom_effect_tooltip = GER_expand_luftwaffe_hidden_tt
+			hidden_effect = {
+				add_ideas = GER_expanded_luftwaffe
+			}
+		}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+		add_political_power = -100
+	}
+}
+country_event = {
+	id = SWE.19
+	title = "Sweden investment"
+	desc = ""
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Civil factory investment"
+		ROOT = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		add_timed_idea = { idea = SWE_tac_investment days = 30 }
+	}
+	option = {
+		name = "Military factory investment"
+		ROOT = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		add_political_power = 100
+
+	}
+}
+country_event = {
+	id = SWE.20
+	title = "Sweden colonial sale"
+	desc = "Sweden wants to buy our nigeria colony"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ENG = {
+			136 = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		SWE = {
+			transfer_state = 558
+			141 ={
+				remove_building = {
+					type = industrial_complex
+					level = 3
+				}
+			}
+			139 ={
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+		}
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+	}
+}
+country_event = {
+	id = SWE.21
+	title = "Sweden colonial sale"
+	desc = "Sweden wants to buy our ivory coast colony"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		FRA = {
+			16 = {
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		SWE = {
+			transfer_state = 779
+			140 ={
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			138 ={
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+		}
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+	}
+}
+country_event = {
+	id = SWE.22
+	title = "Swedish norwegian union"
+	desc = "Sweden proposes to unify as before"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		SWE = {
+			annex_country = { target = NOR transfer_troops = yes }
+		}
+	}
+	option = {
+		name = "Nope"
+		SWE = {country_event = SWE.5}
+	}
+}
+country_event = {
+	id = SWE.23
+	title = "Alan's award?"
+	desc = "Sweden wants Alan back"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Aland and Lappi belong to Sweden"
+		FIN = {
+			country_event = SWE.24
+		}
+	}
+	option = {
+		name = "Aland belongs to Sweden and has rights in Lappide."
+		FIN = {country_event = SWE.25}
+	}
+	option = {
+		name = "No Aland belongs to Finland."
+		SWE = {country_event = SWE.26}
+	}
+}
+country_event = {
+	id = SWE.24
+	title = "Alan's award?"
+	desc = "Sweden wants Alan back"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Aland and Lappi belong to Sweden"
+		SWE = {
+			transfer_state = 145
+			transfer_state = 148
+			transfer_state = 722
+			transfer_state = 147
+			145 = { set_demilitarized_zone = no }
+		}
+		145 = {add_core_of = SWE}
+		148 = {add_core_of = SWE}
+	}
+	option = {
+		name = "No."
+		SWE = {
+			country_event = SWE.26
+
+		}
+	}
+
+}
+country_event = {
+	id = SWE.25
+	title = "Alan's award?"
+	desc = "Sweden wants Alan back"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Aland and Lappi belong to Sweden"
+		SWE = {
+			transfer_state = 145
+		}
+		148 = {add_claim_by = SWE}
+		722 = {add_claim_by = SWE}
+		147 = {add_claim_by = SWE}
+		145 = {add_core_of = SWE}
+	}
+	option = {
+		name = "No."
+		SWE = {
+			country_event = SWE.26
+		}
+		FIN = {
+			148 = { set_demilitarized_zone = yes }
+		}
+	}
+
+}
+country_event = {
+	id = SWE.26
+	title = "Finland refuse"
+	desc = "Sweden wants Alan back"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Then this is  war"
+		create_wargoal= {
+			type = annex_everything
+			target = FIN
+		}
+	}
+	option = {
+		name = "No."
+		SWE = {
+			148 = {add_claim_by = SWE}
+		}
+	}
+
+}
+country_event = {
+	id = SWE.27
+	title = "Military organization"
+	desc = "We must set up a military organization like in Germany, which is the heart of our regime"
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Blixtförbundet:Let's give importance to modernized fast speed"
+		SWE = {add_ideas = SWE_army_1}
+	}
+	option = {
+		name = "Nationalsocialistiska Vakter:We must form a semi-police-style unit to suppress the country's riots."
+		add_ideas = SWE_army_2
+	}
+	option = {
+		name = "Revolverkår:Special operations units to support our soldiers"
+		add_ideas = SWE_army_3
+	}
+}
+#easter egg
+country_event = {
+	id = SWE.28
+	title = "Islamic immigration"
+	desc = "Immigrants coming to our country are preparing for the rebellion"
+	picture = GFX_report_event_generic_conference
+	fire_only_once = yes
+	trigger = {
+		original_tag = SWE
+		has_focus_tree = ef_sweden_focus
+		date > 1937.1.1
+		NOT = {
+			has_completed_focus = SWE_forsvarsbeslutet
+			has_completed_focus = SWE_stay_neatural
+			has_completed_focus = SWE_interve
+		}
+		NOT = {
+			has_global_flag = his_only
+		}
+	}
+
+	option = {
+		name = "We should embrace these immigrants who came to our country and move on to a new state administration."
+		set_country_flag = allow_cerkes
+		hidden_effect = {
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	option = {
+		name = "Our country does not need new immigrants and their laws	."
+		add_stability = -0.100
+	}
+
+}
+
+
+
+

@@ -1,0 +1,33 @@
+@manifest_fulfilled_value = 0.75
+
+# Bulwark of Libertea
+faction_manifest_bulwark_of_liberty = {
+	name = bulwark_of_liberty_name
+	description = bulwark_of_liberty_desc
+	is_manifest = yes
+	ratio_progress = {
+		total_amount_collection = collection:countries_in_europe
+		completed_amount_collection = collection:europen_faction_members
+
+		range = {
+			max = 1
+		}
+
+		scale = {
+			agency_upgrade_time = -0.15
+			communism_drift = -0.10
+		}
+
+		progress_sections = {
+			manifest_fulfilled = {
+				min = @manifest_fulfilled_value
+
+				modifier = {
+					army_core_defence_factor = 0.05
+					stability_factor = 0.05
+					war_support_factor = 0.05
+				}
+			}
+		}
+	}
+}

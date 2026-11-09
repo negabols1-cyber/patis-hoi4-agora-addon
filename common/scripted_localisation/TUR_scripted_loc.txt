@@ -1,0 +1,85 @@
+defined_text = {
+	name = healthbar
+
+	text = {
+		trigger = {
+			check_variable = { 0 < ataturk_health }
+			check_variable = { 0 > ataturk_health }
+		}
+		localization_key = TUR_health_bar_text
+	}
+}
+
+defined_text = {
+	name = ataturk_economy_bar
+
+	text = {
+		trigger = {
+			OR = {
+				has_idea = soviet_1
+				has_idea = soviet_2
+				has_idea = soviet_3
+			}
+		}
+		localization_key = TUR_Eastern_economy
+	}
+
+	text = {
+		trigger = {
+			OR = {
+				has_idea = american_1
+				has_idea = american_2
+				has_idea = american_3
+			}
+		}
+		localization_key = TUR_Western_economy
+	}
+
+	text = {
+		trigger = {
+			has_idea = neutrality_influence_idea
+		}
+		localization_key = TUR_Neutral_economy
+	}
+}
+
+defined_text = {
+	name = country_gdp_level
+
+	text = {
+		trigger = {
+			check_variable = { GDP_position < 3 }
+		}
+		localization_key = gdp_super_power
+	}
+	text = {
+		trigger = {
+			check_variable = { GDP_position < 11 }
+			check_variable = { GDP_position > 3 }
+		}
+		localization_key = gdp_high
+	}
+
+	text = {
+		trigger = {
+			check_variable = { GDP_position < 21 }
+			check_variable = { GDP_position > 9 }
+		}
+		localization_key = gdp_medium
+	}
+
+	text = {
+		trigger = {
+			check_variable = { GDP_position < 51 }
+			check_variable = { GDP_position > 19 }
+		}
+		localization_key = gdp_low
+	}
+
+	text = {
+		trigger = {
+			check_variable = { GDP_position > 50 }
+		}
+		localization_key = gdp_poor
+	}
+}

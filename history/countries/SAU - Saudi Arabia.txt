@@ -1,0 +1,151 @@
+﻿capital = 292
+
+oob = "SAU_1936"
+
+# Starting tech
+set_technology = {
+	infantry_weapons = 1
+	tech_trucks = 1
+	basic_train = 1
+	tech_support = 1
+	fuel_silos = 1
+}
+
+if = {
+	limit = {
+		has_dlc = "Battle for the Bosporus"
+	}
+	set_technology = { camelry = 1 }
+}
+if = {
+	limit = {
+		NOT = { has_dlc = "No Step Back" }
+	}
+	set_technology = {
+		gwtank = 1
+	}
+}
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	set_technology = {
+		gwtank_chassis = 1
+	}
+}
+
+set_research_slots = 2
+
+set_convoys = 70
+set_stability = 0.45
+set_war_support = 0.30
+
+recruit_character = SAU_abdulaziz_ibn_saud
+recruit_character = SAU_philip_gordon_lee
+recruit_character = SAU_youssef_al_bishi
+recruit_character = SAU_hamadan_al_odha
+recruit_character = SAU_karim_nassar
+recruit_character = SAU_hamed_al_sabani
+recruit_character = SAU_saud_bin_abdulaziz_al_saud
+recruit_character = SAU_ismail_ali_al_salhi
+recruit_character = SAU_ali_muhammed_khan
+recruit_character = SAU_abdullah_suleiman_al_hamdan
+recruit_character = SAU_faisal_bin_abdulaziz_al_saud
+recruit_character = SAU_saad_abdulaziz_saud
+recruit_character = SAU_khalid_abdulaziz_arabia
+recruit_character = SAU_abdullah_rahman_al_saud
+recruit_character = SAU_saud_al_kabeer_bin_abdulaziz_al_saud
+recruit_character = SAU_mansour_abdulaziz_saud
+recruit_character = SAU_muhammad_kashoggi
+recruit_character = SAU_muhammad_ibn_ibrahim
+recruit_character = SAU_khalid_gargani
+recruit_character = SAU_muhammad_bin_ladin
+recruit_character = SAU_amin_al_husseini
+recruit_character = SAU_muhammad_tariq_tarabulsi
+
+recruit_character = SAU_karim_khakimov
+recruit_character = SAU_kuzma_galitsky
+recruit_character = SAU_ivan_fedyuninsky
+recruit_character = SAU_dmitry_lelyushenko
+
+SAU_abdulaziz_ibn_saud = {
+	set_character_flag = SAU_royal_family_member_flag
+}
+SAU_saud_bin_abdulaziz_al_saud = {
+	set_character_flag = SAU_royal_family_member_flag
+}
+SAU_faisal_bin_abdulaziz_al_saud = {
+	set_character_flag = SAU_royal_family_member_flag
+}
+SAU_khalid_abdulaziz_arabia = {
+	set_character_flag = SAU_royal_family_member_flag
+}
+SAU_abdullah_rahman_al_saud = {
+	set_character_flag = SAU_royal_family_member_flag
+}
+SAU_saad_abdulaziz_saud = {
+	set_character_flag = SAU_royal_family_member_flag
+}
+SAU_saud_al_kabeer_bin_abdulaziz_al_saud = {
+	set_character_flag = SAU_royal_family_member_flag
+}
+SAU_mansour_abdulaziz_saud = {
+	set_character_flag = SAU_royal_family_member_flag
+}
+
+#Army
+set_variable = { SAU_royal_saudi_army_experience_gain_army_factor = -0.1 }
+set_variable = { SAU_royal_saudi_army_org_factor = 0 }
+set_variable = { SAU_royal_saudi_army_org_regain = 0 }
+set_variable = { SAU_royal_saudi_army_morale_factor = -0.05 }
+set_variable = { SAU_royal_saudi_army_attack_factor = -0.05 }
+set_variable = { SAU_royal_saudi_army_army_core_defence_factor = 0 }
+set_variable = { SAU_royal_saudi_army_army_armor_speed_factor = 0 }
+set_variable = { SAU_royal_saudi_army_heat_attrition_factor = -0.1 }
+set_variable = { SAU_royal_saudi_army_acclimatization_hot_climate_gain_factor = 0 }
+set_variable = { SAU_royal_saudi_army_conscription_factor = 0 }
+set_variable = { SAU_royal_saudi_army_conscription = 0 }
+set_variable = { SAU_royal_saudi_army_special_forces_cap = 0 }
+set_variable = { SAU_royal_saudi_army_initiative_factor = 0 }
+set_variable = { SAU_royal_saudi_army_max_planning_factor = 0 }
+set_variable = { SAU_royal_saudi_army_planning_speed = 0 }
+set_variable = { SAU_royal_saudi_army_infantry_attack_factor = 0 }
+set_variable = { SAU_royal_saudi_army_supply_node_range = 0 }
+set_variable = { SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_attack_factor = 0.1 }
+set_variable = { SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_defence_factor = 0.1 }
+set_variable = { SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_speed_factor = 0.05 }
+set_variable = { SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_max_org_factor = 0 }
+set_variable = { SAU_royal_saudi_army_unit_limit_bonus = 0 }
+add_dynamic_modifier = { modifier = SAU_royal_saudi_army_dmod }
+
+#Old Flag
+set_cosmetic_tag = SAU_old_flag
+
+856 = {
+	add_dynamic_modifier = { modifier = SAU_hajj_area }
+}
+
+every_owned_state = {
+	ROOT = {
+		add_to_array = { array = owned_states_at_game_start value = PREV }
+	}
+}
+
+set_politics = {
+	ruling_party = neutrality
+	last_election = "1936.1.1"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	neutrality = 100
+}
+
+add_ideas = {
+	SAU_sharia_law
+	SAU_arbitrary_budget_spending
+	SAU_hajj_dependent_economy
+	SAU_the_ulama
+	SAU_male_guardianship_system
+}

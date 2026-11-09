@@ -1,0 +1,6241 @@
+focus_tree = {
+	id = ef_sweden_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = SWE
+			NOT = { has_dlc = "Arms Against Tyranny" }
+		}
+	}
+
+	continuous_focus_position = { x = 1300 y = 2000 }
+
+	#Economy
+	focus = {
+		id = SWE_indus_sport
+		icon = GFX_goal_generic_construct_civilian
+		x = 6
+		y = 0
+		cost = 6
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 1
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				prioritize = {
+					140
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_tech_bonus = {
+				name = SWE_civil_works
+				bonus = 0.75
+				uses = 1
+				category = industry
+			}
+		}
+	}
+	focus = {
+		id = SWE_begin_rearmed
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = SWE_indus_sport }
+		x = 2
+		y = 1
+		relative_position_id = SWE_indus_sport
+		cost = 6
+		ai_will_do = {
+			base = 20
+		}
+		available = {
+			OR = {
+				NOT = { has_government = democratic }
+				has_war_support > 0.15
+				threat > 0.05
+				has_war = yes
+			}
+		}
+		bypass = {
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			army_experience = 10
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			set_country_flag = SWE_begin_rearmament_flag
+		}
+	}
+	focus = {
+		id = SWE_build_up_mil
+		available = {
+			OR = {
+				NOT = { has_government = democratic }
+				has_war_support > 0.18
+				threat > 0.13
+				has_war = yes
+			}
+			has_country_flag = {
+				flag = SWE_begin_rearmament_flag
+				days > 75
+			}
+		}
+		prerequisite = { focus = SWE_begin_rearmed }
+		icon = GFX_goal_Focus_Military_Mobilisation
+		x = 0
+		y = 1
+		relative_position_id = SWE_begin_rearmed
+		cost = 6
+		ai_will_do = {
+			base = 1
+		}
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_full_up_mil
+		available = {
+			OR = {
+				NOT = { has_government = democratic }
+				has_war_support > 0.22
+				threat > 0.22
+				has_war = yes
+			}
+			has_country_flag = {
+				flag = SWE_begin_rearmament_flag
+				days > 200
+			}
+		}
+		prerequisite = { focus = SWE_build_up_mil }
+		icon = GFX_goal_forced_mil
+		x = 0
+		y = 1
+		relative_position_id = SWE_build_up_mil
+		cost = 8
+		ai_will_do = {
+			base = 1
+		}
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_civ_fatorty
+		icon = GFX_goal_generic_improve_industry
+		cost = 6
+		ai_will_do = {
+			base = 1
+		}
+		prerequisite = { focus = SWE_indus_sport }
+		x = -2
+		y = 1
+		relative_position_id = SWE_indus_sport
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					is_core_of = ROOT
+					is_in_home_area = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = SWE_civil_works
+				bonus = 0.75
+				uses = 1
+				category = industry
+			}
+			add_ideas = SWE_industrial_reinvigoration
+		}
+	}
+	focus = {
+		id = SWE_support_civ_endu
+		icon = GFX_focus_generic_industry_3
+		cost = 7
+		ai_will_do = {
+			base = 1
+		}
+		prerequisite = { focus = SWE_civ_fatorty }
+		x = -1
+		y = 1
+		relative_position_id = SWE_civ_fatorty
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					is_core_of = ROOT
+					is_in_home_area = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					is_core_of = ROOT
+					is_in_home_area = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_land_refom
+		icon = GFX_goal_generic_construct_infrastructure
+		relative_position_id = SWE_support_civ_endu
+		x = 0
+		y = 1
+		cost = 7
+		ai_will_do = {
+			base = 1
+		}
+		prerequisite = { focus = SWE_support_civ_endu }
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			unlock_decision_category_tooltip = SWE_land_reform
+			build_railway = {
+				level = 1
+				build_only_on_allied = yes
+				controller_priority = {
+					base = 1
+					modifier = {
+						tag = SWE
+						add = 1
+					}
+				}
+				path = { 6050 9149 3182 11091 9117 49 9051 125 9035 3108 205 130 6063 11185 118 11067 6132 }
+				start_province = 6050
+				target_province = 6132
+			}
+			build_railway = {
+				level = 1
+				build_only_on_allied = yes
+				controller_priority = {
+					base = 1
+					modifier = {
+						tag = SWE
+						add = 1
+					}
+				}
+				path = { 9220 6161 6083 9108 3104 9186 9226 11155 3095 101 }
+				start_province = 9220
+				target_province = 101
+			}
+		}
+	}
+	focus = {
+		id = SWE_invest_aliminyum
+		icon = GFX_focus_generic_aluminum
+		x = 0
+		y = 1
+		cost = 5
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			controls_state = 141
+			controls_state = 38
+		}
+		prerequisite = { focus = SWE_indus_sport }
+		relative_position_id = SWE_indus_sport
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			141 = {
+				add_resource = {
+					type = aluminium
+					amount = 7
+				}
+			}
+			38 = {
+				add_resource = {
+					type = aluminium
+					amount = 7
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_tac_reform
+		icon = GFX_goal_generic_consumer_goods
+		cost = 5
+		ai_will_do = {
+			base = 1
+		}
+		prerequisite = { focus = SWE_land_refom }
+		x = -2
+		y = 1
+		relative_position_id = SWE_land_refom
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			add_ideas = SWE_tac_refom
+			#add_stability = -0.05
+		}
+	}
+	focus = {
+		id = SWE_invest_iron
+		icon = GFX_focus_generic_steel
+		x = 0
+		y = 1
+		cost = 5
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			controls_state = 139
+			controls_state = 141
+		}
+		prerequisite = { focus = SWE_invest_aliminyum }
+		relative_position_id = SWE_invest_aliminyum
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			139 = {
+				add_resource = {
+					type = steel
+					amount = 7
+				}
+			}
+			141 = {
+				add_resource = {
+					type = steel
+					amount = 3
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_invest_resource_extraction
+		icon = GFX_goal_generic_construction2
+		x = 0
+		y = 1
+		cost = 6
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			controls_state = 38
+			controls_state = 141
+			controls_state = 666
+		}
+		prerequisite = { focus = SWE_invest_iron }
+		relative_position_id = SWE_invest_iron
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			add_tech_bonus = {
+				name = SWE_invest_resource_extraction
+				bonus = 1.0
+				uses = 1
+				category = excavation_tech
+			}
+			add_tech_bonus = {
+				name = SWE_invest_resource_extraction
+				bonus = 0.5
+				uses = 1
+				category = cat_synth_resources
+			}
+			38 = {
+				add_resource = {
+					type = tungsten
+					amount = 8
+				}
+				add_resource = {
+					type = steel
+					amount = 4
+				}
+			}
+			141 = {
+				add_resource = {
+					type = steel
+					amount = 2
+				}
+				add_resource = {
+					type = aluminium
+					amount = 5
+				}
+			}
+			38 = {
+				add_resource = {
+					type = chromium
+					amount = 6
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_reserg_slot
+		icon = GFX_goal_double_research
+		cost = 5
+		ai_will_do = {
+			base = 1
+		}
+		prerequisite = { focus = SWE_invest_resource_extraction }
+		x = 1
+		y = 1
+		relative_position_id = SWE_invest_resource_extraction
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+	focus = {
+		id = SWE_trade_decitions
+		icon = GFX_goal_generic_build_tank
+		relative_position_id = SWE_invest_resource_extraction
+		x = -1
+		y = 1
+		cost = 9
+		ai_will_do = {
+			base = 1
+		}
+		prerequisite = { focus = SWE_land_refom  }
+		prerequisite = { focus = SWE_invest_resource_extraction }
+		available = {
+			OR = {
+				AND = {
+					has_government = democratic
+					has_completed_focus = SWE_stay_neatural
+				}
+				has_completed_focus = SWE_full_up_mil
+			}
+		}
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			unlock_decision_category_tooltip = SWE_trade
+		}
+	}
+	focus = {
+		id = SWE_construction
+		icon = GFX_goal_continuous_repairments
+		relative_position_id = SWE_land_refom
+		x = 0
+		y = 1
+		cost = 9
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_land_refom }
+		ai_will_do = {
+			base = 1
+		}
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					is_core_of = ROOT
+					is_in_home_area = yes
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+					is_core_of = ROOT
+					is_in_home_area = yes
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_dispanded_endu
+		icon = GFX_goal_generic_production2
+		relative_position_id = SWE_support_civ_endu
+		x = -2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_support_civ_endu }
+		ai_will_do = {
+			base = 1
+		}
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 0.75
+				uses = 2
+				category = dispersed_industry_category
+			}
+		}
+	}
+	#Army
+	focus = {
+		id = SWE_forsvarsbeslutet
+		icon = GFX_goal_SWE_Military_Coup
+		x = 6
+		y = 7
+
+		cost = 5
+
+
+
+
+
+		completion_reward = {
+			army_experience = 25
+			navy_experience = 10
+			air_experience = 10
+			swap_ideas = {
+				remove_idea = SWE_uneed_military
+				add_idea = SWE_uneed_military2
+			}
+		}
+		ai_will_do = {
+			factor = 100
+		}
+	}
+
+	focus = {
+		id = SWE_radar
+		icon = GFX_goal_generic_radar
+		relative_position_id = SWE_forsvarsbeslutet
+		x = 2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			has_completed_focus = SWE_begin_rearmed
+		}
+		prerequisite = { focus = SWE_forsvarsbeslutet }
+		ai_will_do = {
+			base = 1
+		}
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1
+				uses = 2
+				category = radar_tech
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_lottorna
+		icon = GFX_focus_generic_women_in_military
+		prerequisite = { focus = SWE_forsvarsbeslutet }
+		relative_position_id = SWE_forsvarsbeslutet
+		x = -2
+		y = 1
+		cost = 5
+		available = {
+			OR = {
+				threat > 0.25
+				has_war = yes
+			}
+		}
+		completion_reward = {
+			add_ideas = SWE_lottorna_idea
+		}
+		ai_will_do = {
+			base = 1
+		}
+		search_filters = { FOCUS_FILTER_MANPOWER }
+	}
+	focus = {
+		id = SWE_hemvarnet_ef_focus
+		icon = GFX_focus_generic_little_entente
+		prerequisite = { focus = SWE_lottorna }
+		relative_position_id = SWE_lottorna
+		x = 0
+		y = 1
+		cost = 5
+		available = {
+			OR = {
+				threat > 0.25
+				has_war = yes
+			}
+		}
+		completion_reward = {
+			add_ideas = SWE_hemvarnet_idea
+		}
+		ai_will_do = {
+			base = 1
+		}
+		search_filters = { FOCUS_FILTER_MANPOWER }
+	}
+
+	focus = {
+		id = SWE_marinstaben
+		icon = GFX_goal_SWE_navy
+		x = -6
+		y = 1
+		relative_position_id = SWE_forsvarsbeslutet
+		cost = 10
+		prerequisite = { focus = SWE_forsvarsbeslutet }
+		completion_reward = {
+			navy_experience = 25
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+		search_filters = {FOCUS_FILTER_RESEARCH}
+	}
+	focus = {
+		id = SWE_naval_effort
+		icon = GFX_goal_SWE_medal_navy
+		x = 1
+		y = 1
+		cost = 6
+		relative_position_id = SWE_marinstaben
+		prerequisite = { focus = SWE_marinstaben }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = SWE_u-batsteknologi
+		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH}
+		icon = GFX_goal_generic_navy_submarine
+		x = -1
+		y = 1
+		relative_position_id = SWE_marinstaben
+		cost = 6
+		prerequisite = { focus = SWE_marinstaben }
+		completion_reward = {
+			138 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					province = 11215
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SWE_master_of_seas
+		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH}
+		icon = GFX_goal_navy_decision
+		x = 1
+		y = 1
+		relative_position_id = SWE_u-batsteknologi
+		cost = 6
+		prerequisite = { focus = SWE_u-batsteknologi }
+		prerequisite = {focus = SWE_naval_effort}
+		completion_reward = {
+			141 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			factor = 10
+		}
+	}
+	focus = {
+		id = SWE_submarine_efoort
+		search_filters = { FOCUS_FILTER_RESEARCH}
+		icon = GFX_goal_generic_coastal_navy
+		x = 0
+		y = 1
+		relative_position_id = SWE_master_of_seas
+		cost = 8
+		prerequisite = { focus = SWE_master_of_seas}
+		completion_reward = {
+			add_tech_bonus = {
+				name = naval_tech_bonus
+				bonus = 1.0
+				uses = 3
+				category = dd_tech
+				category = cv_tech
+				category = ca_tech
+			}
+		}
+	}
+	focus = {
+		id = SWE_eng_ship
+		icon = GFX_british_navy
+		x = 0
+		y = 1
+		relative_position_id = SWE_submarine_efoort
+		mutually_exclusive = {focus = SWE_jap_ship focus = SWE_usa_ship}
+		cost = 10
+		prerequisite = { focus = SWE_submarine_efoort}
+		available = {
+			NOT = { has_idea = neutrality_idea }
+			has_completed_focus = SWE_trade_decitions
+			ENG = {
+				has_opinion = {
+					target = SWE
+					value > 74
+				}
+			}
+			hidden_trigger = {
+				NOT = { has_idea = SWE_neutrality_idea }
+			}
+		}
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_ENG_ships
+		}
+	}
+	focus = {
+		id = SWE_jap_ship
+		icon = GFX_goal_JAP_Navy
+		x = 2
+		y = 1
+		relative_position_id = SWE_submarine_efoort
+		mutually_exclusive = {focus = SWE_usa_ship focus = SWE_eng_ship}
+		cost = 10
+		prerequisite = { focus = SWE_submarine_efoort}
+		allow_branch = {
+			has_dlc = "Waking the Tiger"
+		}
+		available = {
+			NOT = { has_idea = neutrality_idea }
+			has_completed_focus = SWE_trade_decitions
+			JAP = {
+				has_opinion = {
+					target = SWE
+					value > 74
+				}
+			}
+			hidden_trigger = {
+				NOT = { has_idea = SWE_neutrality_idea }
+			}
+		}
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_JAP_ships
+		}
+	}
+	focus = {
+		id = SWE_usa_ship
+		icon = GFX_goal_USA_navy
+		x = -2
+		y = 1
+		relative_position_id = SWE_submarine_efoort
+		mutually_exclusive = {focus = SWE_jap_ship focus = SWE_eng_ship}
+		cost = 10
+		prerequisite = { focus = SWE_submarine_efoort}
+		available = {
+			NOT = { has_idea = neutrality_idea }
+			has_completed_focus = SWE_trade_decitions
+			USA = {
+				has_opinion = {
+					target = SWE
+					value > 74
+				}
+				has_completed_focus = USA_limited_intervention
+			}
+			hidden_trigger = {
+				NOT = { has_idea = SWE_neutrality_idea }
+			}
+		}
+		allow_branch = {
+			has_dlc = "Man the Guns"
+		}
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_USA_ships
+		}
+	}
+	focus = {
+		id = SWE_flygstaben
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		icon = GFX_goal_SWE_airforce_2
+		x = 6
+		y = 1
+		relative_position_id = SWE_forsvarsbeslutet
+
+		cost = 10
+		prerequisite = { focus = SWE_forsvarsbeslutet }
+
+		search_filters = {FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			air_experience = 25
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+	}
+	focus = {
+		id = SWE_luftvarnet
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY}
+		icon = GFX_focus_SOV_women_in_aviation
+		x = -1
+		y = 1
+		relative_position_id = SWE_flygstaben
+
+		cost = 6
+		prerequisite = { focus = SWE_flygstaben }
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = cat_anti_air
+			}
+
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+			}
+
+		}
+	}
+	focus = {
+		id = SWE_fighter_focus
+		icon = GFX_goal_generic_air_production
+		prerequisite = { focus = SWE_flygstaben }
+		relative_position_id = SWE_flygstaben
+		x = 1
+		y = 1
+		cost = 6
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = swe_ffvs
+			add_tech_bonus = {
+				name = CAS_bonus
+				bonus = 1
+				uses = 1
+				category = air_equipment
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	focus = {
+		id = SWE_supreme_air
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY}
+		icon = GFX_goal_generic_air_heavy_fighter_new
+		x = 1
+		y = 1
+		relative_position_id = SWE_luftvarnet
+
+		cost = 9
+		prerequisite = { focus = SWE_luftvarnet}
+		prerequisite = {focus = SWE_fighter_focus}
+
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = swe_saab
+			add_tech_bonus = {
+				name = medium_air_bonus
+				bonus = 1.0
+				uses = 1
+				category = medium_air
+				category = cas_bomber
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
+		}
+	}
+	focus = {
+		id = SWE_bomber_focus
+		icon = GFX_goal_generic_air_bomber
+		prerequisite = { focus = SWE_supreme_air }
+		relative_position_id = SWE_supreme_air
+		x = 0
+		y = 1
+		cost = 9
+		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				#ahead_reduction = 1
+				bonus = 1
+				uses = 1
+				category = cat_heavy_fighter
+				category = tactical_bomber
+			}
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+	focus = {
+		id = SWE_eng_fly
+		icon = GFX_goal_ENG_devolution_england
+		x = 0
+		y = 1
+		relative_position_id = SWE_bomber_focus
+		mutually_exclusive = {focus = SWE_ger_fly focus = SWE_ita_fly}
+		cost = 10
+		prerequisite = { focus = SWE_bomber_focus}
+		available = {
+			NOT = { has_idea = neutrality_idea }
+			has_completed_focus = SWE_trade_decitions
+			ENG = {
+				has_opinion = {
+					target = SWE
+					value > 74
+				}
+			}
+			hidden_trigger = {
+				NOT = { has_idea = SWE_neutrality_idea }
+			}
+		}
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_ENG_fly
+		}
+	}
+	focus = {
+		id = SWE_ger_fly
+		icon = GFX_goal_GER_Pilots
+		x = 2
+		y = 1
+		relative_position_id = SWE_bomber_focus
+		mutually_exclusive = {focus = SWE_ita_fly focus = SWE_eng_fly}
+		cost = 10
+		prerequisite = { focus = SWE_bomber_focus}
+		available = {
+			NOT = { has_idea = neutrality_idea }
+			has_completed_focus = SWE_trade_decitions
+			GER = {
+				has_opinion = {
+					target = SWE
+					value > 74
+				}
+			}
+			hidden_trigger = {
+				NOT = { has_idea = SWE_neutrality_idea }
+			}
+		}
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_GER_fly
+		}
+	}
+	focus = {
+		id = SWE_ita_fly
+		icon = GFX_goal_italy_regia_marina_photo
+		x = -2
+		y = 1
+		relative_position_id = SWE_bomber_focus
+		mutually_exclusive = {focus = SWE_ger_fly focus = SWE_eng_fly}
+		cost = 10
+		prerequisite = { focus = SWE_bomber_focus}
+		available = {
+			NOT = { has_idea = neutrality_idea }
+			has_completed_focus = SWE_trade_decitions
+			date > 1938.1.1
+			ITA = {
+				has_opinion = {
+					target = SWE
+					value > 74
+				}
+			}
+			hidden_trigger = {
+				NOT = { has_idea = SWE_neutrality_idea }
+			}
+		}
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_ITA_fly
+		}
+	}
+	focus = {
+		id = SWE_armestaben
+		icon = GFX_goal_SWE_army
+		x = 0
+		y = 1
+		relative_position_id = SWE_forsvarsbeslutet
+
+		cost = 10
+		prerequisite = { focus = SWE_forsvarsbeslutet }
+
+		completion_reward = {
+			army_experience = 10
+			custom_effect_tooltip = available_theorist
+			show_ideas_tooltip = SWE_helge_jung
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_delete_debuff1
+		icon = GFX_goal_mass_concentration_of_army
+		prerequisite = { focus = SWE_armestaben }
+		x = 0
+		y = 1
+		relative_position_id = SWE_armestaben
+		cost = 8
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+		completion_reward = {
+			army_experience = 20
+			every_army_leader = {
+				add_planning = 1
+			}
+			swap_ideas = {
+				remove_idea = SWE_uneed_military2
+				add_idea = SWE_uneed_military3
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_mobile_focus
+		icon = GFX_goal_national_mobilization
+		prerequisite = { focus = SWE_armestaben }
+		x = 2
+		y = 1
+		relative_position_id = SWE_armestaben
+
+		cost = 8
+
+		ai_will_do = {
+			base = 10
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = SWE_mobile_focus
+				cost_reduction = 0.35
+				uses = 1
+				category = cat_mobile_warfare
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_the_scania
+		icon = GFX_goal_generic_armored_cars
+		prerequisite = { focus = SWE_delete_debuff1 }
+		x = -2
+		y = 1
+		relative_position_id = SWE_delete_debuff1
+
+		cost = 8
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = scania
+			add_tech_bonus = {
+				name = SWE_the_scania
+				bonus = 1.0
+				uses = 1
+				category = motorized_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_motorized_logistics
+		icon = GFX_ARG_build_hospital
+		prerequisite = { focus = SWE_the_scania }
+		x = 1
+		y = 1
+		relative_position_id = SWE_the_scania
+
+		cost = 8
+
+		ai_will_do = {
+			base = 30
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SWE_motorized_logistics
+				bonus = 1.0
+				uses = 2
+				category = hospital_tech
+				category = logistics_tech
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_develop_tanks
+		icon = GFX_goal_generic_mobile_artillery_medium
+		prerequisite = { focus = SWE_delete_debuff1 }
+		x = 0
+		y = 1
+		relative_position_id = SWE_delete_debuff1
+		search_filters = {FOCUS_FILTER_RESEARCH }
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = landsverk
+			add_tech_bonus = {
+				name = SWE_develop_tanks
+				bonus = 1
+				uses = 2
+				category = armor
+			}
+			if = {
+				limit = {
+					has_dlc = "La Resistance"
+				}
+				add_tech_bonus = {
+					name = armor_bonus
+					bonus = 1
+					uses = 1
+					technology = armored_car1
+					technology = armored_car2
+					technology = armored_car3
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_ski_infantry
+		icon = GFX_focus_generic_manpower
+		prerequisite = { focus = SWE_the_scania }
+		x = -1
+		y = 1
+		relative_position_id = SWE_the_scania
+		cost = 7
+		ai_will_do = {
+			base = 10
+		}
+		completion_reward = {
+			add_ideas = NOR_winter_training
+			#set_technology = { ski_infantry = 1 }
+			custom_effect_tooltip = SWE_ski_infantry_tt
+
+			division_template = {
+				name = "Skidinfanteri"
+				priority = 2
+				is_locked = yes
+				division_cap = 20
+				force_allow_recruiting = yes
+				division_names_group = SWE_INF_01
+				regiments = {
+					ski_battalion = { x = 0 y = 0 }
+					ski_battalion = { x = 0 y = 1 }
+					ski_battalion = { x = 0 y = 2 }
+					ski_battalion = { x = 1 y = 0 }
+					ski_battalion = { x = 1 y = 1 }
+					ski_battalion = { x = 1 y = 2 }
+					ski_battalion = { x = 2 y = 0 }
+					ski_battalion = { x = 2 y = 1 }
+					ski_battalion = { x = 2 y = 2 }
+				}
+				support = {
+					engineer = { x = 0 y = 0 }
+					recon = { x = 0 y = 1 }
+				}
+			}
+		}
+		search_filters = {  FOCUS_FILTER_NAW_UNIQUE_TACTICS }
+	}
+	focus = {
+		id = SWE_delete_debuff2
+		icon = GFX_goal_generic_drafted_army
+		prerequisite = { focus = SWE_develop_tanks }
+		x = 1
+		y = 1
+		relative_position_id = SWE_develop_tanks
+		cost = 9
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			has_completed_focus = SWE_delete_debuff1
+		}
+
+		bypass = {
+
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SWE_uneed_military3
+				add_idea = SWE_uneed_military4
+			}
+		}
+	}
+	focus = {
+		id = SWE_utlandskt_samarbete
+		icon = GFX_goal_production
+		x = 0
+		y = 2
+		relative_position_id = SWE_develop_tanks
+
+		available = {
+		}
+		bypass = {
+		}
+
+		cost = 6
+		prerequisite = { focus = SWE_develop_tanks }
+
+		completion_reward = {
+			add_ideas = SWE_arms_deals
+		}
+	}
+	focus = {
+		id = SWE_total_mobilise
+		icon = GFX_focus_generic_license_production
+		x = 0
+		y = 1
+		relative_position_id = SWE_utlandskt_samarbete
+
+		available = {
+			has_completed_focus = SWE_delete_debuff2
+		}
+		bypass = {
+		}
+
+		cost = 9
+		prerequisite = { focus = SWE_utlandskt_samarbete }
+
+		completion_reward = {
+			remove_ideas = SWE_uneed_military4
+			add_ideas = SWE_car_manufacturing
+		}
+	}
+	focus = {
+		id = SWE_ger_tank
+		icon = GFX_ARG_inv_ger_tank
+		x = 0
+		y = 1
+		relative_position_id = SWE_total_mobilise
+		mutually_exclusive = {focus = SWE_sov_tank focus = SWE_usa_tank}
+		cost = 10
+		prerequisite = { focus = SWE_total_mobilise}
+		available = {
+			NOT = { has_idea = neutrality_idea }
+			has_completed_focus = SWE_trade_decitions
+			GER = {
+				has_opinion = {
+					target = SWE
+					value > 74
+				}
+			}
+			hidden_trigger = {
+				NOT = { has_idea = SWE_neutrality_idea }
+			}
+		}
+		completion_reward = {
+			unlock_decision_tooltip = SWE_GER_tank
+		}
+	}
+	focus = {
+		id = SWE_sov_tank
+		icon = GFX_focus_SOV_the_glory_of_the_red_army_communism
+		x = 2
+		y = 1
+		relative_position_id = SWE_total_mobilise
+		mutually_exclusive = {focus = SWE_ger_tank focus = SWE_usa_tank}
+		cost = 10
+		prerequisite = { focus = SWE_total_mobilise}
+		allow_branch = {
+			has_dlc = "No Step Back"
+		}
+		available = {
+			NOT = { has_idea = neutrality_idea }
+			has_completed_focus = SWE_trade_decitions
+			SOV = {
+				has_opinion = {
+					target = SWE
+					value > 74
+				}
+				has_completed_focus = SOV_beaten_but_not_defeated
+			}
+			hidden_trigger = {
+				NOT = { has_idea = SWE_neutrality_idea }
+			}
+		}
+		completion_reward = {
+			unlock_decision_tooltip = SWE_SOV_tank
+		}
+	}
+	focus = {
+		id = SWE_usa_tank
+		icon = GFX_BRA_american_tank
+		x = -2
+		y = 1
+		relative_position_id = SWE_total_mobilise
+		mutually_exclusive = {focus = SWE_sov_tank focus = SWE_ger_tank}
+		cost = 10
+		prerequisite = { focus = SWE_total_mobilise}
+		allow_branch = {
+			has_dlc = "Man the Guns"
+		}
+		available = {
+			NOT = { has_idea = neutrality_idea }
+			has_completed_focus = SWE_trade_decitions
+			USA = {
+				has_opinion = {
+					target = SWE
+					value > 74
+				}
+				has_completed_focus = USA_limited_intervention
+			}
+			hidden_trigger = {
+				NOT = { has_idea = SWE_neutrality_idea }
+			}
+		}
+		completion_reward = {
+			unlock_decision_tooltip = SWE_USA_tank
+		}
+	}
+	focus = {
+		id = SWE_stay_neatural
+		icon = GFX_goal_HOL_sustain_neutrality
+		x = 12
+		y = 0
+		offset = {
+			x = -2
+			y = 0
+			trigger = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		mutually_exclusive = {focus = SWE_interve }
+		cost = 10
+		available = {
+
+		}
+		ai_will_do = {
+			base = 2
+		}
+		completion_reward = {
+			add_political_power = 175
+		}
+	}
+	focus = {
+		id = SWE_interve
+		icon = GFX_goal_HOL_fires_of_revolution_faux
+		x = 14
+		y = 0
+		mutually_exclusive = {focus = SWE_stay_neatural }
+		cost = 10
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		available = {
+
+		}
+		ai_will_do = {
+			base = 1
+		}
+
+
+
+
+		completion_reward = {
+			remove_ideas = neutrality_idea
+			swap_ideas = {
+				remove_idea = SWE_communist_influence
+				add_idea = internationalism
+			}
+		}
+	}
+	focus = {
+		id = SWE_hansson_way
+		icon = GFX_focus_generic_bastion_of_democracy
+		x = 18
+		y = 0
+		offset = {
+			x = -5
+			y = 0
+			trigger = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		mutually_exclusive = {
+			focus = SWE_agresif_king focus = SWE_take_more_imagirants focus = SWE_old_leagcy focus = SWE_comis_take_over focus = SWE_svea_rike
+		}
+		cost = 5
+		available = {
+			has_completed_focus = SWE_stay_neatural
+		}
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					OR = {
+						has_completed_focus = SWE_old_leagcy
+						has_completed_focus = SWE_svea_rike
+						has_completed_focus = SWE_agresif_king
+						has_completed_focus = SWE_comis_take_over
+						has_completed_focus = SWE_take_more_imagirants
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 2
+		}
+
+
+
+
+		completion_reward = {
+			add_political_power = 75
+			add_popularity = { ideology = democratic popularity = 0.1 }
+			swap_ideas = {
+				remove_idea = neutrality_idea
+				add_idea = SWE_neutrality_idea
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = obsolete_focus_branches_visibility
+							option = HIDE
+						}
+					}
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_the_cbyran
+		icon = GFX_focus_usa_build_the_pentagon
+		relative_position_id = SWE_hansson_way
+		x = 2
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_hansson_way }
+		ai_will_do = {
+			base = 1
+		}
+		allow_branch = {
+			has_dlc = "La Resistance"
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					OR = {
+						has_completed_focus = SWE_old_leagcy
+						has_completed_focus = SWE_svea_rike
+						has_completed_focus = SWE_agresif_king
+						has_completed_focus = SWE_comis_take_over
+						has_completed_focus = SWE_take_more_imagirants
+					}
+				}
+			}
+		}
+		available = {
+			has_intelligence_agency = yes
+			agency_upgrade_number > 1
+		}
+		completion_reward = {
+			add_ideas= SWE_the_cbryan
+		}
+	}
+	focus = {
+		id = SWE_careful_missions
+		icon = GFX_ARG_clamp_down
+		relative_position_id = SWE_the_cbyran
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_the_cbyran }
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SWE_the_cbryan
+				add_idea = SWE_the_cbryan2
+			}
+		}
+	}
+	focus = {
+		id = SWE_special_operative_capturing_measures
+		icon = GFX_ARG_gain_back_trust
+		relative_position_id = SWE_careful_missions
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_careful_missions }
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SWE_the_cbryan2
+				add_idea = SWE_the_cbryan3
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_sendinng_volunteers
+		icon = GFX_goal_volunteer_alliance
+		prerequisite = { focus = SWE_hansson_way }
+		x = 0
+		y = 1
+		cost = 6
+		relative_position_id = SWE_hansson_way
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 4
+		}
+		completion_reward = {
+			set_rule = { can_send_volunteers = yes }
+			add_ideas = SWE_volumteers
+		}
+	}
+	focus = {
+		id = SWE_the_saltsjobaden_agreement
+		icon = GFX_goal_generic_positive_trade_relations
+		prerequisite = { focus = SWE_hansson_way }
+		relative_position_id = SWE_hansson_way
+		x = -2
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		completion_reward = {
+			add_ideas = SWE_accept_saltsjobad
+			add_popularity = { ideology = democratic popularity = 0.05 }
+		}
+	}
+	focus = {
+		id = SWE_stonrgline_intel
+		icon = GFX_goal_generic_fortify_city
+		prerequisite = { focus = SWE_the_saltsjobaden_agreement }
+		available = {
+			SWE = {
+				controls_state = 666
+			}
+		}
+		x = 0
+		y = 1
+		cost = 10
+		relative_position_id = SWE_the_saltsjobaden_agreement
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			666 = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 9147
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 201
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 6168
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					province = 61
+					instant_build = yes
+				}
+			}
+			138 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					province = 6345
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					province = 9279
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 1
+					province = 11376
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 1
+					province = 6120
+					instant_build = yes
+				}
+			}
+			141 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+	}
+	focus = {
+		id = SWE_more_steats_for_demokrats
+		icon = GFX_ARG_azules
+		prerequisite = { focus = SWE_sendinng_volunteers }
+		relative_position_id = SWE_sendinng_volunteers
+		x = 0
+		y = 1
+		cost = 6
+
+		ai_will_do = {
+			base = 4
+		}
+
+		completion_reward = {
+			add_ideas = SWE_more_seatsin_party
+		}
+	}
+	focus = {
+		id = SWE_getting_rid_of_communism
+		icon = GFX_goal_tfv_burn_the_royal_portraits
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_more_steats_for_demokrats}
+		relative_position_id = SWE_more_steats_for_demokrats
+		ai_will_do = {
+			base = 4
+		}
+		completion_reward = {
+			remove_ideas= SWE_communist_influence
+			add_stability = -0.05
+		}
+	}
+	focus = {
+		id = SWE_propose_the_northern_lights
+		icon = GFX_focus_generic_scandinavian_alliance
+		x = 0
+		y = 1
+		cost = 10
+		mutually_exclusive = {focus = SWE_join_allies focus = SWE_stay_neatural_demok}
+		available_if_capitulated = yes
+		relative_position_id = SWE_getting_rid_of_communism
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					OR = {
+						has_completed_focus = SWE_old_leagcy
+						has_completed_focus = SWE_svea_rike
+						has_completed_focus = SWE_agresif_king
+						has_completed_focus = SWE_comis_take_over
+						has_completed_focus = SWE_take_more_imagirants
+					}
+				}
+			}
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		prerequisite = {
+			focus = SWE_getting_rid_of_communism
+		}
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			create_faction = "Northern Lights"
+			set_rule= { can_create_factions = yes }
+			remove_ideas = SWE_neutrality_idea
+		}
+	}
+	focus = {
+		id = SWE_invite_norway
+		icon = GFX_goal_NOR_norgesveldet
+		x = 2
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		bypass = {
+			OR = {
+				is_in_faction_with = NOR
+				NOR = {
+					OR = {
+						exists = no
+						is_in_faction = yes
+					}
+				}
+			}
+		}
+		prerequisite = { focus = SWE_propose_the_northern_lights }
+		relative_position_id = SWE_propose_the_northern_lights
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			NOR = {
+				country_event = generic.5
+			}
+		}
+	}
+	focus = {
+		id = SWE_invite_finland
+		icon = GFX_focus_invite_finland
+		x = -2
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		bypass = {
+			OR = {
+				is_in_faction_with = FIN
+				FIN = {
+					OR = {
+						exists = no
+						is_in_faction = yes
+					}
+				}
+			}
+		}
+		prerequisite = { focus = SWE_propose_the_northern_lights }
+		relative_position_id = SWE_propose_the_northern_lights
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			FIN = {
+				country_event = generic.5
+			}
+		}
+	}
+	focus = {
+		id = SWE_invite_estonia
+		icon = GFX_goal_estonia
+		x = 0
+		y = 1
+		cost = 10
+		available_if_capitulated = yes
+		bypass = {
+			OR = {
+				is_in_faction_with = EST
+				EST = {
+					OR = {
+						exists = no
+						is_in_faction = yes
+					}
+				}
+			}
+		}
+		prerequisite = { focus = SWE_invite_finland }
+		relative_position_id = SWE_invite_finland
+		available = { FIN = {is_in_faction_with = SWE} }
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			EST = {
+				country_event = generic.5
+			}
+		}
+	}
+	focus = {
+		id = SWE_invite_denmark
+		icon = GFX_goal_DEN_focus_danish_democracy
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		bypass = {
+			OR = {
+				is_in_faction_with = DEN
+				DEN = {
+					OR = {
+						exists = no
+						is_in_faction = yes
+					}
+				}
+			}
+		}
+		prerequisite = { focus = SWE_propose_the_northern_lights }
+		relative_position_id = SWE_propose_the_northern_lights
+		completion_reward = {
+			DEN = {
+				country_event = generic.5
+			}
+		}
+	}
+	focus = {
+		id = SWE_superier_union_of_swe
+		icon = GFX_goal_SCA_focus_Monarchy
+		x = 0
+		y = 1
+		cost = 10
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_invite_denmark }
+		prerequisite = { focus = SWE_invite_finland }
+		prerequisite = { focus = SWE_invite_norway }
+		relative_position_id = SWE_invite_denmark
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			every_country = {
+				limit = {
+					is_in_faction_with = SWE
+				}
+				if = {
+					limit = {
+						tag = NOR
+					}
+					add_ideas = SWE_team_nordic
+				}
+				if = {
+					limit = {
+						tag = FIN
+					}
+					add_ideas = SWE_team_nordic
+				}
+				if = {
+					limit = {
+						tag = DEN
+					}
+					add_ideas = SWE_team_nordic
+				}
+				if = {
+					limit = {
+						tag = EST
+					}
+					add_ideas = SWE_team_nordic
+				}
+				if = {
+					limit = {
+						tag = LAT
+					}
+					add_ideas = SWE_team_nordic
+				}
+				if = {
+					limit = {
+						tag = LIT
+					}
+					add_ideas = SWE_team_nordic
+				}
+			}
+			add_ideas = SWE_team_nordic
+		}
+	}
+	focus = {
+		id = SWE_nordic_reserge
+		icon = GFX_goal_NOR_scandi_research
+		x = 0
+		y = 1
+		cost = 15
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_superier_union_of_swe }
+		relative_position_id = SWE_superier_union_of_swe
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			every_country = {
+				limit = {
+					is_in_faction_with = SWE
+					has_idea = SWE_team_nordic
+				}
+				add_research_slot = 1
+			}
+		}
+	}
+	focus = {
+		id = SWE_cominist_treat
+		icon = GFX_focus_attack_soviet
+		relative_position_id = SWE_nordic_reserge
+		x = 0
+		y = 1
+		cost = 10
+		available_if_capitulated = yes
+		available = { has_completed_focus = SWE_embargo_soviets }
+		prerequisite = {
+			focus = SWE_nordic_reserge
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal= {
+				type = annex_everything
+				target = SOV
+			}
+		}
+	}
+	focus = {
+		id = SWE_embargo_soviets
+		icon = GFX_goal_generic_attack_allies
+		relative_position_id = SWE_nordic_reserge
+		x = -2
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_nordic_reserge }
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			send_embargo = SOV
+			custom_effect_tooltip = embargo_relation_tt
+		}
+	}
+	focus = {
+		id = SWE_take_more_imagirants
+		icon = GFX_BOL_side_with_the_people
+		x = 64
+		y = 0
+		offset = {
+			x = -46
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = SWE_take_more_imagirants
+			}
+		}
+		mutually_exclusive = {
+			focus = SWE_agresif_king focus = SWE_hansson_way focus = SWE_old_leagcy focus = SWE_comis_take_over focus = SWE_svea_rike
+		}
+		allow_branch = {
+			has_dlc = "Battle for the Bosporus"
+		}
+		allow_branch = {
+			has_country_flag = allow_cerkes
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		cost = 5
+		available = {
+			has_completed_focus = SWE_interve
+		}
+
+
+
+
+		completion_reward = {
+			add_political_power = 120
+			add_ideas = SWE_imagirends
+			add_ideas = SWE_gt_economy
+			hidden_effect = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = obsolete_focus_branches_visibility
+							option = HIDE
+						}
+					}
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_stable_imagirants
+		icon = GFX_SWE_imagret
+		x = -2
+		y = 1
+		relative_position_id = SWE_take_more_imagirants
+		prerequisite = {focus = SWE_take_more_imagirants}
+		cost = 5
+		available = {
+		}
+
+
+
+
+		completion_reward = {
+			unlock_decision_category_tooltip = SWE_imegirends
+		}
+	}
+	focus = {
+		id = SWE_about_islamisizm
+		icon = GFX_goal_OTT_caliph
+		x = 0
+		y = 1
+		relative_position_id = SWE_take_more_imagirants
+		prerequisite = {focus = SWE_take_more_imagirants}
+		cost = 5
+		available = {
+
+		}
+
+
+
+
+		completion_reward = {
+			add_ideas = GER_islamizim
+			add_stability = -0.50
+		}
+	}
+	focus = {
+		id = SWE_red_army
+		icon = GFX_goal_PRU_focus_dying_the_inca_red
+		x = 0
+		y = 1
+		relative_position_id = SWE_about_islamisizm
+		prerequisite = {focus = SWE_about_islamisizm}
+		cost = 5
+		available = {
+		}
+
+
+
+
+		completion_reward = {
+			add_stability = -0.05
+		}
+	}
+	focus = {
+		id = SWE_Islamic_crescent
+		icon = GFX_goal_OTT_Islamic_Education
+		x = -1
+		y = 1
+		relative_position_id = SWE_red_army
+		prerequisite = {focus = SWE_red_army}
+		cost = 5
+		available = {
+			NOT = { has_idea = SWE_cerkezethem }
+		}
+
+
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.2
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.50
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.1
+			}
+			add_stability = -0.15
+			add_research_slot = -1
+		}
+	}
+	focus = {
+		id = SWE_hammer_of_communism
+		icon = GFX_goal_broken_red_star
+		x = 1
+		y = 1
+		relative_position_id = SWE_red_army
+		prerequisite = {focus = SWE_red_army}
+		cost = 5
+		available = {
+			NOT = { has_idea = SWE_cerkezethem }
+		}
+
+
+
+
+		completion_reward = {
+			add_stability = -0.05
+			add_ideas = SWE_ally_with_soviet
+		}
+	}
+	focus = {
+		id = SWE_coup_of_redgreens
+		icon = GFX_z_goal_proclaim_islamic_socialist_revolution
+		x = 1
+		y = 1
+		relative_position_id = SWE_Islamic_crescent
+		prerequisite = {focus = SWE_Islamic_crescent}
+		prerequisite = {focus = SWE_hammer_of_communism }
+		cost = 5
+		available = {
+			communism > 0.4
+			has_idea = SWE_cerkezethem
+		}
+
+
+
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = no
+			}
+			add_ideas = neutrality_influence
+			remove_ideas = SWE_king_gustav
+			create_country_leader = {
+				name = "Çerkez Ethem"
+				picture = "SWE_cerkez_ethem.dds"
+				expire = "1965.1.1"
+				ideology = anarchism
+				traits = {
+					islamic_personality
+				}
+			}
+			remove_ideas = SWE_gt_economy
+			start_civil_war = {
+				ruling_party = neutrality
+				ideology = democratic
+				size = 0.5
+				capital = 141
+				states = {
+					141 139 124 138
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_green_army
+		icon = GFX_SWE_focus_redgreen
+		x = 0
+		y = 1
+		relative_position_id = SWE_coup_of_redgreens
+		prerequisite = {focus = SWE_coup_of_redgreens}
+		cost = 5
+		available = {
+
+		}
+
+
+
+
+		completion_reward = {
+			add_ideas = SWE_green_army
+		}
+	}
+	focus = {
+		id = SWE_soviet_investments
+		icon = GFX_CHL_purchase_soviet_taks
+		x = -2
+		y = 1
+		relative_position_id = SWE_green_army
+		prerequisite = {focus = SWE_green_army}
+		cost = 5
+		available = {has_completed_focus = SWE_trade_decitions}
+
+
+
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_SOV_invest2
+		}
+	}
+	focus = {
+		id = SWE_soviet_ally_wtih_soviet
+		icon = GFX_focus_SOV_the_path_of_marxism_leninism
+		x = 0
+		y = 1
+		relative_position_id = SWE_green_army
+		prerequisite = {focus = SWE_green_army}
+		cost = 5
+		available = {
+
+		}
+
+
+
+
+		completion_reward = {
+			SOV = {country_event = generic.2}
+		}
+	}
+	focus = {
+		id = SWE_build_ulema
+		icon = GFX_SWE_focus_SWE_ulema
+		x = -2
+		y = 1
+		relative_position_id = SWE_soviet_ally_wtih_soviet
+		prerequisite = {focus = SWE_soviet_ally_wtih_soviet}
+		cost = 5
+		available = {
+
+		}
+
+
+
+
+		completion_reward = {
+			add_ideas = SWE_ulema
+		}
+	}
+	focus = {
+		id = SWE_imams
+		icon = GFX_SWE_focus_hoca
+		x = 2
+		y = 1
+		relative_position_id = SWE_soviet_ally_wtih_soviet
+		prerequisite = {focus = SWE_soviet_ally_wtih_soviet}
+		cost = 5
+		available = {
+
+		}
+
+
+
+
+		completion_reward = {
+			add_ideas = SWE_imams
+		}
+	}
+	focus = {
+		id = SWE_jihad
+		icon = GFX_u_fra_sword_of_islam
+		x = 0
+		y = 1
+		relative_position_id = SWE_soviet_ally_wtih_soviet
+		prerequisite = {focus = SWE_soviet_ally_wtih_soviet}
+		cost = 5
+		available = {
+
+		}
+
+
+
+
+		completion_reward = {
+			add_ideas = SWE_socialist_jihad
+		}
+	}
+	focus = {
+		id = SWE_annex_den
+		icon = GFX_focus_generic_attack_denmark
+		x = 0
+		y = 1
+		relative_position_id = SWE_jihad
+		prerequisite = {focus = SWE_jihad}
+		cost = 5
+		available = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = DEN
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_annex_nor
+		icon = GFX_goal_NOR_navy
+		x = -2
+		y = 1
+		relative_position_id = SWE_jihad
+		prerequisite = {focus = SWE_jihad}
+		cost = 5
+		available = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = NOR
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_annex_fin
+		icon = GFX_goal_finnish_spirit
+		x = 2
+		y = 1
+		relative_position_id = SWE_jihad
+		prerequisite = {focus = SWE_jihad}
+		cost = 5
+		available = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = FIN
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_claim_orange_country
+		icon = GFX_SWE_focus_SWE_orange
+		x = -2
+		y = 1
+		relative_position_id = SWE_annex_fin
+		prerequisite = {focus = SWE_annex_den}
+		prerequisite = {focus = SWE_annex_nor}
+		prerequisite = {focus = SWE_annex_fin}
+		cost = 5
+		available = {
+
+		}
+
+
+
+
+		completion_reward = {
+			set_cosmetic_tag = SIC_communism
+		}
+	}
+	focus = {
+		id = SWE_revenge_to_mustafa
+		icon = GFX_SWE_focus_revenge
+		x = 0
+		y = 1
+		relative_position_id = SWE_claim_orange_country
+		prerequisite = {focus = SWE_claim_orange_country}
+		cost = 5
+		available = {
+			country_exists = TUR
+		}
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = TUR
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_invest_nordic
+		icon = GFX_goal_NOR_nordic_alliance_crossed_flags
+		relative_position_id = SWE_nordic_reserge
+		x = 2
+		y = 1
+		cost = 5
+		available = { has_completed_focus = SWE_trade_decitions }
+		available_if_capitulated = yes
+		prerequisite = { focus = SWE_nordic_reserge }
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			unlock_decision_tooltip = SWE_SWE_invest4
+		}
+	}
+	focus = {
+		id = SWE_agresif_king
+		icon = GFX_king_north
+		x = 46
+		y = 0
+		offset = {
+			x = -29
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = SWE_agresif_king
+			}
+		}
+		cost = 5
+		mutually_exclusive = {
+			focus = SWE_hansson_way focus = SWE_take_more_imagirants focus = SWE_old_leagcy focus = SWE_comis_take_over focus = SWE_svea_rike
+		}
+		available = {
+			has_completed_focus = SWE_interve
+		}
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					OR = {
+						has_completed_focus = SWE_hansson_way
+						has_completed_focus = SWE_old_leagcy
+						has_completed_focus = SWE_svea_rike
+						has_completed_focus = SWE_comis_take_over
+						has_completed_focus = SWE_take_more_imagirants
+					}
+				}
+			}
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+
+
+
+
+		completion_reward = {
+			add_political_power = 120
+			add_ideas = GER_the_kings_party_idea
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.20
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = obsolete_focus_branches_visibility
+							option = HIDE
+						}
+					}
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_kings_party
+		icon = GFX_goal_SCA_economy_sweden
+		x = 0
+		y = 1
+		cost = 5
+		available = {
+		}
+		relative_position_id = SWE_agresif_king
+		prerequisite = {focus = SWE_agresif_king}
+
+
+
+
+		completion_reward = {
+			add_timed_idea = { idea = neutrality_influence days = 1200 }
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.20
+			}
+		}
+	}
+	focus = {
+		id = SWE_king_leads
+		icon = GFX_SWE_king_lead
+		x = 0
+		y = 1
+		cost = 10
+		available = {
+			neutrality > 0.30
+			has_completed_focus = SWE_total_mobilise
+		}
+		relative_position_id = SWE_kings_party
+		prerequisite = {focus = SWE_kings_party}
+
+
+
+
+		completion_reward = {
+			remove_ideas = internationalism
+			remove_ideas = SWE_king_gustav
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = no
+			}
+			create_country_leader = {
+				name = "Gustav V"
+				picture = "SWE_king_gustaf.dds"
+				expire = "1965.1.1"
+				ideology = monarchism
+				traits = {
+					king_of_sweden
+				}
+			}
+			hidden_effect = {
+				remove_ideas = SWE_communist_influence
+			}
+		}
+	}
+	focus = {
+		id = SWE_ask_for_referandum
+		icon = GFX_goal_NOR_coat_of_arms
+		x = 2
+		y = 1
+		cost = 5
+		available = {}
+		relative_position_id = SWE_king_leads
+		prerequisite = {focus = SWE_king_leads}
+
+
+
+
+		completion_reward = {
+			NOR = {country_event = SWE.22}
+		}
+	}
+	focus = {
+		id = SWE_ally_with_hungary
+		icon = GFX_HUN_empire_swe_hun
+		x = 4
+		y = 1
+		cost = 5
+		available = {
+			HUN = {has_completed_focus = HUN_elect_a_democratic_king}
+
+		}
+		relative_position_id = SWE_king_leads
+		prerequisite = {focus = SWE_king_leads}
+
+
+
+
+		completion_reward = {
+			add_opinion_modifier = { target = HUN modifier = huge_increase }
+			create_faction = "Bernadotte dynasty"  set_rule= { can_create_factions = yes }
+			HUN = {
+				country_event = generic.5
+				add_opinion_modifier = { target = SWE modifier = huge_increase }
+			}
+		}
+	}
+	focus = {
+		id = SWE_time_not_referandum
+		icon = GFX_goal_NOR_scandi_research
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = NOR}
+		bypass = {NOT = { country_exists = NOR }}
+		relative_position_id = SWE_ask_for_referandum
+		prerequisite = {focus = SWE_ask_for_referandum}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = NOR
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_swe_nor_union
+		icon = GFX_goal_NOR_nordic_council
+		x = 0
+		y = 1
+		cost = 5
+		available = {}
+		relative_position_id = SWE_time_not_referandum
+		prerequisite = {focus = SWE_time_not_referandum}
+
+
+
+
+		completion_reward = {
+			set_cosmetic_tag = SWENOR_neutrality
+			every_state = {
+				limit = {
+					is_core_of = NOR
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
+	focus = {
+		id = SWE_prusia_of_nordic
+		icon = GFX_ARG_commence_plans
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = SWE_king_leads
+		prerequisite = {focus = SWE_king_leads}
+
+
+
+
+		completion_reward = {
+			add_ideas = SWE_prusian_disiplin
+		}
+	}
+	focus = {
+		id = SWE_rebuild_army
+		icon = GFX_goal_generic_army_tanks3
+		x = 0
+		y = 1
+		cost = 5
+		available = {}
+		relative_position_id = SWE_prusia_of_nordic
+		prerequisite = {focus = SWE_prusia_of_nordic}
+
+
+
+
+		completion_reward = {
+			add_ideas = SWE_remoreled_army
+		}
+	}
+	focus = {
+		id = SWE_coldest_warriors
+		icon = GFX_goal_generic_cold_training
+		x = 0
+		y = 1
+		cost = 5
+		available = {}
+		relative_position_id = SWE_rebuild_army
+		prerequisite = {focus = SWE_rebuild_army}
+
+
+
+
+		completion_reward = {
+			add_ideas = SWE_coldest_warriors
+		}
+	}
+	focus = {
+		id = SWE_prusian_disiple
+		icon = GFX_goal_forced_inf
+		x = 0
+		y = 1
+		cost = 5
+		available = {}
+		relative_position_id = SWE_coldest_warriors
+		prerequisite = {focus = SWE_coldest_warriors}
+
+
+
+
+		completion_reward = {
+			add_ideas = SWE_prussia_of_the_scadavinia
+		}
+	}
+	focus = {
+		id = SWE_coloni_time
+		icon = GFX_focus_eng_the_sun_never_sets
+		x = -2
+		y = 1
+		cost = 5
+		available = {}
+		bypass = {controls_state = 558}
+		relative_position_id = SWE_king_leads
+		prerequisite = {focus = SWE_king_leads}
+
+
+
+
+		completion_reward = {
+			558 = {
+				controller = {
+					country_event = { id = SWE.20 }
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_coloni_time2
+		icon = GFX_focus_eng_imperial_federation
+		x = 0
+		y = 1
+		cost = 5
+		available = {}
+		bypass = {controls_state = 779}
+		relative_position_id = SWE_coloni_time
+		prerequisite = {focus = SWE_coloni_time}
+
+
+
+
+		completion_reward = {
+			779 = {
+				controller = {
+					country_event = { id = SWE.21 }
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_hol
+		icon = GFX_focus_hol_oranje_boven
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = HOL}
+		bypass = {NOT = { country_exists = HOL }}
+		relative_position_id = SWE_coloni_time2
+		prerequisite = {focus = SWE_coloni_time2}
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = HOL
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_bel
+		icon = GFX_goal_BEL_Belgian_Rearmement2
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = BEL}
+		bypass = {NOT = { country_exists = BEL }}
+		relative_position_id = SWE_attack_hol
+		prerequisite = {focus = SWE_attack_hol}
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = BEL
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_sia
+		icon = GFX_goal_flag_siam
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = SIA}
+		bypass = {NOT = { country_exists = SIA }}
+		relative_position_id = SWE_attack_bel
+		prerequisite = {focus = SWE_attack_bel}
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SIA
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_den
+		icon = GFX_goal_DEN_focus_danish_kingdom
+		x = 2
+		y = 1
+		cost = 5
+		available = {country_exists = DEN}
+		bypass = {NOT = { country_exists = DEN }}
+		relative_position_id = SWE_swe_nor_union
+		prerequisite = {focus = SWE_swe_nor_union}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = DEN
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_fin
+		icon = GFX_goal_flag_finland
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = FIN}
+		bypass = {NOT = { country_exists = FIN }}
+		relative_position_id = SWE_swe_nor_union
+		prerequisite = {focus = SWE_swe_nor_union}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = FIN
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_est
+		icon = GFX_goal_EST_navy
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = EST}
+		bypass = {NOT = { country_exists = EST }}
+		relative_position_id = SWE_attack_fin
+		prerequisite = {focus = SWE_attack_fin}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = EST
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_lat
+		icon = GFX_goal_latvia
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = LAT}
+		bypass = {NOT = { country_exists = LAT }}
+		relative_position_id = SWE_attack_est
+		prerequisite = {focus = SWE_attack_est}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = LAT
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_lit
+		icon = GFX_goal_LIT_New_Republic
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = LIT}
+		bypass = {NOT = { country_exists = LIT }}
+		relative_position_id = SWE_attack_lat
+		prerequisite = {focus = SWE_attack_lat}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = LIT
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_rebuild_high_seas
+		icon = GFX_goal_navy_decision
+		x = 0
+		y = 3
+		cost = 6
+		available = {}
+		relative_position_id = SWE_attack_den
+		prerequisite = {focus = SWE_attack_den}
+
+
+
+
+		completion_reward = {
+			navy_experience = 50
+			140 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			124 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_pol
+		icon = GFX_goal_poland
+		x = -1
+		y = 1
+		cost = 5
+		available = {country_exists = POL}
+		bypass = {NOT = { country_exists = POL }}
+		relative_position_id = SWE_rebuild_high_seas
+		prerequisite = {focus = SWE_rebuild_high_seas}
+		prerequisite = {focus = SWE_attack_lit}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = POL
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_ger
+		icon = GFX_goal_attack_germany
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = GER}
+		bypass = {NOT = { country_exists = GER }}
+		relative_position_id = SWE_attack_pol
+		prerequisite = {focus = SWE_attack_pol}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = GER
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_second_great_war
+		icon = GFX_goal_russia
+		x = 0
+		y = 1
+		cost = 5
+		available = {country_exists = SOV}
+		bypass = {NOT = { country_exists = SOV }}
+		relative_position_id = SWE_attack_ger
+		prerequisite = {focus = SWE_attack_ger}
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SOV
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_old_leagcy
+		icon = GFX_SWE_viking
+		x = 27
+		y = 0
+		offset = {
+			x = -10
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = SWE_old_leagcy
+			}
+		}
+		cost = 5
+		available = {has_completed_focus = SWE_interve has_completed_focus = SWE_total_mobilise}
+		mutually_exclusive = {
+			focus = SWE_hansson_way focus = SWE_agresif_king focus = SWE_take_more_imagirants focus = SWE_comis_take_over focus = SWE_svea_rike
+		}
+
+
+
+		ai_will_do = {
+			base = 1
+		}
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					OR = {
+						has_completed_focus = SWE_hansson_way
+						has_completed_focus = SWE_svea_rike
+						has_completed_focus = SWE_agresif_king
+						has_completed_focus = SWE_comis_take_over
+						has_completed_focus = SWE_take_more_imagirants
+					}
+				}
+			}
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		completion_reward = {
+			add_ideas = SWE_Barbaric_recuqt
+			add_ideas = SWE_barbaric_economy
+			create_country_leader = {
+				name = "Gustaf Adolf VI"
+				picture = "SWE_king_adolf.dds"
+				expire = "1965.1.1"
+				ideology = monarchism
+				traits = {
+					king_of_viking
+				}
+			}
+			remove_ideas = SWE_king_gustav
+			add_popularity = {
+				ideology = communism
+				popularity = 0.2
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.30
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.35
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.1
+			}
+			set_party_name = { ideology = neutrality long_name = "Viking Kingdom" name = "Viking Kingdom" }
+			every_country = {
+				limit = {
+					capital_scope = { is_on_continent = europe }
+				}
+				add_opinion_modifier = { target = SWE modifier = embargo }
+				add_opinion_modifier = { target = SWE modifier = sanctions_relations }
+			}
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = no
+			}
+			add_timed_idea = { idea = neutrality_influence days = 1200 }
+			remove_ideas = internationalism
+			add_ideas = SWE_rebuiled_vikings
+			set_cosmetic_tag = SWEVINK_neutrality
+			hidden_effect = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = obsolete_focus_branches_visibility
+							option = HIDE
+						}
+					}
+					mark_focus_tree_layout_dirty = yes
+				}
+				remove_ideas = SWE_communist_influence
+			}
+		}
+	}
+	focus = {
+		id = SWE_return_of_oldgods
+		icon = GFX_SWE_beliveoldgods
+		x = -1
+		y = 1
+		cost = 5
+		prerequisite = {focus = SWE_old_leagcy}
+		relative_position_id = SWE_old_leagcy
+
+
+
+
+		completion_reward = {
+			unlock_decision_category_tooltip = SWE_old_gods
+		}
+	}
+	focus = {
+		id = SWE_wolf
+		icon = GFX_SWE_wolf
+		x = -2
+		y = 1
+		cost = 5
+		prerequisite = {focus = SWE_return_of_oldgods}
+		relative_position_id = SWE_return_of_oldgods
+
+
+
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_wolf
+		}
+	}
+	focus = {
+		id = SWE_bear
+		icon = GFX_SWE_bear
+		x = 2
+		y = 1
+		cost = 5
+		prerequisite = {focus = SWE_return_of_oldgods}
+		relative_position_id = SWE_return_of_oldgods
+
+
+
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_bear
+		}
+	}
+	focus = {
+		id = SWE_destory_norvay
+		icon = GFX_SWE_norway
+		x = 3
+		y = 1
+		cost = 5
+		prerequisite = {focus = SWE_old_leagcy}
+		relative_position_id = SWE_old_leagcy
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = NOR
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_destory_denmark
+		icon = GFX_SWE_denmark
+		x = 0
+		y = 1
+		cost = 5
+		prerequisite = {focus = SWE_destory_norvay}
+		relative_position_id = SWE_destory_norvay
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = DEN
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_unify_nordick_wkings
+		icon = GFX_SWE_unitedswe
+		x = 0
+		y = 1
+		cost = 5
+		available = {
+			controls_state = 37
+			controls_state = 99
+			controls_state = 142
+			controls_state = 110
+			controls_state = 143
+			controls_state = 144
+		}
+		prerequisite = {focus = SWE_destory_denmark}
+		relative_position_id = SWE_destory_denmark
+
+
+
+
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_core_of = NOR
+				}
+				add_core_of = ROOT
+			}
+			every_state = {
+				limit = {
+					is_core_of = DEN
+				}
+				add_core_of = ROOT
+			}
+			add_state_core = 332
+			add_state_core = 331
+		}
+	}
+	focus = {
+		id = SWE_spriitf_of_squid
+		icon = GFX_SWE_squid
+		x = 1
+		y = 2
+		cost = 5
+		prerequisite = {focus = SWE_return_of_oldgods}
+		relative_position_id = SWE_return_of_oldgods
+
+
+
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_octo
+		}
+	}
+	focus = {
+		id = SWE_unif_celts
+		icon = GFX_SWE_celts
+		x = 0
+		y = 1
+		cost = 5
+		prerequisite = {focus = SWE_unify_nordick_wkings}
+		relative_position_id = SWE_unify_nordick_wkings
+
+
+
+
+		completion_reward = {
+			every_state = {
+				limit = { is_core_of = ENG }
+				add_claim_by = ROOT
+			}
+			every_state = {
+				limit = { is_core_of = IRE }
+				add_claim_by = ROOT
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_eng
+		icon = GFX_SWE_take_eng
+		x = 1
+		y = 1
+		cost = 5
+		bypass = {
+			ENG = {exists = no}
+		}
+		prerequisite = {focus = SWE_unif_celts}
+		relative_position_id = SWE_unif_celts
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ENG
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_attack_irl
+		icon = GFX_SWE_take_irland
+		x = -1
+		y = 1
+		cost = 5
+		bypass = {
+			IRE = {exists = no}
+		}
+		prerequisite = {focus = SWE_unif_celts}
+		relative_position_id = SWE_unif_celts
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = IRE
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_claimd_god_of_celts
+		icon = GFX_u_fra_celtic_paganism
+		x = 1
+		y = 1
+		cost = 5
+		available = {
+			controls_state = 113
+			controls_state = 135
+			controls_state = 134
+			controls_state = 119
+			controls_state = 123
+			controls_state = 127
+			controls_state = 338
+			controls_state = 126
+			controls_state = 125
+			controls_state = 128
+			controls_state = 129
+			controls_state = 122
+			controls_state = 132
+			controls_state = 130
+			controls_state = 131
+			controls_state = 121
+			controls_state = 133
+			controls_state = 136
+			controls_state = 120
+		}
+		prerequisite = {focus = SWE_attack_irl}
+		prerequisite = {focus = SWE_attack_eng}
+		relative_position_id = SWE_attack_irl
+
+
+
+
+		completion_reward = {
+			add_state_claim = 171
+			add_state_claim = 790
+			add_state_claim = 174
+			add_state_claim = 788
+			add_state_claim = 170
+			add_state_claim = 169
+			add_state_claim = 789
+			add_state_claim = 41
+			add_state_claim = 175
+			add_state_claim = 791
+			add_state_claim = 14
+			add_state_claim = 15
+			add_state_claim = 30
+			add_state_claim = 23
+			add_state_claim = 19
+			add_state_claim = 29
+			add_state_claim = 785
+			add_state_claim = 16
+			add_state_claim = 24
+			add_state_claim = 33
+			set_cosmetic_tag = SWEVINKCEL_neutrality
+			every_state = {
+				limit = { is_core_of = POR }
+				add_claim_by = ROOT
+			}
+			every_state = {
+				limit = {
+					is_core_of = ENG
+				}
+				add_core_of = ROOT
+			}
+			every_state = {
+				limit = {
+					is_core_of = IRE
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
+	focus = {
+		id = SWE_invade_spain
+		icon = GFX_u_fra_grab_iberia
+		x = 0
+		y = 1
+		cost = 5
+		bypass = {
+			SPR = {exists = no}
+		}
+		prerequisite = {focus = SWE_claimd_god_of_celts}
+		relative_position_id = SWE_claimd_god_of_celts
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = SPA
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_invade_por
+		icon = GFX_goal_POR_zambia
+		x = 2
+		y = 1
+		cost = 5
+		bypass = {
+			POR = {exists = no}
+		}
+		prerequisite = {focus = SWE_claimd_god_of_celts}
+		relative_position_id = SWE_claimd_god_of_celts
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = POR
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_invade_fra
+		icon = GFX_BEL_Reclaim_France
+		x = -2
+		y = 1
+		cost = 5
+		bypass = {
+			FRA = {exists = no}
+		}
+		prerequisite = {focus = SWE_claimd_god_of_celts}
+		relative_position_id = SWE_claimd_god_of_celts
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = FRA
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_celt_nation
+		icon = GFX_king_north
+		x = 0
+		y = 1
+		cost = 5
+		available = {
+			controls_state = 171
+			controls_state = 790
+			controls_state = 174
+			controls_state = 788
+			controls_state = 170
+			controls_state = 169
+			controls_state = 789
+			controls_state = 41
+			controls_state = 175
+			controls_state = 791
+			controls_state = 14
+			controls_state = 15
+			controls_state = 30
+			controls_state = 23
+			controls_state = 19
+			controls_state = 29
+			controls_state = 785
+			controls_state = 16
+			controls_state = 24
+			controls_state = 33
+
+
+		}
+		prerequisite = {focus = SWE_invade_por}
+		prerequisite = {focus = SWE_invade_spain}
+		prerequisite = {focus = SWE_invade_fra}
+		relative_position_id = SWE_invade_spain
+
+
+
+
+		completion_reward = {
+			add_state_core = 171
+			add_state_core = 790
+			add_state_core = 174
+			add_state_core = 788
+			add_state_core = 170
+			add_state_core = 169
+			add_state_core = 789
+			add_state_core = 41
+			add_state_core = 175
+			add_state_core = 791
+			add_state_core = 14
+			add_state_core = 15
+			add_state_core = 30
+			add_state_core = 23
+			add_state_core = 19
+			add_state_core = 29
+			add_state_core = 785
+			add_state_core = 16
+			add_state_core = 24
+			add_state_core = 33
+
+			every_state = {
+				limit = { is_core_of = POR }
+				add_core_of = ROOT
+			}
+		}
+	}
+	focus = {
+		id = SWE_join_allies
+		icon = GFX_focus_hol_the_fourth_ally
+		x = -5
+		y = 1
+		offset = {
+			x = 3
+			y = 0
+			trigger = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		cost = 6
+		mutually_exclusive = {focus = SWE_propose_the_northern_lights focus = SWE_stay_neatural_demok}
+		prerequisite = {focus = SWE_getting_rid_of_communism}
+		relative_position_id = SWE_getting_rid_of_communism
+
+		completion_reward = {
+			ENG = {country_event = generic.2}
+			remove_ideas = SWE_neutrality_idea
+		}
+	}
+	focus = {
+		id = SWE_denounce_fascist_aggression_europe
+		icon = GFX_focus_POL_ban_nazi_party
+		prerequisite = { focus = SWE_join_allies }
+		relative_position_id = SWE_join_allies
+		x = -1
+		y = 1
+		cost = 6
+
+		available_if_capitulated = yes
+
+		available = {
+			OR = {
+				has_government = neutrality
+				has_government = democratic
+			}
+		}
+
+		completion_reward = {
+			SWE = {
+				every_other_country = {
+					limit = {
+						has_government = fascism
+						capital_scope = {
+							is_core_of = PREV
+							is_on_continent = Europe
+						}
+					}
+					PREV = { send_embargo = PREV }
+					custom_effect_tooltip = embargo_relation_tt
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_free_for_nordics
+		icon = GFX_focus_attack_germany
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {focus = SWE_join_allies}
+		relative_position_id = SWE_join_allies
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = topple_government
+				target = GER
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_comis_take_over
+		icon = GFX_focus_generic_join_comintern
+		x = 55
+		y = 0
+		offset = {
+			x = -38
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = SWE_comis_take_over
+			}
+		}
+		cost = 5
+		available = {
+			has_completed_focus = SWE_interve
+			communism > 0.5
+		}
+		mutually_exclusive = {
+			focus = SWE_hansson_way focus = SWE_agresif_king focus = SWE_take_more_imagirants focus = SWE_old_leagcy focus = SWE_svea_rike
+		}
+		ai_will_do = {
+			base = 1
+		}
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					OR = {
+						has_completed_focus = SWE_hansson_way
+						has_completed_focus = SWE_old_leagcy
+						has_completed_focus = SWE_svea_rike
+						has_completed_focus = SWE_agresif_king
+						has_completed_focus = SWE_take_more_imagirants
+					}
+				}
+			}
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		bypass = {
+			has_government = communism
+			has_civil_war = no
+		}
+
+		available_if_capitulated = yes
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_politics = {
+				ruling_party = communism
+				elections_allowed = no
+			}
+			add_political_power = 120
+			army_experience = 25
+			if = {
+				limit = {
+					has_government = communism
+				}
+				add_popularity = {
+					ideology = communism
+					popularity = 0.05
+				}
+			}
+			swap_ideas = {
+				remove_idea = SWE_king_gustav
+				add_idea = SWE_anti_comi_king_gustav
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = obsolete_focus_branches_visibility
+							option = HIDE
+						}
+					}
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_soviet_empire
+		icon = GFX_SWE_red_king
+		prerequisite = { focus = SWE_comis_take_over }
+		relative_position_id = SWE_comis_take_over
+		mutually_exclusive = {focus = SWE_obish_king}
+		x = 1
+		y = 1
+		cost = 10
+
+		available = {
+			has_government = communism
+		}
+
+		bypass = {
+		}
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_cosmetic_tag = SWECK_communism
+			add_stability = 0.15
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+			swap_ideas = {
+				remove_idea = SWE_anti_comi_king_gustav
+				add_idea = SWE_cominist_king_of_sweden
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_obish_king
+		icon = GFX_SWE_bye_king
+		prerequisite = { focus = SWE_comis_take_over }
+		relative_position_id = SWE_comis_take_over
+		mutually_exclusive = {focus = SWE_soviet_empire}
+		x = -1
+		y = 1
+		cost = 4
+
+		available = {
+			has_government = communism
+		}
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			remove_ideas = SWE_anti_comi_king_gustav
+			add_stability = -0.15
+		}
+	}
+
+
+
+	focus = {
+		id = SWE_lets_purge
+		icon = GFX_u_fra_FRA_purge_communism
+		prerequisite = { focus = SWE_obish_king}
+		relative_position_id = SWE_obish_king
+
+		x = 0
+		y = 1
+		cost = 10
+
+		available = {
+			OR = {
+				has_completed_focus = SWE_obish_king
+			}
+		}
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_stability = -0.15
+			custom_effect_tooltip = "If the stability is below 50%, the country will enter civil war."
+			if = {
+				limit = {
+					has_stability < 0.50
+				}
+				start_civil_war = {
+					ruling_party = communism
+					ideology = democratic
+					size = 0.45
+					capital = 124
+					states = { 666 38 }
+				}
+			}
+		}
+	}
+
+	############
+	###SOVIET###
+	############
+	focus = {
+		id = SWE_stork_soviet
+		icon = GFX_focus_CZE_german_puppet
+		prerequisite = { focus = SWE_lets_purge }
+		mutually_exclusive = { focus = SWE_troskizim_leads }
+		relative_position_id = SWE_lets_purge
+
+		available = {
+			NOT = {has_completed_focus = SWE_soviet_empire}
+			has_war = no
+			is_subject = no
+			communism > 0.4
+			SOV = {
+				has_civil_war = no
+				has_government = communism
+			}
+		}
+
+		x = 0
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_country_leader_trait = stalins_puppet
+			set_cosmetic_tag = SWESOV_communism
+			#add_timed_idea = { idea = SWE_soviet_economy days = 100 }
+			SOU = {
+				set_autonomy = {
+					target = SWE
+					autonomy_state = autonomy_puppet
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_autonomy_up
+		icon = GFX_goal_Communist_Discourse
+		prerequisite = { focus = SWE_stork_soviet }
+		relative_position_id = SWE_stork_soviet
+		x = 0
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+		available = { has_government = communism }
+
+		search_filters = {  FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			#SOV = {add_timed_idea = { idea = SWE_soviet_economy days = 50 }}
+			SOV = {
+				set_autonomy = {
+					target = ROOT
+					autonomy_state = autonomy_colony
+					freedom_level = 0.5
+					end_wars = no
+					end_civil_wars = no
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_soviet_industry
+		icon = GFX_goal_generic_soviet_construction
+		prerequisite = { focus = SWE_autonomy_up }
+		relative_position_id = SWE_autonomy_up
+		dynamic = yes
+		x = -2
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+		available = { has_government = communism }
+
+		complete_tooltip = {
+			random_state = {
+				limit = {
+					has_state_flag = SWE_soviet_factory
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				prioritize = { 10 }
+				limit = {
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				set_state_flag = SWE_soviet_factory
+			}
+			random_owned_controlled_state = {
+				prioritize = { 10 }
+				limit = {
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				set_state_flag = SWE_soviet_factory
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_pressure_for_the_west
+		icon = GFX_focus_generic_attack_norway
+		prerequisite = { focus = SWE_autonomy_up }
+		relative_position_id = SWE_autonomy_up
+
+		x = 0
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 2.5
+		}
+		available = { has_government = communism }
+
+		bypass = {
+			99 = { is_core_of = SWE }
+			37 = { is_core_of = SWE }
+			142 = { is_core_of = SWE }
+			110 = { is_core_of = SWE }
+			143 = { is_core_of = SWE }
+			144 = { is_core_of = SWE }
+		}
+
+		available_if_capitulated = yes
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			99 = { add_core_of = SWE }
+			37 = { add_core_of = SWE }
+			142 = { add_core_of = SWE }
+			110 = { add_core_of = SWE }
+			143 = { add_core_of = SWE }
+			144 = { add_core_of = SWE }
+		}
+	}
+
+	focus = {
+		id = SWE_soviet_military_staff
+		icon = GFX_goal_generic_red_guard
+		prerequisite = { focus = SWE_autonomy_up }
+		relative_position_id = SWE_autonomy_up
+
+		x = 2
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 2.5
+		}
+		available = { has_government = communism }
+
+		available_if_capitulated = yes
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			army_experience = 50
+			division_template = {
+				name = "Röda soldater"
+				priority = 2
+				#template_counter = 0
+				division_names_group = SWE_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 1 y = 2 }
+
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 2 y = 1 }
+					infantry = { x = 2 y = 2 }
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { ROOT = { has_full_control_of_state = PREV } }
+				prioritize = { 10 }
+				create_unit = {
+					division = "name = \"1 Röda soldater\" division_template = \"Röda soldater\" start_experience_factor = 1.0"
+					owner = SWE
+				}
+				create_unit = {
+					division = "name = \"2 Röda soldater\" division_template = \"Röda soldater\" start_experience_factor = 1.0"
+					owner = SWE
+				}
+				create_unit = {
+					division = "name = \"3 Röda soldater\" division_template = \"Röda soldater\" start_experience_factor = 1.0"
+					owner = SWE
+				}
+				create_unit = {
+					division = "name = \"4 Röda soldater\" division_template = \"Röda soldater\" start_experience_factor = 1.0"
+					owner = SWE
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { ROOT = { has_full_control_of_state = PREV } }
+				prioritize = { 88 }
+				create_unit = {
+					division = "name = \"5 Röda soldater\" division_template = \"Röda soldater\" start_experience_factor = 1.0"
+					owner = SWE
+				}
+				create_unit = {
+					division = "name = \"6 Röda soldater\" division_template = \"Röda soldater\" start_experience_factor = 1.0"
+					owner = SWE
+				}
+				create_unit = {
+					division = "name = \"7 Röda soldater\" division_template = \"Röda soldater\" start_experience_factor = 1.0"
+					owner = SWE
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_greater_sweden_SSR
+		icon = GFX_focus_generic_soviet_politics
+		prerequisite = { focus = SWE_soviet_industry }
+		prerequisite = { focus = SWE_pressure_for_the_west }
+		prerequisite = { focus = SWE_soviet_military_staff }
+		relative_position_id = SWE_soviet_industry
+		x = 2
+		y = 1
+		cost = 10
+		ai_will_do = {
+			base = 5
+		}
+		available = {
+			has_government = communism
+			SOU = {
+				has_government = Communism
+				has_civil_war = no
+			}
+		}
+		available_if_capitulated = yes
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			111 = { add_core_of = SWE }
+			149 = { add_core_of = SWE }
+			150 = { add_core_of = SWE }
+			146 = { add_core_of = SWE }
+			147 = { add_core_of = SWE }
+			148 = { add_core_of = SWE }
+			722 = { add_core_of = SWE }
+		}
+	}
+
+	#####################
+	###tROSki###
+	#####################
+
+	focus = {
+		id = SWE_troskizim_leads
+		icon = GFX_SWE_world_revelation
+		prerequisite = { focus = SWE_obish_king }
+		mutually_exclusive = { focus = SWE_stork_soviet }
+		relative_position_id = SWE_lets_purge
+
+		available = {
+			is_subject = no
+			has_war = no
+			communism > 0.4
+			has_idea = SWE_nils_flyg
+		}
+
+		x = 2
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			set_cosmetic_tag = SWETRS_communism
+			add_country_leader_role = {
+				character = SWE_nils_flyg
+				promote_leader = yes
+				country_leader = {
+					ideology = leninism
+					expire = "1965.1.1.1"
+					traits = { exiled_revolutionary }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_anti_imperialism
+		icon = GFX_focus_SOV_international_union_of_soviet_republics
+		prerequisite = { focus = SWE_troskizim_leads focus = SWE_soviet_empire}
+		relative_position_id = SWE_troskizim_leads
+
+		x = 2
+		y = 3
+		cost = 10
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = { GER_warfare }
+		}
+	}
+
+	focus = {
+		id = SWE_comi_on_fin
+		icon = GFX_goal_fin_flag2
+		prerequisite = { focus = SWE_anti_imperialism }
+		relative_position_id = SWE_anti_imperialism
+
+		x = 2
+		y = 1
+		cost = 5
+
+		available = { has_government = communism }
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			FIN = {add_timed_idea = { idea = communist_influence days = 90 }}
+		}
+	}
+
+	focus = {
+		id = SWE_comi_on_den
+		icon = GFX_goal_friend_denmark
+		prerequisite = { focus = SWE_anti_imperialism }
+		relative_position_id = SWE_anti_imperialism
+
+		x = -2
+		y = 1
+		cost = 5
+		available = {
+			DEN = {
+				NOT = { has_war_with = ROOT }
+				OR = {
+					has_government = democratic
+					has_government = communism
+				}
+			}
+			NOT = {
+				any_other_country = {
+					is_in_faction_with = DEN
+					has_war_with = SWE
+				}
+			}
+			is_in_faction = no
+		}
+
+		bypass = {
+			is_in_faction_with = DEN
+		}
+
+		available_if_capitulated = yes
+		completion_reward = {
+			set_rule = {
+				can_create_factions = yes
+			}
+			DEN = {
+				add_timed_idea = { idea = communist_influence days = 90 }
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_morges_economic_union
+		icon = GFX_focus_generic_industry_3
+		prerequisite = { focus = SWE_comi_on_den }
+		relative_position_id = SWE_comi_on_den
+
+		x = 0
+		y = 2
+		cost = 10
+
+		ai_will_do = {
+			base = 10
+		}
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 5 }
+		}
+	}
+	focus = {
+		id = SWE_invite_of_britain
+		icon = GFX_goal_british_cooperation
+		prerequisite = { focus = SWE_morges_economic_union }
+		relative_position_id = SWE_morges_economic_union
+
+		x = 0
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 10
+		}
+
+		available = {
+			is_faction_leader = yes
+		}
+
+		available_if_capitulated = yes
+		completion_reward = {
+			if = {
+				limit = {
+					ROM = {
+						is_in_faction = no
+						is_subject = no
+						exists = yes
+						NOT = { has_war_with = ROOT }
+					}
+				}
+				ENG = {
+					country_event = generic.5
+				}
+			}
+			else_if = {
+				limit = {
+					ENG = { exists = yes }
+				}
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = ENG
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_comi_on_nor
+		icon = GFX_goal_bf_norway
+		prerequisite = {   focus = SWE_anti_imperialism }
+		relative_position_id = SWE_anti_imperialism
+
+		x = 0
+		y = 1
+		cost = 5
+
+		available = {
+			NOR = {
+				NOT = { has_war_with = ROOT }
+				is_faction_leader = yes
+				is_major = yes
+			}
+
+			NOT = {
+				NOR = {
+					has_war_with = SWE
+				}
+			}
+			is_in_faction = no
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			NOR = {add_timed_idea = { idea = communist_influence days = 90 }}
+		}
+	}
+
+	focus = {
+		id = SWE_baltic_socialism
+		icon = GFX_focus_eng_global_defense
+		prerequisite = { focus = SWE_comi_on_fin }
+		relative_position_id = SWE_comi_on_fin
+		will_lead_to_war_with = LIT
+		will_lead_to_war_with = LAT
+		will_lead_to_war_with = EST
+
+		x = 0
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+		available = { has_government = communism }
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			if = {
+				limit = {
+					LIT = {
+						has_government = communism
+						is_in_faction = no
+					}
+				}
+				country_event = generic.5
+				country_event = generic.25
+			}
+			else = {
+				create_wargoal = {
+					type = topple_government
+					target = LIT
+				}
+			}
+			if = {
+				limit = {
+					LAT = {
+						has_government = communism
+						is_in_faction = no
+					}
+				}
+				country_event = generic.5
+				country_event = generic.25
+			}
+			else = {
+				create_wargoal = {
+					type = topple_government
+					target = LAT
+				}
+			}
+			if = {
+				limit = {
+					EST = {
+						has_government = communism
+						is_in_faction = no
+					}
+				}
+				country_event = generic.5
+				country_event = generic.25
+			}
+			else = {
+				create_wargoal = {
+					type = topple_government
+					target = EST
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SWE_anti_fascist_military
+		icon = GFX_focus_spr_the_anti_fascist_workers_revolution
+		prerequisite = { focus = SWE_comi_on_nor focus = SWE_comi_on_den }
+		relative_position_id = SWE_comi_on_nor
+
+		x = -1
+		y = 1
+		cost = 10
+
+		ai_will_do = {
+			base = 2.5
+		}
+
+		available_if_capitulated = yes
+		available = { NOT = { has_government = fascism } }
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = { anti_fascist_army_idea }
+		}
+	}
+	focus = {
+		id = SWE_stay_neatural_demok
+		icon = GFX_SWE_neaturl
+		x = 5
+		y = 1
+		offset = {
+			x = -3
+			y = 0
+			trigger = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		cost = 6
+		mutually_exclusive = { focus = SWE_propose_the_northern_lights focus = SWE_join_allies }
+		prerequisite = { focus = SWE_getting_rid_of_communism }
+		relative_position_id = SWE_getting_rid_of_communism
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 3
+				is_historical_focus_on = yes
+			}
+		}
+
+		completion_reward = {
+			add_stability = 0.03
+			add_political_power = 150
+		}
+	}
+	focus = {
+		id = SWE_operation_radda_danmark
+		icon = GFX_goal_friend_denmark
+		x = 1
+		y = 1
+		cost = 6
+		mutually_exclusive = { focus = SWE_lead_german_troops }
+		prerequisite = { focus = SWE_stay_neatural_demok }
+		relative_position_id = SWE_stay_neatural_demok
+
+		available = {
+			is_subject = no
+			has_government = democratic
+			if = {
+				limit = {
+					DEN = {
+						OR = {
+							has_government = neutrality
+							has_government = democratic
+						}
+					}
+				}
+				DEN = {
+					NOT = {
+						is_in_faction_with = GER
+					}
+					has_capitulated = yes
+				}
+			}
+			GER = {
+				surrender_progress > 0.2
+			}
+		}
+
+		completion_reward = {
+			custom_effect_tooltip = SWE_operation_radda_danmark_tt
+			add_to_war = {
+				targeted_alliance = DEN
+				enemy = GER
+			}
+		}
+	}
+	focus = {
+		id = SWE_lead_german_troops
+		icon = GFX_goal_no_compromises
+		x = 3
+		y = 1
+		cost = 6
+		mutually_exclusive = { focus = SWE_operation_radda_danmark }
+		prerequisite = {focus = SWE_stay_neatural_demok}
+		relative_position_id = SWE_stay_neatural_demok
+
+		available = {
+			GER = {
+				OR = {
+					has_war_with = NOR
+					has_war_with = DEN
+				}
+			}
+		}
+		completion_reward = {
+			GER = {
+				give_guarantee = SWE
+				add_ideas = SWE_accses_ger
+			}
+			SWE = { give_military_access = GER }
+		}
+	}
+	focus = {
+		id = SWE_leak_german_intel
+		icon = GFX_SWE_intel
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {focus = SWE_stay_neatural_demok}
+		relative_position_id = SWE_stay_neatural_demok
+
+		completion_reward = {
+			unlock_decision_category_tooltip = SWE_leak_intel
+		}
+	}
+	focus = {
+		id = SWE_leak_eng_intel
+		icon = GFX_SWE_intel_eng
+		x = 1
+		y = 1
+		cost = 6
+		prerequisite = {focus = SWE_leak_german_intel}
+		relative_position_id = SWE_leak_german_intel
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_england_int
+		}
+	}
+	focus = {
+		id = SWE_leak_soviet_intel
+		icon = GFX_SWE_intel_sov
+		x = -1
+		y = 1
+		cost = 6
+		prerequisite = {focus = SWE_leak_german_intel}
+		relative_position_id = SWE_leak_german_intel
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_soviet_int
+		}
+	}
+	focus = {
+		id = SWE_no_mands_land
+		icon = GFX_goal_canada
+		x = 2
+		y = 1
+		cost = 5
+		available = {
+			controls_state = 332
+			controls_state = 331
+		}
+		prerequisite = {focus = SWE_unify_nordick_wkings}
+		relative_position_id = SWE_unify_nordick_wkings
+
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_core_of = CAN
+				}
+				add_core_of = ROOT
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = CAN
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = SWE_svea_rike
+		icon = GFX_goal_sov_anti_fascism
+		mutually_exclusive = {focus = SWE_old_leagcy focus = SWE_hansson_way focus = SWE_agresif_king focus = SWE_take_more_imagirants focus = SWE_comis_take_over }
+		x = 36
+		y = 0
+		offset = {
+			x = -18
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = SWE_svea_rike
+			}
+		}
+		cost = 5
+		available_if_capitulated = yes
+		available = {has_completed_focus = SWE_interve}
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
+		ai_will_do = {
+			base = 1
+		}
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					OR = {
+						has_completed_focus = SWE_hansson_way
+						has_completed_focus = SWE_old_leagcy
+						has_completed_focus = SWE_agresif_king
+						has_completed_focus = SWE_comis_take_over
+						has_completed_focus = SWE_take_more_imagirants
+					}
+				}
+			}
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		completion_reward = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			SWE_sven_olov_lindholm = {
+				add_country_leader_role = {
+					promote_leader = yes
+					country_leader = {
+						ideology = nazism
+						expire = "1965.1.1"
+						traits = { anti_democrat }
+					}
+
+				}
+			}
+			add_war_support = 0.1
+			hidden_effect = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = obsolete_focus_branches_visibility
+							option = HIDE
+						}
+					}
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_organise_our_militias
+		icon = GFX_focus_generic_manpower
+		prerequisite = { focus = SWE_svea_rike }
+		relative_position_id = SWE_svea_rike
+		x = 0
+		y = 1
+		cost = 10
+		available_if_capitulated = yes
+		available = {
+			has_completed_focus = SWE_total_mobilise
+			has_government = fascism
+		}
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_ARMY_XP }
+
+		completion_reward = {
+			army_experience = 5
+			add_manpower = 5000
+			add_ideas = SWE_militarizm
+		}
+	}
+	focus = {
+		id = SWE_the_puppet_king
+		icon = GFX_focus_rom_handle_king
+		prerequisite = { focus = SWE_organise_our_militias }
+		mutually_exclusive = { focus = SWE_no_king }
+		relative_position_id = SWE_svea_rike
+		x = -2
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			has_civil_war = no
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+
+		completion_reward = {
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+			add_stability = 0.05
+			swap_ideas = {
+				add_idea = SWE_king_gustav_fasic
+				remove_idea = SWE_king_gustav
+			}
+		}
+	}
+	focus = {
+		id = SWE_defending_our_monarchy
+		icon = GFX_focus_generic_home_defense
+		prerequisite = {
+			focus = SWE_the_puppet_king
+		}
+		relative_position_id = SWE_the_puppet_king
+		x = 0
+		y = 1
+		cost = 5
+
+		available_if_capitulated = yes
+		available = {
+			OR = {
+				has_government = fascism
+				AND = {
+					has_government = neutrality
+					has_war = yes
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+
+		completion_reward = {
+			add_ideas = SWE_defend_monarc
+		}
+	}
+	focus = {
+		id = SWE_no_king
+		icon = GFX_u_fra_charlemagne_crown
+		prerequisite = { focus = SWE_organise_our_militias }
+		mutually_exclusive = { focus = SWE_the_puppet_king }
+		relative_position_id = SWE_svea_rike
+		x = 2
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			has_civil_war = no
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_stability = -0.15
+			add_political_power = 120
+			remove_ideas = SWE_king_gustav
+		}
+	}
+	focus = {
+		id = SWE_declare_dictator
+		icon = GFX_u_fra_FRA_all_shall_serve
+		prerequisite = { focus = SWE_no_king }
+		relative_position_id = SWE_no_king
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			has_stability > 0.5
+			has_government = fascism
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_country_leader_trait = dictator
+		}
+	}
+	focus = {
+		id = SWE_military_reorganisation
+		icon = GFX_BOL_side_with_the_military
+		prerequisite = {
+			focus = SWE_the_puppet_king
+			focus = SWE_no_king
+		}
+		relative_position_id = SWE_svea_rike
+		x = 0
+		y = 3
+		cost = 7
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			country_event = SWE.27
+		}
+	}
+	focus = {
+		id = SWE_back_to_stormaktstiden
+		icon = GFX_goal_SWE_medal_air
+		prerequisite = { focus = SWE_military_reorganisation }
+		relative_position_id = SWE_military_reorganisation
+		x = 0
+		y = 1
+
+		cost = 10
+
+		available_if_capitulated = yes
+
+		available = {
+			is_subject = no
+			has_government = fascism
+			has_army_manpower = { size > 74999 }
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			add_ideas = SWE_return_of_stormaktstiden
+		}
+	}
+	focus = {
+		id = SWE_rebuild_arms_factory
+		icon = GFX_u_fra_begin_rearmement
+		prerequisite = { focus = SWE_back_to_stormaktstiden }
+		relative_position_id = SWE_back_to_stormaktstiden
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		available = {
+			has_government = fascism
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_more_slots
+		icon = GFX_goal_munitions_factories
+		prerequisite = { focus = SWE_rebuild_arms_factory }
+		relative_position_id = SWE_rebuild_arms_factory
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		available = {
+			has_government = fascism
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 6
+			}
+		}
+	}
+	focus = {
+		id = SWE_new_training_sytstem
+		icon = GFX_focus_generic_military_mission
+		prerequisite = { focus = SWE_more_slots }
+		relative_position_id = SWE_more_slots
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+		completion_reward = {
+			army_experience = 10
+			effect_tooltip = {
+				every_army_leader = {
+					add_attack = 1
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_learn_the_blitz
+		icon = GFX_goal_generic_army_tanks
+		prerequisite = { focus = SWE_new_training_sytstem }
+		relative_position_id = SWE_new_training_sytstem
+		x = 0
+		y = 1
+		cost = 10
+
+		available_if_capitulated = yes
+
+		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			army_experience = 10
+			add_tech_bonus = {
+				name = armor_bonus
+				bonus = 0.5
+				uses = 1
+				category = armor
+			}
+			add_doctrine_cost_reduction = {
+				name = land_doctrine
+				category = land_doctrine
+				uses = 1
+				cost_reduction = 0.5
+			}
+		}
+	}
+	focus = {
+		id = SWE_restore_the_union
+		icon = GFX_focus_generic_attack_norway
+		prerequisite = { focus = SWE_back_to_stormaktstiden }
+		relative_position_id = SWE_back_to_stormaktstiden
+		x = 3
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 149999 }
+			NOR = {
+				exists = yes
+				NOT = { is_in_faction_with = ROOT }
+				NOT = { has_non_aggression_pact_with = ROOT }
+			}
+		}
+		bypass = {
+			OR = {
+				has_war_with = NOR
+				has_subject = NOR
+				AND = {
+					controls_state = 110
+					controls_state = 143
+					controls_state = 142
+					controls_state = 144
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		completion_reward = {
+			add_threat = 3
+			create_wargoal = {
+				type = annex_everything
+				target = NOR
+			}
+		}
+	}
+	focus = {
+		id = SWE_retake_denmark
+		icon = GFX_focus_generic_attack_denmark
+		prerequisite = { focus = SWE_back_to_stormaktstiden }
+		relative_position_id = SWE_back_to_stormaktstiden
+		x = 5
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 149999 }
+			DEN = {
+				exists = yes
+				NOT = { is_in_faction_with = ROOT }
+				NOT = { has_non_aggression_pact_with = ROOT }
+			}
+		}
+		bypass = {
+			OR = {
+				has_war_with = DEN
+				has_subject = DEN
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		completion_reward = {
+			add_threat = 3
+			create_wargoal = {
+				type = annex_everything
+				target = DEN
+			}
+		}
+	}
+	focus = {
+		id = SWE_restore_our_baltic_claims
+		icon = GFX_focus_generic_baltic_entente
+		prerequisite = {
+			focus = SWE_restore_the_union
+			focus = SWE_retake_denmark
+		}
+		relative_position_id = SWE_back_to_stormaktstiden
+		x = 4
+		y = 2
+		cost = 10
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			add_threat = 4
+			add_state_claim = 12
+			add_state_claim = 13
+			add_state_claim = 146
+			add_state_claim = 191
+			add_state_claim = 195
+			add_state_claim = 208
+			add_state_claim = 808
+			add_state_claim = 811
+			add_state_claim = 812
+			add_state_claim = 813
+		}
+	}
+	focus = {
+		id = SWE_anti_opposition_campaign
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		prerequisite = { focus = SWE_restore_our_baltic_claims }
+		relative_position_id = SWE_restore_our_baltic_claims
+		x = 2
+		y = 1
+		cost = 7
+		available_if_capitulated = yes
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 199999 }
+		}
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = military_police_tech
+				bonus = 1.0
+				uses = 1
+				technology = tech_military_police
+				technology = tech_military_police2
+				technology = tech_military_police3
+				technology = tech_military_police4
+			}
+		}
+	}
+	focus = {
+		id = SWE_join_the_axis
+		icon = GFX_focus_chi_mission_to_germany
+		prerequisite = { focus = SWE_back_to_stormaktstiden }
+		mutually_exclusive = { focus = SWE_stronger_alone }
+		relative_position_id = SWE_back_to_stormaktstiden
+		x = 2
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			is_subject = no
+			is_in_faction = no
+			NOT = { is_justifying_wargoal_against = GER }
+			GER = {
+				is_faction_leader = yes
+				NOT = { has_war_with = ROOT }
+				NOT = { has_wargoal_against = SWE }
+				NOT = { is_justifying_wargoal_against = SWE }
+				NOT = { has_government = democratic }
+			}
+		}
+		bypass = {
+			is_in_faction_with = GER
+		}
+
+		completion_reward = {
+			GER = { country_event = { id = generic.5 } }
+		}
+	}
+	focus = {
+		id = SWE_inspired_self_reliance
+		icon = GFX_goal_generic_trade
+		prerequisite = { focus = SWE_join_the_axis }
+		relative_position_id = SWE_join_the_axis
+		x = 0
+		y = 2
+		cost = 10
+		available_if_capitulated = yes
+		available = {
+			has_government = fascism
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_idea = closed_economy
+						has_idea = limited_exports
+					}
+				}
+				add_ideas = limited_exports
+			}
+			add_tech_bonus = {
+				name = synth_resources
+				bonus = 3.0
+				uses = 2
+				category = synth_resources
+			}
+		}
+	}
+	focus = {
+		id = SWE_swedish_quary
+		icon = GFX_goal_Automobile_Production
+		prerequisite = { focus = SWE_join_the_axis }
+		relative_position_id = SWE_join_the_axis
+		x = -1
+		y = 3
+
+		cost = 10
+
+		available_if_capitulated = yes
+
+		available = {
+			has_government = fascism
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						state = 666
+					}
+				}
+				add_resource = {
+					type = tungsten
+					amount = 7
+				}
+			}
+			add_tech_bonus = {
+				name = GER_autarky
+				bonus = 1.0
+				uses = 2
+				category = excavation_tech
+			}
+			add_ideas = SWE_autarky_idea
+		}
+	}
+	focus = {
+		id = SWE_stronger_alone
+		icon = GFX_focus_anti_nazi
+		prerequisite = { focus = SWE_restore_our_baltic_claims }
+		mutually_exclusive = { focus = SWE_join_the_axis }
+		relative_position_id = SWE_restore_our_baltic_claims
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			is_subject = no
+			NOT = { is_in_faction_with = GER }
+			has_army_manpower = { size > 199999 }
+		}
+		search_filters = {  FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			create_faction = "Swedish Lions"  set_rule= { can_create_factions = yes }
+			add_political_power = 50
+			hidden_effect = {
+				GER = {
+					add_ai_strategy = {
+						type = alliance
+						id = "SWE"
+						value = -200
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_extend_our_claims
+		icon = GFX_goal_LIT_New_Republic
+		prerequisite = {
+			focus = SWE_join_the_axis
+			focus = SWE_stronger_alone
+		}
+		relative_position_id = SWE_join_the_axis
+		x = 1
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 199999 }
+			has_completed_focus = SWE_restore_our_baltic_claims
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_state_claim = 190
+			add_state_claim = 809
+			add_state_claim = 189
+			add_state_claim = 188
+		}
+	}
+	focus = {
+		id = SWE_pursue_land_in_germany
+		icon = GFX_focus_attack_germany
+		prerequisite = { focus = SWE_stronger_alone }
+		relative_position_id = SWE_stronger_alone
+		x = 1
+		y = 1
+
+		cost = 7
+
+		available_if_capitulated = yes
+
+		available = {
+			is_subject = no
+			has_army_manpower = { size > 199999 }
+		}
+		bypass = {
+			controls_state = 58
+			controls_state = 59
+			controls_state = 61
+			controls_state = 62
+			controls_state = 63
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		completion_reward = {
+			add_state_claim = 58
+			add_state_claim = 59
+			add_state_claim = 61
+			add_state_claim = 62
+			add_state_claim = 63
+			if = {
+				limit = { GER = { controls_state = 807 } }
+				add_state_claim = 807
+			}
+			if = {
+				limit = { GER = { controls_state = 85 } }
+				add_state_claim = 85
+			}
+			if = {
+				limit = { GER = { controls_state = 5 } }
+				add_state_claim = 5
+			}
+			if = {
+				limit = { GER = { controls_state = 763 } }
+				add_state_claim = 763
+			}
+		}
+	}
+	focus = {
+		id = SWE_all_with_germany
+		icon = GFX_goal_ger_nazi
+		x = 2
+		y = 1
+		relative_position_id = SWE_svea_rike
+		available = {
+			NOT = {has_war_with = GER}
+		}
+		bypass = {
+		}
+		cost = 4
+		prerequisite = { focus = SWE_svea_rike }
+
+
+
+		completion_reward = {
+			remove_ideas = internationalism
+			add_opinion_modifier = { target = GER modifier = huge_increase }
+			GER = {add_opinion_modifier = { target = SWE modifier = huge_increase }}
+			add_popularity = {ideology = fascism popularity = 0.05}
+			add_timed_idea = { idea = fascist_influence days = 360}
+			hidden_effect = {
+				remove_ideas = SWE_communist_influence
+			}
+		}
+	}
+	focus = {
+		id = SWE_aland_award
+		search_filters = { FOCUS_FILTER_ANNEXATION}
+		icon = GFX_ARG_Islas_Malvinas
+		x = -2
+		y = 1
+		relative_position_id = SWE_svea_rike
+		available = {
+			has_government = fascism
+			145 = {is_claimed_by = SWE}
+		}
+		bypass = {
+			owns_state = 145
+		}
+		cost = 5
+		prerequisite = { focus = SWE_svea_rike }
+
+
+
+		completion_reward = {
+			GER = {country_event = SWE.23}
+		}
+	}
+	focus = {
+		id = SWE_finland_reich
+		icon = GFX_goal_FIN_Airforce
+		x = 2
+		y = 2
+		relative_position_id = SWE_stronger_alone
+
+		available = {
+			FIN = {exists = yes}
+			NOT = {
+				has_war_with = FIN
+				FIN = {has_government = communism}
+			}
+		}
+		bypass = {
+			FIN = {exists = no}
+		}
+		cost = 5
+		prerequisite = { focus = SWE_stronger_alone }
+
+
+
+
+		completion_reward = {
+			FIN = {
+				add_timed_idea = {idea = fascist_influence days = 360}
+				country_event = { id = generic.5 }
+				add_ai_strategy = {
+					type = alliance
+					id = "SWE"
+					value = 200
+				}
+			}
+		}
+	}
+	focus = {
+		id = SWE_karelian_gamble
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_WAR_SUPPORT}
+		icon = GFX_goal_sov_consolidate_power
+		prerequisite = { focus = SWE_extend_our_claims }
+		prerequisite = { focus = SWE_pursue_land_in_germany }
+		relative_position_id = SWE_stronger_alone
+		x = 0
+		y = 2
+		bypass = {
+			OR = {
+				has_war_with = SOV
+				SOV = {exists = no}}
+		}
+		cost = 10
+		will_lead_to_war_with = SOV
+
+
+
+
+		completion_reward = {
+			declare_war_on = {
+				target = SOV
+				type = take_claimed_state
+				generator = {195}
+			}
+		}
+	}
+	focus = {
+		id = SWE_onegalinjen
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT}
+		icon = GFX_focus_ger_bulwark_against_bolshevism
+		x = 0
+		y = 1
+		relative_position_id = SWE_karelian_gamble
+
+		available = {
+			195 = {controller = {
+					OR = {
+						tag = SWE
+						is_in_faction_with = swe}}}
+			215 = {controller = {
+					OR = {
+						tag = SWE
+						is_in_faction_with = swe}}}
+			216 = {controller = {
+					OR = {
+						tag = SWE
+						is_in_faction_with = swe}}}
+		}
+
+		cost = 5
+		prerequisite = { focus = SWE_karelian_gamble}
+
+		cancel_if_invalid = no
+		continue_if_invalid = yes
+
+		completion_reward = {
+			195  = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 3151
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 149
+					}}
+
+			215  = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 94
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 6021
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 11175
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 155
+					}}
+			216  = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 11153
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 6057
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 3084
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 6106
+					}}
+		}
+	}
+	focus = {
+		id = SWE_population_effort
+		search_filters = { FOCUS_FILTER_MANPOWER}
+		icon = GFX_goal_national_populism
+		x = -2
+		y = 1
+		relative_position_id = SWE_new_training_sytstem
+		cost = 10
+		prerequisite = { focus = SWE_new_training_sytstem}
+
+
+
+		completion_reward = {
+			add_ideas = SWE_rebirdish_proglam
+		}
+	}
+	focus = {
+		id = SWE_lat_napalmen_regna_ner
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_RESEARCH}
+		icon = GFX_goal_generic_air_tactical_bomber_new
+		x = -2
+		y = 1
+		relative_position_id = SWE_rebuild_arms_factory
+
+		cost = 10
+		prerequisite = { focus = SWE_rebuild_arms_factory}
+
+
+
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = bomber_bonus
+				bonus = 2.0
+				uses = 1
+				category = tactical_bomber
+				category = cat_strategic_bomber
+			}
+		}
+	}
+	focus = {
+		id = SWE_natthaxorna
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT}
+		icon = GFX_goal_generic_air_heavy_fighter2_new
+		x = 0
+		y = 1
+		relative_position_id = SWE_lat_napalmen_regna_ner
+
+		cost = 5
+		prerequisite = { focus = SWE_lat_napalmen_regna_ner}
+
+
+
+
+		completion_reward = {
+			add_ideas = SWE_swishcrafts
+		}
+	}
+	focus = {
+		id = SWE_levnadsrum
+		search_filters = {FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER FOCUS_FILTER_ANNEXATION}
+		icon = GFX_u_fra_new_world_order
+		x = 0
+		y = 1
+		relative_position_id = SWE_onegalinjen
+		cost = 30
+		prerequisite = { focus = SWE_onegalinjen }
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					EST = {
+						is_subject_of = SWE
+					}
+				}
+				annex_country = {
+					target = EST
+					transfer_troops = yes
+				}
+			}
+			if = {
+				limit = {
+					KAR = {
+						is_subject_of = SWE
+					}
+				}
+				annex_country = {
+					target = KAR
+					transfer_troops = yes
+				}
+			}
+			add_state_core = 722
+			add_state_core = 213
+			add_state_core = 147
+			add_state_core = 215
+			add_state_core = 146
+			add_state_core = 216
+			add_state_core = 214
+			add_state_core = 195
+			add_state_core = 208
+			add_state_core = 209
+			add_state_core = 191
+			add_state_core = 13
+			add_state_core = 811
+			add_state_core = 12
+			add_state_core = 190
+			add_state_core = 11
+			add_state_core = 189
+			add_state_core = 188
+			add_state_core = 784
+			add_state_core = 843
+			add_state_core = 845
+			add_state_core = 214
+			812 = {set_state_name = "Reval"}
+			set_province_name = {
+				id = 3152
+				name = "Reval"}
+			811 = {set_state_name = "Dagö & Ösel"}
+			195 = {set_state_name = "Nöteborg"}
+			set_province_name = {
+				id = 3151
+				name = "Nyen"}
+			12 = {set_state_name = "Livland"}
+			190 = {set_state_name = "Kurland"}
+			216 = {set_state_name = "Kexholm"}
+			set_province_name = {
+				id = 11159
+				name = "Onegaborg"}
+			if = {
+				limit = {
+					controls_state = 208
+				}
+				208 = {set_state_name = "Ingermanland"}
+			}
+			if = {
+				limit = {
+					controls_state = 214
+				}
+				214 = {set_state_name = "Ärkeänglamark"}
+				set_province_name = {
+					id = 3338
+					name = "Ärkeängeln"}
+			}
+		}
+	}
+	focus = {
+		id = SWE_spriitf_of_eagle
+		icon = GFX_goal_SWE_god_of_eagle
+		x = -1
+		y = 2
+		cost = 5
+		prerequisite = {focus = SWE_return_of_oldgods}
+		relative_position_id = SWE_return_of_oldgods
+
+
+
+
+		completion_reward = {
+			unlock_decision_tooltip = SWE_eagle
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

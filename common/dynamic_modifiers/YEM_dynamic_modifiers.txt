@@ -1,0 +1,127 @@
+semi_autonomous_state_yem = {
+	enable = { always = yes }
+	icon = GFX_modifiers_sabotaged_resource
+
+	recruitable_population_factor = -0.25
+	local_building_slots_factor = -0.15
+	state_resources_factor = -0.15
+	state_production_speed_buildings_factor = -0.15
+}
+
+YEM_underdeveloped_industry_dynamic_modifier = { #NATIONAL SPIRIT
+	enable = { always = yes }
+
+	icon = GFX_idea_SOV_second_five_year_plan
+
+	#INITIAL
+	conscription_factor = YEM_pi_conscription_factor #-0.2
+	production_factory_efficiency_gain_factor = YEM_pi_production_factory_efficiency_gain_factor #-0.15
+	production_factory_max_efficiency_factor = YEM_pi_production_factory_max_efficiency_factor #-0.05
+	consumer_goods_factor = YEM_pi_consumer_goods_factor #0.1
+	industrial_capacity_factory = YEM_pi_industrial_capacity_factory #-0.1
+	local_resources_factor = YEM_pi_local_resources_factor #-0.05
+	production_speed_buildings_factor = YEM_pi_production_speed_buildings_factor #-0.05
+
+	#EXTRA IMPROVEMENTS
+	industrial_capacity_dockyard = YEM_pi_industrial_capacity_dockyard #0.05 -> Open New Dockyards
+	fuel_gain_factor_from_states = YEM_pi_fuel_gain_factor_from_states #0.05 -> Open New Oil Wells
+	production_oil_factor = YEM_pi_production_oil_factor #0.05 -> Open New Oil Wells
+	research_speed_factor = YEM_pi_research_speed_factor #0.04 -> Secret Weapons
+}
+
+YEM_underdeveloped_industry_dynamic_modifier_civilian = { #NATIONAL SPIRIT
+	enable = { always = yes }
+
+	icon = GFX_idea_SOV_third_five_year_plan_civilian
+
+	#INITIAL
+	conscription_factor = YEM_pi_conscription_factor #-0.2
+	production_factory_efficiency_gain_factor = YEM_pi_production_factory_efficiency_gain_factor #-0.15
+	production_factory_max_efficiency_factor = YEM_pi_production_factory_max_efficiency_factor #-0.05
+	consumer_goods_factor = YEM_pi_consumer_goods_factor #0.1
+	industrial_capacity_factory = YEM_pi_industrial_capacity_factory #-0.1
+	local_resources_factor = YEM_pi_local_resources_factor #-0.05
+	production_speed_buildings_factor = YEM_pi_production_speed_buildings_factor #-0.05
+
+	#EXTRA IMPROVEMENTS
+	industrial_capacity_dockyard = YEM_pi_industrial_capacity_dockyard #0.05 -> Open New Dockyards
+	fuel_gain_factor_from_states = YEM_pi_fuel_gain_factor_from_states #0.05 -> Open New Oil Wells
+	production_oil_factor = YEM_pi_production_oil_factor #0.05 -> Open New Oil Wells
+	research_speed_factor = YEM_pi_research_speed_factor #0.04 -> Secret Weapons
+}
+
+YEM_armed_forces_dmod = {
+	enable = { always = yes }
+
+	icon = GFX_idea_chi_army_corruption
+
+	custom_modifier_tooltip = YEM_armed_forces_dmod_modifier_tt
+	#army_defence_against_major_factor = 0.05
+	military_leader_cost_factor = YEM_armed_forces_dmod_military_leader_cost_factor #0.5
+	experience_gain_army_factor = YEM_armed_forces_dmod_experience_gain_army_factor #-0.75
+
+	modifier_army_sub_unit_irregular_infantry_max_org_factor = YEM_armed_forces_dmod_irregular_infantry_max_org_factor #0.1
+	modifier_army_sub_unit_irregular_infantry_attack_factor = YEM_armed_forces_dmod_irregular_infantry_attack_factor #0.05
+	army_attack_against_minor_factor = YEM_armed_forces_dmod_army_attack_against_minor #0.05
+	army_morale_factor = YEM_armed_forces_dmod_army_morale_factor # 0.10
+	army_org_factor = YEM_armed_forces_dmod_army_org #0.1
+	army_org_regain = YEM_armed_forces_dmod_army_org_regain #0.05
+	army_armor_attack_factor = YEM_armed_forces_dmod_army_armor_attack #0.05
+	army_artillery_attack_factor = YEM_armed_forces_dmod_army_artillery_attack #0.05
+	max_command_power = YEM_armed_forces_dmod_max_command_power #25
+	conscription = YEM_armed_forces_dmod_conscription #0.08
+	org_loss_when_moving = YEM_armed_forces_dmod_org_loss_when_moving #-0.1
+	dig_in_speed_factor = YEM_armed_forces_dmod_dig_in_speed_factor #0.05
+	training_time_factor = YEM_armed_forces_dmod_training_time_factor #-0.25
+	special_forces_cap = YEM_armed_forces_dmod_org_special_forces_cap #0.02
+	winter_attrition_factor = YEM_armed_forces_dmod_winter_attrition_factor #0.05
+	heat_attrition_factor = YEM_armed_forces_dmod_heat_attrition_factor #-0.15
+	cas_damage_reduction = YEM_armed_forces_dmod_cas_damage_reduction #0.1
+	recon_factor_while_entrenched = YEM_armed_forces_dmod_recon_factor_while_entrenched #0.1
+	land_reinforce_rate = YEM_armed_forces_dmod_land_reinforce_rate #0.05
+	supply_consumption_factor = YEM_armed_forces_dmod_supply_consumption_factor #-0.05
+	land_doctrine_cost_factor = YEM_armed_forces_dmod_land_doctrine_cost_factor #-0.05
+
+	#Air
+	experience_gain_air_factor = YEM_armed_forces_dmod_experience_gain_air_factor #0.05
+	air_mission_efficiency = YEM_armed_forces_dmod_mission_efficiency
+
+	#Navy
+	positioning = YEM_armed_forces_dmod_positioning
+}
+
+YEM_armed_forces_dmod_modern = {
+	enable = { always = yes }
+
+	icon = GFX_idea_chi_army_corruption3
+
+	#army_defence_against_major_factor = 0.05
+	military_leader_cost_factor = YEM_armed_forces_dmod_military_leader_cost_factor #0.5
+	experience_gain_army_factor = YEM_armed_forces_dmod_experience_gain_army_factor #-0.75
+
+	modifier_army_sub_unit_irregular_infantry_max_org_factor = YEM_armed_forces_dmod_irregular_infantry_max_org_factor #0.1
+	modifier_army_sub_unit_irregular_infantry_attack_factor = YEM_armed_forces_dmod_irregular_infantry_attack_factor #0.05
+	army_attack_against_minor_factor = YEM_armed_forces_dmod_army_attack_against_minor #0.05
+	army_morale_factor = YEM_armed_forces_dmod_army_morale_factor # 0.10
+	army_org_factor = YEM_armed_forces_dmod_army_org #0.1
+	army_armor_attack_factor = YEM_armed_forces_dmod_army_armor_attack #0.05
+	army_artillery_attack_factor = YEM_armed_forces_dmod_army_artillery_attack #0.05
+	max_command_power = YEM_armed_forces_dmod_max_command_power #25
+	conscription = YEM_armed_forces_dmod_conscription #0.08
+	org_loss_when_moving = YEM_armed_forces_dmod_org_loss_when_moving #-0.1
+	dig_in_speed_factor = YEM_armed_forces_dmod_dig_in_speed_factor #0.05
+	training_time_factor = YEM_armed_forces_dmod_training_time_factor #-0.25
+	special_forces_cap = YEM_armed_forces_dmod_org_special_forces_cap #0.02
+	cas_damage_reduction = YEM_armed_forces_dmod_cas_damage_reduction #0.1
+	recon_factor_while_entrenched = YEM_armed_forces_dmod_recon_factor_while_entrenched #0.1
+	land_reinforce_rate = YEM_armed_forces_dmod_land_reinforce_rate #0.05
+	supply_consumption_factor = YEM_armed_forces_dmod_supply_consumption_factor #-0.05
+	land_doctrine_cost_factor = YEM_armed_forces_dmod_land_doctrine_cost_factor #-0.05
+
+	#Air
+	experience_gain_air_factor = YEM_armed_forces_dmod_experience_gain_air_factor #0.05
+	air_mission_efficiency = YEM_armed_forces_dmod_mission_efficiency
+
+	#Navy
+	positioning = YEM_armed_forces_dmod_positioning
+}

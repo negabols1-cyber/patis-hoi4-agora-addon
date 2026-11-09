@@ -1,0 +1,2568 @@
+focus_tree = {
+	id = french_fascist_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = FRA
+		}
+	}
+
+	continuous_focus_position = {
+		x = 50 y = 3000
+	}
+
+	initial_show_position = {
+		x = 0
+	}
+
+	default = no
+
+	shared_focus = UFRA_nationalism
+	shared_focus = UFRA_create_dga
+	shared_focus = UFRA_open_to_the_world
+	shared_focus = UFRA_economic_policies
+	shared_focus = UFRA_devalue_the_franc
+	shared_focus = UFRA_begin_rearmament
+	shared_focus = UFRA_naval_rearmament
+	shared_focus = UFRA_air_focus
+
+
+	# Fascist Tree
+	focus = {
+		id = UFRA_revive_the_national_bloc
+		icon = GFX_focus_generic_strike_at_democracy2
+		x = 46
+		y = 0
+		offset = {
+			x = 0
+			y = 0
+		}
+
+		cost = 1
+		ai_will_do = {
+			base = 500
+		}
+		available = {
+		}
+		mutually_exclusive = {}
+
+		allow_branch = {
+		}
+		bypass = {
+			always = yes
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = FRA_pl_leagues_tt
+			set_country_flag = FRA_parliament_can_discuss
+		}
+	}
+	focus = {
+		id = UFRA_utilize_the_leagues
+		icon = GFX_focus_generic_strike_at_democracy1
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_revive_the_national_bloc }
+		relative_position_id = UFRA_revive_the_national_bloc
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			OR = {
+				has_government = fascism
+				has_government = neutrality
+			}
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			unlock_decision_tooltip = { decision = UFRA_rally_the_leagues show_effect_tooltip = yes }
+			unlock_decision_tooltip = { decision = UFRA_unleash_la_cagoule show_effect_tooltip = yes }
+			add_stability = -0.05
+			set_country_flag = FRA_parliament_can_discuss
+		}
+	}
+	focus = {
+		id = UFRA_national_regeneration
+		icon = GFX_u_fra_FRA_the_french_century
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_utilize_the_leagues
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_utilize_the_leagues
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = FRA_national_regeneration_trigger_tt
+					set_temp_variable = { FRA_rw_support = party_popularity@neutrality }
+					add_to_temp_variable = { FRA_rw_support = party_popularity@fascism }
+					check_variable = { FRA_rw_support > 0.5 }
+				}
+
+				custom_trigger_tooltip = {
+					tooltip = nationalists_majority
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^3 }
+					check_variable = { FRA_rw_support > 125 }
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_country_flag = FRA_maintain_election
+			hidden_effect = {
+				country_event = u_fra.53
+				create_country_leader = {
+					name = "Pierre Laval"
+					desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+					picture = GFX_portrait_fra_pierre_laval
+					expire = "1965.1.1"
+					ideology = rexism
+					traits = {
+						tenacious_negotiator
+					}
+				}
+			}
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+		}
+	}
+
+
+	focus = {
+		id = UFRA_political_unity
+		icon = GFX_u_fra_FRA_all_shall_serve
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_utilize_the_leagues
+		}
+		relative_position_id = UFRA_utilize_the_leagues
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			remove_ideas = { FRA_disjointed_government }
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_popularity = { ideology = fascism popularity = party_popularity@neutrality }
+			add_popularity = { ideology = neutrality popularity = -1}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = nationalists_win_10
+			set_temp_variable = { temp_member = 4 }
+			set_temp_variable = { temp_seats = 10 }
+			modify_parliament_seat = yes
+			add_to_variable = { fra_senate_support = 4 }
+			custom_effect_tooltip = senate_win_4
+		}
+	}
+	focus = {
+		id = UFRA_diplomatic_freedom
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		x = 4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_national_regeneration
+		}
+		relative_position_id = UFRA_national_regeneration
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+			NOT = {
+				any_other_country = {
+					OR = {
+						tag = POL
+						tag = CZE
+						tag = YUG
+						tag = ROM
+						tag = HUN
+					}
+					is_guaranteed_by = ROOT
+				}
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					OR = {
+						tag = POL
+						tag = CZE
+						tag = YUG
+						tag = ROM
+						tag = HUN
+					}
+					is_guaranteed_by = ROOT
+				}
+				ROOT = {
+					diplomatic_relation = {
+						country = POL
+						relation = guarantee
+						active = no
+					}
+					diplomatic_relation = {
+						country = CZE
+						relation = guarantee
+						active = no
+					}
+					diplomatic_relation = {
+						country = YUG
+						relation = guarantee
+						active = no
+					}
+					diplomatic_relation = {
+						country = ROM
+						relation = guarantee
+						active = no
+					}
+					diplomatic_relation = {
+						country = HUN
+						relation = guarantee
+						active = no
+					}
+				}
+			}
+			hidden_effect = {
+				news_event = { id = lar_news.6 days = 3 random = 5 }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_army_of_aggression
+		icon = GFX_goal_generic_occupy_states_ongoing_war
+		available = {
+		}
+		prerequisite = { focus = UFRA_national_regeneration }
+		x = 1
+		y = 1
+		relative_position_id = UFRA_national_regeneration
+		cost = 5
+
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			base = 1
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_ideas = FRA_army_of_aggression_focus
+			USA = {
+				set_country_flag = { flag = USA_army_of_aggression_window days = 60 value = 1 }
+			}
+			if = {
+				limit = {
+					ENG = {
+						is_in_faction_with = FRA
+						is_faction_leader = yes
+					}
+				}
+				ENG = { remove_from_faction = FRA }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_croix_de_feux
+		icon = GFX_u_fra_croix_de_feu
+		x = 6
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_diplomatic_freedom
+		}
+		mutually_exclusive = { focus = UFRA_towards_a_new_europe }
+		relative_position_id = UFRA_diplomatic_freedom
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			hidden_effect = {
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = CDF_FRA
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = "Croix-de-Feu"
+				name = "Croix-de-Feu"
+			}
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = yes
+			}
+			create_country_leader = {
+				name = "François de la Rocque"
+				desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+				picture = GFX_portrait_fra_francois_de_la_rocque
+				expire = "1965.1.1"
+				ideology = fascism_ideology
+				traits = {
+					retired_officer
+				}
+			}
+			if = {
+				limit = {
+					has_global_flag = UFRA_mermoz_survive
+				}
+				custom_effect_tooltip = available_political_advisor
+				show_ideas_tooltip = jean_mermoz
+				set_global_flag = UFRA_mermoz_minister
+				clr_global_flag = UFRA_mermoz_survive
+			}
+			add_opinion_modifier = {
+				target = GER
+				modifier = hostile_status
+			}
+			GER = {
+				add_opinion_modifier = {
+					target = FRA
+					modifier = hostile_status
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_minimum_wage
+		icon = GFX_u_fra_FRA_minimum_wage
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_croix_de_feux
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_croix_de_feux
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_disgruntled_workers_I
+				add_idea = FRA_disgruntled_workers_II
+			}
+		}
+	}
+	focus = {
+		id = UFRA_vote_for_women
+		icon = GFX_u_fra_FRA_vote_for_women
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_minimum_wage
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_minimum_wage
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_popularity = { ideology = democratic popularity = 0.05 }
+			add_popularity = { ideology = fascism popularity = 0.05 }
+			swap_ideas = {
+				remove_idea = FRA_disgruntled_workers_II
+				add_idea = FRA_disgruntled_workers_III
+			}
+		}
+	}
+	focus = {
+		id = UFRA_the_great_war_model
+		icon = GFX_u_fra_FRA_the_great_war_model
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_vote_for_women
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_vote_for_women
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_disgruntled_workers_III
+				add_idea = FRA_the_great_war_model
+			}
+		}
+	}
+	focus = {
+		id = UFRA_latin_heritage
+		icon = GFX_focus_generic_italy_first
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_croix_de_feux
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_croix_de_feux
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_political_power = 150
+			add_opinion_modifier = {
+				target = ITA
+				modifier =  large_increase
+			}
+
+			ITA = {
+				add_opinion_modifier = {
+					target = FRA
+					modifier =  large_increase
+				}
+			}
+			ITA = {
+				add_ai_strategy = {
+					type = befriend
+					id = ROOT
+					value = 20
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_honneur_et_traditions
+		icon = GFX_u_fra_FRA_honneur_et_trad
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_latin_heritage
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_latin_heritage
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = FRA_honneur_et_traditions_I
+			add_stability = 0.025
+			add_war_support = 0.025
+		}
+	}
+	focus = {
+		id = UFRA_modern_knights
+		icon = GFX_u_fra_FRA_modern_knight
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_honneur_et_traditions
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_honneur_et_traditions
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_honneur_et_traditions_I
+				add_idea = FRA_honneur_et_traditions_II
+			}
+			add_stability = 0.025
+			add_war_support = 0.025
+		}
+	}
+	focus = {
+		id = UFRA_french_path_to_fascism
+		icon = GFX_u_fra_FRA_french_path_to_fascism
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_croix_de_feux
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_croix_de_feux
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_country_leader_trait = french_fascist
+		}
+	}
+	focus = {
+		id = UFRA_anti_nazi_anti_soviet
+		icon = GFX_goal_generic_defence
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_french_path_to_fascism
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_french_path_to_fascism
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_country_leader_trait = anti_nazi_anti_soviet
+			add_opinion_modifier = {
+				target = SOV
+				modifier =  medium_decrease
+			}
+			add_opinion_modifier = {
+				target = GER
+				modifier =  medium_decrease
+			}
+			SOV = {
+				add_opinion_modifier = {
+					target = FRA
+					modifier =  medium_decrease
+				}
+			}
+			GER = {
+				add_opinion_modifier = {
+					target = FRA
+					modifier =  medium_decrease
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_the_natural_borders_of_france
+		icon = GFX_focus_focus_fra_border
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_anti_nazi_anti_soviet
+		}
+		relative_position_id = UFRA_anti_nazi_anti_soviet
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+		will_lead_to_war_with = BEL
+		will_lead_to_war_with = GER
+		will_lead_to_war_with = HOL
+		available = {
+			has_army_manpower = { size > 649999 }
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			BEL = {
+				country_event = { id = u_fra.18 }
+			}
+			HOL = {
+				country_event = { id = u_fra.18 }
+			}
+			LUX = {
+				country_event = { id = u_fra.18 }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_crush_the_german_danger
+		icon = GFX_u_fra_german_danger
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_the_natural_borders_of_france
+		}
+		relative_position_id = UFRA_the_natural_borders_of_france
+		cost = 8
+		will_lead_to_war_with = GER
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			OR = {
+				is_in_faction_with = GER
+				has_war_with = GER
+
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = GER
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = UFRA_cooperation_with_italy
+
+		prerequisite = { focus = UFRA_the_natural_borders_of_france focus = UFRA_modern_knights focus = UFRA_the_great_war_model }
+
+		icon = GFX_focus_befriend_italy
+		relative_position_id = UFRA_the_natural_borders_of_france
+		x = -3
+		y = 1
+		cost = 5
+
+		bypass = {
+			OR = {
+				NOT = { country_exists = ITA }
+				ITA = { is_subject = yes }
+				ITA = { has_capitulated = yes }
+				has_war_with = ITA
+			}
+		}
+
+		available = {
+			NOT = { has_war_with = ITA }
+			ITA = {
+				NOT = { is_justifying_wargoal_against = ROOT }
+				has_opinion	= {
+					target = ROOT
+					value > 24
+				}
+			}
+			OR = {
+				is_in_faction = no
+				is_in_faction_with = ITA
+			}
+		}
+
+
+
+		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_to_tech_sharing_group = fra_col_research
+			ITA = {
+				add_to_tech_sharing_group = fra_col_research
+			}
+		}
+	}
+	focus = {
+		id = UFRA_state_catholism_2
+		icon = GFX_focus_generic_pope
+		x = -4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_croix_de_feux }
+		relative_position_id = UFRA_croix_de_feux
+		mutually_exclusive = { }
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_state_catholicism }
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = UFRA_towards_a_new_europe
+		icon = GFX_u_fra_partisocialfr
+		x = -4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_diplomatic_freedom
+		}
+		mutually_exclusive = { focus = UFRA_croix_de_feux }
+		relative_position_id = UFRA_diplomatic_freedom
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			hidden_effect = {
+				drop_cosmetic_tag = yes
+				set_cosmetic_tag = PPF_FRA
+			}
+			add_stability = -0.05
+			set_party_name = {
+				ideology = fascism
+				long_name = "Parti Populaire Francais"
+				name = "PPF"
+			}
+			add_country_leader_role = {
+				character = FRA_jacques_doriot
+				country_leader = {
+					expire = "1965.1.1"
+					ideology = nazism
+					traits = {
+						eager_collaborator
+					}
+				}
+				promote_leader = yes
+			}
+			create_corps_commander = {
+				name = "Marcel Bucard"
+				picture = "Portrait_France_Marcel_Bucard.dds"
+				traits = {
+					politically_connected
+					trickster
+					harsh_leader
+				}
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			add_opinion_modifier = {
+				target = GER
+				modifier = FRA_right_wing_rhetoric_fascism
+			}
+			GER = {
+				add_opinion_modifier = {
+					target = FRA
+					modifier = FRA_right_wing_rhetoric_fascism
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_create_propaganda_apparatus
+		icon = GFX_u_fra_FRA_propaganda_apparatus
+		x = 4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_towards_a_new_europe
+			focus = UFRA_croix_de_feux
+		}
+		mutually_exclusive = {  }
+		relative_position_id = UFRA_towards_a_new_europe
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = FRA_propaganda_apparatus_I
+			set_country_flag = UFRA_propaganda_cinema_script
+			custom_effect_tooltip = FRA_propaganda_cinema_bonus_tt
+		}
+	}
+	focus = {
+		id = UFRA_classicism
+		icon = GFX_u_fra_classicism
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_create_propaganda_apparatus
+		}
+		mutually_exclusive = {  }
+		relative_position_id = UFRA_create_propaganda_apparatus
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_political_power = 25
+			swap_ideas = {
+				remove_idea = FRA_propaganda_apparatus_I
+				add_idea = FRA_propaganda_apparatus_II
+			}
+		}
+	}
+	focus = {
+		id = UFRA_establish_spheres_of_influence
+		icon = GFX_goal_generic_more_territorial_claims
+		x = 1
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_towards_a_new_europe
+		}
+		relative_position_id = UFRA_towards_a_new_europe
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			GER = {
+				has_government = ROOT
+			}
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_political_power = 100
+			GER = {
+				country_event = lar_spheres_of_influence.1
+			}
+			effect_tooltip = {
+				GER = {
+					add_state_claim = 8
+					add_state_claim = 7
+					add_state_claim = 35
+					add_state_claim = 36
+					add_to_faction = ROOT
+				}
+				ROOT = {
+					add_state_claim = 34
+					add_state_claim = 6
+					add_state_claim = 908
+				}
+			}
+			custom_effect_tooltip = FRA_influence_tooltip
+		}
+
+	}
+	focus = {
+		id = UFRA_split_belgium
+		icon = GFX_goal_generic_territory_or_war
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_establish_spheres_of_influence
+		}
+		mutually_exclusive = { focus = UFRA_align_belgium }
+		relative_position_id = UFRA_establish_spheres_of_influence
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			has_army_manpower = { size > 649999 }
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+		}
+		will_lead_to_war_with = BEL
+		bypass = {
+			BEL = {
+				OR = {
+					exists = no
+					has_war_with = ROOT
+				}
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+			BEL = {
+				country_event = lar_split_belgium.1
+			}
+		}
+	}
+	focus = {
+		id = UFRA_align_belgium
+		icon = GFX_goal_generic_forceful_treaty
+		x = 1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_establish_spheres_of_influence
+		}
+		mutually_exclusive = { focus = UFRA_split_belgium }
+		relative_position_id = UFRA_establish_spheres_of_influence
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+		will_lead_to_war_with = BEL
+		available = {
+			has_army_manpower = { size > 649999 }
+			BEL = {
+				exists = yes
+				is_in_faction = no
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+		}
+
+		bypass = {
+			BEL = {
+				is_subject_of = ROOT
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+			BEL = {
+				country_event = lar_align_belgium.1
+			}
+		}
+	}
+	focus = {
+		id = UFRA_the_split_switzerland
+		icon = GFX_focus_attack_switzerland
+		x = -8
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_split_belgium
+			focus = UFRA_the_natural_borders_of_france
+			focus = UFRA_align_belgium
+		}
+		relative_position_id = UFRA_the_natural_borders_of_france
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+		will_lead_to_war_with = SWI
+		available = {
+			has_army_manpower = { size > 749999 }
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = UFRA_the_natural_borders_of_france
+				}
+				ITA = {
+					add_state_core = 151
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						has_completed_focus = UFRA_split_belgium
+						has_completed_focus = UFRA_align_belgium
+					}
+				}
+				GER = {
+					add_state_core = 151
+				}
+			}
+			add_state_core = 3
+			SWI = {
+				country_event = { id = u_fra.18 }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_celtic_paganism
+		icon = GFX_u_fra_celtic_paganism
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_towards_a_new_europe
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_towards_a_new_europe
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {}
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = FRA_state_paganism
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_german_military_exchange
+		icon = GFX_u_fra_FRA_german_exchange
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_split_belgium
+			focus = UFRA_align_belgium
+		}
+		relative_position_id = UFRA_split_belgium
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		mutually_exclusive = {
+			focus = UFRA_an_army_to_challenge_ger
+		}
+
+		available = {
+			GER = {
+				has_government = ROOT
+			}
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			custom_effect_tooltip = FRA_fra_ger_10_loss
+			FRA = { add_to_variable = { var = france_and_germany_diplomatic_influence value = -10 } }
+			army_experience = 10
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.25
+				uses = 2
+				category = land_doctrine
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				ahead_reduction = 1
+				uses = 2
+				name = mech_army_bonus
+				technology = basic_medium_tank
+				technology = improved_medium_tank
+				technology = advanced_medium_tank
+				technology = mechanised_infantry
+			}
+			GER = {
+				add_doctrine_cost_reduction = {
+					cost_reduction = 0.25
+					uses = 2
+					category = land_doctrine
+				}
+				army_experience = 10
+				add_tech_bonus = {
+					bonus = 1.0
+					uses = 2
+					category = infantry_weapons
+				}
+				add_tech_bonus = {
+					bonus = 0.5
+					ahead_reduction = 1
+					uses = 1
+					category = artillery
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_an_army_to_challenge_ger
+		icon = GFX_u_fra_FRA_an_army_to_challenge_ger
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_split_belgium
+			focus = UFRA_align_belgium
+		}
+		relative_position_id = UFRA_split_belgium
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		mutually_exclusive = {
+			focus = UFRA_german_military_exchange
+		}
+
+		available = {
+			GER = {
+				has_government = ROOT
+			}
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			custom_effect_tooltip = FRA_fra_ger_10_augment
+			FRA = { add_to_variable = { var = france_and_germany_diplomatic_influence value = 10 } }
+			army_experience = 5
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.25
+				uses = 1
+				category = land_doctrine
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				ahead_reduction = 1
+				uses = 1
+				name = mech_army_bonus
+				technology = basic_medium_tank
+				technology = improved_medium_tank
+				technology = advanced_medium_tank
+			}
+		}
+	}
+	focus = {
+		id = UFRA_plan_german_betrayal
+		icon = GFX_focus_attack_germany
+		x = 1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_an_army_to_challenge_ger
+			focus = UFRA_german_military_exchange
+		}
+		relative_position_id = UFRA_an_army_to_challenge_ger
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		mutually_exclusive = {
+		}
+
+		available = {
+			GER = {
+				exists = yes
+			}
+		}
+
+		bypass = {
+			GER = {
+				exists = no
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+			army_experience = 10
+			custom_effect_tooltip = FRA_fra_ger_15_augment
+			FRA = { add_to_variable = { var = france_and_germany_diplomatic_influence value = 15 } }
+			add_country_leader_trait = no_more_collaboration
+			remove_country_leader_trait = eager_collaborator
+		}
+	}
+	focus = {
+		id = UFRA_grow_the_empire
+		icon = GFX_goal_generic_political_pressure
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_split_belgium
+			focus = UFRA_align_belgium
+		}
+		relative_position_id = UFRA_align_belgium
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			BEL = {
+				is_subject_of = ROOT
+			}
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+			295 = { CONTROLLER = { OR = { tag = BEL is_subject_of = BEL } } }
+			538 = { CONTROLLER = { OR = { tag = BEL is_subject_of = BEL } } }
+			718 = { CONTROLLER = { OR = { tag = BEL is_subject_of = BEL } } }
+			769 = { CONTROLLER = { OR = { tag = BEL is_subject_of = BEL } } }
+			768 = { CONTROLLER = { OR = { tag = BEL is_subject_of = BEL } } }
+		}
+
+		bypass = {
+			BEL = {
+				exists = no
+			}
+			NOT = {
+				295 = {
+					CONTROLLER = {
+						OR = {
+							tag = BEL
+							is_subject_of = BEL
+						}
+					}
+				}
+			}
+			NOT = {
+				538 = {
+					CONTROLLER = {
+						OR = {
+							tag = BEL
+							is_subject_of = BEL
+						}
+					}
+				}
+			}
+			NOT = {
+				718 = {
+					CONTROLLER = {
+						OR = {
+							tag = BEL
+							is_subject_of = BEL
+						}
+					}
+				}
+			}
+			NOT = {
+				769 = {
+					CONTROLLER = {
+						OR = {
+							tag = BEL
+							is_subject_of = BEL
+						}
+					}
+				}
+			}
+			NOT = {
+				768 = {
+					CONTROLLER = {
+						OR = {
+							tag = BEL
+							is_subject_of = BEL
+						}
+					}
+				}
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+			transfer_state = 295
+			transfer_state = 538
+			transfer_state = 718
+			transfer_state = 769
+			transfer_state = 768
+		}
+	}
+	focus = {
+		id = UFRA_forced_assimilation
+		icon = GFX_focus_eng_move_to_secure_the_dominions
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_grow_the_empire
+		}
+		relative_position_id = UFRA_grow_the_empire
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			custom_effect_tooltip = FRA_africa_assimil_tooltip
+		}
+	}
+	focus = {
+		id = UFRA_purge_communist_rot
+		icon = GFX_u_fra_FRA_purge_communism
+		x = 3
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_grow_the_empire
+			focus = UFRA_cooperation_with_italy
+		}
+		relative_position_id = UFRA_grow_the_empire
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+		}
+		will_lead_to_war_with = SOV
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_timed_idea = { idea = FRA_purge_communist_rot days = 125 }
+			create_wargoal = {
+				target = SOV
+				type = annex_everything
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = UFRA_destroy_us_liberalism
+		icon = GFX_u_fra_FRA_crush_usa_liberalism
+		x = 1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_grow_the_empire
+			focus = UFRA_cooperation_with_italy
+		}
+		relative_position_id = UFRA_grow_the_empire
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+		}
+		will_lead_to_war_with = USA
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				target = USA
+				type = annex_everything
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = UFRA_bring_home_quebec
+		icon = GFX_focus_attack_canada
+		x = 5
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_grow_the_empire
+			focus = UFRA_cooperation_with_italy
+		}
+		relative_position_id = UFRA_grow_the_empire
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			OR = {
+				is_subject = no
+				is_subject_of = GER
+			}
+		}
+		will_lead_to_war_with = CAN
+		bypass = {
+			owns_state  = 466
+		}
+
+
+
+
+
+		completion_reward = {
+			add_state_core = 466
+			466 = {
+				OWNER = {
+					ROOT = {
+						create_wargoal = {
+							type = take_state
+							target = PREV
+							expire = 0
+							generator = {
+								466
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_the_new_worl_order
+		icon = GFX_u_fra_new_world_order
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_destroy_us_liberalism focus = UFRA_purge_communist_rot
+		}
+		relative_position_id = UFRA_purge_communist_rot
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			date > 1940.1.1
+			OR = {
+				ENG = {
+					has_government = fascism
+
+				}
+				is_in_faction_with = ENG
+				NOT = {
+					country_exists = ENG
+				}
+			}
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_named_threat = { threat = -10 name = "The New World Order" }
+			add_ideas = FRA_new_world_order
+		}
+	}
+	focus = {
+		id = UFRA_expand_to_the_suez
+		icon = GFX_focus_generic_the_suez
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_cooperation_with_italy
+			focus = UFRA_grow_the_empire
+		}
+		relative_position_id = UFRA_cooperation_with_italy
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+			owns_state = 455
+			owns_state = 454
+			owns_state = 453
+		}
+
+
+
+
+
+		completion_reward = {
+			add_state_claim = 455
+			add_state_claim = 454
+			add_state_claim = 453
+			if = {
+				limit = {
+					455 = { OWNER = { tag = ENG } }
+					454 = { OWNER = { tag = ENG } }
+					453 = { OWNER = { tag = ENG } }
+				}
+				455 = {
+					OWNER = {
+						ROOT = {
+							create_wargoal = {
+								type = take_state
+								target = PREV
+								expire = 0
+								generator = {
+									455
+								}
+							}
+						}
+					}
+				}
+				hidden_effect = {
+					454 = {
+						OWNER = {
+							ROOT = {
+								create_wargoal = {
+									type = take_state
+									target = PREV
+									expire = 0
+									generator = {
+										454
+									}
+								}
+							}
+						}
+					}
+					453 = {
+						OWNER = {
+							ROOT = {
+								create_wargoal = {
+									type = take_state
+									target = PREV
+									expire = 0
+									generator = {
+										453
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			else = {
+				455 = {
+					OWNER = {
+						ROOT = {
+							create_wargoal = {
+								type = take_state
+								target = PREV
+								expire = 0
+								generator = {
+									455
+								}
+							}
+						}
+					}
+				}
+				454 = {
+					OWNER = {
+						ROOT = {
+							create_wargoal = {
+								type = take_state
+								target = PREV
+								expire = 0
+								generator = {
+									454
+								}
+							}
+						}
+					}
+				}
+				453 = {
+					OWNER = {
+						ROOT = {
+							create_wargoal = {
+								type = take_state
+								target = PREV
+								expire = 0
+								generator = {
+									453
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_dominate_the_middle_east
+		icon = GFX_goal_generic_attack_allies
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_expand_to_the_suez
+		}
+		relative_position_id = UFRA_expand_to_the_suez
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+			SAU = {
+				OR = {
+					is_subject_of = ROOT
+					exists = no
+				}
+			}
+			OMA = {
+				OR = {
+					is_subject_of = ROOT
+					exists = no
+				}
+			}
+			YEM = {
+				OR = {
+					is_subject_of = ROOT
+					exists = no
+				}
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					capital_scope = {
+						is_on_continent = middle_east
+					}
+					is_major = no
+					is_subject = no
+					NOT = {
+						tag = TUR
+						tag = PER
+					}
+				}
+				country_event = lar_dominate_the_middle_east.1
+			}
+		}
+	}
+
+	## Fascism SubTree
+	focus = {
+		id = UFRA_form_the_milice
+		icon = GFX_focus_fra_milice
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_national_regeneration
+		}
+		relative_position_id = UFRA_national_regeneration
+
+		cost = 8
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			add_ideas = FRA_milice_peace
+		}
+	}
+	focus = {
+		id = UFRA_give_full_powers
+		icon = GFX_u_fra_FRA_take_power
+		x = -5
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_national_regeneration
+		}
+		mutually_exclusive = {}
+		relative_position_id = UFRA_national_regeneration
+		cost = 6
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			clr_country_flag = FRA_maintain_election
+			custom_effect_tooltip = FRA_end_of_parliment_decisions
+
+			add_political_power = 50
+			add_ideas = FRA_fascist_society_I
+		}
+	}
+
+	focus = {
+		id = UFRA_crush_political_dissent
+		icon = GFX_u_fra_FRA_purge_political_opponents
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_give_full_powers
+		}
+		mutually_exclusive = {}
+		relative_position_id = UFRA_give_full_powers
+		cost = 3
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_political_power = 25
+			country_event = { id = u_fra.51 }
+			set_temp_variable = { FRA_democracy = party_popularity@democratic }
+			multiply_temp_variable = { FRA_democracy = 0.3 }
+			add_popularity = { ideology = fascism popularity = FRA_democracy }
+			multiply_temp_variable = { FRA_democracy = -1 }
+			add_popularity = { ideology = democratic popularity = FRA_democracy }
+			add_stability = FRA_democracy
+			FRA_communism_riot_effect = yes
+		}
+	}
+	focus = {
+		id = UFRA_control_newspapers
+		icon = GFX_u_fra_burning_journal
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_give_full_powers
+		}
+		relative_position_id = UFRA_give_full_powers
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = -50
+		}
+	}
+	focus = {
+		id = UFRA_new_national_holiday_1
+		icon = GFX_focus_focus_fra_down_marianne
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_give_full_powers }
+		relative_position_id = UFRA_give_full_powers
+		mutually_exclusive = { }
+		cost = 2
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			country_event = { id = u_fra.171 }
+		}
+	}
+
+	focus = {
+		id = UFRA_chantiers_jeunesse
+		icon = GFX_u_fra_focus_chantiers
+		x = 0
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_control_newspapers
+		}
+		prerequisite = {
+			focus = UFRA_crush_political_dissent
+		}
+		mutually_exclusive = {}
+		relative_position_id = UFRA_give_full_powers
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_fascist_society_I
+				add_idea = FRA_fascist_society_II
+			}
+		}
+	}
+	focus = {
+		id = UFRA_aids_for_families
+		icon = GFX_u_fra_FRA_help_families
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_chantiers_jeunesse }
+		relative_position_id = UFRA_chantiers_jeunesse
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_fascist_society_II
+				add_idea = FRA_fascist_society_III
+			}
+		}
+	}
+	focus = {
+		id = UFRA_ideological_fanaticism
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = UFRA_aids_for_families }
+		prerequisite = { focus = UFRA_extensive_conscription focus = UFRA_direction_for_interior_security }
+		x = 1
+		y = 1
+		relative_position_id = UFRA_aids_for_families
+		cost = 5
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = ideological_fanaticism_focus
+			set_rule = {
+				can_create_factions = yes
+			}
+			hidden_effect = {
+				set_rule = { can_use_kamikaze_pilots = yes }
+			}
+			custom_effect_tooltip = kamikaze_focus_tooltip
+		}
+	}
+	focus = {
+		id = UFRA_put_opponents_to_work
+		icon = GFX_u_fra_Focus_Generic_Forced_Labour
+		x = 0
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_towards_a_new_europe
+		}
+		prerequisite = {
+			focus = UFRA_form_the_milice
+		}
+		mutually_exclusive = {}
+		relative_position_id = UFRA_form_the_milice
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_stability = -0.05
+			remove_ideas = FRA_disgruntled_workers_I
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+			}
+			add_country_leader_trait = prince_of_terror
+		}
+	}
+	focus = {
+		id = UFRA_extensive_conscription
+		icon = GFX_u_fra_FRA_LVF
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_put_opponents_to_work
+		}
+		mutually_exclusive = { focus = UFRA_direction_for_interior_security }
+		relative_position_id = UFRA_put_opponents_to_work
+		cost = 3
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_milice_peace
+				add_idea = FRA_extensive_conscription
+			}
+		}
+	}
+	focus = {
+		id = UFRA_direction_for_interior_security
+		icon = GFX_u_fra_FRA_all_shall_obey
+		x = 1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_put_opponents_to_work
+		}
+		mutually_exclusive = { focus = UFRA_extensive_conscription }
+		relative_position_id = UFRA_put_opponents_to_work
+		cost = 3
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_milice_peace
+				add_idea = FRA_interior_security
+			}
+		}
+	}
+}

@@ -1,0 +1,212 @@
+﻿capital = 306
+
+recruit_character = EUYL_COL_alfonso_lópez_pumarejo
+recruit_character = COL_eliseo_arango_ramos
+recruit_character = COL_alfredo_azuero_arenas
+recruit_character = COL_laureano_gómez
+recruit_character = COL_eutiquio_timoté
+recruit_character = COL_carlos_cortés_vargas
+recruit_character = COL_rafael_negret_vivas
+recruit_character = COL_josé_joaquín_villamizar
+recruit_character = COL_eduardo_bonitto_vega
+recruit_character = COL_miguel_j_neira
+recruit_character = COL_agustín_morales_olaya
+recruit_character = COL_aureliano_castro_romero
+recruit_character = COL_rufino_franco
+recruit_character = EUYL_COL_luis_bernardo_andrade
+recruit_character = EUYL_COL_luis_rodriguez
+recruit_character = COL_rafael_navas_pardo
+recruit_character = COL_plinio_mendoza_neira
+recruit_character = EUYL_COL_guillermo_padilla_manrique
+recruit_character = COL_salvador_tiaga_gonzalez_2
+recruit_character = COL_juan_de_la_cruz_posada
+recruit_character = EUYL_COL_salvador_tiaga_gonzalez
+recruit_character = EUYL_COL_querista_sellor
+recruit_character = COL_miguel_neira
+recruit_character = COL_ismael_perdomo_borrero
+recruit_character = COL_luis_bernardo_andrade_2
+recruit_character = COL_luis_lopez_de_mesa
+recruit_character = COL_luis_angel_arango
+recruit_character = COL_luis_ernesto_castillo
+recruit_character = COL_jorge_hernandez_de_brigard_2
+recruit_character = COL_german_arciniegas
+recruit_character = COL_deogracias_fonseca_espinosa
+recruit_character = COL_maria_cano
+recruit_character = COL_mariano_roldan_uribe
+recruit_character = COL_roberto_urdaneta_arbelaez
+recruit_character = EUYL_COL_enrico_diaz_carias
+recruit_character = COL_gabriel_echevarria_misas
+recruit_character = COL_carlos_echeverri_cortes
+recruit_character = COL_ralph_douglas_binney
+recruit_character = COL_alvarez
+recruit_character = COL_luis_cano_villegas
+recruit_character = COL_jorge_hernandez_de_brigard
+recruit_character = EUYL_COL_gabriel_paris_gordillo
+recruit_character = COL_jorge_eliecer_gaitan
+recruit_character = COL_pedro_estrada_gonzalez
+recruit_character = COL_laureano_gomez
+recruit_character = COL_tulio_enrique_tascon
+recruit_character = EUYL_COL_camilo_daza_alvarez
+recruit_character = EUYL_COL_manuel_quinones
+recruit_character = EUYL_COL_ruben_piedrahita_arango
+recruit_character = COL_efrain_rojas_acevedo
+
+promote_character = EUYL_COL_alfonso_lópez_pumarejo
+
+486 = { add_dynamic_modifier = { modifier = EUYL_native_population } }
+
+oob = "COL_1936"
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	set_naval_oob = "COL_1936_naval_mtg"
+	else = {
+		set_naval_oob = "COL_1936_naval_legacy"
+	}
+}
+
+add_ideas = {
+	COL_political_violence_6
+	COL_politicised_army
+	COL_oposicion
+	COL_gaitan
+	COL_economia_1
+	COL_heridas
+	extensive_conscription
+	EUYL_focus_on_army
+}
+
+set_country_flag = monroe_doctrine
+set_country_flag = rojo_a_cargo
+set_country_flag = oposicion_politica_activa_flag
+
+set_variable = { COL_influencia_conservadora = 20 }
+set_variable = { COL_influencia_liberal = 15 }
+set_variable = { COL_influencia_militar = 15 }
+
+set_variable = { COL_influencia_conservadora_days = 60 }
+set_variable = { COL_influencia_liberal_days = 60 }
+set_variable = { COL_influencia_militar_days = 60 }
+
+set_variable = { COL_establecer_laico_cost = 200 }
+set_variable = { COL_establecer_laico_cost_discount = 50 }
+
+set_variable = { COL_start_confederation_war_cost = 300 }
+set_variable = { COL_start_confederation_war_cost_discount = 50 }
+
+set_variable = { COL_oposicion_low_increase = 5 }
+set_variable = { COL_oposicion_medium_increase = 10 }
+set_variable = { COL_oposicion_high_increase = 15 }
+set_variable = { COL_oposicion_low_decrease = -5 }
+set_variable = { COL_oposicion_medium_decrease = -10 }
+set_variable = { COL_oposicion_high_decrease = -15 }
+
+set_variable = { var = COL_cat_status value = 1 }
+set_variable = { var = COL_crist_status value = 0 }
+set_variable = { var = COL_athe_status value = -1 }
+
+set_variable = { var = COL_15_percent value = 9 }
+set_variable = { var = COL_10_percent value = 6 }
+set_variable = { var = COL_25_percent value = 15 }
+set_variable = { var = COL_35_percent value = 21 }
+
+set_variable = { COL_cobo_death_monthly_probability_factor = 0 }
+
+COL_oposicion_speed_update = yes #aplica los efectos del estatus religioso a la oposicion política
+COL_injerencia_ideas_update = yes #aplica los efectos del estatus religioso
+
+# Starting tech
+set_technology = {
+	infantry_weapons = 1
+	tech_support = 1
+	tech_engineers = 1
+	gw_artillery = 1
+	interwar_antiair = 1
+}
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+	set_technology = {
+		iw_small_airframe = 1
+		aa_lmg = 1
+	}
+	else = {
+		set_technology = {
+			early_fighter = 1
+			cv_early_fighter = 1
+		}
+	}
+}
+if = {
+	limit = { not = { has_dlc = "Man the Guns" } }
+	set_technology = {
+		early_destroyer = 1
+	}
+}
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	set_technology = {
+		basic_naval_mines = 1
+		early_ship_hull_light = 1
+		basic_ship_hull_light = 1
+		basic_battery = 1
+		basic_torpedo = 1
+		basic_depth_charges = 1
+	}
+}
+
+set_convoys = 20
+set_stability = 0.35
+set_war_support = 0.3
+
+
+set_politics = {
+	ruling_party = democratic
+	last_election = "1934.2.11"
+	election_frequency = 48
+	elections_allowed = yes
+}
+set_popularities = {
+	democratic = 45
+	neutrality = 43
+	fascism = 5
+	communism = 7
+}
+
+
+
+### VARIANTS ###
+# 1936 Start #
+
+if = {
+	limit = {
+		has_dlc = "By Blood Alone"
+	}
+	create_equipment_variant = {
+		name = "P-6" #
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		obsolete = yes
+	}
+}
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	create_equipment_variant = {
+		name = "Antioquia Class"
+		type = ship_hull_light_1
+		name_group = COL_DD_HISTORICAL
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_2
+			fixed_ship_anti_air_slot = ship_anti_air_1
+			fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_2
+			fixed_ship_torpedo_slot = ship_torpedo_1
+			mid_1_custom_slot = ship_mine_layer_1
+			rear_1_custom_slot = ship_depth_charge_1
+		}
+	}
+}

@@ -1,0 +1,74 @@
+armored_SOV = {
+
+	available_for = {
+		SOV
+	}
+
+	role = armor
+
+	upgrade_prio = {
+		base = 5
+
+		modifier = {
+			factor = 3
+			OR = {
+				has_tech = basic_medium_tank
+				has_tech = basic_medium_tank_chassis
+			}
+		}
+	}
+
+	medium_armor_early_SOV = {
+
+		upgrade_prio = {
+			base = 8
+		}
+
+		target_template = {
+
+			support = {
+				assault_engineer = 1
+				medium_flame_tank = 1
+				engineer = 1
+				light_tank_recon = 1
+				maintenance_company = 1
+				logistics_company = 1
+			}
+
+			regiments = {
+				medium_armor = 8
+				motorized = 6
+				heavy_tank_destroyer_brigade = 3
+			}
+		}
+	}
+	medium_armor_late_SOV = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				has_tech = mechanised_infantry
+				factor = 40
+			}
+		}
+
+		target_template = {
+
+			support = {
+				assault_engineer = 1
+				medium_flame_tank = 1
+				engineer = 1
+				light_tank_recon = 1
+				maintenance_company = 1
+				logistics_company = 1
+			}
+
+			regiments = {
+				medium_armor = 8
+				mechanized = 6
+				heavy_tank_destroyer_brigade = 3
+			}
+		}
+	}
+}

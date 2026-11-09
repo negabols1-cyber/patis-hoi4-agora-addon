@@ -1,0 +1,161 @@
+PRC_solidifying_our_revolution = {
+	PRC_question_of_our_capital_decision = {
+		available = {
+			has_war = no
+			OR = {
+				CHI = {
+					exists = no
+				}
+				AND = {
+					CHI = {
+						exists = yes
+					}
+					OR = {
+						has_global_flag = PRC_restart_CHI_war
+						CHI = {
+							OR = {
+								is_puppet_of = JAP
+								is_in_faction_with = JAP
+							}
+						}
+					}
+				}
+			}
+			OR = {
+				controls_state = 608 #Beijing
+				controls_state = 613 #Nanjing
+			}
+		}
+		visible = {
+			#num_of_controlled_states > 10
+			NOT = {
+				has_country_flag = prc_capital_decided
+			}
+		}
+
+		cost = 25
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 1
+		}
+
+		complete_effect = {
+			country_event = china.204
+		}
+	}
+}
+
+political_actions = {
+
+	PRC_attract_intellectuals = {
+		allowed = { original_tag = PRC }
+
+		visible = {
+			OR = {
+				has_idea = PRC_lack_skilled_personnel
+				has_idea = PRC_lack_skilled_personnel_1
+				has_idea = PRC_lack_skilled_personnel_2
+			}
+		}
+
+		available = {
+			num_of_controlled_states > 3
+		}
+
+		cost = 10
+
+		complete_effect = {
+			if = {
+				limit = { has_idea = PRC_lack_skilled_personnel }
+				swap_ideas = {
+					remove_idea = PRC_lack_skilled_personnel
+					add_idea = PRC_lack_skilled_personnel_3
+				}
+			}
+			else_if = {
+				limit = { has_idea = PRC_lack_skilled_personnel_1 }
+				swap_ideas = {
+					remove_idea = PRC_lack_skilled_personnel_1
+					add_idea = PRC_lack_skilled_personnel_3
+				}
+			}
+			else_if = {
+				limit = { has_idea = PRC_lack_skilled_personnel_2 }
+				swap_ideas = {
+					remove_idea = PRC_lack_skilled_personnel_2
+					add_idea = PRC_lack_skilled_personnel_3
+				}
+			}
+		}
+
+		priority = 250
+
+		icon = SOV_secure_the_administration
+	}
+}
+
+PRC_the_new_communist_beacon = {
+
+	PRC_hundred_flowers_campaign_progress = {
+
+		icon = generic_political_rally
+
+		days_mission_timeout = 70 #focus was 350:5 = 70 - Fantom
+		fire_only_once = no
+
+		available = {
+			has_country_flag = baihua_completed
+			has_government = communism
+		}
+		activation = {
+			tag = PRC
+			has_completed_focus = KMT_hundred_flowers_campaign
+			has_idea = KMT_baihua_stage_1_idea
+		}
+
+		visible = {
+			tag = PRC
+			NOT = {
+				has_country_flag = baihua_completed
+			}
+		}
+
+		cancel_if_not_visible = yes
+
+		is_good = no
+
+		timeout_effect = {
+			if = {
+				limit = {
+					has_idea = KMT_baihua_stage_1_idea
+				}
+				country_event = kmt.33
+			}
+			else_if = {
+				limit = {
+					has_idea = KMT_baihua_stage_2_idea
+				}
+				country_event = kmt.34
+			}
+			else_if = {
+				limit = {
+					has_idea = KMT_baihua_stage_3_idea
+				}
+				country_event = kmt.35
+			}
+			else_if = {
+				limit = {
+					has_idea = KMT_baihua_stage_4_idea
+				}
+				country_event = kmt.36
+			}
+			else_if = {
+				limit = {
+					has_idea = KMT_baihua_stage_5_idea
+				}
+				country_event = kmt.37
+			}
+		}
+	}
+}

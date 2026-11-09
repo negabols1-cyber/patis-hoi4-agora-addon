@@ -1,0 +1,241 @@
+URG_initiate_balance_of_power = {
+	set_power_balance = {
+		id = URG_nacional_colorado_bop
+		left_side = URG_colorado_side # will keep the last set side if not specified
+		right_side = URG_nacional_side # will keep the last set side if not specified
+		set_value = -0.30 # if specified will set the value of the power balance, this option will override the effect of set_default so the two options should not be used together. if neither set_default or set_value is specified the current value of the power balance will not change
+	}
+}
+
+URG_move_5_nacionales = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = 0.05
+	}
+}
+
+URG_move_10_nacionales = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = 0.1
+	}
+}
+
+URG_move_20_nacionales = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = 0.2
+	}
+}
+
+URG_move_35_nacionales = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = 0.35
+	}
+}
+
+URG_move_70_nacionales = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = 0.7
+	}
+}
+
+URG_move_5_colorado = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = -0.05
+	}
+}
+
+URG_move_10_colorado = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = -0.1
+	}
+}
+
+URG_move_20_colorado = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = -0.2
+	}
+}
+
+URG_move_35_colorado = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = -0.35
+	}
+}
+
+URG_move_70_colorado = {
+	add_power_balance_value = {
+		id = URG_nacional_colorado_bop
+		value = -0.7
+	}
+}
+
+URG_bop_remove_bop_effect = {
+	remove_power_balance = { id = URG_nacional_colorado_bop }
+}
+
+URG_increase_blanco_opposition = {
+	if = {
+		limit = {
+			has_idea = URG_blancos_in_opposition0
+		}
+		swap_ideas = {
+			remove_idea = URG_blancos_in_opposition0
+			add_idea = URG_blancos_in_opposition1
+		}
+		hidden_effect = {
+			activate_mission = URG_blancos_in_opposition
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = URG_blancos_in_opposition1
+		}
+		swap_ideas = {
+			remove_idea = URG_blancos_in_opposition1
+			add_idea = URG_blancos_in_opposition2
+		}
+		hidden_effect = {
+			activate_mission = URG_blancos_in_opposition
+		}
+	}
+	else = {
+		remove_ideas = URG_blancos_in_opposition2
+		URG = {
+			country_event = uruguay.31
+		}
+	}
+}
+
+URG_increase_colorado_opposition = {
+	if = {
+		limit = {
+			has_idea = URG_colorados_in_opposition0
+		}
+		swap_ideas = {
+			remove_idea = URG_colorados_in_opposition0
+			add_idea = URG_colorados_in_opposition1
+		}
+		hidden_effect = {
+			activate_mission = URG_colorados_in_opposition
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = URG_colorados_in_opposition1
+		}
+		swap_ideas = {
+			remove_idea = URG_colorados_in_opposition1
+			add_idea = URG_colorados_in_opposition2
+		}
+		hidden_effect = {
+			activate_mission = URG_colorados_in_opposition
+		}
+	}
+	else = {
+		remove_ideas = URG_colorados_in_opposition2
+		URG = {
+			country_event = uruguay.32
+		}
+	}
+}
+
+URG_reduce_blanco_opposition = {
+	if = {
+		limit = {
+			has_idea = URG_blancos_in_opposition2
+		}
+		swap_ideas = {
+			remove_idea = URG_blancos_in_opposition2
+			add_idea = URG_blancos_in_opposition1
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = URG_blancos_in_opposition1
+		}
+		swap_ideas = {
+			remove_idea = URG_blancos_in_opposition1
+			add_idea = URG_blancos_in_opposition0
+		}
+	}
+	else = {
+		remove_ideas = URG_blancos_in_opposition0
+	}
+}
+
+URG_reduce_colorado_opposition = {
+	if = {
+		limit = {
+			has_idea = URG_colorados_in_opposition2
+		}
+		swap_ideas = {
+			remove_idea = URG_colorados_in_opposition2
+			add_idea = URG_colorados_in_opposition1
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = URG_colorados_in_opposition1
+		}
+		swap_ideas = {
+			remove_idea = URG_colorados_in_opposition1
+			add_idea = URG_colorados_in_opposition0
+		}
+	}
+	else = {
+		remove_ideas = URG_colorados_in_opposition0
+	}
+}
+
+URG_improve_battlism_idea = {
+	if = {
+		limit = {
+			has_idea = URG_anarcho_batllism_1
+		}
+		swap_ideas = {
+			remove_idea = URG_anarcho_batllism_1
+			add_idea = URG_anarcho_batllism_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = URG_anarcho_batllism_2
+		}
+		swap_ideas = {
+			remove_idea = URG_anarcho_batllism_2
+			add_idea = URG_anarcho_batllism_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = URG_anarcho_batllism_3
+		}
+		swap_ideas = {
+			remove_idea = URG_anarcho_batllism_3
+			add_idea = URG_anarcho_batllism_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = URG_anarcho_batllism_4
+		}
+		swap_ideas = {
+			remove_idea = URG_anarcho_batllism_4
+			add_idea = URG_anarcho_batllism_5
+		}
+	}
+	else = {
+		swap_ideas = {
+			remove_idea = URG_anarcho_batllism_5
+			add_idea = URG_anarcho_batllism_6
+		}
+	}
+}

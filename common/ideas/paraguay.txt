@@ -1,0 +1,1191 @@
+ideas = {
+
+	hidden_ideas = {
+
+	}
+
+	country = {
+
+		PAR_heavy_naval_investments_idea = {
+			picture = generic_coastal_defense_ships2
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_dockyard_factor = 0.15
+				industrial_capacity_dockyard = 0.15
+				production_speed_arms_factory_factor = -0.05
+				production_speed_industrial_complex_factor = -0.05
+				industrial_capacity_factory = -0.05
+			}
+		}
+
+		PAR_mild_naval_investments_idea = {
+			picture = generic_coastal_defense_ships2
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_dockyard_factor = 0.075
+				industrial_capacity_dockyard = 0.075
+			}
+		}
+
+		PAR_guarani_communications = {
+			picture = PAR_guarani
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				encryption_factor = 0.1
+				decryption_factor = 0.1
+				airforce_intel_to_others = -10
+				navy_intel_to_others = -10
+				army_intel_to_others = -10
+				civilian_intel_to_others = -10
+			}
+		}
+
+		### Am I doing it right, babe? ###
+		### WORN OUT ARMY ###
+		PAR_worn_out_army_1 = {
+			name = PAR_worn_out_army
+			picture = PAR_worn_out_army_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.05
+				army_attack_factor = -0.15
+				army_defence_factor = -0.15
+				stability_factor = -0.05
+			}
+		}
+
+		PAR_worn_out_army_2 = {
+			name = PAR_worn_out_army
+			picture = PAR_worn_out_army_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.05
+				army_attack_factor = -0.075
+				army_defence_factor = -0.075
+				stability_factor = -0.05
+			}
+		}
+
+		### STAGNATED ECONOMY ###
+		PAR_stagnated_economy_1 = {
+			name = PAR_stagnated_economy
+			picture = PAR_stagnated_economy_icon
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				check_variable = {
+					PAR_percent_subsidize < 100
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.5
+				production_speed_buildings_factor = -0.2
+				industrial_capacity_factory = -0.15
+			}
+		}
+
+		# PAR_stagnated_economy_2 = {
+			# 	name = PAR_stagnated_economy
+			# 	picture = PAR_stagnated_economy_icon
+
+			# 	allowed = {
+				# 		always = no
+				# 	}
+
+			# 	allowed_civil_war = { always = yes }
+
+			# 	removal_cost = -1
+
+			# 	modifier = {
+				# 		consumer_goods_factor = 0.1
+				# 		production_speed_buildings_factor = -0.1
+				# 		industrial_capacity_factory = -0.075
+				# 	}
+			# }
+
+		### VICTOR OF THE CHACO WAR ###
+		PAR_victor_of_the_chaco_war = {
+			picture = PAR_victor_of_chaco_war
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				any_country_with_original_tag = {
+					original_tag_to_check = PAR
+					controls_state = 688
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = 0.1
+				conscription_factor = 0.1
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+			}
+		}
+
+		### AGRARIAN SOCIETY ###
+		PAR_agrarian_society = {
+			picture = generic_agrarian_society
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				monthly_population = 0.5
+				political_power_factor = 0.05
+				local_resources_factor = 0.1
+				stability_factor = 0.1
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		### LAISSEZ-FAIRE APPROACH ###
+		PAR_laissez_faire_approach_1 = {
+			name = PAR_laissez_faire_approach
+			picture = PAR_laissez_faire
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.1
+				industrial_capacity_factory = -0.2
+				production_speed_buildings_factor = -0.1
+			}
+		}
+
+		PAR_laissez_faire_approach_2 = {
+			name = PAR_laissez_faire_approach
+			picture = PAR_laissez_faire
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.15
+				industrial_capacity_factory = -0.1
+				production_speed_buildings_factor = -0.05
+			}
+		}
+
+		### DISSATISFIED POPULATION ###
+		PAR_dissatisfied_population = {
+			picture = PRU_rebel_native
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.15
+				political_power_factor = -0.15
+				industrial_capacity_factory = -0.2
+				production_speed_buildings_factor = -0.1
+			}
+		}
+
+		### POLITICAL INSTABILITY ###
+		PAR_political_instability = {
+			picture = PAR_instability
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_any_power_balance = yes
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.1
+				stability_factor = -0.1
+				power_balance_weekly = -0.007
+			}
+		}
+
+		### AGRARIAN REFORMS ###
+		PAR_agrarian_reforms = {
+			picture = generic_agrarian_reform
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.05
+				stability_weekly = 0.0015
+			}
+		}
+
+		### AMERICAN INVESTMENTS ###
+		PAR_american_investments_1 = {
+			name = PAR_american_investments
+			picture = generic_foreign_capital
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.03
+				production_speed_industrial_complex_factor = 0.04
+				trade_opinion_factor = 0.2
+				civilian_intel_to_others = 10
+				navy_intel_to_others = 10
+				army_intel_to_others = 10
+			}
+		}
+		PAR_american_investments_2 = {
+			name = PAR_american_investments
+			picture = generic_foreign_capital
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.05
+				production_speed_industrial_complex_factor = 0.07
+				trade_opinion_factor = 0.2
+				civilian_intel_to_others = 15
+				navy_intel_to_others = 15
+				army_intel_to_others = 15
+			}
+		}
+		PAR_american_investments_3 = {
+			name = PAR_american_investments
+			picture = generic_foreign_capital
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.1
+				production_speed_industrial_complex_factor = 0.1
+				trade_opinion_factor = 0.2
+				civilian_intel_to_others = 20
+				navy_intel_to_others = 20
+				army_intel_to_others = 20
+			}
+		}
+
+		### EXPANDED NATIVE RIGHTS ###
+		PAR_expanded_native_rights = {
+			picture = prc_low_popular_support3
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription_factor = 0.1
+				political_power_factor = 0.05
+			}
+		}
+
+		### National Professors ###
+		PAR_national_professors = {
+			picture = PAR_national_prof_idea
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				research_speed_factor = 0.05
+			}
+		}
+
+		### Foreign Professors ###
+		PAR_foreign_professors = {
+			picture = PAR_foreign_prof_idea
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.1
+				research_speed_factor = 0.1
+			}
+		}
+
+		### Labor Reforms ###
+		PAR_labor_reforms = {
+			picture = PAR_laborer_reforms_idea
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+				political_power_factor = -0.05
+			}
+		}
+
+		### Agitated Right Wing Revolutionaries ###
+		PAR_agitated_right_wing_revs = {
+			picture = generic_fascism_drift_bonus
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				fascism_drift = 0.05
+				power_balance_weekly = -0.002
+				war_support_factor = 0.03
+				stability_factor = -0.05
+				industrial_capacity_factory = -0.03
+			}
+		}
+
+		### Supportive Right Wing Revolutionaries ###
+		PAR_supportive_right_wing_revs = {
+			picture = generic_fascism_drift_bonus
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				fascism_drift = 0.05
+				political_power_factor = 0.05
+			}
+		}
+
+		## Pleased Oligarchs ##
+		PAR_pleased_oligarchs_idea = {
+			picture = generic_disjointed_gov
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.05
+				industrial_capacity_factory = 0.075
+			}
+		}
+
+		## Liberal Remnants in the Army ##
+		PAR_liberal_remnants_idea = {
+			picture = PAR_liberal_remnants
+
+			allowed = { always = no }
+
+			available = {
+				NOT = { has_government = democratic }
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				democratic_drift = 0.05
+				power_balance_weekly = -0.003
+				political_power_factor = -0.1
+				production_speed_buildings_factor = -0.05
+			}
+		}
+
+		PAR_committee_of_civilian_mobilization = {
+			picture = chi_army_corruption3
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.025
+				conscription_factor = 0.05
+				industrial_capacity_factory = 0.03
+				production_speed_arms_factory_factor = 0.05
+			}
+		}
+
+		PAR_committee_of_civilian_mobilization_1 = {
+			name = PAR_committee_of_civilian_mobilization
+			picture = chi_army_corruption3
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.03
+				conscription_factor = 0.075
+				industrial_capacity_factory = 0.05
+				production_speed_arms_factory_factor = 0.05
+				consumer_goods_factor = 0.1
+			}
+		}
+
+		PAR_committee_of_civilian_mobilization_2 = {
+			name = PAR_committee_of_civilian_mobilization
+			picture = chi_army_corruption3
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.035
+				conscription_factor = 0.1
+				industrial_capacity_factory = 0.075
+				production_speed_arms_factory_factor = 0.075
+				consumer_goods_factor = 0.25
+			}
+		}
+
+		PAR_department_of_labor = {
+			picture = PAR_laborer_reforms_idea
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		PAR_full_abolishment_of_the_1870_constitution = {
+			picture = PAR_abolished_constitution_icon
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.03
+				political_advisor_cost_factor = 0.05
+				economy_cost_factor = 0.05
+			}
+		}
+
+		PAR_supprtive_communist_block = {
+			picture = por_iberian_workers_united
+
+			allowed = { always = no }
+
+			available = {
+				NOT = { has_government = communism }
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				communism_drift = 0.03
+				political_power_factor = 0.05
+			}
+		}
+
+		PAR_rafael_barretts_influence = {
+			picture = PAR_rafael_barett_icon
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				weekly_manpower = 500
+				war_support_factor = 0.05
+				political_power_factor = 0.05
+				stability_weekly = -0.001
+			}
+		}
+
+		PAR_fascist_deportations = {
+			picture = SPR_anti_fascist_crusade
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				fascism_drift = -0.1
+				democratic_drift = 0.1
+				fascism_acceptance = -35
+			}
+		}
+
+		PAR_empowered_fascists = {
+			picture = generic_fascist_workers
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				fascism_drift = 0.05
+				fascism_acceptance = 35
+				army_attack_factor = 0.03
+				army_defence_factor = 0.03
+				stability_factor = -0.05
+			}
+		}
+
+		PAR_fascist_dictatorship_idea = {
+			picture = generic_fascism_drift_2
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				fascism_acceptance = 55
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				production_speed_arms_factory_factor = 0.075
+				stability_factor = -0.075
+			}
+		}
+
+		PAR_native_knowledge = {
+			picture = FIN_sami_pathfinders
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				heat_attrition = -0.5
+				acclimatization_hot_climate_gain_factor = 0.1
+				initiative_factor = 0.02
+				supply_combat_penalties_on_core_factor = -0.1
+				custom_modifier_tooltip = PAR_native_knowledge_tt
+			}
+		}
+
+		PAR_ni_comunista_ni_fascista_ni_racista = {
+			picture = CHL_armed_neutrality
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.1
+				stability_factor = 0.03
+				fascism_drift = -0.05
+				communism_drift = -0.05
+				drift_defence_factor = 0.5
+			}
+		}
+
+		### PUBLIC CONCERNS ###
+		PAR_public_concern_1 = {
+			name = PAR_public_concern
+			picture = chi_war_of_resistance
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_civil_war = no
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				power_balance_weekly = -0.005
+			}
+		}
+
+		PAR_public_concern_2 = {
+			name = PAR_public_concern
+			picture = chi_war_of_resistance2
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_civil_war = no
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				power_balance_weekly = -0.01
+			}
+		}
+
+		PAR_public_concern_3 = {
+			name = PAR_public_concern
+			picture = chi_war_of_resistance2
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_civil_war = no
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				power_balance_weekly = -0.015
+				political_power_factor = -0.05
+			}
+		}
+
+		PAR_public_concern_4 = {
+			name = PAR_public_concern
+			picture = chi_war_of_resistance2
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_civil_war = no
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				power_balance_weekly = -0.02
+				political_power_factor = -0.1
+			}
+		}
+
+		PAR_public_concern_5 = {
+			name = PAR_public_concern
+			picture = chi_war_of_resistance3
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_civil_war = no
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				power_balance_weekly = -0.03
+				political_power_factor = -0.15
+				conscription = -0.01
+				industrial_capacity_factory = -0.1
+			}
+		}
+
+		### Legacy of Solano Lopez Ideas ###
+		PAR_legacy_of_solano_lopez_idea_1 = {
+			name = PAR_legacy_of_solano_lopez_idea
+			picture = PAR_legacy_of_selano_lopez_pic
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = 0.1
+				political_power_factor = 0.15
+				conscription_factor = 0.05
+				army_attack_factor = 0.075
+				army_defence_factor = 0.075
+			}
+		}
+
+		### After taking Unrestricted Conscription only ###
+		PAR_legacy_of_solano_lopez_idea_2 = {
+			name = PAR_legacy_of_solano_lopez_idea
+			picture = PAR_legacy_of_selano_lopez_pic
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = 0.1
+				political_power_factor = 0.15
+				conscription_factor = 0.05
+				army_attack_factor = 0.075
+				army_defence_factor = 0.075
+				industrial_capacity_factory = 0.4
+				industrial_capacity_dockyard = 0.4
+				production_speed_buildings_factor = 0.4
+				training_time_factor = -0.5
+			}
+		}
+
+		### After taking Total Mobilization only ###
+		PAR_legacy_of_solano_lopez_idea_3 = {
+			name = PAR_legacy_of_solano_lopez_idea
+			picture = PAR_legacy_of_selano_lopez_pic
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = 0.1
+				political_power_factor = 0.15
+				conscription_factor = 0.05
+				army_attack_factor = 0.075
+				army_defence_factor = 0.075
+				conscription = 0.03
+			}
+		}
+
+		### After taking Both ###
+		PAR_legacy_of_solano_lopez_idea_4 = {
+			name = PAR_legacy_of_solano_lopez_idea
+			picture = PAR_legacy_of_selano_lopez_pic
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = 0.1
+				political_power_factor = 0.15
+				conscription_factor = 0.05
+				army_attack_factor = 0.075
+				army_defence_factor = 0.075
+				industrial_capacity_factory = 0.4
+				industrial_capacity_dockyard = 0.4
+				production_speed_buildings_factor = 0.4
+				training_time_factor = -0.5
+				conscription = 0.03
+			}
+		}
+
+		### After taking the Greater Paraguay Focus ###
+		PAR_legacy_of_solano_lopez_idea_5 = {
+			name = PAR_legacy_of_solano_lopez_idea
+			picture = PAR_legacy_of_selano_lopez_pic
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_country_flag = PAR_solano_lopez_active_flag
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = 0.15
+				political_power_factor = 0.2
+				conscription_factor = 0.1
+				army_attack_factor = 0.12
+				army_defence_factor = 0.12
+				industrial_capacity_factory = 0.4
+				industrial_capacity_dockyard = 0.4
+				production_speed_buildings_factor = 0.4
+				training_time_factor = -0.5
+				conscription = 0.03
+			}
+		}
+
+		### Our war of Vengaence ###
+		PAR_war_of_veneance = {
+			picture = MEX_politicised_army_2
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_country_flag = PAR_solano_lopez_active_flag
+				has_war = yes
+			}
+
+			removal_cost = -1
+			modifier = {
+				army_core_attack_factor = 0.05
+				army_core_defence_factor = 0.05
+			}
+		}
+
+		PAR_women_and_children_in_the_army = {
+			picture = PAR_women_and_children_army
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_country_flag = PAR_solano_lopez_active_flag }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.05
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				training_time_factor = 0.1
+				monthly_population = -0.1
+				industrial_capacity_factory = -0.1
+				production_speed_buildings_factor = -0.1
+				power_balance_weekly = -0.003
+			}
+		}
+
+		PAR_the_native_struggle_1 = {
+			name = PAR_the_native_struggle
+			picture = PAR_native_struggle_icon
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.02
+				conscription_factor = 0.05
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+
+		PAR_the_native_struggle_2 = {
+			name = PAR_the_native_struggle
+			picture = PAR_native_struggle_icon
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.035
+				conscription_factor = 0.05
+				non_core_manpower = 0.05
+				army_attack_factor = 0.075
+				army_defence_factor = 0.075
+			}
+		}
+	}
+
+	materiel_manufacturer = {
+		designer = yes
+
+		PAR_carlos_casado = {
+			picture = PAR_carlos_casado_icon
+
+			allowed = { original_tag = PAR }
+
+			research_bonus = {
+				support_tech = 0.10
+			}
+
+			traits = { support_equipment_manufacturer }
+		}
+
+		PAR_mauser = {
+			picture = generic_infantry_equipment_manufacturer_2
+
+			allowed = { original_tag = PAR }
+
+			research_bonus = {
+				infantry_weapons = 0.15
+			}
+
+			traits = { infantry_equipment_manufacturer }
+
+			available = {
+				NOT = { has_idea = PAR_stagnated_economy_1 }
+				has_completed_focus = PAR_the_paraguayan_army
+			}
+		}
+	}
+
+	aircraft_manufacturer = {
+
+		designer = yes
+
+		PAR_douglas_aircraft = {
+			allowed = {
+				original_tag = PAR
+			}
+
+			cost = 150
+
+			picture = PAR_douglas_icon
+
+			research_bonus = {
+				air_equipment = 0.15
+			}
+
+			traits = { CAS_manufacturer }
+
+			modifier = {
+				air_range_factor = 0.05
+				air_strategic_bomber_bombing_factor = 0.02
+				air_cas_present_factor = 0.02
+			}
+
+			available = {
+				NOT = { has_idea = PAR_stagnated_economy_1 }
+				has_completed_focus = PAR_the_paraguayan_airforce
+				NOT = { has_war_with = USA }
+			}
+
+		}
+	}
+
+	industrial_concern = {
+		PAR_universidad_nacional_de_asuncion = {
+
+			picture = PAR_asuncion_uni
+
+			allowed = {
+				original_tag = PAR
+			}
+
+			modifier = {
+				political_power_cost = 0.1
+				consumer_goods_factor = 0.05
+			}
+
+			available = {
+				amount_research_slots > 2
+			}
+
+			ai_will_do = {
+				factor = 1
+			}
+
+			traits = { URG_public_university }
+		}
+
+		PAR_shell = {
+			name = "Shell"
+			picture = PAR_shell_pic
+
+			allowed = { original_tag = PAR }
+
+			modifier = {
+				trade_laws_cost_factor = -0.25
+			}
+
+			research_bonus = {
+				industry = 0.05
+				synth_resources = 0.1
+			}
+		}
+
+		PAR_teofilo_farina_sanchez = {
+			picture = SWE_radiotjanst
+
+			allowed = { original_tag = PAR }
+
+			cost = 75
+
+			traits = { PAR_head_of_meteorology }
+
+			research_bonus = {
+				electronics = 0.10
+			}
+
+			modifier = {
+				monthly_population = 0.1
+				stability_factor = 0.03
+				air_mission_efficiency = 0.1
+			}
+
+			available = {
+				OR = {
+					date > 1938.1.1
+					has_tech = radio_detection
+				}
+			}
+		}
+	}
+}

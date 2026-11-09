@@ -1,0 +1,1484 @@
+characters={
+	PRU_carlos_pio_habsburgo_borbon = {
+		name = "Carlos pio Hasburgo Borbon"
+		portraits={
+			civilian={
+				large="gfx/leaders/PRU/portrait_PRU_carlos_pio.dds"
+			}
+		}
+	}
+	PRU_federico_more_barrionuevo = {
+		name = "Federico More Barrionuevo"
+		portraits = {
+			army = {
+				small = "GFX_idea_PRU_federico_more_barrionuevo_pic"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_federico_more_barrionuevo_idea
+			allowed  = {
+				original_tag  = PRU
+			}
+			cost = 115
+			available = {
+				NOT = {
+					has_completed_focus = PRU_social_democratic_peru
+				}
+			}
+			traits  = {
+				editor
+			}
+		}
+	}
+	PRU_Oscar_benavides={
+		name="Óscar Benavides"
+		portraits={
+			civilian={
+				large="gfx/leaders/PRU/portrait_per_oscar_benavides.dds"
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=44512
+		}
+		country_leader={
+			desc="POLITICS_OSCAR_BENAVIDES_DESC"
+			ideology=militarism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	PRU_manuel_prado_ugarteche={
+		name="Manuel Prado Ugarteche"
+		portraits={
+			civilian={
+				large="gfx/leaders/PRU/portrait_per_liberal.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_OSCAR_BENAVIDES_DESC"
+			ideology=liberalism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	PRU_jorge_del_prado_chávez={
+		name="Jorge del Prado Chávez"
+		portraits={
+			civilian={
+				large="gfx/leaders/PRU/portrait_per_communist.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_OSCAR_BENAVIDES_DESC"
+			ideology=marxism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	PRU_luis_antonio_eguiguren_escudero = {
+		name = "Luis Antonio Eguiguren Escudero"
+		portraits={
+			civilian={
+				large="gfx/leaders/PRU/eguiguren.dds"
+			}
+			army = {
+				small = "GFX_idea_PRU_eguiguren_icon"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_luis_antonio_eguiguren_escudero_idea
+			allowed  = {
+				original_tag  = PRU
+			}
+			cost = 75
+			available = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_completed_focus = PRU_delay_democracy
+					}
+				}
+				NOT = {
+					ROOT = {
+						has_country_leader = {
+							character = PRU_luis_antonio_eguiguren_escudero
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			traits  = {
+				PAR_mayor
+			}
+		}
+		country_leader={
+			desc="POLITICS_EGUIGUREN_DESC"
+			ideology=socialism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	PRU_josé_luis_bustamante_y_rivero={
+		name="José Luis Bustamante y Rivero"
+		portraits={
+			civilian={
+				large="gfx/leaders/PRU/portrait_per_socialist.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_OSCAR_BENAVIDES_DESC"
+			ideology=socialism
+			expire="1965.1.1.1"
+			id=-1
+			traits = { economist }
+		}
+	}
+	PRU_luis_a_flores={
+		name="Luis A. Flores"
+		portraits={
+			civilian={
+				large="gfx/leaders/PRU/portrait_PRU_luis_a_flores.dds"
+			}
+			army={
+				small="GFX_idea_south_america_generic_1"
+			}
+		}
+		country_leader={
+			desc="POLITICS_LUIS_FLORES_DESC"
+			ideology=fascism_ideology
+			expire="1965.1.1.1"
+			id=-1
+			traits = { CHL_military_leader }
+		}
+		corps_commander={
+			traits={ }
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=3
+			visible = {
+				has_government = fascism
+			}
+		}
+	}
+	PRU_carlos_miro_quesada = {
+		name = "Carlos Miro Quesada"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/PRU/r56_portrait_PRU_Carlos_Miro_Quesada.dds"
+			}
+			army = {
+				small = "GFX_idea_PRU_carlos_miro_icon"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_carlos_miro_quesada_idea
+			allowed  = {
+				original_tag  = PRU
+			}
+			cost = 100
+			available = {
+				OR = {
+					has_completed_focus = PRU_the_kingdom_of_peru
+					has_completed_focus = PRU_proclaim_peruvian_empire
+				}
+			}
+			traits = {
+				rearmament_proponent
+			}
+		}
+		corps_commander={
+			traits={ trait_cautious }
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			planning_skill=1
+			logistics_skill=3
+		}
+	}
+
+	PRU_ernesto_montagne_markholz = {
+		name = "Ernesto Montagne Markholz"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/PRU/montagne.dds"
+			}
+			army = {
+				small = "GFX_idea_PRU_montagne_icon"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_ernesto_montagne_markholz_idea
+			allowed  = {
+				original_tag  = PRU
+			}
+			available = {
+				NOT = {
+					has_government = democratic
+				}
+				NOT = {
+					ROOT = {
+						has_country_leader = {
+							character = PRU_ernesto_montagne_markholz
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			traits  = {
+				nationalist_symbol
+			}
+		}
+		country_leader={
+			desc="POLITICS_ERNESTO_DESC"
+			ideology=fascism_ideology
+			expire="1965.1.1.1"
+			id=-1
+			traits = { PRU_compassionate_leader }
+		}
+		corps_commander={
+			traits={ old_guard }
+			skill=3
+			attack_skill=2
+			defense_skill=1
+			planning_skill=4
+			logistics_skill=3
+		}
+	}
+
+	PRU_eloy_ureta_montehermoso_leader={
+		name="Eloy Ureta Montehermoso"
+		portraits={
+			civilian = {
+				large = "gfx/leaders/PRU/PRU_eloy_ureta.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_OSCAR_BENAVIDES_DESC"
+			ideology=fascism_ideology
+			expire="1965.1.1.1"
+			id=-1
+			traits = { CHL_leader_of_the_people }
+		}
+	}
+	PRU_eloy_ureta_montehermoso={
+		name="Eloy Ureta Montehermoso"
+		portraits={
+			army={
+				small="GFX_idea_PRU_eloy_urreta_icon"
+			}
+			army={
+				large="gfx/leaders/PRU/PRU_eloy_ureta.dds"
+			}
+
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_eloy_ureta_montehermoso_idea
+			allowed  = {
+				original_tag  = PRU
+			}
+			available = {
+				NOT = {
+					has_government = democratic
+				}
+				NOT = {
+					ROOT = {
+						has_country_leader = {
+							character = PRU_eloy_ureta_montehermoso_leader
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			traits  = {
+				fascist_corporatist
+			}
+		}
+
+		field_marshal={
+			traits={ offensive_doctrine }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	PRU_haya_de_la_torre = {
+		name = "Haya de la Torre"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/PRU/haya_de_la_torre.dds"
+			}
+			army = {
+				small = "GFX_idea_PRU_haya_de_la_torre_icon"
+			}
+		}
+		country_leader = {
+			desc = "POLITICS_HAYA_TORRE_DESC"
+			expire = "1965.1.1"
+			ideology = socialism
+			traits = {
+				PRU_visionary
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_haya_de_la_torre_idea
+			allowed  = {
+				original_tag  = PRU
+			}
+			available = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_completed_focus = PRU_delay_democracy
+					}
+				}
+				NOT = {
+					ROOT = {
+						has_country_leader = {
+							character = PRU_haya_de_la_torre
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			traits  = {
+				SWI_social_democrat
+			}
+		}
+	}
+	PRU_eudocio_ravines={
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_eudocio_ravines_idea
+			allowed  = {
+				original_tag  = PRU
+			}
+			available = {
+				has_government = communism
+				NOT = {
+					ROOT = {
+						has_country_leader = {
+							character = PRU_eudocio_ravines
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			traits  = {
+				PAR_revolutionary_writer
+			}
+		}
+		name="Eudocio Ravines"
+		country_leader = {
+			desc = "POLITICS_EUDOCIO_RAVINES_DESC"
+			ideology = stalinism
+			expire = "1965.1.1"
+			traits = {
+				#
+			}
+		}
+		portraits={
+			army={
+				small="GFX_idea_PRU_eudocio_r"
+			}
+			civilian = {
+				large = "gfx/leaders/PRU/portrait_PRU_eudocio_ravines.dds"
+			}
+		}
+	}
+	PRU_miguel_monteza_tafur={
+		name="Miguel Monteza Tafur"
+		portraits={
+			army={
+				small="GFX_idea_PRU_monteza_icon"
+			}
+			army={
+				large="gfx/leaders/PRU/monteza tafur.dds"
+			}
+		}
+		advisor={
+			cost = 100
+
+			slot = theorist
+			idea_token = PRU_miguel_monteza_tafur_idea
+			ledger = army
+			allowed = {
+				original_tag = PRU
+			}
+
+			traits = {
+				military_theorist
+			}
+		}
+		field_marshal={
+			traits = { armor_officer }
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill=3
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	PRU_carlos_Miro={
+		name="Manuel Ramirez"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/sicca.dds"
+				small="GFX_idea_south_america_generic_1"
+			}
+		}
+		corps_commander={
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	PRU_antonio_rodríguez_ramírez={
+		name="Antonio Rodríguez Ramírez"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/portrait_PRU_antonio_rodriguez_ramirez.dds"
+			}
+		}
+		corps_commander={
+			traits={ old_guard brilliant_strategist }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=44511
+		}
+	}
+	PRU_antonio_silva_santiesteban = {
+		name="Antonio Silva Santiesteban"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/PRU_antonio_silva.dds"
+			}
+		}
+		corps_commander={
+			traits={ old_guard jungle_rat }
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=2
+		}
+	}
+
+	PRU_manuel_a_odria={
+		name="Manuel A. Odria"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/PRU_manuel_a_odria.dds"
+			}
+		}
+		corps_commander={
+			traits = { fast_planner }
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	PRU_luis_vinatea_almonte={
+		name="Felix Huaman"
+		portraits={
+			army={
+				small="gfx/interface/ideas/idea_south_america_generic_land_2.dds"
+			}
+			army={
+				large="gfx/leaders/PRU/Felix.dds"
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	PRU_maximo_pimentel = {
+		name = "Maximo Pimentel Obregon"
+		portraits = {
+			army = {
+				large = "gfx/leaders/PRU/Maximo_Pimentel_Obregon.dds"
+				small="GFX_idea_south_america_generic_1"
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+	PRU_carlos_minano_mendocilla = {
+		name = "Carlos Miñano Mendocilla"
+		portraits = {
+			army = {
+				large = "gfx/leaders/PRU/PRU_carlos_minano.dds"
+				small="GFX_idea_south_america_generic_1"
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=1
+			defense_skill=3
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+
+	PRU_Salustio_Fernandez_Oblitas = {
+		name = "Salustio Fernandez Oblitas"
+		portraits = {
+			army = {
+				large = "gfx/leaders/PRU/Salustio_Fernandez_Oblitas.dds"
+			}
+			army={
+				small="GFX_idea_south_america_generic_1"
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+
+	PRU_Praxedes_Merino_Machuca = {
+		name = "Praxedes Merino Machuca"
+		portraits = {
+			army = {
+				large = "gfx/leaders/PRU/Praxedes_Merino_Machuca.dds"
+			}
+			army={
+				small="GFX_idea_south_america_generic_1"
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+
+	PRU_Fausto_Figueroa = {
+		name = "Fausto Figueroa"
+		portraits = {
+			army = {
+				large = "gfx/leaders/PRU/Fausto_Figueroa.dds"
+			}
+			army={
+				small="GFX_idea_south_america_generic_1"
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	PRU_victor_rodriguez_zumaran = {
+		name = "Víctor Rodríguez Zumarán"
+		portraits = {
+			army = {
+				large = "gfx/leaders/PRU/PRU_victor_rodriguez.dds"
+			}
+		}
+		corps_commander={
+			traits = { jungle_rat }
+			skill=1
+			attack_skill=2
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	PRU_felipe_de_la_barra={
+		name="Felipe de la Barra"
+		portraits={
+			army={
+				small="gfx/interface/ideas/PRU_felipe_barra.dds"
+			}
+			army={
+				large="gfx/leaders/PRU/PRU_Felipe_de_la_Barra.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_felipe_barra
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				captain_of_industry
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=1
+			defense_skill=1
+			planning_skill=3
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+
+
+
+	PRU_roque_a_saldías={
+		name="Roque A. Saldías"
+		portraits={
+			army={
+				small="gfx/interface/ideas/idea_south_america_generic_navy_1.dds"
+			}
+			army={
+				large="gfx/leaders/PRU/Roque.dds"
+			}
+		}
+		navy_leader={
+			traits={ chief_engineer }
+			skill=2
+			attack_skill=3
+			defense_skill=2
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+
+	PRU_Emilio_Barron_Sanchez={
+		name="Emilio Barron Sanchez"
+		portraits={
+			army={
+				small="gfx/interface/ideas/idea_south_america_generic_navy_1.dds"
+			}
+			army={
+				large="gfx/leaders/PRU/Emilio_Barron_Sanchez.dds"
+			}
+		}
+		navy_leader={
+			traits={  }
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			maneuvering_skill=1
+			coordination_skill=2
+			legacy_id=-1
+		}
+	}
+
+	PRU_carlos_rotalde={
+		name="Carlos Rotalde"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/carlos_rotalde.dds"
+			}
+		}
+		navy_leader={
+			traits={ }
+			skill=1
+			attack_skill=2
+			defense_skill=1
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+	PRU_mariano_melgar={
+		name="Mariano H. Melgar Conde"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/mariano_melgar_conde.dds"
+			}
+		}
+		navy_leader={
+			traits={ }
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			maneuvering_skill=3
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+	PRU_Cesar_Atahualpa={
+		name="Cesar Atahualpa"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/Cusi_Huallpa.dds"
+			}
+		}
+		corps_commander = {
+			traits={ brilliant_strategist }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill = 1
+			logistics_skill = 1
+			legacy_id=-1
+			visible = { has_completed_focus = PRU_our_war_of_independence }
+		}
+	}
+	PRU_Wayna_Qhapaq={
+		name="Wayna Qhapaq"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/Wayna_Qhapaq.dds"
+			}
+		}
+		corps_commander = {
+			traits={  }
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill = 2
+			logistics_skill = 1
+			legacy_id=-1
+			visible = { has_completed_focus = PRU_our_war_of_independence }
+		}
+	}
+	PRU_armando_figueroa_roggero={
+		name="Armando Figueroa Roggero"
+		portraits={
+			army={
+				small="gfx/interface/ideas/idea_south_america_generic_navy_2.dds"
+			}
+			army={
+				large="gfx/leaders/South America/Portrait_South_America_Generic_navy_2.dds"
+			}
+		}
+		navy_leader={
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+	PRU_josé_r_alzamora={
+		name="José R. Alzamora"
+		portraits={
+			army={
+				small="gfx/interface/ideas/idea_south_america_generic_navy_3.dds"
+			}
+			army={
+				large="gfx/leaders/South America/Portrait_South_America_Generic_navy_3.dds"
+			}
+		}
+		navy_leader={
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+	PRU_ricardo_perez_godoy_general={
+		name="Ricardo Perez Godoy"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/PRU_ricardo_perez_godoy.dds"
+			}
+			civilian = {
+				large="gfx/leaders/PRU/PRU_ricardo_perez_godoy.dds"
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill = 1
+			logistics_skill = 2
+			legacy_id=-1
+		}
+	}
+	PRU_nicolas_lindley_lopez={
+		name="Nicolás Lindley López"
+		portraits={
+			army={
+				large="gfx/leaders/PRU/PRU_nicolas_lindley_lopez.dds"
+			}
+		}
+		corps_commander={
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill = 1
+			logistics_skill = 1
+			legacy_id=-1
+		}
+	}
+	PRU_federico_corrico={
+		name="Federico Corrico"
+		portraits={
+			civilian={
+				large="gfx/leaders/leader_unknown.dds"
+			}
+		}
+		country_leader={
+			ideology=fascism
+			expire="1943.1.1.12"
+			id=-1
+		}
+	}
+
+	PRU_pachacutec_2={
+		name="Pachacutec II"
+		portraits={
+			civilian={
+				large="gfx/leaders/PRU/PRU_Pachacutec_II.dds"
+			}
+		}
+		country_leader={
+			ideology=theocracy
+			expire="1963.1.1.12"
+			id=-1
+			traits = { driver_of_the_faithful }
+		}
+
+
+	}
+
+	PRU_pachacutec_2_general = {
+		name = "Pachacutec II"
+		portraits = {
+			army={
+				large="gfx/leaders/PRU/PRU_Pachacutec_II.dds"
+			}
+		}
+
+		corps_commander = {
+			traits={ trait_mountaineer }
+			skill=4
+			attack_skill=2
+			defense_skill=3
+			planning_skill = 2
+			logistics_skill = 3
+			legacy_id=-1
+			visible = { has_completed_focus = PRU_our_war_of_independence }
+		}
+	}
+
+	PRU_Mateo_Sahuaraural = {
+		name = "Mateo Sahuaraura"
+		portraits = {
+			army={
+				large="gfx/leaders/PRU/mateo.dds"
+			}
+		}
+
+		corps_commander = {
+			traits={ }
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill = 1
+			logistics_skill = 1
+			legacy_id=-1
+			visible = { has_completed_focus = PRU_our_war_of_independence }
+		}
+	}
+
+	PRU_Justo_Pumacahua = {
+		name = "Justo Pumacahua"
+		portraits = {
+			army={
+				large="gfx/leaders/PRU/mamani.dds"
+			}
+		}
+
+		corps_commander = {
+			traits={ trait_mountaineer }
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill = 1
+			logistics_skill = 1
+			legacy_id=-1
+			visible = { has_completed_focus = PRU_our_war_of_independence }
+		}
+	}
+
+	PRU_Amadeo_Quispe = {
+		name = "Amadeo Quispe"
+		portraits = {
+			army={
+				large="gfx/leaders/PRU/Mariano_quispe.dds"
+			}
+		}
+
+		corps_commander = {
+			traits={ trait_mountaineer }
+			skill=2
+			attack_skill=1
+			defense_skill=3
+			planning_skill = 1
+			logistics_skill = 1
+			legacy_id=-1
+			visible = { has_completed_focus = PRU_our_war_of_independence }
+		}
+	}
+
+	PRU_rafael_escardo={
+		advisor={
+			slot = high_command
+			idea_token = PRU_rafael_escardo
+			ledger  = army
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				army_infantry_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_rafael_escardo"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_2"
+			}
+		}
+	}
+	PRU_alberto_lopez_flores={
+		advisor={
+			slot = high_command
+			idea_token = PRU_alberto_lopez_flores
+			ledger  = air
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				air_airborne_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_alberto_lopez_flores"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+	}
+	PRU_oscar_gilardi={
+		advisor={
+			slot = army_chief
+			idea_token = PRU_oscar_gilardi
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				army_chief_drill_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_oscar_gilardi"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_5"
+			}
+		}
+	}
+	PRU_armando_reveredo_iglesias={
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_armando_reveredo_iglesias
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				war_industrialist
+			}
+		}
+		name="PRU_armando_reveredo_iglesias"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+	}
+	PRU_jose_de_la_riva_aguero={
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_jose_de_la_riva_aguero
+			allowed  = {
+				original_tag  = PRU
+			}
+			available = {
+				has_government = fascism
+			}
+			traits  = {
+				fascist_demagogue
+			}
+		}
+		name="Jose de la Riva Aguero"
+		portraits={
+			army={
+				small="GFX_idea_PRU_jose_riva"
+			}
+		}
+	}
+	PRU_felipe_tudela={
+		advisor={
+			slot = navy_chief
+			idea_token = PRU_felipe_tudela
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				navy_chief_commerce_raiding_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_felipe_tudela"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_3"
+			}
+		}
+	}
+	PRU_oscar_miro_quesada={
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_oscar_miro_quesada
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				silent_workhorse
+			}
+		}
+		name="PRU_oscar_miro_quesada"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}
+	}
+	PRU_eduardo_cantabria_gomez={
+		advisor={
+			slot = air_chief
+			idea_token = PRU_eduardo_cantabria_gomez
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				air_chief_reform_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_eduardo_cantabria_gomez"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_2"
+			}
+		}
+	}
+	PRU_ernesto_scroth={
+		advisor={
+			slot = theorist
+			idea_token = PRU_ernesto_scroth
+			ledger  = navy
+			allowed  = {
+				original_tag  = PRU
+			}
+			research_bonus  = {
+				naval_doctrine  = 0.100
+			}
+			traits  = {
+				naval_theorist
+			}
+		}
+		name="PRU_ernesto_scroth"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+	}
+	PRU_luis_ramirez_ortiz={
+		advisor={
+			slot = high_command
+			idea_token = PRU_luis_navarrete
+			ledger  = army
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				army_regrouping_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_luis_ramirez_ortiz"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_1"
+			}
+		}
+	}
+	PRU_oscar_benavides_larrea={
+		advisor={
+			slot = army_chief
+			idea_token = PRU_oscar_benavides_larrea
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				army_chief_defensive_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_oscar_benavides_larrea"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_2"
+			}
+		}
+	}
+	PRU_manuel_vicente={
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_manuel_vicente
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				EUYL_soldier_recruiter
+			}
+		}
+		name="PRU_manuel_vicente"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}
+	}
+	PRU_manuel_odria_amoretti={
+		advisor={
+			slot = army_chief
+			idea_token = PRU_manuel_odria_amoretti
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				army_chief_organizational_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_manuel_odria_amoretti"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_2"
+			}
+		}
+	}
+	PRU_luis_navarrete={
+		advisor={
+			slot = high_command
+			idea_token = PRU_luis_navarrete
+			ledger  = air
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				navy_carrier_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_luis_navarrete"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_1"
+			}
+		}
+	}
+	PRU_paul_de_beaudiez={
+		advisor={
+			slot = air_chief
+			idea_token = PRU_paul_de_beaudiez
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				air_chief_safety_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_paul_de_beaudiez"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_3"
+			}
+		}
+	}
+	PRU_alberto_roque_saldias={
+		advisor={
+			slot = navy_chief
+			idea_token = PRU_alberto_roque_saldias
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				navy_chief_decisive_battle_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_alberto_roque_saldias"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_2"
+			}
+		}
+	}
+	PRU_reynaldo_vinatea={
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_reynaldo_vinatea
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				ideological_crusader
+			}
+		}
+		name="PRU_reynaldo_vinatea"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+	}
+	PRU_vladimiro_lopez_trigoso={
+		advisor={
+			slot = army_chief
+			idea_token = PRU_vladimiro_lopez_trigoso
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				army_chief_offensive_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_vladimiro_lopez_trigoso"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_3"
+			}
+		}
+	}
+	PRU_eloy_g_ureta={
+		advisor={
+			slot = high_command
+			idea_token = PRU_eloy_g_ureta
+			ledger  = army
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				army_logistics_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_eloy_g_ureta"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_1"
+			}
+		}
+	}
+	PRU_fernando_m_quesada_blanco={
+		advisor={
+			slot = high_command
+			idea_token = PRU_fernando_m_quesada_blanco
+			ledger  = air
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				air_strategic_bombing_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_fernando_m_quesada_blanco"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+	}
+	PRU_eduardo_montero_rojas={
+		advisor={
+			slot = high_command
+			idea_token = PRU_eduardo_montero_rojas
+			ledger  = army
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				army_armored_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="PRU_eduardo_montero_rojas"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_4"
+			}
+		}
+	}
+	PRU_jose_bustamante_y_rivero={
+		advisor={
+			slot = political_advisor
+			idea_token = PRU_jose_bustamante_y_rivero
+			allowed  = {
+				original_tag  = PRU
+			}
+			traits  = {
+				compassionate_gentleman
+			}
+		}
+		name="PRU_jose_bustamante_y_rivero"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_3"
+			}
+		}
+	}
+	PRU_romulo_frias={
+		advisor={
+			slot = theorist
+			idea_token = PRU_romulo_frias
+			ledger  = air
+			allowed  = {
+				original_tag  = PRU
+			}
+			research_bonus  = {
+				air_doctrine  = 0.100
+			}
+			traits  = {
+				air_warfare_theorist
+			}
+		}
+		name="PRU_romulo_frias"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+	}
+	PRU_apu_panchau={
+		name="Apu-punchau"
+		portraits={
+			civilian={
+				large="gfx/leaders/PRU/INC_sun_god_portrait.dds"
+			}
+		}
+
+	}
+
+	###### SCIENTISTS ######
+
+	PRU_pedro_paulet = {
+		name = "Pedro Paulet"
+		portraits = {
+			army = {
+				large = "gfx/leaders/PRU/PRU_pedro_paulet_portrait.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_rocketry_specialist }
+			skills = {
+				specialization_air = 2
+			}
+		}
+	}
+
+	PRU_santiago_antunez = {
+		name = "Santiago Antúnez de Mayolo"
+		portraits = {
+			army = {
+				large = "gfx/leaders/PRU/PRU_santiago_antunez_portrait.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_nuclear_power_expert }
+			skills = {
+				specialization_nuclear = 2
+			}
+		}
+	}
+}

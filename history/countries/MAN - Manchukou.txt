@@ -1,0 +1,177 @@
+﻿capital = 328 # Hsingking
+
+set_variable = { MAN_state_shintoism_surrender_limit = 0 }
+set_variable = { MAN_state_shintoism_war_support_factor = 0 }
+set_variable = { MAN_state_shintoism_pocket_penalty = 0 }
+set_variable = { MAN_state_shintoism_stability_factor = -0.05 }
+set_variable = { MAN_state_shintoism_army_core_defence_factor = 0 }
+set_variable = { MAN_state_shintoism_research_speed_factor = 0 }
+set_variable = { MAN_state_shintoism_recruitable_population_factor = 0 }
+set_variable = { MAN_state_shintoism_political_power_gain = -0.1 }
+set_variable = { MAN_levy_cap_max = 48 }
+set_variable = { MAN_levy_cap_min = 0 }
+set_variable = { MAN_levy_cap = 12 }
+set_variable = { MAN_levy_deployed = 0 }
+clamp_variable = {
+	var = MAN_levy_cap
+	min = MAN_levy_cap_min
+	max = MAN_levy_cap_max
+}
+
+#Economy
+set_variable = { MAN_economy_modifier_consumer_goods_factor = 0 }
+set_variable = { MAN_economy_modifier_production_factory_max_efficiency_factor = 0 }
+set_variable = { MAN_economy_modifier_line_change_production_efficiency_factor = 0 }
+set_variable = { MAN_economy_modifier_production_factory_efficiency_gain_factor = 0 }
+set_variable = { MAN_economy_modifier_production_factory_start_efficiency_factor = 0 }
+set_variable = { MAN_economy_modifier_research_speed_factor = 0 }
+set_variable = { MAN_economy_modifier_production_speed_buildings_factor = 0 }
+set_variable = { MAN_economy_modifier_production_speed_arms_factory_factor = 0 }
+set_variable = { MAN_economy_modifier_production_speed_industrial_complex_factor = 0 }
+set_variable = { MAN_economy_modifier_production_speed_dockyard_factor = 0 }
+set_variable = { MAN_economy_modifier_production_speed_infrastructure_factor = 0 }
+set_variable = { MAN_economy_modifier_production_speed_rail_way_factor = 0 }
+set_variable = { MAN_economy_modifier_industrial_capacity_factory = -0.05 }
+set_variable = { MAN_economy_modifier_industrial_capacity_dockyard = 0 }
+set_variable = { MAN_economy_modifier_production_lack_of_resource_penalty_factor = 0 }
+set_variable = { MAN_economy_modifier_local_resources_factor = 0 }
+set_variable = { MAN_economy_modifier_cic_construction_boost_factor = 0 }
+set_variable = { MAN_economy_modifier_factory_energy_consumption = -0.1 }
+
+set_variable = { MAN_five_year_plan_mission_variable = 1825 }
+set_variable = { MAN_five_year_plan_active_missions = 0 }
+set_variable = { MAN_five_year_plan_successful_missions = 0 }
+set_variable = { MAN_five_year_plan_failed_missions = 0 }
+
+#Army
+set_variable = { MAN_army_modifier_experience_gain_army_factor = -0.1 }
+set_variable = { MAN_army_modifier_army_org_factor = -0.05 }
+set_variable = { MAN_army_modifier_army_morale_factor = -0.1 }
+set_variable = { MAN_army_modifier_org_loss_at_low_org_factor = 0 }
+set_variable = { MAN_army_modifier_land_doctrine_cost_factor = 0 }
+set_variable = { MAN_army_modifier_planning_speed = 0 }
+set_variable = { MAN_army_modifier_breakthrough_factor = 0 }
+set_variable = { MAN_army_modifier_dig_in_speed_factor = 0 }
+set_variable = { MAN_army_modifier_mobilization_speed = 0 }
+set_variable = { MAN_army_modifier_conscription = 0 }
+set_variable = { MAN_army_modifier_special_forces_cap = 0 }
+set_variable = { MAN_army_modifier_supply_consumption_factor = -0.05 }
+set_variable = { MAN_army_modifier_resistance_damage_to_garrison = 0 }
+set_variable = { MAN_army_modifier_army_core_defence_factor = 0 }
+set_variable = { MAN_army_modifier_cas_damage_reduction = 0 }
+set_variable = { MAN_army_modifier_army_armor_attack_factor = 0 }
+set_variable = { MAN_army_modifier_army_artillery_attack_factor = 0 }
+set_variable = { MAN_army_modifier_experience_loss_factor = 0 }
+set_variable = { MAN_army_modifier_army_leader_start_level = 0 }
+add_dynamic_modifier = { modifier = MAN_army_modifier }
+
+oob = "MAN_1936"
+
+set_technology = {
+	infantry_weapons = 1
+	gw_artillery = 1
+	tech_trucks = 1
+	bicycle_infantry = 1
+}
+
+every_owned_state = {
+	ROOT = {
+		add_to_array = { array = owned_states_at_game_start value = PREV }
+	}
+}
+
+set_country_flag = MAN_northern_bandits
+set_country_flag = MAN_eastern_bandits
+set_country_flag = MAN_western_bandits
+
+add_ideas = MAN_banditry
+add_ideas = MAN_kwantung_veto
+add_ideas = MAN_low_legitimacy_5
+add_ideas = MAN_the_kangde_emperor
+add_ideas = MAN_uneven_industrial_development
+
+
+recruit_character = MAN_aisin_gioro_puyi
+recruit_character = MAN_zhang_haipeng
+recruit_character = MAN_zhang_jinghui
+recruit_character = MAN_aisin_gioro_xiqia
+recruit_character = MAN_yoshiko_kawashima
+recruit_character = MAN_zhao_shangzhi
+recruit_character = MAN_deng_linge
+recruit_character = MAN_yin_zuoqian
+recruit_character = MAN_xian_yuan
+recruit_character = MAN_urzhin_garmaev
+recruit_character = MAN_yu_zishan
+recruit_character = MAN_ma_zhanshan
+recruit_character = MAN_jonjurjab
+recruit_character = MAN_pujie
+#recruit_character = MAN_songgotu_zhanshan
+recruit_character = MAN_zhang_yanqing
+recruit_character = MAN_zhang_shiyi
+recruit_character = MAN_sun_qichang
+recruit_character = MAN_li_shaogeng
+recruit_character = MAN_chu_kudo
+recruit_character = MAN_yuan_jinkai
+recruit_character = MAN_xie_jieshi
+recruit_character = MAN_ding_chao
+recruit_character = MAN_li_zhaolin
+recruit_character = MAN_kanjurjab
+recruit_character = MAN_ding_jianxiu
+recruit_character = MAN_kawashima_naniwa
+recruit_character = MAN_yoshisuke_aikawa
+recruit_character = MAN_naoki_hoshino
+#recruit_character = MAN_changlin_linge
+
+# Old fake characters
+#recruit_character = MAN_kyoiji_tomonaga
+#recruit_character = MAN_yonimitsu_kasahara
+#recruit_character = MAN_hesehn_tiemei
+#recruit_character = MAN_guan_xingde
+#recruit_character = MAN_megata_toshiro
+#recruit_character = MAN_hung_zhehuang
+#recruit_character = MAN_nakajima_kesago
+
+IF = {
+	limit = { has_dlc = "No Step Back" }
+	recruit_character = SOV_grigory_semyonov
+	SOV_grigory_semyonov = {
+		set_character_flag = SOV_exiled_army_leader
+	}
+}
+IF = {
+	limit = {
+		has_dlc = "No Compromise, No Surrender"
+	}
+	add_ideas = { MAN_aisin_gioro_puyi }
+}
+
+set_convoys = 5
+
+328 = { #Kirin
+	add_dynamic_modifier = { modifier = dense_rural_infrastructure }
+}
+715 = { #Liaoning
+	add_dynamic_modifier = { modifier = dense_rural_infrastructure }
+}
+714 = { #Heilungkiang
+	add_dynamic_modifier = { modifier = dense_rural_infrastructure }
+}
+717 = { #Hungkiang
+	add_dynamic_modifier = { modifier = dense_rural_infrastructure }
+}
+761 = { #Hulunbuir
+	add_dynamic_modifier = { modifier = dense_rural_infrastructure }
+}
+
+
+set_politics = {
+	ruling_party = fascism
+	last_election = "1936.1.1"
+	election_frequency = 48
+	elections_allowed = no
+}
+set_popularities = {
+	fascism = 80
+	neutrality = 20
+}
+

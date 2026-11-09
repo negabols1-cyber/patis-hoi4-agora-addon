@@ -1,0 +1,219 @@
+ROM_allies = {
+	name = "Romanian plan to join allies"
+	desc = ""
+
+	allowed = {
+		original_tag = ROM
+		has_dlc = "Death or Dishonor"
+	}
+	enable = {
+		OR = {
+			has_country_flag = ROM_AI_RANDOM_DEMOCRATIC
+			has_game_rule = {
+				rule = ROM_ai_behavior
+				option = DEMOCRATIC
+			}
+		}
+	}
+	abort = {
+
+	}
+
+	ai_national_focuses = {
+		ROM_king_front
+		ROM_democratic_romania
+		#ROM_romania_economic_reform
+		ROM_national_civil_industry
+		ROM_repair_our_economy
+		ROM_proclaim_the_elections
+		ROM_the_romanian_parlemento
+		ROM_constitutional_guarantees_new
+		ROM_balkans_defance
+		ROM_conferance_of_priority
+		ROM_fortify_the_borders_new
+		ROM_welfare_of_peoples
+		ROM_guarantor_of_other_countries
+		ROM_declare_a_new_faction_new_focus
+		ROM_invite_to_faction
+		ROM_economic_support
+		ROM_military_support
+	}
+
+	research = {
+		industry = 50.0
+		infantry_tech = 15.0
+		artillery = 8.0
+		support_tech = 6.5
+		air_equipment = 5.0
+	}
+
+	ideas = {
+
+	}
+
+	traits = {
+		captain_of_industry = 5
+		war_industrialist = 5
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+	focus_factors = {
+
+	}
+
+}
+
+ROM_dominance = {
+	name = "Romanian plan to dominante the balkans"
+	desc = ""
+
+	allowed = {
+		original_tag = ROM
+		has_dlc = "Death or Dishonor"
+	}
+	enable = {
+		OR = {
+			has_country_flag = ROM_AI_RANDOM_BALKAN_DOMINANCE
+			has_game_rule = {
+				rule = ROM_ai_behavior
+				option = BALKAN_DOMINANCE
+			}
+		}
+	}
+	abort = {
+		is_subject = yes
+	}
+
+	ai_national_focuses = {
+		ROM_king_front
+		ROM_romania_economy_reform
+		ROM_kingdom_of_romania
+		ROM_monarchy
+		ROM_balkans_dominance
+		ROM_the_mihai
+		ROM_exile_lifestyle
+		ROM_puppet_bulgaria_new
+		#ROM_puppet_yugoslavia
+		ROM_align_hungary
+		ROM_secure_greece_new
+		ROM_split_czechoslovakia
+		ROM_secure_the_bosporus_new
+
+	}
+
+	research = {
+		industry = 50.0
+		infantry_tech = 15.0
+		artillery = 8.0
+		support_tech = 6.5
+		air_equipment = 5.0
+	}
+
+	ideas = {
+
+	}
+
+	traits = {
+		captain_of_industry = 5
+		war_industrialist = 5
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+	focus_factors = {
+
+	}
+
+}
+
+ROM_communist = {
+	name = "Romanian plan to side with SOV"
+	desc = ""
+
+	allowed = {
+		original_tag = ROM
+		has_dlc = "Death or Dishonor"
+	}
+	enable = {
+		OR = {
+			has_country_flag = ROM_AI_RANDOM_COMMUNIST
+			has_game_rule = {
+				rule = ROM_ai_behavior
+				option = COMMUNIST
+			}
+		}
+	}
+	abort = {
+		is_subject = yes
+		OVERLORD = {
+			not = { has_government = communism }
+		}
+	}
+
+	ai_national_focuses = {
+		ROM_communist_front
+		ROM_assainate_leader
+		ROM_communist_party_of_romania
+		ROM_follow_soviet_politics
+		ROM_worker_liberation_in_bulgaria
+		ROM_soviet_economic_help
+		ROM_civil_factories
+		ROM_communist_military_modernization
+		ROM_soviet_army_model
+		ROM_free_and_comintern_romania
+		ROM_soviet_economic_plan
+		ROM_worker_liberation_in_greece
+		ROM_worker_liberation_in_turkey
+		ROM_worker_liberation_in_yugoslavia
+		ROM_worker_liberation_in_hungary
+	}
+
+	research = {
+		industry = 50.0
+		infantry_tech = 15.0
+		artillery = 8.0
+		support_tech = 6.5
+		air_equipment = 5.0
+	}
+
+	ideas = {
+
+	}
+
+	traits = {
+		captain_of_industry = 5
+		war_industrialist = 5
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+	focus_factors = {
+		ROM_expand_the_galati_shipyards_new = 5
+		ROM_coastal_defense_navy = 5
+		ROM_modern_destroyers_new = 5
+	}
+
+}
+

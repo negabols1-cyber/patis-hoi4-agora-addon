@@ -1,0 +1,362 @@
+### BOL ###
+
+BOL_the_1936_coup_d_etat = {
+	priority = 50
+	icon = GFX_BOL_bolivian_coup
+
+	picture = GFX_BOL_coup_image
+
+	allowed = { original_tag = BOL }
+
+	custom_icon = {
+		tag = BCG
+		value = BOL_civil_civil_war_divisions_counter_icon_value
+		desc = BOL_civil_civil_war_divisions_counter_full_breakdown
+
+		visible = {
+			always = yes
+		}
+	}
+
+	custom_icon = {
+		tag = BOL
+		value = BOL_military_civil_war_divisions_counter_icon_value
+		desc = BOL_military_civil_war_divisions_counter_full_breakdown
+
+		visible = {
+			always = yes
+		}
+	}
+
+	visible = {
+		has_country_flag = BOL_coup_being_planned
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+BOL_regaining_the_trust_of_the_people = {
+	priority = 10
+	icon = eng_concessions_to_the_trade_unions
+
+	allowed = {
+		original_tag = BOL
+	}
+
+	visible = {
+		has_completed_focus = BOL_begin_regaining_the_peoples_trust
+		NOT = {
+			has_country_flag = is_PBC
+		}
+		custom_trigger_tooltip = {
+			tooltip = BOL_has_civilian_rebelling
+			OR = {
+				has_idea = BOL_went_against_the_civilians
+				has_idea = BOL_went_against_the_civilians_2
+				has_idea = BOL_went_against_the_civilians_3
+				has_idea = BOL_went_against_the_civilians_4
+				has_idea = BOL_went_against_the_civilians_5
+			}
+		}
+	}
+
+	visible_when_empty = yes
+}
+
+BOL_taking_antofagasta = {
+	priority = 35
+	icon = eng_move_to_secure_the_dominions
+
+	allowed = {
+		original_tag = BOL
+	}
+
+	visible = {
+		has_completed_focus = BOL_draft_plans_to_take_antofagasta
+		NOT = { has_war_with = CHL }
+	}
+}
+
+CHL_countering_bolivias_plan = { #Chilean decisions to counter
+	priority = 35
+	icon = generic_crisis
+
+	allowed = {
+		original_tag = CHL
+	}
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				state = 506
+			}
+		}
+		name = CHL_state_bolivia_claiming_tt
+		zoom = 150
+	}
+
+	visible = {
+		BOL = { has_completed_focus = BOL_draft_plans_to_take_antofagasta }
+		NOT = { has_war_with = BOL }
+	}
+}
+
+BOL_getting_our_sweet_revenge = {
+	priority = 10
+	icon = GFX_BOL_wars_of_vengence
+
+	allowed = {
+		original_tag = BOL
+	}
+
+	available = {
+		has_completed_focus = BOL_our_wars_of_vengence
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		has_completed_focus = BOL_our_wars_of_vengence
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+BOL_foreign_arms_purchasing = {
+	priority = 10
+	icon = GFX_decision_category_generic_arms_trade
+
+	allowed = {
+		OR = {
+			original_tag = BOL
+			original_tag = BRA
+			original_tag = ECU
+		}
+	}
+
+	visible = {
+		if = {
+			limit = { original_tag = BOL }
+			has_completed_focus = BOL_purchase_foreign_arms
+		}
+		if = {
+			limit = { original_tag = BRA }
+			#has_completed_focus = BRA_purchase_foreign_arms
+		}
+		if = {
+			limit = {
+				original_tag = ECU
+			}
+			has_completed_focus = ECU_foreign_equipment_shipments
+		}
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+BOL_south_american_investment = {
+	priority = 10
+	icon = GFX_decision_category_generic_industry
+
+
+	allowed = {
+		original_tag = BOL
+	}
+
+	available = {
+		has_completed_focus = BOL_investment_possibilities_in_south_america
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+
+	visible = {
+		has_completed_focus = BOL_investment_possibilities_in_south_america
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+BOL_dealing_with_toros_schemes = {
+	priority = 25
+	icon = GFX_BOL_toros_scheme
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = BOL_controlled_by_toro }
+			}
+		}
+		name = BOL_states_controlled_by_toro_tt
+		zoom = 150
+	}
+
+	allowed = {
+		original_tag = BOL
+	}
+
+	available = {
+		has_country_flag = BOL_toro_rebellious
+		NOT = {
+			has_country_flag = is_PBC
+		}
+		NOT = {
+			has_completed_focus = BOL_imprison_toro
+		}
+	}
+
+	visible = {
+		has_country_flag = BOL_toro_rebellious
+		NOT = {
+			has_country_flag = is_PBC
+		}
+		NOT = {
+			has_completed_focus = BOL_imprison_toro
+		}
+	}
+}
+
+BOL_tejadas_incompetence = {
+	priority = 50
+	icon = GFX_BOL_tejada_incompetent
+
+	allowed = { original_tag = BOL }
+
+	visible = {
+		has_completed_focus = BOL_victor_of_the_civil_war
+		NOT = {
+			has_country_flag = is_PBC
+		}
+	}
+}
+
+### Peru-Bolivian Confederation Decisions ###
+
+PBC_nationalism_rising = {
+	priority = 30
+	icon = GFX_PBC_nationalism
+
+	picture = GFX_PBC_nation
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = PBC_BOL_nationalists }
+			}
+		}
+		name = PBC_states_with_bolivian_nationalists
+		zoom = 150
+	}
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = { modifier = PBC_PRU_nationalists }
+			}
+		}
+		name = PBC_states_with_peruvian_nationalists
+		zoom = 150
+	}
+
+	allowed = {
+		OR = {
+			original_tag = PRU
+			original_tag = BOL
+		}
+	}
+
+	visible = {
+		has_country_flag = is_PBC
+		has_country_flag = PBC_nationalists_on_rise
+	}
+}
+
+PBC_reforming_lost_unions = {
+	priority = 20
+	icon = GFX_PBC_reforming_old_nations
+
+	allowed = {
+		OR = {
+			original_tag = BOL
+			original_tag = PRU
+		}
+	}
+
+	visible = {
+		has_completed_focus = PBC_prepare_for_our_expansion
+	}
+}
+
+PBC_integrating_all_our_claimed_lands = {
+	priority = 15
+	icon = GFX_PBC_securing_our_claimed_lands
+
+	allowed = {
+		OR = {
+			original_tag = PRU
+			original_tag = BOL
+		}
+	}
+
+	visible = {
+		has_country_flag = PBC_must_integrate
+		has_cosmetic_tag = PBC_UNIFIED
+	}
+}
+
+PBC_war_of_independence_d = {
+	priority = 20
+	icon = GFX_PBC_war_independence_desc
+
+	allowed = {
+		OR = {
+			original_tag = BOL
+			original_tag = PRU
+		}
+	}
+
+	available = {
+		has_cosmetic_tag = PBC_UNIFIED
+	}
+
+	visible = {
+		has_country_flag = is_PBC
+		has_completed_focus = PBC_focus_on_our_armed_forces
+		OR = {
+			has_war_with = CHL
+			has_war_with = ARG
+			has_war_with = ECU
+			has_war_with = COL
+		}
+	}
+}
+
+PBC_maneging_the_confederation = {
+	priority = 15
+	icon = GFX_PBC_manage_confederation
+
+	allowed = {
+		OR = {
+			original_tag = BOL
+			original_tag = PRU
+		}
+	}
+
+	available = {
+		has_cosmetic_tag = PBC_UNIFIED
+	}
+
+	visible = {
+		has_country_flag = is_PBC
+		has_completed_focus = PBC_maneging_the_new_nation
+	}
+}

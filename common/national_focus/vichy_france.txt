@@ -1,0 +1,1217 @@
+﻿focus_tree = {
+	id = vichy_french_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 1
+			tag = FRA
+		}
+	}
+
+	continuous_focus_position = {
+		x = 50 y = 3000
+	}
+
+	initial_show_position = {
+		x = 0
+	}
+
+	default = no
+
+	shared_focus = UFRA_nationalism
+	shared_focus = UFRA_economic_policies
+	shared_focus = UFRA_devalue_the_franc
+	shared_focus = UFRA_begin_rearmament
+
+
+
+
+
+
+
+
+	focus = {
+		id = VIC_armistice_with_germany
+		icon = GFX_goal_NFA_Petain
+		x = 24
+		y = 0
+
+		cost = 1
+		ai_will_do = {
+			base = 200
+		}
+
+
+		available_if_capitulated = yes
+		completion_reward = {
+			set_country_flag = vichy_french_focus
+			set_country_flag = FRA_maintain_election
+			add_ideas = {
+				FRA_german_armistice
+				FRA_french_pow_4
+			}
+			create_country_leader = {
+				name = "Philippe Pétain"
+				desc = "POLITICS_PHILIPPE_PÉTAIN_DESC"
+				picture = "Portrait_France_Philippe_Petain.dds"
+				expire = "1965.1.1"
+				ideology = conservatism
+				traits = {
+
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = VIC_emergency_powers_to_petain
+		icon = GFX_goal_generic_demand_territory
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_armistice_with_germany
+		}
+		relative_position_id = VIC_armistice_with_germany
+		mutually_exclusive = { }
+
+		cost = 4
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			clr_country_flag = FRA_maintain_election
+			add_country_leader_trait = emergency_powers
+			if = {
+				limit = {
+					has_idea = FRA_disjointed_government
+				}
+				remove_ideas = { FRA_disjointed_government }
+			}
+		}
+	}
+
+	focus = {
+		id = VIC_the_national_revolution
+		icon = GFX_focus_generic_strike_at_democracy1
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_emergency_powers_to_petain
+		}
+		relative_position_id = VIC_emergency_powers_to_petain
+
+		cost = 5
+		ai_will_do = {
+			base = 400
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+
+	focus = {
+		id = VIC_the_legionary_service_order
+		icon = GFX_goal_generic_small_arms
+		x = 7
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_emergency_powers_to_petain
+		}
+		relative_position_id = VIC_emergency_powers_to_petain
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_legionary_service_order }
+			hidden_effect = { add_named_threat = { threat = 10 name = VIC_the_legionary_service_order } }
+		}
+	}
+	focus = {
+		id = VIC_form_the_milice
+		icon = GFX_focus_fra_milice
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_the_legionary_service_order
+		}
+		relative_position_id = VIC_the_legionary_service_order
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			french_pow_return_home_effect = yes
+			swap_ideas = {
+				remove_idea = FRA_legionary_service_order
+				add_idea = FRA_milice
+			}
+		}
+	}
+	focus = {
+		id = VIC_anti_bolshevist_volunteers
+		icon = GFX_focus_generic_military_mission
+		x = 1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_the_legionary_service_order
+		}
+		relative_position_id = VIC_the_legionary_service_order
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+			16 = { # Controller of paris is in a war against any communist major
+				CONTROLLER = {
+					NOT = {
+						tag = ROOT
+					}
+					NOT = { has_war_with = ROOT }
+					any_enemy_country = {
+						is_major = yes
+						has_government = communism
+					}
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			french_pow_return_home_effect = yes
+			add_ideas = { FRA_anti_bolshevist_volunteers }
+		}
+	}
+
+	focus = {
+		id = VIC_control_newspapers
+		icon = GFX_u_fra_burning_journal
+		x = -2
+		y = 1
+
+		prerequisite = {
+			focus = VIC_the_national_revolution
+		}
+		relative_position_id = VIC_the_national_revolution
+		cost = 4
+
+		ai_will_do = {
+			base = 200
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = -50
+		}
+	}
+	focus = {
+		id = VIC_crush_political_dissent
+		icon = GFX_u_fra_FRA_purge_political_opponents
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = VIC_form_the_milice
+		}
+		prerequisite = {
+			focus = VIC_the_national_bureau_of_statistics
+		}
+		mutually_exclusive = {}
+		relative_position_id = VIC_form_the_milice
+		cost = 4
+
+		ai_will_do = {
+			base = 200
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			set_temp_variable = { FRA_democracy = party_popularity@democratic }
+			multiply_temp_variable = { FRA_democracy = 0.2 }
+			add_popularity = { ideology = fascism popularity = FRA_democracy }
+			multiply_temp_variable = { FRA_democracy = -1 }
+			add_popularity = { ideology = democratic popularity = FRA_democracy }
+			add_stability = 0.1
+			FRA_communism_riot_effect = yes
+		}
+	}
+	focus = {
+		id = UFRA_VIC_put_opponents_to_work
+		icon = GFX_u_fra_Focus_Generic_Forced_Labour
+		x = 0
+		y = 1
+
+		prerequisite = {
+			focus = VIC_crush_political_dissent
+		}
+		mutually_exclusive = {}
+		relative_position_id = VIC_crush_political_dissent
+		cost = 4
+
+		ai_will_do = {
+			base = 200
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			french_pow_return_home_effect = yes
+			add_stability = -0.075
+			remove_ideas = FRA_disgruntled_workers_I
+
+			add_country_leader_trait = prince_of_terror
+		}
+	}
+	focus = {
+		id = UFRA_VIC_chantiers_jeunesse
+		icon = GFX_u_fra_focus_chantiers
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_control_newspapers
+		}
+		mutually_exclusive = {}
+		relative_position_id = VIC_control_newspapers
+		cost = 5
+
+		ai_will_do = {
+			base = 200
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_fascist_society_I
+				add_idea = FRA_fascist_society_II
+			}
+		}
+	}
+	focus = {
+		id = UFRA_VIC_aids_for_families
+		icon = GFX_u_fra_FRA_help_families
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_VIC_chantiers_jeunesse }
+		relative_position_id = UFRA_VIC_chantiers_jeunesse
+		cost = 5
+
+		ai_will_do = {
+			base = 200
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = FRA_fascist_society_II
+				add_idea = FRA_fascist_society_III
+			}
+		}
+	}
+	focus = {
+		id = UFRA_VIC_ideological_fanaticism
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = UFRA_VIC_aids_for_families focus = VIC_celebrate_motherhood}
+		prerequisite = { focus = VIC_venerate_the_craftsman}
+
+		x = 0
+		y = 1
+		relative_position_id = UFRA_VIC_aids_for_families
+		cost = 4
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 200
+		}
+		completion_reward = {
+			add_ideas = ideological_fanaticism_focus
+			set_rule = {
+				can_create_factions = yes
+			}
+			hidden_effect = {
+				set_rule = { can_use_kamikaze_pilots = yes }
+			}
+			custom_effect_tooltip = kamikaze_focus_tooltip
+		}
+	}
+	focus = {
+		id = VIC_long_term_economic_planning
+		icon = GFX_goal_generic_construct_civilian
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_the_national_revolution
+		}
+		relative_position_id = VIC_the_national_revolution
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_tech_bonus = {
+				name = VIC_long_term_economic_planning
+				category = industry
+				uses = 2
+				bonus = 1
+			}
+		}
+	}
+	focus = {
+		id = VIC_aid_small_businesses
+		icon = GFX_goal_generic_consumer_goods
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_long_term_economic_planning
+		}
+		relative_position_id = VIC_long_term_economic_planning
+
+		cost = 4
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_stability = 0.025
+			random_owned_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = VIC_venerate_the_craftsman
+		icon = GFX_goal_generic_production
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_aid_small_businesses
+		}
+		relative_position_id = VIC_aid_small_businesses
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = { FRA_venerate_the_craftsman }
+		}
+	}
+	focus = {
+		id = VIC_down_with_marianne
+		icon = GFX_focus_focus_fra_down_marianne
+		x = -4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_the_national_revolution
+		}
+		relative_position_id = VIC_the_national_revolution
+
+		cost = 4
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = FRA_down_with_marianne
+				days = 730
+			}
+		}
+	}
+	focus = {
+		id = VIC_up_with_jean_darc
+		icon = GFX_focus_up_joan_of_arc
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_down_with_marianne
+		}
+		relative_position_id = VIC_down_with_marianne
+
+		cost = 6
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = FRA_up_with_jean_darc
+				days = 730
+			}
+			add_war_support = 0.025
+		}
+	}
+	focus = {
+		id = VIC_celebrate_motherhood
+		icon = GFX_goal_generic_propaganda
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_VIC_chantiers_jeunesse
+		}
+		relative_position_id = UFRA_VIC_chantiers_jeunesse
+
+		cost = 4
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.05
+		}
+	}
+	focus = {
+		id = VIC_prosecute_the_losers
+		icon = GFX_goal_generic_neutrality_focus
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_the_national_revolution
+		}
+		relative_position_id = VIC_the_national_revolution
+
+		cost = 4
+		ai_will_do = {
+			base = 400
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = VIC_concessions_to_the_germans
+		icon = GFX_focus_chi_mission_to_germany
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_prosecute_the_losers
+		}
+		relative_position_id = VIC_prosecute_the_losers
+
+		cost = 4
+		ai_will_do = {
+			base = 400
+		}
+		available = {
+			16 = {
+				is_controlled_by = GER
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_FRA_OCCUPATION_COST }
+		completion_reward = {
+			unlock_decision_category_tooltip = VIC_concessions_to_the_germans
+		}
+	}
+	focus = {
+		id = VIC_mandatory_work_service
+		icon = GFX_goal_generic_construction2
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_concessions_to_the_germans
+		}
+		relative_position_id = VIC_concessions_to_the_germans
+
+		cost = 4
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_FRA_OCCUPATION_COST }
+		completion_reward = {
+			reduce_occupation_cost_effect = yes
+			french_pow_return_home_effect = yes
+			add_ideas = { FRA_mandatory_work_service }
+		}
+	}
+	focus = {
+		id = VIC_a_nation_reborn
+		icon = GFX_focus_generic_vichy_france_triumphant
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_venerate_the_craftsman
+		}
+		prerequisite = {
+			focus = VIC_mandatory_work_service
+		}
+		relative_position_id = VIC_venerate_the_craftsman
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+			has_stability > 0.80
+			OR = {
+				fascism > 0.65
+				neutrality > 0.65
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	focus = {
+		id = VIC_end_the_occupation
+		icon = GFX_goal_generic_territory_or_war
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_a_nation_reborn
+		}
+		relative_position_id = VIC_a_nation_reborn
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+			modifier = {
+				is_historical_focus_on = yes
+				NOT = {
+					GER = { owns_state = 219 }
+				}
+				factor = 0
+			}
+		}
+		available = {
+			16 = {
+				NOT = {
+					is_controlled_by = ROOT
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			set_rule = {
+				can_join_factions = yes
+				can_not_declare_war = no
+				can_create_factions = yes
+			}
+			remove_occupation_cost_effect = yes
+			remove_ideas = {
+				FRA_german_armistice
+				FRA_french_pow_1
+			}
+			hidden_effect = {
+				remove_ideas = {
+					FRA_secret_build_tank
+					FRA_french_pow_4
+					FRA_french_pow_3
+					FRA_french_pow_2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = VIC_produce_aircraft_parts
+				}
+				remove_ideas = VIC_produce_aircraft_parts
+			}
+			GER = {
+				country_event = u_fra.179
+				if = { limit = { has_idea = VIC_aircraft_parts }
+					remove_ideas = VIC_aircraft_parts
+				}
+			}
+			hidden_effect = {
+				load_focus_tree = french_fascist_focus
+				unlock_national_focus = UFRA_revive_the_national_bloc
+				unlock_national_focus = UFRA_utilize_the_leagues
+				unlock_national_focus = UFRA_national_regeneration
+				unlock_national_focus = UFRA_diplomatic_freedom
+				unlock_national_focus = UFRA_towards_a_new_europe
+				unlock_national_focus = UFRA_give_full_powers
+				unlock_national_focus = UFRA_control_newspapers
+				unlock_national_focus = UFRA_form_the_milice
+				unlock_national_focus = UFRA_ideological_fanaticism
+				unlock_national_focus = UFRA_chantiers_jeunesse
+				unlock_national_focus = UFRA_aids_for_families
+
+				remove_ideas = {
+					FRA_secret_build_tank
+					FRA_french_pow_4
+					FRA_french_pow_3
+					FRA_french_pow_2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = VIC_the_national_bureau_of_statistics
+		icon = GFX_focus_generic_treaty
+		x = 4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_the_national_revolution
+		}
+		relative_position_id = VIC_the_national_revolution
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_national_bureau_of_statistics }
+		}
+	}
+	focus = {
+		id = VIC_rebuild_the_military
+		icon = GFX_goal_generic_construct_mil_factory
+		x = -7
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_emergency_powers_to_petain
+		}
+		relative_position_id = VIC_emergency_powers_to_petain
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+			num_of_military_factories > 34
+		}
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_rebuild_the_military }
+			random_owned_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = arms_factory
+					level = 4
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = VIC_hidden_materials
+		icon = GFX_focus_secret_rearmament
+		x = 1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_rebuild_the_military
+		}
+		relative_position_id = VIC_rebuild_the_military
+
+		cost = 4
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_hidden_materials }
+		}
+	}
+
+	focus = {
+		id = UFRA_VIC_light_medium_armor
+		icon = GFX_goal_generic_army_tanks
+		prerequisite = { focus = VIC_hidden_materials }
+		x = 0
+		y = 1
+		relative_position_id = VIC_hidden_materials
+		cost = 5
+
+		available_if_capitulated = yes
+		ai_will_do = {
+			base = 200
+		}
+		completion_reward = {
+			add_ideas = {
+				FRA_secret_build_tank
+			}
+			add_tech_bonus = {
+				name = FRA_light_medium_armor
+				bonus = 1.5
+				uses = 1
+				category = cat_light_armor
+				category = cat_medium_armor
+				category = cat_heavy_armor
+			}
+		}
+	}
+	focus = {
+		id = VIC_analyze_our_defeat
+		icon = GFX_goal_generic_army_doctrines
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_VIC_light_medium_armor
+		}
+		relative_position_id = UFRA_VIC_light_medium_armor
+
+		cost = 5
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = VIC_analyze_our_defeat
+				category = land_doctrine
+				uses = 2
+				cost_reduction = 0.5
+			}
+		}
+	}
+	focus = {
+		id = VIC_modernize_the_airforce
+		icon = GFX_goal_generic_air_doctrine
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_rebuild_the_military
+		}
+		relative_position_id = VIC_rebuild_the_military
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = VIC_modernize_the_airforce
+				category = light_fighter
+				category = cas_bomber
+				category = tactical_bomber
+				bonus = 2
+				uses = 2
+			}
+		}
+	}
+	focus = {
+		id = VIC_learn_from_the_enemy
+		icon = GFX_focus_research2
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = VIC_the_national_bureau_of_statistics
+		}
+		relative_position_id = VIC_the_national_bureau_of_statistics
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			add_to_tech_sharing_group = VIC_learn_from_the_enemy
+			GER = { add_to_tech_sharing_group = VIC_learn_from_the_enemy }
+		}
+	}
+	focus = {
+		id = VIC_buy_from_the_enemy
+		icon = GFX_goal_generic_air_fighter
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		allow_branch = { has_dlc = "Death or Dishonor" }
+		prerequisite = {
+			focus = VIC_modernize_the_airforce
+		}
+		relative_position_id = VIC_modernize_the_airforce
+
+		cost = 5
+		ai_will_do = {
+			base = 200
+		}
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_buy_from_the_enemy }
+		}
+	}
+
+}

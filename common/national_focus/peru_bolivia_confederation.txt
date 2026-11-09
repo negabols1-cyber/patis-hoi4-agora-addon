@@ -1,0 +1,3349 @@
+### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_RESEARCH}
+### search_filters = {FOCUS_FILTER_INDUSTRY}
+### search_filters = {FOCUS_FILTER_STABILITY}
+### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+### search_filters = {FOCUS_FILTER_MANPOWER}
+### search_filters = {FOCUS_FILTER_ANNEXATION}
+
+
+focus_tree = {
+	id = PBC_focus_tree
+
+	country = {
+		factor = 0
+
+		#modifier = {
+			#	add = 1
+			#    OR = {
+				#	    original_tag = BOL
+				#        original_tag = PRU
+				#    }
+			#}
+	}
+
+	initial_show_position = {
+		x = 0
+	}
+
+	continuous_focus_position = { x = 100 y = 2650 }
+
+	default = no
+
+	focus = {
+		id = PBC_choose_our_leader
+		icon = GFX_PBC_choosing_leader
+		x = 5
+		y = 0
+
+		cost = 1
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 50
+			country_event = perubolivia.1
+		}
+	}
+
+	focus = {
+		id = PBC_our_war_of_independence
+		icon = GFX_PBC_win_war_independence
+		x = 0
+		y = 1
+		relative_position_id = PBC_choose_our_leader
+		prerequisite = { focus = PBC_choose_our_leader }
+
+		cost = 3
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			PBC_check_for_war_focus = yes
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_political_power = 25
+			swap_ideas = {
+				remove_idea = PBC_war_of_independence_1
+				add_idea = PBC_war_of_independence_2
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_focus_on_our_armed_forces
+		icon = GFX_focus_generic_manpower
+		x = -2
+		y = 1
+		relative_position_id = PBC_our_war_of_independence
+		prerequisite = { focus = PBC_our_war_of_independence }
+
+		cost = 3
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			has_country_flag = PBC_appointed_ministry_of_defense
+		}
+
+		select_effect = { add_ideas = EUYL_expansionist_path }
+
+		bypass = {
+			OR = {
+				has_country_flag = PBC_winner_of_war_of_independence
+				AND = {
+					NOT = {
+						OR = {
+							has_war_with = ARG
+							has_war_with = ECU
+							has_war_with = CHL
+							has_war_with = COL
+						}
+					}
+					OR = {
+						controls_state = 951
+						controls_state = 490
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_political_power = 10
+			unlock_decision_category_tooltip = PBC_war_of_independence_d
+		}
+	}
+
+	focus = {
+		id = PBC_maneging_the_new_nation
+		icon = GFX_focus_generic_self_management
+		x = 2
+		y = 1
+		relative_position_id = PBC_our_war_of_independence
+		prerequisite = { focus = PBC_our_war_of_independence }
+
+		cost = 4
+
+		ai_will_do = {
+			base = 10
+		}
+
+		available = {
+			exists = yes
+			has_civil_war = no
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_political_power = 50
+			unlock_decision_category_tooltip = PBC_maneging_the_confederation
+			unlock_decision_tooltip = PBC_appoint_a_ministry_of_economy
+			unlock_decision_tooltip = PBC_appoint_a_ministry_of_defense
+			unlock_decision_tooltip = PBC_appoint_a_ministry_of_foreign_relations
+			unlock_decision_tooltip = PBC_appoint_a_ministry_of_education
+			unlock_decision_tooltip = PBC_choose_our_new_capital
+		}
+	}
+
+	focus = {
+		id = PBC_invite_foreign_advisors
+		icon = GFX_goal_generic_intelligence_exchange
+		x = -1
+		y = 1
+		relative_position_id = PBC_maneging_the_new_nation
+		prerequisite = { focus = PBC_maneging_the_new_nation }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 3
+		}
+
+		available = {
+			has_country_flag = PBC_appointed_ministry_of_foreign_relations
+		}
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_ideas = PBC_foreign_advisors
+		}
+	}
+
+	focus = {
+		id = PBC_unite_the_parties
+		icon = GFX_goal_generic_forceful_treaty
+		x = 0
+		y = 1
+		relative_position_id = PBC_invite_foreign_advisors
+		prerequisite = { focus = PBC_invite_foreign_advisors }
+
+		cost = 6
+
+		ai_will_do = {
+			base = 3
+		}
+
+		available = {
+			OR = {
+				has_idea = PBC_divided_ideological_sentiments_1
+				has_idea = PBC_divided_ideological_sentiments_2
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			if = {
+				limit = { has_idea = PBC_divided_ideological_sentiments_1 }
+				remove_ideas = PBC_divided_ideological_sentiments_1
+			}
+			else = {
+				remove_ideas = PBC_divided_ideological_sentiments_2
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_deal_with_the_economy
+		icon = GFX_goal_generic_construction
+		x = 2
+		y = 1
+		relative_position_id = PBC_maneging_the_new_nation
+		prerequisite = { focus = PBC_maneging_the_new_nation }
+
+		cost = 6
+
+		ai_will_do = {
+			base = 4
+		}
+
+		available = {
+			has_country_flag = PBC_appointed_ministry_of_economy
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			swap_ideas = {
+				remove_idea = PBC_divided_economy_1
+				add_idea = PBC_divided_economy_2
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_mobilize_the_economy
+		icon = GFX_focus_generic_tank_production
+		x = -1
+		y = 1
+		relative_position_id = PBC_deal_with_the_economy
+		prerequisite = { focus = PBC_deal_with_the_economy }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_idea = war_economy
+							has_idea = tot_economic_mobilisation
+						}
+					}
+				}
+				add_ideas = war_economy
+			}
+			else = {
+				add_political_power = 150
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_unite_the_industries
+		icon = GFX_goal_generic_national_unity
+		x = 1
+		y = 1
+		relative_position_id = PBC_deal_with_the_economy
+		prerequisite = { focus = PBC_deal_with_the_economy }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			remove_ideas = PBC_divided_economy_2
+		}
+	}
+
+	focus = {
+		id = PBC_reform_the_research_facilities
+		icon = GFX_focus_research
+		x = -1
+		y = 1
+		relative_position_id = PBC_mobilize_the_economy
+		prerequisite = { focus = PBC_mobilize_the_economy }
+		prerequisite = { focus = PBC_unite_the_parties }
+
+		cost = 8
+
+		available = {
+			has_country_flag = PBC_appointed_ministry_of_education
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = PBC_stabilizing_the_nation
+		icon = GFX_goal_generic_neutrality_focus
+		x = 0
+		y = 2
+		relative_position_id = PBC_unite_the_parties
+		prerequisite = { focus = PBC_unite_the_parties }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.05
+			unlock_decision_tooltip = PBC_focus_on_stabilizing_the_nation
+		}
+	}
+
+	focus = {
+		id = PBC_mutual_military_training
+		icon = GFX_focus_generic_military_academy
+		x = 1
+		y = 1
+		relative_position_id = PBC_focus_on_our_armed_forces
+		prerequisite = { focus = PBC_focus_on_our_armed_forces }
+
+		cost = 6
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			has_idea = PBC_split_armies_1
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PBC_split_armies_1
+				add_idea = PBC_split_armies_2
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_fully_reform_the_army
+		icon = GFX_goal_generic_axis_build_infantry
+		x = 0
+		y = 1
+		relative_position_id = PBC_mutual_military_training
+		prerequisite = { focus = PBC_mutual_military_training }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_political_power = 50
+			remove_ideas = PBC_split_armies_2
+		}
+	}
+
+	focus = {
+		id = PBC_arm_up_the_militias
+		icon = GFX_PBC_militias
+		x = -2
+		y = 1
+		relative_position_id = PBC_focus_on_our_armed_forces
+		prerequisite = { focus = PBC_focus_on_our_armed_forces }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 4
+		}
+
+		available = {
+			PBC_check_for_war_focus = yes
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			hidden_effect = {
+				division_template = {
+					name = "Reservas Militares"
+					division_names_group = SPAN_INF_02
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+						infantry = { x = 0 y = 4 }
+					}
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Reservas Militares\" division_template = \"Reservas Militares\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Reservas Militares\" division_template = \"Reservas Militares\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Reservas Militares\" division_template = \"Reservas Militares\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Reservas Militares\" division_template = \"Reservas Militares\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_escelate_the_war
+		icon = GFX_focus_generic_provoke_border_clashes
+		x = -1
+		y = 1
+		relative_position_id = PBC_arm_up_the_militias
+		prerequisite = { focus = PBC_arm_up_the_militias }
+
+		cost = 6
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			has_country_flag = is_in_second_war_of_confederation
+			PBC_check_for_war_focus = yes
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			custom_effect_tooltip = PBC_unlock_escalate_tt
+		}
+	}
+
+	focus = {
+		id = PBC_expanding_our_armaments
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 1
+		y = 1
+		relative_position_id = PBC_arm_up_the_militias
+		prerequisite = { focus = PBC_arm_up_the_militias }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			has_war = yes
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_purchase_foreign_arms
+		icon = GFX_goal_generic_small_arms
+		x = 1
+		y = 1
+		relative_position_id = PBC_expanding_our_armaments
+		prerequisite = { focus = PBC_expanding_our_armaments }
+		prerequisite = { focus = PBC_fully_reform_the_army }
+
+		cost = 8
+
+		available = {
+			has_war = yes
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			unlock_decision_tooltip = PBC_purchasing_foreign_arms
+		}
+	}
+
+	focus = {
+		id = PBC_ask_for_foreign_volunteers
+		icon = GFX_goal_generic_dangerous_deal
+		x = -1
+		y = 1
+		relative_position_id = PBC_escelate_the_war
+		prerequisite = { focus = PBC_escelate_the_war }
+
+		cost = 8
+
+		available = {
+			has_country_flag = PBC_appointed_ministry_of_foreign_relations
+			has_country_flag = is_in_second_war_of_confederation
+			PBC_check_for_war_focus = yes
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			custom_effect_tooltip = FROM_unlock_influence_and_invite_decision
+		}
+	}
+
+	focus = {
+		id = PBC_expand_the_army
+		icon = GFX_ARG_quantity
+		x = -1
+		y = 1
+		relative_position_id = PBC_expanding_our_armaments
+		prerequisite = { focus = PBC_expanding_our_armaments }
+		prerequisite = { focus = PBC_escelate_the_war}
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_idea = URG_expanded_consription }
+				}
+				add_ideas = URG_expanded_consription
+			}
+			else = {
+				add_manpower = 75000
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_conscript_militias_across_the_country
+		icon = GFX_focus_generic_little_entente
+		x = 0
+		y = 1
+		relative_position_id = PBC_expand_the_army
+		prerequisite = { focus = PBC_ask_for_foreign_volunteers }
+		prerequisite = { focus = PBC_purchase_foreign_arms }
+
+		cost = 8
+
+		available = {
+			has_country_flag = is_in_second_war_of_confederation
+			PBC_check_for_war_focus = yes
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			custom_effect_tooltip = PBC_unlock_conscript_tt
+		}
+	}
+
+	focus = {
+		id = PBC_independent_at_last
+		icon = GFX_PBC_victor_of_war
+		x = -1
+		y = 2
+		relative_position_id = PBC_stabilizing_the_nation
+		prerequisite = { focus = PBC_stabilizing_the_nation }
+		prerequisite = { focus = PBC_fully_reform_the_army }
+
+		available = {
+			OR = {
+				has_country_flag = PBC_winner_of_war_of_independence
+				AND = {
+					NOT = {
+						OR = {
+							has_war_with = ARG
+							has_war_with = ECU
+							has_war_with = CHL
+							has_war_with = COL
+						}
+					}
+					OR = {
+						controls_state = 951
+						controls_state = 490
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+		}
+
+
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_political_power = 75
+			add_stability = 0.1
+			add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = PBC_prepare_for_our_expansion
+		icon = GFX_goal_generic_major_war
+		x = 7
+		y = 1
+		relative_position_id = PBC_independent_at_last
+		prerequisite = { focus = PBC_independent_at_last }
+		mutually_exclusive = { focus = PBC_consolidate_our_borders }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			has_completed_focus = PBC_improve_the_army
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = ARG_expansionist_policy
+			add_manpower = 64500
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_the_path_to_communism
+		icon = GFX_goal_support_communism
+		x = -3
+		y = 1
+		relative_position_id = PBC_prepare_for_our_expansion
+		prerequisite = { focus = PBC_prepare_for_our_expansion }
+		mutually_exclusive = { focus = PBC_the_glory_of_fascism }
+
+		cost = 6
+
+		available = {
+			communism > 0.39
+			has_civil_war = no
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						has_war_with = BOA
+						has_war_with = PRA
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.03
+			add_popularity = { ideology = communism popularity = 0.05}
+		}
+	}
+
+	focus = {
+		id = PBC_spread_communism_to_the_continent
+		icon = GFX_focus_ger_great_red_menace
+		x = -1
+		y = 1
+		relative_position_id = PBC_the_path_to_communism
+		prerequisite = { focus = PBC_the_path_to_communism }
+
+		cost = 10
+
+		available = {
+			is_subject = no
+			has_government = communism
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					capital_scope = { is_on_continent = south_america }
+					NOT = { has_war_with = ROOT }
+				}
+				adD_ideas = communist_influence
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_the_glory_of_fascism
+		icon = GFX_goal_support_fascism
+		x = 3
+		y = 1
+		relative_position_id = PBC_prepare_for_our_expansion
+		prerequisite = { focus = PBC_prepare_for_our_expansion }
+		mutually_exclusive = { focus = PBC_the_path_to_communism }
+
+		cost = 6
+
+		available = {
+			fascism > 0.39
+			has_civil_war = no
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						has_war_with = BOA
+						has_war_with = PRA
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.03
+			add_popularity = { ideology = fascism popularity = 0.05}
+		}
+	}
+
+	focus = {
+		id = PBC_preperations_for_our_expansion
+		icon = GFX_focus_generic_tank_production
+		x = -3
+		y = 1
+		relative_position_id = PBC_the_glory_of_fascism
+		prerequisite = {
+			focus = PBC_the_glory_of_fascism
+			focus = PBC_the_path_to_communism
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_spread_fascism_to_the_continent
+		icon = GFX_focus_ger_reichskommisariats
+		x = 1
+		y = 1
+		relative_position_id = PBC_the_glory_of_fascism
+		prerequisite = { focus = PBC_the_glory_of_fascism }
+
+		cost = 10
+
+		available = {
+			is_subject = no
+			has_government = fascism
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					capital_scope = { is_on_continent = south_america }
+					NOT = { has_war_with = ROOT }
+				}
+				adD_ideas = fascist_influence
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_make_the_argentines_pay
+		icon = GFX_focus_ARG_attack
+		x = -2
+		y = 2
+		relative_position_id = PBC_prepare_for_our_expansion
+		prerequisite = {
+			focus = PBC_the_glory_of_fascism
+			focus = PBC_the_path_to_communism
+		}
+		will_lead_to_war_with = ARG
+
+		cost = 8
+
+		available = {
+			has_army_manpower = { size > 199999 }
+			NOT = {
+				is_in_faction_with = ARG
+			}
+			NOT = {
+				has_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise }
+			}
+		}
+
+		bypass = {
+			ARG = {
+				OR = {
+					AND = {
+						is_in_faction_with = ROOT
+						has_government = ROOT
+					}
+					exists = no
+					is_subject_of = ROOT
+					capital_scope = {
+						is_fully_controlled_by = ROOT
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ARG
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_make_the_chileans_pay
+		icon = GFX_ARG_attack_chile
+		x = 2
+		y = 2
+		relative_position_id = PBC_prepare_for_our_expansion
+		prerequisite = {
+			focus = PBC_the_glory_of_fascism
+			focus = PBC_the_path_to_communism
+		}
+		will_lead_to_war_with = CHL
+
+		cost = 8
+
+		available = {
+			has_army_manpower = { size > 199999 }
+			NOT = {
+				is_in_faction_with = CHL
+			}
+			NOT = {
+				has_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise }
+			}
+		}
+
+		bypass = {
+			CHL = {
+				OR = {
+					AND = {
+						is_in_faction_with = ROOT
+						has_government = ROOT
+					}
+					exists = no
+					is_subject_of = ROOT
+					capital_scope = {
+						is_fully_controlled_by = ROOT
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = CHL
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_integrate_our_newly_conquered_lands
+		icon = GFX_goal_generic_demand_territory
+		x = -2
+		y = 1
+		relative_position_id = PBC_make_the_chileans_pay
+		prerequisite = { focus = PBC_make_the_chileans_pay }
+		prerequisite = { focus = PBC_make_the_argentines_pay }
+
+		cost = 10
+
+		available = {
+			ARG = {
+				capital_scope = { is_fully_controlled_by = ROOT }
+			}
+			CHL = {
+				capital_scope = { is_fully_controlled_by = ROOT }
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			custom_effect_tooltip = ARG_unlock_integrate_territory
+			hidden_effect = {
+				set_country_flag = EUYL_can_integrate
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_take_out_uruguay
+		icon = GFX_ARG_attack_uruguay
+		x = -1
+		y = 2
+		relative_position_id = PBC_make_the_argentines_pay
+		prerequisite = { focus = PBC_make_the_argentines_pay }
+		will_lead_to_war_with = URG
+
+		cost = 5
+
+		available = {
+			NOT = {
+				is_in_faction_with = URG
+			}
+		}
+
+		bypass = {
+			URG = {
+				OR = {
+					AND = {
+						is_in_faction_with = ROOT
+						has_government = ROOT
+					}
+					exists = no
+					is_subject_of = ROOT
+					capital_scope = {
+						is_fully_controlled_by = ROOT
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = URG
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_take_out_paraguay
+		icon = GFX_ARG_go_through_paraguay
+		x = 1
+		y = 2
+		relative_position_id = PBC_make_the_argentines_pay
+		prerequisite = { focus = PBC_make_the_argentines_pay }
+		will_lead_to_war_with = PAR
+
+		cost = 5
+
+		available = {
+			NOT = {
+				is_in_faction_with = PAR
+			}
+		}
+
+		bypass = {
+			PAR = {
+				OR = {
+					AND = {
+						is_in_faction_with = ROOT
+						has_government = ROOT
+					}
+					exists = no
+					is_subject_of = ROOT
+					capital_scope = {
+						is_fully_controlled_by = ROOT
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PAR
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_take_out_colombia_and_ecuador
+		icon = GFX_ARG_push_past
+		x = -1
+		y = 2
+		relative_position_id = PBC_make_the_chileans_pay
+		prerequisite = { focus = PBC_make_the_chileans_pay }
+		will_lead_to_war_with = ECU
+		will_lead_to_war_with = COL
+
+		cost = 10
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			has_completed_focus = PBC_prepare_for_our_expansion
+			ROOT = {
+				OR = {
+					AND = {
+						controls_state = 305
+						controls_state = 486
+						controls_state = 306
+						controls_state = 493
+					}
+					is_in_faction_with = ECU
+					is_in_faction_with = COL
+					has_war_with = ECU
+					has_war_with = COL
+				}
+			}
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ECU
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = COL
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_go_after_venezuela
+		icon = GFX_ARG_attack_venezuela
+		x = 1
+		y = 2
+		relative_position_id = PBC_make_the_chileans_pay
+		prerequisite = { focus = PBC_make_the_chileans_pay }
+		will_lead_to_war_with = VEN
+
+		cost = 8
+
+		available = {
+			NOT = {
+				is_in_faction_with = VEN
+			}
+		}
+
+		bypass = {
+			VEN = {
+				OR = {
+					AND = {
+						is_in_faction_with = ROOT
+						has_government = ROOT
+					}
+					exists = no
+					is_subject_of = ROOT
+					capital_scope = {
+						is_fully_controlled_by = ROOT
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = VEN
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_reform_the_gran_colombia
+		icon = GFX_PBC_reform_gran_colombia
+		x = -1
+		y = 1
+		relative_position_id = PBC_go_after_venezuela
+		prerequisite = { focus = PBC_go_after_venezuela }
+		prerequisite = { focus = PBC_take_out_colombia_and_ecuador }
+
+		cost = 10
+
+		available = {
+			is_subject = no
+			has_capitulated = no
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			unlock_decision_tooltip = PBC_reform_gran_colombia
+		}
+	}
+
+	focus = {
+		id = PBC_reform_the_viceroyalty_of_rio_de_la_plata
+		icon = GFX_PBC_reform_viceroyalty
+		x = -1
+		y = 1
+		relative_position_id = PBC_take_out_paraguay
+		prerequisite = { focus = PBC_take_out_paraguay }
+		prerequisite = { focus = PBC_take_out_uruguay }
+
+		cost = 10
+
+		available = {
+			is_subject = no
+			has_capitulated = no
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			unlock_decision_tooltip = PBC_reform_viceroyalty_of_rio_de_la_plata
+		}
+	}
+
+	focus = {
+		id = PBC_take_out_brazil
+		icon = GFX_ARG_attack_brazil
+		x = 0
+		y = 2
+		relative_position_id = PBC_integrate_our_newly_conquered_lands
+		prerequisite = { focus = PBC_take_out_uruguay }
+		prerequisite = { focus = PBC_take_out_paraguay }
+		prerequisite = { focus = PBC_take_out_colombia_and_ecuador }
+		prerequisite = { focus = PBC_go_after_venezuela }
+		will_lead_to_war_with = BRA
+
+		cost = 10
+
+		available = {
+			has_army_manpower = { size > 299999 }
+			NOT = {
+				is_in_faction_with = BRA
+			}
+		}
+
+		bypass = {
+			BRA = {
+				OR = {
+					AND = {
+						is_in_faction_with = ROOT
+						has_government = ROOT
+					}
+					exists = no
+					is_subject_of = ROOT
+					capital_scope = {
+						is_fully_controlled_by = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_push_past_the_darien_gap
+		icon = GFX_ARG_push_past_gap
+		x = 0
+		y = 1
+		relative_position_id = PBC_take_out_brazil
+		prerequisite = { focus = PBC_take_out_brazil }
+
+		will_lead_to_war_with = PAN
+		will_lead_to_war_with = COS
+
+		cost = 10
+
+		available = {
+			ARG = {
+				capital_scope = { controls_or_subject_of = yes }
+			}
+			BRA = {
+				capital_scope = { controls_or_subject_of = yes }
+			}
+			VEN = {
+				capital_scope = { controls_or_subject_of = yes }
+			}
+			COL = {
+				capital_scope = { controls_or_subject_of = yes }
+			}
+			CHL = {
+				capital_scope = { controls_or_subject_of = yes }
+			}
+			URG = {
+				capital_scope = { controls_or_subject_of = yes }
+			}
+			PAR = {
+				capital_scope = { controls_or_subject_of = yes }
+			}
+			ECU = {
+				capital_scope = { controls_or_subject_of = yes }
+			}
+		}
+
+		bypass = {
+			has_completed_focus = PBC_take_out_brazil
+			OR = {
+				has_war_with = PAN
+				has_war_with = COS
+				is_in_faction_with = PAN
+				is_in_faction_with = COS
+				AND = {
+					controls_state = 304
+					controls_state = 316
+				}
+			}
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PAN
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = COS
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_conquer_the_central_american_nations
+		icon = GFX_ARG_conquer_america_central
+		x = 0
+		y = 1
+		relative_position_id = PBC_push_past_the_darien_gap
+		prerequisite = { focus = PBC_push_past_the_darien_gap }
+
+		will_lead_to_war_with = HON
+		will_lead_to_war_with = NIC
+		will_lead_to_war_with = GUA
+
+		cost = 10
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			has_completed_focus = PBC_take_out_brazil
+			OR = {
+				AND = {
+					controls_state = 312
+					controls_state = 313
+					controls_state = 317
+				}
+				has_war_with = HON
+				has_war_with = NIC
+				has_war_with = GUA
+				has_war_with = ELS
+				has_war_with = DOM
+				is_in_faction_with = HON
+				is_in_faction_with = NIC
+				is_in_faction_with = GUA
+				is_in_faction_with = ELS
+				has_war_with = DOM
+			}
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = HON
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = NIC
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = GUA
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = ELS
+			}
+			create_wargoal = {
+				type = annex_everything
+				target = DOM
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_conquer_the_mexicans
+		icon = GFX_focus_attack_mexico
+		x = 0
+		y = 1
+		relative_position_id = PBC_conquer_the_central_american_nations
+		prerequisite = { focus = PBC_conquer_the_central_american_nations }
+
+		will_lead_to_war_with = MEX
+
+		cost = 10
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			has_completed_focus = PBC_take_out_brazil
+			OR = {
+				is_in_faction_with = MEX
+				has_war_with = MEX
+			}
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = MEX
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_build_up_for_the_final_war
+		icon = GFX_goal_generic_construct_civilian
+		x = 0
+		y = 1
+		relative_position_id = PBC_conquer_the_mexicans
+		prerequisite = { focus = PBC_conquer_the_mexicans }
+
+		cost = 10
+
+		available = {
+			is_subject = no
+			controls_state = 479
+			controls_state = 480
+			controls_state = 481
+			controls_state = 482
+			controls_state = 483
+			controls_state = 484
+			479 = {
+				infrastructure < 10
+			}
+			480 = {
+				infrastructure < 10
+			}
+			481 = {
+				infrastructure < 10
+			}
+			482 = {
+				infrastructure < 10
+			}
+			483 = {
+				infrastructure < 10
+			}
+			484 = {
+				infrastructure < 10
+			}
+		}
+
+		bypass = {
+			has_completed_focus = PBC_conquer_the_mexicans
+			OR = {
+				479 = {
+					infrastructure > 9
+				}
+				480 = {
+					infrastructure > 9
+				}
+				481 = {
+					infrastructure > 9
+				}
+				482 = {
+					infrastructure > 9
+				}
+				483 = {
+					infrastructure > 9
+				}
+				484 = {
+					infrastructure > 9
+				}
+			}
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			479 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_compliance = 15
+			}
+			480 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+				add_compliance = 15
+			}
+			481 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 4
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					province = 8057
+					instant_build = yes
+				}
+				add_compliance = 15
+			}
+			482 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_compliance = 15
+			}
+			483 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 3
+					instant_build = yes
+				}
+				add_compliance = 15
+			}
+			484 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_compliance = 15
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = { NOT = { has_idea = extensive_conscription } }
+				add_ideas = extensive_conscription
+			}
+			else = {
+				add_political_power = 150
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_the_one_true_american_power
+		icon = GFX_focus_spa_the_war_of_vengeance
+		x = 0
+		y = 1
+		relative_position_id = PBC_build_up_for_the_final_war
+		prerequisite = { focus = PBC_build_up_for_the_final_war }
+		will_lead_to_war_with = USA
+
+		cost = 10
+
+		available = {
+			USA = {
+				has_government = democratic
+				NOT = { is_in_faction_with = ROOT }
+			}
+		}
+
+		bypass = {
+			has_completed_focus = PBC_build_up_for_the_final_war
+			ROOT = {
+				has_war_with = USA
+			}
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				target = USA
+				type = annex_everything
+			}
+		}
+	}
+
+
+	#### Army/Navy/Air/Industry ####
+	focus = {
+		id = PBC_reforming_the_economy
+		icon = GFX_goal_generic_construct_civilian
+		x = 24
+		y = 0
+
+		cost = 4
+
+		available = {
+			has_completed_focus = PBC_unite_the_industries
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_investing_in_the_civilian_economy
+		icon = GFX_goal_generic_construct_civ_factory
+		x = -6
+		y = 1
+		relative_position_id = PBC_reforming_the_economy
+		prerequisite = { focus = PBC_reforming_the_economy }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_idea = PBC_investing_heavily_in_the_economy_1
+							has_idea = PBC_investing_heavily_in_the_economy_2
+							has_idea = PBC_investing_heavily_in_the_economy_3
+							has_idea = PBC_investing_heavily_in_the_economy_4
+						}
+					}
+				}
+				add_ideas = PBC_investing_heavily_in_the_economy_1
+			}
+			else_if = {
+				limit = { has_idea = PBC_investing_heavily_in_the_economy_1 }
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_1
+					add_idea = PBC_investing_heavily_in_the_economy_2
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_2
+					add_idea = PBC_investing_heavily_in_the_economy_3
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_invest_in_our_armaments
+		icon = GFX_goal_generic_construct_mil_factory
+		x = -2
+		y =1
+		relative_position_id = PBC_reforming_the_economy
+		prerequisite = { focus = PBC_reforming_the_economy }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_idea = PBC_investing_heavily_in_the_economy_1
+							has_idea = PBC_investing_heavily_in_the_economy_2
+							has_idea = PBC_investing_heavily_in_the_economy_3
+							has_idea = PBC_investing_heavily_in_the_economy_4
+						}
+					}
+				}
+				add_ideas = PBC_investing_heavily_in_the_economy_1
+			}
+			else_if = {
+				limit = { has_idea = PBC_investing_heavily_in_the_economy_1 }
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_1
+					add_idea = PBC_investing_heavily_in_the_economy_2
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_2
+					add_idea = PBC_investing_heavily_in_the_economy_3
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_focus_more_on_industry
+		icon = GFX_goal_generic_consumer_goods
+		x = 1
+		y = 1
+		relative_position_id = PBC_investing_in_the_civilian_economy
+		prerequisite = { focus = PBC_investing_in_the_civilian_economy }
+		mutually_exclusive = { focus = PBC_focus_more_on_our_army }
+
+		cost = 6
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			unlock_decision_tooltip = PBC_invest_more_in_the_industry
+		}
+	}
+
+	focus = {
+		id = PBC_focus_more_on_our_army
+		icon = GFX_goal_generic_military_sphere
+		x = -1
+		y = 1
+		relative_position_id = PBC_invest_in_our_armaments
+		prerequisite = { focus = PBC_invest_in_our_armaments }
+		mutually_exclusive = { focus = PBC_focus_more_on_industry }
+
+		cost = 6
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			unlock_decision_tooltip = PBC_invest_more_in_the_army
+		}
+	}
+
+	focus = {
+		id = PBC_expand_even_further_our_industry
+		icon = GFX_ARG_subsidize_industry
+		x = 0
+		y = 2
+		relative_position_id = PBC_investing_in_the_civilian_economy
+		prerequisite = { focus = PBC_investing_in_the_civilian_economy }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					has_idea = PBC_investing_heavily_in_the_economy_1
+				}
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_1
+					add_idea = PBC_investing_heavily_in_the_economy_2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = PBC_investing_heavily_in_the_economy_2
+				}
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_2
+					add_idea = PBC_investing_heavily_in_the_economy_3
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_3
+					add_idea = PBC_investing_heavily_in_the_economy_4
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_further_improve_our_arms_industry
+		icon = GFX_CHL_military_economy
+		x = 0
+		y = 2
+		relative_position_id = PBC_invest_in_our_armaments
+		prerequisite = { focus = PBC_invest_in_our_armaments }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					has_idea = PBC_investing_heavily_in_the_economy_1
+				}
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_1
+					add_idea = PBC_investing_heavily_in_the_economy_2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = PBC_investing_heavily_in_the_economy_2
+				}
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_2
+					add_idea = PBC_investing_heavily_in_the_economy_3
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = PBC_investing_heavily_in_the_economy_3
+					add_idea = PBC_investing_heavily_in_the_economy_4
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_redirect_our_fundings
+		icon = GFX_col_focus_ingenieria
+		x = -1
+		y = 2
+		relative_position_id = PBC_focus_more_on_our_army
+		prerequisite = { focus = PBC_further_improve_our_arms_industry }
+		prerequisite = { focus = PBC_expand_even_further_our_industry }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			remove_ideas = PBC_investing_heavily_in_the_economy_4
+		}
+	}
+
+	focus = {
+		id = PBC_improve_the_army
+		icon = GFX_focus_generic_manpower
+		x = 0
+		y = 2
+		relative_position_id = PBC_reforming_the_economy
+		prerequisite = { focus = PBC_reforming_the_economy }
+		prerequisite = { focus = PBC_invest_in_our_armaments }
+
+		cost = 5
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = PBC_improved_army
+		}
+	}
+
+	focus = {
+		id = PBC_improve_our_firearms
+		icon = GFX_goal_generic_small_arms
+		x = 0
+		y = 1
+		relative_position_id = PBC_improve_the_army
+		prerequisite = { focus = PBC_improve_the_army }
+
+		cost = 6
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PBC_improve_our_firearms
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_improve_our_artillery
+		icon = GFX_goal_generic_army_artillery2
+		x = 2
+		y = 1
+		relative_position_id = PBC_improve_the_army
+		prerequisite = { focus = PBC_improve_the_army }
+
+		cost = 6
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PBC_improve_our_artillery
+				bonus = 1.0
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_establish_a_tank_korp
+		icon = GFX_goal_generic_army_tanks
+		x = -1
+		y = 1
+		relative_position_id = PBC_improve_our_artillery
+		prerequisite = { focus = PBC_improve_our_artillery }
+		prerequisite = { focus = PBC_improve_our_firearms }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PBC_establish_a_tank_korp
+				bonus = 1.0
+				uses = 2
+				category = armor
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_establish_a_proper_airforce
+		icon = GFX_goal_generic_air_doctrine
+		x = 5
+		y = 1
+		relative_position_id = PBC_improve_the_army
+		prerequisite = { focus = PBC_improve_the_army }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			air_experience = 25
+			add_tech_bonus = {
+				name = PBC_establish_a_proper_airforce
+				bonus = 1.0
+				uses = 1
+				category = air_doctrine
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_imrpove_our_fighters
+		icon = GFX_goal_generic_air_fighter
+		x = -1
+		y = 1
+		relative_position_id = PBC_establish_a_proper_airforce
+		prerequisite = { focus = PBC_establish_a_proper_airforce }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PBC_imrpove_our_fighters
+				bonus = 1.0
+				uses = 2
+				category = light_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_improve_our_bombers
+		icon = GFX_goal_generic_air_bomber
+		x = 1
+		y = 1
+		relative_position_id = PBC_establish_a_proper_airforce
+		prerequisite = { focus = PBC_establish_a_proper_airforce }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PBC_improve_our_bombers
+				bonus = 1.0
+				uses = 2
+				category = tactical_bomber
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_purchase_foreign_planes
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 0
+		y = 2
+		relative_position_id = PBC_establish_a_proper_airforce
+		prerequisite = { focus = PBC_imrpove_our_fighters }
+		prerequisite = { focus = PBC_improve_our_bombers }
+
+		cost = 10
+
+		search_filters = { }
+		completion_reward = {
+			custom_effect_tooltip = CHL_purchase_planes
+		}
+	}
+
+	focus = {
+		id = PBC_build_up_the_navy
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 8
+		y = 1
+		relative_position_id = PBC_reforming_the_economy
+		prerequisite = { focus = PBC_reforming_the_economy }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			navy_experience = 35
+			random_owned_controlled_state = {
+				limit = { is_coastal = yes }
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_focus_on_light_ships
+		icon = GFX_goal_generic_navy_submarine
+		x = -1
+		y = 1
+		relative_position_id = PBC_build_up_the_navy
+		prerequisite = { focus = PBC_build_up_the_navy }
+		mutually_exclusive = { focus = PBC_focus_on_heavy_ships }
+
+		cost = 5
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PBC_focus_on_light_ships
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+			add_tech_bonus = {
+				name = PBC_focus_on_light_ships
+				bonus = 1.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_focus_on_heavy_ships
+		icon = GFX_goal_generic_navy_battleship
+		x = 1
+		y = 1
+		relative_position_id = PBC_build_up_the_navy
+		prerequisite = { focus = PBC_build_up_the_navy }
+		mutually_exclusive = { focus = PBC_focus_on_light_ships }
+
+		cost = 5
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PBC_focus_on_heavy_ships
+				bonus = 1.0
+				uses = 1
+				category = bb_tech
+			}
+			add_tech_bonus = {
+				name = PBC_focus_on_heavy_ships
+				bonus = 1.0
+				uses = 1
+				category = cv_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_modernizing_the_light_cruisers
+		icon = GFX_goal_generic_navy_cruiser
+		x = 0
+		y = 2
+		relative_position_id = PBC_build_up_the_navy
+		prerequisite = {
+			focus = PBC_focus_on_heavy_ships
+			focus = PBC_focus_on_light_ships
+		}
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PBC_modernizing_the_light_cruisers
+				bonus = 1.0
+				uses = 2
+				category = ca_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_expand_further_our_dockyards
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 0
+		y = 1
+		relative_position_id = PBC_modernizing_the_light_cruisers
+		prerequisite = { focus = PBC_modernizing_the_light_cruisers }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = { is_coastal = yes }
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_modernize_our_naval_bombers
+		icon = GFX_goal_generic_navy_carrier
+		x = -1
+		y = 1
+		relative_position_id = PBC_expand_further_our_dockyards
+		prerequisite = { focus = PBC_expand_further_our_dockyards }
+		prerequisite = { focus = PBC_improve_our_bombers }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PBC_modernize_our_naval_bombers
+				bonus = 1.0
+				uses = 2
+				category = naval_air
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_design_coastal_ships
+		icon = GFX_focus_generic_coastal_fort
+		x = 1
+		y = 1
+		relative_position_id = PBC_expand_further_our_dockyards
+		prerequisite = { focus = PBC_expand_further_our_dockyards }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_ideas = ARG_build_coastal_ships
+		}
+	}
+
+	focus = {
+		id = PBC_consolidate_our_borders
+		icon = GFX_goal_generic_political_pressure
+		x = -6
+		y = 1
+		relative_position_id = PBC_independent_at_last
+		prerequisite = { focus = PBC_independent_at_last }
+		mutually_exclusive = { focus = PBC_prepare_for_our_expansion }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			NOT = {
+				has_government = democratic
+			}
+			is_subject = no
+		}
+
+		bypass = {
+			has_government = democratic
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.03
+			custom_effect_tooltip = PBC_unlock_democratic_reformer_tt
+		}
+	}
+
+	focus = {
+		id = PBC_begin_our_switch_to_democracy
+		icon = GFX_goal_support_democracy
+		x = 0
+		y = 1
+		relative_position_id = PBC_consolidate_our_borders
+		prerequisite = { focus = PBC_consolidate_our_borders }
+
+		cost = 6
+
+		available = {
+			NOT = {
+				has_government = democratic
+			}
+			is_subject = no
+		}
+
+		bypass = {
+			has_government = democratic
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_timed_idea = {
+				idea = democratic_influence
+				days = 280
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_freedom_to_the_people
+		icon = GFX_goal_generic_propaganda
+		x = -1
+		y = 1
+		relative_position_id = PBC_begin_our_switch_to_democracy
+		prerequisite = { focus = PBC_begin_our_switch_to_democracy }
+
+		cost = 8
+
+		available = {
+			NOT = {
+				has_government = democratic
+			}
+			is_subject = no
+		}
+
+		bypass = {
+			has_government = democratic
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_supress_the_extremists
+		icon = GFX_focus_generic_anti_fascist_diplomacy
+		x = 1
+		y = 1
+		relative_position_id = PBC_begin_our_switch_to_democracy
+		prerequisite = { focus = PBC_begin_our_switch_to_democracy }
+
+		cost = 8
+
+		available = {
+			NOT = {
+				has_government = democratic
+			}
+			is_subject = no
+		}
+
+		bypass = {
+			has_government = democratic
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = -0.02
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.03
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = -0.03
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_prado_leads_the_way
+		icon = GFX_PBC_prado_president
+		x = 1
+		y = 1
+		relative_position_id = PBC_supress_the_extremists
+		prerequisite = { focus = PBC_supress_the_extremists }
+		prerequisite = { focus = PBC_freedom_to_the_people }
+		mutually_exclusive = { focus = PBC_apoint_the_congress_to_lead }
+
+		cost = 10
+
+		available = {
+			has_country_leader = {
+				name = "Manuel Prado Ugarteche"
+				ruling_only = yes
+			}
+			NOT = {
+				has_government = democratic
+			}
+			is_subject = no
+			has_civil_war = no
+		}
+
+		bypass = {
+			has_government = democratic
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			retire_country_leader = yes
+			set_politics = {
+				ruling_party = democratic
+			}
+			retire_country_leader = yes
+			create_country_leader = {
+				name = "Manuel Prado Ugarteche"
+				desc = "POLITICS_PRADO_DESC"
+				picture = "gfx/leaders/PRU/portrait_per_liberal.dds"
+				expire = "1965.1.1"
+				ideology = socialism
+				traits = {
+					PBC_democratic_tendencies
+					CHL_economist_2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_apoint_the_congress_to_lead
+		icon = GFX_focus_generic_self_management
+		x = -1
+		y = 1
+		relative_position_id = PBC_freedom_to_the_people
+		prerequisite = { focus = PBC_freedom_to_the_people }
+		prerequisite = { focus = PBC_supress_the_extremists }
+		mutually_exclusive = { focus = PBC_prado_leads_the_way }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				has_government = democratic
+			}
+			is_subject = no
+			has_civil_war = no
+		}
+
+		bypass = {
+			has_government = democratic
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			retire_country_leader = yes
+			set_politics = {
+				ruling_party = democratic
+			}
+			retire_country_leader = yes
+			create_country_leader = {
+				name = "Congreso de Tacna"
+				desc = "POLITICS_CONGRESS_TACNA_DESC"
+				picture = "gfx/leaders/PRU/PBC_portrait_congreso_de_tacna.dds"
+				expire = "1965.1.1"
+				ideology = socialism
+				traits = {
+					PRU_not_a_real_person_2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_open_up_our_politics
+		icon = GFX_goal_generic_national_unity
+		x = -2
+		y = 1
+		relative_position_id = PBC_prado_leads_the_way
+		prerequisite = {
+			focus = PBC_prado_leads_the_way
+			focus = PBC_apoint_the_congress_to_lead
+		}
+
+		cost = 5
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = PBC_advocate_public_works
+		icon = GFX_goal_generic_construction2
+		x = 0
+		y = 1
+		relative_position_id = PBC_open_up_our_politics
+		prerequisite = { focus = PBC_open_up_our_politics }
+
+		cost = 10
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = PBC_advocated_public_works
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_formalize_the_defense_pact
+		icon = GFX_goal_generic_intelligence_exchange
+		x = -3
+		y = 1
+		relative_position_id = PBC_open_up_our_politics
+		prerequisite = { focus = PBC_open_up_our_politics }
+
+		cost = 8
+
+		available = {
+			has_war = no
+			OR = {
+				ECU = {
+					AND = {
+						has_war = no
+						exists = yes
+					}
+				}
+				URG = {
+					AND = {
+						has_war = no
+						exists = yes
+					}
+				}
+			}
+			has_completed_focus = PBC_put_the_nationalists_in_their_place
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			if = {
+				limit = {
+					ECU = {
+						has_capitulated = no
+						exists = yes
+						has_war = no
+					}
+				}
+				ECU = {
+					country_event = { id = perubolivia.5 hours = 8 }
+				}
+			}
+			if = {
+				limit = {
+					URG = {
+						has_capitulated = no
+						exists = yes
+						has_war = no
+					}
+				}
+				URG = {
+					country_event = { id = perubolivia.5 hours = 8 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_chaco_for_gurantees
+		icon = GFX_URG_invite_paraguay
+		x = 0
+		y = 1
+		relative_position_id = PBC_formalize_the_defense_pact
+		prerequisite = { focus = PBC_formalize_the_defense_pact }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				has_war_with = PAR
+			}
+			PAR = {
+				has_capitulated = no
+				has_civil_war = no
+			}
+		}
+
+		bypass = {
+			has_completed_focus = PBC_formalize_the_defense_pact
+			controls_state = 688
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				transfer_state = 688
+				PAR = {
+					add_ideas = EUYL_defense_pact
+				}
+			}
+			PAR = {
+				country_event = { id = perubolivia.8 hours = 8 }
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_purchase_our_lands_in_brazil
+		icon = GFX_URG_deal_brazil
+		x = 2
+		y = 1
+		relative_position_id = PBC_formalize_the_defense_pact
+		prerequisite = { focus = PBC_formalize_the_defense_pact }
+		prerequisite = { focus = PBC_advocate_public_works }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				has_war_with = BRA
+			}
+			BRA = {
+				has_capitulated = no
+				has_civil_war = no
+			}
+		}
+
+		bypass = {
+			has_completed_focus = PBC_formalize_the_defense_pact
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				random_owned_controlled_state = {
+					limit = { industrial_complex > 1 }
+					remove_building = {
+						type = industrial_complex
+						level = 1
+					}
+				}
+				BRA = {
+					add_ideas = EUYL_defense_pact
+					random_owned_controlled_state = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+			BRA = {
+				country_event = { id = perubolivia.9 hours = 8 }
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_putumayo_for_gurantees
+		icon = GFX_ARG_inv_colombia
+		x = -2
+		y = 1
+		relative_position_id = PBC_formalize_the_defense_pact
+		prerequisite = { focus = PBC_formalize_the_defense_pact }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				has_war_with = COL
+			}
+			COL = {
+				has_capitulated = no
+				has_civil_war = no
+			}
+		}
+
+		bypass = {
+			has_completed_focus = PBC_formalize_the_defense_pact
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				COL = {
+					add_ideas = EUYL_defense_pact
+				}
+			}
+			COL = {
+				country_event = { id = perubolivia.7 hours = 8 }
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_approach_the_allies
+		icon = GFX_ARG_placate_west
+		x = 3
+		y = 1
+		relative_position_id = PBC_open_up_our_politics
+		prerequisite = { focus = PBC_open_up_our_politics }
+
+		cost = 6
+
+		available = {
+			NOT = {
+				OR = {
+					has_war_with = FRA
+					has_war_with = ENG
+					has_war_with = USA
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			USA = {
+				add_opinion_modifier = { target = ROOT modifier = placated_west }
+			}
+			FRA = {
+				add_opinion_modifier = { target = ROOT modifier = placated_west }
+			}
+			ENG = {
+				add_opinion_modifier = { target = ROOT modifier = placated_west }
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_purchase_british_guns
+		icon = GFX_BOL_purchase_british_armaments
+		x = -1
+		y = 1
+		relative_position_id = PBC_approach_the_allies
+		prerequisite = { focus = PBC_approach_the_allies }
+
+		cost = 10
+
+		available = {
+			ENG = {
+				has_government = democratic
+				NOT = {
+					has_war_with = ROOT
+				}
+				has_capitulated = no
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1079
+				producer = ENG
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 250
+				producer = ENG
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 250
+				producer = ENG
+			}
+			random_owned_controlled_state = {
+				limit = { industrial_complex > 1 }
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			ENG = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_cooperate_with_the_french_resistance
+		icon = GFX_focus_chi_reach_out_to_france
+		x = 1
+		y = 1
+		relative_position_id = PBC_approach_the_allies
+		prerequisite = { focus = PBC_approach_the_allies }
+
+		cost = 8
+
+		available = {
+			FRA = {
+				capital_scope = { is_controlled_by = GER }
+				has_capitulated = yes
+			}
+			NOT = { has_war_with = FRA }
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_ideas = PBC_cooperating_with_french_resistance
+			FRA = {
+				add_ideas = PBC_cooperating_with_french_resistance
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_join_the_allies
+		icon = GFX_focus_eng_the_sun_never_sets
+		x = 0
+		y = 2
+		relative_position_id = PBC_approach_the_allies
+		prerequisite = { focus = PBC_approach_the_allies }
+		mutually_exclusive = { focus = PBC_remain_neutral }
+		mutually_exclusive = { focus = PBC_officialy_declare_the_defense_pact }
+
+		cost = 10
+
+		available = {
+			OR = {
+				ENG = { has_government = democratic }
+				USA = { has_government = democratic }
+				FRA = { has_government = democratic }
+			}
+			has_capitulated = no
+			has_civil_war = no
+			has_completed_focus = PBC_put_the_nationalists_in_their_place
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			if = {
+				limit = {
+					ENG = {
+						is_faction_leader = yes
+						has_government = democratic
+						NOT = {
+							has_war_with = ROOT
+						}
+					}
+				}
+				ENG = {
+					country_event = { id = generic.2 hours = 8 }
+				}
+			}
+			else_if = {
+				limit = {
+					FRA = {
+						is_faction_leader = yes
+						has_government = democratic
+						NOT = {
+							has_war_with = ROOT
+						}
+					}
+				}
+				FRA = {
+					country_event = { id = generic.2 hours = 8 }
+				}
+			}
+			else = {
+				USA = {
+					country_event = { id = generic.2 hours = 8 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_spread_democracy_to_our_neighbors
+		icon = GFX_focus_SA_demo
+		x = 0
+		y = 1
+		relative_position_id = PBC_join_the_allies
+		prerequisite = { focus = PBC_join_the_allies }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			every_neighbor_country = {
+				limit = {
+					NOT = { has_war_with = ROOT }
+					NOT = { has_government = democratic }
+				}
+				add_timed_idea = {
+					idea = democratic_influence
+					days = 280
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_remain_neutral
+		icon = GFX_goal_generic_military_sphere
+		x = 0
+		y = 2
+		relative_position_id = PBC_advocate_public_works
+		prerequisite = { focus = PBC_advocate_public_works }
+		mutually_exclusive = { focus = PBC_join_the_allies }
+		mutually_exclusive = { focus = PBC_officialy_declare_the_defense_pact }
+
+		cost = 10
+
+		available = {
+			has_offensive_war = no
+			is_in_faction = no
+		}
+
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_ideas = CHL_armed_neutrality_idea
+		}
+	}
+
+	focus = {
+		id = PBC_officialy_declare_the_defense_pact
+		icon = GFX_goal_generic_alliance
+		x = 0
+		y = 1
+		relative_position_id = PBC_chaco_for_gurantees
+		prerequisite = {
+			focus = PBC_chaco_for_gurantees
+			focus = PBC_purchase_our_lands_in_brazil
+			focus = PBC_putumayo_for_gurantees
+		}
+		mutually_exclusive = { focus = PBC_remain_neutral }
+		mutually_exclusive = { focus = PBC_join_the_allies }
+
+		cost = 10
+
+		available = {
+			is_in_faction = no
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			create_faction = "The Defense Pact"
+			add_war_support = 0.05
+			every_other_country = {
+				limit = {
+					has_idea = EUYL_defense_pact
+					is_in_faction = no
+					has_civil_war = no
+					NOT = { has_war_with = ROOT }
+				}
+				country_event = { id = generic.5 hours = 6 }
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_economic_cooperation_with_our_allies
+		icon = GFX_PRU_unified_currency
+		x = 0
+		y = 1
+		relative_position_id = PBC_officialy_declare_the_defense_pact
+		prerequisite = { focus = PBC_officialy_declare_the_defense_pact }
+
+		cost = 10
+
+		available = {
+			is_faction_leader = yes
+			any_other_country = {
+				capital_scope = { is_on_continent = south_america }
+				is_in_faction_with = ROOT
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = PRU_every_allied_nation_recieve
+			effect_tooltip = {
+				add_ideas = PRU_unified_currency
+			}
+			hidden_effect = {
+				add_ideas = PRU_unified_currency
+				every_other_country = {
+					limit = {
+						capital_scope = { is_on_continent = south_america }
+						is_in_faction_with = ROOT
+					}
+					add_ideas = PRU_unified_currency
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_wipe_out_the_communists
+		icon = GFX_ARG_rid_communism
+		x = 2
+		y = 1
+		relative_position_id = PBC_officialy_declare_the_defense_pact
+		prerequisite = {
+			focus = PBC_officialy_declare_the_defense_pact
+			focus = PBC_join_the_allies
+		}
+
+		cost = 10
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					capital_scope = { is_on_continent = south_america }
+					has_government = communism
+					NOT = {
+						is_in_faction_with = ROOT
+						has_war_with = ROOT
+					}
+				}
+				ROOT = {
+					create_wargoal = {
+						type = puppet_wargoal_focus
+						target = PREV
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_wipe_out_the_fascists
+		icon = GFX_ARG_rid_fascism
+		x = -2
+		y = 1
+		relative_position_id = PBC_join_the_allies
+		prerequisite = {
+			focus = PBC_officialy_declare_the_defense_pact
+			focus = PBC_join_the_allies
+		}
+
+		cost = 10
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					capital_scope = { is_on_continent = south_america }
+					has_government = fascism
+					NOT = {
+						is_in_faction_with = ROOT
+						has_war_with = ROOT
+					}
+				}
+				ROOT = {
+					create_wargoal = {
+						type = puppet_wargoal_focus
+						target = PREV
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_peace_in_our_time
+		icon = GFX_goal_generic_improve_relations
+		x = -1
+		y = 1
+		relative_position_id = PBC_wipe_out_the_fascists
+		prerequisite = { focus = PBC_wipe_out_the_fascists }
+		prerequisite = { focus = PBC_wipe_out_the_communists }
+
+		available = {
+			NOT = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+			}
+			CHL = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = communism
+					}
+				}
+			}
+			URG = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = communism
+					}
+				}
+			}
+			ARG = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = communism
+					}
+				}
+			}
+			PAR = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = communism
+					}
+				}
+			}
+			BRA = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = communism
+					}
+				}
+			}
+			ECU = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = communism
+					}
+				}
+			}
+			COL = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = communism
+					}
+				}
+			}
+			VEN = {
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = communism
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			custom_effect_tooltip = PRU_every_south_american_nation_recieve
+			effect_tooltip = {
+				add_stability = 0.1
+				add_war_support = 0.1
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.05
+				}
+			}
+			hidden_effect = {
+				add_stability = 0.1
+				add_war_support = 0.1
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.05
+				}
+				every_other_country = {
+					limit = {
+						capital_scope = { is_on_continent = south_america }
+						NOT = {
+							has_war_with = ROOT
+							OR = {
+								has_government = communism
+								has_government = fascism
+							}
+						}
+					}
+					add_stability = 0.1
+					add_war_support = 0.1
+					add_popularity = {
+						ideology = democratic
+						popularity = 0.05
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_calm_down_the_nationalists
+		icon = GFX_goal_generic_demand_territory
+		x = 14
+		y = 0
+		cost = 3
+
+		ai_will_do = {
+			base = 5
+		}
+
+		allow_branch = {
+			has_country_flag = PBC_nationalists_rising_up
+		}
+
+		available = {
+			has_civil_war = no
+			hidden_trigger = {
+				NOT = {
+					OR = {
+						has_war_with = BOA
+						has_war_with = PRA
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_stability = 0.03
+			add_war_support = 0.05
+			custom_effect_tooltip = PBC_unlock_retake_state_tt
+		}
+	}
+
+	focus = {
+		id = PBC_deal_with_the_peruvian_nationalists
+		icon = GFX_PBC_crush_peruvian_nationalists
+		x = -1
+		y = 1
+		relative_position_id = PBC_calm_down_the_nationalists
+		prerequisite = { focus = PBC_calm_down_the_nationalists }
+
+		cost = 4
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = { has_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise } }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = PBC_take_peruvians_8_more_tt
+			hidden_effect = {
+				add_to_variable = { PBC_time_it_takes_to_take_state_PRU = 10 }
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_deal_with_the_bolivian_nationalists
+		icon = GFX_PBC_deal_with_bolivian_nation
+		x = 1
+		y = 1
+		relative_position_id = PBC_calm_down_the_nationalists
+		prerequisite = { focus = PBC_calm_down_the_nationalists }
+
+		cost = 4
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = { has_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise } }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = PBC_take_bolivians_10_more_tt
+			hidden_effect = {
+				add_to_variable = { PBC_time_it_takes_to_take_state_BOL = 10 }
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_build_up_arms_for_garrison
+		icon = GFX_goal_generic_construct_mil_factory
+		x = -1
+		y = 1
+		relative_position_id = PBC_deal_with_the_bolivian_nationalists
+		prerequisite = {
+			focus = PBC_deal_with_the_bolivian_nationalists
+			focus = PBC_deal_with_the_peruvian_nationalists
+		}
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = { has_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise } }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					NOT = {
+						OR = {
+							has_dynamic_modifier = { modifier = PBC_PRU_nationalists }
+							has_dynamic_modifier = { modifier = PBC_BOL_nationalists }
+						}
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_try_appeasing_the_nationalists
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 0
+		y = 2
+		relative_position_id = PBC_deal_with_the_peruvian_nationalists
+		prerequisite = { focus = PBC_deal_with_the_peruvian_nationalists }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = { has_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise } }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = PBC_cost_to_retake_state_reduced_tt
+			hidden_effect = {
+				subtract_from_variable = { PBC_cost_to_retake_state = 10 }
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_crush_the_nationalists_faster
+		icon = GFX_goal_tfv_saf_anti_colonialist_crusade
+		x = 0
+		y = 2
+		relative_position_id = PBC_deal_with_the_bolivian_nationalists
+		prerequisite = { focus = PBC_deal_with_the_bolivian_nationalists }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = { has_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise } }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = PBC_days_to_retake_state_reduced_tt
+			hidden_effect = {
+				subtract_from_variable = { PBC_days_to_retake_state = 8 }
+			}
+		}
+	}
+
+	focus = {
+		id = PBC_put_the_nationalists_in_their_place
+		icon = GFX_focus_generic_support_the_left_right
+		x = -1
+		y = 1
+		relative_position_id = PBC_crush_the_nationalists_faster
+		prerequisite = { focus = PBC_crush_the_nationalists_faster }
+		prerequisite = { focus = PBC_try_appeasing_the_nationalists }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 10
+		}
+
+		available = {
+			has_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise }
+			custom_trigger_tooltip = {
+				tooltip = PBC_nationalists_control_no_states_tt
+				check_variable = { PBC_PRU_states_controlled_by_nationalists < 1 }
+				check_variable = { PBC_BOL_states_controlled_by_nationalists < 1 }
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		cancel_if_invalid = no
+		continue_if_invalid = yes
+		completion_reward = {
+			remove_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise }
+			hidden_effect = {
+				every_controlled_state = {
+					limit = {
+						has_dynamic_modifier = { modifier = PBC_BOL_nationalists }
+					}
+					remove_dynamic_modifier = { modifier = PBC_BOL_nationalists }
+				}
+				every_controlled_state = {
+					limit = {
+						has_dynamic_modifier = { modifier = PBC_PRU_nationalists }
+					}
+					remove_dynamic_modifier = { modifier = PBC_PRU_nationalists }
+				}
+			}
+		}
+	}
+
+}

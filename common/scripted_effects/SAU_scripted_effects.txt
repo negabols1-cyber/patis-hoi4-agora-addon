@@ -1,0 +1,813 @@
+SAU_lower_arbitrary_budget_spending = {
+	if = {
+		limit = {
+			has_idea = SAU_arbitrary_budget_spending
+		}
+		swap_ideas = {
+			remove_idea = SAU_arbitrary_budget_spending
+			add_idea = SAU_arbitrary_budget_spending_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = SAU_arbitrary_budget_spending_2
+		}
+		swap_ideas = {
+			remove_idea = SAU_arbitrary_budget_spending_2
+			add_idea = SAU_arbitrary_budget_spending_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = SAU_arbitrary_budget_spending_3
+		}
+		swap_ideas = {
+			remove_idea = SAU_arbitrary_budget_spending_3
+			add_idea = SAU_arbitrary_budget_spending_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = SAU_arbitrary_budget_spending_4
+		}
+		remove_ideas = SAU_arbitrary_budget_spending_4
+	}
+	else = {
+		random_core_state = {
+			limit = {
+				is_fully_controlled_by = ROOT
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+SAU_lower_hajj_dependent_economy = {
+	if = {
+		limit = {
+			has_idea = SAU_hajj_dependent_economy
+		}
+		swap_ideas = {
+			remove_idea = SAU_hajj_dependent_economy
+			add_idea = SAU_hajj_dependent_economy_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = SAU_hajj_dependent_economy_2
+		}
+		swap_ideas = {
+			remove_idea = SAU_hajj_dependent_economy_2
+			add_idea = SAU_hajj_dependent_economy_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = SAU_hajj_dependent_economy_3
+		}
+		remove_ideas = SAU_hajj_dependent_economy_3
+	}
+}
+
+SAU_add_arab_league_ideas = {
+	if = {
+		limit = {
+			has_completed_focus = SAU_create_the_arabian_central_bank
+		}
+		add_ideas = SAU_arabian_economic_council_improved
+	}
+	else_if = {
+		limit = {
+			has_completed_focus = SAU_create_arabian_economic_council
+		}
+		add_ideas = SAU_arabian_economic_council
+	}
+	if = {
+		limit = {
+			has_completed_focus = SAU_joint_arabian_defense_forces
+		}
+		add_ideas = SAU_arabian_defence_council_2
+	}
+	else_if = {
+		limit = {
+			has_completed_focus = SAU_create_arabian_defense_council
+		}
+		add_ideas = SAU_arabian_defence_council
+	}
+	if = {
+		limit = {
+			has_completed_focus = SAU_pool_technical_knowhow
+		}
+		add_ideas = SAU_pool_technical_know_how
+	}
+	if = {
+		limit = {
+			has_completed_focus = SAU_increase_research_budget
+		}
+		add_ideas = SAU_increased_research_budget
+	}
+}
+
+SAU_remove_arab_league_ideas = {
+	if = {
+		limit = {
+			has_idea = SAU_arab_league_member
+		}
+		remove_ideas = SAU_arab_league_member
+	}
+	if = {
+		limit = {
+			has_idea = SAU_arabian_defence_council
+		}
+		remove_ideas = SAU_arabian_defence_council
+	}
+	if = {
+		limit = {
+			has_idea = SAU_arabian_defence_council_2
+		}
+		remove_ideas = SAU_arabian_defence_council_2
+	}
+	if = {
+		limit = {
+			has_idea = SAU_arabian_economic_council
+		}
+		remove_ideas = SAU_arabian_economic_council
+	}
+	if = {
+		limit = {
+			has_idea = SAU_arabian_economic_council_improved
+		}
+		remove_ideas = SAU_arabian_economic_council_improved
+	}
+	if = {
+		limit = {
+			has_idea = SAU_pool_technical_know_how
+		}
+		remove_ideas = SAU_pool_technical_know_how
+	}
+	if = {
+		limit = {
+			has_idea = SAU_increased_research_budget
+		}
+		remove_ideas = SAU_increased_research_budget
+	}
+}
+
+SAU_rashidun_claims = {
+	every_state = {
+		limit = {
+			OR = {
+				state = 419
+				state = 1000
+				state = 421
+				state = 413
+				state = 420
+				state = 417
+				state = 411
+				state = 412
+				state = 266
+				state = 418
+				state = 1002
+				state = 414
+				state = 410
+				state = 1003
+				state = 416
+				state = 1004
+				state = 676
+				state = 1010
+				state = 675
+				state = 291
+				state = 1011
+				state = 656
+				state = 658
+				state = 1014
+				state = 1013
+				state = 294
+				state = 1015
+				state = 1016
+				state = 293
+				state = 765
+				state = 554
+				state = 680
+				state = 677
+				state = 799
+				state = 553
+				state = 454
+				state = 455
+				state = 446
+				state = 447
+				state = 453
+				state = 452
+				state = 456
+				state = 457
+				state = 907
+				state = 659
+				state = 992
+			}
+		}
+		ROOT = {
+			add_to_array = {
+				array = claimed_rashidun_states
+				value = PREV
+			}
+			add_state_claim = 552 #Impassable states excluded
+		}
+		add_claim_by = ROOT
+		set_state_flag = SAU_rashidun_claimed_state_flag
+	}
+}
+
+SAU_umayyad_claims = {
+	every_state = {
+		limit = {
+			OR = {
+				state = 448
+				state = 661
+				state = 449
+				state = 662
+				state = 663
+				state = 450
+				state = 451
+				state = 458
+				state = 665
+				state = 459
+				state = 460
+				state = 513
+				state = 461
+				state = 462
+				state = 290
+				state = 783
+			}
+		}
+		ROOT = {
+			add_to_array = {
+				array = claimed_umayyad_states
+				value = PREV
+			}
+			add_state_claim = 273 #Impassable states excluded
+			add_state_claim = 514 #Impassable states excluded
+		}
+		add_claim_by = ROOT
+		set_state_flag = SAU_umayyad_claimed_state_flag
+	}
+}
+
+SAU_spain_claims = {
+	every_state = {
+		limit = {
+			OR = {
+				state = 41
+				state = 165
+				state = 166
+				state = 167
+				state = 168
+				state = 169
+				state = 170
+				state = 171
+				state = 172
+				state = 173
+				state = 174
+				state = 175
+				state = 176
+				state = 788
+				state = 789
+				#state = 790
+				state = 791
+				#state = 792
+				state = 793
+				state = 794
+			}
+		}
+		add_claim_by = ROOT
+	}
+}
+
+SAU_set_up_arab_revolt_states = {
+	hidden_effect = {
+		for_each_scope_loop = {
+			array = global.countries
+			IF = {
+				limit = {
+					exists = no
+					any_state = {
+						is_core_of = PREV
+						OR = {
+							is_on_continent = africa
+							is_on_continent = middle_east
+						}
+						OWNER = {
+							NOT = { is_in_faction_with = ROOT }
+							NOT = { tag = ROOT }
+						}
+					}
+				}
+
+				every_core_state = {
+					limit = {
+						OR = {
+							is_on_continent = africa
+							is_on_continent = middle_east
+						}
+						SAU_arabian_countries_core_no_sau_trigger = yes
+						has_resistance = yes
+						NOT = {
+							is_in_array = {
+								array = SAU.arabian_colonial_states_array
+								value = THIS
+							}
+						}
+					}
+					add_to_array = { SAU.arabian_colonial_states_array = THIS }
+				}
+			}
+
+		}
+	}
+}
+
+SAU_set_up_arab_revolt_countries = {
+	hidden_effect = {
+		for_each_scope_loop = {
+			array = global.countries
+			IF = {
+				limit = {
+					SAU_arabian_countries_trigger = yes
+					exists = no
+				}
+				every_possible_country = {
+					limit = {
+						SAU_arabian_countries_trigger = yes
+						exists = no
+						NOT = {
+							is_in_array = {
+								array = SAU.arabian_colonial_countries_array
+								value = THIS
+							}
+						}
+					}
+					add_to_array = { SAU.arabian_colonial_countries_array = THIS }
+				}
+			}
+		}
+	}
+}
+
+SAU_set_up_asir_rebellion = {
+	#release_on_controlled = ASI #TODO Normal transfer state de olabilir
+	ASI = {
+		transfer_state = 858
+		declare_war_on = {
+			target = SAU
+			type = independence_wargoal
+		}
+		add_ideas = ASI_asir_rebellion
+		division_template = {
+			name = "Alfurqat Alqabalia"
+
+			division_names_group = SAU_INF_01
+
+			regiments = {
+				irregular_infantry = { x = 0 y = 0 }
+				irregular_infantry = { x = 0 y = 1 }
+				irregular_infantry = { x = 0 y = 2 }
+				irregular_infantry = { x = 1 y = 0 }
+				irregular_infantry = { x = 1 y = 1 }
+			}
+		}
+		858 = {
+			create_unit = {
+				division = "name = \"Alfurqat Alqabalia\" division_template = \"Alfurqat Alqabalia\" start_experience_factor = 0.1 start_equipment_factor = 1"
+				owner = ASI
+				count = 2
+				prioritize_location = 5006
+			}
+			create_unit = {
+				division = "name = \"Alfurqat Alqabalia\" division_template = \"Alfurqat Alqabalia\" start_experience_factor = 0.1 start_equipment_factor = 1"
+				owner = ASI
+				count = 2
+				prioritize_location = 8073
+			}
+		}
+		856 = {
+			create_unit = {
+				division = "name = \"Alfurqat Alqabalia\" division_template = \"Alfurqat Alqabalia\" start_experience_factor = 0.1 start_equipment_factor = 1"
+				owner = ASI
+				prioritize_location = 1923
+				allow_spawning_on_enemy_provs = yes
+			}
+		}
+	}
+	set_province_controller = 12768
+	set_province_controller = 10870
+	set_province_controller = 8030
+}
+
+SAU_check_federation_tag = {
+	if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 2 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_2
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 3 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_3
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 4 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_4
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 5 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_5
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 6 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_6
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 7 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_7
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 8 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_8
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 9 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_9
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 10 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_10
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 11 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_11
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 12 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_12
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 13 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_13
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 14 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_14
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 15 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_15
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 16 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_16
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 17 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_17
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 18 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_18
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 19 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_19
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 20 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_20
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 21 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_21
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var = 22 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_22
+	}
+	else_if = {
+		limit = {
+			check_variable = { SAU_arab_league_countries_var > 22 }
+		}
+		set_cosmetic_tag = SAU_arab_fed_22
+	}
+	else = {
+		set_cosmetic_tag = SAU_united_arab_federation
+	}
+}
+
+SAU_find_best_democratic_ally = {
+	if = {
+		limit = {
+			FRA = {
+				exists = yes
+				has_government = democratic
+				has_capitulated = no
+				OR = {
+					is_faction_leader = yes
+					is_in_faction = no
+				}
+			}
+		}
+		set_variable = {
+			SAU.SAU_best_dem_ally = FRA
+		}
+	}
+	else_if = {
+		limit = {
+			ENG = {
+				exists = yes
+				is_faction_leader = yes
+				has_government = democratic
+			}
+		}
+		set_variable = {
+			SAU.SAU_best_dem_ally = ENG
+		}
+	}
+	else_if = {
+		limit = {
+			USA = {
+				exists = yes
+				is_faction_leader = yes
+				has_government = democratic
+			}
+		}
+		set_variable = {
+			SAU.SAU_best_dem_ally = USA
+		}
+	}
+	else = {
+		random_other_country = {
+			limit = {
+				is_major = yes
+				is_faction_leader = yes
+				exists = yes
+				has_government = democratic
+				NOT = { has_war_with = ROOT }
+			}
+			SAU = {
+				set_variable = {
+					SAU_best_dem_ally = PREV
+				}
+			}
+		}
+	}
+}
+
+SAU_set_military_offensive_effect = {
+	set_country_flag = SAU_military_offensive_in_progress_flag
+	for_each_scope_loop = {
+		array = SAU_military_offensive_states
+		add_dynamic_modifier = {
+			modifier = SAU_arabian_military_offensive
+			days = 90
+			scope = SAU
+		}
+	}
+}
+
+SAU_clean_military_offensive_effect = {
+	clr_country_flag = SAU_military_offensive_in_progress_flag
+	for_each_scope_loop = {
+		array = SAU_military_offensive_states
+		remove_dynamic_modifier = { modifier = SAU_arabian_military_offensive }
+	}
+	clear_array = SAU_military_offensive_states
+}
+
+SAU_remove_demand_flags_effect = {
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_country_syr_flag
+		}
+		clr_country_flag = SAU_demanding_country_syr_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_country_arab_flag
+		}
+		clr_country_flag = SAU_demanding_country_arab_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_country_libya_flag
+		}
+		clr_country_flag = SAU_demanding_country_libya_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_country_djibouti_flag
+		}
+		clr_country_flag = SAU_demanding_country_djibouti_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_independence_mali_flag
+		}
+		clr_country_flag = SAU_demanding_independence_mali_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_independence_nigeria_flag
+		}
+		clr_country_flag = SAU_demanding_independence_nigeria_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_independence_chad_flag
+		}
+		clr_country_flag = SAU_demanding_independence_chad_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_independence_somalia_flag
+		}
+		clr_country_flag = SAU_demanding_independence_somalia_flag
+	}
+}
+
+SAU_remove_demand_flags_reject_effect = {
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_country_syr_flag
+		}
+		clr_country_flag = SAU_demanding_country_syr_flag
+		set_country_flag = SAU_rejected_syr_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_country_arab_flag
+		}
+		clr_country_flag = SAU_demanding_country_arab_flag
+		set_country_flag = SAU_rejected_arab_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_country_libya_flag
+		}
+		clr_country_flag = SAU_demanding_country_libya_flag
+		set_country_flag = SAU_rejected_libya_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_country_djibouti_flag
+		}
+		clr_country_flag = SAU_demanding_country_djibouti_flag
+		set_country_flag = SAU_rejected_djibouti_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_independence_mali_flag
+		}
+		clr_country_flag = SAU_demanding_independence_mali_flag
+		set_country_flag = SAU_rejected_mali_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_independence_nigeria_flag
+		}
+		clr_country_flag = SAU_demanding_independence_nigeria_flag
+		set_country_flag = SAU_rejected_nigeria_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_independence_chad_flag
+		}
+		clr_country_flag = SAU_demanding_independence_chad_flag
+		set_country_flag = SAU_rejected_chad_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = SAU_demanding_independence_somalia_flag
+		}
+		clr_country_flag = SAU_demanding_independence_somalia_flag
+		set_country_flag = SAU_rejected_somalia_flag
+	}
+}
+
+SAU_set_up_arab_league_spirits = {
+	if = {
+		limit = {
+			SAU = { has_completed_focus = SAU_joint_arabian_defense_forces }
+		}
+		add_ideas = SAU_arabian_defence_council_2
+	}
+	else_if = {
+		limit = {
+			SAU = { has_completed_focus = SAU_create_arabian_defense_council }
+		}
+		add_ideas = SAU_arabian_defence_council
+	}
+
+	if = {
+		limit = {
+			SAU = { has_completed_focus = SAU_create_the_arabian_central_bank }
+		}
+		add_ideas = SAU_arabian_economic_council_improved
+	}
+	else_if = {
+		limit = {
+			SAU = { has_completed_focus = SAU_create_arabian_economic_council }
+		}
+		add_ideas = SAU_arabian_economic_council
+	}
+
+	if = {
+		limit = {
+			SAU = { has_completed_focus = SAU_pool_technical_knowhow }
+		}
+		add_ideas = SAU_pool_technical_know_how
+	}
+}
+
+SAU_decrease_poor_working_effects = {
+	if = {
+		limit = {
+			has_idea = SAU_poor_working_conditions
+		}
+		swap_ideas = {
+			remove_idea = SAU_poor_working_conditions
+			add_idea = SAU_poor_working_conditions2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = SAU_poor_working_conditions2
+		}
+		swap_ideas = {
+			remove_idea = SAU_poor_working_conditions2
+			add_idea = SAU_poor_working_conditions3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = SAU_poor_working_conditions3
+		}
+		swap_ideas = {
+			remove_idea = SAU_poor_working_conditions3
+			add_idea = SAU_poor_working_conditions4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = SAU_poor_working_conditions4
+		}
+		remove_ideas = SAU_poor_working_conditions4
+	}
+	clr_country_flag = SAU_improve_worker_conditions_flag
+}

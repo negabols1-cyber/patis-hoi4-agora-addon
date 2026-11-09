@@ -1,0 +1,349 @@
+political_actions = {
+
+	#Encourage Free Thought (Democratic)
+	NWO_encourage_free_thought_democratic = {
+
+		icon = generic_political_discourse
+		allowed = {
+			is_ai1 = yes
+		}
+		visible = {
+			has_idea = free_press
+		}
+
+		# cancel_trigger = {
+			# 	hidden_trigger = {
+				# 		has_idea = free_press
+				# 	}
+			# }
+
+		cost = 75
+
+		fire_only_once = no
+		days_remove = 140
+		days_re_enable = 280
+
+		modifier = {
+			research_speed_factor = -0.10
+			communism_drift = 0.01
+			fascism_drift = 0.01
+			democratic_drift = -0.03
+			neutrality_drift = 0.01
+		}
+
+	}
+
+	NWO_institute_press_censorship_fascist_state = {
+		name = institute_press_censorship_fascist_state
+		icon = generic_political_discourse
+		allowed = {
+			is_ai1 = yes
+		}
+		visible = {
+			has_government = fascism
+			has_idea = censored_press
+		}
+
+		# cancel_trigger = {
+			# 	hidden_trigger = {
+				# 		has_idea = censored_press
+				# 	}
+			# }
+
+		modifier = {
+			communism_drift = -0.01
+			fascism_drift = 0.03
+			democratic_drift = -0.01
+			neutrality_drift = -0.01
+		}
+
+		days_remove = 150
+		cost = 75
+		days_re_enable = 300
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	NWO_institute_press_censorship_democratic_state = {
+		name = institute_press_censorship_democratic_state
+		icon = generic_political_discourse
+		allowed = {
+			is_ai1 = yes
+		}
+		visible = {
+			has_government = democratic
+			has_idea = censored_press
+		}
+
+		# cancel_trigger = {
+			# 	hidden_trigger = {
+				# 		has_idea = censored_press
+				# 	}
+			# }
+
+		modifier = {
+			communism_drift = -0.01
+			fascism_drift = -0.01
+			democratic_drift = 0.03
+			neutrality_drift = -0.01
+		}
+
+		days_remove = 150
+		cost = 75
+		days_re_enable = 140
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	NWO_institute_press_censorship_communist_state = {
+		name = institute_press_censorship_communist_state
+		icon = generic_political_discourse
+		allowed = {
+			is_ai1 = yes
+		}
+		visible = {
+			has_government = communism
+			has_idea = censored_press
+		}
+
+		# cancel_trigger = {
+			# 	hidden_trigger = {
+				# 		has_idea = censored_press
+				# 	}
+			# }
+
+		modifier = {
+			communism_drift = 0.03
+			fascism_drift = -0.01
+			democratic_drift = -0.01
+			neutrality_drift = -0.01
+		}
+
+		days_remove = 150
+		cost = 75
+		days_re_enable = 300
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	NWO_institute_press_censorship_neutrality_state = {
+		name = institute_press_censorship_neutrality_state
+		icon = generic_political_discourse
+		allowed = {
+			is_ai1 = yes
+		}
+		visible = {
+			has_government = neutrality
+			has_idea = censored_press
+		}
+
+		# cancel_trigger = {
+			# 	hidden_trigger = {
+				# 		has_idea = censored_press
+				# 	}
+			# }
+
+		modifier = {
+			communism_drift = -0.01
+			fascism_drift = -0.01
+			democratic_drift = -0.01
+			neutrality_drift = 0.03
+		}
+
+		days_remove = 150
+		cost = 150
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+
+	#Man the Assembly Line
+	NWO_man_the_assembly_line = {
+
+		icon = generic_construction
+		visible = {
+			has_idea = productive_press
+		}
+
+
+		modifier = {
+			production_factory_efficiency_gain_factor = 0.20
+		}
+
+		days_remove = 70
+		days_re_enable = 280
+		cost = 75
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				date > 1938.6.15
+				add = 100
+			}
+		}
+	}
+
+	#Message_Resistance_Cells
+	NWO_message_the_resistance = {
+
+		icon = generic_civil_support
+
+		available = {
+			ROOT = { has_capitulated = yes }
+		}
+
+		visible = {
+			has_idea = resistance_press
+		}
+
+		# cancel_trigger = {
+			# 	hidden_trigger = {
+				# 		has_idea = resistance_press
+				# 	}
+			# }
+
+		days_remove = 140
+		days_re_enable = 280
+		cost = 75
+
+		ai_will_do = {
+			base = 25
+		}
+
+		remove_effect = {
+			random_owned_state = {
+				limit = { NOT = { is_fully_controlled_by = ROOT } }
+				damage_building = {
+					type = arms_factory
+					damage = 0.5
+				}
+
+			}
+			random_owned_state = {
+				limit = { NOT = { is_fully_controlled_by = ROOT } }
+				damage_building = {
+					type = arms_factory
+					damage = 0.5
+				}
+			}
+		}
+	}
+
+	#Training Initiative
+	NWO_training_initiative = {
+
+		icon = generic_civil_support
+
+		available = {
+		}
+
+		visible = {
+			has_idea = mobilization_press
+		}
+
+		# cancel_trigger = {
+			# 	hidden_trigger = {
+				# 		has_idea = mobilization_press
+				# 	}
+			# }
+
+		days_remove = 140
+		days_re_enable = 280
+		cost = 75
+
+		ai_will_do = {
+			base = 5
+		}
+
+		modifier = {
+			training_time_factor = -0.1
+			mobilization_speed = 0.05
+		}
+	}
+
+	#Propaganda Campaign
+	NWO_propaganda_campaign = {
+
+		icon = generic_civil_support
+
+		available = {
+		}
+
+		visible = {
+			has_idea = nationalism_press
+		}
+
+		# cancel_trigger = {
+			# 	hidden_trigger = {
+				# 		has_idea = aggressive_press
+				# 	}
+			# }
+
+		days_remove = 70
+		days_re_enable = 280
+		cost = 75
+
+		ai_will_do = {
+			base = 10
+
+			modifier = {
+				add = 10
+				ROOT = { has_stability < 0.30 }
+			}
+
+			modifier = {
+				add = 20
+				ROOT = { has_stability < 0.20 }
+			}
+		}
+
+		complete_effect = {
+			add_war_support = 0.10
+		}
+
+		remove_effect = {
+			hidden_effect = {
+				add_war_support = -0.10
+			}
+		}
+	}
+
+	#Logistics Initiative
+	NWO_logistics_initiative = {
+
+		icon = generic_civil_support
+
+		available = {
+		}
+
+		visible = {
+			has_idea = aggressive_press
+		}
+
+		# cancel_trigger = {
+			# 	hidden_trigger = {
+				# 		has_idea = aggressive_press
+				# 	}
+			# }
+
+		days_remove = 140
+		days_re_enable = 280
+		cost = 75
+
+		ai_will_do = {
+			base = 10
+		}
+
+		modifier = {
+			political_power_factor = -0.1
+			supply_consumption_factor = -0.05
+		}
+	}
+}

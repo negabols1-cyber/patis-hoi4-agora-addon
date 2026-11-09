@@ -1,0 +1,160 @@
+armored_GER = {
+
+	available_for = {
+		GER
+	}
+
+	role = armor
+
+	upgrade_prio = {
+		base = 2
+
+		modifier = {
+			factor = 50
+			OR = {
+				has_tech = basic_medium_tank
+				has_tech = basic_medium_tank_chassis
+			}
+		}
+
+		modifier = {
+			factor = 2
+			OR = {
+				has_tech = main_battle_tank
+				has_tech = main_battle_tank_chassis
+			}
+		}
+	}
+
+	light_armor_early_GER = {
+		division_names_group = GER_Arm_01
+		upgrade_prio = {
+			base = 0
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				artillery = 1
+			}
+
+			regiments = {
+				light_armor = 7
+				motorized = 5
+			}
+		}
+
+		replace_at_match = 1.5  # I.e., no
+		replace_with = medium_armor_late_GER
+		target_min_match = 0.5
+	}
+
+
+	medium_armor_early_GER = {
+		division_names_group = GER_Arm_01
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 40
+				OR = {
+					has_tech = basic_medium_tank
+					has_tech = basic_medium_tank_chassis
+				}
+				NOT = {
+					has_tech = main_battle_tank
+				}
+				NOT = {
+					has_tech = main_battle_tank_chassis
+				}
+			}
+		}
+
+		target_template = {
+
+			support = {
+				medium_flame_tank = 1
+				assault_engineer = 1
+				engineer = 1
+				light_tank_recon = 1
+				maintenance_company = 1
+				logistics_company = 1
+			}
+
+			regiments = {
+				medium_armor = 11 #remove sp
+				motorized = 6
+			}
+		}
+
+		replace_at_match = 0.95
+		replace_with = medium_armor_late_GER
+		target_min_match = 0.5
+	}
+	medium_armor_late_GER = {
+		division_names_group = GER_Arm_01
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				has_tech = mechanised_infantry
+				factor = 100
+			}
+		}
+
+		target_template = {
+
+			support = {
+				medium_flame_tank = 1
+				assault_engineer = 1
+				engineer = 1
+				light_tank_recon = 1
+				maintenance_company = 1
+				logistics_company = 1
+			}
+
+			regiments = {
+				medium_armor = 11 #remove sp
+				mechanized = 6
+			}
+		}
+
+		replace_at_match = 0.95
+		replace_with = modern_armor_default_GER
+		target_min_match = 0.5
+	}
+	modern_armor_default_GER = {
+
+		upgrade_prio = {
+			base = 1
+
+			modifier = {
+				factor = 15
+				OR = {
+					has_tech = main_battle_tank
+					has_tech = main_battle_tank_chassis
+				}
+			}
+		}
+
+		target_template = {
+
+			support = {
+				engineer = 1
+				mot_recon = 1
+				maintenance_company = 1
+				logistics_company = 1
+				artillery = 1
+			}
+
+			regiments = {
+				modern_armor = 9
+				mechanized = 6
+				#medium_sp_artillery_brigade = 1
+				#super_heavy_armor = 1
+			}
+		}
+	}
+}

@@ -1,0 +1,6641 @@
+focus_tree = {
+	id = siam_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = SIA
+		}
+	}
+
+	continuous_focus_position = { x = 250 y = 1500 }
+	default = no
+
+	focus = {
+		id = SIA_Bangkok_Field
+		icon = GFX_z_goal_arab_decentralization
+		x = 63
+		y = 0
+		offset = {
+			x = 9
+			y = 0
+			trigger = {
+				has_country_flag = SIA_hirohitos_wife_called
+			}
+		}
+		offset = {
+			x = -25
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = SIA_Bangkok_Field
+			}
+		}
+		mutually_exclusive = {focus = SIA_Authorize_Khana_Ratsadon}
+		mutually_exclusive = {focus = SIA_Kneel_to_the_Emperor}
+
+		cost = 5
+
+		available = {
+			OR = {
+				neutrality < 0.65
+				fascism < 0.35
+			}
+		}
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = SIA_Authorize_Khana_Ratsadon
+				}
+			}
+
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_political_power = 150
+			add_stability = -0.05
+
+			hidden_effect = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = obsolete_focus_branches_visibility
+							option = HIDE
+						}
+					}
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_second_siamese_revoulation
+		icon = GFX_focus_SOV_proclaim_soviet_hegemony
+		mutually_exclusive = { focus = SIA_democratic_path }
+		x = -1
+		y = 1
+		relative_position_id = SIA_Bangkok_Field
+		prerequisite = { focus = SIA_Bangkok_Field }
+
+		cost = 5
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_war_support = 0.1
+
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+
+			custom_effect_tooltip = SIA_second_siamese_revoulation_tt
+		}
+	}
+
+	focus = {
+		id = SIA_start_to_work
+		icon = GFX_focus_ARG_develop_the_electricity_sector
+		x = 0
+		y = 1
+		relative_position_id = SIA_second_siamese_revoulation
+		prerequisite = { focus = SIA_second_siamese_revoulation }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+			add_stability = 0.05
+			add_political_power = 25
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			unlock_decision_tooltip = {
+				decision = SIA_start_to_work
+				show_effect_tooltip = yes
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_get_farmer_support
+		icon = GFX_focus_CHL_focus_on_cattle_and_wool
+		x = -1
+		y = 1
+		relative_position_id = SIA_start_to_work
+		prerequisite = { focus = SIA_start_to_work }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.025
+			}
+
+			custom_effect_tooltip = SIA_get_farmer_support_tt
+		}
+	}
+
+	focus = {
+		id = SIA_get_industrialists_support
+		icon = GFX_focus_generic_industrialists
+		x = 1
+		y = 1
+		relative_position_id = SIA_start_to_work
+		prerequisite = { focus = SIA_start_to_work focus = SIA_open_state_parliament }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.025
+			}
+
+			add_timed_idea = {
+				idea = SIA_get_industrialists_support
+				days = 365
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_bangkok_university
+		icon = GFX_focus_NOR_moscows_education_centers
+		x = 0
+		y = 3
+		relative_position_id = SIA_start_to_work
+		prerequisite = { focus = SIA_get_farmer_support }
+		prerequisite = { focus = SIA_get_industrialists_support }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = SIA_man_of_the_country
+		icon = GFX_SIA_select_Pridi_Banomyong
+		x = 0
+		y = 3
+		relative_position_id = SIA_get_industrialists_support
+		prerequisite = { focus = SIA_get_industrialists_support }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = SIA_democratic_path
+				}
+				promote_character = {
+					character = SIA_Pridi_Banomyong2
+					ideology = socialism
+				}
+				add_stability = 0.1
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.05
+				}
+			}
+			custom_effect_tooltip = SIA_man_of_the_country_tt1
+			effect_tooltip = {
+				promote_character = {
+					character = SIA_Pridi_Banomyong2
+					ideology = socialism
+				}
+				add_stability = 0.1
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.05
+				}
+			}
+
+			custom_effect_tooltip = SIA_man_of_the_country_tt2
+			effect_tooltip = {
+				promote_character = {
+					character = SIA_Pridi_Banomyong
+					ideology = social_democracy
+				}
+				add_stability = 0.1
+				add_popularity = {
+					ideology = communism
+					popularity = 0.05
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = SIA_second_siamese_revoulation
+				}
+				promote_character = {
+					character = SIA_Pridi_Banomyong
+					ideology = social_democracy
+				}
+				add_stability = 0.1
+				add_popularity = {
+					ideology = communism
+					popularity = 0.05
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_extract_fascist_from_army
+		icon = GFX_focus_SOV_builder_of_the_red_army
+		x = -3
+		y = 2
+		relative_position_id = SIA_start_to_work
+		prerequisite = { focus = SIA_get_farmer_support }
+		prerequisite = { focus = SIA_get_industrialists_support }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.025
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.1
+			}
+
+			custom_effect_tooltip = SIA_extract_fascist_from_army_tt
+		}
+	}
+
+	focus = {
+		id = SIA_communist_propaganda
+		icon = GFX_focus_SOV_stalins_cult_of_personality
+		x = -1
+		y = 1
+		relative_position_id = SIA_extract_fascist_from_army
+		prerequisite = { focus = SIA_extract_fascist_from_army }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.025
+			}
+			add_political_power = 25
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			unlock_decision_tooltip = {
+				decision = SIA_communist_propaganda
+				show_effect_tooltip = yes
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_seek_soviet_support
+		icon = GFX_SOV_Fighting_on_Familiar_Ground
+		x = 1
+		y = 1
+		relative_position_id = SIA_extract_fascist_from_army
+		prerequisite = { focus = SIA_extract_fascist_from_army }
+
+		cost = 10
+
+		available = {
+			SOV = {
+				has_government = communism
+			}
+		}
+
+		bypass = {
+			NOT = {
+				SOV = {
+					has_government = communism
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+
+			SOV = {
+				add_opinion_modifier = { target = SIA modifier = medium_increase }
+			}
+			add_opinion_modifier = { target = SOV modifier = medium_increase }
+
+			custom_effect_tooltip = SIA_extract_fascist_from_army_tt
+		}
+	}
+
+	focus = {
+		id = SIA_revoulation_time
+		icon = GFX_focus_ARG_women_in_industry
+		x = 1
+		y = 1
+		relative_position_id = SIA_seek_soviet_support
+		prerequisite = { focus = SIA_seek_soviet_support focus = SIA_communist_propaganda }
+		prerequisite = { focus = SIA_bangkok_university }
+
+		cost = 10
+
+		available = {
+			communism > 0.4
+			has_completed_focus = SIA_man_of_the_country
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			start_civil_war = {
+				ideology = neutrality
+				ruling_party = communism
+				size = party_popularity@communism
+				set_country_flag = sia_civil_war_started
+
+				retire_character = SIA_plaek_phibunsongkhram
+
+				random_other_country = {
+					limit = {
+						original_tag = SIA
+						has_government = communism
+						has_completed_focus = SIA_get_farmer_support
+						has_completed_focus = SIA_get_industrialists_support
+					}
+					division_template = {
+						name = "Peasant Militias"
+						priority = 2
+						#template_counter = 0
+						#division_names_group = SOV_INF_01
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 0 y = 2 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"Peasant Militias\" division_template = \"Peasant Militias\" start_experience_factor = 1.0"
+							owner = SIA
+						}
+						create_unit = {
+							division = "name = \"Peasant Militias\" division_template = \"Peasant Militias\" start_experience_factor = 1.0"
+							owner = SIA
+						}
+						create_unit = {
+							division = "name = \"Peasant Militias\" division_template = \"Peasant Militias\" start_experience_factor = 1.0"
+							owner = SIA
+						}
+						create_unit = {
+							division = "name = \"Peasant Militias\" division_template = \"Peasant Militias\" start_experience_factor = 1.0"
+							owner = SIA
+						}
+
+					}
+
+					add_equipment_to_stockpile = {
+						type = infantry_equipment_1
+						amount = 3000
+						producer = PREV
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_fate_of_monarchy
+		icon = GFX_focus_CHL_crown_antoine_as_sovereign_king
+		x = 0
+		y = 1
+		relative_position_id = SIA_revoulation_time
+		prerequisite = { focus = SIA_revoulation_time }
+
+		cost = 10
+
+		available = {
+			has_government = communism
+			has_civil_war = no
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = SIA_fate_of_monarchy_tt
+			if = {
+				limit = { has_idea = SIA_Rama }
+				remove_ideas = SIA_Rama
+			}
+
+			add_stability = -0.05
+		}
+	}
+
+	focus = {
+		id = SIA_meet_with_mao
+		icon = GFX_PRC_Mao_Zedong
+		mutually_exclusive = { focus = SIA_visit_moscow }
+		x = -8
+		y = 1
+		relative_position_id = SIA_fate_of_monarchy
+		prerequisite = { focus = SIA_fate_of_monarchy }
+
+		cost = 10
+
+		available = {
+			PRC = {
+				has_government = communism
+				has_country_leader = {
+					name = "Mao Zedong"
+					ruling_only = yes
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management
+				add_idea = SIA_Splited_Management2
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_opinion_modifier = { target = PRC modifier = medium_increase }
+			PRC = { add_opinion_modifier = { target = SIA modifier = medium_increase } }
+		}
+	}
+
+	focus = {
+		id = SIA_anti_japanese_pact
+		icon = GFX_JAP_Ones_Act_Ones_Profit
+		x = 0
+		y = 1
+		relative_position_id = SIA_meet_with_mao
+		prerequisite = { focus = SIA_meet_with_mao }
+
+		cost = 10
+
+		available = {
+			JAP = {
+				NOT = {
+					has_government = communism
+				}
+			}
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			set_rule = { can_create_factions = yes }
+			create_faction = "Anti-Japanese Pact"
+			PRC = { country_event = { id = generic.5 hours = 6 } }
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management2
+				add_idea = SIA_Splited_Management3
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_increase_military_budget
+		icon = GFX_focus_BRA_ethical_internationalism
+		x = 0
+		y = 2
+		relative_position_id = SIA_meet_with_mao
+		prerequisite = { focus = SIA_anti_japanese_pact }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_timed_idea = {
+				idea = SIA_increase_military_budget
+				days = 1095
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			remove_ideas = SIA_Splited_Management3
+		}
+	}
+
+	focus = {
+		id = SIA_no_monarchy_in_asia
+		icon = GFX_focus_NOR_send_the_king_back_to_denmark
+		x = -1
+		y = 2
+		relative_position_id = SIA_anti_japanese_pact
+		prerequisite = { focus = SIA_anti_japanese_pact }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			add_political_power = 25
+
+			every_other_country = {
+				limit = {
+					capital_scope = {
+						is_on_continent = asia
+					}
+					has_government = neutrality
+				}
+				ROOT = {
+					create_wargoal = {
+						type = topple_government
+						target = PREV
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_no_fascism_in_asia
+		icon = GFX_focus_generic_anti_fascist_diplomacy
+		x = 1
+		y = 2
+		relative_position_id = SIA_anti_japanese_pact
+		prerequisite = { focus = SIA_anti_japanese_pact }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			add_political_power = 25
+
+			every_other_country = {
+				limit = {
+					capital_scope = {
+						is_on_continent = asia
+					}
+					has_government = fascism
+				}
+				ROOT = {
+					create_wargoal = {
+						type = topple_government
+						target = PREV
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_visit_moscow
+		icon = GFX_focus_SOV_third_rome
+		mutually_exclusive = { focus = SIA_meet_with_mao }
+		x = 0
+		y = 1
+		relative_position_id = SIA_fate_of_monarchy
+		prerequisite = { focus = SIA_fate_of_monarchy }
+
+		cost = 10
+
+		available = {
+			NOT = { has_completed_focus = IRE_approach_west }
+			has_government = communism
+			has_civil_war = no
+			is_subject = no
+			any_other_country = {
+				original_tag = SOV
+				is_faction_leader = yes
+				has_government = communism
+				NOT = { has_war_with = ROOT }
+				all_allied_country = {
+					NOT = { has_war_with = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			SOV = {
+				add_ai_strategy = {
+					type = befriend
+					id = ROOT
+					value = 100
+				}
+				ROOT = {
+					add_ai_strategy = {
+						type = befriend
+						id = PREV
+						value = 100
+					}
+				}
+				country_event = { id = generic.2 hours = 4 random_hours = 4 }
+				if = {
+					limit = {
+						has_war = yes
+					}
+					ROOT = { add_war_support = 0.1 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_new_direction
+		icon = GFX_focus_SWE_socialist_reforms
+		x = 0
+		y = 1
+		relative_position_id = SIA_visit_moscow
+		prerequisite = { focus = SIA_visit_moscow }
+
+		cost = 10
+
+		available = {
+			has_stability > 0.5
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_political_power = 25
+
+			add_ideas = SIA_new_direction
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management
+				add_idea = SIA_Splited_Management2
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_economic_works
+		icon = GFX_focus_generic_public_works
+		x = -1
+		y = 1
+		relative_position_id = SIA_new_direction
+		prerequisite = { focus = SIA_new_direction }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			swap_ideas = {
+				add_idea = SIA_new_direction2
+				remove_idea = SIA_new_direction
+			}
+
+			random_core_state = {
+				limit = {
+					is_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_tech_bonus = {
+				name = FIN_industrial_cooperation
+				bonus = 0.5
+				uses = 1
+				category = cat_production
+			}
+			add_tech_bonus = {
+				name = FIN_industrial_cooperation
+				bonus = 0.5
+				uses = 1
+				category = construction_tech
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_new_constution
+		icon = GFX_focus_BRA_repeale_national_security_law
+		x = 1
+		y = 1
+		relative_position_id = SIA_new_direction
+		prerequisite = { focus = SIA_new_direction }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_political_power = 25
+
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management2
+				add_idea = SIA_Splited_Management3
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_khana_ratsadon_trials
+		icon = GFX_focus_BRA_utilize_security_law
+		x = 0
+		y = 1
+		relative_position_id = SIA_new_constution
+		prerequisite = { focus = SIA_new_constution }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			remove_ideas = SIA_Splited_Management3
+
+			if = {
+				limit = {
+					has_dlc = "La Resistance"
+				}
+				if = {
+					limit = {
+						has_intelligence_agency = no
+					}
+					create_intelligence_agency = yes
+				}
+			}
+
+			custom_effect_tooltip = SIA_khana_ratsadon_trials_tt
+		}
+	}
+
+	focus = {
+		id = SIA_total_war
+		icon = GFX_focus_SOV_penal_battalions
+		x = 0
+		y = 1
+		relative_position_id = SIA_economic_works
+		prerequisite = { focus = SIA_economic_works }
+
+		cost = 10
+
+		available = {
+			has_war_support > 0.55
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			swap_ideas = {
+				add_idea = SIA_new_direction3
+				remove_idea = SIA_new_direction2
+			}
+
+			if = {
+				limit = {
+					has_idea = war_economy
+				}
+				add_ideas = tot_economic_mobilisation
+				activate_decision = women_in_the_workforce
+			}
+			else_if = {
+				limit = {
+					has_idea = tot_economic_mobilisation
+				}
+				add_manpower = 30000
+			}
+			else = {
+				add_ideas = war_economy
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_preapare_to_war_with_japan
+		icon = GFX_JAP_samurai
+		x = -4
+		y = 1
+		relative_position_id = SIA_visit_moscow
+		prerequisite = { focus = SIA_visit_moscow focus = SIA_meet_with_mao }
+
+		cost = 10
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SIA_preapare_to_war_with_japan_tt
+				NOT = {
+					OR = {
+						has_idea = SIA_Splited_Management
+						has_idea = SIA_Splited_Management2
+						has_idea = SIA_Splited_Management3
+						has_idea = SIA_Splited_Management4
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = SIA_Japan_Pressure2
+				}
+				remove_ideas = SIA_Japan_Pressure2
+			}
+
+			add_timed_idea = {
+				idea = SIA_preapare_to_war_with_japan
+				days = 730
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			every_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				random_select_amount = 3
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_neutrality_on_asia
+		icon = GFX_focus_CHL_protect_the_easter_island
+		mutually_exclusive = { focus = SIA_memories_of_1905 }
+		x = 1
+		y = 1
+		relative_position_id = SIA_preapare_to_war_with_japan
+		prerequisite = { focus = SIA_preapare_to_war_with_japan }
+
+		cost = 10
+
+		available = {
+			has_war = no
+			NOT = {
+				has_completed_focus = SIA_total_war
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_ideas = neutrality_idea
+		}
+	}
+
+	focus = {
+		id = SIA_memories_of_1905
+		icon = GFX_focus_jap_strike_south
+		mutually_exclusive = { focus = SIA_neutrality_on_asia }
+		x = -1
+		y = 1
+		relative_position_id = SIA_preapare_to_war_with_japan
+		prerequisite = { focus = SIA_preapare_to_war_with_japan }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			add_war_support = 0.1
+
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = JAP
+			}
+
+			add_timed_idea = {
+				idea = SIA_memories_of_1905
+				days = 730
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					SOV = {
+						NOT = { has_government = fascism }
+					}
+				}
+				add_timed_idea = {
+					idea = SIA_memories_of_1905
+					days = 730
+				}
+			}
+
+			if = {
+				limit = {
+					has_non_aggression_pact_with = JAP
+				}
+				diplomatic_relation = {
+					country = ROOT
+					relation = non_aggression_pact
+					active = no
+				}
+			}
+			if = {
+				limit = {
+					is_guaranteed_by = JAP
+				}
+				diplomatic_relation = {
+					country = ROOT
+					relation = guarantee
+					active = no
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_claim_Indochina
+		icon = GFX_goal_JAP_target_indochina
+		x = 0
+		y = 2
+		relative_position_id = SIA_preapare_to_war_with_japan
+		prerequisite = { focus = SIA_memories_of_1905 focus = SIA_neutrality_on_asia }
+
+		cost = 5
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_state_claim = 741
+			add_state_claim = 286
+			add_state_claim = 670
+			add_state_claim = 671
+		}
+	}
+
+	focus = {
+		id = SIA_fortify_cities
+		icon = GFX_goal_generic_fortify_city
+		x = 0
+		y = 2
+		relative_position_id = SIA_neutrality_on_asia
+		prerequisite = { focus = SIA_neutrality_on_asia }
+
+		cost = 5
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			if = {
+				limit = { has_idea = SIA_preapare_to_war_with_japan }
+				swap_ideas = {
+					remove_idea = SIA_preapare_to_war_with_japan
+					add_idea = SIA_preapare_to_war_with_japan2
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_idea = SIA_preapare_to_war_with_japan }
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = SIA_preapare_to_war_with_japan
+						add_idea = SIA_preapare_to_war_with_japan2
+					}
+				}
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			every_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					NOT = {
+						OR = {
+							state = 110
+							state = 144
+						}
+					}
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_victory_point = yes
+					}
+				}
+			}
+			868 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_victory_point = yes
+					}
+				}
+			}
+			289 = {
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_victory_point = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_demand_rattanakosin_regions
+		icon = GFX_focus_ARG_the_buenos_aires_conference
+		x = -1
+		y = 3
+		relative_position_id = SIA_preapare_to_war_with_japan
+		prerequisite = { focus = SIA_memories_of_1905 }
+		prerequisite = { focus = SIA_claim_Indochina }
+
+		cost = 5
+
+		available = {
+
+		}
+
+		bypass = {
+			controls_state = 741
+			controls_state = 670
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = SIA_demand_rattanakosin_regions_tt
+
+			741 = {
+				controller = {
+					if = {
+						limit = {
+							NOT = { is_in_array = { ROOT.target_countries = THIS } }
+						}
+						add_to_array = { ROOT.target_countries = THIS }
+					}
+				}
+			}
+
+			670 = {
+				controller = {
+					if = {
+						limit = {
+							NOT = { is_in_array = { ROOT.target_countries = THIS } }
+						}
+						add_to_array = { ROOT.target_countries = THIS }
+					}
+				}
+			}
+
+			for_each_scope_loop = {
+				array = ROOT.target_countries
+				country_event = { id = SIA.29 hours =  1 }
+			}
+
+			clear_array = ROOT.target_countries
+		}
+	}
+
+	focus = {
+		id = SIA_democratic_path
+		icon = GFX_focus_ARG_strengthening_the_concordancia
+		mutually_exclusive = { focus = SIA_second_siamese_revoulation }
+		x = 1
+		y = 1
+		relative_position_id = SIA_Bangkok_Field
+		prerequisite = { focus = SIA_Bangkok_Field }
+
+		cost = 5
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.05
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_open_state_parliament
+		icon = GFX_focus_NOR_restore_public_trust_in_the_storting
+		x = 0
+		y = 1
+		relative_position_id = SIA_democratic_path
+		prerequisite = { focus = SIA_democratic_path }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_POLITICAL_CHARACTER }
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = SIA_Damrong_Rajanubhab_id
+		}
+	}
+
+	focus = {
+		id = SIA_democracy
+		icon = GFX_focus_POL_complete_april_constitution
+		x = 1
+		y = 1
+		relative_position_id = SIA_open_state_parliament
+		prerequisite = { focus = SIA_open_state_parliament }
+		prerequisite = { focus = SIA_arrest_plaek }
+
+		cost = 10
+
+		available = {
+			democratic > 0.4
+			has_completed_focus = SIA_man_of_the_country
+		}
+
+		bypass = {
+			has_government = democratic
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			random = {
+				custom_effect_tooltip = jap_democratic_coup_tt
+				chance = party_popularity_100@democratic
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = yes
+					election_frequency = 48
+				}
+				add_popularity = { ideology = democratic popularity = 0.15 }
+			}
+			random = {
+				custom_effect_tooltip = jap_fascist_civil_war_tt
+				chance = party_popularity_100@fascism
+				add_popularity = { ideology = democratic popularity = 0.1 }
+				start_civil_war = {
+					ruling_party = democratic
+					ideology = fascism
+					size = 0.5
+				}
+			}
+
+			add_ideas = SIA_where_is_plaek
+		}
+	}
+
+	focus = {
+		id = SIA_building_program
+		icon = GFX_focus_generic_low_cost_housing
+		x = -1
+		y = 1
+		relative_position_id = SIA_democracy
+		prerequisite = { focus = SIA_democracy }
+		cost = 10
+
+		available = {
+			has_government = democratic
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			unlock_decision_category_tooltip = SIA_building_program
+			custom_effect_tooltip = SIA_building_program_tt
+		}
+	}
+
+	focus = {
+		id = SIA_education_centers
+		icon = GFX_focus_generic_university_1
+		x = 0
+		y = 1
+		relative_position_id = SIA_building_program
+		prerequisite = { focus = SIA_building_program }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = SIA_will_of_the_people
+		icon = GFX_focus_ARG_defense_and_democracy
+		x = 1
+		y = 1
+		relative_position_id = SIA_democracy
+		prerequisite = { focus = SIA_democracy }
+
+		cost = 10
+
+		available = {
+			has_government = democratic
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management
+				add_idea = SIA_Splited_Management2
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_reach_out_to_democrats
+		icon = GFX_JAP_Greater_East_Asia_Co_Prosperity_Sphere
+		x = 0
+		y = 1
+		relative_position_id = SIA_will_of_the_people
+		prerequisite = { focus = SIA_will_of_the_people }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_political_power = 75
+			every_other_country = {
+				limit = {
+					capital_scope = {
+						is_on_continent = asia
+					}
+					has_government = democratic
+				}
+				add_opinion_modifier = { target = SIA modifier = medium_increase }
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_expand_the_political_pool
+		icon = GFX_focus_BRA_rio_protocol
+		x = 0
+		y = 1
+		relative_position_id = SIA_reach_out_to_democrats
+		prerequisite = { focus = SIA_reach_out_to_democrats }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 100
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management2
+				add_idea = SIA_Splited_Management3
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_arrest_plaek
+		icon = GFX_z_goal_paint_the_sword_with_the_blood_of_modernists
+		x = 5
+		y = 1
+		relative_position_id = SIA_democratic_path
+		prerequisite = { focus = SIA_democratic_path }
+
+		cost = 10
+
+		available = {
+			democratic > 0.1
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.15
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+			retire_character = SIA_plaek_phibunsongkhram
+
+			custom_effect_tooltip = SIA_arrest_plaek_tt
+		}
+	}
+
+	focus = {
+		id = SIA_meet_with_generals
+		icon = GFX_focus_FIN_parmis_devils
+		mutually_exclusive = { focus = SIA_who_is_plaek }
+		x = -1
+		y = 6
+		relative_position_id = SIA_arrest_plaek
+		prerequisite = { focus = SIA_arrest_plaek }
+
+		cost = 10
+
+		available = {
+			fascism < 0.2
+			has_government = democratic
+			has_idea = SIA_where_is_plaek
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_ARMY_XP FOCUS_FILTER_MILITARY_CHARACTER }
+		completion_reward = {
+			custom_effect_tooltip = SIA_meet_with_generals_tt
+
+			every_army_leader = {
+				include_invisible = yes
+				add_planning = 1
+			}
+			every_navy_leader = {
+				include_invisible = yes
+				add_coordination = 1
+			}
+			add_stability = 0.1
+			army_experience = 25
+
+			remove_ideas = SIA_where_is_plaek
+		}
+	}
+
+	focus = {
+		id = SIA_who_is_plaek
+		icon = GFX_focus_BRA_tribunal
+		mutually_exclusive = { focus = SIA_meet_with_generals }
+		x = 1
+		y = 6
+		relative_position_id = SIA_arrest_plaek
+		prerequisite = { focus = SIA_arrest_plaek }
+
+		cost = 10
+
+		available = {
+			has_government = democratic
+			has_idea = SIA_where_is_plaek
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_stability = -0.2
+			remove_ideas = SIA_where_is_plaek
+
+			start_civil_war = {
+				ruling_party = democratic
+				ideology = fascism
+				size = 0.5
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_reform_the_army
+		icon = GFX_focus_chi_army_reform
+		x = -1
+		y = 1
+		relative_position_id = SIA_who_is_plaek
+		prerequisite = { focus = SIA_who_is_plaek focus = SIA_meet_with_generals }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_timed_idea = {
+				idea = SIA_reform_the_army
+				days = 730
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_soldiers_of_democracy
+		icon = GFX_focus_SWE_refuge_from_war
+		x = 0
+		y = 1
+		relative_position_id = SIA_reform_the_army
+		prerequisite = { focus = SIA_reform_the_army }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_XP }
+		completion_reward = {
+			army_experience = 20
+			add_tech_bonus = {
+				name = SIA_soldiers_of_democracy
+				bonus = 1
+				uses = 1
+				category = military_police_tech
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_increase_defense_budget
+		icon = GFX_focus_BRA_support_sugar_barons
+		mutually_exclusive = { focus = SIA_disarmament_program }
+		x = -1
+		y = 1
+		relative_position_id = SIA_expand_the_political_pool
+		prerequisite = { focus = SIA_expand_the_political_pool }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_timed_idea = {
+				idea = SIA_increase_military_budget
+				days = 1095
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_non_agression_japan
+		icon = GFX_JAP_Cardinal_Principles_of_National_Polity
+		mutually_exclusive = { focus = SIA_fight_until_last_empire }
+		x = -1
+		y = 1
+		relative_position_id = SIA_increase_defense_budget
+		prerequisite = { focus = SIA_increase_defense_budget }
+
+		cost = 5
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			JAP = { country_event = SIA.14 }
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				JAP = {
+					diplomatic_relation = {
+						country = SIA
+						relation = non_aggression_pact
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					has_idea = SIA_Japan_Pressure2
+				}
+				remove_ideas = SIA_Japan_Pressure2
+			}
+
+		}
+	}
+
+	focus = {
+		id = SIA_fight_until_last_empire
+		icon = GFX_goal_JAP_Kodoha
+		mutually_exclusive = { focus = SIA_non_agression_japan }
+		x = 1
+		y = 1
+		relative_position_id = SIA_increase_defense_budget
+		prerequisite = { focus = SIA_increase_defense_budget }
+
+		cost = 5
+
+		will_lead_to_war_with = JAP
+
+		available = {
+			JAP = {
+				has_government = fascism
+				has_government = neutrality
+			}
+		}
+
+		bypass = {
+			NOT = {
+				JAP = {
+					has_government = fascism
+					has_government = neutrality
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = JAP
+			}
+
+			if = {
+				limit = {
+					has_non_aggression_pact_with = JAP
+				}
+				diplomatic_relation = {
+					country = ROOT
+					relation = non_aggression_pact
+					active = no
+				}
+			}
+
+			if = {
+				limit = {
+					is_guaranteed_by = JAP
+				}
+				diplomatic_relation = {
+					country = ROOT
+					relation = guarantee
+					active = no
+				}
+			}
+
+			if = {
+				limit = {
+					has_idea = SIA_Japan_Pressure2
+				}
+				swap_ideas = {
+					add_idea = SIA_Japan_Pressure22
+					remove_idea = SIA_Japan_Pressure2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Join_Allies2
+		icon = GFX_focus_ARG_join_the_allies
+		x = -1
+		y = 1
+		relative_position_id = SIA_fight_until_last_empire
+		prerequisite = { focus = SIA_fight_until_last_empire focus = SIA_non_agression_japan }
+
+		cost = 10
+
+		available = {
+			ENG = {
+				is_faction_leader = yes
+				exists = yes
+				has_government = democratic
+			}
+		}
+
+		bypass = {
+			is_in_faction = yes
+			any_allied_country = {
+				is_faction_leader = yes
+				has_government = democratic
+			}
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			ENG = { country_event = generic.2 }
+			remove_ideas = SIA_Splited_Management3
+		}
+	}
+
+	focus = {
+		id = SIA_disarmament_program
+		icon = GFX_focus_NOR_broken_gun_policies
+		mutually_exclusive = { focus = SIA_increase_defense_budget }
+		x = 1
+		y = 1
+		relative_position_id = SIA_expand_the_political_pool
+		prerequisite = { focus = SIA_expand_the_political_pool }
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = SIA_disarmament_program
+		}
+	}
+
+	focus = {
+		id = SIA_international_indochina_state
+		icon = GFX_FRA_Indochine_Francaise
+		x = 1
+		y = 1
+		relative_position_id = SIA_Join_Allies2
+		prerequisite = { focus = SIA_Join_Allies2 }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			every_country = {
+				limit = {
+					owns_state = 670
+					owns_state = 671
+					owns_state = 286
+					owns_state = 741
+				}
+				country_event = { id = SIA.35 hours =  1 }
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_develop_indochina_lands
+		icon = GFX_focus_BRA_amazon_colonization
+		x = 0
+		y = 1
+		relative_position_id = SIA_international_indochina_state
+		prerequisite = { focus = SIA_international_indochina_state }
+
+		cost = 10
+
+		available = {
+			has_country_flag = SIA_international_state_formed
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			670 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					province = 6361
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+			671 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					province = 6361
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+			286 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					province = 6361
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+			741 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 1
+					province = 6361
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = air_base
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_embargo_japan
+		icon = GFX_SIA_emperors_investment
+		x = -1
+		y = 1
+		relative_position_id = SIA_Join_Allies2
+		prerequisite = { focus = SIA_Join_Allies2 }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			JAP = {
+				add_opinion_modifier = { target = SIA modifier = embargo }
+				add_opinion_modifier = { target = SIA modifier = sanctions_relations }
+			}
+			add_opinion_modifier = { target = JAP modifier = embargo }
+			add_opinion_modifier = { target = JAP modifier = sanctions_relations }
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = SIA_american_support
+		icon = GFX_focus_ARG_the_american_push
+		x = 0
+		y = 1
+		relative_position_id = SIA_embargo_japan
+		prerequisite = { focus = SIA_embargo_japan }
+
+		cost = 10
+
+		available = {
+			has_war = no
+			USA = {
+				has_government = democratic
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			USA = {
+				country_event = { id = SIA.32 hours =  1 }
+			}
+
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				USA = {
+					diplomatic_relation = {
+						country = SIA
+						relation = non_aggression_pact
+						active = yes
+					}
+				}
+				SIA = {
+					diplomatic_relation = {
+						country = USA
+						relation = non_aggression_pact
+						active = yes
+					}
+				}
+
+				SIA = {
+					add_timed_idea = {
+						days = 1095
+						idea = SIA_american_support
+					}
+				}
+
+				USA = {
+					add_political_power = 25
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_start_to_reduce_depression
+		icon = GFX_GENERIC_Nationalize_Industry
+		x = 0
+		y = 0
+
+		cost = 3
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = SIA_Kneel_to_the_Emperor
+				}
+			}
+		}
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			has_civil_war = no
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL_CHARACTER }
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip  = SIA_thawee_punyaketu
+			random_core_state = {
+				prioritize = { 289 }
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			random_core_state = {
+				prioritize = { 868 869 }
+				limit = {
+					is_controlled_by = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Military_Schools
+		icon = GFX_SOV_The_Enslaved_West_Awaits_us
+		x = 18
+		y = 1
+		prerequisite = {focus = SIA_start_to_reduce_depression}
+		relative_position_id = SIA_start_to_reduce_depression
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			OR = {
+				has_idea = SIA_Great_Depression2
+				has_completed_focus = SIA_End_Of_Economic_Depression
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY FOCUS_FILTER_AIR_XP FOCUS_FILTER_ARMY_XP FOCUS_FILTER_NAVY_XP }
+		completion_reward = {
+			army_experience = 10
+			air_experience = 10
+			navy_experience = 10
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			add_tech_bonus = {
+				name = SIA_SIA_Military_Schools_tech
+				bonus = 0.75
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Royal_Thai_Air_Force
+		icon = GFX_goal_SIAM_AIRCORPS
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Military_Schools}
+		relative_position_id = SIA_Military_Schools
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_AIR_XP }
+		completion_reward = {
+			air_experience = 25
+			add_ideas = SIA_Royal_Thai_Air_Force
+		}
+	}
+
+	focus = {
+		id = SIA_Phibun_Effort
+		icon = GFX_ITA_Bodoglios_Influence
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Royal_Thai_Air_Force}
+		relative_position_id = SIA_Royal_Thai_Air_Force
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIR_XP }
+		completion_reward = {
+			air_experience = 10
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Air_Dominance
+		icon = GFX_goal_generic_air_fighter
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Phibun_Effort}
+		relative_position_id = SIA_Phibun_Effort
+		mutually_exclusive = {focus = SIA_Long_Range_Effort}
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SIA_Air_Dominance
+				bonus = 1.0
+				uses = 2
+				category = air_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Long_Range_Effort
+		icon = GFX_goal_generic_air_bomber
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Phibun_Effort}
+		relative_position_id = SIA_Phibun_Effort
+		mutually_exclusive = {focus = SIA_Air_Dominance}
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SIA_Long_Range_Effort
+				bonus = 1.0
+				uses = 2
+				category = heavy_air
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Local_Development
+		icon = GFX_focus_generic_aircraft_production
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Air_Dominance focus = SIA_Long_Range_Effort}
+		relative_position_id = SIA_Air_Dominance
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_breakthrough_progress = {
+				specialization = specialization_air
+				value = 0.25
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_idea = SIA_Royal_Thai_Air_Force
+				}
+				swap_ideas = {
+					add_idea = SIA_Royal_Thai_Air_Force2
+					remove_idea = SIA_Royal_Thai_Air_Force
+				}
+			}
+			if = {
+				limit = {
+					has_idea = SIA_Royal_Thai_Air_Force2
+				}
+				swap_ideas = {
+					add_idea = SIA_Royal_Thai_Air_Force3
+					remove_idea = SIA_Royal_Thai_Air_Force2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {has_idea = SIA_Royal_Thai_Air_Force2}
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						add_idea = SIA_Royal_Thai_Air_Force3
+						remove_idea = SIA_Royal_Thai_Air_Force2
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Heroine_Air
+		icon = GFX_SOV_The_Aerial_Army
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Long_Range_Effort focus = SIA_Air_Dominance}
+		relative_position_id = SIA_Long_Range_Effort
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = SIA_Royal_Thai_Air_Force2
+				}
+				swap_ideas = {
+					add_idea = SIA_Royal_Thai_Air_Force3
+					remove_idea = SIA_Royal_Thai_Air_Force2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = SIA_Royal_Thai_Air_Force
+				}
+				swap_ideas = {
+					add_idea = SIA_Royal_Thai_Air_Force2
+					remove_idea = SIA_Royal_Thai_Air_Force
+				}
+			}
+			if = {
+				limit = {
+					NOT = {has_idea = SIA_Royal_Thai_Air_Force2}
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						add_idea = SIA_Royal_Thai_Air_Force3
+						remove_idea = SIA_Royal_Thai_Air_Force2
+					}
+				}
+			}
+			add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = SIA_Flying_Women
+		icon = GFX_focus_SOV_flying_clubs
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Long_Range_Effort focus = SIA_Air_Dominance}
+		relative_position_id = SIA_Long_Range_Effort
+
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_manpower = 1000
+			set_rule = {
+				can_generate_female_aces = yes
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Air_Zone_Investment
+		icon = GFX_SOV_Expand_The_Aviation_Industry
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Flying_Women}
+		prerequisite = {focus = SIA_Heroine_Air}
+		prerequisite = {focus = SIA_Local_Development}
+		relative_position_id = SIA_Heroine_Air
+
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			868 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			869 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			724 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Royal_Thai_Navy
+		icon = GFX_goal_SIAM_NAVY
+		x = 7
+		y = 1
+		prerequisite = {focus = SIA_Military_Schools}
+		relative_position_id = SIA_Military_Schools
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_NAVY_XP }
+		completion_reward = {
+			navy_experience = 25
+			add_ideas = SIA_Royal_Thai_Navy
+		}
+	}
+
+	focus = {
+		id = SIA_Dockyard_Area
+		icon = GFX_goal_generic_sea_focused_navy
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Royal_Thai_Navy}
+		relative_position_id = SIA_Royal_Thai_Navy
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Destroyer_Investment
+		icon = GFX_GENERIC_Destroyer
+		x = 1
+		y = 2
+		prerequisite = {focus = SIA_Dockyard_Area}
+		relative_position_id = SIA_Royal_Thai_Navy
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SIA_Destroyer_Investment
+				bonus = 3.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Invasion_Bonus
+		icon = GFX_GENERIC_Mechanized_Marines
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Destroyer_Investment}
+		relative_position_id = SIA_Destroyer_Investment
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_ideas = SIA_Invasion_Bonus
+		}
+	}
+
+	focus = {
+		id = SIA_Submarine_Investment
+		icon = GFX_GENERIC_Submarine
+		x = -1
+		y = 2
+		prerequisite = {focus = SIA_Dockyard_Area}
+		relative_position_id = SIA_Royal_Thai_Navy
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SIA_Destroyer_Investment
+				bonus = 3.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Convoy_prod
+		icon = GFX_GENERIC_Design_Contemporary_Equipment_Standards
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Submarine_Investment}
+		relative_position_id = SIA_Submarine_Investment
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_ideas = SIA_Convoy_prod
+		}
+	}
+
+	focus = {
+		id = SIA_American_Extensions
+		icon = GFX_USA_US_Navy
+		x = 0
+		y = 3
+		prerequisite = {focus = SIA_Submarine_Investment focus = SIA_Destroyer_Investment}
+		relative_position_id = SIA_Royal_Thai_Navy
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			NOT = {
+				has_war_with = USA
+			}
+			USA = {
+				has_capitulated = no
+				is_subject = no
+				has_opinion = {
+					target = ROOT
+					value > 49
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_opinion_modifier = { target = JAP modifier = sanctions_relations }
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			IF = {
+				limit = {
+					has_dlc = "Arms Against Tyranny"
+				}
+				custom_effect_tooltip = available_mio_tt
+				show_mio_tooltip = SIA_electric_boat_company_organization
+				mio:SIA_electric_boat_company_organization = {
+					add_mio_size = 1
+				}
+				custom_effect_tooltip = available_industrial_concern
+				show_ideas_tooltip = KMT_chongqing_steel
+			}
+			else = {
+				custom_effect_tooltip = available_designer
+				show_ideas_tooltip = SIA_electric_boat_company
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = ca_tech
+			}
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = cv_tech
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			swap_ideas = {
+				add_idea = SIA_Royal_Thai_Navy2
+				remove_idea = SIA_Royal_Thai_Navy
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Naval_Schools
+		icon = GFX_GENERIC_Naval_School
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_American_Extensions}
+		prerequisite = {focus = SIA_Invasion_Bonus}
+		relative_position_id = SIA_American_Extensions
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_XP }
+		completion_reward = {
+			navy_experience = 75
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = SIA_Radar_Interefence
+		icon = GFX_GENERIC_Electric_Grid
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_American_Extensions}
+		prerequisite = {focus = SIA_Convoy_prod}
+		relative_position_id = SIA_American_Extensions
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIR_XP }
+		completion_reward = {
+			air_experience = 20
+			add_tech_bonus = {
+				name = SIA_Radar_Interefence
+				bonus = 1.00
+				uses = 2
+				category = radar_tech
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Royal_Thai_Army
+		icon = GFX_goal_SIAM_ARMY
+		x = -7
+		y = 1
+		prerequisite = {focus = SIA_Military_Schools}
+		relative_position_id = SIA_Military_Schools
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MANPOWER FOCUS_FILTER_ARMY_XP }
+		completion_reward = {
+			army_experience = 25
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_ideas = SIA_RTA
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Bangkok_Arsenal
+		icon = GFX_goal_generic_army_mobile_warfare
+		x = 2
+		y = 1
+		prerequisite = {focus = SIA_Royal_Thai_Army}
+		relative_position_id = SIA_Royal_Thai_Army
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_political_power = 50
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_dlc = "Arms Against Tyranny"
+				}
+				custom_effect_tooltip = available_mio_tt
+				show_mio_tooltip = bangkok_arsenal_organization
+				mio:bangkok_arsenal_organization = {
+					add_mio_size = 1
+				}
+			}
+			else = {
+				custom_effect_tooltip = available_designer
+				show_ideas_tooltip = bangkok_arsenal
+			}
+
+			add_tech_bonus = {
+				name = SIA_small_arms_modernization
+				bonus = 1.0
+				uses = 1
+				category = support_tech
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			swap_ideas = {
+				remove_idea = SIA_RTA
+				add_idea = SIA_RTA2
+			}
+
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Light_Gun_Integration
+		icon = GFX_SIA_siamese_rifles
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Royal_Thai_Army}
+		relative_position_id = SIA_Royal_Thai_Army
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SIA_small_arms_modernization
+				bonus = 1.0
+				uses = 2
+				category = infantry_weapons
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Armor_Technology
+		icon = GFX_goal_generic_heavy_armour_canadian
+		x = -2
+		y = 1
+		prerequisite = {focus = SIA_Royal_Thai_Army}
+		relative_position_id = SIA_Royal_Thai_Army
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_war_support = 0.05
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_tech_bonus = {
+				name = SIA_armored_divisions
+				bonus = 1
+				uses = 1
+				category = armor
+			}
+			add_tech_bonus = {
+				name = SIA_armored_divisions
+				bonus = 0.75
+				uses = 1
+				category = support_tech
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+			add_breakthrough_progress = {
+				specialization = specialization_land
+				value = 0.5
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Historical_Tactics
+		icon = GFX_z_goal_creation_of_regular_army_2
+		x = 1
+		y = 2
+		prerequisite = {focus = SIA_Armor_Technology}
+		prerequisite = {focus = SIA_Light_Gun_Integration}
+		prerequisite = {focus = SIA_Bangkok_Arsenal}
+		relative_position_id = SIA_Royal_Thai_Army
+		mutually_exclusive = {focus = SIA_Royal_Army_Traditions}
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_CHARACTER }
+		completion_reward = {
+			show_unit_leaders_tooltip = SIA_Phichit_Kriangsakphichit
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_idea = SIA_Untrained_Army
+				}
+				swap_ideas = {
+					add_idea = SIA_Untrained_Army2
+					remove_idea = SIA_Untrained_Army
+				}
+			}
+
+			swap_ideas = {
+				remove_idea = SIA_RTA2
+				add_idea = SIA_RTA7
+			}
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_National_Factories
+		icon = GFX_focus_generic_aircraft_production
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Historical_Tactics}
+		relative_position_id = SIA_Historical_Tactics
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			has_completed_focus = SIA_Bangkok_Arsenal
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_war_support = 0.05
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Royal_Army_Traditions
+		icon = GFX_z_goal_tibet_army
+		x = -1
+		y = 2
+		prerequisite = {focus = SIA_Armor_Technology}
+		prerequisite = {focus = SIA_Light_Gun_Integration}
+		prerequisite = {focus = SIA_Bangkok_Arsenal}
+		relative_position_id = SIA_Royal_Thai_Army
+		mutually_exclusive = {focus = SIA_Historical_Tactics}
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MILITARY_CHARACTER }
+		completion_reward = {
+			custom_effect_tooltip = SIA_better_com
+			show_unit_leaders_tooltip = SIA_Prince_Boworadej
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_idea = SIA_Untrained_Army
+				}
+				swap_ideas = {
+					add_idea = SIA_Untrained_Army2
+					remove_idea = SIA_Untrained_Army
+				}
+			}
+
+			swap_ideas = {
+				remove_idea = SIA_RTA2
+				add_idea = SIA_RTA3
+			}
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Expand_The_Strategy
+		icon = GFX_focus_ETH_continuous_strengthen_the_black_lions
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Royal_Army_Traditions}
+		relative_position_id = SIA_Royal_Army_Traditions
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_XP }
+		completion_reward = {
+			army_experience = 25
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_idea = SIA_RTA3
+				}
+				swap_ideas = {
+					remove_idea = SIA_RTA3
+					add_idea = SIA_RTA4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SIA_RTA6
+				}
+				swap_ideas = {
+					remove_idea = SIA_RTA6
+					add_idea = SIA_RTA5
+				}
+			}
+			effect_tooltip = {
+				if = {
+					limit = {
+						NOT = {
+							has_idea = SIA_RTA3
+							has_idea = SIA_RTA6
+							has_idea = SIA_RTA5
+							has_idea = SIA_RTA4
+						}
+					}
+					swap_ideas = {
+						remove_idea = SIA_RTA3
+						add_idea = SIA_RTA4
+					}
+				}
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Military_Focus
+		icon = GFX_focus_SOV_builder_of_the_red_army
+		x = 0
+		y = 3
+		prerequisite = {focus = SIA_Royal_Army_Traditions focus = SIA_Historical_Tactics}
+		relative_position_id = SIA_Royal_Thai_Army
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+		completion_reward = {
+			army_experience = 25
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_idea = SIA_Untrained_Army2
+				}
+				swap_ideas = {
+					add_idea = SIA_Untrained_Army3
+					remove_idea = SIA_Untrained_Army2
+				}
+			}
+			if = {
+				limit = {
+					NOT = {has_idea = SIA_Untrained_Army2}
+				}
+				effect_tooltip = {
+					swap_ideas = {
+						add_idea = SIA_Untrained_Army3
+						remove_idea = SIA_Untrained_Army2
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Experienced_Army
+		icon = GFX_focus_SOV_restore_cossack_units
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Military_Focus}
+		relative_position_id = SIA_Military_Focus
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = SIA_Untrained_Army3
+				}
+				remove_ideas = SIA_Untrained_Army3
+			}
+			if = {
+				limit = {
+					NOT = {has_idea = SIA_Untrained_Army3}
+				}
+				effect_tooltip = {
+					remove_ideas = SIA_Untrained_Army3
+				}
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_idea = SIA_RTA4
+				}
+				swap_ideas = {
+					remove_idea = SIA_RTA4
+					add_idea = SIA_RTA5
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SIA_RTA3
+				}
+				swap_ideas = {
+					remove_idea = SIA_RTA3
+					add_idea = SIA_RTA6
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = SIA_RTA7
+				}
+				swap_ideas = {
+					remove_idea = SIA_RTA7
+					add_idea = SIA_RTA8
+				}
+			}
+			effect_tooltip = {
+				if = {
+					limit = {
+						NOT = {
+							has_completed_focus = SIA_Royal_Army_Traditions
+							has_completed_focus = SIA_Historical_Tactics
+						}
+					}
+					custom_effect_tooltip = SIA_royal_army_completed_tt
+					swap_ideas = {
+						remove_idea = SIA_RTA3
+						add_idea = SIA_RTA6
+					}
+
+					custom_effect_tooltip =  generic_skip_one_line_tt
+
+					custom_effect_tooltip = SIA_historical_tactics_completed_tt
+					swap_ideas = {
+						remove_idea = SIA_RTA7
+						add_idea = SIA_RTA8
+					}
+				}
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_High_Research_Schools
+		icon = GFX_goal_tfv_generic_tech_sharing
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_start_to_reduce_depression}
+		relative_position_id = SIA_start_to_reduce_depression
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_research_slot = 1
+			add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 0.5
+				uses = 1
+				category = electronics
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_End_Of_Economic_Depression
+		icon = GFX_goal_generic_price_controls
+		x = 0
+		y = 2
+		prerequisite = {focus = SIA_Focus_Local_Industry focus = SIA_Italian_Companies}
+		relative_position_id = SIA_High_Research_Schools
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			has_idea = SIA_Great_Depression
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			unlock_decision_category_tooltip = SIA_Economic_Works
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			custom_effect_tooltip = SIA_Economic_1
+		}
+	}
+
+	focus = {
+		id = SIA_Give_Importance_To_Civilian_Economy
+		icon = GFX_goal_generic_destruction_civil_war
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_End_Of_Economic_Depression}
+		relative_position_id = SIA_End_Of_Economic_Depression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			OR = {
+				NOT = {has_idea = SIA_Great_Depression}
+				NOT = {has_idea = SIA_Great_Depression2}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			every_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				random_select_amount = 3
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Open_Military_Factories
+		icon = GFX_focus_generic_military_equipment
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_End_Of_Economic_Depression}
+		relative_position_id = SIA_End_Of_Economic_Depression
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			OR = {
+				NOT = {has_idea = SIA_Great_Depression}
+				NOT = {has_idea = SIA_Great_Depression2}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Train_Effort
+		icon = GFX_ARG_armored_trains
+		x = 0
+		y = 2
+		prerequisite = {focus = SIA_End_Of_Economic_Depression}
+		relative_position_id = SIA_End_Of_Economic_Depression
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = SIA_focus_on_trains_1
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			IF = {
+				limit = {
+					NOT = { has_tech = basic_train }
+				}
+				set_technology = {
+					basic_train = 1
+					popup = yes
+				}
+			}
+			add_equipment_to_stockpile = {
+				type = train_equipment_1
+				amount = 15
+				producer = SIA
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_New_Tax_Law
+		icon = GFX_focus_SWI_issue_war_bonds
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Train_Effort}
+		relative_position_id = SIA_Train_Effort
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			date > 1938.01.01
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_timed_idea = {
+				idea = SIA_New_Tax_Law
+				days = 365
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Work_Harder_For_Your_Country
+		icon = GFX_GER_A_Workers_Struggle
+		x = 0
+		y = 2
+		prerequisite = {focus = SIA_New_Tax_Law}
+		prerequisite = {focus = SIA_Bangkok_Railway}
+		relative_position_id = SIA_Train_Effort
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			date > 1938.01.01
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = SIA_Work_Harder_For_Your_Country
+		}
+	}
+
+	focus = {
+		id = SIA_Bangkok_Railway
+		icon = GFX_focus_POL_warsaw_main_station
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Train_Effort}
+		relative_position_id = SIA_Train_Effort
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					can_build_railway = {
+						start_state = 289
+						target_state = 868
+						build_only_on_allied = yes
+					}
+				}
+				build_railway = {
+					level = 2
+					start_state = 289
+					target_state = 868
+				}
+			}
+			868 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Italian_Companies
+		icon = GFX_ITA_Italian_Empire
+		x = 5
+		y = 1
+		prerequisite = {focus = SIA_High_Research_Schools}
+		relative_position_id = SIA_High_Research_Schools
+		mutually_exclusive = {focus = SIA_Focus_Local_Industry }
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = ITA_agip
+			add_opinion_modifier = {
+				target = ITA
+				modifier = ita_diplomacy_focus
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Expand_synthetic_Refineries
+		icon = GFX_goal_generic_oil_refinery
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Italian_Companies}
+		relative_position_id = SIA_Italian_Companies
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SIA_Rubber
+				bonus = 0.75
+				uses = 2
+				category = cat_synth_oil
+			}
+			289 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Excavation_Works
+		icon = GFX_focus_ETH_peacekeeping_forces
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Italian_Companies}
+		relative_position_id = SIA_Italian_Companies
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					289 = {
+						state_is_fully_controlled_by_ROOT_or_subject = yes
+					}
+				}
+				add_resource = {
+					type = tungsten
+					amount = 16
+					state = 289
+				}
+				289 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+				add_tech_bonus = {
+					name = SIA_tungsten
+					bonus = 1
+					uses = 1
+					category = excavation_tech
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Radar_Tech
+		icon = GFX_goal_generic_radar
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Excavation_Works}
+		relative_position_id = SIA_Excavation_Works
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			724 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			289 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = SIA_comms_industry
+				bonus = 1
+				uses = 1
+				category = radar_tech
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Tillage_Reform
+		icon = GFX_goal_generic_agriculture2
+		x = -2
+		y = 1
+		prerequisite = {focus = SIA_Radar_Tech}
+		prerequisite = {focus = SIA_Give_Importance_To_Civilian_Economy}
+		relative_position_id = SIA_Radar_Tech
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = SIA_Tillage_Reform_idea
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Efficient_Rice_Field
+		icon = GFX_goal_generic_rice_field
+		x = 1
+		y = 2
+		prerequisite = {focus = SIA_Radar_Tech}
+		prerequisite = {focus = SIA_Develop_Rubber_Mines}
+		relative_position_id = SIA_Excavation_Works
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = SIA_Efficient_Rice_Field_idea
+		}
+	}
+
+	focus = {
+		id = SIA_Develop_Rubber_Mines
+		icon = GFX_focus_generic_improve_roads
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Expand_synthetic_Refineries}
+		relative_position_id = SIA_Expand_synthetic_Refineries
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_resource = {
+				type = rubber
+				amount = 16
+				state = 289
+			}
+			289 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Focus_Local_Industry
+		icon = GFX_focus_generic_industry_3
+		x = -5
+		y = 1
+		prerequisite = {focus = SIA_High_Research_Schools}
+		relative_position_id = SIA_High_Research_Schools
+		mutually_exclusive = {focus = SIA_Italian_Companies }
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			every_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				random_select_amount = 3
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Industry_investigative
+		icon = GFX_SOV_Female_Tractor_Operators
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Focus_Local_Industry}
+		relative_position_id = SIA_Focus_Local_Industry
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SIA_industry
+				bonus = 1.0
+				uses = 2
+				category = industry
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Supply_Hub_centers
+		icon = GFX_focus_generic_railroad
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Industry_investigative}
+		relative_position_id = SIA_Industry_investigative
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_timed_idea = {
+				idea = SIA_supply_Hub_centers
+				days = 120
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_City_infrastructure
+		icon = GFX_z_goal_deserted_road
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Focus_Local_Industry}
+		relative_position_id = SIA_Focus_Local_Industry
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = { limit = { 289 = { is_owned_and_controlled_by = SIA } }
+				289 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+
+			if = { limit = { 724 = { is_owned_and_controlled_by = SIA } }
+				724 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Military_Investments
+		icon = GFX_z_goal_artisanal_production_of_weapons
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_City_infrastructure}
+		relative_position_id = SIA_City_infrastructure
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			every_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				random_select_amount = 2
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Commercial_Bank
+		icon = GFX_goal_generic_cinema
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Open_Military_Factories}
+		prerequisite = {focus = SIA_Military_Investments}
+		relative_position_id = SIA_Open_Military_Factories
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = SIA_Siam_Commercial_Bank
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Fate_Of_The_Peasant_Class
+		icon = GFX_SOV_Kolkhoz_Farms
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Supply_Hub_centers}
+		prerequisite = {focus = SIA_Military_Investments}
+		relative_position_id = SIA_Supply_Hub_centers
+
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL_CHARACTER }
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip  = SIA_Khuang_Aphaiwong
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			random_core_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Free_Thai_Movement
+		icon = GFX_SOV_The_Great_Patriotic_War
+		x = 24
+		y = 8
+		mutually_exclusive = {focus = SIA_Do_Nothing_Against_To_Japan}
+
+		cost = 1
+
+		allow_branch = {
+			NOT = {has_completed_focus = SIA_Kneel_to_the_Emperor}
+		}
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			surrender_progress > 0.1
+			JAP = {
+				OR = {
+					has_country_leader = {
+						character = JAP_emperor_hirohito
+						ruling_only = yes
+					}
+					has_country_leader = { name = "Yasuhito" }
+				}
+			}
+			has_defensive_war_with = JAP
+			has_war_support > 0.5
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_war_support = 0.05
+			add_stability = -0.1
+		}
+	}
+
+	focus = {
+		id = SIA_Do_Nothing_Against_To_Japan
+		icon = GFX_focus_ETH_the_lion_and_the_sun
+		x = 26
+		y = 8
+		mutually_exclusive = {focus = SIA_Free_Thai_Movement}
+
+		cost = 1
+
+		allow_branch = {
+			NOT = {has_completed_focus = SIA_Kneel_to_the_Emperor}
+		}
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			JAP = {
+				OR = {
+					has_country_leader = {
+						character = JAP_emperor_hirohito
+						ruling_only = yes
+					}
+					has_country_leader = { name = "Yasuhito" }
+				}
+				OR = {
+					is_justifying_wargoal_against = ROOT
+					NOT = {
+						country_exists = CHI
+						country_exists = PRC
+					}
+					has_war_with = CHI
+					has_war_with = PRC
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = -0.1
+			hidden_effect = {
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Authorize_Khana_Ratsadon
+		icon = GFX_z_goal_arab_guard
+		x = 46
+		y = 0
+		offset = {
+			x = 8
+			y = 0
+			trigger = {
+				has_country_flag = SIA_hirohitos_wife_called
+			}
+		}
+		offset = {
+			x = -15
+			y = 0
+			trigger = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		mutually_exclusive = {focus = SIA_Bangkok_Field}
+		mutually_exclusive = {focus = SIA_Kneel_to_the_Emperor}
+
+		cost = 5
+
+		available = {
+			has_civil_war = no
+			has_country_leader = {
+				character = SIA_phraya_phahon
+				ruling_only = yes
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = SIA_Bangkok_Field
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 150
+
+			hidden_effect = {
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = obsolete_focus_branches_visibility
+							option = HIDE
+						}
+					}
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_new_leader_Plaek_Phibunsongkhram
+		icon = GFX_SIA_select_Plaek_Phibunsongkhram
+		x = -15
+		y = 1
+		offset = {
+			x = 15
+			y = 0
+			trigger = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		prerequisite = {focus = SIA_Authorize_Khana_Ratsadon}
+		relative_position_id = SIA_Authorize_Khana_Ratsadon
+		mutually_exclusive = {focus = SIA_new_leader_Ananda_Mahidol}
+		cost = 5
+
+		available = {
+			has_civil_war = no
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+				last_election = "1936.12.17"
+				election_frequency = 48
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.5
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			retire_character = SIA_phraya_phahon
+			if = {
+				limit = {
+					has_dlc = "La Resistance"
+				}
+				promote_character = SIA_plaek_phibunsongkhram
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Fuhrer_Propaganda_Tactics
+		icon = GFX_z_goal_fuhrer_principle
+		x = -1
+		y = 1
+		relative_position_id = SIA_new_leader_Plaek_Phibunsongkhram
+		prerequisite = { focus = SIA_new_leader_Plaek_Phibunsongkhram }
+		mutually_exclusive = {focus = SIA_Duce_Propaganda_Tactics}
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_political_power = 100
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management
+				add_idea = SIA_Splited_Management2
+			}
+
+			add_timed_idea = {
+				days = 365
+				idea = SIA_Fuhrer_Tactics
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Duce_Propaganda_Tactics
+		icon = GFX_focus_ITA_to_live_as_a_lion
+		x = 1
+		y = 1
+		relative_position_id = SIA_new_leader_Plaek_Phibunsongkhram
+		prerequisite = { focus = SIA_new_leader_Plaek_Phibunsongkhram }
+		mutually_exclusive = {focus = SIA_Fuhrer_Propaganda_Tactics}
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_political_power = 100
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management
+				add_idea = SIA_Splited_Management2
+			}
+
+			add_timed_idea = {
+				days = 365
+				idea = SIA_Duce_Tactics
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Calm_the_Split
+		icon = GFX_z_goal_destroy_city
+		x = 1
+		y = 1
+		relative_position_id = SIA_Fuhrer_Propaganda_Tactics
+		prerequisite = { focus = SIA_Duce_Propaganda_Tactics focus = SIA_Fuhrer_Propaganda_Tactics}
+
+		cost = 5
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management2
+				add_idea = SIA_Splited_Management3
+			}
+			add_political_power = 25
+		}
+	}
+
+	focus = {
+		id = SIA_Peoples_Man_People_General
+		icon = GFX_GER_Ein_Volk_Ein_Reich_Ein_Fuhrer
+		x = -1
+		y = 1
+		relative_position_id = SIA_Calm_the_Split
+		prerequisite = { focus = SIA_Calm_the_Split}
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = SIA_the_new_emperor_of_people_trait_tt
+			SIA_plaek_phibunsongkhram = {
+				add_country_leader_trait = revolutionary_general
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Thai_National_Anthem
+		icon = GFX_z_goal_greatness_of_solomon
+		x = -1
+		y = 1
+		relative_position_id = SIA_Peoples_Man_People_General
+		prerequisite = { focus = SIA_Peoples_Man_People_General }
+
+		cost = 10
+
+		available = {
+			date > 1938.3.1
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			country_event = SIA.13
+			add_timed_idea = {
+				idea = SIA_Thai_National_Anthem
+				days = 1005
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Nationalist_Propaganda
+		icon = GFX_focus_POL_end_the_regency
+		x = 1
+		y = 1
+		relative_position_id = SIA_Calm_the_Split
+		prerequisite = { focus = SIA_Calm_the_Split}
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_timed_idea = {
+				days = 730
+				idea = SIA_Nationalist_Propaganda
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Half_Parliament_System
+		icon = GFX_z_goal_JAP_parliament_elections
+		x = 0
+		y = 2
+		relative_position_id = SIA_Calm_the_Split
+		prerequisite = { focus = SIA_Calm_the_Split }
+		prerequisite = { focus = SIA_Nationalist_Propaganda focus = SIA_Peoples_Man_People_General}
+
+		cost = 5
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.05
+			remove_ideas = SIA_Splited_Management3
+		}
+	}
+
+	focus = {
+		id = SIA_State_Decrees
+		icon = GFX_MAN_Five_Races_under_One_Union
+		x = 1
+		y = 1
+		relative_position_id = SIA_Nationalist_Propaganda
+		prerequisite = { focus = SIA_Nationalist_Propaganda }
+
+		cost = 10
+
+		available = {
+			date > 1938.3.1
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			country_event = SIA.12
+			add_ideas = SIA_State_Decrees
+		}
+	}
+
+	focus = {
+		id = SIA_Siamese_Himmler
+		icon = GFX_GER_The_Reichsfuhrer
+		x = 1
+		y = 1
+		relative_position_id = SIA_Half_Parliament_System
+		prerequisite = { focus = SIA_Half_Parliament_System }
+		prerequisite = { focus = SIA_Thai_National_Anthem }
+		prerequisite = { focus = SIA_State_Decrees }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL_CHARACTER FOCUS_FILTER_HISTORICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL FOCUS_FILTER_MILITARY_CHARACTER }
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = Phraya_Songsuradet
+			show_unit_leaders_tooltip = SIA_Phraya_Songsuradet
+			add_war_support = 0.05
+
+		}
+	}
+
+	focus = {
+		id = SIA_Night_of_Long_Knifes_Assessment
+		icon = GFX_GER_The_Brown_Revolution
+		x = -1
+		y = 1
+		relative_position_id = SIA_Half_Parliament_System
+		prerequisite = { focus = SIA_Half_Parliament_System }
+		prerequisite = { focus = SIA_Thai_National_Anthem }
+		prerequisite = { focus = SIA_State_Decrees }
+
+		cost = 4
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_opinion_modifier = { target = GER modifier = medium_increase }
+			country_event = SIA.11
+		}
+	}
+
+	focus = {
+		id = SIA_Songsuradet_Rebellion
+		icon = GFX_z_goal_dead_prisoner
+		x = 1
+		y = 1
+		relative_position_id = SIA_Night_of_Long_Knifes_Assessment
+		prerequisite = { focus = SIA_Night_of_Long_Knifes_Assessment }
+		prerequisite = { focus = SIA_Siamese_Himmler }
+
+		cost = 12
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = -0.10
+			custom_effect_tooltip = SIA_Phraya_Thephatsadin_tt
+		}
+	}
+
+	focus = {
+		id = SIA_Stability_In_The_State
+		icon = GFX_z_goal_YEM_shura_council
+		x = 1
+		y = 1
+		relative_position_id = SIA_Songsuradet_Rebellion
+		prerequisite = { focus = SIA_Songsuradet_Rebellion }
+
+		cost = 10
+
+		available = {
+			date > 1938.3.1
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			set_cosmetic_tag = SIA_plaek
+			add_war_support = 0.10
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			if = {
+				limit = {
+					has_idea = SIA_Splited_Management4
+				}
+				remove_ideas = SIA_Splited_Management4
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_industry_update
+		icon = GFX_z_goal_contacts_with_foreign_companies
+		x = -1
+		y = 1
+		relative_position_id = SIA_Songsuradet_Rebellion
+		prerequisite = { focus = SIA_Songsuradet_Rebellion }
+
+		cost = 10
+
+		available = {
+			date > 1938.3.1
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if= {
+				limit = {
+					has_full_control_of_state = 869
+				}
+				869 = {
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			if= {
+				limit = {
+					has_full_control_of_state = 724
+				}
+				724 = {
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+
+		}
+	}
+
+	focus = {
+		id = SIA_Join_axis
+		icon = GFX_focus_chi_collaboration_with_the_japanese
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_industry_update focus = SIA_Stability_In_The_State}
+		relative_position_id = SIA_industry_update
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			JAP = {
+				exists = yes
+				is_faction_leader = yes
+				has_government = fascism
+			}
+			NOT = { has_war_with = JAP }
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			JAP = {
+				country_event = generic.2
+			}
+			add_opinion_modifier = { target = JAP modifier = medium_increase }
+		}
+	}
+
+	focus = {
+		id = SIA_new_leader_Ananda_Mahidol
+		icon = GFX_SIA_select_Ananda_Mahidol
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Authorize_Khana_Ratsadon}
+		relative_position_id = SIA_Authorize_Khana_Ratsadon
+		mutually_exclusive = {focus = SIA_new_leader_Plaek_Phibunsongkhram}
+		cost = 5
+
+		available = {
+			has_civil_war = no
+			has_country_leader = {
+				character = SIA_phraya_phahon
+				ruling_only = yes
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = SIA_Bangkok_Field
+				}
+			}
+
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			SWI = {
+				country_event = SIA.16
+			}
+			add_timed_idea = { idea = neutrality_influence days = 1200 }
+		}
+	}
+
+	focus = {
+		id = SIA_Moderate_Approach_to_Japan
+		icon = GFX_goal_JAP_Kodoha
+		x = -7
+		y = 1
+		offset = {
+			x = 12
+			y = 0
+			trigger = {
+				has_global_flag = his_only
+			}
+		}
+		relative_position_id = SIA_new_leader_Ananda_Mahidol
+		prerequisite = { focus = SIA_new_leader_Ananda_Mahidol focus = SIA_new_leader_Plaek_Phibunsongkhram}
+
+		cost = 5
+
+		available = {
+			OR = {
+				has_completed_focus = SIA_Half_Parliament_System
+				AND = {
+					has_completed_focus = SIA_emperors_qualitative
+					NOT = { has_completed_focus = SIA_Neutrality_Act }
+				}
+			}
+			NOT = { has_completed_focus = SIA_Moderate_Approach_to_China }
+			JAP = {
+				NOT = {
+					has_government = communism
+					has_country_flag = JAP_emperor_hirohito_has_abdicated_flag
+					has_country_flag = JAP_hirohito_has_been_killed_flag
+					has_wargoal_against = SIA
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		bypass = {
+			NOT = {
+				JAP = {
+					OR = {
+						has_government = neutrality
+						has_government = fascism
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_opinion_modifier = { target = JAP modifier = medium_increase }
+			JAP = {country_event = SIA.1}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			SIA_japanese_pressure_level_down = yes
+			hidden_effect = {
+				set_country_flag = SIA_approached_japan
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Hakko_Ichiu
+		icon = GFX_JAP_Hakko_Ichiu
+		x = -1
+		y = 1
+		relative_position_id = SIA_Moderate_Approach_to_Japan
+		prerequisite = { focus = SIA_Moderate_Approach_to_Japan }
+
+		cost = 12
+
+		available = {
+			has_country_leader = {
+				character = SIA_plaek_phibunsongkhram
+				ruling_only = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			unlock_decision_category_tooltip = SIA_Hakko_Ichiu_dec_cat
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = SIA_Eyes_On_Middle_Asia
+		icon = GFX_ENG_A_Watchful_Eye_Eastwards
+		x = -1
+		y = 1
+		relative_position_id = SIA_Hakko_Ichiu
+		prerequisite = { focus = SIA_Hakko_Ichiu }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_threat = 3
+			every_state = {
+				custom_effect_tooltip = SIA_Claim
+				limit = {
+					is_on_continent = asia
+					is_owned_by = ENG
+				}
+				hidden_effect ={
+					ROOT = { add_state_claim = PREV }
+				}
+				custom_effect_tooltip = generic_ROOT_gains_claim_tt
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			SIA_japanese_pressure_level_down = yes
+		}
+	}
+
+	focus = {
+		id = SIA_Claim_Indochina
+		icon = GFX_focus_mex_soldaderas
+		x = 1
+		y = 1
+		relative_position_id = SIA_Hakko_Ichiu
+		prerequisite = { focus = SIA_Hakko_Ichiu}
+
+		cost = 5
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			add_threat = 3
+			add_state_claim = 741
+			add_state_claim = 286
+			add_state_claim = 670
+			add_state_claim = 671
+		}
+	}
+
+	focus = {
+		id = SIA_Demand_Indochina
+		icon = GFX_goal_JAP_target_indochina
+		x = 1
+		y = 1
+		relative_position_id = SIA_Claim_Indochina
+		prerequisite = { focus = SIA_Claim_Indochina focus = SIA_Eyes_On_Middle_Asia }
+
+		cost = 10
+		available = {
+			has_army_manpower = {
+				size > 99999
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			unlock_decision_tooltip = { decision = SIA_Demand_Indochina show_effect_tooltip = yes }
+			add_political_power = 25
+		}
+	}
+
+	focus = {
+		id = SIA_Demand_North_Borneo
+		icon = GFX_goal_JAP_target_indonesia
+		x = -1
+		y = 1
+		relative_position_id = SIA_Eyes_On_Middle_Asia
+		prerequisite = { focus = SIA_Eyes_On_Middle_Asia focus = SIA_Claim_Indochina}
+
+		cost = 10
+
+		available = {
+			has_army_manpower = {
+				size > 199999
+			}
+		}
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = SIA_Bangkok_Field
+				}
+			}
+
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			unlock_decision_tooltip = { decision = SIA_Demand_North_Borneo_decision show_effect_tooltip = yes }
+		}
+	}
+
+	focus = {
+		id = SIA_old_empire
+		icon = GFX_SIA_old_empires
+		x = 1
+		y = 1
+		relative_position_id = SIA_Eyes_On_Middle_Asia
+		prerequisite = { focus = SIA_Eyes_On_Middle_Asia}
+		prerequisite = { focus = SIA_Claim_Indochina }
+
+		cost = 10
+
+		bypass = {
+			741 = {
+				is_core_of = ROOT
+			}
+			286 = {
+				is_core_of = ROOT
+			}
+			671 = {
+				is_core_of = ROOT
+			}
+			670 = {
+				is_core_of = ROOT
+			}
+		}
+
+		available = {
+			has_army_manpower = {
+				size > 499999
+			}
+		}
+		search_filters = {  }
+		completion_reward = {
+			unlock_decision_tooltip = { decision = SIA_old_empire_decision show_effect_tooltip = yes }
+		}
+	}
+
+	focus = {
+		id = SIA_Yen_Currency
+		icon = GFX_JAP_The_Yen_Bloc
+		x = 1
+		y = 1
+		relative_position_id = SIA_Moderate_Approach_to_Japan
+		prerequisite = { focus = SIA_Moderate_Approach_to_Japan }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				has_idea = SIA_Great_Depression0
+			}
+			OR = {
+				NOT = {
+					has_idea = SIA_Great_Depression
+				}
+				has_idea = SIA_Great_Depression2
+				has_idea = SIA_Great_Depression
+			}
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			JAP = {add_opinion_modifier = { target = ROOT modifier = small_increase }}
+			add_ideas = SIA_Yen
+		}
+	}
+
+	focus = {
+		id = SIA_Asian_Finance_Center
+		icon = GFX_JAP_Greater_East_Asia_Co_Prosperity_Sphere
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Yen_Currency}
+		relative_position_id = SIA_Yen_Currency
+
+		cost = 8
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = SIA_Asian_Finance_Center
+			if = { limit = { 289 = { is_owned_and_controlled_by = SIA } }
+				289 = {
+					add_extra_state_shared_building_slots = 2
+				}
+			}
+			if = { limit = { 724 = { is_owned_and_controlled_by = SIA } }
+				724 = {
+					add_extra_state_shared_building_slots = 2
+				}
+			}
+			if = { limit = { 869 = { is_owned_and_controlled_by = SIA } }
+				869 = {
+					add_extra_state_shared_building_slots = 2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Invest_To_Rubber_Resources
+		icon = GFX_z_goal_gold_mines2
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Asian_Finance_Center}
+		relative_position_id = SIA_Asian_Finance_Center
+
+		cost = 8
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			owns_state = 289
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_resource = {
+				type = rubber
+				amount = 12
+				state = 289
+			}
+			if = { limit = { 289 = { is_owned_and_controlled_by = SIA } }
+				289 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			SIA_japanese_pressure_level_down = yes
+		}
+	}
+
+	focus = {
+		id = SIA_old_enemy
+		icon = GFX_goal_JAP_target_india
+		x = -1
+		y = 2
+		offset = {
+			x = 1
+			y = 0
+			trigger = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		prerequisite = {focus = SIA_Demand_North_Borneo focus = SIA_old_empire focus = SIA_Demand_Indochina}
+		relative_position_id = SIA_Claim_Indochina
+		mutually_exclusive = {
+			focus = SIA_free_ind_movement
+		}
+
+		cost = 8
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		bypass = {
+			RAJ = {
+				is_puppet = no
+			}
+		}
+
+		available = {
+			RAJ = {
+				is_puppet = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = puppet_wargoal_focus
+				target = RAJ
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_free_ind_movement
+		icon = GFX_goal_british_india_restored
+		x = 1
+		y = 2
+		prerequisite = {focus = SIA_Demand_North_Borneo focus = SIA_old_empire focus = SIA_Demand_Indochina focus = SIA_Invest_To_Rubber_Resources}
+		relative_position_id = SIA_Claim_Indochina
+		mutually_exclusive = {
+			focus = SIA_old_enemy
+		}
+
+		cost = 8
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		bypass = {
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = SIA_Bangkok_Field
+				}
+			}
+
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+
+		available = {
+			has_government = fascism
+			country_exists = RAJ
+			NOT = {
+				has_war_with = RAJ
+			}
+			RAJ = {
+				is_puppet = no
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			RAJ = {
+				add_opinion_modifier = { target = ROOT modifier = medium_increase }
+				if = {
+					limit = {
+						ROOT = {
+							has_government = fascism
+						}
+					}
+					add_timed_idea = { idea = fascist_influence days = 1095 }
+				}
+				country_event = { id = generic.1 }
+			}
+			hidden_effect = {
+				news_event = { hours = 6 id = news.232 }
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_the_kings_party
+		icon = GFX_z_goal_CSR_corps_of_kwantung_army
+		x = 0
+		y = 1
+		relative_position_id = SIA_new_leader_Ananda_Mahidol
+		prerequisite = { focus = SIA_new_leader_Ananda_Mahidol}
+
+		cost = 8
+
+		available = {
+			has_country_flag = SIA_king_called
+			neutrality > 0.5
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			retire_character = SIA_phraya_phahon
+			create_country_leader = {
+				name = "Rama VIII"
+				desc = ""
+				picture = GFX_Portrait_rama
+				expire = "1965.1.1"
+				ideology = monarchism
+				traits = {
+					underage_monarch
+				}
+			}
+			add_stability = 0.05
+			remove_ideas = SIA_Rama
+		}
+	}
+
+	focus = {
+		id = SIA_approach_to_aristocracy
+		icon = GFX_z_goal_arab_council_of_ministers
+		x = -1
+		y = 1
+		relative_position_id = SIA_the_kings_party
+		prerequisite = { focus = SIA_the_kings_party }
+		mutually_exclusive = {focus = SIA_strengthen_the_king}
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_POLITICAL_CHARACTER }
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = SIA_Damrong_Rajanubhab
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_ideas = SIA_approach_to_aristocracy
+		}
+	}
+
+	focus = {
+		id = SIA_science_schools
+		icon = GFX_focus_SWI_dissolve_the_federal_council
+		x = -1
+		y = 1
+		relative_position_id = SIA_approach_to_aristocracy
+		prerequisite = { focus = SIA_approach_to_aristocracy }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = SIA_strengthen_the_king
+		icon = GFX_GER_Weltpolitik
+		x = 1
+		y = 1
+		relative_position_id = SIA_the_kings_party
+		prerequisite = { focus = SIA_the_kings_party }
+		mutually_exclusive = {focus = SIA_approach_to_aristocracy}
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			swap_ruler_traits = { remove = underage_monarch add = autocratic_imperialist }
+		}
+	}
+
+	focus = {
+		id = SIA_emperors_qualitative
+		icon = GFX_focus_jap_showa_restoration
+		x = 1
+		y = 1
+		relative_position_id = SIA_strengthen_the_king
+		prerequisite = { focus = SIA_strengthen_the_king}
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_ideas = SIA_emperors_qualitative
+			add_opinion_modifier = { target = JAP modifier = medium_increase }
+			JAP = {add_opinion_modifier = { target = SIA modifier = small_increase }}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			swap_ideas = {
+				remove_idea = SIA_Splited_Management
+				add_idea = SIA_Splited_Management3
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_land_taxes
+		icon = GFX_z_goal_agriculture_taxes
+		x = 0
+		y = 2
+		relative_position_id = SIA_the_kings_party
+		prerequisite = { focus = SIA_strengthen_the_king focus = SIA_approach_to_aristocracy }
+
+		cost = 5
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_ideas = SIA_land_taxes
+			add_stability = -0.05
+		}
+	}
+
+	focus = {
+		id = SIA_Nationalist_Approach
+		icon = GFX_z_goal_anti_fascists_of_spain_2
+		x = 1
+		y = 3
+		relative_position_id = SIA_the_kings_party
+		prerequisite = { focus = SIA_science_schools focus = SIA_land_taxes focus = SIA_emperors_qualitative}
+		mutually_exclusive = {focus = SIA_Left_Approach}
+
+		cost = 10
+
+		available = {
+			has_global_flag = spanish_civil_war
+		}
+
+		bypass = {
+			has_global_flag = scw_over
+		}
+
+		search_filters = { FOCUS_FILTER_SPA_CIVIL_WAR }
+		completion_reward = {
+			add_ideas = SIA_Nationalist_Approach
+			add_opinion_modifier = { target = SPA modifier = medium_increase }
+			SPA = {add_opinion_modifier = { target = SPA modifier = small_increase }}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Left_Approach
+		icon = GFX_z_goal_anti_fascists_of_spain
+		x = -1
+		y = 3
+		relative_position_id = SIA_the_kings_party
+		prerequisite = { focus = SIA_science_schools focus = SIA_land_taxes focus = SIA_emperors_qualitative}
+		mutually_exclusive = {focus = SIA_Nationalist_Approach}
+
+		cost = 10
+
+		available = {
+			has_global_flag = spanish_civil_war
+		}
+
+		bypass = {
+			has_global_flag = scw_over
+		}
+
+		search_filters = { FOCUS_FILTER_SPA_CIVIL_WAR }
+		completion_reward = {
+			add_ideas = SIA_Left_Approach
+			add_opinion_modifier = { target = SPR modifier = medium_increase }
+			SPR = {add_opinion_modifier = { target = SPA modifier = small_increase }}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_agricultural_reform
+		icon = GFX_focus_generic_land_reclamation
+		x = 0
+		y = 2
+		relative_position_id = SIA_land_taxes
+		prerequisite = { focus = SIA_land_taxes }
+
+		cost = 5
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = SIA_land_taxes
+				}
+				swap_ideas = {
+					add_idea = SIA_land_taxes2
+					remove_idea = SIA_land_taxes
+				}
+			}
+			effect_tooltip = {
+				if = {
+					limit = {
+						NOT = {
+							has_idea = SIA_land_taxes
+						}
+					}
+					swap_ideas = {
+						add_idea = SIA_land_taxes2
+						remove_idea = SIA_land_taxes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Political_Isolation
+		icon = GFX_MAN_Power_to_the_Kwantung_Army
+		x = 0
+		y = 2
+		relative_position_id = SIA_emperors_qualitative
+		prerequisite = { focus = SIA_emperors_qualitative}
+
+		cost = 10
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL FOCUS_FILTER_POLITICAL_CHARACTER }
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = SIA_Rangsit_Prayurasakdi_id
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			remove_ideas = SIA_Splited_Management3
+		}
+	}
+
+	focus = {
+		id = SIA_nobles_rule
+		icon = GFX_goal_generic_stable_government
+		x = 0
+		y = 2
+		relative_position_id = SIA_science_schools
+		prerequisite = { focus = SIA_science_schools }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			swap_ideas = {
+				add_idea = SIA_approach_to_aristocracy2
+				remove_idea = SIA_approach_to_aristocracy
+			}
+			remove_ideas = SIA_Splited_Management
+		}
+	}
+
+	focus = {
+		id = SIA_reformed_economy
+		icon = GFX_z_goal_economic_reforms
+		x = 1
+		y = 1
+		relative_position_id = SIA_nobles_rule
+		prerequisite = { focus = SIA_nobles_rule }
+		prerequisite = { focus = SIA_agricultural_reform }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_idea = women_workers
+					}
+				}
+				add_ideas = women_workers
+			}
+			add_timed_idea = {
+				days = 300
+				idea = SIA_reformed_economy
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_royal_guards
+		icon = GFX_z_goal_arab_cavalry_development
+		x = -1
+		y = 1
+		relative_position_id = SIA_Political_Isolation
+		prerequisite = { focus = SIA_Political_Isolation }
+		prerequisite = { focus = SIA_agricultural_reform }
+
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_field_marshal_role = {
+				character = SIA_Paribatra_Sukhumbandhu
+				skill = 2
+				attack_skill = 3
+				defense_skill = 3
+				planning_skill = 3
+				logistics_skill = 2
+			}
+			custom_effect_tooltip = SIA_royal_guards_tt
+			add_war_support = 0.1
+			hidden_effect = {
+				division_template = {
+					name = "Imperial Divisons"
+					priority = 1
+					#template_counter = 0
+					#division_names_group = SOV_INF_01
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+					}
+				}
+				random_owned_controlled_state = {
+					prioritize = { 10 }
+					create_unit = {
+						division = "name = \"Imperial Divisons\" division_template = \"Imperial Divisons\" start_experience_factor = 1.0"
+						owner = SIA
+					}
+					create_unit = {
+						division = "name = \"Imperial Divisons\" division_template = \"Imperial Divisons\" start_experience_factor = 1.0"
+						owner = SIA
+					}
+					create_unit = {
+						division = "name = \"Imperial Divisons\" division_template = \"Imperial Divisons\" start_experience_factor = 1.0"
+						owner = SIA
+					}
+					create_unit = {
+						division = "name = \"Imperial Divisons\" division_template = \"Imperial Divisons\" start_experience_factor = 1.0"
+						owner = SIA
+					}
+					create_unit = {
+						division = "name = \"Imperial Divisons\" division_template = \"Imperial Divisons\" start_experience_factor = 1.0"
+						owner = SIA
+					}
+					create_unit = {
+						division = "name = \"Imperial Divisons\" division_template = \"Imperial Divisons\" start_experience_factor = 1.0"
+						owner = SIA
+					}
+					create_unit = {
+						division = "name = \"Imperial Divisons\" division_template = \"Imperial Divisons\" start_experience_factor = 1.0"
+						owner = SIA
+					}
+					create_unit = {
+						division = "name = \"Imperial Divisons\" division_template = \"Imperial Divisons\" start_experience_factor = 1.0"
+						owner = SIA
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Neutrality_Act
+		icon = GFX_GER_Two_Allies_in_the_Far_East
+		x = 1
+		y = 1
+		relative_position_id = SIA_reformed_economy
+		prerequisite = { focus = SIA_reformed_economy focus = SIA_royal_guards }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				has_completed_focus = SIA_Moderate_Approach_to_China
+				has_completed_focus = SIA_Moderate_Approach_to_Japan
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = -0.05
+			add_ideas = neutrality_idea
+			add_opinion_modifier = { target = JAP modifier = medium_increase }
+			add_opinion_modifier = { target = CHI modifier = medium_increase }
+		}
+	}
+
+	focus = {
+		id = SIA_non_ag_japan
+		icon = GFX_JAP_A_Common_Goal_with_Different_Methods
+		x = -1
+		y = 1
+		relative_position_id = SIA_Neutrality_Act
+		prerequisite = { focus = SIA_Neutrality_Act }
+
+		cost = 5
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			JAP = {country_event = SIA.14}
+		}
+	}
+
+	focus = {
+		id = SIA_non_ag_china
+		icon = GFX_z_goal_EHB_reorganize_militia_groups
+		x = 1
+		y = 1
+		relative_position_id = SIA_Neutrality_Act
+		prerequisite = { focus = SIA_Neutrality_Act }
+
+		cost = 5
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			CHI = {country_event = SIA.14}
+		}
+	}
+
+	focus = {
+		id = SIA_Moderate_Approach_to_China
+		icon = GFX_CHI_Chinese_Church
+		x = 7
+		y = 1
+		relative_position_id = SIA_new_leader_Ananda_Mahidol
+		prerequisite = { focus = SIA_new_leader_Ananda_Mahidol }
+
+		cost = 5
+
+		available = {
+			NOT = {has_idea = SIA_Splited_Management3}
+			NOT = {has_completed_focus = SIA_Moderate_Approach_to_Japan}
+			CHI = {
+				NOT = {has_completed_focus = KMT_promote_nationalism}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = -0.05
+			SIA_japanese_pressure_level_down_alt = yes
+		}
+	}
+
+	focus = {
+		id = SIA_Mutual_Investment
+		icon = GFX_goal_CHI_tigress_battalions
+		x = 1
+		y = 1
+		relative_position_id = SIA_Moderate_Approach_to_China
+		prerequisite = { focus = SIA_Moderate_Approach_to_China }
+
+		cost = 10
+
+		available = {
+			OR = {
+				is_in_faction_with = CHI
+				has_non_aggression_pact_with = CHI
+				is_guaranteed_by = CHI
+				has_guaranteed = CHI
+				has_opinion = {
+					target = CHI
+					value > 50
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if= {
+				limit = {
+					has_full_control_of_state = 869
+				}
+				869 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			if= {
+				limit = {
+					has_full_control_of_state = 869
+				}
+				869 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			CHI = {
+				if= {
+					limit = {
+						has_full_control_of_state = 620
+					}
+					620 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = arms_factory
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+
+			custom_effect_tooltip =  generic_skip_one_line_tt
+
+			effect_tooltip = {
+				if = {
+					limit = {
+						OR = {
+							has_idea = SIA_Japan_Pressure
+							has_idea = SIA_Japan_Pressure2
+							has_idea = SIA_Japan_Pressure3
+						}
+					}
+					remove_ideas = SIA_Japan_Pressure3
+				}
+			}
+			hidden_effect = {
+				remove_ideas = SIA_Japan_Pressure3
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Join_Sino_German_Cooperation
+		icon = GFX_CHI_Sino_German_Cooperation
+		x = -1
+		y = 1
+		relative_position_id = SIA_Moderate_Approach_to_China
+		prerequisite = { focus = SIA_Moderate_Approach_to_China }
+
+		cost = 10
+
+		available = {
+			CHI = {
+				OR = {
+					has_idea = german_advisors
+					has_idea = KMT_sino_german_joint_research_ger_adv
+				}
+			}
+			NOT = {
+				has_war_with = GER
+				has_war_with = CHI
+
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			GER = {
+				country_event = SIA.2 #TODO: reddetme kabul etme eventi yok
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Economic_Aid_Against_Rising_Sun
+		icon = GFX_ENG_A_Symbol_of_Determination
+		x = 1
+		y = 1
+		relative_position_id = SIA_Join_Sino_German_Cooperation
+		prerequisite = { focus = SIA_Join_Sino_German_Cooperation}
+		prerequisite = {focus = SIA_Mutual_Investment}
+
+		cost = 10
+
+		available = {
+			ENG = {
+				has_country_leader = {
+					character = ENG_winston_churchill
+					ruling_only = yes
+				}
+				OR = {
+					has_government = democratic
+					NOT = {
+						has_war_with = SIA
+					}
+					has_subject = AST
+					has_subject = RAJ
+					has_subject = NZL
+					has_subject = MAL
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			ENG = {
+				country_event = SIA.3
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				add_timed_idea = {
+					days = 800
+					idea = SIA_allied_Investment
+				}
+				add_opinion_modifier = { target = ENG modifier = medium_increase }
+				diplomatic_relation = {
+					country = RAJ
+					relation = non_aggression_pact
+					active = yes
+				}
+				diplomatic_relation = {
+					country = NZL
+					relation = non_aggression_pact
+					active = yes
+				}
+				diplomatic_relation = {
+					country = AST
+					relation = non_aggression_pact
+					active = yes
+				}
+				diplomatic_relation = {
+					country = MAL
+					relation = non_aggression_pact
+					active = yes
+				}
+				ENG = {
+					add_opinion_modifier = { target = SIA modifier = medium_increase }
+					add_political_power = 50
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Protect_Air
+		icon = GFX_goal_anti_air
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Economic_Aid_Against_Rising_Sun}
+		relative_position_id = SIA_Economic_Aid_Against_Rising_Sun
+
+		cost = 8
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 1
+				category = cat_anti_air
+			}
+			289 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			868 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Support_Demestic_Producers
+		icon = GFX_SOV_Kolkhoz_Farms
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Mutual_Investment}
+		relative_position_id = SIA_Mutual_Investment
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = SIA_Domestic_producers
+			if = { limit = { 868 = { is_owned_and_controlled_by = SIA } }
+				868 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+
+			if = { limit = { 724 = { is_owned_and_controlled_by = SIA } }
+				724 = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Embargo_Japan
+		icon = GFX_focus_jap_showa_restoration
+		x = -1
+		y = 1
+		relative_position_id = SIA_Economic_Aid_Against_Rising_Sun
+		prerequisite = { focus = SIA_Economic_Aid_Against_Rising_Sun}
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			JAP = {
+				add_opinion_modifier = { target = SIA modifier = embargo }
+				add_opinion_modifier = { target = SIA modifier = sanctions_relations }
+			}
+			add_opinion_modifier = { target = JAP modifier = embargo }
+			add_opinion_modifier = { target = JAP modifier = sanctions_relations }
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = SIA_naval_industry
+		icon = GFX_focus_POL_develop_polish_shipbuilding
+		prerequisite = { focus = SIA_Join_Sino_German_Cooperation}
+		relative_position_id = SIA_Join_Sino_German_Cooperation
+		x = -1
+		y = 1
+
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			neutrality > 0.70
+			any_owned_state = {
+				is_coastal = yes
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+
+		completion_reward = {
+			custom_effect_tooltip = SWI_naval_industry_tt
+			hidden_effect = {
+				set_temp_variable = {max_nav_added = 10}
+				set_temp_variable = {current_nav_added = 0}
+				every_owned_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 1
+							include_locked = yes
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {current_nav_added < max_nav_added}
+						}
+						add_to_temp_variable = {current_nav_added = 1}
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = dockyard
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_Join_Allies
+		icon = GFX_goal_CAN_parliament
+		x = 1
+		y = 1
+		cost = 5
+		prerequisite = {focus = SIA_Embargo_Japan}
+		prerequisite = {focus = SIA_Protect_Air}
+		relative_position_id = SIA_Embargo_Japan
+		available = {
+			country_exists = ENG
+			country_exists = SIA
+			NOT = {has_war_with = ENG}
+		}
+
+		bypass = {}
+
+
+
+
+
+		completion_reward = {
+			ENG = { country_event = generic.2 }
+		}
+	}
+
+	focus = {
+		id = SIA_Kneel_to_the_Emperor
+		icon = GFX_JAP_2_26_Incident
+		x = 32
+		y = 0
+		mutually_exclusive = {focus = SIA_Bangkok_Field}
+		mutually_exclusive = {focus = SIA_Authorize_Khana_Ratsadon}
+		cost = 12
+
+		allow_branch = {
+			has_country_flag = SIA_hirohitos_wife_called
+		}
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+			JAP = {
+				has_civil_war = no
+				OR = {
+					has_government = neutrality
+					has_government = fascism
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = SIA_Kneel_to_the_Emperor_tt
+			JAP = {country_event = SIA.19}
+			custom_effect_tooltip = if_they_accept_tt
+			custom_effect_tooltip = SIA_Kneel_to_the_Emperor_accept_tt
+			custom_effect_tooltip = if_they_refuse_tt
+			custom_effect_tooltip = SIA_Kneel_to_the_Emperor_refuse_tt
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_a_new_country
+		icon = GFX_z_goal_JAP_principles_of_national_policy
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Kneel_to_the_Emperor}
+		relative_position_id = SIA_Kneel_to_the_Emperor
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			JAP = {
+				set_autonomy = {
+					target = ROOT
+					autonomous_state = autonomy_personal_union
+					freedom_level = 0.2
+				}
+			}
+			create_country_leader = {
+				name = "Japanese Provisional Government"
+				desc = ""
+				picture = GFX_Portrait_kwantung_army_leader
+				expire = "1965.1.1"
+				ideology = fascism_ideology
+				traits = {
+					cabinet_crisis
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_idea = SIA_Splited_Management
+					}
+					remove_ideas = SIA_Splited_Management
+				}
+				if = {
+					limit = {
+						has_idea = SIA_Rama
+					}
+					remove_ideas = SIA_Rama
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_emperor_investment
+		icon = GFX_SIA_emperors_investment
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_a_new_country}
+		relative_position_id = SIA_a_new_country
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			JAP = {country_event = SIA.26}
+			custom_effect_tooltip = if_they_accept_tt
+			custom_effect_tooltip = emperor_investment_tt
+			effect_tooltip = {
+				JAP = {
+					add_timed_idea = {
+						days = 30
+						idea = SIA_emperor_investment_idea
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_warrior_sprit
+		icon = GFX_focus_generic_japanese_imperial_glory
+		x = -2
+		y = 1
+		prerequisite = {focus = SIA_a_new_country}
+		relative_position_id = SIA_a_new_country
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			hidden_effect = {
+				set_rule = {
+					can_use_kamikaze_pilots = yes
+				}
+			}
+			custom_effect_tooltip = kamikaze_focus_tooltip
+			add_war_support = 0.1
+		}
+	}
+
+	focus = {
+		id = SIA_Naikaku
+		icon = GFX_z_goal_CSR_government_reorganisation
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_warrior_sprit}
+		relative_position_id = SIA_warrior_sprit
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_ideas = SIA_Naikaku
+		}
+	}
+
+	focus = {
+		id =  SIA_Japanese_Society
+		icon = GFX_z_goal_EHB_give_tangshan_city_status
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_warrior_sprit}
+		relative_position_id = SIA_warrior_sprit
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_ideas = SIA_Japanese_Society
+		}
+	}
+
+	focus = {
+		id = SIA_upper_rank_purges
+		icon = GFX_z_goal_paint_the_sword_with_the_blood_of_modernists
+		x = 2
+		y = 1
+		prerequisite = {focus = SIA_a_new_country}
+		relative_position_id = SIA_a_new_country
+		cost = 10
+
+		select_effect = {
+			add_ideas = SIA_upper_rank_purges
+		}
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = SOV_focus_select_effect_tt
+			effect_tooltip = {
+				add_ideas = SIA_upper_rank_purges
+			}
+
+			custom_effect_tooltip = SOV_focus_complete_effect_tt
+			remove_ideas = SIA_upper_rank_purges
+			add_command_power = 10
+			custom_effect_tooltip = SIA_khana_ratsadon_purge_tt
+
+		}
+	}
+
+	focus = {
+		id = SIA_Japanese_Army_Staff
+		icon = GFX_JAP_Imperial_Army
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_upper_rank_purges}
+		relative_position_id = SIA_upper_rank_purges
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL_CHARACTER }
+		completion_reward = {
+			custom_effect_tooltip = SIA_Japanese_Army_Staff_tt
+
+			JAP = {
+				country_event = SIA.21
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				JAP = {
+					JAP_shigeru_honjo = {
+						set_nationality = SIA
+						set_character_flag = JAP_advisor_sia
+					}
+					JAP_iwane_matsui = {
+						set_nationality = SIA
+						set_character_flag = JAP_advisor_sia
+					}
+					JAP_kuniaki_koiso = {
+						set_nationality = SIA
+						set_character_flag = JAP_advisor_sia
+					}
+				}
+			}
+
+			add_ideas = SIA_Japanese_Army_Staff
+		}
+	}
+
+	focus = {
+		id = SIA_Japanese_Navy_Staff
+		icon = GFX_z_goal_EHB_japan_instructors_and_advisers
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_upper_rank_purges}
+		relative_position_id = SIA_upper_rank_purges
+		cost = 10
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL_CHARACTER }
+		completion_reward = {
+			custom_effect_tooltip = SIA_Japanese_Army_Staff_tt
+
+			JAP = {
+				country_event = SIA.24
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				JAP = {
+					JAP_zengo_yoshida = {
+						set_nationality = SIA
+						set_character_flag = JAP_advisor_sia
+					}
+				}
+			}
+
+			add_ideas = SIA_Japanese_Navy_Staff
+		}
+	}
+
+	focus = {
+		id = SIA_Offical_Announcement
+		icon = GFX_SIA_offical_announcement
+		x = 0
+		y = 2
+		prerequisite = {focus = SIA_emperor_investment}
+		prerequisite = {focus = SIA_Japanese_Society focus = SIA_Naikaku}
+		prerequisite = {focus = SIA_Japanese_Army_Staff focus = SIA_Japanese_Navy_Staff}
+		relative_position_id = SIA_emperor_investment
+
+		cost = 5
+
+		ai_will_do = {
+			factor = 0
+		}
+
+		available = {
+
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			set_cosmetic_tag = SIA_queen
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = no
+				last_election = "1930.12.17"
+				election_frequency = 48
+				long_name = "Imperial Japanese Royal Family"
+				name = "Royal Party"
+			}
+			create_country_leader = {
+				name = "Princess Nagako"
+				desc = ""
+				picture = GFX_Portrait_Japan_Nagako
+				expire = "1965.1.1"
+				ideology = monarchism
+				traits = {
+					Emperors_Wife popular_queen
+				}
+			}
+			news_event = { days = 1 id = SIA_news.1 }
+			add_political_power = 75
+		}
+	}
+
+	focus = {
+		id = SIA_Welfare_In_State
+		icon = GFX_z_goal_liberation_of_oppressed_peoples
+		x = -2
+		y = 1
+		prerequisite = {focus = SIA_Offical_Announcement}
+		relative_position_id = SIA_Offical_Announcement
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.1
+
+			swap_ruler_traits = {
+				remove = Emperors_Wife
+				add = Emperorss_Wife
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_konoe_cabinet_focus
+		icon = GFX_JAP_konoe_cabinet_focus_icon
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_Welfare_In_State}
+		relative_position_id = SIA_Welfare_In_State
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+
+		}
+	}
+
+	focus = {
+		id = SIA_tojo_cabinet_focus
+		icon = GFX_JAP_tojo_cabinet_focus_icon
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_Welfare_In_State}
+		relative_position_id = SIA_Welfare_In_State
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+
+		}
+	}
+
+	focus = {
+		id = SIA_japanese_experts
+		icon = GFX_z_goal_construction_hospitals
+		x = 2
+		y = 1
+		prerequisite = {focus = SIA_Offical_Announcement}
+		relative_position_id = SIA_Offical_Announcement
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_ideas = SIA_japanese_experts
+		}
+	}
+
+	focus = {
+		id = SIA_siamese_zero
+		icon = GFX_goal_JAP_the_zero
+		x = 1
+		y = 1
+		prerequisite = {focus = SIA_japanese_experts}
+		relative_position_id = SIA_japanese_experts
+		mutually_exclusive = {focus = SIA_siamese_yamato}
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			custom_effect_tooltip = JAP_the_zero_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_dlc = "By Blood Alone"
+						}
+					}
+					set_technology = { cv_fighter2 = 1 }
+				}
+				else = {
+					create_equipment_variant = {
+						name = "A6M Zero-Sen"
+						type = cv_small_plane_airframe_2
+						allow_without_tech = yes
+						modules = {
+							fixed_main_weapon_slot = light_mg_2x
+							fixed_auxiliary_weapon_slot_1 = aircraft_cannon_1_2x
+							engine_type_slot = engine_3_1x
+							special_type_slot_1 = drop_tanks
+							special_type_slot_2 = fuel_tanks_small
+						}
+						icon = "GFX_JAP_cv_fighter2_medium"
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_siamese_yamato
+		icon = GFX_JAP_The_Ultimate_Battleship
+		x = -1
+		y = 1
+		prerequisite = {focus = SIA_japanese_experts}
+		relative_position_id = SIA_japanese_experts
+		mutually_exclusive = {focus = SIA_siamese_zero}
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			if = {
+				limit = {
+					not = { has_dlc = "Man the Guns" }
+				}
+				add_tech_bonus = {
+					name = JAP_the_ultimate_battleship
+					bonus = 3.0
+					uses = 1
+					category = shbb_tech
+				}
+			}
+			else = {
+				if = {
+					limit = {
+						not = { has_tech = ship_hull_super_heavy }
+					}
+					set_technology = {
+						ship_hull_super_heavy = 1
+					}
+				}
+				create_equipment_variant = {
+					name = "Yamato Class"
+					type = ship_hull_super_heavy_1
+					name_group = JAP_BB_HISTORICAL
+					allow_without_tech = yes
+					parent_version = 0
+					modules = {
+						fixed_ship_battery_slot = ship_super_heavy_battery_1
+						fixed_ship_anti_air_slot = ship_anti_air_2
+						fixed_ship_fire_control_system_slot = ship_fire_control_system_1
+						fixed_ship_radar_slot = empty
+						fixed_ship_engine_slot = heavy_ship_engine_2
+						fixed_ship_secondaries_slot = ship_secondaries_2
+						fixed_ship_armor_slot = ship_armor_shbb
+						front_1_custom_slot = ship_anti_air_1
+						front_2_custom_slot = empty
+						mid_1_custom_slot = empty
+						mid_2_custom_slot = ship_secondaries_2
+						mid_3_custom_slot = ship_secondaries_2
+						rear_1_custom_slot = ship_super_heavy_battery_1
+						rear_2_custom_slot = ship_airplane_launcher_1
+					}
+				}
+				custom_effect_tooltip = JAP_yamato_tt
+				hidden_effect = {
+					set_country_flag = jap_yamato_created
+					add_equipment_production = {
+						equipment = {
+							type = ship_hull_super_heavy_1
+							creator = "JAP"
+							version_name = "Yamato Class"
+						}
+						name = "Yamato"
+						requested_factories = 1
+						progress = 0.75
+						amount = 1
+					}
+					add_equipment_production = {
+						equipment = {
+							type = ship_hull_super_heavy_1
+							creator = "JAP"
+							version_name = "Yamato Class"
+						}
+						name = "Musashi"
+						requested_factories = 1
+						progress = 0.5
+						amount = 1
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SIA_thai_japanese_empire
+		icon = GFX_z_goal_CSR_management_of_mongolian_lands
+		x = 0
+		y = 1
+		prerequisite = {focus = SIA_Offical_Announcement}
+		relative_position_id = SIA_Offical_Announcement
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			custom_effect_tooltip = SIA_thai_japanese_empire_tt
+		}
+	}
+
+	focus = {
+		id = SIA_unifierd_empires
+		icon = GFX_z_goal_market_is_source_of_law
+		x = 0
+		y = 2
+		prerequisite = {focus = SIA_thai_japanese_empire}
+		relative_position_id = SIA_thai_japanese_empire
+		cost = 10
+
+		available = {
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			JAP = {add_ideas = SIA_unifierd_empires1}
+			add_ideas = SIA_unifierd_empires1
+			custom_effect_tooltip = SIA_unifierd_empires_tt
+			show_ideas_tooltip = SIA_unifierd_empires2
+		}
+	}
+}

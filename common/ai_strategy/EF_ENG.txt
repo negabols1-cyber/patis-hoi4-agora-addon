@@ -1,0 +1,213 @@
+ENG_start = {
+	allowed = {
+		original_tag = ENG
+	}
+	enable = {
+		NOT = {
+			has_tech = construction1
+			has_tech = basic_machine_tools
+			has_tech = improved_depth_charges
+			has_tech = improved_sonar
+			has_tech = range_improvements
+			has_tech = dispersed_industry
+			has_tech = improved_machine_tools
+			has_tech = construction2
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = research_tech
+		id = improved_depth_charges
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_depth_charges
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = improved_sonar
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_sonar
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = basic_machine_tools
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_machine_tools
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = construction1
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = construction1
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = range_improvements
+		value = 1000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = range_improvements
+		value = 1000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = dispersed_industry
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = dispersed_industry
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = improved_machine_tools
+		value = 4500
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_machine_tools
+		value = 4500
+	}
+	ai_strategy = {
+		type = research_tech
+		id = construction2
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = construction2
+		value = 3000
+	}
+}
+ENG_UCAK = {
+	allowed = {
+		original_tag = ENG
+	}
+	enable = {
+		OR = {
+			has_completed_focus = fighter_command_focus
+			date > 1939.6.15
+		}
+	}
+	abort = {
+		has_tech = improved_small_airframe
+		has_tech = aa_hmg
+		has_tech = engine_tech_3
+		has_tech = survivability_studies
+	}
+
+	ai_strategy = {
+		type = research_tech
+		id = improved_small_airframe
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_small_airframe
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_tech
+		id = aa_hmg
+		value = 4000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = aa_hmg
+		value = 4000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = survivability_studies
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = survivability_studies
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = engine_tech_3
+		value = 5000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = engine_tech_3
+		value = 5000
+	}
+}
+#lutfen al
+ENG_ucak_ucak = {
+	allowed = {
+		original_tag = ENG
+	}
+	enable = {
+		is_historical_focus_on = yes
+		NOT = {
+			has_idea = industry_liasons_spirit
+		}
+		OR = {
+			has_game_rule = {
+				rule = ENG_ai_behavior
+				option = DEFAULT
+			}
+			has_game_rule = {
+				rule = ENG_ai_behavior
+				option = DEMOCRATIC_HISTORICAL
+			}
+			has_country_flag = ENG_AI_DEMOCRATIC_HISTORICAL
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = air_xp_spend_priority
+		id = air_force_spirit
+		value = 100
+	}
+}
+ENG_altyapi_bas_yetmiyorsa = {
+	allowed = {
+		original_tag = ENG
+	}
+	enable = {
+		check_variable = { resource_imported@aluminium > 7 }
+		687 = {
+			free_building_slots = {
+				building = infrastructure
+				size > 0
+			}
+		}
+	}
+	abort = {
+		687 = {
+			free_building_slots = {
+				building = infrastructure
+				size < 1
+			}
+		}
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 687
+		value = 2000
+	}
+}

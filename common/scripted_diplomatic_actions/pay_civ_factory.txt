@@ -1,0 +1,117 @@
+scripted_diplomatic_actions = {
+
+	pay_civ_factory = {
+		allowed = { ROOT = { is_ai = no } }
+		visible = {
+			THIS = { NOT= { has_war_with = ROOT } }
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = remove_all_multiplayer_tools
+						option = ALLOWED
+					}
+				}
+				always = no
+			}
+			if = {
+				limit = {
+					has_global_flag = EF_multiplayer_tools_available_flag
+				}
+				always = yes
+			}
+			if = {
+				limit = {
+					OR = {
+						has_global_flag = his_only
+
+					}
+				}
+				always = no
+			}
+		}
+		selectable = {
+			ROOT = {
+				any_owned_state = { is_controlled_by = PREV industrial_complex > 0 }
+			}
+			if = {
+				limit = {
+					NOT = { has_country_flag = deactivate_factory_right_limit_value }
+				}
+				check_variable = { factory_right > 0 }
+			}
+		}
+
+		requires_acceptance = no
+		cost = 0
+		command_power = 0
+
+		show_acceptance_on_action_button = no
+
+		icon = 4
+
+		on_sent_effect = {}
+
+		complete_effect = {
+			ROOT = { random_owned_controlled_state = { limit={ industrial_complex > 0 } remove_building = { type=industrial_complex level = 1 } }
+				add_to_variable = {
+					var = factory_right
+					value = 1
+					tooltip = add_factory_tt
+				}
+				if = {
+					limit = {
+						OR = {
+							check_variable = {
+								var = factory_right
+								value = factory_right_limit
+								compare = greater_than_or_equals
+							}
+							check_variable = { factory_right > factory_right_limit }
+						}
+					}
+					add_to_variable = {
+						var = factory_right_limit
+						value = 1
+					}
+				}
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+
+			subtract_from_variable = {
+				var = factory_right
+				value = 1
+				tooltip = subtract_factory_tt
+			}
+		}
+
+		reject_effect = {
+
+		}
+
+		send_description = pay_civ_factory_send_text
+
+		receive_description = pay_civ_get_message
+
+		accept_title = pay_civ_get_title
+
+		accept_description = pay_civ_get_message
+
+		reject_title = pay_civ_get_title
+
+		reject_description = pay_civ_get_message
+
+		ai_acceptance = {
+			condition = {
+				base = 0
+
+			}
+		}
+
+		ai_desire = {
+			base = -1
+
+		}
+
+	}
+
+}

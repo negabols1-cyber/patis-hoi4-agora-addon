@@ -1,0 +1,46 @@
+#####-----> BRA: Historical AI Behavior <><> <><> <><> <><> <><>
+
+BRA_historical_plan = {
+	name = "Brazil Hisorical Plan"
+	desc = "Historical behavior for Brazil."
+	allowed = {
+		original_tag = BRA
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = BRA_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = BRA_AI_HISTORICAL_BEHAVIOR
+			has_game_rule = {
+				rule = BRA_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	focus_factors = {
+		BRA_reject_the_estado_navo = 0
+		BRA_manipulate_behind_the_scenes = 0
+		BRA_begin_industrializing_the_nation = 0
+		BRA_political_cooperation_with_plinio = 0
+		BRA_maintain_strict_neutrality = 0
+		BRA_allign_ourselves_with_the_axis = 0
+		BRA_the_war_on_fascism = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

@@ -1,0 +1,46 @@
+#####-----> BOL: Historical AI Behavior <><> <><> <><> <><> <><>
+
+BOL_historical_plan = {
+	name = "Bolivia Hisorical Plan"
+	desc = "Historical behavior for Bolivia."
+	allowed = {
+		original_tag = BOL
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = BOL_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = BOL_AI_HISTORICAL
+			has_game_rule = {
+				rule = BOL_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	focus_factors = {
+		BOL_side_with_the_people = 0
+		BOL_empower_the_young_officers = 0
+		BOL_continue_with_toro = 0
+		BOL_continue_with_the_military = 0
+		BOL_sea_access_for_resource_rights = 0
+		BOL_try_to_buyback_chaco = 0
+		BOL_switch_to_an_agrarian_industry = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

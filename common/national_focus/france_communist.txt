@@ -1,0 +1,2414 @@
+focus_tree = {
+	id = french_communist_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = FRA
+		}
+	}
+
+	continuous_focus_position = {
+		x = 50 y = 2250
+	}
+
+	initial_show_position = {
+		x = 0
+	}
+
+
+	default = no
+
+	shared_focus = UFRA_open_to_the_world
+	shared_focus = UFRA_economic_policies
+	shared_focus = UFRA_devalue_the_franc
+	shared_focus = UFRA_begin_rearmament
+	shared_focus = UFRA_naval_rearmament
+	shared_focus = UFRA_air_focus
+
+	focus = {
+		id = UFRA_radicalise_the_popular_front # COMMUNIST
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 54
+		y = 0
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {}
+		mutually_exclusive = { }
+		cost = 1
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+			always = yes
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL  }
+		completion_reward = {
+			custom_effect_tooltip = FRA_blum_rad_tt
+			set_country_flag = FRA_parliament_can_discuss
+		}
+	}
+	focus = {
+		id = UFRA_invite_communist_ministers
+		icon = GFX_goal_FRA_World_Revolution
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_radicalise_the_popular_front }
+		relative_position_id = UFRA_radicalise_the_popular_front
+		mutually_exclusive = { }
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			not = {
+			}
+			is_subject = no
+		}
+
+		bypass = {
+			has_government = communism
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			FRA_right_wing_riot_effect = yes
+			add_popularity = { ideology = communism popularity = 0.05 }
+			set_temp_variable = { communism_temp = party_popularity@communism }
+			multiply_temp_variable = { communism_temp = 0.25 }
+			add_stability = communism_temp
+
+			custom_effect_tooltip = socialists_win_15
+
+			set_temp_variable = { temp_member = 1 }
+			set_temp_variable = { temp_seats = 15 }
+			modify_parliament_seat = yes
+
+			modify_parliament_seat = yes
+			add_to_variable = { fra_senate_support = 8 }
+			custom_effect_tooltip = senate_win_8
+			set_country_flag = FRA_parliament_can_discuss
+		}
+	}
+	focus = {
+		id = UFRA_strengthen_the_unions
+		icon = GFX_goal_FRA_ruralism
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_invite_communist_ministers }
+		mutually_exclusive = { }
+		relative_position_id = UFRA_invite_communist_ministers
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			has_government = communism
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_popularity = { ideology = communism popularity = 0.1}
+			FRA_right_wing_riot_effect = yes
+
+			IF = {
+				limit = {
+					has_government = democratic
+				}
+				custom_effect_tooltip = social_liberals_loss_5
+				custom_effect_tooltip = socialists_win_10
+				set_temp_variable = { temp_member = 2 }
+				set_temp_variable = { temp_seats = -5 }
+				modify_parliament_seat = yes
+				set_temp_variable = { temp_member = 1 }
+				set_temp_variable = { temp_seats = 10 }
+				modify_parliament_seat = yes
+
+			}
+		}
+	}
+	focus = {
+		id = UFRA_celebrate_the_commune
+		icon = GFX_FRA_Commune
+		x = 0
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_strengthen_the_unions }
+		mutually_exclusive = { }
+		relative_position_id = UFRA_strengthen_the_unions
+		cost = 5
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			has_government = communism
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_popularity = { ideology = communism popularity = 0.1}
+		}
+	}
+	focus = {
+		id = UFRA_womens_suffrage
+		icon = GFX_u_fra_FRA_help_families
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_invite_communist_ministers }
+		mutually_exclusive = { }
+		relative_position_id = UFRA_invite_communist_ministers
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+
+			if = {
+				limit = {
+					has_government = democratic
+				}
+				set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+				add_to_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+				custom_trigger_tooltip = {
+					tooltip = popular_front_majority
+					check_variable = { FRA_rw_support > 125 }
+				}
+				custom_trigger_tooltip = {
+					tooltip = fra_senate_support_60
+					check_variable = { fra_senate_support > 59 }
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_ideas = { FRA_womens_suffrage }
+			add_popularity = { ideology = communism popularity = 0.1}
+
+			IF = {
+				limit = {
+					has_government = democratic
+				}
+				custom_effect_tooltip = socialists_win_10
+				set_temp_variable = { temp_member = 1 }
+				set_temp_variable = { temp_seats = 10 }
+				modify_parliament_seat = yes
+				add_to_variable = { fra_senate_support = 4 }
+				custom_effect_tooltip = senate_win_4
+
+			}
+		}
+	}
+	focus = {
+		id = UFRA_legal_equality
+		icon = GFX_u_fra_FRA_minimum_wage
+		x = 0
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_womens_suffrage }
+		mutually_exclusive = { }
+		relative_position_id = UFRA_womens_suffrage
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			IF = {
+				limit = {
+					has_government = democratic
+				}
+				custom_trigger_tooltip = {
+					tooltip = socialists_advantage
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+					add_to_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+					check_variable = { FRA_rw_support > 90 }
+				}
+				custom_trigger_tooltip = {
+					tooltip = fra_senate_support_70
+					check_variable = { fra_senate_support > 69 }
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			FRA_right_wing_riot_effect = yes
+			add_popularity = { ideology = communism popularity = 0.1 }
+			set_rule = {
+				can_generate_female_aces = yes
+			}
+			IF = {
+				limit = {
+					has_government = democratic
+				}
+				custom_effect_tooltip = socialists_win_5
+				set_temp_variable = { temp_member = 1 }
+				set_temp_variable = { temp_seats = 5 }
+				modify_parliament_seat = yes
+				add_to_variable = { fra_senate_support = -6 }
+				custom_effect_tooltip = senate_loss_6
+
+			}
+		}
+	}
+	focus = {
+		id = UFRA_industrial_collectivization
+		icon = GFX_goal_generic_construct_civ_factory
+		x = -1
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_ban_the_leagues
+		}
+		prerequisite = { focus = UFRA_womens_suffrage focus = UFRA_strengthen_the_unions }
+		mutually_exclusive = { }
+		relative_position_id = UFRA_invite_communist_ministers
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			IF = {
+				limit = {
+					has_government = democratic
+				}
+				custom_trigger_tooltip = {
+					tooltip = socialists_enough
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+					check_variable = { FRA_rw_support > 60 }
+				}
+				custom_trigger_tooltip = {
+					tooltip = fra_senate_support_50
+					check_variable = { fra_senate_support > 49 }
+				}
+			}
+		}
+
+		bypass = {
+			not = {
+				any_owned_state = {
+					is_core_of = ROOT
+					is_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+			}
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+
+			random_owned_state = {
+				limit = {
+					is_core_of = ROOT
+					is_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = ROOT
+					is_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = ROOT
+					is_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_agricultural_collectivization
+		icon = GFX_u_fra_FRA_minimum_wage
+		x = 1
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_ban_the_leagues
+		}
+		prerequisite = { focus = UFRA_womens_suffrage focus = UFRA_strengthen_the_unions }
+		mutually_exclusive = { }
+		relative_position_id = UFRA_invite_communist_ministers
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			IF = {
+				limit = {
+					has_government = democratic
+				}
+				custom_trigger_tooltip = {
+					tooltip = socialists_enough
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+					check_variable = { FRA_rw_support > 60 }
+				}
+				custom_trigger_tooltip = {
+					tooltip = fra_senate_support_50
+					check_variable = { fra_senate_support > 49 }
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = { FRA_agricultural_collectivization }
+			if = {
+				limit = {
+					set_temp_variable = { FRA_rw_support = party_popularity@neutrality }
+					add_to_temp_variable = { FRA_rw_support = party_popularity@fascism }
+					check_variable = { FRA_rw_support > 0.4 }
+				}
+				add_stability = -0.05
+			}
+		}
+	}
+	focus = {
+		id = UFRA_force_the_issue
+		icon = GFX_goal_FRA_french_revanchism
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_celebrate_the_commune
+		}
+		prerequisite = {
+			focus = UFRA_legal_equality
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_celebrate_the_commune
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			OR = {
+				communism > 0.45
+
+				IF = {
+					limit = {
+						has_government = democratic
+					}
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^2 }
+					add_to_temp_variable = { FRA_rw_support = parliament_seat_array^3 }
+					custom_trigger_tooltip = {
+						tooltip = national_bloc_minority
+						check_variable = { FRA_rw_support < 40 }
+					}
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+					custom_trigger_tooltip = {
+						tooltip = socialists_majority
+						check_variable = { FRA_rw_support > 125 }
+					}
+				}
+			}
+		}
+
+		bypass = {
+			has_government = communism
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_temp_variable = { FRA_democratic_support = party_popularity@democratic }
+			multiply_temp_variable = { FRA_democratic_support = -0.25 }
+			add_stability = FRA_democratic_support
+			custom_effect_tooltip = FRA_force_the_issue_tt
+			set_politics = { ruling_party = communism elections_allowed = no }
+			if = {
+				limit = {
+					has_idea = FRA_disjointed_government
+				}
+				remove_ideas = FRA_disjointed_government
+			}
+			hidden_effect = {
+				news_event = { id = lar_news.9 days = 3 random_days = 5 }
+			}
+			create_corps_commander = {
+				name = "Henri Roi-Tangui"
+				picture = "Portrait_France_Henri_Roi_Tanguy.dds"
+				traits = {
+					politically_connected
+					trickster
+					infantry_leader
+				}
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 2
+				logistics_skill = 3
+			}
+			custom_effect_tooltip = FRA_end_of_parliment_decisions
+		}
+	}
+	focus = {
+		id = UFRA_state_atheism
+		icon = GFX_focus_mex_triumph_over_the_cristeros
+		x = 4
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_force_the_issue
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_force_the_issue
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			communism > 0.60
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_ideas = FRA_state_atheism
+		}
+	}
+	focus = {
+		id = UFRA_heirs_of_the_french_revolution
+		icon = GFX_u_fra_french_revolution
+		x = -5
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_force_the_issue
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_force_the_issue
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_political_power = 150
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+		}
+	}
+	focus = {
+		id = UFRA_jaccobinisme
+		icon = GFX_focus_generic_soviet_politics
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_heirs_of_the_french_revolution
+		}
+		mutually_exclusive = { focus = UFRA_regionalisme }
+		relative_position_id = UFRA_heirs_of_the_french_revolution
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_political_power = 150
+			add_stability = 0.1
+		}
+	}
+	focus = {
+		id = UFRA_regionalisme
+		icon = GFX_focus_generic_soviet_politics
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_heirs_of_the_french_revolution
+		}
+		mutually_exclusive = { focus = UFRA_jaccobinisme }
+		relative_position_id = UFRA_heirs_of_the_french_revolution
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_stability = -0.1
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_socialist_anti_colonial_commitee
+		icon = GFX_focus_generic_self_management
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_regionalisme
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_regionalisme
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_manpower = 150000
+			add_opinion_modifier = {
+				target = ENG
+				modifier =  medium_decrease
+			}
+		}
+	}
+	focus = {
+		id = UFRA_factory_towns
+		icon = GFX_goal_generic_soviet_construction
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_jaccobinisme
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_jaccobinisme
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = industry
+			}
+		}
+	}
+	focus = {
+		id = UFRA_european_revolution
+		icon = GFX_goal_generic_political_pressure
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_factory_towns focus = UFRA_socialist_anti_colonial_commitee
+		}
+		prerequisite = {
+			focus = UFRA_anti_fascist_coalition focus = UFRA_loyalty_to_moscow focus = UFRA_loyalty_to_the_cause
+		}
+
+		prerequisite = { focus = UFRA_revolutionary_zeal }
+		mutually_exclusive = { }
+		relative_position_id = UFRA_factory_towns
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				target = BEL
+				type = annex_everything
+				expire = 0
+			}
+			create_wargoal = {
+				target = SWI
+				type = annex_everything
+				expire = 0
+			}
+			create_wargoal = {
+				target = LUX
+				type = annex_everything
+				expire = 0
+			}
+			create_wargoal = {
+				target = HOL
+				type = annex_everything
+				expire = 0
+			}
+		}
+	}
+	focus = {
+		id = UFRA_communal_army
+		icon = GFX_goal_FRA_army
+		x = -9
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_force_the_issue
+		}
+		mutually_exclusive = { }
+		relative_position_id = UFRA_force_the_issue
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			communism > 0.50
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = FRA_communal_army
+		}
+	}
+	focus = {
+		id = UFRA_revolutionary_zeal
+		icon = GFX_goal_generic_war_with_comintern
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_communal_army
+		}
+		relative_position_id = UFRA_communal_army
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_revolutionary_zeal}
+		}
+	}
+	focus = {
+		id = UFRA_political_commissars
+		icon = GFX_focus_prc_agrarian_socialism
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_revolutionary_zeal }
+		mutually_exclusive = { }
+		relative_position_id = UFRA_revolutionary_zeal
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = political_commissars_focus
+			if = {
+				limit = { has_government = fascism }
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.2
+				}
+			}
+			if = {
+				limit = { has_government = communism }
+				add_popularity = {
+					ideology = communism
+					popularity = 0.2
+				}
+			}
+			add_political_power = 200
+		}
+	}
+	focus = {
+		id = UFRA_reconciliation
+		icon = GFX_goal_generic_improve_relations
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_force_the_issue
+		}
+		search_filters = { FOCUS_FILTER_STABILITY }
+		mutually_exclusive = { focus = UFRA_revolution_to_the_utmost }
+		relative_position_id = UFRA_force_the_issue
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+	focus = {
+		id = UFRA_constitutional_convention
+		icon = GFX_focus_generic_treaty
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_reconciliation
+		}
+		relative_position_id = UFRA_reconciliation
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_political_power = 120
+		}
+	}
+	focus = {
+		id = UFRA_anti_fascist_coalition
+		icon = GFX_goal_generic_military_deal
+		x = -1
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_constitutional_convention
+		}
+		mutually_exclusive = { focus = UFRA_loyalty_to_moscow focus = UFRA_loyalty_to_the_cause }
+		relative_position_id = UFRA_reconciliation
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			is_in_faction = yes
+		}
+
+
+
+
+
+		completion_reward = {
+			promote_character = FRA_rene_nicod
+			add_trait = {
+				character = FRA_rene_nicod
+				ideology = marxism
+				trait = reluctant_veteran
+			}
+			set_party_name = {
+				ideology = communism
+				long_name = FRA_union_populaire_long
+				name = FRA_union_populaire
+			}
+			if = {
+				limit = {
+					NOT = {
+						any_neighbor_country = {
+							is_faction_leader = yes
+							OR = {
+								has_government = democratic
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_rule = { can_create_factions = yes }
+				create_faction_from_template = {
+					template = faction_template_anti_fascist
+					name = FRA_anti_fascist_coalition
+				}
+				every_neighbor_country = {
+					limit = {
+						is_in_faction = no
+						OR = {
+							has_government = communism
+							has_government = democratic
+						}
+					}
+					country_event = generic.5
+				}
+			}
+			else_if = {
+				limit = {
+					any_neighbor_country = {
+						is_faction_leader = yes
+						has_government = communism
+					}
+				}
+				random_neighbor_country = {
+					limit = {
+						is_faction_leader = yes
+						has_government = communism
+					}
+					country_event = generic.2
+				}
+			}
+			else_if = {
+				limit = {
+					any_neighbor_country = {
+						is_faction_leader = yes
+						has_government = democratic
+					}
+				}
+				random_neighbor_country = {
+					limit = {
+						is_faction_leader = yes
+						has_government = democratic
+					}
+					country_event = generic.2
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_invite_anti_fascist_emigrants
+		icon = GFX_goal_generic_national_unity
+		x = -1
+		y = 3
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_anti_fascist_coalition
+		}
+		relative_position_id = UFRA_reconciliation
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = { FRA_anti_fascist_immigrants }
+		}
+	}
+	focus = {
+		id = UFRA_reconnect_to_the_balkans
+		icon = GFX_goal_generic_military_sphere
+		x = -1
+		y = 4
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_invite_anti_fascist_emigrants
+		}
+		relative_position_id = UFRA_reconciliation
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+
+			every_other_country = {
+				limit = {
+					OR = {
+						original_tag = YUG
+						original_tag = HUN
+						original_tag = ROM
+						original_tag = GRE
+						original_tag = CZE
+						original_tag = BUL
+						original_tag = ALB
+						original_tag = SER
+						original_tag = SLO
+						original_tag = MNT
+						original_tag = BOS
+						original_tag = MAC
+						original_tag = CRO
+					}
+					exists = yes
+					is_in_faction = no
+					is_subject = no
+					NOT = { has_war_with = ROOT }
+					OR = {
+						has_government = communism
+						has_government = democratic
+					}
+				}
+				if = {
+					limit = { ROOT = { is_faction_leader = yes } }
+					country_event = generic.5
+				}
+				else_if = {
+					limit = {
+						ROOT = {
+							is_in_faction = yes
+						}
+					}
+					random_other_country = {
+						limit = {
+							is_in_faction_with = ROOT
+							is_faction_leader = yes
+						}
+						ROOT = { set_variable = { faction_leader = PREV } }
+					}
+					country_event = lar_fra_reconnect_to_the_balkans.1
+				}
+				else = {
+					custom_effect_tooltip = invite_to_faction_tt
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_pre_empt_the_fascist_attack
+		icon = GFX_focus_focus_fra_fascist_threat
+		x = 1
+		y = 5
+		prerequisite = {
+			focus = UFRA_reconnect_to_the_balkans
+			focus = UFRA_host_the_german_exiles
+		}
+
+		relative_position_id = UFRA_reconciliation
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			any_neighbor_country = {
+				has_government = fascism
+				NOT = { has_war_with = ROOT }
+				NOT = { is_in_faction_with = ROOT }
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			every_neighbor_country = {
+				limit = {
+					has_government = fascism
+				}
+				ROOT = {
+					create_wargoal = {
+						type = topple_government
+						target = PREV
+						expire = 0
+					}
+				}
+			}
+			if = {
+				limit = {
+					has_idea = FRA_union_and_labor_strikes
+				}
+				remove_ideas = FRA_union_and_labor_strikes
+			}
+		}
+	}
+	focus = {
+		id = UFRA_loyalty_to_moscow
+		icon = GFX_goal_support_communism
+		x = 3
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_constitutional_convention
+			focus = UFRA_destroy_the_counter_revolution
+		}
+		mutually_exclusive = { focus = UFRA_anti_fascist_coalition focus = UFRA_loyalty_to_the_cause }
+		relative_position_id = UFRA_reconciliation
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			Not = { has_war_with = SOV }
+			SOV = { has_government = communism }
+			OR = {
+				is_subject = no
+				is_subject_of = SOV
+			}
+		}
+
+		bypass = {
+			is_in_faction_with = SOV
+		}
+
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					SOV = {
+						is_faction_leader = yes
+						has_government = communism
+					}
+				}
+				SOV = {
+					country_event = generic.2
+				}
+			}
+			else_if = {
+				limit = {
+					SOV = {
+						is_faction_leader = no
+						is_in_faction = yes
+					}
+				}
+				random_other_country = {
+					limit = {
+						is_faction_leader = yes
+						is_in_faction_with = SOV
+					}
+					country_event = generic.2
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_soviet_industrial_aid
+		available = {
+			NOT = { has_war_with = SOV }
+			SOV = { has_government = communism }
+		}
+		prerequisite = { focus = UFRA_loyalty_to_moscow focus = UFRA_anti_fascist_coalition }
+
+		icon = GFX_focus_generic_join_comintern
+		x = -2
+		y = 1
+		relative_position_id = UFRA_loyalty_to_moscow
+		cost = 5
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			add_tech_bonus = {
+				name = SPR_soviet_industrial_aid
+				bonus = 1.0
+				uses = 1
+				category = industry
+			}
+			add_timed_idea = { idea = SPR_soviet_industrial_aid days = 1025 }
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+					}
+					is_core_of = ROOT
+				}
+				set_state_flag = SPR_soviet_industrial_aid_2civ
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+					}
+					is_core_of = ROOT
+				}
+				set_state_flag = SPR_soviet_industrial_aid_2civ
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = UFRA_league_of_french_bolshevist_volunteers
+		icon = GFX_focus_YUG_pan_slavic_congress
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_loyalty_to_moscow
+		}
+		relative_position_id = UFRA_loyalty_to_moscow
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_league_of_french_bolshevist_volunteers }
+		}
+	}
+	focus = {
+		id = UFRA_host_the_german_exiles
+		icon = GFX_focus_generic_self_management
+		x = 0
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_league_of_french_bolshevist_volunteers
+		}
+
+		relative_position_id = UFRA_loyalty_to_moscow
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			GER = {
+				not = {
+					has_government = communism
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_relation_modifier = {
+				target = GER
+				modifier = FRA_host_the_german_exiles
+			}
+		}
+	}
+	focus = {
+		id = UFRA_revolution_to_the_utmost
+		icon = GFX_goal_FRA_ruralism
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_force_the_issue
+		}
+		mutually_exclusive = { focus = UFRA_reconciliation }
+		relative_position_id = UFRA_force_the_issue
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_war_support = 0.1
+			country_event = { id = u_fra.172 }
+		}
+	}
+	focus = {
+		id = UFRA_national_television
+		icon = GFX_u_fra_FRA_imperial_cinema_society
+		x = -2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_revolution_to_the_utmost
+		}
+		relative_position_id = UFRA_revolution_to_the_utmost
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = FRA_propaganda_apparatus_I
+			set_country_flag = UFRA_propaganda_cinema_script
+			custom_effect_tooltip = FRA_propaganda_cinema_bonus_tt
+		}
+	}
+	focus = {
+		id = UFRA_destroy_the_counter_revolution
+		icon = GFX_FRA_To_Save_the_Nation
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_revolution_to_the_utmost
+		}
+		relative_position_id = UFRA_revolution_to_the_utmost
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					fascism > 0.10
+					communism < 0.65
+				}
+				set_temp_variable = { FRA_rw_support = party_popularity@fascism }
+				add_to_temp_variable = { FRA_rw_support = party_popularity@neutrality }
+				multiply_temp_variable = { FRA_rw_support = 0.5 }
+				start_civil_war = {
+					size = FRA_rw_support
+					ideology = fascism
+				}
+			}
+			else_if = {
+				limit = {
+					fascism < 0.10
+					communism < 0.65
+				}
+				start_civil_war = {
+					size = party_popularity@fascism
+					ideology = fascism
+				}
+			}
+			else_if = {
+				limit = {
+					communism > 0.65
+				}
+				start_civil_war = {
+					size = party_popularity@democratic
+					ideology = democratic
+				}
+			}
+			else = {
+				multiply_temp_variable = { FRA_rw_support = 0.5 }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_loyalty_to_the_cause
+		icon = GFX_focus_spr_unify_the_london_bureau
+		x = 2
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_destroy_the_counter_revolution
+		}
+		mutually_exclusive = { focus = UFRA_loyalty_to_moscow focus = UFRA_anti_fascist_coalition }
+		relative_position_id = UFRA_destroy_the_counter_revolution
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			set_rule = { can_create_factions = yes }
+			create_faction_from_template = {
+				template = faction_template_POR_popular_front_bloc
+				name = FRA_communist_faction
+				icon = GFX_faction_logo_generic_14
+			}
+
+			retire_country_leader = yes
+			create_country_leader = {
+				name = "Pierre Frank"
+				desc = "POLITICS_ÉDOUARD_DALADIER_DESC"
+				picture = "portrait_pierre_frank.dds"
+				expire = "1965.1.1"
+				ideology = marxism
+				traits = {
+				}
+			}
+
+			create_operative_leader = {
+				name = "Jacques Duclos"
+				GFX = GFX_portrait_jacques_duclos
+				traits = { operative_infiltrator operative_natural_orator }
+				bypass_recruitment = no
+				available_to_spy_master = yes
+				nationalities = { FRA }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_marxism_leninism
+		available = {
+		}
+		bypass = {
+		}
+		prerequisite = { focus = UFRA_loyalty_to_the_cause }
+		mutually_exclusive = { focus = UFRA_syndicalism }
+
+		icon = GFX_focus_spr_torchbearers_of_tomorrow
+		x = -1
+		y = 1
+		relative_position_id = UFRA_loyalty_to_the_cause
+		cost = 8
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_MANPOWER FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			add_ideas = SPR_class_war_1
+		}
+	}
+	focus = {
+		id = UFRA_provide_for_the_people
+		available = {
+		}
+		bypass = {
+		}
+		prerequisite = { focus = UFRA_marxism_leninism }
+
+		icon = GFX_focus_prc_agrarian_socialism
+		x = 0
+		y = 1
+		relative_position_id = UFRA_marxism_leninism
+		cost = 8
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY}
+		completion_reward = {
+			add_ideas = SPR_provide_for_the_people
+		}
+	}
+	focus = {
+		id = UFRA_syndicalism
+		available = {
+		}
+		bypass = {
+		}
+		prerequisite = { focus = UFRA_loyalty_to_the_cause }
+		mutually_exclusive = { focus = UFRA_marxism_leninism }
+
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		x = 1
+		y = 1
+		relative_position_id = UFRA_loyalty_to_the_cause
+		cost = 8
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY}
+		completion_reward = {
+			set_politics = {
+				ruling_party = communism
+				elections_allowed = no
+				last_election = "1935.12.17"
+				election_frequency = 48
+				long_name = "Arachist Commune"
+				name = "Arachist Commune"
+			}
+			add_country_leader_trait = anarchist_zeal
+			hidden_effect = {
+				drop_cosmetic_tag = yes
+				create_country_leader = {
+					name = "Anarchist Commune"
+					desc = "POLITICS_ANARCHIST_COMMUNE_DESC"
+					picture = "GFX_portrait_SPR_anarchist_commune"
+					expire = "1965.1.1"
+					ideology = anarchist_communism
+					traits = {
+						our_right_to_survive
+					}
+				}
+			}
+			set_cosmetic_tag = COM_FRA
+			add_ideas = SPR_anarchist_society_16
+			####
+			set_rule = {
+				can_generate_female_aces = yes
+				can_create_factions = no
+				can_join_factions = no
+				can_send_volunteers = yes
+				can_use_kamikaze_pilots = yes
+				can_boost_other_ideologies = yes
+				can_force_government = yes
+			}
+		}
+	}
+
+	focus = {
+		id = UFRA_collectivization
+		available = {
+		}
+		bypass = {
+		}
+		prerequisite = { focus = UFRA_syndicalism }
+
+		icon = GFX_focus_generic_concessions
+		x = 0
+		y = 1
+		relative_position_id = UFRA_syndicalism
+		cost = 8
+
+		available_if_capitulated = yes
+		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER}
+		completion_reward = {
+			add_ideas = SPR_collectivized_society
+			if = {
+				limit = {
+					NOT = { has_idea = closed_economy }
+				}
+				add_ideas = closed_economy
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_idea = disarmed_nation
+						has_idea = volunteer_only
+					}
+				}
+				add_ideas = volunteer_only
+			}
+			if = {
+				limit = {
+					has_idea = SPR_anarchist_society_15
+				}
+				swap_ideas = {
+					remove_idea = SPR_anarchist_society_15
+					add_idea = SPR_anarchist_society_17
+				}
+			}
+			if = {
+				limit = {
+					has_idea = SPR_anarchist_society_16
+				}
+				swap_ideas = {
+					remove_idea = SPR_anarchist_society_16
+					add_idea = SPR_anarchist_society_18
+				}
+			}
+			else = {
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = SPR_anarchist_society_15
+						add_idea = SPR_anarchist_society_17
+					}
+				}
+			}
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 165
+						state = 171
+						state = 792
+					}
+				}
+				remove_dynamic_modifier = { modifier = autonomous_state }
+			}
+		}
+	}
+	focus = {
+		id = UFRA_world_revolution
+		icon = GFX_goal_FRA_phalanstere
+		prerequisite = { focus = UFRA_collectivization focus = UFRA_provide_for_the_people }
+		x = -1
+		y = 1
+		relative_position_id = UFRA_collectivization
+
+		cost = 5
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+		cancel_if_invalid = no
+		continue_if_invalid = yes
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = MEX_proletarian_class_army
+			if = {
+				limit = {
+					has_idea = FRA_union_and_labor_strikes
+				}
+				remove_ideas = FRA_union_and_labor_strikes
+			}
+		}
+	}
+	focus = {
+		id = UFRA_carry_the_revolution_north
+		icon = GFX_goal_generic_position_armies
+		x = -1
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_european_revolution
+		}
+		relative_position_id = UFRA_factory_towns
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			ENG = {
+				OR = {
+					exists = no
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					is_in_faction_with = ROOT
+					has_government = communism
+				}
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+
+			create_wargoal = {
+				target = ENG
+				type = topple_government
+				expire = 0
+			}
+			custom_effect_tooltip = unlocks_espionage_operation_tt
+			custom_effect_tooltip = FRA_instigate_workers_revolution_britain
+		}
+	}
+	focus = {
+		id = UFRA_carry_the_revolution_west
+		icon = GFX_goal_generic_territory_or_war
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_carry_the_revolution_north
+		}
+		relative_position_id = UFRA_carry_the_revolution_north
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+		}
+
+		bypass = {
+			any_neighbor_country = {
+				original_tag = SPR
+				has_government = communism
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+
+			every_other_country = {
+				limit = {
+					original_tag = SPR
+					not = { has_government = communism }
+				}
+				ROOT = {
+					create_wargoal = {
+						target = PREV
+						type = topple_government
+						expire = 0
+					}
+				}
+			}
+			custom_effect_tooltip = unlocks_espionage_operation_tt
+			custom_effect_tooltip = FRA_instigate_workers_revolution_spain
+		}
+	}
+	focus = {
+		id = UFRA_carry_the_revolution_east
+		icon = GFX_goal_generic_occupy_states_ongoing_war
+		x = 1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_carry_the_revolution_north
+		}
+		relative_position_id = UFRA_carry_the_revolution_north
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			GER = {
+				not = { has_government = communism }
+			}
+		}
+
+		bypass = {
+			GER = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_war_with = ROOT
+					has_government = communism
+				}
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				target = GER
+				type = topple_government
+				expire = 0
+			}
+			custom_effect_tooltip = unlocks_espionage_operation_tt
+			custom_effect_tooltip = FRA_instigate_workers_revolution_germany
+		}
+	}
+	focus = {
+		id = UFRA_carry_the_revolution_south
+		icon = GFX_goal_generic_major_war
+		x = 0
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_carry_the_revolution_west
+		}
+		prerequisite = {
+			focus = UFRA_carry_the_revolution_east
+		}
+		relative_position_id = UFRA_carry_the_revolution_north
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			ITA = {
+				not = { has_government = communism }
+			}
+			is_subject = no
+		}
+
+		bypass = {
+			ITA = {
+				OR = {
+					exists = no
+					has_war_with = ROOT
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_government = communism
+				}
+			}
+		}
+
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				target = ITA
+				type = topple_government
+				expire = 0
+			}
+			custom_effect_tooltip = unlocks_espionage_operation_tt
+			custom_effect_tooltip = FRA_instigate_workers_revolution_italy
+		}
+	}
+	focus = {
+		id = UFRA_west_european_union_of_socialists_republics
+		icon = GFX_focus_generic_join_comintern
+		x = -1
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = { focus = UFRA_carry_the_revolution_south }
+		mutually_exclusive = { }
+		relative_position_id = UFRA_carry_the_revolution_south
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			is_subject = no
+			OR = {
+				GER = {
+					is_subject_of = ROOT
+				}
+				any_controlled_state = {
+					is_core_of = GER
+				}
+			}
+			OR = {
+				ITA = {
+					is_subject_of = ROOT
+				}
+				any_controlled_state = {
+					is_core_of = ITA
+				}
+			}
+			OR = {
+				BEL = {
+					is_subject_of = ROOT
+				}
+				any_controlled_state = {
+					is_core_of = BEL
+				}
+			}
+			OR = {
+				HOL = {
+					is_subject_of = ROOT
+				}
+				any_controlled_state = {
+					is_core_of = HOL
+				}
+			}
+			OR = {
+				SWI = {
+					is_subject_of = ROOT
+				}
+				any_controlled_state = {
+					is_core_of = SWI
+				}
+			}
+			OR = {
+				LUX = {
+					is_subject_of = ROOT
+				}
+				any_controlled_state = {
+					is_core_of = LUX
+				}
+			}
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = FRA_integrating_states
+				days = 300
+			}
+			set_cosmetic_tag = EUR_UNIFIED
+			every_state = {
+				limit = {
+					capital_scope = {
+						is_on_continent = europe
+					}
+					OR = {
+						is_core_of = GER
+						is_core_of = ITA
+						is_core_of = BEL
+						is_core_of = HOL
+						is_core_of = SWI
+						is_core_of = LUX
+					}
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
+	focus = {
+		id = UFRA_egalite_liberte_solidarite
+		icon = GFX_focus_focus_fra_liberte_egalite_solidarite
+		x = 1
+		y = 3
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_carry_the_revolution_south
+		}
+		relative_position_id = UFRA_carry_the_revolution_north
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = { FRA_egalite_liberte_solidarite }
+		}
+	}
+	focus = {
+		id = UFRA_ban_the_leagues
+		icon = GFX_goal_generic_forceful_treaty
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		prerequisite = {
+			focus = UFRA_invite_communist_ministers
+		}
+		relative_position_id = UFRA_invite_communist_ministers
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+			has_idea = FRA_political_violence
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = {FOCUS_FILTER_FRA_POLITICAL_VIOLENCE }
+		completion_reward = {
+			remove_ideas = { FRA_political_violence }
+			set_temp_variable = { FRA_rw_support = party_popularity@neutrality }
+			add_to_temp_variable = { FRA_rw_support = party_popularity@fascism }
+			multiply_temp_variable = { FRA_rw_support = -0.5 }
+			add_stability = FRA_rw_support
+
+			IF = {
+				limit = {
+					has_government = democratic
+				}
+				custom_effect_tooltip = conservatives_loss_15
+				custom_effect_tooltip = nationalists_loss_10
+				set_temp_variable = { temp_member = 4 }
+				set_temp_variable = { temp_seats = -15 }
+				modify_parliament_seat = yes
+				set_temp_variable = { temp_member = 3 }
+				set_temp_variable = { temp_seats = -10 }
+				modify_parliament_seat = yes
+				add_to_variable = { fra_senate_support = -15 }
+				custom_effect_tooltip = senate_loss_15
+
+			}
+
+		}
+	}
+
+}

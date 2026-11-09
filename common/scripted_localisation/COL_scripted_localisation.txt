@@ -1,0 +1,900 @@
+# Allows you to create your own dynamic keys
+# to be called in localization.
+# defined_text -> this is it, we're defining the text
+# text -> a discrete entry that can be picked to display in loc.
+# trigger -> determines if a text entry will be picked or not.
+# (The triggers need to be valid for the scope the key is called in
+# (eg Root or From.From).)
+# localization_key -> points to the localization key
+# that'll be used if trigger passes
+
+defined_text = { # Country
+	name = GetSeguirFrancoName
+	text = {
+		trigger = {
+			original_tag = COL
+			SPA = {
+				has_completed_focus = SPA_con_paquito
+			}
+		}
+		localization_key = COL_seguir_a_franco_name_paquito
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			SPA = {
+				has_completed_focus = SPA_the_phalanx_ascendant
+			}
+		}
+		localization_key = COL_seguir_a_franco_name_phalanx
+	}
+	text = {
+		localization_key = COL_seguir_a_franco_name
+	}
+}
+
+defined_text = {
+	name = GetConservativeStatus
+	text = {
+		trigger = {
+			original_tag = COL
+			NOT = {
+				has_country_flag = alinear_azul_3
+			}
+		}
+		localization_key = col_preparar_conservador
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			has_country_flag = alinear_azul_3
+		}
+		localization_key = col_alinear_conservador
+	}
+}
+
+defined_text = {
+	name = GetMilitaryStatus
+	text = {
+		trigger = {
+			original_tag = COL
+			NOT = {
+				has_country_flag = alinear_mil_3
+			}
+		}
+		localization_key = col_preparar_militar
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			has_country_flag = alinear_mil_3
+		}
+		localization_key = col_alinear_militar
+	}
+}
+
+defined_text = {
+	name = GetLiberalStatus
+	text = {
+		trigger = {
+			original_tag = COL
+			NOT = {
+				has_country_flag = alinear_rojo_3
+			}
+		}
+		localization_key = col_preparar_liberal
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			has_country_flag = alinear_rojo_3
+		}
+		localization_key = col_alinear_liberal
+	}
+}
+
+defined_text = {
+	name = GetLiberalViolentStatus
+	text = {
+		trigger = {
+			original_tag = COL
+			NOT = {
+				has_country_flag = erradicar_rojo_3
+			}
+		}
+		localization_key = col_erradicar_rojo1
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			has_country_flag = erradicar_rojo_3
+		}
+		localization_key = col_erradicar_rojo2
+	}
+}
+
+defined_text = {
+	name = GetConservativeName
+	text = {
+		trigger = {
+			original_tag = COL
+		}
+		localization_key = COL_Conservative_name_and_icon
+	}
+}
+
+defined_text = {
+	name = GetLiberalName
+	text = {
+		trigger = {
+			original_tag = COL
+		}
+		localization_key = COL_Liberal_name_and_icon
+	}
+}
+
+defined_text = {
+	name = GetMilitaryName
+	text = {
+		trigger = {
+			original_tag = COL
+		}
+		localization_key = COL_Military_name_and_icon
+	}
+}
+
+defined_text = {
+	name = GetRuilingLeader
+	text = {
+		trigger = {
+			original_tag = COL
+			has_country_flag = azul_a_cargo
+		}
+		localization_key = COL_Ruling_Conservative
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			has_country_flag = rojo_a_cargo
+		}
+		localization_key = COL_Ruling_Liberal
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			has_country_flag = mil_a_cargo
+		}
+		localization_key = COL_Ruling_Military
+	}
+}
+
+defined_text = {
+	name = GetConservativeValues
+	text = {
+		trigger = {
+			original_tag = COL
+			OR = {
+				has_country_flag = azul_a_cargo
+				has_country_flag = azul_civil_war
+				has_country_flag = azul_purgado
+			}
+		}
+		localization_key = COL_Conservative_values_removed
+	}
+	text = {
+		localization_key = COL_Conservative_values
+	}
+}
+
+defined_text = {
+	name = GetLiberalValues
+	text = {
+		trigger = {
+			original_tag = COL
+			OR = {
+				has_country_flag = rojo_a_cargo
+				has_country_flag = rojo_civil_war
+				has_country_flag = rojo_purgado
+			}
+		}
+		localization_key = COL_Liberal_values_removed
+	}
+	text = {
+		localization_key = COL_Liberal_values
+	}
+}
+
+defined_text = {
+	name = GetMilitaryValues
+	text = {
+		trigger = {
+			original_tag = COL
+			OR = {
+				has_country_flag = mil_a_cargo
+				has_country_flag = mil_civil_war
+				has_country_flag = mil_purgado
+			}
+		}
+		localization_key = COL_Military_values_removed
+	}
+	text = {
+		localization_key = COL_Military_values
+	}
+}
+
+defined_text = {
+	name = IsAffectedConservative
+	text = {
+		trigger = {
+			original_tag = COL
+			OR = {
+				check_variable = { var = COL_cat_status value = 2 compare = greater_than_or_equals }
+				check_variable = { var = COL_cat_status value = 1 compare = equals }
+				check_variable = { var = COL_athe_status value = -1 compare = greater_than }
+			}
+		}
+		localization_key = is_affected_azul
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			NOT = {
+				check_variable = { var = COL_cat_status value = 2 compare = greater_than_or_equals }
+				check_variable = { var = COL_cat_status value = 1 compare = equals }
+				check_variable = { var = COL_athe_status value = -1 compare = greater_than }
+			}
+		}
+		localization_key = no_affected
+	}
+}
+
+defined_text = {
+	name = GetConservativeAffectedCat
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 2 compare = greater_than_or_equals }
+		}
+		localization_key = COL_azul_cat2_affected
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 1 compare = equals }
+		}
+		localization_key = COL_azul_cat1_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = GetConservativeAffectedAthe
+	text = {
+		trigger = {
+			original_tag = COL
+			NOT = {
+				check_variable = { var = COL_athe_status value = -1 compare = equals }
+			}
+		}
+		localization_key = COL_azul_athe_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = IsAffectedLiberal
+	text = {
+		trigger = {
+			original_tag = COL
+			OR = {
+				has_idea = COL_gaitan
+				check_variable = { var = COL_cat_status value = 0 compare = greater_than }
+				check_variable = { var = COL_athe_status value = 2 compare = greater_than_or_equals }
+				check_variable = { var = COL_athe_status value = 1 compare = equals }
+			}
+		}
+		localization_key = is_affected_rojo
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			NOT = {
+				has_idea = COL_gaitan
+				check_variable = { var = COL_cat_status value = 0 compare = greater_than }
+				check_variable = { var = COL_athe_status value = 2 compare = greater_than_or_equals }
+				check_variable = { var = COL_athe_status value = 1 compare = equals }
+			}
+		}
+		localization_key = no_affected
+	}
+}
+
+defined_text = {
+	name = GetLiberalAffectedPacificPath
+	text = {
+		trigger = {
+			original_tag = COL
+			has_country_flag = rojo_pacific_path
+		}
+		localization_key = COL_rojo_pacific_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = GetLiberalAffectedViolentPath
+	text = {
+		trigger = {
+			original_tag = COL
+			has_country_flag = rojo_violent_path
+		}
+		localization_key = COL_rojo_violent_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = GetLiberalAffectedGaitan
+	text = {
+		trigger = {
+			original_tag = COL
+			has_idea = COL_gaitan
+		}
+		localization_key = COL_rojo_gaitan_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = GetLiberalAffectedObrero
+	text = {
+		trigger = {
+			original_tag = COL
+			has_idea = COL_compromiso_obrero
+		}
+		localization_key = COL_rojo_obrero_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = GetLiberalAffectedCat
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 0 compare = greater_than }
+		}
+		localization_key = COL_rojo_cat_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = GetLiberalAffectedAthe
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 2 compare = greater_than_or_equals }
+		}
+		localization_key = COL_rojo_athe2_affected
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 1 compare = equals }
+		}
+		localization_key = COL_rojo_athe1_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = IsAffectedMil
+	text = {
+		trigger = {
+			original_tag = COL
+			OR = {
+				check_variable = { var = COL_cat_status value = 0 compare = not_equals }
+				check_variable = { var = COL_crist_status value = 2 compare = greater_than_or_equals }
+				check_variable = { var = COL_crist_status value = 1 compare = equals }
+				check_variable = { var = COL_athe_status value = 0 compare = not_equals }
+			}
+		}
+		localization_key = is_affected_mil
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			NOT = {
+				check_variable = { var = COL_cat_status value = 0 compare = not_equals }
+				check_variable = { var = COL_crist_status value = 2 compare = greater_than_or_equals }
+				check_variable = { var = COL_crist_status value = 1 compare = equals }
+				check_variable = { var = COL_athe_status value = 0 compare = not_equals }
+			}
+		}
+		localization_key = no_affected
+	}
+}
+
+defined_text = {
+	name = GetMilAffectedCat
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 0 compare = not_equals }
+		}
+		localization_key = COL_mil_cat_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = GetMilAffectedCrist
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 2 compare = greater_than_or_equals }
+		}
+		localization_key = COL_mil_crist2_affected
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 1 compare = equals }
+		}
+		localization_key = COL_mil_crist1_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = GetMilAffectedAthe
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 0 compare = not_equals }
+		}
+		localization_key = COL_mil_athe_affected
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = SindicatosSeMovilizan
+	text = {
+		trigger = {
+			original_tag = COL
+			has_government = democratic
+		}
+		localization_key = SindicatosSeMovilizan_democratic
+	}
+
+	text = {
+		trigger = {
+			original_tag = COL
+			has_government = fascism
+		}
+		localization_key = SindicatosSeMovilizan_fascism
+	}
+
+	text = {
+		trigger = {
+			original_tag = COL
+			has_government = communism
+		}
+		localization_key = SindicatosSeMovilizan_communism
+	}
+
+	text = {
+		trigger = {
+			original_tag = COL
+			has_government = neutrality
+		}
+		localization_key = SindicatosSeMovilizan_neutrality
+	}
+}
+
+#2 = Dominante / S.+10 - P.+15 - F.+15
+#1 = Influyente / S.+5 - P.+10 - F.+10
+#0 = Imparcial / 0 - 0 - 0
+#-1 = Excluido / S.-15 - P.-15 - F.-15
+
+defined_text = {
+	name = GetCatStatus
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 2 compare = greater_than_or_equals }
+		}
+		localization_key = col_pugna_religiosa_dominante
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 1 compare = equals }
+		}
+		localization_key = col_pugna_religiosa_influyente
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 0 compare = equals }
+		}
+		localization_key = col_pugna_religiosa_imparcial
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = -1 compare = equals }
+		}
+		localization_key = col_pugna_religiosa_excluido
+	}
+}
+
+defined_text = {
+	name = GetCatStabilityBonus
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 2 compare = equals }
+		}
+		localization_key = col_dominante_stability
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 1 compare = equals }
+		}
+		localization_key = col_influyente_stability
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 0 compare = equals }
+		}
+		localization_key = col_imparcial_stability
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = -1 compare = equals }
+		}
+		localization_key = col_excluido_stability
+	}
+}
+
+defined_text = {
+	name = GetCatPoliticsBonus
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 2 compare = equals }
+		}
+		localization_key = col_dominante_politics
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 1 compare = equals }
+		}
+		localization_key = col_influyente_politics
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = 0 compare = equals }
+		}
+		localization_key = col_imparcial_politics
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_cat_status value = -1 compare = equals }
+		}
+		localization_key = col_excluido_politics
+	}
+}
+
+defined_text = {
+	name = GetCristStatus
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 2 compare = greater_than_or_equals }
+		}
+		localization_key = col_pugna_religiosa_dominante
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 1 compare = equals }
+		}
+		localization_key = col_pugna_religiosa_influyente
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 0 compare = equals }
+		}
+		localization_key = col_pugna_religiosa_imparcial
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = -1 compare = equals }
+		}
+		localization_key = col_pugna_religiosa_excluido
+	}
+}
+
+defined_text = {
+	name = GetCristStabilityBonus
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 2 compare = equals }
+		}
+		localization_key = col_dominante_stability
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 1 compare = equals }
+		}
+		localization_key = col_influyente_stability
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 0 compare = equals }
+		}
+		localization_key = col_imparcial_stability
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = -1 compare = equals }
+		}
+		localization_key = col_excluido_stability
+	}
+}
+
+defined_text = {
+	name = GetCristFactoryBonus
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 2 compare = equals }
+		}
+		localization_key = col_dominante_factory
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 1 compare = equals }
+		}
+		localization_key = col_influyente_factory
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = 0 compare = equals }
+		}
+		localization_key = col_imparcial_factory
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_crist_status value = -1 compare = equals }
+		}
+		localization_key = col_excluido_factory
+	}
+}
+
+defined_text = {
+	name = GetAtheStatus
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 2 compare = greater_than_or_equals }
+		}
+		localization_key = col_pugna_religiosa_dominante
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 1 compare = equals }
+		}
+		localization_key = col_pugna_religiosa_influyente
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 0 compare = equals }
+		}
+		localization_key = col_pugna_religiosa_imparcial
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = -1 compare = equals }
+		}
+		localization_key = col_pugna_religiosa_excluido
+	}
+}
+
+defined_text = {
+	name = GetAthePoliticsBonus
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 2 compare = equals }
+		}
+		localization_key = col_dominante_politics
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 1 compare = equals }
+		}
+		localization_key = col_influyente_politics
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 0 compare = equals }
+		}
+		localization_key = col_imparcial_politics
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = -1 compare = equals }
+		}
+		localization_key = col_excluido_politics
+	}
+}
+
+defined_text = {
+	name = GetAtheFactoryBonus
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 2 compare = equals }
+		}
+		localization_key = col_dominante_factory
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 1 compare = equals }
+		}
+		localization_key = col_influyente_factory
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = 0 compare = equals }
+		}
+		localization_key = col_imparcial_factory
+	}
+	text = {
+		trigger = {
+			original_tag = COL
+			check_variable = { var = COL_athe_status value = -1 compare = equals }
+		}
+		localization_key = col_excluido_factory
+	}
+}
+
+
+
+
+defined_text = {
+	name = Get306Laureanist
+	text = {
+		trigger = {
+			306 = {
+				has_dynamic_modifier = { modifier = COL_laureanist_agitation }
+			}
+		}
+		localization_key = COL_306_laureanist
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = Get486Laureanist
+	text = {
+		trigger = {
+			486 = {
+				has_dynamic_modifier = { modifier = COL_laureanist_agitation }
+			}
+		}
+		localization_key = COL_486_laureanist
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = Get493Laureanist
+	text = {
+		trigger = {
+			493 = {
+				has_dynamic_modifier = { modifier = COL_laureanist_agitation }
+			}
+		}
+		localization_key = COL_493_laureanist
+	}
+	text = {
+		localization_key = COL_not_affected
+	}
+}
+
+defined_text = {
+	name = GetConfederationWarCatName
+	text = {
+		trigger = {
+			tag = COL
+		}
+		localization_key = COL_revivir_confederacion1
+	}
+	text = {
+		trigger = {
+			OR = {
+				tag = PRU
+				tag = BOL
+			}
+		}
+		localization_key = COL_revivir_confederacion2
+	}
+}
+
+defined_text = {
+	name = GetConfederationWarStatus
+	text = {
+		trigger = {
+			tag = COL
+			NOT = {
+				has_country_flag = must_puppet_pbc
+			}
+		}
+		localization_key = COL_confederation_war1
+	}
+	text = {
+		trigger = {
+			tag = COL
+			has_country_flag = must_puppet_pbc
+		}
+		localization_key = COL_confederation_war2
+	}
+	text = {
+		localization_key = COL_confederation_war3
+	}
+}

@@ -1,0 +1,5689 @@
+### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_RESEARCH}
+### search_filters = {FOCUS_FILTER_INDUSTRY}
+### search_filters = {FOCUS_FILTER_STABILITY}
+### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+### search_filters = {FOCUS_FILTER_MANPOWER}
+### search_filters = {FOCUS_FILTER_ANNEXATION}
+
+focus_tree = {
+	id = bolivia_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = BOL
+		}
+	}
+
+	initial_show_position = {
+		x = 0
+	}
+
+	continuous_focus_position = { x = 100 y = 2550 }
+
+	default = no
+
+	shortcut = {
+		name = BOL_bolivian_economy_shortcut
+		target = BOL_begin_dealing_with_the_depression
+		scroll_wheel_factor = 1.5
+	}
+	shortcut = {
+		name = BOL_tejada_remains_shortcut
+		target = BOL_secure_the_southern_provinces
+		scroll_wheel_factor = 1.1
+	}
+	shortcut = {
+		name = BOL_military_socialism_shortcut
+		target = BOL_embrace_military_socialism
+		scroll_wheel_factor = 1.25
+	}
+	shortcut = {
+		name = BOL_fascism_shortcut
+		target = BOL_make_our_ideals_official
+		scroll_wheel_factor = 1
+	}
+	shortcut = {
+		name = BOL_bolivian_armed_forces_shortcut
+		target = BOL_army_revival
+		scroll_wheel_factor = 1.3
+	}
+
+	focus = {
+		id = BOL_begin_dealing_with_the_depression
+		icon = GFX_goal_generic_construction
+
+		x = 4
+		y = 0
+
+		cost = 2
+
+		ai_will_do = {
+			base = 15
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = BOL_focus_on_what_were_good_at
+		icon = GFX_BOL_focus_on_good_at
+		x = 3
+		y = 1
+		relative_position_id = BOL_begin_dealing_with_the_depression
+		prerequisite = { focus = BOL_begin_dealing_with_the_depression }
+		mutually_exclusive = { focus = BOL_switch_to_an_agrarian_industry }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 10
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_great_depression
+				add_idea = BOL_great_depression_2
+			}
+			add_ideas = BOL_focused_on_what_were_good_at_1
+		}
+	}
+
+	focus = {
+		id = BOL_switch_to_an_agrarian_industry
+		icon = GFX_BOL_agrarian_society
+		x = -3
+		y = 1
+		relative_position_id = BOL_begin_dealing_with_the_depression
+		prerequisite = { focus = BOL_begin_dealing_with_the_depression }
+		mutually_exclusive = { focus = BOL_focus_on_what_were_good_at }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_great_depression
+				add_idea = BOL_great_depression_2
+			}
+			add_ideas = BOL_switched_to_agrarian_society_1
+		}
+	}
+
+	focus = {
+		id = BOL_improve_our_road_networks
+		icon = GFX_goal_generic_construct_infrastructure
+		x = 0
+		y = 1
+		relative_position_id = BOL_focus_on_what_were_good_at
+		prerequisite = { focus = BOL_focus_on_what_were_good_at }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 25
+			custom_effect_tooltip = BOL_gain_infrastructure
+			hidden_effect = {
+				every_owned_state = {
+					if = {
+						limit = {
+							infrastructure > 3
+							is_controlled_by = ROOT
+						}
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+					}
+					else_if = {
+						limit = {
+							is_controlled_by = ROOT
+						}
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_feed_our_people
+		icon = GFX_goal_generic_national_unity
+		x = 0
+		y = 1
+		relative_position_id = BOL_switch_to_an_agrarian_industry
+		prerequisite = { focus = BOL_switch_to_an_agrarian_industry }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_political_power = 120
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = BOL_open_our_food_markets
+		icon = GFX_goal_generic_trade
+		x = 2
+		y = 1
+		relative_position_id = BOL_feed_our_people
+		prerequisite = { focus = BOL_feed_our_people }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_political_power = 50
+			if = {
+				limit = {
+					NOT = {
+						has_idea = free_trade
+					}
+				}
+				add_ideas = free_trade
+			}
+			else = {
+				add_political_power = 150
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_conserve_our_resources
+		icon = GFX_ARG_limit_exports
+		x = -2
+		y = 1
+		relative_position_id = BOL_improve_our_road_networks
+		prerequisite = { focus = BOL_improve_our_road_networks }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 50
+			if = {
+				limit = {
+					NOT = {
+						has_idea = limited_exports
+					}
+				}
+				add_ideas = limited_exports
+			}
+			else = {
+				add_political_power = 150
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_expand_our_mines
+		icon = GFX_goal_generic_construction2
+		x = 2
+		y = 1
+		relative_position_id = BOL_improve_our_road_networks
+		prerequisite = { focus = BOL_improve_our_road_networks }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			302 = {
+				add_resource = {
+					type = tungsten
+					amount = 8
+				}
+				add_resource = {
+					type = steel
+					amount = 2
+				}
+			}
+			487 = {
+				add_resource = {
+					type = tungsten
+					amount = 28
+				}
+				add_resource = {
+					type = aluminium
+					amount = 16
+				}
+				add_resource = {
+					type = steel
+					amount = 4
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_sell_our_tungsten_mines
+		icon = GFX_focus_generic_tungsten
+		x = 0
+		y = 1
+		relative_position_id = BOL_expand_our_mines
+		prerequisite = { focus = BOL_expand_our_mines }
+
+		cost = 8
+
+		available = {
+			any_owned_state = {
+				is_controlled_by = ROOT
+			}
+		}
+
+
+		continue_if_invalid = yes
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = BOL_tungsten_selling
+			hidden_effect = {
+				if = {
+					limit = {
+						any_owned_state = {
+							has_resources_amount = {
+								resource = tungsten
+								amount > 39
+							}
+						}
+					}
+					random_owned_controlled_state = {
+						limit = {
+							has_resources_amount = {
+								resource = tungsten
+								amount > 39
+							}
+						}
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 3
+							instant_build = yes
+						}
+					}
+				}
+				if = {
+					limit = {
+						302 = {
+							has_resources_amount = {
+								resource = tungsten
+								amount > 39
+							}
+						}
+					}
+					302 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 3
+							instant_build = yes
+						}
+					}
+				}
+				if = {
+					limit = {
+						487 = {
+							has_resources_amount = {
+								resource = tungsten
+								amount > 39
+							}
+						}
+					}
+					487 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 3
+							instant_build = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_improve_relations_with_our_trade_partners
+		icon = GFX_goal_generic_improve_relations
+		x = -2
+		y = 1
+		relative_position_id = BOL_feed_our_people
+		prerequisite = { focus = BOL_feed_our_people }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 75
+			every_neighbor_country = {
+				limit = {
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+				add_opinion_modifier = { target = ROOT modifier = BOL_improved_relations }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_allow_foreign_investment
+		icon = GFX_goal_generic_intelligence_exchange
+		x = 0
+		y = 1
+		relative_position_id = BOL_improve_relations_with_our_trade_partners
+		prerequisite = { focus = BOL_improve_relations_with_our_trade_partners }
+
+		cost = 8
+
+		available = {
+			any_neighbor_country = {
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = ARG_every_country_with_high_opinion_gain_1_civ_tt
+			hidden_effect = {
+				every_neighbor_country = {
+					limit = {
+						has_opinion = {
+							target = ROOT
+							value > 49
+						}
+						NOT = {
+							has_war_with = ROOT
+						}
+					}
+					ROOT = {
+						EUYL_add_1_civilian = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_gurantee_foreign_trade_agreements
+		icon = GFX_goal_generic_forceful_treaty
+		x = 0
+		y = 1
+		relative_position_id = BOL_feed_our_people
+		prerequisite = { focus = BOL_feed_our_people }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_switched_to_agrarian_society_1
+				add_idea = BOL_switched_to_agrarian_society_2
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_improved_farmer_rights
+		icon = GFX_BOL_farmer_rights
+		x = 0
+		y = 1
+		relative_position_id = BOL_gurantee_foreign_trade_agreements
+		prerequisite = { focus = BOL_gurantee_foreign_trade_agreements }
+
+		cost = 5
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 25
+		}
+	}
+
+	focus = {
+		id = BOL_improve_miner_salaries
+		icon = GFX_BOL_increase_slary
+		x = 0
+		y = 1
+		relative_position_id = BOL_improve_our_road_networks
+		prerequisite = { focus = BOL_improve_our_road_networks }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_focused_on_what_were_good_at_1
+				add_idea = BOL_focused_on_what_were_good_at_2
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_accept_government_subsidies
+		icon = GFX_focus_generic_self_management
+		x = 0
+		y = 1
+		relative_position_id = BOL_improve_miner_salaries
+		prerequisite = { focus = BOL_improve_miner_salaries }
+
+		cost = 5
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 75
+		}
+	}
+
+	focus = {
+		id = BOL_maintain_a_civilian_economy
+		icon = GFX_goal_generic_consumer_goods
+		x = 0
+		y = 1
+		relative_position_id = BOL_open_our_food_markets
+		prerequisite = {
+			focus = BOL_open_our_food_markets
+			focus = BOL_conserve_our_resources
+		}
+		mutually_exclusive = { focus = BOL_mobilize_the_economy }
+
+		cost = 4
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			if = {
+				limit = { NOT = { has_idea = civilian_economy } }
+				add_ideas = civilian_economy
+			}
+			else = {
+				add_political_power = 50
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_mobilize_the_economy
+		icon = GFX_focus_generic_tank_production
+		x = 0
+		y = 1
+		relative_position_id = BOL_conserve_our_resources
+		prerequisite = {
+			focus = BOL_open_our_food_markets
+			focus = BOL_conserve_our_resources
+		}
+		mutually_exclusive = { focus = BOL_maintain_a_civilian_economy }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_war_support = 0.05
+			if = {
+				limit = {
+					NOT = { has_idea = partial_economic_mobilisation }
+					NOT = { has_idea = war_economy }
+					NOT = { has_idea = tot_economic_mobilisation }
+				}
+				add_ideas = partial_economic_mobilisation
+			}
+			else_if = {
+				limit = {
+					NOT = { has_idea = war_economy }
+					NOT = { has_idea = tot_economic_mobilisation }
+				}
+				add_ideas = war_economy
+			}
+			else = {
+				add_political_power = 150
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_open_our_wheat_markets
+		icon = GFX_BOL_export_wheat
+		x = 0
+		y = 1
+		relative_position_id = BOL_maintain_a_civilian_economy
+		prerequisite = {
+			focus = BOL_maintain_a_civilian_economy
+			focus = BOL_mobilize_the_economy
+		}
+		mutually_exclusive = { focus = BOL_reserve_money_for_our_industry }
+
+		available = {
+			has_idea = free_trade
+		}
+
+		cost = 6
+
+		ai_will_do = {
+			factor = 4
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_great_depression_2
+				add_idea = BOL_great_depression_3
+			}
+			add_ideas = BOL_opened_wheat_markets
+			custom_effect_tooltip = BOL_step_off_free_trade_warning
+		}
+	}
+
+	focus = {
+		id = BOL_reserve_money_for_our_industry
+		icon = GFX_focus_generic_industry_3
+		x = 2
+		y = 1
+		relative_position_id = BOL_maintain_a_civilian_economy
+		prerequisite = {
+			focus = BOL_maintain_a_civilian_economy
+			focus = BOL_mobilize_the_economy
+		}
+		mutually_exclusive = { focus = BOL_open_our_wheat_markets }
+
+		cost = 6
+
+		ai_will_do = {
+			base = 4
+		}
+		search_filters = { FOCUS_FILTER_HISTORICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_great_depression_2
+				add_idea = BOL_great_depression_3
+			}
+			EUYL_add_2_civilian = yes
+		}
+	}
+
+	focus = {
+		id = BOL_expand_the_civilian_economy
+		icon = GFX_goal_generic_construct_civ_factory
+		x = -1
+		y = 1
+		relative_position_id = BOL_open_our_wheat_markets
+		prerequisite = {
+			focus = BOL_open_our_wheat_markets
+			focus = BOL_reserve_money_for_our_industry
+		}
+
+		cost = 10
+
+		mutually_exclusive = { focus = BOL_expand_our_armories }
+		mutually_exclusive = { focus = BOL_aleviate_the_industrial_mills }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_civilian = yes
+			EUYL_add_1_civilian = yes
+			EUYL_add_1_military = yes
+		}
+	}
+
+	focus = {
+		id = BOL_expand_our_armories
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 1
+		y = 1
+		relative_position_id = BOL_open_our_wheat_markets
+		prerequisite = {
+			focus = BOL_open_our_wheat_markets
+			focus = BOL_reserve_money_for_our_industry
+		}
+
+		cost = 10
+
+		mutually_exclusive = { focus = BOL_expand_the_civilian_economy }
+		mutually_exclusive = { focus = BOL_aleviate_the_industrial_mills }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_military = yes
+			EUYL_add_1_military = yes
+			EUYL_add_1_civilian = yes
+		}
+	}
+
+	focus = {
+		id = BOL_the_bohen_plan
+		icon = GFX_BOL_bohan_plan
+		x = 0
+		y = 1
+		relative_position_id = BOL_expand_our_armories
+		prerequisite = {
+			focus = BOL_expand_our_armories
+			focus = BOL_expand_the_civilian_economy
+			focus = BOL_aleviate_the_industrial_mills
+		}
+
+		cost = 5
+
+		ai_will_do = {
+			base = 4
+		}
+
+		available = {
+			date > 1940.1.1
+			has_civil_war = no
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_underdeveloped_east_idea
+				add_idea = BOL_corporacion_boliviana_de_fomento
+			}
+			every_core_state = {
+				limit = {
+					has_dynamic_modifier = { modifier = BOL_underdeveloped_province }
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			unlock_decision_tooltip = {
+				decision = BOL_develop_the_province_of_FROM
+				show_effect_tooltip = yes
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_aleviate_the_industrial_mills
+		icon = GFX_goal_generic_production2
+		x = 3
+		y = 1
+		relative_position_id = BOL_open_our_wheat_markets
+		prerequisite = {
+			focus = BOL_open_our_wheat_markets
+			focus = BOL_reserve_money_for_our_industry
+		}
+
+		cost = 10
+
+		mutually_exclusive = { focus = BOL_expand_the_civilian_economy }
+		mutually_exclusive = { focus = BOL_expand_our_armories }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+			add_manpower = 76450
+		}
+	}
+
+	focus = {
+		id = BOL_an_open_economy
+		icon = GFX_goal_generic_positive_trade_relations
+		x = -2
+		y = 1
+		relative_position_id = BOL_expand_the_civilian_economy
+		prerequisite = { focus = BOL_improved_farmer_rights }
+		prerequisite = {
+			focus = BOL_expand_the_civilian_economy
+			focus = BOL_expand_our_armories
+			focus = BOL_aleviate_the_industrial_mills
+		}
+
+		cost = 5
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			remove_ideas = BOL_great_depression_3
+		}
+	}
+
+	focus = {
+		id = BOL_a_self_sufficient_economy
+		icon = GFX_goal_generic_construct_civilian
+		x = 2
+		y = 1
+		relative_position_id = BOL_aleviate_the_industrial_mills
+		prerequisite = { focus = BOL_accept_government_subsidies }
+		prerequisite = {
+			focus = BOL_expand_the_civilian_economy
+			focus = BOL_expand_our_armories
+			focus = BOL_aleviate_the_industrial_mills
+		}
+
+		cost = 5
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			remove_ideas = BOL_great_depression_3
+		}
+	}
+
+	focus = {
+		id = BOL_new_research_facilities
+		icon = GFX_focus_research
+		x = 0
+		y = 2
+		relative_position_id = BOL_expand_our_armories
+		prerequisite = {
+			focus = BOL_an_open_economy
+			focus = BOL_a_self_sufficient_economy
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = BOL_side_with_the_people
+		icon = GFX_BOL_side_with_the_people
+		x = 21
+		y = 0
+		mutually_exclusive = { focus = BOL_side_with_military }
+
+		cost = 2
+
+		available = {
+			has_country_flag = BOL_coup_being_planned
+		}
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 90
+			custom_effect_tooltip = BOL_lead_to_civil_war
+			custom_effect_tooltip = BOL_unlock_decision_to_delay_coup
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.08
+			}
+			hidden_effect = {
+				set_variable = { BOL_military_divisions = 34 }
+				set_variable = { BOL_civilian_army_divisions = 5 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_secure_the_southern_provinces #secure our provinces
+		icon = GFX_goal_generic_position_armies #might change
+		x = -5
+		y = 1
+		relative_position_id = BOL_side_with_the_people
+		prerequisite = { focus = BOL_side_with_the_people }
+
+		cost = 4
+
+		ai_will_do = {
+			base = 50
+		}
+
+		bypass = {
+			has_completed_focus = BOL_side_with_the_people
+			NOT = {
+				has_country_flag = BOL_coup_being_planned
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 30
+			custom_effect_tooltip = BOL_begin_civil_war_with_south
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.06
+			}
+			hidden_effect = {
+				subtract_from_variable = { BOL_military_divisions = 9 }
+				add_to_variable = { BOL_civilian_army_divisions = 9 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_militarize_the_people_in_our_provinces
+		icon = GFX_focus_generic_little_entente
+		x = 0
+		y = 1
+		relative_position_id = BOL_secure_the_southern_provinces
+		prerequisite = { focus = BOL_secure_the_southern_provinces }
+
+		cost = 6
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+			has_completed_focus = BOL_side_with_the_people
+		}
+
+		bypass = {
+			has_completed_focus = BOL_side_with_the_people
+			NOT = {
+				has_country_flag = BOL_coup_being_planned
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			custom_effect_tooltip = BOL_unlock_conscription
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_secure_the_guardia_nacional
+		icon = GFX_BOL_guardia_nacional
+		x = 0
+		y = 1
+		relative_position_id = BOL_militarize_the_people_in_our_provinces
+		prerequisite = { focus = BOL_militarize_the_people_in_our_provinces }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+			has_completed_focus = BOL_side_with_the_people
+		}
+
+		bypass = {
+			has_completed_focus = BOL_side_with_the_people
+			NOT = {
+				has_country_flag = BOL_coup_being_planned
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = BOL_gain_4_elite_militias
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+			hidden_effect = {
+				subtract_from_variable = { BOL_military_divisions = 5 }
+				add_to_variable = { BOL_civilian_army_divisions = 5 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_disband_the_bolivian_armed_forces
+		icon = GFX_BOL_disband_army
+		x = 0
+		y = 1
+		relative_position_id = BOL_secure_the_guardia_nacional
+		prerequisite = { focus = BOL_secure_the_guardia_nacional }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+			has_completed_focus = BOL_side_with_the_people
+		}
+
+		bypass = {
+			has_completed_focus = BOL_side_with_the_people
+			NOT = {
+				has_country_flag = BOL_coup_being_planned
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = BOL_start_civil_war
+			effect_tooltip = {
+				add_ideas = BOL_disbanded_the_army
+			}
+			custom_effect_tooltip = BOL_retain_70_equipment
+			country_event = bolivia.1
+		}
+	}
+
+	focus = {
+		id = BOL_mobilizing_the_economy
+		icon = GFX_focus_generic_the_giant_wakes
+		x = -2
+		y = 1
+		relative_position_id = BOL_disband_the_bolivian_armed_forces
+		prerequisite = { focus = BOL_disband_the_bolivian_armed_forces }
+
+		cost = 4
+
+		available = {
+			has_civil_war = yes
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_idea = war_economy }
+					NOT = { has_idea = tot_economic_mobilisation }
+				}
+				add_ideas = partial_economic_mobilisation
+			}
+			else_if = {
+				limit = {
+					NOT = { has_idea = war_economy }
+					NOT = { has_idea = tot_economic_mobilisation }
+				}
+				add_ideas = war_economy
+			}
+			else = {
+				add_political_power = 150
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_strengthen_the_guardia_nacional
+		icon = GFX_BOL_strengthen_guardia_nacional
+		x = 0
+		y = 1
+		relative_position_id = BOL_mobilizing_the_economy
+		prerequisite = { focus = BOL_mobilizing_the_economy }
+
+		cost = 8
+
+		available = {
+			has_civil_war = yes
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			custom_effect_tooltip = BOL_create_2_guardia_nacional_units_tt
+			add_manpower = 24500
+			hidden_effect = {
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Guardia Nacional\" division_template = \"Guardia Nacional\" start_experience_factor = 0.2 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Guardia Nacional\" division_template = \"Guardia Nacional\" start_experience_factor = 0.2 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_purchase_foreign_arms
+		icon = GFX_BRA_foreign_purchases
+		x = -4
+		y = 1
+		relative_position_id = BOL_disband_the_bolivian_armed_forces
+		prerequisite = { focus = BOL_disband_the_bolivian_armed_forces }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = PRU_purchase_foreign_arms_from_other_country
+			EUYL_add_1_military = yes
+		}
+	}
+
+	focus = {
+		id = BOL_train_new_generals
+		icon = GFX_focus_generic_military_academy
+		x = 1
+		y = 1
+		relative_position_id = BOL_disband_the_bolivian_armed_forces
+		prerequisite = { focus = BOL_disband_the_bolivian_armed_forces }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			if = {
+				limit = { has_idea = BOL_disbanded_the_army }
+				swap_ideas = {
+					remove_idea = BOL_disbanded_the_army
+					add_idea = BOL_disbanded_the_army_2
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = BOL_disbanded_the_army_2
+					add_idea = BOL_disbanded_the_army_3
+				}
+			}
+			create_corps_commander = {
+				name = "Filiberto Osorio"
+				portrait_path = "gfx/leaders/South America/Portrait_South_America_Generic_land_3.dds"
+				traits = { }
+				skill = 2
+				attack_skill = 2
+				defense_skill = 2
+				planning_skill = 1
+				logistics_skill = 1
+			}
+			create_corps_commander = {
+				name = "José Leonardo"
+				portrait_path = "gfx/leaders/South America/Portrait_South_America_Generic_land_1.dds"
+				traits = { }
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				planning_skill = 1
+				logistics_skill = 1
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_take_matters_into_our_own_hands
+		icon = GFX_BOL_take_matters_in_hand
+		x = 3
+		y = 1
+		relative_position_id = BOL_disband_the_bolivian_armed_forces
+		prerequisite = { focus = BOL_disband_the_bolivian_armed_forces }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			custom_effect_tooltip = BOL_leader_becomes_general_tt
+			if = {
+				limit = { has_idea = BOL_disbanded_the_army }
+				swap_ideas = {
+					remove_idea = BOL_disbanded_the_army
+					add_idea = BOL_disbanded_the_army_2
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = BOL_disbanded_the_army_2
+					add_idea = BOL_disbanded_the_army_3
+				}
+			}
+			hidden_effect = {
+				create_corps_commander = {
+					name = "Jose Luis Tejada"
+					portrait_path = "gfx/leaders/BOL/jose_tejada_sorzano_general.dds"
+					traits = { urban_assault_specialist }
+					skill = 4
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 4
+					logistics_skill = 4
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_secure_the_loyalty_of_our_army
+		icon = GFX_focus_generic_military_mission
+		x = -1
+		y = 1
+		relative_position_id = BOL_take_matters_into_our_own_hands
+		prerequisite = { focus = BOL_take_matters_into_our_own_hands }
+		prerequisite = { focus = BOL_train_new_generals }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 50
+			swap_ideas = {
+				remove_idea = BOL_disbanded_the_army_3
+				add_idea = BOL_disbanded_the_army_4
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_the_bolivian_army_reborn
+		icon = GFX_focus_generic_manpower
+		x = 0
+		y = 1
+		relative_position_id = BOL_secure_the_loyalty_of_our_army
+		prerequisite = { focus = BOL_secure_the_loyalty_of_our_army }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			remove_ideas = BOL_disbanded_the_army_4
+			EUYL_add_1_military = yes
+		}
+	}
+
+	focus = {
+		id = BOL_victor_of_the_civil_war
+		icon = GFX_BOL_our_nation_reborn
+		x = 0
+		y = 4
+		relative_position_id = BOL_disband_the_bolivian_armed_forces
+		prerequisite = { focus = BOL_disband_the_bolivian_armed_forces }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 8
+		}
+
+		available = {
+			has_civil_war = no
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_stability = 0.05
+			add_research_slot = 1
+			country_event = bolivia.2
+			unlock_decision_category_tooltip = BOL_tejadas_incompetence
+		}
+	}
+
+	focus = {
+		id = BOL_a_path_of_diplomacy #Bolivian democracy
+		icon = GFX_BOL_bolivian_democracy
+		x = -3
+		y = 1
+		relative_position_id = BOL_victor_of_the_civil_war
+		prerequisite = { focus = BOL_victor_of_the_civil_war }
+		mutually_exclusive = { focus = BOL_a_path_of_force }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.08
+			}
+			every_other_country = {
+				limit = {
+					capital_scope = { is_on_continent = south_america }
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+				add_opinion_modifier = { modifier = BOL_chose_path_of_diplomacy target = ROOT }
+				ROOT = {
+					add_opinion_modifier = { modifier = BOL_chose_path_of_diplomacy target = PREV }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_open_up_our_foreing_policy
+		icon = GFX_goal_generic_national_unity
+		x = -1
+		y = 1
+		relative_position_id = BOL_a_path_of_diplomacy
+		prerequisite = { focus = BOL_a_path_of_diplomacy }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 75
+		}
+	}
+
+	focus = {
+		id = BOL_try_to_buyback_chaco
+		icon = GFX_URG_invite_paraguay
+		x = 0
+		y = 1
+		relative_position_id = BOL_open_up_our_foreing_policy
+		prerequisite = { focus = BOL_open_up_our_foreing_policy }
+
+		cost = 10
+
+		available = {
+			any_neighbor_country = {
+				controls_state = 688
+			}
+			NOT = {
+				has_war_with = PAR
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_open_up_our_foreing_policy
+			OR = {
+				controls_state = 688
+				has_war_with = PAR
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			random_other_country = {
+				limit = {
+					controls_state = 688
+				}
+				country_event = { id = bolivia.4 hours = 8 }
+			}
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				transfer_state = 688
+				random_owned_controlled_state = {
+					limit = { industrial_complex > 1 }
+					remove_building = {
+						type = industrial_complex
+						level = 1
+					}
+				}
+				add_timed_idea = {
+					idea = BOL_purchasing_chaco
+					days = 160
+				}
+				PAR = {
+					add_offsite_building = {
+						type = industrial_complex
+						level = 1
+					}
+					add_timed_idea = {
+						idea = PAR_purchasing_chaco
+						days = 160
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_sea_access_for_resource_rights
+		icon = GFX_ARG_inv_chl
+		x = -2
+		y = 1
+		relative_position_id = BOL_open_up_our_foreing_policy
+		prerequisite = { focus = BOL_open_up_our_foreing_policy }
+
+		cost = 10
+
+		available = {
+			any_neighbor_country = {
+				controls_state = 506
+			}
+			NOT = {
+				has_war_with = CHL
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_open_up_our_foreing_policy
+			OR = {
+				controls_state = 506
+				has_war_with = CHL
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			random_other_country = {
+				limit = {
+					controls_state = 506
+				}
+				country_event = { id = bolivia.5 hours = 8 }
+			}
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				transfer_state = 506
+				random_other_country = {
+					limit = {
+						controls_state = 506
+					}
+					ROOT = {
+						give_resource_rights = { receiver = PREV state = 487 }
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_try_to_purchase_acre
+		icon = GFX_URG_deal_brazil
+		x = -2
+		y = 1
+		relative_position_id = BOL_try_to_buyback_chaco
+		prerequisite = { focus = BOL_try_to_buyback_chaco }
+		prerequisite = { focus = BOL_sea_access_for_resource_rights }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				has_war_with = BRA
+			}
+			any_other_country = {
+				controls_state = 940
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_open_up_our_foreing_policy
+			OR = {
+				controls_state = 940
+				has_war_with = BRA
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			random_other_country = {
+				limit = {
+					controls_state = 940
+				}
+				country_event = { id = bolivia.6 hours = 8 }
+			}
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				transfer_state = 940
+				random_owned_controlled_state = {
+					limit = { industrial_complex > 1 }
+					remove_building = {
+						type = industrial_complex
+						level = 2
+					}
+				}
+				add_timed_idea = {
+					idea = BOL_purchasing_acre
+					days = 180
+				}
+				BRA = {
+					add_offsite_building = {
+						type = industrial_complex
+						level = 2
+					}
+					add_timed_idea = {
+						idea = BRA_purchasing_acre
+						days = 180
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_our_borders_finaly_restored
+		icon = GFX_BOL_borders_restored
+		x = 0
+		y = 1
+		relative_position_id = BOL_try_to_purchase_acre
+		prerequisite = { focus = BOL_try_to_purchase_acre }
+
+		cost = 10
+
+		available = {
+			controls_state = 688
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			688 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_join_the_allies
+		icon = GFX_focus_chi_british_cooperation
+		x = -2
+		y = 1
+		relative_position_id = BOL_our_borders_finaly_restored
+		prerequisite = { focus = BOL_our_borders_finaly_restored }
+		mutually_exclusive = { focus = BOL_look_for_a_close_ally }
+
+		cost = 5
+
+		available = {
+			is_in_faction = no
+			is_subject = no
+			has_civil_war = no
+			OR = {
+				ENG = {
+					NOT = {
+						has_war_with = ROOT
+						has_government = communism
+					}
+					is_faction_leader = yes
+				}
+				FRA = {
+					NOT = {
+						has_war_with = ROOT
+					}
+					has_government = democratic
+					is_faction_leader = yes
+				}
+				USA = {
+					NOT = {
+						has_war_with = ROOT
+					}
+					has_government = democratic
+					is_faction_leader = yes
+				}
+			}
+		}
+		bypass = {
+			OR = {
+				is_in_faction_with = ENG
+				is_in_faction_with = FRA
+				is_in_faction_with = USA
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			EUYL_clear_monroe_doctrine = yes
+			if = {
+				limit = {
+					ENG = {
+						NOT = {
+							has_war_with = ROOT
+							has_government = communism
+						}
+						is_faction_leader = yes
+					}
+				}
+				ENG = {
+					country_event = generic.2
+				}
+			}
+			else_if = {
+				limit = {
+					FRA = {
+						NOT = {
+							has_war_with = ROOT
+							has_government = communism
+						}
+						is_faction_leader = yes
+					}
+				}
+				FRA = {
+					country_event = generic.2
+				}
+			}
+			else_if = {
+				limit = {
+					USA = {
+						NOT = {
+							has_war_with = ROOT
+							has_government = communism
+						}
+						is_faction_leader = yes
+					}
+				}
+				USA = {
+					country_event = generic.2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_learn_from_the_british_navy
+		icon = GFX_british_navy
+		x = 0
+		y = 1
+		relative_position_id = BOL_join_the_allies
+		prerequisite = { focus = BOL_join_the_allies }
+
+		cost = 10
+
+		available = {
+			is_in_faction_with = ENG
+			any_owned_state = {
+				is_coastal = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			navy_experience = 50
+			EUYL_add_2_dockyard = yes
+			add_tech_bonus = {
+				name = BOL_learn_from_the_british_navy
+				bonus = 1.0
+				uses = 1
+				category = naval_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_purchase_british_armaments
+		icon = GFX_BOL_purchase_british_armaments
+		x = -2
+		y = 1
+		relative_position_id = BOL_join_the_allies
+		prerequisite = { focus = BOL_join_the_allies }
+
+		cost = 10
+
+		available = {
+			ENG = {
+				has_capitulated = no
+				is_in_faction_with = ROOT
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1079
+				producer = ENG
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 250
+				producer = ENG
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 250
+				producer = ENG
+			}
+			random_owned_controlled_state = {
+				limit = { industrial_complex > 1 }
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			ENG = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_economic_cooperation_with_britain
+		icon = GFX_focus_generic_the_giant_wakes
+		x = -1
+		y = 1
+		relative_position_id = BOL_learn_from_the_british_navy
+		prerequisite = { focus = BOL_learn_from_the_british_navy }
+		prerequisite = { focus = BOL_purchase_british_armaments }
+
+		cost = 10
+
+		available = {
+			ENG = {
+				has_capitulated = no
+			}
+			is_in_faction_with = ENG
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_civilian = yes
+			EUYL_add_1_military = yes
+			ENG = {
+				EUYL_add_2_civilian = yes
+				EUYL_add_1_military = yes
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_look_for_a_close_ally
+		icon = GFX_PRU_ally_with_south_america
+		x = 2
+		y = 1
+		relative_position_id = BOL_our_borders_finaly_restored
+		prerequisite = { focus = BOL_our_borders_finaly_restored }
+		mutually_exclusive = { focus = BOL_join_the_allies }
+
+		cost = 5
+
+		available = {
+			is_subject = no
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 50
+			EUYL_clear_monroe_doctrine = yes
+		}
+	}
+
+	focus = {
+		id = BOL_join_the_argentines
+		icon = GFX_focus_ARG_inv
+		x = 0
+		y = 1
+		relative_position_id = BOL_look_for_a_close_ally
+		prerequisite = { focus = BOL_look_for_a_close_ally }
+		mutually_exclusive = { focus = BOL_join_the_peruvians }
+		mutually_exclusive = { focus = BOL_join_the_chileans }
+		mutually_exclusive = { focus = BOL_create_our_own_faction }
+
+		cost = 10
+
+		available = {
+			ARG = {
+				has_government = democratic
+				is_in_faction = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_look_for_a_close_ally
+			is_in_faction_with = ARG
+		}
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			ARG = {
+				country_event = { id = generic.2 hours = 6 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_join_the_chileans
+		icon = GFX_ARG_inv_chl
+		x = 2
+		y = 1
+		relative_position_id = BOL_look_for_a_close_ally
+		prerequisite = { focus = BOL_look_for_a_close_ally }
+		mutually_exclusive = { focus = BOL_join_the_peruvians }
+		mutually_exclusive = { focus = BOL_create_our_own_faction }
+		mutually_exclusive = { focus = BOL_join_the_argentines }
+
+		cost = 10
+
+		available = {
+			CHL = {
+				has_government = democratic
+				is_in_faction = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_look_for_a_close_ally
+			is_in_faction_with = CHL
+		}
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			CHL = {
+				country_event = { id = generic.2 hours = 6 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_join_the_peruvians
+		icon = GFX_ARG_invite_peru
+		x = 4
+		y = 1
+		relative_position_id = BOL_look_for_a_close_ally
+		prerequisite = { focus = BOL_look_for_a_close_ally }
+		mutually_exclusive = { focus = BOL_create_our_own_faction }
+		mutually_exclusive = { focus = BOL_join_the_chileans }
+		mutually_exclusive = { focus = BOL_join_the_argentines }
+
+		cost = 10
+
+		available = {
+			PRU = {
+				has_government = democratic
+				is_in_faction = yes
+				is_faction_leader = yes
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_look_for_a_close_ally
+			is_in_faction_with = PRU
+		}
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			PRU = {
+				country_event = { id = generic.2 hours = 6 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_create_our_own_faction
+		icon = GFX_goal_generic_alliance
+		x = 6
+		y = 1
+		relative_position_id = BOL_look_for_a_close_ally
+		prerequisite = { focus = BOL_look_for_a_close_ally }
+		mutually_exclusive = { focus = BOL_join_the_peruvians }
+		mutually_exclusive = { focus = BOL_join_the_chileans }
+		mutually_exclusive = { focus = BOL_join_the_argentines }
+
+		cost = 10
+
+		available = {
+			is_in_faction = no
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_rule = { can_create_factions = yes }
+			create_faction = "Sudamerica Unida"
+		}
+	}
+
+	focus = {
+		id = BOL_economic_boost_from_our_ally
+		icon = GFX_goal_generic_construct_civilian
+		x = 0
+		y = 6
+		relative_position_id = BOL_join_the_chileans
+		prerequisite = {
+			focus = BOL_join_the_chileans
+			focus = BOL_join_the_argentines
+			focus = BOL_join_the_peruvians
+			focus = BOL_establish_an_allience_with_brazil
+		}
+
+		cost = 10
+
+		available = {
+			OR = {
+				is_in_faction_with = ARG
+				is_in_faction_with = CHL
+				is_in_faction_with = PRU
+				is_in_faction_with = BRA
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_civilian = yes
+			EUYL_add_1_military = yes
+		}
+	}
+
+	focus = {
+		id = BOL_invite_the_other_democracies
+		icon = GFX_goal_generic_improve_relations
+		x = 0
+		y = 1
+		relative_position_id = BOL_create_our_own_faction
+		prerequisite = { focus = BOL_create_our_own_faction }
+
+		cost = 10
+
+		available = {
+			is_in_faction = yes
+			is_faction_leader = yes
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					capital_scope = { is_on_continent = south_america }
+					has_government = democratic
+					is_in_faction = no
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+				country_event = { id = generic.5 hours = 6 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_arm_up_the_population
+		icon = GFX_focus_generic_little_entente
+		x = 2
+		y = 1
+		relative_position_id = BOL_join_the_allies
+		prerequisite = {
+			focus = BOL_join_the_allies
+			focus = BOL_look_for_a_close_ally
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = CHL_prepare_the_people_for_war_idea
+		}
+	}
+
+	focus = {
+		id = BOL_clean_up_the_fascists
+		icon = GFX_ARG_rid_fascism
+		x = 0
+		y = 1
+		relative_position_id = BOL_arm_up_the_population
+		prerequisite = {
+			focus = BOL_arm_up_the_population
+		}
+
+		cost = 10
+
+		available = {
+			has_civil_war = no
+			is_subject = no
+			has_government = democratic
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = ARG_removefascismfromcontinent
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						capital_scope = { is_on_continent = south_america }
+						has_government = fascism
+						NOT = {
+							OR = {
+								is_in_faction_with = ROOT
+								has_war_with = ROOT
+							}
+						}
+					}
+					ROOT = {
+						create_wargoal = {
+							type = annex_everything
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_clean_up_the_communists
+		icon = GFX_ARG_rid_communism
+		x = 0
+		y = 1
+		relative_position_id = BOL_clean_up_the_fascists
+		prerequisite = { focus = BOL_clean_up_the_fascists }
+
+		cost = 10
+
+		available = {
+			is_subject = no
+			has_government = democratic
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = ARG_removecommunismfromcontinent
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						capital_scope = { is_on_continent = south_america }
+						has_government = communism
+						NOT = {
+							OR = {
+								is_in_faction_with = ROOT
+								has_war_with = ROOT
+							}
+						}
+					}
+					ROOT = {
+						create_wargoal = {
+							type = annex_everything
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_a_path_of_force #centralize Government Control
+		icon = GFX_BOL_guardia_nacional
+		x = 3
+		y = 1
+		relative_position_id = BOL_victor_of_the_civil_war
+		prerequisite = {
+			focus = BOL_victor_of_the_civil_war
+		}
+		mutually_exclusive = { focus = BOL_a_path_of_diplomacy }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.1
+			}
+			every_other_country = {
+				limit = {
+					capital_scope = { is_on_continent = south_america }
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+				add_opinion_modifier = { modifier = BOL_chose_path_of_force target = ROOT }
+				ROOT = {
+					add_opinion_modifier = { modifier = BOL_chose_path_of_force target = PREV }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_making_the_military_our_puppet
+		icon = GFX_BOL_mil_puppet
+		x = 1
+		y = 1
+		relative_position_id = BOL_a_path_of_force
+		prerequisite = { focus = BOL_a_path_of_force }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_stability = -0.05
+			add_ideas = BOL_puppeted_military
+		}
+	}
+
+	focus = {
+		id = BOL_ban_the_press
+		icon = GFX_goal_generic_forceful_treaty
+		x = 0
+		y = 1
+		relative_position_id = BOL_making_the_military_our_puppet
+		prerequisite = { focus = BOL_making_the_military_our_puppet }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 35
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.05
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_establish_the_new_regime #solidify Government Rule
+		icon = GFX_focus_rom_royal_dictatorship
+		x = 0
+		y = 1
+		relative_position_id = BOL_ban_the_press
+		prerequisite = { focus = BOL_ban_the_press }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			neutrality > 0.39
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_country_leader_ideology = despotism
+			set_politics = {
+				ruling_party = neutrality
+			}
+			set_party_name = {
+				ideology = neutrality
+				long_name = BOL_central_government_long
+				name = BOL_central_government
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_the_tejada_dictatorship
+		icon = GFX_BOL_tejada_dictatoship
+		x = -2
+		y = 1
+		relative_position_id = BOL_establish_the_new_regime
+		prerequisite = { focus = BOL_establish_the_new_regime }
+
+		cost = 8
+
+		available = {
+			has_country_leader = {
+				name = "José Luis Tejada Sorzano"
+				ruling_only = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_ideas = BOL_the_tejada_dictatorship_idea
+		}
+	}
+
+	focus = {
+		id = BOL_focus_on_expanding_our_industry
+		icon = GFX_goal_generic_construct_civilian
+		x = 2
+		y = 1
+		relative_position_id = BOL_a_path_of_diplomacy
+		prerequisite = {
+			focus = BOL_a_path_of_diplomacy
+			focus = BOL_a_path_of_force
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			EUYL_add_2_civilian = yes
+		}
+	}
+
+	focus = {
+		id = BOL_expand_the_armories
+		icon = GFX_goal_generic_construct_mil_factory
+		x = -2
+		y = 1
+		relative_position_id = BOL_a_path_of_force
+		prerequisite = {
+			focus = BOL_a_path_of_diplomacy
+			focus = BOL_a_path_of_force
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_military = yes
+		}
+	}
+
+	focus = {
+		id = BOL_investment_possibilities_in_south_america
+		icon = GFX_PRU_unified_currency
+		x = -1
+		y = 1
+		relative_position_id = BOL_focus_on_expanding_our_industry
+		prerequisite = { focus = BOL_focus_on_expanding_our_industry }
+		prerequisite = { focus = BOL_a_path_of_diplomacy }
+
+		cost = 10
+
+		available = {
+			has_war = no
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			custom_effect_tooltip = PRU_invest_unlocked
+		}
+	}
+
+	focus = {
+		id = BOL_expand_our_conscription
+		icon = GFX_BOL_bolivian_military
+		x = 1
+		y = 1
+		relative_position_id = BOL_expand_the_armories
+		prerequisite = { focus = BOL_expand_the_armories }
+		prerequisite = { focus = BOL_a_path_of_force }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = URG_expanded_consription
+		}
+	}
+
+	focus = {
+		id = BOL_a_revived_industry
+		icon = GFX_goal_generic_construct_civ_factory
+		x = -2
+		y = 1
+		relative_position_id = BOL_expand_our_conscription
+		prerequisite = {
+			focus = BOL_expand_our_conscription
+			focus = BOL_investment_possibilities_in_south_america
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_stability = 0.05
+			add_ideas = BOL_revivied_industry
+		}
+	}
+
+	focus = {
+		id = BOL_side_with_military
+		icon = GFX_BOL_side_with_the_military
+		x = 23
+		y = 0
+		mutually_exclusive = { focus = BOL_side_with_the_people }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 50
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 25
+			add_popularity = {
+				ideology = communism
+				popularity = 0.08
+			}
+			custom_effect_tooltip = BOL_avoid_civil_war
+			add_days_mission_timeout = {
+				mission = BOL_the_great_coup
+				days = -15
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_placate_to_the_experienced_officers
+		icon = GFX_focus_generic_military_mission
+		x = 4
+		y = 1
+		relative_position_id = BOL_side_with_military
+		prerequisite = { focus = BOL_side_with_military }
+		mutually_exclusive = { focus = BOL_empower_the_young_officers }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 50
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+			custom_effect_tooltip = BOL_toro_in_power
+			add_days_mission_timeout = {
+				mission = BOL_the_great_coup
+				days = -5
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_empower_the_young_officers
+		icon = GFX_focus_generic_manpower
+		x = 10
+		y = 1
+		relative_position_id = BOL_side_with_military
+		prerequisite = { focus = BOL_side_with_military }
+		mutually_exclusive = { focus = BOL_placate_to_the_experienced_officers }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				add = 40
+				PRU = {
+					has_completed_focus = PRU_the_people_serve_the_state
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
+			custom_effect_tooltip = BOL_german_in_power
+			add_days_mission_timeout = {
+				mission = BOL_the_great_coup
+				days = -5
+			}
+			hidden_effect = {
+				country_event = { id = bolivia.3 days = 150 random_days = 90 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_begin_regaining_the_peoples_trust
+		icon = GFX_ARG_gain_back_trust
+		x = -3
+		y = 1
+		relative_position_id = BOL_empower_the_young_officers
+		prerequisite = {
+			focus = BOL_empower_the_young_officers
+			focus = BOL_placate_to_the_experienced_officers
+		}
+
+		cost = 2
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			has_idea = BOL_went_against_the_civilians
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 75
+			unlock_decision_category_tooltip = BOL_regaining_the_trust_of_the_people
+		}
+	}
+
+	focus = {
+		id = BOL_restructure_parliament
+		icon = GFX_focus_generic_self_management
+		x = -2
+		y = 1
+		relative_position_id = BOL_begin_regaining_the_peoples_trust
+		prerequisite = { focus = BOL_begin_regaining_the_peoples_trust }
+
+		cost = 4
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_has_civilian_rebelling
+				OR = {
+					has_idea = BOL_went_against_the_civilians
+					has_idea = BOL_went_against_the_civilians_2
+					has_idea = BOL_went_against_the_civilians_3
+					has_idea = BOL_went_against_the_civilians_4
+					has_idea = BOL_went_against_the_civilians_5
+				}
+			}
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 25
+			unlock_decision_tooltip = BOL_restructure_the_parliament
+		}
+	}
+
+	focus = {
+		id = BOL_kickstart_the_industry
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 0
+		y = 1
+		relative_position_id = BOL_begin_regaining_the_peoples_trust
+		prerequisite = { focus = BOL_begin_regaining_the_peoples_trust }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_has_civilian_rebelling
+				OR = {
+					has_idea = BOL_went_against_the_civilians
+					has_idea = BOL_went_against_the_civilians_2
+					has_idea = BOL_went_against_the_civilians_3
+					has_idea = BOL_went_against_the_civilians_4
+					has_idea = BOL_went_against_the_civilians_5
+				}
+			}
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 25
+			EUYL_add_1_civilian = yes
+			unlock_decision_tooltip = BOL_kickstart_our_economy
+		}
+	}
+
+	focus = {
+		id = BOL_nationalize_the_holdings_of_standard_oil
+		icon = GFX_focus_nationalize_oil
+		x = 2
+		y = 1
+		relative_position_id = BOL_begin_regaining_the_peoples_trust
+		prerequisite = { focus = BOL_begin_regaining_the_peoples_trust }
+
+		cost = 4
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_has_civilian_rebelling
+				OR = {
+					has_idea = BOL_went_against_the_civilians
+					has_idea = BOL_went_against_the_civilians_2
+					has_idea = BOL_went_against_the_civilians_3
+					has_idea = BOL_went_against_the_civilians_4
+					has_idea = BOL_went_against_the_civilians_5
+				}
+			}
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 4
+				}
+			}
+			unlock_decision_tooltip = BOL_nationalize_holdings_of_standard_oil
+		}
+	}
+
+	focus = {
+		id = BOL_set_up_corporate_style_system
+		icon = GFX_URG_privatize_industry
+		x = -1
+		y = 1
+		relative_position_id = BOL_kickstart_the_industry
+		prerequisite = { focus = BOL_restructure_parliament }
+		prerequisite = { focus = BOL_kickstart_the_industry }
+
+		cost = 7
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_has_civilian_rebelling
+				OR = {
+					has_idea = BOL_went_against_the_civilians
+					has_idea = BOL_went_against_the_civilians_2
+					has_idea = BOL_went_against_the_civilians_3
+					has_idea = BOL_went_against_the_civilians_4
+					has_idea = BOL_went_against_the_civilians_5
+				}
+			}
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_stability = 0.05
+			unlock_decision_tooltip = BOL_set_up_a_corporate_style_system
+		}
+	}
+
+	focus = {
+		id = BOL_improve_worker_conditions
+		icon = GFX_goal_generic_production
+		x = -1
+		y = 1
+		relative_position_id = BOL_nationalize_the_holdings_of_standard_oil
+		prerequisite = { focus = BOL_nationalize_the_holdings_of_standard_oil }
+		prerequisite = { focus = BOL_kickstart_the_industry }
+
+		cost = 7
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_has_civilian_rebelling
+				OR = {
+					has_idea = BOL_went_against_the_civilians
+					has_idea = BOL_went_against_the_civilians_2
+					has_idea = BOL_went_against_the_civilians_3
+					has_idea = BOL_went_against_the_civilians_4
+					has_idea = BOL_went_against_the_civilians_5
+				}
+			}
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_manpower = 27500
+			unlock_decision_tooltip = BOL_improve_conditions_of_the_average_worker
+		}
+	}
+
+	focus = {
+		id = BOL_embrace_a_new_idea
+		icon = GFX_BOL_embrace_new_idea
+		x = 0
+		y = 1
+		relative_position_id = BOL_empower_the_young_officers
+		prerequisite = { focus = BOL_empower_the_young_officers }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 25
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.1
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = BOL_falange_long
+				name = BOL_falange
+			}
+			add_ideas = fascist_influence
+		}
+	}
+
+	focus = {
+		id = BOL_begin_purging_the_military_socialists
+		icon = GFX_BOL_against_military_socialism
+		x = 1
+		y = 1
+		relative_position_id = BOL_embrace_a_new_idea
+		prerequisite = { focus = BOL_embrace_a_new_idea }
+
+		cost = 6
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 75
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = -0.1
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_revive_our_military_industry
+		icon = GFX_goal_generic_construct_mil_factory
+		x = -1
+		y = 1
+		relative_position_id = BOL_begin_purging_the_military_socialists
+		prerequisite = { focus = BOL_begin_purging_the_military_socialists }
+		prerequisite = { focus = BOL_nationalize_the_holdings_of_standard_oil }
+
+		cost = 8
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_military = yes
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.03
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_embrace_military_socialism
+		icon = GFX_military_socialism
+		x = 0
+		y = 1
+		relative_position_id = BOL_placate_to_the_experienced_officers
+		prerequisite = { focus = BOL_placate_to_the_experienced_officers }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			has_government = communism
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			add_stability = 0.05
+			retire_country_leader = yes
+			create_country_leader = {
+				name = "David Toro"
+				desc = "POLITICS_DAVID_TORO_DESC"
+				picture = "gfx/leaders/BOL/portrait_BOL_david_toro.dds"
+				expire = "1965.1.1"
+				ideology = military_socialism
+				traits = {
+					ARG_brutal_leader
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_expand_worker_rights
+		icon = GFX_ARG_worker_rights
+		x = -1
+		y = 1
+		relative_position_id = BOL_embrace_military_socialism
+		prerequisite = { focus = BOL_embrace_military_socialism }
+
+		cost = 6
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_ideas = ARG_expanded_worker_rights
+		}
+	}
+
+	focus = {
+		id = BOL_a_balanced_Economy
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 1
+		y = 1
+		relative_position_id = BOL_expand_worker_rights
+		prerequisite = { focus = BOL_expand_worker_rights }
+		prerequisite = { focus = BOL_restructure_parliament }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			EUYL_add_1_military = yes
+			EUYL_add_1_civilian = yes
+		}
+	}
+
+	focus = {
+		id = BOL_nation_reborn
+		icon = GFX_BOL_our_nation_reborn
+		x = -1
+		y = 1
+		relative_position_id = BOL_improve_worker_conditions
+		prerequisite = { focus = BOL_improve_worker_conditions }
+		prerequisite = { focus = BOL_set_up_corporate_style_system }
+		prerequisite = {
+			focus = BOL_revive_our_military_industry
+			focus = BOL_a_balanced_Economy
+		}
+
+		cost = 10
+
+		ai_will_do = {
+			base = 10
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_weakest_version_of_civ_tt
+				has_idea = BOL_went_against_the_civilians_6
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_stability = 0.1
+			add_research_slot = 1
+			remove_ideas = BOL_went_against_the_civilians_6
+			add_ideas = CHL_prepare_the_people_for_war_idea
+		}
+	}
+
+	focus = {
+		id = BOL_continue_with_toro
+		icon = GFX_BOL_continue_with_toro
+		x = -3
+		y = 1
+		relative_position_id = BOL_nation_reborn
+		prerequisite = { focus = BOL_nation_reborn }
+		prerequisite = { focus = BOL_a_balanced_Economy }
+		mutually_exclusive = { focus = BOL_continue_with_german }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				add = 10
+				PRU = {
+					has_government = communism
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			custom_effect_tooltip = BOL_german_will_rebel_tt
+			add_stability = -0.05
+			add_ideas = BOL_german_rebelling
+			remove_unit_leader = 44124
+		}
+	}
+
+	focus = {
+		id = BOL_put_german_in_his_place
+		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		x = -1
+		y = 1
+		relative_position_id = BOL_continue_with_toro
+		prerequisite = { focus = BOL_continue_with_toro }
+
+		cost = 15
+
+		available = {
+			has_idea = BOL_german_rebelling
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			remove_ideas = BOL_german_rebelling
+			create_field_marshal = {
+				name = "Germán Busch"
+				portrait_path = "gfx/leaders/BOL/portrait_BOL_german_busch.dds"
+				traits = { offensive_doctrine brilliant_strategist }
+				id = 44124
+				skill = 3
+				attack_skill = 3
+				defense_skill = 2
+				planning_skill = 1
+				logistics_skill = 2
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_continue_with_german
+		icon = GFX_BOL_continue_with_german
+		x = -7
+		y = 1
+		relative_position_id = BOL_nation_reborn
+		prerequisite = { focus = BOL_a_balanced_Economy }
+		prerequisite = { focus = BOL_nation_reborn }
+		mutually_exclusive = { focus = BOL_continue_with_toro }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			custom_effect_tooltip = BOL_kick_out_toro_tt
+			remove_unit_leader = 44123
+			retire_country_leader = yes
+			create_country_leader = {
+				name = "Germán Busch"
+				desc = "POLITICS_GERMAN_BUSCH_DESC"
+				picture = "gfx/leaders/BOL/portrait_BOL_german_busch.dds"
+				expire = "1965.1.1"
+				ideology = military_socialism
+				traits = {
+					ARG_inexperienced_leader_1
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_hold_the_1938_national_convention
+		icon = GFX_goal_generic_national_unity
+		x = 1
+		y = 1
+		relative_position_id = BOL_continue_with_german
+		prerequisite = { focus = BOL_continue_with_german }
+
+		cost = 5
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 50
+		}
+	}
+
+	focus = {
+		id = BOL_treaty_of_peace_with_paraguay
+		icon = GFX_URG_invite_paraguay
+		x = -1
+		y = 1
+		relative_position_id = BOL_continue_with_german
+		prerequisite = { focus = BOL_continue_with_german }
+
+		cost = 5
+
+		available = {
+			NOT = {
+				has_war_with = PAR
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			PAR = { country_event = { id = bolivia.7 hours = 6 }}
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				give_military_access = PAR
+				688 = {
+					remove_core_of = BOL
+				}
+				add_opinion_modifier = { modifier = strengthened_ties target = PAR }
+				PAR = {
+					add_opinion_modifier = { modifier = strengthened_ties target = ROOT }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_write_the_1938_constitution
+		icon = GFX_focus_hol_the_foundations_of_defense
+		x = -1
+		y = 1
+		relative_position_id = BOL_hold_the_1938_national_convention
+		prerequisite = { focus = BOL_hold_the_1938_national_convention }
+		prerequisite = { focus = BOL_treaty_of_peace_with_paraguay }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 75
+			add_stability = 0.05
+			remove_country_leader_trait = ARG_inexperienced_leader_1
+		}
+	}
+
+	focus = {
+		id = BOL_hand_out_welfare_plans
+		icon = GFX_ARG_help_the_poor
+		x = 3
+		y = 1
+		relative_position_id = BOL_write_the_1938_constitution
+		prerequisite = {
+			focus = BOL_write_the_1938_constitution
+			focus = BOL_put_german_in_his_place
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = BOL_welfare_plans
+		}
+	}
+
+	focus = {
+		id = BOL_establish_the_department_of_pando
+		icon = GFX_BOL_establish_pando
+		x = -1
+		y = 1
+		relative_position_id = BOL_put_german_in_his_place
+		prerequisite = {
+			focus = BOL_put_german_in_his_place
+			focus = BOL_hold_the_1938_national_convention
+		}
+
+		cost = 10
+
+		available = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 50
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_establish_ourselves_as_dictator
+		icon = GFX_BOL_establish_ourselves_as_dictator
+		x = 0
+		y = 2
+		relative_position_id = BOL_write_the_1938_constitution
+		prerequisite = { focus = BOL_write_the_1938_constitution }
+
+		cost = 10
+
+		available = {
+			has_civil_war = no
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 100
+			add_stability = -0.05
+			add_country_leader_trait = dictator
+			hidden_effect = {
+				country_event = { id = bolivia.8 days = 120 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_invest_in_the_army
+		icon = GFX_BOL_bolivian_military
+		x = 0
+		y = 1
+		relative_position_id = BOL_establish_ourselves_as_dictator
+		prerequisite = { focus = BOL_establish_ourselves_as_dictator }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_MANPOWER FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_war_support = 0.05
+			add_ideas = URG_expanded_consription
+		}
+	}
+
+	focus = {
+		id = BOL_choose_a_path_of_democracy
+		icon = GFX_BOL_democracy_path
+		x = 1
+		y = 2
+		relative_position_id = BOL_establish_ourselves_as_dictator
+		prerequisite = { focus = BOL_invest_in_the_army }
+		mutually_exclusive = { focus = BOL_continue_with_the_military }
+
+		cost = 10
+
+		available = {
+			has_country_flag = BOL_german_died
+		}
+
+		ai_will_do = {
+			base = 2
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_stability = 0.05
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.15
+			}
+			add_ideas = democratic_influence
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = yes
+			}
+			add_country_leader_role = {
+				character = BOL_enrique_peñaranda
+				promote_leader = yes
+				country_leader = {
+					ideology = liberalism
+					traits = {  }
+					expire = "1965.3.1.1"
+					desc = "POLITICS_ENRIQUE_PENARANDA_DESC"
+				}
+			}
+			unlock_national_focus = BOL_a_path_of_diplomacy
+		}
+	}
+
+	focus = {
+		id = BOL_continue_with_the_military
+		icon = GFX_BOL_side_with_the_military
+		x = -1
+		y = 1
+		relative_position_id = BOL_invest_in_the_army
+		prerequisite = { focus = BOL_invest_in_the_army }
+		mutually_exclusive = { focus = BOL_choose_a_path_of_democracy }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		available = {
+			has_country_flag = BOL_german_died
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_make_our_ideals_official
+		icon = GFX_focus_ger_reichskommisariats
+		x = 0
+		y = 2
+		relative_position_id = BOL_revive_our_military_industry
+		prerequisite = { focus = BOL_nation_reborn }
+		prerequisite = { focus = BOL_revive_our_military_industry }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 10
+				PRU = {
+					has_government = fascism
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_politics = {
+				ruling_party = fascism
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_tackle_toro_directly
+		icon = GFX_focus_generic_support_the_left_right
+		x = 5
+		y = 1
+		relative_position_id = BOL_make_our_ideals_official
+		prerequisite = { focus = BOL_make_our_ideals_official }
+
+		cost = 6
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 20
+				has_active_mission = BOL_toro_planning_to_control_FROM
+			}
+		}
+
+		available = {
+			has_country_flag = BOL_toro_rebellious
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = BOL_decisions_toro_cheaper
+			hidden_effect = {
+				subtract_from_variable = { BOL_cost_of_taking_out_toro = 30 }
+				subtract_from_variable = { BOL_days_to_get_back_state = 10 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_imprison_toro
+		icon = GFX_BOL_imprisonment_of_toro
+		x = 0
+		y = 1
+		relative_position_id = BOL_tackle_toro_directly
+		prerequisite = { focus = BOL_tackle_toro_directly }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 25
+		}
+
+		available = {
+			has_country_flag = BOL_toro_rebellious
+			custom_trigger_tooltip = {
+				tooltip = BOL_toro_controls_no_states
+				check_variable = { BOL_number_of_states_controlled_by_toro < 2 }
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = BOL_toro_impriosned_tt
+			hidden_effect = {
+				remove_unit_leader = 44123
+				clr_country_flag = BOL_toro_rebellious
+				every_controlled_state = {
+					clr_state_flag = BOL_controlled_by_player
+					clr_state_flag = BOL_state_will_be_controlled_by_toro
+					clr_state_flag = BOL_state_controlled_by_toro
+					if = {
+						limit = {
+							has_dynamic_modifier = { modifier = BOL_controlled_by_toro }
+						}
+						remove_dynamic_modifier = { modifier = BOL_controlled_by_toro }
+					}
+				}
+				clear_variable = BOL_number_of_states_controlled_by_toro
+				clear_variable = BOL_cost_of_taking_out_toro
+				clear_variable = BOL_days_to_get_back_state
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_contact_the_peruvians
+		icon = GFX_ARG_invite_peru
+		x = 0
+		y = 2
+		relative_position_id = BOL_nation_reborn
+		prerequisite = {
+			focus = BOL_continue_with_toro
+			focus = BOL_make_our_ideals_official
+		}
+		mutually_exclusive = { focus = BOL_focusing_on_internal_politics }
+
+		cost = 6
+
+		available = {
+			NOT = {
+				has_war_with = PRU
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 30
+				PRU = {
+					has_government = fascism
+					exists = yes
+					has_civil_war = no
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			PRU = {
+				add_opinion_modifier = { modifier = URG_contacted_us target = ROOT }
+			}
+			add_opinion_modifier = { modifier = URG_contacted_us target = PRU }
+		}
+	}
+
+	focus = {
+		id = BOL_focusing_on_internal_politics
+		icon = GFX_goal_generic_neutrality_focus
+		x = 2
+		y = 1
+		relative_position_id = BOL_make_our_ideals_official
+		prerequisite = { focus = BOL_make_our_ideals_official }
+		mutually_exclusive = { focus = BOL_contact_the_peruvians }
+
+		cost = 7
+
+		available = {
+			has_war = no
+			has_government = fascism
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				add = 25
+				has_army_manpower = {
+					size < 99999
+				}
+				num_of_factories < 29
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_political_power = 25
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = BOL_close_down_the_economy
+		icon = GFX_ARG_limit_exports
+		x = -1
+		y = 1
+		relative_position_id = BOL_focusing_on_internal_politics
+		prerequisite = { focus = BOL_focusing_on_internal_politics }
+
+		cost = 8
+
+		bypass = {
+			has_idea = closed_economy
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_ideas = closed_economy
+		}
+	}
+
+	focus = {
+		id = BOL_nationalize_our_industry
+		icon = GFX_ARG_nationalize_industry
+		x = 0
+		y = 1
+		relative_position_id = BOL_close_down_the_economy
+		prerequisite = { focus = BOL_close_down_the_economy }
+
+		cost = 10
+
+		available = {
+			has_idea = closed_economy
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_1_civilian = yes
+			EUYL_add_1_military = yes
+			custom_effect_tooltip = BOL_completed_focus_on_what_good_at_tt
+			effect_tooltip = {
+				EUYL_add_1_civilian = yes
+			}
+			hidden_effect = {
+				if = {
+					limit = { has_completed_focus = BOL_focus_on_what_were_good_at }
+					EUYL_add_1_civilian = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_support_from_the_catholic_church
+		icon = GFX_focus_spa_no_compromise_on_carlist_ideals
+		x = 1
+		y = 1
+		relative_position_id = BOL_focusing_on_internal_politics
+		prerequisite = { focus = BOL_focusing_on_internal_politics }
+
+		cost = 10
+
+		available = {
+			has_war = no
+			is_subject = no
+		}
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_ideas = BOL_catholic_support_1
+		}
+	}
+
+	focus = {
+		id = BOL_draft_plans_to_take_antofagasta
+		icon = GFX_BOL_take_anto
+		x = 1
+		y = 1
+		relative_position_id = BOL_support_from_the_catholic_church
+		prerequisite = { focus = BOL_support_from_the_catholic_church }
+		prerequisite = { focus = BOL_imprison_toro }
+
+		cost = 10
+
+		available = {
+			exists = yes
+			NOT = {
+				has_war_with = CHL
+			}
+			CHL = {
+				has_civil_war = no
+			}
+			has_civil_war = no
+		}
+
+		ai_will_do = {
+			base = 5
+		}
+
+		bypass = {
+			controls_state = 506
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			activate_mission = BOL_time_until_we_execute_the_plan
+			custom_effect_tooltip = BOL_unlock_decision_to_take_state_progressively_tt
+			hidden_effect = {
+				set_variable = { BOL_cost_to_claim_state = 35 }
+				set_variable = { BOL_days_to_claim_state = 40 }
+				set_variable = { BOL_claim_strength = 0 }
+				set_variable = { chance_of_taking_state = 0 }
+				set_variable = { chance_of_not_taking_state = 100 }
+				CHL = {
+					country_event = { id = bolivia.9 hours = 4 }
+					set_variable = { CHL_bol_days_to_claim_state = 40 }
+					set_variable = { CHL_cost_to_counter_claim = 15 }
+					set_variable = { CHL_bol_claim_strength = 0 }
+					set_variable = { CHL_chance_of_taking_state = 0 }
+					set_variable = { CHL_chance_of_not_taking_state = 100 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_focus_all_our_efforts_on_the_plan
+		icon = GFX_focus_generic_treaty
+		x = 2
+		y = 1
+		relative_position_id = BOL_draft_plans_to_take_antofagasta
+		prerequisite = { focus = BOL_draft_plans_to_take_antofagasta }
+
+		cost = 8
+
+		available = {
+			has_active_mission = BOL_time_until_we_execute_the_plan
+		}
+
+		ai_will_do = {
+			base = 7
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			add_political_power = 35
+			custom_effect_tooltip = BOL_cost_and_days_reduced_tt
+			hidden_effect = {
+				subtract_from_variable = { BOL_cost_to_claim_state = 15 }
+				subtract_from_variable = { BOL_days_to_claim_state = 10 }
+				CHL = { subtract_from_variable = { CHL_bol_days_to_claim_state = 10 } }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_prepare_our_forces_for_worst_case
+		icon = GFX_focus_generic_manpower
+		x = 0
+		y = 1
+		relative_position_id = BOL_draft_plans_to_take_antofagasta
+		prerequisite = { focus = BOL_draft_plans_to_take_antofagasta }
+
+		cost = 5
+
+		available = {
+			exists = yes
+			has_civil_war = no
+		}
+
+		ai_will_do = {
+			base = 5
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_manpower = 44500
+		}
+	}
+
+	focus = {
+		id = BOL_connect_the_country
+		icon = GFX_goal_generic_construct_infrastructure
+		x = -2
+		y = 1
+		relative_position_id = BOL_draft_plans_to_take_antofagasta
+		prerequisite = {
+			focus = BOL_draft_plans_to_take_antofagasta
+			focus = BOL_nationalize_our_industry
+		}
+
+		cost = 7
+
+		available = {
+			exists = yes
+			has_civil_war = no
+			any_controlled_state = {
+				is_core_of = ROOT
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = BOL_connect_the_country_idea
+		}
+	}
+
+	focus = {
+		id = BOL_total_success
+		icon = GFX_BOL_total_victory_ic
+		x = 0
+		y = 1
+		relative_position_id = BOL_prepare_our_forces_for_worst_case
+		prerequisite = { focus = BOL_prepare_our_forces_for_worst_case }
+
+		cost = 8
+
+		available = {
+			controls_state = 506
+			has_war = no
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_political_power = 75
+			add_stability = 0.03
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = BOL_develop_antofagasta
+		icon = GFX_goal_generic_construction2
+		x = 1
+		y = 1
+		relative_position_id = BOL_total_success
+		prerequisite = { focus = BOL_total_success }
+
+		cost = 10
+
+		available = {
+			controls_state = 506
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			506 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_strengthen_our_catholic_support
+		icon = GFX_focus_mex_restore_the_army_of_christ
+		x = -1
+		y = 1
+		relative_position_id = BOL_total_success
+		prerequisite = { focus = BOL_total_success }
+
+		cost = 10
+
+		available = {
+			exists = yes
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_catholic_support_1
+				add_idea = BOL_catholic_support_2
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_reform_the_peru_bolivian_confederation
+		icon = GFX_PRU_peru_bolivia_commonwealth
+		x = 2
+		y = 1
+		relative_position_id = BOL_contact_the_peruvians
+		prerequisite = { focus = BOL_contact_the_peruvians }
+		mutually_exclusive = { focus = BOL_propose_a_plan_to_peru }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 40
+				PRU = {
+					OR = {
+						has_completed_focus = PRU_contact_the_bolivians
+						has_completed_focus = PRU_make_our_allience_official
+					}
+				}
+			}
+		}
+
+		available = {
+			PRU = { exists = yes }
+			NOT = {
+				has_war_with = PRU
+			}
+			PRU = {
+				is_subject = no
+			}
+		}
+
+		completion_reward = {
+			PRU = { country_event = { id = peru.137 hours = 4 } }
+			custom_effect_tooltip = BOL_if_peru_strengthened_relations_tt
+		}
+	}
+
+	focus = {
+		id = BOL_propose_a_plan_to_peru
+		icon = GFX_coop_between_peru_and_bolivia
+		x = -2
+		y = 1
+		relative_position_id = BOL_contact_the_peruvians
+		prerequisite = { focus = BOL_contact_the_peruvians }
+		mutually_exclusive = { focus = BOL_reform_the_peru_bolivian_confederation }
+		will_lead_to_war_with = CHL
+
+		cost = 5
+
+		ai_will_do = {
+			base = 5
+		}
+
+		available = {
+			NOT = {
+				has_war_with = PRU
+			}
+			PRU = {
+				is_subject = no
+			}
+		}
+
+		bypass = {
+			has_country_flag = ROOT_accepted_to_declare_war
+			PRU = {
+				has_government = ROOT
+				OR =  {
+					has_completed_focus = PRU_make_our_allience_official
+					has_completed_focus = PRU_propose_a_plan_to_bolivia
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION FOCUS_FILTER_SECOND_WAR_OF_THE_PACIFIC}
+		completion_reward = {
+			PRU = { country_event = { id = peru.138 hours = 6}}
+			custom_effect_tooltip = PRU_higher_opinion_of_us_tt
+			custom_effect_tooltip = BOL_if_they_accept_then_war
+		}
+	}
+
+	focus = {
+		id = BOL_get_revenge_for_our_sea_access_loss
+		icon = GFX_ARG_attack_chile
+		x = 0
+		y = 1
+		relative_position_id = BOL_propose_a_plan_to_peru
+		prerequisite = { focus = BOL_propose_a_plan_to_peru }
+		will_lead_to_war_with = CHL
+		will_lead_to_war_with = ECU
+		will_lead_to_war_with = COL
+
+		cost = 7.2
+
+		available = {
+			has_war = no
+			NOT = {
+				is_in_faction_with = CHL
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_propose_a_plan_to_peru
+			has_war_with = CHL
+		}
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION FOCUS_FILTER_SECOND_WAR_OF_THE_PACIFIC }
+		completion_reward = {
+			declare_war_on = {
+				target = CHL
+				type = annex_everything
+			}
+			set_country_flag = is_in_second_war_of_the_pacific
+			CHL = {
+				set_country_flag = is_in_second_war_of_the_pacific
+			}
+			if = {
+				limit = {
+					PRU = {
+						has_country_flag = ROOT_accepted_to_declare_war
+					}
+				}
+				PRU = {
+					country_event = { id = peru.124 hours = 1 }
+				}
+			}
+			hidden_effect = {
+				set_global_flag = EUYL_second_war_of_the_pacific_flag
+				news_event = { days = 1 id = news.343 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_the_second_war_of_the_pacific
+		icon = GFX_second_war_of_pacific_peru_side
+		x = 0
+		y = 1
+		relative_position_id = BOL_get_revenge_for_our_sea_access_loss
+		prerequisite = { focus = BOL_get_revenge_for_our_sea_access_loss }
+
+		cost = 4
+
+		available = {
+			has_country_flag = is_in_second_war_of_the_pacific
+			has_war_with = CHL
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_POLITICAL FOCUS_FILTER_SECOND_WAR_OF_THE_PACIFIC }
+		completion_reward = {
+			unlock_decision_category_tooltip = ROOT_the_second_war_of_the_pacific
+		}
+	}
+
+	focus = {
+		id = BOL_mobilize_the_militias
+		icon = GFX_focus_generic_little_entente
+		x = -1
+		y = 1
+		relative_position_id = BOL_the_second_war_of_the_pacific
+		prerequisite = { focus = BOL_the_second_war_of_the_pacific }
+
+		cost = 6
+
+		available = {
+			has_country_flag = is_in_second_war_of_the_pacific
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+
+		bypass = {
+			has_completed_focus = BOL_the_second_war_of_the_pacific
+			NOT = {
+				OR = {
+					has_war_with = CHL
+					has_war_with = ECU
+					has_war_with = COL
+				}
+			}
+			OR = {
+				NOT = {
+					has_country_flag = is_in_second_war_of_the_pacific
+				}
+				has_country_flag = PRU_BOL_winner_of_war_of_pacific
+				controls_state = 506
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_SECOND_WAR_OF_THE_PACIFIC }
+		completion_reward = {
+			add_manpower = 45650
+			custom_effect_tooltip = URG_mobilize_reserves
+			hidden_effect = {
+				division_template = {
+					name = "Reservas Militares"
+					division_names_group = SPAN_INF_02
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+						infantry = { x = 0 y = 4 }
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Reservas Militares\" division_template = \"Reservas Militares\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+					create_unit = {
+						division = "name = \"Reservas Militares\" division_template = \"Reservas Militares\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Reservas Militares\" division_template = \"Reservas Militares\" start_experience_factor = 0.4 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_an_economy_for_war
+		icon = GFX_focus_generic_tank_production
+		x = 1
+		y = 1
+		relative_position_id = BOL_the_second_war_of_the_pacific
+		prerequisite = { focus = BOL_the_second_war_of_the_pacific }
+
+		cost = 6
+
+		available = {
+			has_country_flag = is_in_second_war_of_the_pacific
+		}
+
+		ai_will_do = {
+			base = 4
+		}
+
+		bypass = {
+			has_completed_focus = BOL_the_second_war_of_the_pacific
+			NOT = {
+				OR = {
+					has_war_with = CHL
+					has_war_with = ECU
+					has_war_with = COL
+				}
+			}
+			OR = {
+				NOT = {
+					has_country_flag = is_in_second_war_of_the_pacific
+				}
+				has_country_flag = PRU_BOL_winner_of_war_of_pacific
+				controls_state = 506
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_SECOND_WAR_OF_THE_PACIFIC }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_idea = war_economy
+							has_idea = tot_economic_mobilisation
+						}
+					}
+				}
+				add_ideas = war_economy
+			}
+			else = {
+				add_political_power = 150
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_ask_for_foreign_volunteers
+		icon = GFX_focus_generic_manpower
+		x = -3
+		y = 1
+		relative_position_id = BOL_the_second_war_of_the_pacific
+		prerequisite = { focus = BOL_the_second_war_of_the_pacific }
+
+		cost = 8
+
+		available = {
+			has_country_flag = is_in_second_war_of_the_pacific
+		}
+
+		ai_will_do = {
+			base = 3
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_SECOND_WAR_OF_THE_PACIFIC }
+		completion_reward = {
+			custom_effect_tooltip = FROM_unlock_influence_and_invite_decision
+		}
+	}
+
+	focus = {
+		id = BOL_expand_the_conscription
+		icon = GFX_BOL_bolivian_military
+		x = 3
+		y = 1
+		relative_position_id = BOL_the_second_war_of_the_pacific
+		prerequisite = { focus = BOL_the_second_war_of_the_pacific }
+
+		cost = 10
+
+		available = {
+			has_country_flag = is_in_second_war_of_the_pacific
+		}
+
+		bypass = {
+			NOT = {
+				has_war_with = CHL
+			}
+			has_country_flag = PRU_BOL_winner_of_war_of_pacific
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_SECOND_WAR_OF_THE_PACIFIC }
+		completion_reward = {
+			add_ideas = URG_expanded_consription
+		}
+	}
+
+	focus = {
+		id = BOL_victor_of_the_war_of_the_pacific
+		icon = GFX_focus_generic_support_the_left_right
+		x = -1
+		y = 1
+		relative_position_id = BOL_an_economy_for_war
+		prerequisite = { focus = BOL_an_economy_for_war }
+		prerequisite = { focus = BOL_mobilize_the_militias }
+
+		cost = 5
+
+		available = {
+			OR = {
+				has_country_flag = PRU_BOL_winner_of_war_of_pacific
+				AND = {
+					has_war = no
+					controls_state = 506
+				}
+				CHL = { is_in_faction_with = ROOT }
+			}
+			NOT = {
+				OR = {
+					has_war_with = CHL
+					has_war_with = COL
+					has_war_with = ECU
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_STABILITY FOCUS_FILTER_SECOND_WAR_OF_THE_PACIFIC }
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.1
+			hidden_effect = {
+				clr_country_flag = PRU_BOL_winner_of_war_of_pacific
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_alliance_with_peru
+		icon = GFX_peru-bolivia_alliance
+		x = 5
+		y = 1
+		relative_position_id = BOL_victor_of_the_war_of_the_pacific
+		prerequisite = {
+			focus = BOL_victor_of_the_war_of_the_pacific
+			focus = BOL_strengthen_our_catholic_support
+		}
+		mutually_exclusive = { focus = BOL_forge_our_own_path }
+
+		cost = 8
+
+		available = {
+			NOT = {
+				has_war_with = PRU
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_victor_of_the_war_of_the_pacific
+			is_in_faction_with = PRU
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			if = {
+				limit = {
+					is_in_faction = no
+					is_faction_leader = no
+				}
+				set_rule = { can_create_factions = yes }
+				create_faction = "La Alianza de Los Andes"
+				PRU = {
+					country_event = { id = generic.5 hours = 4 }
+				}
+			}
+			else = {
+				random_other_country = {
+					limit = {
+						is_in_faction_with = PRU
+						is_faction_leader = yes
+					}
+					country_event = { id = generic.2 hours = 6 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_economic_cooperation_with_peru
+		icon = GFX_focus_generic_tank_production
+		x = 0
+		y = 1
+		relative_position_id = BOL_alliance_with_peru
+		prerequisite = { focus = BOL_alliance_with_peru }
+
+		cost = 10
+
+		available = {
+			is_in_faction_with = PRU
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_civilian = yes
+			EUYL_add_1_military = yes
+			PRU = {
+				EUYL_add_2_civilian = yes
+				EUYL_add_1_military = yes
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_mutual_military_buildup
+		icon = GFX_coop_between_peru_and_bolivia
+		x = -2
+		y = 1
+		relative_position_id = BOL_economic_cooperation_with_peru
+		prerequisite = { focus = BOL_economic_cooperation_with_peru }
+
+		cost = 10
+
+		available = {
+			is_in_faction_with = PRU
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = PRU_arming_up_our_nations
+			PRU = {
+				add_ideas = PRU_arming_up_our_nations
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_use_a_shared_currency
+		icon = GFX_PRU_unified_currency
+		x = 2
+		y = 1
+		relative_position_id = BOL_economic_cooperation_with_peru
+		prerequisite = { focus = BOL_economic_cooperation_with_peru }
+
+		cost = 10
+
+		available = {
+			is_in_faction_with = PRU
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = PRU_unified_currency
+			PRU = {
+				add_ideas = PRU_unified_currency
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_go_after_chile
+		icon = GFX_ARG_attack_chile
+		x = -1
+		y = 2
+		relative_position_id = BOL_economic_cooperation_with_peru
+		prerequisite = { focus = BOL_economic_cooperation_with_peru }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				is_in_faction_with = CHL
+			}
+		}
+
+		bypass = {
+			CHL = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = CHL
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_take_out_argentina
+		icon = GFX_focus_ARG_attack
+		x = 1
+		y = 2
+		relative_position_id = BOL_economic_cooperation_with_peru
+		prerequisite = { focus = BOL_economic_cooperation_with_peru }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				is_in_faction_with = ARG
+			}
+		}
+
+		bypass = {
+			ARG = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ARG
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_invite_venezuela
+		icon = GFX_ARG_invite_venezuela
+		x = -1
+		y = 1
+		relative_position_id = BOL_take_out_argentina
+		prerequisite = { focus = BOL_take_out_argentina }
+		prerequisite = { focus = BOL_go_after_chile }
+
+		cost = 10
+
+		available = {
+			VEN = {
+				is_in_faction = no
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		bypass = {
+			VEN = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = ARG_invven
+			hidden_effect = {
+				VEN = {
+					country_event = { id = generic.5 days = 1 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_invest_in_the_venezuelan_oil
+		icon = GFX_goal_generic_oil_refinery
+		x = -2
+		y = 1
+		relative_position_id = BOL_invite_venezuela
+		prerequisite = { focus = BOL_invite_venezuela }
+
+		cost = 10
+
+		available = {
+			VEN = {
+				is_in_faction_with = ROOT
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = { industrial_complex > 1 }
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+			add_timed_idea = {
+				idea = PRU_investing_in_the_venezuelan_oil
+				days = 120
+			}
+			custom_effect_tooltip = PRU_effect_when_idea_removed_tt
+			effect_tooltip = {
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 3
+						instant_build = yes
+					}
+				}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 3
+						instant_build = yes
+					}
+				}
+			}
+			VEN = {
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_resource = {
+						type = oil
+						amount = 18
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_take_out_paraguay
+		icon = GFX_ARG_go_through_paraguay
+		x = 1
+		y = 1
+		relative_position_id = BOL_invite_venezuela
+		prerequisite = { focus = BOL_invite_venezuela }
+		mutually_exclusive = { focus = BOL_invite_paraguay }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				is_in_faction_with = PAR
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PAR
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_invite_paraguay
+		icon = GFX_URG_invite_paraguay
+		x = 3
+		y = 1
+		relative_position_id = BOL_invite_venezuela
+		prerequisite = { focus = BOL_invite_venezuela }
+		mutually_exclusive = { focus = BOL_take_out_paraguay }
+
+		cost = 10
+
+		available = {
+			PAR = {
+				is_in_faction = no
+			}
+			NOT = {
+				has_war_with = ROOT
+			}
+			is_faction_leader = yes
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			PAR = {
+				country_event = { id = generic.5 hours = 6 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_establish_a_common_border
+		icon = GFX_ARG_push_past
+		x = 0
+		y = 2
+		relative_position_id = BOL_invite_venezuela
+		prerequisite = { focus = BOL_invite_venezuela }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				is_in_faction_with = ECU
+				is_in_faction_with = COL
+			}
+		}
+
+		bypass = {
+			AND = {
+				ECU = {
+					OR = {
+						exists = no
+						is_in_faction_with = ROOT
+						has_war_with = ROOT
+						is_subject_of = ROOT
+						capital_scope = { is_fully_controlled_by = ROOT }
+					}
+				}
+				COL = {
+					OR = {
+						exists = no
+						is_in_faction_with = ROOT
+						has_war_with = ROOT
+						is_subject_of = ROOT
+						capital_scope = { is_fully_controlled_by = ROOT }
+					}
+				}
+			}
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_war_with = ECU }
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = ECU
+				}
+			}
+			if = {
+				limit = {
+					NOT = { has_war_with = COL }
+				}
+				create_wargoal = {
+					type = annex_everything
+					target = COL
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_take_out_brazil
+		icon = GFX_ARG_attack_brazil
+		x = 0
+		y = 1
+		relative_position_id = BOL_establish_a_common_border
+		prerequisite = { focus = BOL_establish_a_common_border }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				is_in_faction_with = BRA
+			}
+		}
+
+		bypass = {
+			BRA = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = BRA
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_our_rightful_borders
+		icon = GFX_BOL_borders_restored
+		x = 0
+		y = 1
+		relative_position_id = BOL_take_out_brazil
+		prerequisite = { focus = BOL_take_out_brazil }
+
+		cost = 10
+
+		available = {
+			controls_state = 494
+			controls_state = 506
+			controls_state = 688
+		}
+
+		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			688 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			506 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			494 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_forge_our_own_path
+		icon = GFX_PRU_strengthen_bolivian_relations
+		x = -6
+		y = 1
+		relative_position_id = BOL_victor_of_the_war_of_the_pacific
+		prerequisite = {
+			focus = BOL_victor_of_the_war_of_the_pacific
+			focus = BOL_establish_the_new_regime
+			focus = BOL_continue_with_the_military
+			focus = BOL_strengthen_our_catholic_support
+		}
+		mutually_exclusive = { focus = BOL_alliance_with_peru }
+
+		cost = 4
+
+		available = {
+			is_subject = no
+		}
+
+		select_effect = {
+			add_ideas = EUYL_expansionist_path
+			every_other_country = {
+				limit = {
+					any_controlled_state = {
+						is_claimed_by = ROOT
+					}
+				}
+				ROOT = {
+					add_ai_strategy = {
+						type = prepare_for_war
+						id = PREV
+						value = 70
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_political_power = 35
+			add_war_support = 0.05
+			add_state_claim = 951
+		}
+	}
+
+	focus = {
+		id = BOL_our_wars_of_vengence
+		icon = GFX_goal_generic_demand_territory
+		x = 0
+		y = 1
+		relative_position_id = BOL_forge_our_own_path
+		prerequisite = { focus = BOL_forge_our_own_path }
+
+		cost = 6
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER FOCUS_FILTER_ANNEXATION FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = BOL_unlock_vengence_decisions_tt
+		}
+	}
+
+	focus = {
+		id = BOL_retaking_the_chaco
+		icon = GFX_ARG_go_through_paraguay
+		x = 0
+		y = 1
+		relative_position_id = BOL_our_wars_of_vengence
+		prerequisite = { focus = BOL_our_wars_of_vengence }
+		will_lead_to_war_with = PAR
+
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			has_army_manpower = { size > 99999 }
+			NOT = {
+				is_in_faction_with = PAR
+			}
+		}
+
+		bypass = {
+			PAR = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PAR
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_revenge_against_the_chileans
+		icon = GFX_ARG_attack_chile
+		x = -2
+		y = 2
+		relative_position_id = BOL_retaking_the_chaco
+		prerequisite = { focus = BOL_retaking_the_chaco }
+		will_lead_to_war_with = CHL
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			has_army_manpower = { size > 149999 }
+			NOT = {
+				is_in_faction_with = CHL
+			}
+		}
+
+		bypass = {
+			CHL = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = CHL
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_the_peruvian_menace
+		icon = GFX_focus_PRU_attack
+		x = 2
+		y = 2
+		relative_position_id = BOL_retaking_the_chaco
+		prerequisite = { focus = BOL_retaking_the_chaco }
+		will_lead_to_war_with = PRU
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			has_army_manpower = { size > 149999 }
+			NOT = {
+				is_in_faction_with = PRU
+			}
+		}
+
+		bypass = {
+			PRU = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = PRU
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_building_up_our_conquered_lands
+		icon = GFX_goal_generic_construct_civilian
+		x = 0
+		y = 1
+		relative_position_id = BOL_retaking_the_chaco
+		prerequisite = { focus = BOL_retaking_the_chaco }
+
+		cost = 10
+
+		available = {
+			OR = {
+				controls_state = 688
+				controls_state = 951
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = BOL_unlock_build_up_decisions_tt
+		}
+	}
+
+	focus = {
+		id = BOL_force_integrate_our_new_territory
+		icon = GFX_goal_generic_position_armies
+		x = -2
+		y = 1
+		relative_position_id = BOL_the_peruvian_menace
+		prerequisite = { focus = BOL_the_peruvian_menace }
+		prerequisite = { focus = BOL_revenge_against_the_chileans }
+
+		cost = 10
+
+		available = {
+			OR = {
+				PRU = {
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+				CHL = {
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+				num_subjects > 1
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = ARG_unlock_integrate_territory
+		}
+	}
+
+	focus = {
+		id = BOL_make_the_argentineans_pay
+		icon = GFX_focus_ARG_attack
+		x = 1
+		y = 1
+		relative_position_id = BOL_force_integrate_our_new_territory
+		prerequisite = { focus = BOL_revenge_against_the_chileans }
+		prerequisite = { focus = BOL_the_peruvian_menace }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			has_army_manpower = { size > 249999 }
+			NOT = {
+				is_in_faction_with = ARG
+			}
+		}
+
+		bypass = {
+			ARG = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ARG
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_retaking_acre
+		icon = GFX_ARG_attack_brazil
+		x = -1
+		y = 1
+		relative_position_id = BOL_force_integrate_our_new_territory
+		prerequisite = { focus = BOL_the_peruvian_menace }
+		prerequisite = { focus = BOL_revenge_against_the_chileans }
+		mutually_exclusive = { focus = BOL_try_to_buy_acre_off_brazil }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			has_army_manpower = { size > 249999 }
+			NOT = {
+				is_in_faction_with = BRA
+			}
+		}
+
+		bypass = {
+			BRA = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = BRA
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_try_to_buy_acre_off_brazil
+		icon = GFX_URG_deal_brazil
+		x = -1
+		y = 2
+		relative_position_id = BOL_revenge_against_the_chileans
+		prerequisite = { focus = BOL_revenge_against_the_chileans }
+		prerequisite = { focus = BOL_establish_the_new_regime }
+		mutually_exclusive = { focus = BOL_retaking_acre }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+			NOT = {
+				has_war_with = BRA
+			}
+			any_other_country = {
+				controls_state = 940
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_revenge_against_the_chileans
+			OR = {
+				AND = {
+					controls_state = 940
+				}
+				has_war_with = BRA
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			random_other_country = {
+				limit = {
+					controls_state = 940
+				}
+				country_event = { id = bolivia.6 hours = 8 }
+			}
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				transfer_state = 940
+				random_owned_controlled_state = {
+					limit = { industrial_complex > 1 }
+					remove_building = {
+						type = industrial_complex
+						level = 2
+					}
+				}
+				add_timed_idea = {
+					idea = BOL_purchasing_acre
+					days = 180
+				}
+				BRA = {
+					add_offsite_building = {
+						type = industrial_complex
+						level = 2
+					}
+					add_timed_idea = {
+						idea = BRA_purchasing_acre
+						days = 180
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_establish_an_allience_with_brazil
+		icon = GFX_goal_generic_alliance
+		x = -1
+		y = 1
+		relative_position_id = BOL_try_to_buy_acre_off_brazil
+		prerequisite = { focus = BOL_try_to_buy_acre_off_brazil }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				has_war_with = BRA
+			}
+			BRA = {
+				is_in_faction = no
+			}
+		}
+
+		bypass = {
+			has_completed_focus = BOL_try_to_buy_acre_off_brazil
+			is_in_faction_with = BRA
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			create_faction = "The Southern Defense Pact"
+			BRA = {
+				country_event = { id = generic.5 hours = 8 }
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_go_after_ecuador
+		icon = GFX_focus_northernlands
+		x = 1
+		y = 1
+		relative_position_id = BOL_retaking_acre
+		prerequisite = { focus = BOL_retaking_acre }
+		prerequisite = { focus = BOL_make_the_argentineans_pay }
+
+		cost = 5
+
+		available = {
+			NOT = {
+				is_in_faction_with = ECU
+			}
+		}
+
+		bypass = {
+			ECU = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = ECU
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_go_after_colombia
+		icon = GFX_PRU_attack_colombia
+		x = 1
+		y = 1
+		relative_position_id = BOL_make_the_argentineans_pay
+		prerequisite = { focus = BOL_make_the_argentineans_pay }
+
+		cost = 8
+
+		available = {
+			NOT = {
+				is_in_faction_with = COL
+			}
+		}
+
+		bypass = {
+			COL = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = COL
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_take_out_venezuela
+		icon = GFX_ARG_attack_venezuela
+		x = -1
+		y = 1
+		relative_position_id = BOL_retaking_acre
+		prerequisite = { focus = BOL_retaking_acre }
+
+		cost = 8
+
+		available = {
+			NOT = {
+				is_in_faction_with = VEN
+			}
+		}
+
+		bypass = {
+			VEN = {
+				OR = {
+					exists = no
+					is_in_faction_with = ROOT
+					has_war_with = ROOT
+					is_subject_of = ROOT
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = VEN
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_triumphant_will
+		icon = GFX_BOL_total_victory
+		x = 5
+		y = 2
+		relative_position_id = BOL_go_after_ecuador
+		prerequisite = {
+			focus = BOL_go_after_ecuador
+			focus = BOL_go_after_colombia
+			focus = BOL_take_out_venezuela
+			focus = BOL_our_rightful_borders
+		}
+
+		cost = 10
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_formed_greater_bolivia_tt
+				has_cosmetic_tag = GBO
+			}
+			num_of_factories > 79
+			has_army_manpower = { size > 599999 }
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			set_major = yes
+			add_research_slot = 1
+			add_political_power = 100
+			add_stability = 0.2
+			add_war_support = 0.2
+		}
+	}
+
+	### Army ###
+
+	focus = {
+		id = BOL_army_revival
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 44
+		y = 0
+
+		cost = 5
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 25
+			EUYL_add_1_military = yes
+			unlock_decision_category_tooltip = south_american_armament
+		}
+	}
+
+	focus = {
+		id = BOL_reforming_the_army
+		icon = GFX_focus_chi_army_reform
+		x = -1
+		y = 1
+		relative_position_id = BOL_army_revival
+		prerequisite = { focus = BOL_army_revival }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ARMY_XP FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			army_experience = 25
+			add_timed_idea = {
+				idea = BOL_process_of_reforming_army
+				days = 200
+			}
+			custom_effect_tooltip = BOL_army_go_through_reform_tt
+			custom_effect_tooltip = PRU_effect_when_idea_removed_tt
+			effect_tooltip = {
+				add_ideas = BOL_reformed_army
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_founded_the_school_of_transmissions
+		icon = GFX_goal_generic_radar
+		x = 3
+		y = 1
+		relative_position_id = BOL_reforming_the_army
+		prerequisite = { focus = BOL_reforming_the_army }
+
+		cost = 7.2
+
+		available = {
+			date > 1937.6.1
+			has_tech = radio_detection
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = { is_core_of = ROOT }
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = BOL_school_of_transmissions
+				bonus = 0.5
+				uses = 2
+				category = radar_tech
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_found_the_escuela_central_tecnica
+		icon = GFX_goal_generic_defence
+		x = 0
+		y = 1
+		relative_position_id = BOL_founded_the_school_of_transmissions
+		prerequisite = { focus = BOL_founded_the_school_of_transmissions }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_XP }
+		completion_reward = {
+			army_experience = 50
+			add_tech_bonus = {
+				name = special_bonus
+				bonus = 1
+				uses = 2
+				category = support_tech
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_restoring_faith_in_the_army
+		icon = GFX_ARG_quantity
+		x = -4
+		y = 1
+		relative_position_id = BOL_reforming_the_army
+		prerequisite = { focus = BOL_reforming_the_army }
+
+		cost = 10
+
+		available = {
+			has_idea = BOL_losers_in_the_chaco_war
+		}
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_losers_in_the_chaco_war
+				add_idea = BOL_losers_in_the_chaco_war_2
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_advocating_bolivian_nationalism
+		icon = GFX_BOL_our_nation_reborn
+		x = 0
+		y = 1
+		relative_position_id = BOL_restoring_faith_in_the_army
+		prerequisite = { focus = BOL_restoring_faith_in_the_army }
+
+		cost = 15
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			remove_ideas = BOL_losers_in_the_chaco_war_2
+		}
+	}
+
+	focus = {
+		id = BOL_help_out_the_spanish
+		icon = GFX_focus_intervention_spain_republic
+		x = 0
+		y = 1
+		relative_position_id = BOL_reforming_the_army
+		prerequisite = { focus = BOL_reforming_the_army }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_army_reformed
+				has_idea = BOL_reformed_army
+			}
+			SPR_scw_in_progress = yes
+			is_subject = no
+		}
+
+		search_filters = { FOCUS_FILTER_SPA_CIVIL_WAR }
+
+
+
+
+
+		completion_reward = {
+			add_timed_idea = { idea = ARG_send_volunteers days = 365 }
+			set_rule = { can_send_volunteers = yes }
+		}
+	}
+
+	focus = {
+		id = BOL_study_spanish_infantry_equipment
+		icon = GFX_goal_generic_small_arms
+		x = -1
+		y = 1
+		relative_position_id = BOL_help_out_the_spanish
+		prerequisite = { focus = BOL_help_out_the_spanish }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = BOL_study_spanish_infantry_equipment
+				bonus = 1.0
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_examine_the_spanish_artillery
+		icon = GFX_goal_generic_army_artillery2
+
+		x = 1
+		y = 1
+		relative_position_id = BOL_help_out_the_spanish
+		prerequisite = { focus = BOL_help_out_the_spanish }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = BOL_examine_the_spanish_artillery
+				bonus = 1.0
+				uses = 2
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_expanding_our_armaments
+		icon = GFX_focus_generic_tank_production
+		x = -2
+		y = 3
+		relative_position_id = BOL_reforming_the_army
+		prerequisite = { focus = BOL_reforming_the_army }
+
+		cost = 10
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_army_reformed
+				has_idea = BOL_reformed_army
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_military = yes
+		}
+	}
+
+	focus = {
+		id = BOL_expanding_the_bolivian_Army
+		icon = GFX_BOL_the_bolivian_arm
+		x = 0
+		y = 1
+		relative_position_id = BOL_expanding_our_armaments
+		prerequisite = { focus = BOL_expanding_our_armaments }
+
+		cost = 10
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_army_reformed
+				has_idea = BOL_reformed_army
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			EUYL_add_1_military = yes
+			add_ideas = BOL_expanded_army
+		}
+	}
+
+	focus = {
+		id = BOL_establishing_a_proper_airforce
+		icon = GFX_goal_generic_air_fighter2
+		x = 6
+		y = 1
+		relative_position_id = BOL_reforming_the_army
+		prerequisite = { focus = BOL_reforming_the_army }
+
+		cost = 10
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BOL_army_reformed
+				has_idea = BOL_reformed_army
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			EUYL_add_1_military = yes
+			add_ideas = CHL_expanding_our_numbers
+		}
+	}
+
+	focus = {
+		id = BOL_expand_the_airbases
+		icon = GFX_goal_generic_air_production
+		x = 0
+		y = 1
+		relative_position_id = BOL_establishing_a_proper_airforce
+		prerequisite = { focus = BOL_establishing_a_proper_airforce }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_modernize_our_fighters
+		icon = GFX_goal_generic_air_fighter
+		x = -1
+		y = 1
+		relative_position_id = BOL_expand_the_airbases
+		prerequisite = { focus = BOL_expand_the_airbases }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = BOL_modernize_our_fighters
+				bonus = 1.0
+				uses = 2
+				category = light_fighter
+			}
+			add_tech_bonus = {
+				name = BOL_modernize_our_fighters
+				bonus = 1.0
+				uses = 2
+				category = cat_heavy_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_modernize_our_bombers
+		icon = GFX_goal_generic_air_bomber
+		x = 1
+		y = 1
+		relative_position_id = BOL_expand_the_airbases
+		prerequisite = { focus = BOL_expand_the_airbases }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = BOL_modernize_our_bombers
+				bonus = 1.0
+				uses = 2
+				category = tactical_bomber
+			}
+			add_tech_bonus = {
+				name = BOL_modernize_our_bombers
+				bonus = 1.0
+				uses = 2
+				category = cas_bomber
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_rebuilding_the_bolivian_navy
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 9
+		y = 1
+		relative_position_id = BOL_army_revival
+		prerequisite = { focus = BOL_army_revival }
+
+		cost = 10
+
+		available = {
+			any_owned_state = {
+				is_coastal = yes
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			navy_experience = 50
+			EUYL_add_2_dockyard = yes
+			EUYL_add_1_dockyard = yes
+		}
+	}
+
+	focus = {
+		id = BOL_focus_on_light_ships
+		icon = GFX_goal_generic_navy_submarine
+		x = -1
+		y = 1
+		relative_position_id = BOL_rebuilding_the_bolivian_navy
+		prerequisite = { focus = BOL_rebuilding_the_bolivian_navy }
+		mutually_exclusive = { focus = BOL_focus_on_heavy_ships }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = BOL_focus_on_light_ships
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+			add_tech_bonus = {
+				name = BOL_focus_on_light_ships
+				bonus = 1.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_improved_submarine_production
+		icon = GFX_goal_generic_navy_anti_submarine
+		x = -1
+		y = 1
+		relative_position_id = BOL_focus_on_light_ships
+		prerequisite = { focus = BOL_focus_on_light_ships }
+
+		cost = 10
+
+		search_filters = { }
+		completion_reward = {
+			add_ideas = ARG_increased_submarine_output
+		}
+	}
+
+	focus = {
+		id = BOL_focus_on_heavy_ships
+		icon = GFX_goal_generic_navy_battleship
+		x = 1
+		y = 1
+		relative_position_id = BOL_rebuilding_the_bolivian_navy
+		prerequisite = { focus = BOL_rebuilding_the_bolivian_navy }
+		mutually_exclusive = { focus = BOL_focus_on_light_ships }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = BOL_focus_on_heavy_ships
+				bonus = 1.0
+				uses = 1
+				category = ca_tech
+			}
+			add_tech_bonus = {
+				name = BOL_focus_on_heavy_ships
+				bonus = 1.0
+				uses = 1
+				category = bb_tech
+			}
+		}
+	}
+
+	focus = {
+		id = BOL_improve_our_heavy_ships
+		icon = GFX_goal_generic_navy_cruiser
+		x = 1
+		y = 1
+		relative_position_id = BOL_focus_on_heavy_ships
+		prerequisite = { focus = BOL_focus_on_heavy_ships }
+
+		cost = 10
+
+		search_filters = { }
+		completion_reward = {
+			add_ideas = ARG_improved_heavy_ships
+		}
+	}
+
+	focus = {
+		id = BOL_continue_our_naval_rearmament
+		icon = GFX_goal_generic_production
+		x = 0
+		y = 2
+		relative_position_id = BOL_rebuilding_the_bolivian_navy
+		prerequisite = {
+			focus = BOL_focus_on_light_ships
+			focus = BOL_focus_on_heavy_ships
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_4_dockyard = yes
+		}
+	}
+
+	focus = {
+		id = BOL_our_navy_restored
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		x = 0
+		y = 1
+		relative_position_id = BOL_continue_our_naval_rearmament
+		prerequisite = { focus = BOL_continue_our_naval_rearmament }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = BOL_our_navy_restored
+				bonus = 1.0
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+	}
+}
+
+
+

@@ -1,0 +1,694 @@
+ideas = {
+
+	economy = {
+		law = yes
+		use_list_view = yes
+		HON_american_owned_industry_1 = {
+			picture = HON_american_owned_industry_icon
+			name = HON_american_owned_industry
+
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_expected_value = 0.4
+				production_speed_industrial_complex_factor = -0.53
+				production_speed_arms_factory_factor = -0.3
+				production_speed_dockyard_factor = -0.3
+				industrial_capacity_factory = -0.25
+				guarantee_tension = 0.75
+				max_fuel_factor = -0.45
+				fuel_gain_factor = -0.6
+				agency_upgrade_time = 1.0
+
+				custom_modifier_tooltip = HON_american_financing_decisions_cheaper_and_stronger_tt
+			}
+
+			allowed_to_remove = {
+				custom_trigger_tooltip = {
+					tooltip = HON_taking_three_anti_american_focuses_removes_it_tt
+					ROOT = {
+						check_variable = {
+							HON_anti_american_focuses_taken > 2
+						}
+					}
+				}
+				hidden_trigger = {
+					always = no
+				}
+			}
+
+			cancel_if_invalid = no
+		}
+
+		### These next set of variuations are for going AGAINST the United States
+		## These will increase the expected consumer goods until the player can remove it
+
+		### The set going WITH the US will improve expected consuemr goods, roughly war economy level at best
+		## BUT with slight debuffs to production speed and industrial capacity, as well as fuel gain and max fuel
+	}
+
+	country = {
+		CEA_revitalize_the_ROOT_industry = {
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			picture = generic_production_bonus
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+				production_speed_buildings_factor = 0.1
+			}
+		}
+
+		CEA_the_banana_republic = {
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				USA = { exists = yes }
+				NOT = {
+					has_war_with = USA
+				}
+			}
+
+			on_add = {
+				every_other_country = {
+					limit = { NOT = { original_tag = USA } }
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = CEA_banana_republic_other_country
+					}
+				}
+
+				USA = {
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = CEA_banana_republic_modifier
+					}
+				}
+
+				add_opinion_modifier = {
+					target = USA
+					modifier = CEA_banana_republic_modifier
+				}
+			}
+
+			removal_cost = -1
+
+			picture = CEA_banana_republic_icon
+
+			modifier = {
+				stability_factor = -0.05
+				political_power_gain = -0.1
+				industrial_capacity_factory = -0.1
+				custom_modifier_tooltip = CEA_countries_other_than_us_less_likely_to_trade_tt
+				custom_modifier_tooltip = CEA_able_to_ask_for_american_funding_tt
+				custom_modifier_tooltip = CEA_stability_drops_before_50_strike_tt
+			}
+		}
+
+		CEA_coffee_production_1 = {
+			name = CEA_coffee_production
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				USA = { exists = yes }
+				NOT = {
+					has_war_with = USA
+				}
+			}
+
+			removal_cost = -1
+
+			picture = ETH_coffee_exports
+
+			modifier = {
+				consumer_goods_factor = -0.1
+				production_speed_buildings_factor = -0.05
+				research_speed_factor = -0.05
+			}
+		}
+
+		CEA_coffee_production_2 = {
+			name = CEA_coffee_production
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				USA = { exists = yes }
+				NOT = {
+					has_war_with = USA
+				}
+			}
+
+			removal_cost = -1
+
+			picture = ETH_coffee_exports
+
+			modifier = {
+				consumer_goods_factor = -0.1
+			}
+		}
+
+		CEA_coffee_production_3 = { ##Nationalized Coffee Industry
+			name = CEA_coffee_production
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				USA = { exists = yes }
+				NOT = {
+					has_war_with = USA
+				}
+			}
+
+			removal_cost = -1
+
+			picture = ETH_coffee_exports
+
+			modifier = {
+				political_power_factor = 0.1
+				consumer_goods_factor = -0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		CEA_coffee_production_4 = { ##Coffee Exports
+			name = CEA_coffee_production
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				USA = { exists = yes }
+				NOT = {
+					has_war_with = USA
+				}
+			}
+
+			removal_cost = -1
+
+			picture = ETH_coffee_exports
+
+			modifier = {
+				political_power_factor = -0.05
+				consumer_goods_factor = -0.2
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+		CEA_agriculture_above_all_idea = {
+			name = CEA_agriculture_above_all
+			picture = LIT_invested_in_farms
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = -0.05
+				stability_factor = 0.05
+				political_power_gain = 0.1
+				global_building_slots_factor = 0.1
+				consumer_goods_factor = -0.1
+			}
+		}
+
+		CEA_agriculture_above_all_idea_2 = {
+			name = CEA_agriculture_above_all
+			picture = LIT_invested_in_farms
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.05
+				political_power_gain = 0.1
+				global_building_slots_factor = 0.1
+				consumer_goods_factor = -0.15
+				production_speed_buildings_factor = 0.1
+			}
+		}
+
+		CEA_an_export_oriented_industry_idea = {
+			name = CEA_an_export_oriented_industry
+
+			picture = can_wartime_prices_and_trade_board
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_gain = 0.1
+				trade_opinion_factor = 0.2
+				global_building_slots_factor = 0.2
+			}
+		}
+
+		CEA_enhanced_manufacturing_plants_idea = {
+			name = CEA_enhanced_manufacturing_plants
+
+			picture = generic_local_self_management
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_buildings_factor = 0.05
+			}
+		}
+
+		CEA_repaying_the_american_debt = { ##If the player refuses to continue being a banana republic
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				USA = { exists = yes }
+				NOT = {
+					has_war_with = USA
+				}
+				check_variable = {
+					CEA_debt_payed_off < 100
+				}
+			}
+
+			removal_cost = -1
+
+			picture = CEA_repay_american_debt_icon
+
+			modifier = {
+				stability_factor = -0.1
+				consumer_goods_factor = 0.5
+				custom_modifier_tooltip = CEA_debt_must_be_payed_off_to_remove_tt
+			}
+		}
+
+		CEA_railway_expansion_idea = {
+			name = CEA_railway_expansion
+			picture = ARG_invest_in_railways
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_rail_way_factor = 0.1
+				production_speed_supply_node_factor = 0.05
+			}
+		}
+
+		CEA_profit_cuts = {
+			picture = generic_goods_red_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.1
+				production_speed_buildings_factor = -0.1
+			}
+		}
+
+		CEA_railway_expansion_idea_2 = { ##Transportation of Goods
+			name = CEA_railway_expansion
+			picture = ARG_invest_in_railways
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_industrial_complex_factor = 0.15
+				production_speed_rail_way_factor = 0.1
+				production_speed_supply_node_factor = 0.1
+				consumer_goods_factor = -0.1
+				line_change_production_efficiency_factor = 0.1
+			}
+		}
+
+		CEA_railway_expansion_idea_3 = { #Improved Arms Transport
+			name = CEA_railway_expansion
+			picture = ARG_invest_in_railways
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_arms_factory_factor = 0.15
+				industrial_capacity_factory = 0.1
+				production_speed_rail_way_factor = 0.1
+				production_speed_supply_node_factor = 0.05
+			}
+		}
+
+		CEA_railway_expansion_idea_4 = { #Both
+			name = CEA_railway_expansion
+			picture = ARG_invest_in_railways
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_industrial_complex_factor = 0.15
+				production_speed_rail_way_factor = 0.1
+				production_speed_supply_node_factor = 0.1
+				consumer_goods_factor = -0.1
+				line_change_production_efficiency_factor = 0.1
+				production_speed_arms_factory_factor = 0.15
+				industrial_capacity_factory = 0.1
+			}
+		}
+
+		CEA_rosario_mining_company_2 = {
+			name = CEA_rosario_mining_company
+			picture = ARG_resource_extration_focus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				local_resources_factor = 0.15
+			}
+		}
+
+		### GUATEMALA - Uneven Economic Development
+		GUA_uneven_economic_development_1 = {
+			name = GUA_uneven_economic_development
+			picture = GUA_uneven_development_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_buildings_factor = -0.15
+				consumer_goods_factor = 0.3
+				industrial_capacity_factory = -0.15
+			}
+		}
+
+		GUA_uneven_economic_development_2 = {
+			name = GUA_uneven_economic_development
+			picture = GUA_uneven_development_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_buildings_factor = -0.1
+				consumer_goods_factor = 0.2
+				industrial_capacity_factory = -0.1
+			}
+		}
+
+		GUA_uneven_economic_development_3 = {
+			name = CEA_uneven_economic_development
+			picture = GUA_uneven_development_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_buildings_factor = -0.05
+				consumer_goods_factor = 0.1
+				industrial_capacity_factory = -0.05
+			}
+		}
+	}
+
+	industrial_concern = {
+
+		CEA_rosario_mining_company_1 = {
+			name = CEA_rosario_mining_company
+
+			picture = generic_industrial_concern_1
+
+			cost = 75
+
+			allowed = {
+				OR = {
+					original_tag = HON
+					original_tag = NIC
+				}
+			}
+
+			visible = {
+				has_completed_focus = CEA_force_out_the_banana_companies
+			}
+
+			research_bonus = {
+				industry = 0.05
+				synth_resources = 0.1
+			}
+
+			modifier = {
+				local_resources_factor = 0.1
+			}
+
+			traits = { refinery_concern }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		CEA_united_fruit_company = {
+			name = "United Fruit Company"
+			picture = ECU_fruit_company_icon
+
+			allowed = {
+				always = no
+			}
+
+			cost = 100
+
+			allowed_to_remove = {
+				always = no
+			}
+
+			available = {
+				any_controlled_state = {
+					OR = {
+						has_dynamic_modifier = {
+							modifier = CEA_local_banana_production
+						}
+						has_dynamic_modifier = {
+							modifier = CEA_improved_banana_production
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				industry = 0.02
+			}
+
+			traits = { industrial_concern }
+
+			modifier = {
+				political_power_factor = -0.1
+				local_building_slots_factor = 0.05
+				consumer_goods_factor = 0.05
+				custom_modifier_tooltip = CEA_removed_if_theres_no_plantations_tt
+			}
+		}
+	}
+
+	aircraft_manufacturer = {
+		lockheed_CEA = {
+			name = lockheed
+
+			allowed = {
+				always = no
+			}
+
+			visible = {
+				#has_completed_focus = CEA_import_american_companies
+			}
+
+			research_bonus = {
+				air_equipment = 0.15
+			}
+
+			traits = { medium_aircraft_manufacturer }
+
+			modifier = {
+			}
+		}
+	}
+
+	materiel_manufacturer = {
+		ford_motor_company_CEA = {
+			name = ford_motor_company
+
+			allowed = {
+				always = no
+			}
+
+			visible = {
+				#has_completed_focus = CEA_import_american_companies
+				always = no
+			}
+
+			research_bonus = {
+				motorized_equipment = 0.15
+			}
+
+			traits = { motorized_equipment_manufacturer }
+
+			modifier = {
+			}
+		}
+	}
+
+	tank_manufacturer = {
+		chrysler_CEA = {
+			name = chrysler
+
+			allowed = {
+				always = no
+			}
+
+			visible = {
+				#has_completed_focus = CEA_import_american_companies
+				always = no
+			}
+
+			research_bonus = {
+				armor = 0.15
+			}
+
+			traits = { medium_tank_manufacturer }
+
+			modifier = {
+			}
+		}
+	}
+}

@@ -1,0 +1,323 @@
+on_actions = {
+	on_monthly = {
+		effect = {
+			if = {#player geçince idea available tarafından silinmesi lazım
+				limit = {
+					is_ai = yes
+					NOT = {
+						has_idea = EF_ai_cap_fix
+					}
+				}
+				add_ideas = EF_ai_cap_fix
+			}
+			if = {
+				limit = { 
+					OR = { 
+						is_ai = no
+						is_major = yes
+					}
+					NOT = { 
+						has_country_flag = EF_can_see_prospect_decs
+					}
+				}
+				set_country_flag = EF_can_see_prospect_decs
+				clr_country_flag = EF_cant_see_prospect_decs
+			}
+		}
+	}
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					is_major = no 
+					is_ai = yes
+					NOT = {
+						has_idea = ai_optimisation
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = EF_can_see_prospect_decs
+						}
+					}
+					random_list = {
+						80 = {
+
+						}
+						20 = { 
+							set_country_flag = EF_can_see_prospect_decs
+							clr_country_flag = EF_cant_see_prospect_decs
+						}
+					}
+				}
+				if = {
+					limit = { 
+						has_country_flag = { 
+							flag = EF_can_see_prospect_decs
+							days < 90
+						}
+					}
+					random_list = {
+						50 ={ 
+							clr_country_flag = EF_can_see_prospect_decs
+							set_country_flag = EF_cant_see_prospect_decs
+						}
+						50 = {
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = { 
+							flag = EF_cant_see_prospect_decs
+							days > 89
+						}	
+					}
+					set_country_flag = EF_can_see_prospect_decs
+					clr_country_flag = EF_cant_see_prospect_decs
+				}
+			}
+			
+		}
+	}
+	on_startup = {
+		effect = {
+			every_country = {
+				set_country_flag = EF_can_see_prospect_decs
+			}
+		}
+		effect = {
+			every_country = {
+				limit = {
+					has_idea = ai_optimisation
+				}
+				clr_country_flag = EF_can_see_prospect_decs
+			}
+		}
+		effect = {
+			if = {
+				limit = {
+					GER = {
+						is_ai = yes
+					}
+				}
+				GER = {
+					add_ideas = industry_liasons_spirit
+				}
+			}
+			if = {
+				limit = {
+					ENG = {
+						is_ai = yes
+					}
+				}
+				ENG = { 	
+					add_ideas = industry_liasons_spirit
+				}
+			}
+			if = {
+				limit = {
+					ITA = {
+						is_ai = yes
+					}
+				}
+				ITA = {
+					delete_units = {
+						division_template = "Truppe Irregolari a Cavallo"
+						disband = yes
+					}
+					delete_units = {
+						division_template = "Banda Indigena Irregolare"
+						disband = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					SOV = {
+						is_ai = yes
+					}
+				}
+				SOV = { # light tanka çok veriyor bunun yüzünden zamanında piyadeye sayısına ulaşaamdığı için med tanka dönemiyor
+					delete_units = {
+						division_template = "Mekhanizirovaniy Korpus"
+						disband = yes
+					}
+				}
+			}
+			every_country = {
+				country_event = EF_events.5
+			}
+		}
+	}
+	on_liberate = {
+		effect = {
+			ROOT = {
+				country_event = EF_events.5
+			}
+		}
+	}
+	on_puppet = {
+		effect = {
+			ROOT = {
+				country_event = EF_events.5
+			}
+		}
+	}
+	on_release_as_free = {
+		effect = {
+			ROOT = {
+				country_event = EF_events.5
+			}
+		}
+	}
+	on_release_as_puppet = {
+		effect = {
+			ROOT = {
+				country_event = EF_events.5
+			}
+		}
+	}
+	#on_weekly_GER = {
+		#	effect = {
+			#		if = {
+				#			limit = { is_historical_focus_on = yes date < 1945.1.1}
+				#			GER = {
+					#				if = {
+						#					limit = { GER = { is_ai = yes } }
+						#					add_opinion_modifier = {
+							#						target = SWE
+							#						modifier = trade_with_friend
+							#					}
+						#					add_opinion_modifier = {
+							#						target = NOR
+							#						modifier = trade_with_friend
+							#					}
+						#					add_opinion_modifier = {
+							#						target = HUN
+							#						modifier = trade_with_friend
+							#					}
+						#					add_opinion_modifier = {
+							#						target = ROM
+							#						modifier = trade_with_friend
+							#					}
+						#					add_opinion_modifier = {
+							#						target = BUL
+							#						modifier = trade_with_friend
+							#					}
+						#					add_opinion_modifier = {
+							#						target = ITA
+							#						modifier = trade_with_friend
+							#					}
+						#				}
+					#			}
+				#			every_other_country = {
+					#				limit = {
+						#					is_axis_sided_country = yes
+						#					is_ai = yes
+						#				}
+					#				add_opinion_modifier = {
+						#	   				target = GER
+						#	   				modifier = trade_with_friend
+						#				}
+					#			}
+				#		}
+			#	}
+		#}
+	#on_weekly_ENG = {
+		#	effect = {
+			#		if = {
+				#			limit = { is_historical_focus_on = yes date < 1945.1.1}
+				#			every_other_country = {
+					#				limit = {
+						#					is_ai = yes
+						#					OR = {
+							#						AND = {
+								#							OR = {
+									#								has_government = democratic
+									#								is_in_faction_with = ENG
+									#								is_allies_country = yes
+									#							}
+								#							OR = {
+									#								capital_scope = { is_on_continent = europe }
+									#								capital_scope = { is_on_continent = asia }
+									#								capital_scope = { is_on_continent = africa }
+									#							}
+								#						}
+							#						original_tag = USA
+							#					}
+						#					is_axis_sided_country = no
+						#				}
+					#				add_opinion_modifier = {
+						#					target = ENG
+						#					modifier = trade_with_friend_high
+						#				}
+					#			}
+				#		}
+			#	}
+		#}
+	#on_weekly_SOV = {
+		#	effect = {
+			#		if = {
+				#			limit = { is_historical_focus_on = yes date < 1945.1.1}
+				#			every_other_country = {
+					#				limit = {
+						#					is_ai = yes
+						#					OR = {
+							#						has_government = neutrality
+							#						has_government = communism
+							#					}
+						#					OR = {
+							#						capital_scope = { is_on_continent = asia }
+							#						capital_scope = { is_on_continent = middle_east }
+							#						tag = EST
+							#						tag = LIT
+							#						tag = LAT
+							#					}
+						#				}
+					#				add_opinion_modifier = {
+						#		  			target = SOV
+						#		   			modifier = trade_with_friend
+						#				}
+					#			}
+				#		}
+			#	}
+		#}
+	#on_weekly = {
+		#	effect = {
+			#		if = {
+				#			limit = { is_historical_focus_on = yes date < 1945.1.1}
+				#			every_country = {
+					#				if = {
+						#					limit = {
+							#						is_axis_sided_country = yes
+							#						is_ai = yes
+							#					}
+						#					add_opinion_modifier = {
+							#		   				target = GER
+							#						modifier = trade_with_friend
+							#					}
+						#					add_opinion_modifier = {
+							#						target = PREV
+							#						modifier = trade_with_friend
+							#					}
+						#				}
+					#			}
+				#			every_country = {
+					#				if = {
+						#					limit = {
+							#						is_allies_country = yes
+							#						is_ai = yes
+							#					}
+						#					add_opinion_modifier = {
+							#						target = PREV
+							#			   			modifier = trade_with_friend
+							#					}
+						#				}
+					#			}
+				#		}
+			#
+			#	}
+		#}
+}

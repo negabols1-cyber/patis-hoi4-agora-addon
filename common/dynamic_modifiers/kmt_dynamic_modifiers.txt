@@ -1,0 +1,134 @@
+#	Example:
+#
+#	example_dynamic_modifier = {
+	#		icon = "GFX_idea_unknown" # optional, will show up in guis if icon is specified
+	#		enable = { always = yes } #optional, the modifier won't apply if not enabled
+	#		remove_trigger = { always = no } #optional, will remove the modifier if true
+	#
+	#		# list of modifiers
+	#		fuel_cost = 321
+	#		max_fuel = var_max_fuel # will be taken from a variable
+	#	}
+#
+#
+#	In a script file:
+#
+#	effect = {
+	#		add_dynamic_modifier = {
+		#			modifier = example_dynamic_modifier
+		#			scope = GER # optional, if you specify this your dynamic modifier scoped to this scope (root is the effect scope)
+		#			days = 14 # optional, will be removed after this many days passes
+		#		}
+	#	}
+#
+#	can be added to countries, states or unit leaders
+#	will only updated daily, unless forced by force_update_dynamic_modifier effect
+
+
+KMT_the_big_rear = {
+	remove_trigger = {
+		ROOT = { # ROOT refers to the state on which the modifier is added
+			controller = { NOT = { original_tag = CHI } }
+		}
+	}
+	icon = GFX_modifiers_SOV_civilian_labor_in_defense
+
+
+	state_production_speed_buildings_factor = 0.15
+	army_core_defence_factor = 0.1
+}
+
+KMT_the_rear = {
+	remove_trigger = {
+		ROOT = { # ROOT refers to the state on which the modifier is added
+			controller = { NOT = { original_tag = CHI } }
+		}
+	}
+	icon = GFX_modifiers_SOV_civilian_labor_in_defense
+
+
+	state_production_speed_buildings_factor = 0.05
+	army_core_defence_factor = 0.05
+}
+
+KMT_lure_them_in = {
+	icon = GFX_modifiers_generic_military_plans
+	remove_trigger = {
+		CHI = {
+			OR = {
+				exists = no
+				is_puppet = yes
+			}
+		}
+	}
+
+	enemy_local_supplies = -0.1
+	resistance_growth = 0.1
+	resistance_decay = -0.1
+	resistance_damage_to_garrison = 0.1
+	resistance_target = 0.1
+	enemy_truck_attrition_factor = 0.1
+	enemy_attrition = 0.05
+	local_non_core_manpower = -1
+	disable_strategic_redeployment = yes
+}
+
+KMT_unideal_resistance_holdout = {
+	enable = {
+		always = yes
+	}
+
+	remove_trigger = {
+		always = no
+	}
+
+	icon = GFX_occupation_supresion_icon
+
+	resistance_target = -0.15
+	resistance_growth = -0.95
+}
+
+KMT_japanese_rule_in_taiwan = {
+	enable = {
+		always = yes
+	}
+
+	remove_trigger = {
+		always = no
+	}
+
+	icon = GFX_occupation_supresion_icon
+
+	resistance_target = -0.10
+	resistance_growth = -0.5
+}
+
+SHX_suiyuan_campagin_bruteforce_historical_dm = {
+	enable = {
+		has_border_war = yes
+	}
+
+	remove_trigger = {
+		OR = {
+			has_war = yes
+			is_historical_focus_on = no
+		}
+	}
+
+	land_reinforce_rate = 10
+	army_defence_factor = 1
+}
+
+KMT_battle_of_shanghai = {
+	icon = GFX_modifiers_generic_military_plans
+
+	remove_trigger = {
+		CONTROLLER = {
+			OWNER = { has_war_with = PREV }
+		}
+	}
+
+	army_defence_factor = 0.05
+	land_reinforce_rate = 0.02
+	army_morale_factor = 0.05
+}

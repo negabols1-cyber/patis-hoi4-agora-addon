@@ -1,0 +1,562 @@
+############################
+##### LIBERIAN EVENTS  #####
+############################
+
+add_namespace = liberia
+
+####################
+### BLACK SUNDAY ###
+####################
+country_event = {
+	id = liberia.1
+	title = liberia.1.t
+	desc = liberia.1.d
+
+	picture = GFX_report_event_LIB_black_sunday
+
+	is_triggered_only = yes
+
+	option = {
+		name = liberia.1.a
+		add_popularity = {
+			ideology = communism
+			popularity = 0.125
+		}
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.075
+		}
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.05
+		}
+	}
+}
+
+####################
+### Sierra Leone ###
+####################
+country_event = {
+	id = liberia.2
+	title = liberia.2.t
+	desc = liberia.2.d
+
+	picture = GFX_report_event_romania_poland_visit
+
+	is_triggered_only = yes
+
+	option = { #OK
+		name = liberia.2.a
+		country_event = { id = liberia.15 hours = 6 }
+	}
+
+	option = { #NO
+		name = liberia.2.b
+		country_event = { id = liberia.16 hours = 6 }
+	}
+}
+
+####################
+### FUCK BARCLAY ###
+####################
+country_event = {
+	id = liberia.3
+	title = liberia.3.t
+	desc = liberia.3.d
+
+	picture = GFX_report_event_DEN_danish_politics
+
+	is_triggered_only = yes
+
+	option = {
+		name = liberia.3.a
+		add_country_leader_trait = LIB_disgrace_to_the_country
+	}
+}
+
+######################
+### LOCAL LANGUAGE ###
+######################
+#STAGE:1
+country_event = {
+	id = liberia.4
+	title = liberia.4.t
+	desc = liberia.4.d
+
+	picture = GFX_report_event_african_soldiers
+
+	is_triggered_only = yes
+
+	option = { #OK
+		name = liberia.4.a
+		country_event = { id = liberia.5 days = 10 }
+		add_to_variable = {
+			var = LIB_multilingual_country_conscription_factor
+			value = 0.15
+			tooltip = conscription_factor_tt
+		}
+
+	}
+
+	option = { #NO
+		name = liberia.4.b
+		country_event = { id = liberia.5 days = 10 }
+		add_political_power = 75
+	}
+}
+
+#STAGE:2
+country_event = {
+	id = liberia.5
+	title = liberia.5.t
+	desc = liberia.5.d
+
+	picture = GFX_report_event_african_soldiers
+
+	is_triggered_only = yes
+
+	option = { #OK
+		name = liberia.5.a
+		country_event = { id = liberia.6 days = 10 }
+		add_to_variable = {
+			var = LIB_multilingual_country_conscription_factor
+			value = 0.15
+			tooltip = conscription_factor_tt
+		}
+	}
+
+	option = { #NO
+		name = liberia.5.b
+		country_event = { id = liberia.6 days = 10 }
+		add_political_power = 75
+	}
+}
+
+#STAGE:3
+country_event = {
+	id = liberia.6
+	title = liberia.6.t
+	desc = liberia.6.d
+
+	picture = GFX_report_event_african_soldiers
+
+	is_triggered_only = yes
+
+	option = { #OK
+		name = liberia.6.a
+		add_to_variable = {
+			var = LIB_multilingual_country_conscription_factor
+			value = 0.15
+			tooltip = conscription_factor_tt
+		}
+	}
+
+	option = { #NO
+		name = liberia.6.b
+		custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+		add_political_power = 75
+	}
+}
+
+#########################
+### NATIONAL LANGUAGE ###
+#########################
+country_event = {
+	id = liberia.7
+	title = liberia.7.t
+	desc = liberia.7.d
+
+	picture = GFX_report_event_american_hunger_march
+
+	is_triggered_only = yes
+
+	option = { #American English
+		name = liberia.7.a
+		custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+		add_to_variable = {
+			var = LIB_multilingual_country_political_power_cost
+			value = -0.25
+			tooltip = political_power_cost_tt
+		}
+	}
+
+	option = { #Liberian English
+		name = liberia.7.b
+		custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+		add_to_variable = {
+			var = LIB_multilingual_country_conscription_factor
+			value = 0.10
+			tooltip = conscription_factor_tt
+		}
+
+	}
+}
+
+######################
+### PARADE CAPITAL ###
+######################
+country_event = {
+	id = liberia.8
+	title = liberia.8.t
+	desc = liberia.8.d
+
+	picture = GFX_report_event_soviet_tank_parade
+
+	is_triggered_only = yes
+
+	option = { #KINGDOM
+		name = liberia.8.a
+		trigger = {
+			NOT = {
+				has_completed_focus = LIB_aristocrat_officers
+				has_completed_focus = LIB_Willkommenskultur
+			}
+		}
+		add_stability = -0.05
+		complete_national_focus = LIB_Great_awakening
+	}
+
+	option = { #TUBMAN
+		name = liberia.8.b
+		add_stability = 0.05
+	}
+}
+
+####################
+### PEARL MINING ###
+####################
+country_event = {
+	id = liberia.9
+	title = liberia.9.t
+	desc = liberia.9.d
+
+	picture = GFX_report_event_LIB_pearl_mining
+
+	is_triggered_only = yes
+
+	option = { #GIVE ME PEARL
+		name = liberia.9.a
+		add_popularity = {
+			ideology = ROOT
+			popularity = -0.075
+		}
+		add_political_power = -50
+		custom_effect_tooltip = LIB_modify_pearl_mining_variable_tt
+		add_to_variable = {
+			var = LIB_pearl_mining_variable
+			value = 5.0
+			tooltip = LIB_add_pearl_variable_tt
+		}
+	}
+
+	option = { #NO
+		name = liberia.9.b
+		add_stability = 0.05
+	}
+}
+
+#######################
+### DO U WANT PEARL ###
+#######################
+country_event = {
+	id = liberia.10
+	title = liberia.10.t
+	desc = liberia.10.d
+
+	picture = GFX_report_event_LIB_pearl_mining
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = {
+				flag = LIB_waiting_for_answer_timeout
+				days = 50
+				value = 1
+			}
+		}
+	}
+
+	timeout_days = 30
+
+	option = { #Sounds like a good idea
+		name = liberia.10.a
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 5
+				OR = {
+					original_tag = GER
+					original_tag = FRA
+					original_tag = USA
+					original_tag = ENG
+				}
+				is_historical_focus_on = yes
+			}
+		}
+		hidden_effect = {
+			LIB = {
+				country_event = {
+					id = liberia.18
+					hours = 3
+				}
+			}
+		}
+		custom_effect_tooltip = LIB_pearl_farming_event_tt
+		hidden_effect = {
+			random_state = {
+				limit = {
+					is_fully_controlled_by = ROOT
+					industrial_complex > 0
+				}
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+		effect_tooltip = {
+			LIB_increase_pearl_trade = yes
+		}
+	}
+
+	option = { #Can't trust those filthy neutrals
+		name = liberia.10.b
+		ai_chance = {
+			base = 10
+		}
+
+		hidden_effect = {
+			set_country_flag = {
+				flag = LIB_rejected_investment
+				days = 240
+				value = 0
+			}
+		}
+		LIB = {
+			country_event = {
+				id = liberia.19
+				hours = 3
+			}
+		}
+	}
+}
+
+#####################
+### RAID SETTLERS ###
+#####################
+country_event = {
+	id = liberia.11
+	title = liberia.11.t
+	desc = liberia.11.d
+
+	picture = GFX_report_event_generic_funeral
+
+	is_triggered_only = yes
+
+	option = {#no raid
+		name = liberia.11.a
+		add_stability = 0.075
+		set_country_flag = LIB_we_love_white_choclate
+	}
+
+	option = {#yes raid
+		name = liberia.11.b
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+}
+
+###########################
+### MOVE THE CLOCK BACK ###
+###########################
+country_event = {
+	id = liberia.12
+	title = liberia.12.t
+	desc = liberia.12.d
+
+	picture = GFX_report_event_iww_demonstration
+
+	is_triggered_only = yes
+
+	option = {#decrase payment
+		name = liberia.12.a
+		set_country_flag = LIB_go_to_clocks_go_back
+		remove_ideas = LIB_deals
+	}
+
+	option = {#no
+		name = liberia.12.b
+		add_political_power = 75
+	}
+
+}
+
+############################
+### LOOK DAD! NEWSPAPERS ###
+############################
+country_event = {
+	id = liberia.13
+	title = liberia.13.t
+	desc = liberia.13.d
+
+	picture = GFX_report_event_aid_pact
+
+	is_triggered_only = yes
+
+	option = {
+		name = liberia.13.a
+		add_popularity = {
+			ideology = communism
+			popularity = 0.075
+		}
+	}
+}
+
+######################
+### WORKER UNRESTS ###
+######################
+country_event = {
+	id = liberia.14
+	title = liberia.14.t
+	desc = liberia.14.d
+
+	picture = GFX_report_event_LIB_black_sunday
+
+	is_triggered_only = yes
+
+	option = {
+		name = liberia.14.a
+		swap_ideas = {
+			add_idea = LIB_workers_unrest_idea2
+			remove_idea = LIB_workers_unrest_idea
+		}
+	}
+}
+
+#######################
+### ACCEPTES SIERRA ###
+#######################
+country_event = {
+	id = liberia.15
+	title = liberia.15.t
+	desc = liberia.15.d
+
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = liberia.15.a
+		LIB = {
+			transfer_state = 700
+		}
+	}
+}
+
+######################
+### REJECTS SIERRA ###
+######################
+country_event = {
+	id = liberia.16
+	title = liberia.16.t
+	desc = liberia.16.d
+
+	picture = GFX_report_event_imperial_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = liberia.16.a
+		add_political_power = -25
+	}
+}
+
+###################
+### COUP D'ETAT ###
+###################
+country_event = {
+	id = liberia.17
+	title = liberia.17.t
+	desc = liberia.17.d
+
+	picture = GFX_report_event_spr_army_of_africa
+
+	is_triggered_only = yes
+
+	option = {
+		name = liberia.17.a
+		add_ideas = LIB_state_of_emergency
+	}
+}
+
+######################
+### PEARL ACCEPTED ###
+######################
+country_event = {
+	id = liberia.18
+	title = liberia.18.t
+	desc = liberia.18.d
+
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = { #Good news!
+		name = liberia.18.a
+		ai_chance = {
+			base = 10
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+		FROM = {
+			LIB_increase_pearl_trade = yes
+		}
+
+	}
+}
+
+######################
+### PEARL REJECTED ###
+######################
+country_event = {
+	id = liberia.19
+	title = liberia.19.t
+	desc = liberia.19.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_imperial_conference
+
+	option = { #Oh well
+		name = liberia.19.a
+		ai_chance = {
+			base = 10
+		}
+		add_political_power = 35
+	}
+}
+
+#######################
+### DOLARISATION US ###
+#######################
+country_event = {
+	id = liberia.20
+	title = liberia.20.t
+	desc = liberia.20.d
+
+	is_triggered_only = yes
+
+	picture = GFX_report_event_imperial_conference
+
+	option = { #Oh well
+		name = liberia.20.a
+		ai_chance = {
+			base = 10
+		}
+		add_political_power = 75
+		custom_effect_tooltip = LIB_pls_build_civil_dad
+	}
+}

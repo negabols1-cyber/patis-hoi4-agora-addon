@@ -1,0 +1,427 @@
+on_actions = {
+
+	on_annex = {
+		effect = {
+			# Warlord War
+			if = {
+				limit = {
+					ROOT = {
+						OR = {
+							has_event_target = CHI_warlord_war_united_leader
+							has_country_flag = WARLORD_warlord_wars_begins #Double check
+						}
+					}
+					FROM = {
+						original_tag = CHI
+						has_country_flag = CHI_warlord_wars_begins
+						exists = no
+					}
+				}
+				event_target:CHI_warlord_war_united_leader = {
+					remove_ideas = CHI_suprise_attack_warlords
+					for_each_scope_loop = {
+						array = faction_members
+						if = {
+							limit = {
+								NOT = { tag = ROOT }
+								OR = {
+									original_tag = PRC
+									original_tag = SHX
+									original_tag = XSM
+									original_tag = YUN
+									original_tag = GXC
+									original_tag = SIK
+								}
+							}
+							remove_ideas = CHI_suprise_attack_warlords
+						}
+					}
+				}
+			}
+
+			# Warlord War - China Wins - Bad Ending :(
+			if = {
+				limit = { # Moved to Events china_fascism.210
+					always = no
+					ROOT = {
+						original_tag = CHI
+						has_country_flag = CHI_warlord_wars_begins
+						exists = yes
+					}
+					FROM = {
+						OR = {
+							has_event_target = CHI_warlord_war_united_leader
+							has_country_flag = WARLORD_warlord_wars_begins #Double check
+						}
+					}
+				}
+				ROOT = {
+					country_event = { id = china_fascism.210 }
+				}
+				FROM = {
+					clr_country_flag = WARLORD_warlord_wars_begins
+				}
+			}
+		}
+	}
+
+	###---> On Declare War <><> <><> <><>
+	on_declare_war = {
+		effect = {
+			#remove chi ger opinion
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							FROM = { tag = CHI }
+							ROOT = { tag = GER }
+						}
+						AND = {
+							ROOT = { tag = CHI }
+							FROM = { tag = GER }
+						}
+					}
+					CHI = {
+						has_opinion_modifier = sino_german_cooperation
+					}
+					GER = {
+						has_opinion_modifier = sino_german_cooperation
+					}
+				}
+				CHI = {
+					remove_opinion_modifier = {
+						target = GER
+						modifier = sino_german_cooperation
+					}
+					remove_opinion_modifier = {
+						target = GER
+						modifier = more_sino_german_coop
+					}
+				}
+				GER = {
+					remove_opinion_modifier = {
+						target = CHI
+						modifier = sino_german_cooperation
+					}
+					remove_opinion_modifier = {
+						target = CHI
+						modifier = more_sino_german_coop
+					}
+				}
+			}
+
+			#set flag for warred with jap
+			if = { #MOD. Slight optimization.
+				limit = {
+					NOT = { has_dlc = "No Compromise, No Surrender" }
+					OR = {
+						AND = { ROOT = { tag = CHI } FROM = { tag = JAP } }
+						AND = { ROOT = { tag = JAP } FROM = { tag = CHI } }
+					}
+				}
+				set_global_flag = CHI_warred_with_JAP
+			}
+
+			#change to wartime corruption
+			if = {
+				limit = {
+					OR = {
+						FROM = { tag = CHI }
+						ROOT = { tag = CHI }
+					}
+					CHI = {
+						OR = {
+							has_idea = KMT_corrupted_government
+							has_idea = KMT_corrupted_government_lesser
+						}
+					}
+				}
+				CHI = {
+					country_event = { id = kmt.272 }
+				}
+			}
+
+			#set flag
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = west_expedition_started
+					}
+					FROM = { tag = XSM }
+					ROOT = {
+						tag = PRC
+						has_completed_focus = PRC_west_expedition
+					}
+				}
+				set_global_flag = west_expedition_started
+			}
+
+			#strike prc when west-expedition-ing
+			if = {
+				limit = {
+					FROM = { tag = PRC }
+					tag = CHI
+					PRC = {
+						is_in_faction = no
+						has_war_with = XSM
+					}
+					has_global_flag = west_expedition_started
+				}
+				PRC = {
+					country_event = { id = prc.53 }
+				}
+			}
+
+			#get revanchism when war with jap
+			if = {
+				limit = {
+					has_idea = PRC_anti_jap_sentiment
+					NOT = {
+						has_idea = PRC_revanchism
+					}
+					FROM = { tag = JAP }
+				}
+				hidden_effect = {
+					country_event = { id = prc.107 }
+				}
+			}
+
+			#pop tips for central government
+			## You cannot trigger this when join others' war against the central government, since it would not be legitimate
+			if = { #// MOD. Duplicated
+				limit = {
+					NOT = { has_dlc = "No Compromise, No Surrender" }
+					OR = {
+						has_country_flag = KMT_central_government_flag
+						FROM = { has_country_flag = KMT_central_government_flag }
+					}
+				}
+				hidden_effect = {
+					country_event = { id = prc.107 }
+				}
+			}
+
+			if = {
+				limit = {
+					NOT = { has_dlc = "No Compromise, No Surrender" }
+					NOT = {
+						has_global_flag = PRC_restart_chinese_civil_war
+					}
+					OR = {
+						AND = { tag = PRC FROM = { tag = CHI } }
+						AND = { tag = CHI FROM = { tag = PRC } }
+					}
+				}
+				PRC = {
+					country_event = { id = china.108 }
+					if = {
+						limit = {
+							NOT = {
+								has_completed_focus = PRC_found_our_nation
+							}
+						}
+						drop_cosmetic_tag = yes
+						set_cosmetic_tag = GCDcivilwar
+						set_global_flag = PRC_civil_war_started
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					NOT = { has_dlc = "No Compromise, No Surrender" }
+					original_tag = JAP
+					FROM = {
+						original_tag = CHI
+						has_idea = CHI_suprise_attack
+					}
+				}
+				CHI = {
+					swap_ideas = {
+						remove_idea = CHI_suprise_attack
+						add_idea = CHI_suprise_attack_alt
+					}
+					country_lock_all_division_template = no
+				}
+			}
+		}
+	}
+
+	on_capitulation = { #ROOT is surrendering country, FROM is winner.
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_dlc = "No Compromise, No Surrender" }
+				}
+				if = {
+					limit = {
+						original_tag = CHI
+						CHI = {
+							has_completed_focus = KMT_the_big_rear_concept
+						}
+					}
+					every_state = {
+						limit = {
+							has_dynamic_modifier = {
+								modifier = KMT_the_big_rear
+							}
+						}
+						remove_dynamic_modifier = { modifier = KMT_the_big_rear }
+					}
+
+				}
+				if = {
+					limit = {
+						original_tag = CHI
+						CHI = {
+							has_completed_focus = KMT_the_big_rear_concept
+						}
+					}
+					every_state = {
+						limit = {
+							has_dynamic_modifier = {
+								modifier = KMT_the_big_rear
+							}
+						}
+						remove_dynamic_modifier = { modifier = KMT_the_rear }
+					}
+
+				}
+				if = {
+					limit = {
+						original_tag = CHI
+						CHI = {
+							has_completed_focus = KMT_lure_them_in_strategy
+						}
+					}
+					every_state = {
+						limit = {
+							has_dynamic_modifier = {
+								modifier = KMT_lure_them_in
+							}
+						}
+						remove_dynamic_modifier = { modifier = KMT_lure_them_in }
+					}
+				}
+				if = {
+					limit = {
+						ROOT = {
+							OR = {
+								tag = SHX
+								tag = GXC
+								tag = XSM
+								tag = YUN
+								tag = SIK
+								tag = TNG
+								tag = CHI
+							}
+							has_country_flag = is_warlords
+							is_in_faction_with = PRC
+							has_idea = KMT_united_front
+							has_completed_focus = CHI_cooperation_with_the_communists
+						}
+					}
+					PRC = {
+						country_event = { id = kmt.300 }
+					}
+				}
+
+				if = {
+					limit = {
+						ROOT = {
+							OR = {
+								tag = SHX
+								tag = GXC
+								tag = XSM
+								tag = YUN
+								tag = SIK
+								tag = TNG
+								tag = CHI
+							}
+							has_country_flag = is_warlords
+							is_in_faction_with = event_target:KMT_central_gov_tag
+							has_idea = KMT_united_front
+							NOT = {
+								has_completed_focus = CHI_cooperation_with_the_communists
+							}
+						}
+					}
+					event_target:KMT_central_gov_tag = {
+						country_event = { id = kmt.300 }
+					}
+				}
+				if = {
+					limit = {
+						ROOT = {
+							tag = MAN
+							is_subject_of = JAP
+							has_country_leader = {
+								character = MAN_aisin_gioro_puyi
+								ruling_only = yes
+							}
+						}
+						FROM = {
+							OR = {
+								tag = CHI
+								tag = PRC
+								tag = event_target:KMT_central_gov_tag
+							}
+						}
+					}
+					FROM = {
+						country_event = { id = kmt.303 }
+					}
+				}
+			}
+		}
+	}
+
+	###---> On Government Change <><> <><> <><>
+	on_government_change = {
+		effect = {
+			if = { #Simplified trigger
+				limit = {
+					NOT = { has_dlc = "No Compromise, No Surrender" }
+					tag = MAN
+					has_government = neutrality
+				}
+				if = {
+					limit = { country_exists = CHI }
+					CHI = { country_event = { id = kmt.275 }}
+					else = {
+						if = {
+							limit = { country_exists = PRC }
+							PRC = { country_event = { id = kmt.275 }}
+						}
+					}
+				}
+			}
+			if = { # MOD. Compressed.
+				limit = {
+					original_tag = CHI
+					NOT = { has_dlc = "No Compromise, No Surrender" }
+				}
+				if = {
+					limit = {
+						has_government = democratic
+						NOT = {
+							has_country_flag = KMT_party_chosen
+						}
+					}
+					country_event = { id = kmt.279 }
+				}
+				else_if = {
+					limit = {
+						has_government = fascism
+						is_subject = no
+						NOT = {
+							has_completed_focus = KMT_support_pro_japanese_faction
+							has_completed_focus = KMT_infiltrate_the_government
+						}
+					}
+					country_event = { id = kmt.286 }	#leader change is handled in event
+				}
+			}
+		}
+	}
+}

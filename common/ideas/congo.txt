@@ -1,0 +1,1319 @@
+ideas = {
+
+	hidden_ideas = {
+
+		COG_death_before_surrender_capitulation = {
+
+			allowed = {
+				always = no
+			}
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.01
+			}
+		}
+	}
+
+	economy = {
+		law = yes
+		use_list_view = yes
+
+		COG_free_trade_zone = {
+
+			allowed = {
+				always = no
+				original_tag = COG
+			}
+			removal_cost = -1
+
+			picture = COG_free_trade_zone_pic
+
+			modifier = {
+				consumer_goods_expected_value = 0.25
+				local_resources_factor = 0.15
+				production_lack_of_resource_penalty_factor = 0.15
+				production_speed_arms_factory_factor = -0.5
+				line_change_production_efficiency_factor = -0.15
+				min_export = 0.2
+			}
+
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+
+	}
+
+	trade_laws = {
+		law = yes
+		use_list_view = yes
+
+		COG_uncontrolled_exports = {
+
+			allowed = {
+				always = no
+				original_tag = COG
+			}
+			removal_cost = -1
+			picture = generic_flexible_foreign_policy
+
+			modifier = {
+				min_export = 0.95
+				civilian_intel_to_others = 60.0
+				navy_intel_to_others = 60.0
+				agency_upgrade_time = 0.25
+			}
+
+			allowed_to_remove = {
+				has_war = yes
+			}
+			cancel_if_invalid = no
+		}
+	}
+
+	country = {
+		COG_leopold_iii_idea = {
+			picture = Leopold_III
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_gain = 0.30
+				stability_factor = 0.05
+				mic_to_overlord_factor = -1.00
+			}
+		}
+		COG_leopold_iii_2_idea = {
+			name = COG_leopold_iii_idea
+			picture = Leopold_III
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_gain = 0.30
+				stability_factor = 0.05
+				army_morale_factor = 0.02
+				army_org_factor = 0.02
+			}
+		}
+		COG_kings_employers_idea = {
+			picture = ARG_holy_assimilation_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.10
+			}
+		}
+		COG_revenge_of_the_all_of_this_idea = {
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				tag = COG
+			}
+
+			picture = chi_war_of_resistance3
+
+			targeted_modifier = {
+				tag = BEL
+				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
+			}
+
+		}
+		COG_harsh_reform_and_labour_problems = {
+			picture = COG_harsh_reforms_pic
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.1
+				monthly_population = -0.5
+				production_factory_efficiency_gain_factor = -0.50
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+		#Histroical
+		COG_foreign_fruits_idea = {
+			picture = COG_banana_pic
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_morale_factor = 0.05
+			}
+		}
+
+		COG_Vers_lAvenir_idea = {
+			picture = POL_looming_peasants_strike
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				monthly_population = 0.5
+				production_factory_max_efficiency_factor = 0.10
+				industrial_capacity_factory = 0.05
+			}
+		}
+		COG_eq_capture = {
+			picture = COG_idea_eq_capture
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				equipment_capture_factor = 0.1
+			}
+		}
+		COG_bula_matari = {
+			picture = SWE_en_svensk_tiger
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.1
+				local_resources_factor = 0.1
+			}
+		}
+
+		COG_Office_de_Travail_Offitra_idea = {
+			picture = gre_political_instability
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				weekly_manpower = 250
+			}
+		}
+
+		#Democratic
+		COG_democrasies_idea = {
+			picture = EST_democratic_opposition
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				weekly_manpower = 300
+				democratic_drift = 0.10
+				stability_factor = 0.1
+			}
+		}
+		COG_Casement_Report = {
+			picture = generic_investigation
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				autonomy_gain = 0.3
+			}
+		}
+
+		COG_tintin_in_congo_idea = {
+			picture = prc_low_popular_support3
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				monthly_population = 0.5
+			}
+		}
+
+		COG_village_institutes_idea = {
+			picture = COL_inscredial
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.1
+				research_speed_factor = 0.03
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.075
+			}
+		}
+		COG_african_employers_idea = {
+			picture = ETH_joint_african_development_program
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = 0.05
+			}
+		}
+		COG_African_generals_idea  = {
+			picture = generic_army_war_college
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				experience_gain_army_unit_factor = 0.15
+				army_leader_start_level = 1
+				army_leader_start_defense_level = 1
+				army_leader_start_logistics_level = 2
+			}
+		}
+		COG_anti_imperialism_idea = {
+			picture = SWI_spirit_of_helvetia_aggressive_war
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_bunker_factor = 0.15
+				production_speed_coastal_bunker_factor = 0.15
+				lend_lease_tension = -0.20
+				send_volunteer_divisions_required = -0.60
+			}
+		}
+		COG_intel_agency_idea = {
+			picture = generic_spy_intel
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				operative_slot = 1
+				agency_upgrade_time = -0.15
+				operative_death_on_capture_chance = 0.15
+				enemy_operative_recruitment_chance = 0.25
+				boost_resistance_factor = 0.07
+			}
+		}
+		COG_neutrality_idea = {
+			picture = hol_aloof_neutrality
+
+			allowed = {
+				always = no
+			}
+
+			cancel = {
+				has_war = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteers_tension = -0.30
+				guarantee_tension = -1.0
+				embargo_threshold_factor = -2.5
+				ai_badass_factor = 0.25
+				ai_get_ally_desire_factor = 20
+			}
+		}
+		COG_nota_bene_idea = {
+			picture = SWE_all_cards_on_deck
+
+			allowed = {
+				always = no
+			}
+
+			cancel = {
+				has_war = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				operation_fake_intel_cost = -0.25
+				operation_fake_intel_outcome = 0.25
+				operation_steal_tech_risk = -0.15
+			}
+		}
+		COG_supply_the_universe_idea = {
+			picture = generic_supply_depot
+
+			allowed = {
+				always = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_supply_node_factor = 0.15
+				production_speed_infrastructure_factor = 0.10
+			}
+		}
+		#English puppet
+		COG_attack_the_fascist_dogs_idea = {
+
+			removal_cost = -1
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				tag = COG
+			}
+
+			picture = saf_ossewabrandwag_fascism
+
+			targeted_modifier = {
+				tag = ITA
+				attack_bonus_against = 0.1
+				defense_bonus_against = 0.1
+			}
+		}
+		#Manikongo
+		COG_christian_employers_idea = {
+			picture = ARG_holy_assimilation_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.10
+			}
+		}
+		#French puppet
+		COG_Armee_du_Africa_idea = {
+			picture = advisors_natfrance
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				local_non_core_manpower = 0.10
+				army_artillery_defence_factor = 0.15
+				modifier_army_sub_unit_camelry_attack_factor = 0.15
+				modifier_army_sub_unit_camelry_defence_factor = 0.15
+				initiative_factor = 0.02
+			}
+		}
+		#Italian puppet
+		COG_italian_advisors = {
+			picture = advisors_italianfed
+
+			allowed = {
+				original_tag = COG
+				NOT = {
+					has_war_with = ITA
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+
+			modifier = {
+				army_org_factor = 0.05
+				max_planning = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+		COG_revenge_on_the_pope = {
+
+
+			allowed = {
+				always = no
+			}
+
+			removal_cost = -1
+
+			picture = generic_morale_bonus
+
+			modifier = {
+				army_morale_factor = 0.1
+			}
+		}
+		COG_nation_under_god = {
+			picture = COG_idea_nation_under_god
+
+			allowed = {
+				original_tag = COG
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.1
+				conscription_factor = 0.1
+				resistance_damage_to_garrison = -0.1
+				compliance_growth = 0.05
+				surrender_limit = 0.1
+			}
+		}
+		COG_attack_of_tribes_idea = {
+			picture = COG_idea_nation_under_god
+
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = COG
+				attack_bonus_against = -0.1
+				defense_bonus_against = 0.05
+			}
+
+			modifier = {
+				resistance_damage_to_garrison = 0.10
+			}
+		}
+		COG_Envoy_of_the_christ_idea = {
+			picture = SWI_spirit_of_helvetia_aggressive_war
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_morale_factor = 0.05
+			}
+		}
+		COG_jungle_missionary_warriors_idea = {
+			picture = tur_coordinated_balkan_armed_forces
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				modifier_army_sub_unit_jungletroop_attack_factor = 0.075
+				modifier_army_sub_unit_jungletroop_defence_factor = 0.025
+				modifier_army_sub_unit_jungletroop_speed_factor = 0.075
+				modifier_army_sub_unit_jaeger_attack_factor = 0.075
+				modifier_army_sub_unit_jaeger_defence_factor = 0.025
+				modifier_army_sub_unit_jaeger_speed_factor = 0.075
+			}
+		}
+		COG_warrior_of_god_idea = {
+			picture = YUG_orthodox_church_support
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_artillery_attack_factor = 0.05
+				special_forces_out_of_supply_factor = -0.05
+			}
+		}
+
+		#Military
+		COG_congo_army1 = {
+			picture = COG_congo_army1_pic
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			research_bonus = {
+				infantry_weapons = -0.20
+			}
+
+			modifier = {
+				army_attack_factor = -0.20
+				army_org_factor = -0.20
+				army_org_regain = 0.05
+				army_chief_cost_factor = 0.30
+				air_chief_cost_factor = 0.50
+				high_command_cost_factor = 0.30
+				theorist_cost_factor = 0.30
+			}
+		}
+		COG_congo_army2 = {
+			name = COG_congo_army1
+			picture = COG_congo_army2_pic
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			research_bonus = {
+				infantry_weapons = -0.15
+			}
+
+			modifier = {
+				army_attack_factor = -0.15
+				army_org_factor = -0.15
+				army_org_regain = 0.10
+				army_chief_cost_factor = 0.20
+				high_command_cost_factor = 0.20
+				theorist_cost_factor = 0.20
+			}
+		}
+		COG_congo_army2_sup = {
+			name = COG_congo_army1
+			picture = COG_congo_army2_pic
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			research_bonus = {
+				infantry_weapons = -0.15
+			}
+
+			modifier = {
+				attrition = -0.1
+				heat_attrition_factor = -0.25
+				army_attack_factor = -0.15
+				army_org_factor = -0.15
+				army_org_regain = 0.10
+				army_chief_cost_factor = 0.20
+				high_command_cost_factor = 0.20
+				theorist_cost_factor = 0.20
+			}
+		}
+		COG_congo_army3 = {
+			name = COG_congo_army1
+			picture = COG_congo_army3_pic
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				attrition = -0.1
+				heat_attrition_factor = -0.25
+				army_attack_factor = -0.10
+				army_org_factor = -0.10
+				army_org_regain = 0.15
+				army_chief_cost_factor = 0.15
+				high_command_cost_factor = 0.15
+				theorist_cost_factor = 0.15
+			}
+		}
+		COG_congo_army4 = {
+			name = COG_congo_army1
+			picture = COG_congo_army4_pic
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				attrition = -0.1
+				heat_attrition_factor = -0.25
+				army_attack_factor = -0.05
+				army_org_factor = -0.05
+				army_org_regain = 0.15
+				army_chief_cost_factor = 0.05
+				high_command_cost_factor = 0.05
+				theorist_cost_factor = 0.05
+			}
+		}
+		COG_congo_army5 = {
+			name = COG_congo_army1
+			picture = COG_congo_army5_pic
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				attrition = -0.1
+				heat_attrition_factor = -0.25
+				army_attack_factor = 0.05
+				army_org_factor = 0.05
+				army_org_regain = 0.10
+			}
+		}
+
+		COG_Aviation_militaire_idea = {
+
+			picture = generic_air_payment
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				air_home_defence_factor = 0.05
+				air_superiority_efficiency = 0.05
+				air_mission_xp_gain_factor = 0.10
+			}
+
+		}
+		COG_Aviation_militaire_long_idea = {
+			name = COG_Aviation_militaire_idea
+
+			picture = generic_air_payment
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				small_plane_airframe = {
+					air_range = 0.10 instant = yes
+				}
+			}
+
+			modifier = {
+				air_home_defence_factor = 0.05
+				air_superiority_efficiency = 0.05
+				air_mission_xp_gain_factor = 0.10
+			}
+		}
+	}
+
+	industrial_concern = {
+
+		COG_LSNTF_indus = {
+
+			picture = LSNTF
+
+			allowed = {
+				original_tag = COG
+			}
+
+			cost = 75
+
+			research_bonus = {
+				train_tech = 0.15
+			}
+
+			traits = { railway_company }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		COG_UMHKO_indus = {
+
+			picture = generic_industrial_concern_2
+
+			allowed = {
+				original_tag = COG
+			}
+
+			cost = 150
+
+			research_bonus = {
+				excavation_tech = 0.15
+			}
+
+			traits = { mining_company }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		astaldi_cog = {
+
+			name = astaldi
+			picture = astaldi
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_invite_italian_companies
+			}
+
+			modifier = {
+				production_speed_arms_factory_factor = 0.075
+				production_speed_industrial_complex_factor = 0.075
+			}
+
+			traits = { construction_company }
+
+			ai_will_do = {
+				factor = 1
+			}
+
+		}
+
+		danieli_cog = {
+
+			name = danieli
+			picture = danieli
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_invite_italian_companies
+			}
+
+			research_bonus = {
+				industry = 0.15
+
+			}
+
+			traits = { industrial_concern }
+		}
+
+	}
+
+	materiel_manufacturer = {
+
+		designer = yes
+
+		breda_cog = {
+
+			name = breda
+			picture = breda
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				has_completed_focus = COG_invite_italian_companies
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_reach_the_italians
+			}
+
+			research_bonus = {
+				artillery = 0.15
+			}
+
+			traits = { artillery_manufacturer }
+		}
+
+		beretta_cog = {
+
+			name = baretta
+			picture = baretta
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_invite_italian_companies
+			}
+
+			research_bonus = {
+				infantry_weapons = 0.15
+			}
+
+			traits = { infantry_equipment_manufacturer }
+		}
+
+		COG_RSAF_enfield = {
+
+			picture = rsaf_enfield
+
+			cost = 75
+
+			allowed = {
+				OR = {
+					original_TAG = COG
+				}
+				has_dlc = "No Step Back"
+			}
+
+			available = {
+				has_completed_focus = COG_british_designers
+			}
+
+			research_bonus = {
+				infantry_weapons = 0.15
+			}
+
+			traits = { infantry_equipment_manufacturer }
+
+			equipment_bonus = {
+				infantry_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				support_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.02
+			}
+		}
+
+		COG_royal_arsenal = {
+
+			picture = royal_arsenal
+
+			cost = 75
+
+			allowed = {
+				OR = {
+					original_TAG = COG
+				}
+				has_dlc = "No Step Back"
+			}
+
+			available = {
+				has_completed_focus = COG_british_designers
+			}
+
+			research_bonus = {
+				artillery = 0.15
+			}
+
+			traits = { artillery_manufacturer }
+
+			equipment_bonus = {
+				artillery_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.02
+			}
+		}
+
+	}
+
+
+	aircraft_manufacturer = {
+
+		designer = yes
+
+		fratelli_nardi_cog = {
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_invite_italian_companies
+			}
+
+			research_bonus = {
+				air_equipment = 0.15
+			}
+
+			traits = { fuel_efficient_aircraft_manufacturer }
+
+			ai_will_do = {
+				factor = 1
+			}
+
+			name = fratelli_nardi
+			picture = fratelli_nardi
+		}
+
+		macchi_cog = {
+
+			name = macchi
+			picture = macchi
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_invite_italian_companies
+			}
+
+			research_bonus = {
+				air_equipment = 0.15
+			}
+
+			traits = { light_aircraft_manufacturer }
+		}
+
+		COG_RAF = {
+
+			allowed = {
+				OR = {
+					original_TAG = COG
+				}
+				has_dlc = "No Step Back"
+			}
+			picture = generic_air_manufacturer_2
+			available = {
+				has_completed_focus = COG_british_designers
+			}
+
+
+
+			research_bonus = {
+				air_equipment = 0.15
+			}
+
+			traits = { medium_aircraft_manufacturer }
+
+			equipment_bonus = {
+				small_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				medium_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				small_plane_cas_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+				medium_plane_scout_plane_airframe = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.02
+			}
+		}
+
+	}
+
+
+	naval_manufacturer = {
+
+		designer = yes
+
+		cantiere_ansaldo_cog = {
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_invite_italian_companies
+			}
+
+			research_bonus = {
+				naval_equipment = 0.15
+			}
+
+			name = cantiere_ansaldo
+			picture = cantiere_ansaldo
+
+			traits = { battlefleet_designer }
+		}
+
+		crda_cog = {
+
+			name = crda
+			picture = crda
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_invite_italian_companies
+			}
+
+			research_bonus = {
+				naval_equipment = 0.15
+			}
+
+			traits = { naval_manufacturer }
+		}
+	}
+
+	tank_manufacturer = {
+
+		designer = yes
+
+		officine_meccaniche_cog = {
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_invite_italian_companies
+			}
+
+			research_bonus = { armor = 0.15 }
+
+			equipment_bonus = {
+				armor = {
+					build_cost_ic = -0.05
+					instant = yes
+				}
+			}
+
+			traits = { tank_manufacturer }
+
+			ai_will_do = {
+				factor = 1
+			}
+
+			name = officine_meccaniche
+			picture = officine_meccaniche
+		}
+
+		ansaldo_cog = {
+
+			allowed = {
+				original_tag = COG
+			}
+
+			available = {
+				NOT = { has_war_with = ITA }
+			}
+
+			visible = {
+				has_completed_focus = COG_invite_italian_companies
+			}
+
+			research_bonus = { armor = 0.15 }
+
+			traits = { medium_tank_manufacturer }
+
+			ai_will_do = {
+				factor = 1
+			}
+
+			name = ansaldo
+			picture = ansaldo
+		}
+	}
+
+}

@@ -1,0 +1,51 @@
+# Defeat of Communism
+faction_goal_global_defeat_of_communism = {
+	name = defeat_of_communism_goal_name
+	description = defeat_of_communism_goal_desc
+	group = FOCUS_FILTER_CONSOLIDATION
+	category = long_term
+	visible = {
+		collection_size = {
+			input = {
+				input = game:scope
+				operators = {
+					faction_members
+					limit = {
+						has_government = communism
+					}
+				}
+				name = FACTION
+			}
+			value < 1
+		}
+	}
+	locked_goal = yes
+	available = {
+
+	}
+	completed = {
+		collection_size = {
+			input = {
+				input = collection:world_communist_countries
+				name = COLLECTION_WORLD_COMMUNIST_COUNTRIES
+			}
+			value < 1
+		}
+
+	}
+	complete_effect = {
+		add_faction_power_projection = 500
+		custom_effect_tooltip = generic_skip_one_line_tt
+		custom_effect_tooltip = THE_FACTION_LEADER
+		add_faction_initiative = 1
+		custom_effect_tooltip = generic_skip_one_line_tt
+		custom_effect_tooltip = ALL_FACTION_MEMBERS
+		every_faction_member = {
+			add_popularity = {
+				ideology = communism
+				popularity = -0.15
+			}
+			add_political_power = 100
+		}
+	}
+}

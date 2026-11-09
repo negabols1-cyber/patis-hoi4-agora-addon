@@ -1,0 +1,593 @@
+﻿###########################
+# Hungarian Events
+###########################
+
+add_namespace = hungary
+country_event = {
+	id = hungary.191
+	title = "Veneto question"
+	desc = "We have to choose how to approach the problem of Veneto between Italy and the Austro-Hungarian state."
+	is_triggered_only = yes
+
+	option = {
+		name = "Demand it"
+		ai_chance = { base = 70 }
+		trigger = {
+			ITA = {
+				controls_state = 160
+				controls_state = 736
+				controls_state = 39
+				controls_state = 159
+				controls_state = 850
+				controls_state = 852
+			}
+		}
+		ITA = {
+			country_event = hungary.192
+		}
+	}
+
+	option = {
+		name = "Attacker"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 160 }
+				target = ITA
+			}
+		}
+	}
+}
+country_event = {
+	id = hungary.193
+	title = "They refuse"
+	is_triggered_only = yes
+	desc = ""
+	option = {
+		name = "Then war"
+		ai_chance = { base = 70 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 160 }
+				target = ITA
+			}
+		}
+	}
+
+	option = {
+		name = "Let's not start a war"
+		ai_chance = { base = 30 }
+
+	}
+}
+country_event = {
+	id = hungary.192
+	title = "Austria-Hungary demands the Veneto region from us."
+	desc = "The lands of Veneto, the former Austro-Hungarian region, are demanded from us."
+	is_triggered_only = yes
+
+	option = {
+		name = "No"
+		ai_chance = { base = 70 }
+		add_threat = 10
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 160 }
+				target = ITA
+			}
+		}
+	}
+
+	option = {
+		name = "Let's not start a war"
+		ai_chance = { base = 30 }
+		HUN = {
+			transfer_state = 160
+			transfer_state = 736
+			transfer_state = 39
+			transfer_state = 159
+			transfer_state = 850
+			transfer_state = 852
+		}
+	}
+}
+country_event = {
+	id = hungary.123
+	title = "The return of the papacy"
+	desc = "Hungary wants the papacy to be re-established as a state"
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ITA = {
+			puppet = VAT
+			every_state = {
+				limit = {
+					is_core_of = VAT
+					is_controlled_by = ROOT
+				}
+			}
+		}
+		VAT = { transfer_state = 2 }
+	}
+	option = {
+		name = "Nope"
+		ITA = {
+			add_timed_idea = {
+				idea = HUN_vatican
+				days = 125
+			}
+		}
+		HUN = {
+			add_opinion_modifier = {
+				target = ITA
+				modifier = large_decrease
+			}
+		}
+	}
+}
+country_event = {
+	id = hungary.124
+	title = "Bohemia problem"
+	desc = "Today, the German people living in the bohemia part of Czechoslovakia are dying to join the supreme German federation, and the German federation will do its best and make this wish come true."
+	is_triggered_only = yes
+
+	option = {
+		name = "For Supreme German federation"
+		ai_chance = { base = 70 }
+		HUN = {
+			transfer_state = 69
+			transfer_state = 9
+			transfer_state = 74
+			transfer_state = 75
+			transfer_state = 72
+		}
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 30 }
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 9 }
+				target = CZE
+			}
+		}
+
+	}
+}
+country_event = {
+	id = hungary.125
+	title = "South Tyrol sale"
+	desc = "Hungarian kingdom wants to buy south tyro from us."
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"
+		ai_chance = { base = 70 }
+		HUN = {
+			transfer_state = 39
+		}
+		ITA = {
+			115 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "No"
+		ai_chance = { base = 30 }
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 39 }
+				target = ITA
+			}
+		}
+
+	}
+}
+country_event = {
+	id = hungary.126
+	title = "Galician Question"
+	desc = "We have to choose how to approach the problem of Galicia between Poland and the Austro-Hungarian state."
+	is_triggered_only = yes
+
+	option = {
+		name = "Diplomatic"
+		ai_chance = { base = 70 }
+		trigger = {
+			controls_state = 72
+			controls_state = 74
+			controls_state = 75
+			POL = {
+				controls_state = 88
+				controls_state = 89
+				controls_state = 91
+			}
+		}
+		HUN = {
+			country_event = hungary.127
+		}
+	}
+
+	option = {
+		name = "Attacker"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 88 }
+				target = POL
+			}
+		}
+	}
+}
+country_event = {
+	id = hungary.127
+	title = "Choose your approach"
+	is_triggered_only = yes
+	desc = ""
+	option = {
+		name = "Offer a trade"
+		ai_chance = { base = 70 }
+		POL = {
+			country_event = hungary.128
+		}
+	}
+
+	option = {
+		name = "Demand it"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		POL = {
+			country_event = hungary.129
+		}
+	}
+}
+country_event = {
+	id = hungary.128
+	title = "Austria-Hungary wants to exchange land"
+	is_triggered_only = yes
+	desc = ""
+	option = {
+		name = "Austria-Hungary proposes land swap"
+		ai_chance = { base = 70 }
+		POL = {
+			transfer_state = 72
+			transfer_state = 74
+			transfer_state = 75
+		}
+		HUN = {
+			transfer_state = 88
+			transfer_state = 89
+			transfer_state = 91
+		}
+	}
+
+	option = {
+		name = "No"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		HUN = {
+			country_event = hungary.130
+		}
+	}
+}
+country_event = {
+	id = hungary.130
+	title = "They refuse"
+	is_triggered_only = yes
+	desc = ""
+	option = {
+		name = "Let's not start a war"
+		ai_chance = { base = 30 }
+
+	}
+}
+country_event = {
+	id = hungary.129
+	title = "Austria-Hungary demands the Galicia region from us."
+	desc = "The lands of Galicia, the former Austro-Hungarian region, are demanded from us."
+	is_triggered_only = yes
+
+	option = {
+		name = "No"
+		ai_chance = { base = 70 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 88 }
+				target = POL
+			}
+		}
+	}
+
+	option = {
+		name = "Let's not start a war"
+		ai_chance = { base = 30 }
+		HUN = {
+			transfer_state = 88
+			transfer_state = 89
+			transfer_state = 91
+		}
+	}
+}
+country_event = {
+	id = hungary.131
+	title = "Yugoslavia question"
+	desc = "We have to choose how to approach the problem of croatia between Yugoslavia and the Austro-Hungarian state."
+	is_triggered_only = yes
+
+	option = {
+		name = "Diplomatic"
+		ai_chance = { base = 70 }
+		trigger = {
+			controls_state = 153
+			controls_state = 152
+			YUG = {
+				controls_state = 109
+				controls_state = 45
+				controls_state = 764
+			}
+		}
+		HUN = {
+			country_event = hungary.132
+		}
+	}
+
+	option = {
+		name = "Attacker"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 109 }
+				target = YUG
+			}
+		}
+	}
+}
+country_event = {
+	id = hungary.132
+	title = "Choose your approach"
+	is_triggered_only = yes
+	desc = ""
+	option = {
+		name = "Offer a trade"
+		ai_chance = { base = 70 }
+		YUG = {
+			country_event = hungary.133
+		}
+	}
+
+	option = {
+		name = "Demand it"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		YUG = {
+			country_event = hungary.134
+		}
+	}
+}
+country_event = {
+	id = hungary.133
+	title = "Austria-Hungary wants to exchange land"
+	is_triggered_only = yes
+	desc = ""
+	option = {
+		name = "Austria-Hungary proposes land swap"
+		ai_chance = { base = 70 }
+		YUG = {
+			transfer_state = 153
+			transfer_state = 152
+		}
+		HUN = {
+			transfer_state = 109
+			transfer_state = 45
+			transfer_state = 764
+		}
+	}
+
+	option = {
+		name = "No"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		HUN = {
+			country_event = hungary.135
+		}
+	}
+}
+country_event = {
+	id = hungary.135
+	title = "They refuse"
+	is_triggered_only = yes
+	desc = ""
+	option = {
+		name = "Then war"
+		ai_chance = { base = 70 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 109 }
+				target = YUG
+			}
+		}
+	}
+
+	option = {
+		name = "Let's not start a war"
+		ai_chance = { base = 30 }
+
+	}
+}
+country_event = {
+	id = hungary.134
+	title = "Austria-Hungary demands the Croatia region from us."
+	desc = "The lands of Croatia, the former Austro-Hungarian region, are demanded from us."
+	is_triggered_only = yes
+
+	option = {
+		name = "No"
+		ai_chance = { base = 70 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 109 }
+				target = YUG
+			}
+		}
+	}
+
+	option = {
+		name = "Let's not start a war"
+		ai_chance = { base = 30 }
+		HUN = {
+			transfer_state = 102
+			transfer_state = 109
+			transfer_state = 45
+			transfer_state = 764
+			transfer_state = 853
+		}
+	}
+}
+country_event = {
+	id = hungary.136
+	title = "Bucovia question"
+	desc = "We have to choose how to approach the problem of Bucovia between Romania and the Austro-Hungarian state."
+	is_triggered_only = yes
+
+	option = {
+		name = "Diplomatic"
+		ai_chance = { base = 70 }
+		trigger = {
+			controls_state = 84
+			ROM = {
+				controls_state = 80
+			}
+		}
+		HUN = {
+			country_event = hungary.137
+		}
+	}
+
+	option = {
+		name = "Attacker"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 80 }
+				target = ROM
+			}
+		}
+	}
+}
+country_event = {
+	id = hungary.137
+	title = "Choose your approach"
+	is_triggered_only = yes
+	desc = ""
+	option = {
+		name = "Offer a trade"
+		ai_chance = { base = 70 }
+		ROM = {
+			country_event = hungary.138
+		}
+	}
+
+	option = {
+		name = "Demand it"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		ROM = {
+			country_event = hungary.139
+		}
+	}
+}
+country_event = {
+	id = hungary.138
+	title = "Austria-Hungary wants to exchange land"
+	desc = ""
+	is_triggered_only = yes
+
+	option = {
+		name = "Austria-Hungary proposes land swap"
+		ai_chance = { base = 70 }
+		ROM = {
+			transfer_state = 84
+		}
+		HUN = {
+			transfer_state = 80
+			puppet = ROM
+		}
+	}
+	option = {
+		name = "No"
+		ai_chance = { base = 30 }
+		add_threat = 5
+		HUN = { country_event = hungary.140
+		}
+	}
+}
+country_event = {
+	id = hungary.140
+	title = "They refuse"
+	desc = ""
+	is_triggered_only = yes
+
+	option = {
+		name = "Then war"
+		ai_chance = { base = 70 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 80 }
+				target = ROM
+			}
+		}
+	}
+
+	option = {
+		name = "Let's not start a war"
+		ai_chance = { base = 30 }
+	}
+}
+country_event = {
+	id = hungary.139
+	title = "Austria-Hungary demands the Bucovia region and our submission from us."
+	desc = "The lands of Bucovia, the former Austro-Hungarian region, are demanded from us."
+	is_triggered_only = yes
+
+	option = {
+		name = "No"
+		ai_chance = { base = 70 }
+		add_threat = 5
+		HUN = {create_wargoal = {
+				type = take_state
+				generator = { 80 }
+				target = ROM
+			}
+		}
+	}
+	option = {
+		name = "Let's not start a war"
+		ai_chance = { base = 30 }
+		HUN = {
+			transfer_state = 80
+			puppet = ROM
+		}
+	}
+}

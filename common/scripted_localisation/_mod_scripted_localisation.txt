@@ -1,0 +1,1185 @@
+# Allows you to create your own dynamic keys
+# to be called in localization.
+# defined_text -> this is it, we're defining the text
+# text -> a discrete entry that can be picked to display in loc.
+# trigger -> determines if a text entry will be picked or not.
+# (The triggers need to be valid for the scope the key is called in
+# (eg Root or From.From).)
+# localization_key -> points to the localization key
+# that'll be used if trigger passes
+
+defined_text = {	# Rio de Janeiro's ruling party name & text for decision category
+	name = GetRioMajorityPartyText
+
+	text = {
+		trigger = {
+			has_country_flag = RIO_majority_democratic
+		}
+		localization_key = GetRioMajorityPartyTextDemocratic
+	}
+	text = {
+		trigger = {
+			has_country_flag = RIO_majority_fascism
+		}
+		localization_key = GetRioMajorityPartyTextFascism
+	}
+	text = {
+		trigger = {
+			has_country_flag = RIO_majority_neutrality
+		}
+		localization_key = GetRioMajorityPartyTextNeutrality
+	}
+	text = {
+		trigger = {
+			has_country_flag = RIO_majority_communism
+		}
+		localization_key = GetRioMajorityPartyTextCommunism
+	}
+	text = {
+		trigger = {
+			NOT = {
+				has_country_flag = RIO_majority_democratic
+				has_country_flag = RIO_majority_fascism
+				has_country_flag = RIO_majority_neutrality
+				has_country_flag = RIO_majority_communism
+			}
+		}
+		localization_key = GetRioMajorityPartyTextNone
+	}
+}
+
+defined_text = {	# Rio de Janeiro's name for 'Restoration' decision category
+	name = GetRioRestorationCategory
+
+	text = {
+		trigger = {
+			has_country_flag = RIO_is_monarchy
+		}
+		localization_key = GetRioRestorationCategoryMonarchy
+	}
+	text = {
+		trigger = {
+			NOT = { has_country_flag = RIO_is_monarchy }
+		}
+		localization_key = GetRioRestorationCategoryRepublic
+	}
+}
+
+defined_text = {	# Get Porto Acre Conference Descriptiron
+	name = GetPortoAcreConferenceDesc
+
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_col	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_eng	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_fra	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_xin	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_col_eng	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_col_fra	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_col_xin	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_col_eng_fra	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_col_eng_xin	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_col_fra_xin	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_col_eng_fra_xin	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_eng_fra	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_eng_xin	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_eng_fra_xin	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_fra_xin	}
+}
+
+defined_text = {	# Get Ultimatum Porto Acre Conference
+	name = GetPortoAcreConferenceUltimatum
+
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_ultimatum_col	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_ultimatum_eng	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_ultimatum_fra	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_ultimatum_xin	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_ultimatum_col_eng	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_ultimatum_col_fra	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_ultimatum_col_xin	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_ultimatum_col_eng_fra	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_ultimatum_col_eng_xin	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_ultimatum_col_fra_xin	}
+	text = { trigger = {
+			COL = { has_country_flag = acrean_agreement_signatory }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_ultimatum_col_eng_fra_xin	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			} localization_key = porto_acre_conference_ultimatum_eng_fra	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_ultimatum_eng_xin	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { has_country_flag = acrean_agreement_signatory }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_ultimatum_eng_fra_xin	}
+	text = { trigger = {
+			COL = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			ENG = { NOT = { has_country_flag = acrean_agreement_signatory } }
+			FRA = { has_country_flag = acrean_agreement_signatory }
+			#XIN = { has_country_flag = acrean_agreement_signatory }
+			} localization_key = porto_acre_conference_ultimatum_fra_xin	}
+}
+
+defined_text = {	# Oust the Civilian Government
+	name = GetEQAMilitaryCoupFocusName
+
+	text = {
+		trigger = {
+			NOT = {
+				has_government = fascism
+				has_government = neutrality
+			}
+		}
+		localization_key = EQA_oust_civilian_government
+	}
+
+	text = {
+		trigger = {
+			has_government = fascism
+		}
+		localization_key = EQA_integralist_coup
+	}
+
+	text = {
+		trigger = {
+			has_government = neutrality
+		}
+		localization_key = EQA_coronelist_coup
+	}
+}
+
+defined_text = {	# Oust the Civilian Government DESCRIPTION
+	name = GetEQAMilitaryCoupFocusDesc
+
+	text = {
+		trigger = {
+			NOT = {
+				has_government = fascism
+				has_government = neutrality
+			}
+		}
+		localization_key = EQA_oust_civilian_government_desc
+	}
+
+	text = {
+		trigger = {
+			has_government = fascism
+		}
+		localization_key = EQA_integralist_coup_desc
+	}
+
+	text = {
+		trigger = {
+			has_government = neutrality
+		}
+		localization_key = EQA_coronelist_coup_desc
+	}
+}
+
+##### EQA RELIGION CUSTOM GUI TOOLTIPS #####
+
+defined_text = {
+	name = GET_religion_effects_or_no_effects
+
+	text = {
+		trigger = {
+			check_variable = { religion_level = 0 }
+		}
+		localization_key = GET_religion_no_effects
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_level = 0 } }
+		}
+		localization_key = GET_religion_effects
+	}
+}
+
+defined_text = {
+	name = GET_religion_democratic_loc
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_democratic_drift = 0 } }
+		}
+		localization_key = GET_religion_democratic_enabled
+	}
+
+	text = {
+		trigger = {
+			check_variable = { religion_democratic_drift = 0 }
+		}
+		localization_key = GET_religion_democratic_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_communism_loc
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_communism_drift = 0 } }
+		}
+		localization_key = GET_religion_communism_enabled
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_communism_drift = 0 } }
+		}
+		localization_key = GET_religion_communism_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_fascism_loc
+
+	text = {
+		trigger = {
+			check_variable = { religion_fascism_drift > 0 }
+		}
+		localization_key = GET_religion_fascism_enabled
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_fascism_drift > 0 } }
+		}
+		localization_key = GET_religion_fascism_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_neutrality_loc
+
+	text = {
+		trigger = {
+			check_variable = { religion_neutrality_drift > 0 }
+		}
+		localization_key = GET_religion_neutrality_enabled
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_neutrality_drift > 0 } }
+		}
+		localization_key = GET_religion_neutrality_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_research_speed_loc
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_research_speed_factor = 0 } }
+		}
+		localization_key = GET_religion_research_speed_enabled
+	}
+
+	text = {
+		trigger = {
+			check_variable = { religion_research_speed_factor = 0 }
+		}
+		localization_key = GET_religion_research_speed_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_political_power_loc
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_political_power_factor = 0 } }
+		}
+		localization_key = GET_religion_political_power_enabled
+	}
+
+	text = {
+		trigger = {
+			check_variable = { religion_political_power_factor = 0 }
+		}
+		localization_key = GET_religion_political_power_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_stability_loc
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_stability_factor = 0 } }
+		}
+		localization_key = GET_religion_stability_enabled
+	}
+
+	text = {
+		trigger = {
+			check_variable = { religion_stability_factor = 0 }
+		}
+		localization_key = GET_religion_stability_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_war_support_loc
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_war_support_factor = 0 } }
+		}
+		localization_key = GET_religion_war_support_enabled
+	}
+
+	text = {
+		trigger = {
+			check_variable = { religion_war_support_factor = 0 }
+		}
+		localization_key = GET_religion_war_support_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_army_defense_loc
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_army_defence_factor = 0 } }
+		}
+		localization_key = GET_religion_army_defense_enabled
+	}
+
+	text = {
+		trigger = {
+			check_variable = { religion_army_defence_factor = 0 }
+		}
+		localization_key = GET_religion_army_defense_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_army_attack_loc
+
+	text = {
+		trigger = {
+			check_variable = { religion_army_attack_factor_base > 0 }
+		}
+		localization_key = GET_religion_army_attack_enabled
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_army_attack_factor_base > 0 } }
+		}
+		localization_key = GET_religion_army_attack_disabled
+	}
+}
+
+defined_text = {
+	name = GET_religion_conscription_loc
+
+	text = {
+		trigger = {
+			check_variable = { religion_conscription_factor_base > 0 }
+		}
+		localization_key = GET_religion_conscription_enabled
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_conscription_factor_base > 0 } }
+		}
+		localization_key = GET_religion_conscription_disabled
+	}
+}
+
+## MAX UNITY TOOLTIPS
+
+defined_text = {
+	name = GET_religion_communism_loc_unity
+
+	text = {
+		trigger = {
+			check_variable = { religion_communism_drift_base > 0 }
+		}
+		localization_key = GET_religion_communism_enabled_unity
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_communism_drift_base > 0 } }
+		}
+		localization_key = GET_religion_communism_disabled_unity
+	}
+}
+
+defined_text = {
+	name = GET_religion_fascism_loc_unity
+
+	text = {
+		trigger = {
+			check_variable = { religion_fascism_drift_base > 0 }
+		}
+		localization_key = GET_religion_fascism_enabled_unity
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_fascism_drift_base > 0 } }
+		}
+		localization_key = GET_religion_fascism_disabled_unity
+	}
+}
+
+defined_text = {
+	name = GET_religion_neutrality_loc_unity
+
+	text = {
+		trigger = {
+			check_variable = { religion_neutrality_drift_base > 0 }
+		}
+		localization_key = GET_religion_neutrality_enabled_unity
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_neutrality_drift_base > 0 } }
+		}
+		localization_key = GET_religion_neutrality_disabled_unity
+	}
+}
+
+defined_text = {
+	name = GET_religion_research_speed_loc_unity
+
+	text = {
+		trigger = {
+			check_variable = { religion_research_speed_factor_base < 0 }
+		}
+		localization_key = GET_religion_research_speed_enabled_unity
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_research_speed_factor_base > 0 } }
+		}
+		localization_key = GET_religion_research_speed_disabled_unity
+	}
+}
+
+defined_text = {
+	name = GET_religion_political_power_loc_unity
+
+	text = {
+		trigger = {
+			check_variable = { religion_political_power_factor_base > 0 }
+		}
+		localization_key = GET_religion_political_power_enabled_unity
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_political_power_factor_base > 0 } }
+		}
+		localization_key = GET_religion_political_power_disabled_unity
+	}
+}
+
+defined_text = {
+	name = GET_religion_war_support_loc_unity
+
+	text = {
+		trigger = {
+			check_variable = { religion_war_support_factor_base > 0 }
+		}
+		localization_key = GET_religion_war_support_enabled_unity
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_war_support_factor_base > 0 } }
+		}
+		localization_key = GET_religion_war_support_disabled_unity
+	}
+}
+
+defined_text = {
+	name = GET_religion_army_defense_loc_unity
+
+	text = {
+		trigger = {
+			check_variable = { religion_army_defence_factor_base > 0 }
+		}
+		localization_key = GET_religion_army_defense_enabled_unity
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_army_defence_factor_base > 0 } }
+		}
+		localization_key = GET_religion_army_defense_disabled_unity
+	}
+}
+
+defined_text = {
+	name = GET_religion_army_attack_loc_unity
+
+	text = {
+		trigger = {
+			check_variable = { religion_army_attack_factor_base > 0 }
+		}
+		localization_key = GET_religion_army_attack_enabled_unity
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_army_attack_factor_base > 0 } }
+		}
+		localization_key = GET_religion_army_attack_disabled_unity
+	}
+}
+
+defined_text = {
+	name = GET_religion_conscription_loc_unity
+
+	text = {
+		trigger = {
+			check_variable = { religion_conscription_factor_base > 0 }
+		}
+		localization_key = GET_religion_conscription_enabled_unity
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_conscription_factor_base > 0 } }
+		}
+		localization_key = GET_religion_conscription_disabled_unity
+	}
+}
+
+## MAX SYNCRETISM TOOLTIPS
+
+defined_text = {
+	name = GET_religion_democratic_loc_syncretism
+
+	text = {
+		trigger = {
+			#NOT = { has_completed_focus = EQA_anti_clerical }
+			always = no
+		}
+		localization_key = GET_religion_democratic_enabled_syncretism
+	}
+
+	text = {
+		trigger = {
+			#has_completed_focus = EQA_anti_clerical
+			always = no
+		}
+		localization_key = GET_religion_democratic_disabled_syncretism
+	}
+}
+
+defined_text = {
+	name = GET_religion_communism_loc_syncretism
+
+	text = {
+		trigger = {
+			#has_completed_focus = EQA_anti_clerical
+			always = no
+		}
+		localization_key = GET_religion_communism_enabled_syncretism
+	}
+
+	text = {
+		trigger = {
+			#NOT = { has_completed_focus = EQA_anti_clerical }
+			always = no
+		}
+		localization_key = GET_religion_communism_disabled_syncretism
+	}
+}
+
+defined_text = {
+	name = GET_religion_stability_loc_syncretism
+
+	text = {
+		trigger = {
+			check_variable = { religion_stability_factor_base < 0 }
+		}
+		localization_key = GET_religion_stability_enabled_syncretism
+	}
+
+	text = {
+		trigger = {
+			NOT = { check_variable = { religion_stability_factor_base > 0 } }
+		}
+		localization_key = GET_religion_stability_disabled_syncretism
+	}
+}
+
+defined_text = {
+	name = GET_religion_level_loc
+
+	text = {
+		trigger = {
+			check_variable = { religion_level < -2 }
+		}
+		localization_key = GET_religion_level_syncretism_3
+	}
+	text = {
+		trigger = {
+			check_variable = { religion_level = -2 }
+		}
+		localization_key = GET_religion_level_syncretism_2
+	}
+	text = {
+		trigger = {
+			check_variable = { religion_level = -1 }
+		}
+		localization_key = GET_religion_level_syncretism_1
+	}
+	text = {
+		trigger = {
+			check_variable = { religion_level = 0 }
+		}
+		localization_key = GET_religion_level_neutral
+	}
+	text = {
+		trigger = {
+			check_variable = { religion_level = 1 }
+		}
+		localization_key = GET_religion_level_unity_1
+	}
+	text = {
+		trigger = {
+			check_variable = { religion_level = 2 }
+		}
+		localization_key = GET_religion_level_unity_2
+	}
+	text = {
+		trigger = {
+			check_variable = { religion_level > 2 }
+		}
+		localization_key = GET_religion_level_unity_3
+	}
+}
+
+## MATO GROSSO
+
+defined_text = {
+	name = GET_XIN_civil_war_volunteers_democratic
+
+	text = {
+		trigger = {
+			NOT = { democratic > 0.3 }
+		}
+		localization_key = GET_XIN_civil_war_volunteers_1
+	}
+
+	text = {
+		trigger = {
+			democratic > 0.3
+			NOT = { democratic > 0.4 }
+		}
+		localization_key = GET_XIN_civil_war_volunteers_2
+	}
+
+	text = {
+		trigger = {
+			democratic > 0.4
+		}
+		localization_key = GET_XIN_civil_war_volunteers_3
+	}
+}
+
+defined_text = {
+	name = GET_XIN_civil_war_volunteers_communism
+
+	text = {
+		trigger = {
+			NOT = { communism > 0.3 }
+		}
+		localization_key = GET_XIN_civil_war_volunteers_1
+	}
+
+	text = {
+		trigger = {
+			communism > 0.3
+			NOT = { communism > 0.4 }
+		}
+		localization_key = GET_XIN_civil_war_volunteers_2
+	}
+
+	text = {
+		trigger = {
+			communism > 0.4
+		}
+		localization_key = GET_XIN_civil_war_volunteers_3
+	}
+}
+
+defined_text = {
+	name = Get_limited_conscription
+
+	text = {
+		trigger = { NOT = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_limited_conscription_other
+	}
+	text = {
+		trigger = { OR = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_limited_conscription_xin
+	}
+}
+
+defined_text = {
+	name = Get_extensive_conscription
+
+	text = {
+		trigger = { NOT = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_extensive_conscription_other
+	}
+	text = {
+		trigger = { OR = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_extensive_conscription_xin
+	}
+}
+
+defined_text = {
+	name = Get_service_by_requirement
+
+	text = {
+		trigger = { NOT = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_service_by_requirement_other
+	}
+	text = {
+		trigger = { OR = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_service_by_requirement_xin
+	}
+}
+
+defined_text = {
+	name = Get_all_adults_serve
+
+	text = {
+		trigger = { NOT = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_all_adults_serve_other
+	}
+	text = {
+		trigger = { OR = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_all_adults_serve_xin
+	}
+}
+
+defined_text = {
+	name = Get_scraping_the_barrel
+
+	text = {
+		trigger = { NOT = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_scraping_the_barrel_other
+	}
+	text = {
+		trigger = { OR = { has_idea = XIN_idea_nationalist_education has_country_leader_with_trait = knight_of_hope } }
+		localization_key = Get_scraping_the_barrel_xin
+	}
+}
+
+defined_text = {
+	name = Get_low_economic_mobilisation
+
+	text = {
+		trigger = { NOT = { has_idea = XIN_idea_nationalist_education } }
+		localization_key = Get_low_economic_mobilisation_other
+	}
+	text = {
+		trigger = { has_idea = XIN_idea_nationalist_education }
+		localization_key = Get_low_economic_mobilisation_xin
+	}
+}
+
+defined_text = {
+	name = Get_partial_economic_mobilisation
+
+	text = {
+		trigger = { NOT = { has_idea = XIN_idea_nationalist_education } }
+		localization_key = Get_partial_economic_mobilisation_other
+	}
+	text = {
+		trigger = { has_idea = XIN_idea_nationalist_education }
+		localization_key = Get_partial_economic_mobilisation_xin
+	}
+}
+
+defined_text = {
+	name = Get_war_economy
+
+	text = {
+		trigger = { NOT = { has_idea = XIN_idea_nationalist_education } }
+		localization_key = Get_war_economy_other
+	}
+	text = {
+		trigger = { has_idea = XIN_idea_nationalist_education }
+		localization_key = Get_war_economy_xin
+	}
+}
+
+defined_text = {
+	name = Get_tot_economic_mobilisation
+
+	text = {
+		trigger = { NOT = { has_idea = XIN_idea_nationalist_education } }
+		localization_key = Get_tot_economic_mobilisation_other
+	}
+	text = {
+		trigger = { has_idea = XIN_idea_nationalist_education }
+		localization_key = Get_tot_economic_mobilisation_xin
+	}
+}
+
+defined_text = {
+	name = Get_AYM_desire_for_independence
+
+	text = {
+		trigger = {
+			any_other_country = {
+				tooltip = XIN_stir_AYM_nationalism_trigger
+				has_stability < var:global.aym_nationalism
+				any_controlled_state = { is_core_of = AYM }
+				NOT = { tag = XIN }
+				NOT = { tag = AYM }
+			}
+			OR = { tag = XIN tag = AYM }
+			NOT = { country_exists = AYM }
+		}
+		localization_key = Get_AYM_desire_for_independence_positive_high
+	}
+	text = {
+		trigger = {
+			NOT = {
+				any_other_country = {
+					tooltip = XIN_stir_AYM_nationalism_trigger
+					has_stability < var:global.aym_nationalism
+					any_controlled_state = { is_core_of = AYM }
+					NOT = { tag = XIN }
+					NOT = { tag = AYM }
+				}
+			}
+			OR = { tag = XIN tag = AYM }
+			NOT = { country_exists = AYM }
+		}
+		localization_key = Get_AYM_desire_for_independence_positive_low
+	}
+	text = {
+		trigger = {
+			any_other_country = {
+				tooltip = XIN_stir_AYM_nationalism_trigger
+				has_stability < var:global.aym_nationalism
+				any_controlled_state = { is_core_of = AYM }
+				NOT = { tag = XIN }
+				NOT = { tag = AYM }
+			}
+			NOT = { tag = XIN tag = AYM }
+			NOT = { country_exists = AYM }
+		}
+		localization_key = Get_AYM_desire_for_independence_negative_high
+	}
+	text = {
+		trigger = {
+			NOT = {
+				any_other_country = {
+					tooltip = XIN_stir_AYM_nationalism_trigger
+					has_stability < var:global.aym_nationalism
+					any_controlled_state = { is_core_of = AYM }
+					NOT = { tag = XIN }
+					NOT = { tag = AYM }
+				}
+			}
+			NOT = { tag = XIN tag = AYM }
+			NOT = { country_exists = AYM }
+		}
+		localization_key = Get_AYM_desire_for_independence_negative_low
+	}
+	text = {
+		trigger = {
+			country_exists = AYM
+		}
+		localization_key = Get_AYM_desire_for_independence_achieved
+	}
+}
+
+defined_text = {
+	name = Get_GRN_desire_for_independence
+
+	text = {
+		trigger = {
+			any_other_country = {
+				tooltip = XIN_stir_GRN_nationalism_trigger
+				has_stability < var:global.grn_nationalism
+				any_controlled_state = { is_core_of = GRN }
+				NOT = { tag = XIN }
+				NOT = { tag = GRN }
+			}
+			OR = { tag = XIN tag = GRN }
+			NOT = { country_exists = GRN }
+		}
+		localization_key = Get_GRN_desire_for_independence_positive_high
+	}
+	text = {
+		trigger = {
+			NOT = {
+				any_other_country = {
+					tooltip = XIN_stir_GRN_nationalism_trigger
+					has_stability < var:global.grn_nationalism
+					any_controlled_state = { is_core_of = GRN }
+					NOT = { tag = XIN }
+					NOT = { tag = GRN }
+				}
+			}
+			OR = { tag = XIN tag = GRN }
+			NOT = { country_exists = GRN }
+		}
+		localization_key = Get_GRN_desire_for_independence_positive_low
+	}
+	text = {
+		trigger = {
+			any_other_country = {
+				tooltip = XIN_stir_GRN_nationalism_trigger
+				has_stability < var:global.grn_nationalism
+				any_controlled_state = { is_core_of = GRN }
+				NOT = { tag = XIN }
+				NOT = { tag = GRN }
+			}
+			NOT = { tag = XIN tag = GRN }
+			NOT = { country_exists = GRN }
+		}
+		localization_key = Get_GRN_desire_for_independence_negative_high
+	}
+	text = {
+		trigger = {
+			NOT = {
+				any_other_country = {
+					tooltip = XIN_stir_GRN_nationalism_trigger
+					has_stability < var:global.grn_nationalism
+					any_controlled_state = { is_core_of = GRN }
+					NOT = { tag = XIN }
+					NOT = { tag = GRN }
+				}
+			}
+			NOT = { tag = XIN tag = GRN }
+			NOT = { country_exists = GRN }
+		}
+		localization_key = Get_GRN_desire_for_independence_negative_low
+	}
+	text = {
+		trigger = {
+			country_exists = GRN
+		}
+		localization_key = Get_GRN_desire_for_independence_achieved
+	}
+}
+
+defined_text = {
+	name = Get_QCH_desire_for_independence
+
+	text = {
+		trigger = {
+			any_other_country = {
+				tooltip = XIN_stir_QCH_nationalism_trigger
+				has_stability < var:global.qch_nationalism
+				any_controlled_state = { is_core_of = QCH }
+				NOT = { tag = XIN }
+				NOT = { tag = QCH }
+			}
+			OR = { tag = XIN tag = QCH }
+			NOT = { country_exists = QCH }
+		}
+		localization_key = Get_QCH_desire_for_independence_positive_high
+	}
+	text = {
+		trigger = {
+			NOT = {
+				any_other_country = {
+					tooltip = XIN_stir_QCH_nationalism_trigger
+					has_stability < var:global.qch_nationalism
+					any_controlled_state = { is_core_of = QCH }
+					NOT = { tag = XIN }
+					NOT = { tag = QCH }
+				}
+			}
+			OR = { tag = XIN tag = QCH }
+			NOT = { country_exists = QCH }
+		}
+		localization_key = Get_QCH_desire_for_independence_positive_low
+	}
+	text = {
+		trigger = {
+			any_other_country = {
+				tooltip = XIN_stir_QCH_nationalism_trigger
+				has_stability < var:global.qch_nationalism
+				any_controlled_state = { is_core_of = QCH }
+				NOT = { tag = XIN }
+				NOT = { tag = QCH }
+			}
+			NOT = { tag = XIN tag = QCH }
+			NOT = { country_exists = QCH }
+		}
+		localization_key = Get_QCH_desire_for_independence_negative_high
+	}
+	text = {
+		trigger = {
+			NOT = {
+				any_other_country = {
+					tooltip = XIN_stir_QCH_nationalism_trigger
+					has_stability < var:global.qch_nationalism
+					any_controlled_state = { is_core_of = QCH }
+					NOT = { tag = XIN }
+					NOT = { tag = QCH }
+				}
+			}
+			NOT = { tag = XIN tag = QCH }
+			NOT = { country_exists = QCH }
+		}
+		localization_key = Get_QCH_desire_for_independence_negative_low
+	}
+	text = {
+		trigger = {
+			country_exists = QCH
+		}
+		localization_key = Get_QCH_desire_for_independence_achieved
+	}
+}

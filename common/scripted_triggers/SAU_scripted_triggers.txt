@@ -1,0 +1,207 @@
+SAU_arabian_countries_trigger = {
+	OR = {
+		original_tag = SAU
+		original_tag = YEM
+		original_tag = OMA
+		original_tag = KUW
+		original_tag = BHR
+		original_tag = QAT
+		original_tag = UAE
+		original_tag = IRQ
+		original_tag = SYR
+		original_tag = JOR
+		original_tag = LEB
+		original_tag = PAL
+		original_tag = EGY
+		original_tag = SUD
+		original_tag = LBA
+		original_tag = TUN
+		original_tag = ALG
+		original_tag = MOR
+		original_tag = MRT
+		original_tag = SOM
+		original_tag = DJI
+		original_tag = IMO #22
+	}
+}
+
+SAU_arabian_countries_core_trigger = {
+	OR = {
+		is_core_of = SAU #Saudi Arabia
+		is_core_of = YEM #Yemen
+		is_core_of = OMA #Sultanate of Muscat and Oman
+		is_core_of = KUW #Kuwait
+		is_core_of = BHR #Bahrain
+		is_core_of = QAT #Qatar
+		is_core_of = UAE #United Arap Emirates
+		is_core_of = IRQ #Iraq
+		is_core_of = SYR #Syria
+		is_core_of = JOR #Jordan
+		is_core_of = LEB #Lebanon
+		is_core_of = PAL #Palestine
+		is_core_of = EGY #Egypt
+		is_core_of = SUD #Sudan
+		is_core_of = LBA #Libya
+		is_core_of = TUN #Tunusia
+		is_core_of = ALG #Algeria
+		is_core_of = MOR #Morocco
+		is_core_of = MRT #Mauritania
+		is_core_of = SOM #Somalia
+		is_core_of = DJI #Djibouti
+		is_core_of = IMO #Imamate of Oman
+	}
+}
+
+SAU_arabian_countries_core_no_sau_trigger = { #Just in case
+	OR = {
+		is_core_of = YEM #Yemen
+		is_core_of = OMA #Sultanate of Muscat and Oman
+		is_core_of = KUW #Kuwait
+		is_core_of = BHR #Bahrain
+		is_core_of = QAT #Qatar
+		is_core_of = UAE #United Arap Emirates
+		is_core_of = IRQ #Iraq
+		is_core_of = SYR #Syria
+		is_core_of = JOR #Jordan
+		is_core_of = LEB #Lebanon
+		is_core_of = PAL #Palestine
+		is_core_of = EGY #Egypt
+		is_core_of = SUD #Sudan
+		is_core_of = LBA #Libya
+		is_core_of = TUN #Tunusia
+		is_core_of = ALG #Algeria
+		is_core_of = MOR #Morocco
+		is_core_of = MRT #Mauritania
+		is_core_of = SOM #Somalia
+		is_core_of = DJI #Djibouti
+		is_core_of = IMO #Imamate of Oman
+	}
+}
+
+SAU_muslim_countries_trigger = {
+	OR = {
+		original_tag = SAU
+		original_tag = YEM
+		original_tag = OMA
+		original_tag = KUW
+		original_tag = BHR
+		original_tag = QAT
+		original_tag = UAE
+		original_tag = IRQ
+		original_tag = SYR
+		original_tag = JOR
+		original_tag = LEB
+		original_tag = PAL
+		original_tag = EGY
+		original_tag = SUD
+		original_tag = LBA
+		original_tag = TUN
+		original_tag = ALG
+		original_tag = MOR
+		original_tag = MRT
+		original_tag = SOM
+		original_tag = DJI
+		original_tag = IMO
+		original_tag = PER
+		original_tag = AFG
+		original_tag = PAK
+		original_tag = BAN
+		original_tag = INS
+		original_tag = BOS
+	}
+}
+
+SAU_states_to_demand = {
+	OR = {
+		state = 656
+		state = 553
+		state = 455
+		state = 454
+		state = 1013
+		state = 294
+		state = 1015
+		state = 1016
+		state = 992
+		state = 659
+		state = 658
+		state = 765
+		state = 1014
+		state = 554
+		state = 680
+		state = 677
+	}
+}
+
+SAU_demand_independence_states = {
+	OR = {
+		state = 782
+		state = 898
+		state = 899
+		state = 556
+		state = 902
+		state = 901
+		state = 558
+		state = 900
+		state = 775
+		state = 774
+		state = 269
+		state = 559
+	}
+}
+
+SAU_is_historical_ai = {
+	OR = {
+		AND = {
+			is_historical_focus_on = yes
+			has_game_rule = {
+				rule = SAU_ai_behavior
+				option = DEFAULT
+			}
+		}
+		has_country_flag = SAU_AI_RANDOM_HISTORICAL
+		has_game_rule = {
+			rule = SAU_ai_behavior
+			option = HISTORICAL
+		}
+	}
+}
+
+SAU_is_allies_ai = {
+	OR = {
+		has_country_flag = SAU_AI_RANDOM_ALLIES_SIDE
+		has_game_rule = {
+			rule = SAU_ai_behavior
+			option = ALLIES_SIDE
+		}
+	}
+}
+
+SAU_is_axis_ai = {
+	OR = {
+		has_country_flag = SAU_AI_RANDOM_AXIS_SIDE
+		has_game_rule = {
+			rule = SAU_ai_behavior
+			option = AXIS_SIDE
+		}
+	}
+}
+
+SAU_is_arab_league_ai = {
+	OR = {
+		has_country_flag = SAU_AI_RANDOM_ARAB_LEAGUE
+		has_game_rule = {
+			rule = SAU_ai_behavior
+			option = ARAB_LEAGUE
+		}
+	}
+}
+
+SAU_is_islamist_ai = {
+	OR = {
+		has_country_flag = SAU_AI_RANDOM_ISLAMIC_STATE
+		has_game_rule = {
+			rule = SAU_ai_behavior
+			option = ISLAMIC_STATE
+		}
+	}
+}

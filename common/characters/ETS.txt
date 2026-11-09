@@ -1,0 +1,637 @@
+characters={
+	#UYGHURS
+
+	##LEADERS##
+	#Ospan Batyr/Osman Batur, pro kmt Turkic Kazakh
+	ETS_osman_batur={
+		name="ETS_osman_batur"
+		portraits={
+			civilian={
+				large="gfx/leaders/ETS/Portrait_ETS_Ospan_Batyr.dds"
+			}
+			army={
+				large="gfx/leaders/ETS/Portrait_ETS_Ospan_Batyr.dds"
+				small="GFX_idea_generic_air_asia_2"
+			}
+		}
+		country_leader={
+			ideology=despotism
+			expire="1965.1.1.1"
+			id=-1
+			traits = {
+			}
+		}
+		field_marshal = {
+			traits = { cavalry_officer }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 4
+		}
+	}
+
+	#Abdulkerim Abbas, pro-soviet Uyghur revolutionary and educator
+	ETS_abdulkerim_abbas={
+		name="ETS_abdulkerim_abbas"
+		portraits={
+			civilian={
+				large="gfx/leaders/Asia/Portrait_Asia_Generic_1.dds"
+			}
+		}
+		country_leader={
+			ideology=stalinism
+			traits={ smooth_talking_charmer }
+			expire="1956.1.1.12"
+			id=-1
+		}
+	}
+
+	#Hoca Niyaz, anti-kmt anti-soviet Uyghur leader
+	ETS_khoja_niyaz={
+		name="ETS_khoja_niyaz"
+		portraits={
+			civilian={
+				large="gfx/leaders/ETS/Portrait_ETS_Khoja_Niyaz.dds"
+			}
+		}
+		country_leader={
+			ideology=fascism_ideology #Sorry for fascism
+			traits={ conservative_grandee }
+			expire="1953.3.1"
+			id=-1
+		}
+	}
+
+	#Elihan Tore pro-soviet Kyrgyz president
+	ETS_elihan_tore={
+		name="ETS_elihan_tore"
+		portraits={
+			civilian={
+				large="gfx/leaders/ETS/Portrait_ETS_Elihan_Tore.dds"
+			}
+		}
+		country_leader={
+			ideology=conservatism
+			traits={ smooth_talking_charmer }
+			expire="1956.1.1.12"
+			id=-1
+		}
+	}
+
+	#ADVISORS
+
+	#After Muhiti's flight, a coalition between Hoja-Niyaz and Sheng broke up. A new rebellion started in Kashgar[27] led by the two of Muhiti's officers Kichik Akhund and 'Abd al-Niyas[28] and supported by Dungans of the 36th Division, now commanded by Ma Hushan
+	ETS_mahmut_muhiti={
+		name="ETS_mahmut_muhiti"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_asia_6"
+				large="gfx/leaders/ETS/Portrait_ETS_Mahmut_Muhiti.dds"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ETS_mahmut_muhiti
+			ledger = army
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				army_cavalry_3
+			}
+			cost = 200
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ETS_mahmut_muhiti
+			allowed = {
+				original_tag  = ETS
+			}
+			traits  = {
+				popular_figurehead
+			}
+		}
+		corps_commander = {
+			traits = { cavalry_officer trait_cautious }
+			skill = 3
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 4
+			logistics_skill = 3
+		}
+		country_leader={
+			ideology=fascism_ideology
+			traits={ fascist_militia_leader }
+			expire="1955.1.1.12"
+			id=-1
+		}
+	}
+
+
+
+	ETS_tawfiq_bay={
+		name="ETS_tawfiq_bay"
+		portraits={
+			army={ #Trust me these portraits match together
+				large="gfx/leaders/Asia/Portrait_Asia_Generic_land_2.dds"
+				small="GFX_idea_generic_army_asia_1"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = ETS_tawfiq_bay
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				army_chief_planning_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+		advisor={
+			cost = 100
+			slot = theorist
+			idea_token = ETS_tawfiq_bay2
+			ledger = army
+			allowed = {
+				original_tag = ETS
+			}
+
+			traits = {
+				military_theorist
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ETS_tawfiq_bay3
+			allowed = {
+				original_tag = ETS
+			}
+			visible = {
+
+			}
+
+			available = {
+
+			}
+			traits = { guerilla_warfare_expert }
+		}
+		corps_commander={
+			traits = {
+				cavalry_leader oganizer
+			}
+			skill=3
+			attack_skill=2
+			defense_skill=2
+			planning_skill=4
+			logistics_skill=2
+			legacy_id=-1
+		}
+	}
+
+	ETS_id_mirab={
+		name="ETS_id_mirab"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_asia_2"
+				large="gfx/leaders/Asia/Portrait_Asia_Generic_land_3.dds"
+
+			}
+		}
+		corps_commander={
+			traits = {
+				cavalry_leader lucky harsh_leader
+			}
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ETS_id_mirab
+			allowed  = {
+				original_tag  = ETS
+			}
+			traits  = {
+				prince_of_terror
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ETS_id_mirab2
+			ledger = army
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				army_regrouping_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ETS_sharipkhan_kogedaiuly={
+		name=ETS_sharipkhan_kogedaiuly
+		portraits={
+			army={
+				small="GFX_idea_generic_air_asia_3"
+				large="gfx/leaders/ETS/Portrait_ETS_Sharipkhan_Kogedaiuly.dds"
+
+			}
+		}
+		corps_commander={
+			traits = {
+				vigorous
+			}
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ETS_sharipkhan_kogedaiuly
+			allowed = {
+				original_tag  = ETS
+			}
+			traits  = {
+				war_industrialist
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ETS_sharipkhan_kogedaiuly2
+			ledger = army
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				army_commando_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ETS_dalelkhan_sugirbayev={
+		name=ETS_dalelkhan_sugirbayev
+		portraits={
+			army={
+				small="GFX_idea_generic_army_asia_3"
+				large="gfx/leaders/ETS/Portrait_ETS_Dalelkhan_Sugirbayev.dds"
+			}
+		}
+		corps_commander={
+			traits = {
+				cavalry_officer
+			}
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ETS_dalelkhan_sugirbayev
+			allowed = {
+				original_tag  = ETS
+			}
+			traits = {
+				armaments_organizer
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ETS_dalelkhan_sugirbayev2
+			ledger = army
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				army_entrenchment_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ETS_yulbars_khan={
+		name=ETS_yulbars_khan
+		portraits={
+			army={
+				small="GFX_idea_generic_air_asia_1"
+				large="gfx/leaders/ETS/Portrait_ETS_Yulbars_Khan.dds"
+			}
+		}
+		corps_commander={
+			traits = {
+				cavalry_officer
+			}
+			skill=4
+			attack_skill=3
+			defense_skill=2
+			planning_skill=4
+			logistics_skill=5
+			legacy_id=-1
+		}
+		advisor={
+			slot = air_chief
+			idea_token = ETS_yulbars_khan
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				air_chief_ground_support_3
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	ETS_demir_yurek={#random?
+		name=ETS_demir_yurek
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_asia_1"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = ETS_demir_yurek
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				navy_chief_maneuver_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ETS_kuzzat_altay={
+		name=ETS_kuzzat_altay
+		portraits={
+			army={
+				small="GFX_idea_generic_army_asia_3" #Changed in NSB so that the other Army Chief can an advisor portrait matching his general portrait
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = ETS_kuzzat_altay
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				army_chief_reform_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+
+	### NAVY CHIEFS ###
+
+	ETS_mehmed_akarsu={
+		name=ETS_mehmed_akarsu
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_asia_1"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = ETS_mehmed_akarsu
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				navy_chief_maneuver_3
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ETS_mazlum_akyol={
+		name=ETS_mazlum_akyol
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_asia_3"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = ETS_mazlum_akyol
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				navy_chief_decisive_battle_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+
+	### AIR CHIEFS ###
+
+	# Claire Lee Chennault is in shared file
+
+	ETS_lalali_khan={
+		name=ETS_lalali_khan
+		portraits={
+			army={
+				small="GFX_idea_generic_air_asia_1"
+			}
+		}
+		advisor={
+			slot = air_chief
+			idea_token = ETS_lalali_khan
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				air_chief_reform_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ETS_akif_haneoglu={
+		name=ETS_akif_haneoglu
+		portraits={
+			army={
+				small="GFX_idea_generic_air_asia_2"
+			}
+		}
+		advisor={
+			slot = air_chief
+			idea_token = ETS_akif_haneoglu
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				air_chief_night_operations_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+
+	### MILITARY HIGH COMMAND ###
+
+	ETS_mete_khan={
+		name=ETS_mete_khan
+		portraits={
+			army={
+				small="GFX_idea_generic_air_asia_2"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ETS_mete_khan
+			ledger = air
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				air_close_air_support_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ETS_barish_manchov={
+		name=ETS_barish_manchov
+		portraits={
+			army={
+				small="GFX_idea_generic_army_asia_2"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ETS_barish_manchov
+			ledger = army
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				army_commando_3
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ETS_cem_qarayilan={
+		name=ETS_cem_qarayilan
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_asia_2"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ETS_cem_qarayilan
+			ledger = navy
+			allowed = {
+				original_tag = ETS
+			}
+			traits = {
+				navy_fleet_logistics_3
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	#POLITICAL
+
+	ETS_muhammad_amin_bughra={
+		name=ETS_muhammad_amin_bughra
+		portraits={
+			army={
+				small="gfx/interface/ideas/idea_asia_generic_democracy.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ETS_muhammad_amin_bughra
+			allowed  = {
+				original_tag  = ETS
+			}
+			traits  = {
+				smooth_talking_charmer
+			}
+		}
+	}
+
+	ETS_habib_yunich={
+		name=ETS_habib_yunich
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_asia_2"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ETS_habib_yunich
+			allowed  = {
+				original_tag  = ETS
+			}
+			traits  = {
+				backroom_backstabber
+			}
+			ai_will_do  = {
+				factor  = 0.000
+			}
+		}
+	}
+
+}

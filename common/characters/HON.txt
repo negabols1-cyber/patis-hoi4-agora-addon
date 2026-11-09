@@ -1,0 +1,796 @@
+characters={
+	HON_tiburcio_carías_andino={
+		name="Tiburcio Carías Andino"
+		portraits={
+			civilian={
+				large="GFX_portrait_honduras_portrait_tiburcio_carias_andino"
+			}
+			army = {
+				large="gfx/leaders/HON/portrait_HON_Tiburcio_Carias_army.dds"
+			}			
+		}
+		country_leader={
+			ideology=conservatism
+			traits = { PER_authoritarian JUNO_the_general_president }			
+			expire="1965.1.1.1"
+			id=-1
+		}
+		field_marshal={
+			traits = { old_guard politically_connected war_hero offensive_doctrine }
+			skill = 3
+    		attack_skill = 3
+    		defense_skill = 2
+    		planning_skill = 3
+    		logistics_skill = 2
+			visible = {
+				has_country_leader = {
+					character = HON_tiburcio_carías_andino
+					ruling_only = yes
+				}
+			}
+		}			
+	}
+
+	HON_manuel_calix_herrera={
+		name="Manuel Calix Herrera"
+		portraits={
+			civilian={
+				large="gfx/leaders/HON/portrait_HON_Manuel_Calix_Herrera.dds"
+			}
+		}
+		country_leader={
+			ideology=marxism
+			traits={ armaments_organizer quartermaster_general }
+			expire="1965.1.1.12"
+			id=-1
+		}
+	}
+
+	HON_pedro_figueroa={
+		name="Pedro Figueroa"
+		portraits={
+			civilian={
+				large=GFX_portrait_Pedro_Figueroa
+			}
+		}
+		country_leader={
+			ideology=fascism_ideology
+			traits={ financial_expert }
+			expire="1953.1.1.12"
+			id=-1
+		}
+	}
+	
+	HON_abraham_williams_calderon={
+		name="Abraham Williams Calderon"	
+		portraits={
+			civilian = {
+				large="gfx/leaders/HON/portrait_HON_Abraham_Williams_Calderon.dds"
+				small="gfx/interface/ideas/HON_abraham_williams_calderon.dds"
+			}			
+			army = {
+				large="gfx/leaders/HON/portrait_HON_Abraham_Williams_Calderon_Army.dds"
+				small="gfx/interface/ideas/HON_abraham_williams_calderon_army.dds"
+			}
+		}		
+		country_leader={
+			ideology=conservatism
+			expire="1965.1.1.1"
+			id=-1
+		}			
+		advisor={
+			slot = political_advisor
+			idea_token = HON_abraham_williams_calderon
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				prince_of_terror 
+			}
+		}
+		corps_commander={
+			traits = { infantry_officer }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			maneuvering_skill = 1
+			coordination_skill = 1
+		}
+	}
+
+	HON_jose_lino_zuniga={
+		name="José Lino Zúñiga"
+		portraits={
+			army = {
+				large="gfx/leaders/HON/portrait_HON_Jose_Lino_Zuñiga.dds"
+			}
+		}
+		corps_commander={
+			traits = { trait_cautious infantry_officer }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 3
+			logistics_skill = 3
+		}
+	}
+
+	HON_jose_leon_castro = {
+		name ="José Leon Castro"
+		portraits = {
+			army = {
+				small = "GFX_idea_generic_army_south_america_1"
+				large = "gfx/leaders/HON/Portrait_HON_Jose_Leon_Castro.dds"
+			}
+		}
+		corps_commander = {
+			traits = { jungle_rat adaptable }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 1
+		}
+	}		
+
+	HON_jose_castro_lopez={
+		name="José Castro López"
+		portraits={
+			army = {
+				large="gfx/leaders/HON/portrait_HON_Jose_Castro_Lopez.dds"
+			}
+		}
+		corps_commander={
+			traits = { brilliant_strategist infantry_officer war_hero }
+			skill = 3
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 3
+			logistics_skill = 2
+		}
+	}	
+
+	HON_francisco_martinez_funes={
+		name="Francisco Martínez Funes"
+		portraits={
+			army = {
+				large="gfx/leaders/HON/portrait_HON_Francisco_Martinez_Funes.dds"
+			}
+		}
+		corps_commander={
+			traits = { militias_officer war_hero old_guard }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 2
+		}
+	}
+
+	HON_inocente_triminio_osorio={
+		name="Inocente Triminio Osorio"
+		portraits={
+			army = {
+				large="gfx/leaders/HON/portrait_HON_Inocente_Triminio_Osorio.dds"
+			}
+		}
+		corps_commander={
+			traits = { inflexible_strategist career_officer }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 2
+		}
+	}	
+
+	HON_oswaldo_lopez_arellano={
+		name="Oswaldo López Arellano"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_3"
+			}
+		}		
+		advisor={
+			slot = high_command
+			idea_token = HON_oswaldo_lopez_arellano
+			ledger = navy
+				allowed = {
+				original_tag = HON
+			}
+			traits = {
+				navy_anti_submarine_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+			visible = {
+				date > 1940.1.1
+			}			
+		}
+	}
+
+	HON_carlos_vaupel_comeza={
+		name="Carlos Vaupel Comeza"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_2"
+			}
+		}		
+		advisor={
+			slot = navy_chief
+			idea_token = HON_carlos_vaupel_comeza
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				navy_chief_naval_aviation_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_neto_britto={
+		name="Neto Britto"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_4"
+			}
+		}		
+		advisor={
+			slot = high_command
+			idea_token = HON_neto_britto
+			ledger = army
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				army_cavalry_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_jose_zuniga_huete={
+		name="José Zuñiga Huete"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_1"
+			}
+		}		
+		advisor={
+			slot = army_chief
+			idea_token = HON_jose_zuniga_huete
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				army_chief_drill_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_teodore_alberto={
+		name="Teodore Alberto Orellana"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_1"
+			}
+		}		
+		advisor={
+			slot = high_command
+			idea_token = HON_teodore_alberto
+			ledger = navy
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				navy_naval_air_defense_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_rufio_villegas={
+		name="Rufio Villegas"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}		
+		advisor={
+			cost = 100		
+			slot = theorist
+			idea_token = HON_rufio_villegas
+			ledger = navy
+			allowed = {
+				original_tag = HON
+			}				
+			traits = {
+				naval_theorist
+			}
+		}
+	}
+
+	HON_carlos_molina_dejonje={
+		name="Carlos Molina Dejonje"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}		
+		advisor={
+			cost = 100
+			slot = theorist
+			idea_token = HON_carlos_molina_dejonje
+			ledger = air
+				allowed = {
+					original_tag = HON
+				}			
+			traits = {
+				air_warfare_theorist
+			}
+		}
+	}
+
+	HON_didier_masson={
+		name="Didier Masson"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_3"
+			}
+		}		
+		advisor={
+			slot = air_chief
+			idea_token = HON_didier_masson
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				air_chief_ground_support_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_miguel_angel_sevilla={
+		name="Miguel Ángel Sevilla"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_2"
+			}
+		}		
+		advisor={
+			slot = air_chief
+			idea_token = HON_miguel_angel_sevilla
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				air_chief_all_weather_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_raimundo_stochler_garcia={
+		name="Raimundo Stochler Garcia"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_2"
+			}
+		}		
+		advisor={
+			slot = army_chief
+			idea_token = HON_raimundo_stochler_garcia
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				army_chief_defensive_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_juan_b_valladares={
+		name="Juan B. Valladares"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_3"
+			}
+		}		
+		advisor={
+			cost = 100
+			slot = theorist
+			idea_token = HON_juan_b_valladares
+			ledger = army
+			allowed = {
+				original_tag = HON
+			}	
+			traits = {
+				military_theorist
+			}
+		}
+	}
+
+	HON_francisco_s_tapio_toro={
+		name="Francisco S. Tapio Toro"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_3"
+			}
+		}		
+		advisor={
+			slot = navy_chief
+			idea_token = HON_francisco_s_tapio_toro
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				navy_chief_commerce_raiding_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_enrique_doll_rojas={
+		name="Enrique Doll Rojas"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_3"
+			}
+		}		
+		advisor={
+			slot = army_chief
+			idea_token = HON_enrique_doll_rojas
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				army_chief_morale_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_gustavo_schmidt={
+		name="Gustavo Schmidt"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_2"
+			}
+		}		
+		advisor={
+			slot = high_command
+			idea_token = HON_gustavo_schmidt
+			ledger = air
+			allowed = {
+				original_tag = HON
+			}
+			traits = {
+				air_air_superiority_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	HON_carlos_alberto_ucles={
+		name="Carlos Alberto Ucles"
+		portraits={
+			army={
+				small="gfx/interface/ideas/HON_carlos_alberto_ulces.dds"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_carlos_alberto_ucles
+			allowed  = {
+					original_tag  = HON
+				}
+			traits  = {
+				war_industrialist 
+			}
+		}
+	}
+
+	HON_humberto_michelleti_brown={
+		name="Humberto Michelleti Brown"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_humberto_michelleti_brown
+			allowed  = {
+					original_tag  = HON
+				}
+			traits  = {
+				quartermaster_general 
+			}
+		}
+	}
+
+	HON_jose_maria_casco={ #Ministro del Gabinete de Tiburcio Carias en 1936.
+		name="José Maria Casco"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_3"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_jose_maria_casco
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				ideological_crusader 
+			}
+			available = {
+				has_country_leader = {
+					ruling_only = yes
+					character = HON_tiburcio_carías_andino
+				}
+			}			
+		}
+	}
+
+	HON_alfredo_leon_gomez = { #En 1936 es electo en el Congreso Nacional como Contador en el Tribunal Superior de Cuentas.
+		name ="Alfredo Leon Gomez"
+		portraits = {
+			civilian = {
+				small = "GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = HON_alfredo_leon_gomez
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				economist
+			}
+			available = {
+				has_country_leader = {
+					ruling_only = yes
+					character = HON_tiburcio_carías_andino
+				}
+			}			
+		}
+	}	
+
+	HON_silverio_lainez = { #Fue el segundo funcionario en asumir las Relaciones Exteriores en el régimen de Tiburcio Carías Andino.
+		name ="Silverio Lainez"
+		portraits = {
+			civilian = {
+				small = "gfx/interface/ideas/HON_silverio_lainez.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = HON_silverio_lainez
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				JUNO_minister_of_foreign_affairs
+			}
+			available = {
+				has_country_leader = {
+					ruling_only = yes
+					character = HON_tiburcio_carías_andino
+				}
+			}			
+		}
+	}	
+
+	HON_manuel_zuniga_huete={ #Medico y Politico Hondureño, Se dedicó con especial atención a estudios sobre la tuberculosis, el cáncer y la sífilis. 
+		name="Manuel Guillermo Zuñiga Huete"
+		portraits={
+			army={
+				small="gfx/interface/ideas/HON_manuel_guillermo_zuniga_huete.dds"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_manuel_zuniga_huete
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				ICE_progressive_doctor 
+			}
+		}
+	}	
+
+	HON_tomas_alonso_brito={ #Magistrado en la Corte de Apelaciones de Tegucigalpa, en 1930 y como Presidente de la Corte Suprema de Justicia en 1936. Fue Rector de la Universidad Central de Honduras, entre 1947 y 1949.
+		name="Tomas Alonso Brito"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_tomas_alonso_brito
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				BRA_supreme_court_justice 
+			}
+		}
+	}		
+
+	HON_mariano_guevara_franco={ #es electo como Diputado a la Asamblea Nacional Constituyente. En 1926, durante el gobierno de Miguel Paz Baraona, fue nombrado Cónsul hondureño en Nueva York, cargo que terminaría en 1929. Posteriormente fue Subsecretario de Guerra, y Director General de Rentas, 1933-1945.
+		name="Mariano P. Guevara Franco"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_3"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_mariano_guevara_franco
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				BRA_democratic_engineer 
+			}
+		}
+	}	
+
+	HON_juan_galvez_duron={ #Ministro de Guerra y Marina 1933-1948
+		name="Juan Manuel Gálvez Durón"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_felix_canales_salazar
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				SWE_minister_of_defense 
+			}
+		}
+	}	
+
+	HON_felix_canales_salazar={
+		name="Felix Canales Salazar"
+		portraits={
+			army={
+				small="gfx/interface/ideas/HON_felix_canales_salazar.dds"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_felix_canales_salazar
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				silent_workhorse 
+			}
+		}
+	}
+
+	HON_rafael_medina_raudales={
+		name="Rafael Medina Raudales"
+		portraits={
+			army={
+				small="gfx/interface/ideas/HON_rafael_medina_raudales.dds"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_rafael_medina_raudales
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				sharp_tongued_lawyer SWI_pragmatic_democrat 
+			}
+		}
+	}	
+
+	HON_lucas_paredes_murillo={
+		name="Lucas Paredes Murillo"
+		portraits={
+			army={
+				small="gfx/interface/ideas/HON_lucas_paredes_murillo.dds"
+			}
+		}		
+		advisor={
+			slot = political_advisor
+			idea_token = HON_lucas_paredes_murillo
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				liberal_journalist
+			}
+		}
+	}	
+	
+	HON_alfonso_guillen_zelaya = {
+		name ="Alfonso Guillen Zelaya"
+		portraits = {
+			civilian = {
+				small = "gfx/interface/ideas/HON_alfonso_guillen_zelaya.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = HON_alfonso_guillen_zelaya
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				socialist_writer
+			}
+		}
+	}	
+
+	HON_zoila_hidalgo = { #Presidenta del Frente Femenino Hondureño Por Legalidad en 1948
+		name ="Zoila Hidalgo"
+		portraits = {
+			civilian = {
+				small = "gfx/interface/ideas/portrait_small_generic_female_advisor_south_america_3.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = HON_zoila_hidalgo
+			allowed  = {
+				original_tag  = HON
+			}
+			traits  = {
+				JUNO_radical_suffragette
+			}
+			available = {
+                has_government = democratic
+			}			
+		}
+	}	
+}

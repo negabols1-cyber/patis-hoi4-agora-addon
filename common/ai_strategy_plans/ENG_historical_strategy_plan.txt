@@ -1,0 +1,138 @@
+ENG_historical_plan = {
+	name = "United Kingdom historical plan"
+	desc = "Historical behavior for United Kingdom"
+
+	allowed = {
+		original_tag = ENG
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				OR = {
+					not = { has_dlc = "Man the Guns" }
+					has_game_rule = {
+						rule = ENG_ai_behavior
+						option = DEFAULT
+					}
+				}
+			}
+			has_country_flag = ENG_AI_DEMOCRATIC_HISTORICAL
+			has_game_rule = {
+				rule = ENG_ai_behavior
+				option = DEMOCRATIC_HISTORICAL
+			}
+		}
+	}
+	abort = {
+		#OR = {
+			#	GER = { has_completed_focus = GER_oppose_hitler }
+			#	GER = { has_completed_focus = GER_oppose_hitler_ww }
+			#}
+		always = no
+	}
+
+	ai_national_focuses = {
+		#ASAP
+		ENG_chiefs_of_staff_committee # 1938
+		air_rearmament_focus
+		fighter_command_focus #November 20 1939
+		general_rearmament_focus
+		ENG_rearmament_drives_industry
+		#
+		limited_rearmament_focus #March 10 1936
+		ENG_national_recovery_programme
+		ENG_public_works_expansion
+		ENG_expand_imperial_college
+		ENG_revitalize_the_economy
+		ENG_national_housing_initiative
+		ENG_expand_imperial_chemical_industries
+		ENG_steady_as_she_goes
+		ENG_home_defence
+		ENG_containment
+		ENG_prepare_for_the_inevitable
+		ENG_an_arsenal_for_the_empire
+		aircraft_production_focus
+		ENG_dual_pillars_of_industry
+		ENG_war_workshop_expansion
+		shadow_scheme_focus
+		royal_ordinance_focus
+		naval_rearmament_focus
+		ENG_army_rearmament_focus
+		ENG_air_training
+		ENG_expand_the_lochaber_scheme
+		ENG_total_war_mobilization
+		ENG_military_training_act
+		ENG_embrace_traditional_warfare
+		uk_waves_focus
+		ENG_infantry_doctrines
+		uk_empire_focus #May 20 1936
+		uk_service_focus #July 30 1936
+		uk_commonwealth_focus
+		uk_canada_focus
+		uk_australia_focus
+		uk_south_africa_focus
+		uk_new_zealand_focus
+		ENG_imperial_conference
+		ENG_expand_steelworks
+		ENG_expand_the_secret_intelligence_service_focus
+		ENG_vickers_experimental_facility_focus # Everything after will be pushed back slightly by this 35 day focus but is is one that it better the earlier it is done
+		uk_colonial_focus #September 30 1937
+		uk_asia_focus #December 10 1937
+		air_defense_focus #April 30 1938
+		radar_focus #July 10 1938
+		ENG_issue_gasmasks#June 30 1939
+		ENG_war_propaganda
+		uk_wartime_measures
+		bomber_command_focus #January 30 1940
+		coastal_command_focus #April 10 1940
+		uk_home_guards
+		uk_government_code_and_cypher_school
+		uk_ultra_enigma
+		ENG_motorized_focus #November 10 1940
+		crypto_bomb_focus #January 20 1941
+		ENG_mechanized_warfare
+		tizard_mission_focus#March 30 1941
+		ENG_armoured_spearhead_tactics
+		uk_small_arms_focus
+		ENG_special_air_service#June 10 1941
+		uk_destroyer_focus#August 20 1941
+		uk_convoy_focus#January 10
+		maud_focus#May 30 1942
+		uk_mediterranean_focus#August 10 1942
+		uk_carrier_focus#October 20 1942
+		uk_iraq_focus#March 10 1943
+		uk_protect_suez
+		uk_rock_focus#May 20 1943
+		singapore_focus#July 30 1943
+		peninsular_focus
+		uk_amphibious_focus
+		UK_secret_focus
+		uk_jet_focus
+		uk_african_focus
+	}
+
+	research = {
+
+	}
+
+	ideas = {
+		r56i_laws_leadership_secular = 8
+		industry_liasons_spirit = 15000
+		home_defence_spirit = 1
+		finances_foreign = 2
+		partial_economic_mobilisation = 1000
+		war_economy = 1100
+		tot_economic_mobilisation = 1200
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+}

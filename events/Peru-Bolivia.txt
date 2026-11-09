@@ -1,0 +1,780 @@
+###########################
+# Peru-Bolivian Confederation Events
+###########################
+
+add_namespace = perubolivia
+
+#Choosing leader (will be between David Toro, Germán Busch, Luis A. Flores, and Jorge Prado Ugarteche)
+country_event = {
+	id = perubolivia.1
+	title = perubolivia.1.t
+	desc = perubolivia.1.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	option = { #David Toro
+		name = perubolivia.1.a
+		trigger = { controls_state = 302 }
+		if = {
+			limit = { has_government = fascism }
+			create_country_leader = {
+				name = "David Toro"
+				desc = "POLITICS_DAVID_TORO_DESC"
+				picture = "gfx/leaders/BOL/portrait_BOL_david_toro.dds"
+				expire = "1965.1.1"
+				ideology = gen_nazism
+				traits = {
+					PBC_socialist_tendencies_1
+					CHL_military_leader
+				}
+			}
+		}
+		else = {
+			create_country_leader = {
+				name = "David Toro"
+				desc = "POLITICS_DAVID_TORO_DESC"
+				picture = "gfx/leaders/BOL/portrait_BOL_david_toro.dds"
+				expire = "1965.1.1"
+				ideology = anti_revisionism
+				traits = {
+					PBC_socialist_tendencies_1
+					CHL_military_leader
+				}
+			}
+		}
+
+	}
+
+	option = { #Germán Busch
+		name = perubolivia.1.b
+		trigger = { controls_state = 302 }
+		if = {
+			limit = { has_government = fascism }
+			create_country_leader = {
+				name = "Germán Busch"
+				desc = "POLITICS_GERMAN_BUSCH_DESC"
+				picture = "gfx/leaders/BOL/portrait_BOL_german_busch.dds"
+				expire = "1965.1.1"
+				ideology = gen_nazism
+				traits = {
+					PBC_socialist_tendencies_2
+					ARG_inexperienced_leader_1
+					CHL_military_leader
+				}
+			}
+		}
+		else = {
+			create_country_leader = {
+				name = "Germán Busch"
+				desc = "POLITICS_GERMAN_BUSCH_DESC"
+				picture = "gfx/leaders/BOL/portrait_BOL_german_busch.dds"
+				expire = "1965.1.1"
+				ideology = anti_revisionism
+				traits = {
+					PBC_socialist_tendencies_2
+					ARG_inexperienced_leader_1
+					CHL_military_leader
+				}
+			}
+		}
+	}
+
+	option = { #Luis A. Flores
+		name = perubolivia.1.c
+		trigger = { controls_state = 303 }
+		if = {
+			limit = { has_government = fascism }
+			create_country_leader = {
+				name = "Luis A. Flores"
+				desc = "POLITICS_OSCAR_BENAVIDES_DESC"
+				picture = "gfx/leaders/PRU/portrait_PRU_luis_a_flores.dds"
+				expire = "1965.1.1"
+				ideology = gen_nazism
+				traits = {
+					PBC_fascist_tendencies
+					ARG_brutal_leader
+				}
+			}
+		}
+		else = {
+			create_country_leader = {
+				name = "Luis A. Flores"
+				desc = "POLITICS_OSCAR_BENAVIDES_DESC"
+				picture = "gfx/leaders/PRU/portrait_PRU_luis_a_flores.dds"
+				expire = "1965.1.1"
+				ideology = leninism
+				traits = {
+					PBC_fascist_tendencies
+					ARG_brutal_leader
+				}
+			}
+		}
+
+	}
+
+	option = {  #Jorge Prado Ugarteche (Manuel Prado Ugarteche)
+		name = perubolivia.1.e
+		trigger = { controls_state = 303 }
+		if = {
+			limit = { has_government = fascism }
+			create_country_leader = {
+				name = "Manuel Prado Ugarteche"
+				desc = "POLITICS_PRADO_DESC"
+				picture = "gfx/leaders/PRU/portrait_per_liberal.dds"
+				expire = "1965.1.1"
+				ideology = gen_nazism
+				traits = {
+					PBC_democratic_tendencies
+					CHL_economist_2
+				}
+			}
+		}
+		else = {
+			create_country_leader = {
+				name = "Manuel Prado Ugarteche"
+				desc = "POLITICS_PRADO_DESC"
+				picture = "gfx/leaders/PRU/portrait_per_liberal.dds"
+				expire = "1965.1.1"
+				ideology = leninism
+				traits = {
+					PBC_democratic_tendencies
+					CHL_economist_2
+				}
+			}
+		}
+	}
+}
+
+#Choosing the new capital
+country_event = {
+	id = perubolivia.2
+	title = perubolivia.2.t
+	desc = perubolivia.2.d
+	picture = GFX_report_event_generic_rally
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_stability = 0.01
+		add_war_support = 0.01
+	}
+
+	option = { #tacna
+		name = perubolivia.2.a
+		set_capital = { state = 947 }
+	}
+
+	option = { #lima
+		name = perubolivia.2.b
+		set_capital = { state = 303 }
+	}
+
+	option = { #la paz
+		name = perubolivia.2.c
+		set_capital = { state = 302 }
+	}
+}
+
+#Nationalists start rising up
+country_event = {
+	id = perubolivia.3
+	title = perubolivia.3.t
+	desc = perubolivia.3.d
+	picture = GFX_report_event_generic_rally
+
+	fire_only_once = yes
+
+	trigger = {
+		has_country_flag = is_PBC
+		has_completed_focus = PBC_choose_our_leader
+		OR = {
+			original_tag = PRU
+			original_tag = BOL
+		}
+		has_civil_war = no
+	}
+
+	immediate = {
+		ROOT = {
+			set_country_flag = PBC_nationalists_rising_up
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+
+	mean_time_to_happen = { days = 3 }
+
+	option = {
+		name = perubolivia.3.a
+		custom_effect_tooltip = PBC_nationalism_starting_to_rise_tt
+		unlock_decision_category_tooltip = PBC_nationalism_rising
+		add_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise }
+		effect_tooltip = {
+			unlock_national_focus = PBC_calm_down_the_nationalists
+		}
+		hidden_effect = {
+			set_country_flag = PBC_nationalists_on_rise
+			clr_country_flag = PBC_winner_of_war_of_independence
+			set_variable = { PBC_time_it_takes_to_take_state_BOL = 100 }
+			set_variable = { PBC_time_it_takes_to_take_state_PRU = 100 }
+			set_variable = { PBC_PRU_states_controlled_by_nationalists = 0 }
+			set_variable = { PBC_BOL_states_controlled_by_nationalists = 0 }
+			set_variable = { PBC_total_states_controlled_by_nationalists = 0 }
+			set_variable = { PBC_stability_factor = 0 }
+			set_variable = { PBC_industrial_factors = 0 }
+			set_variable = { PBC_cost_to_retake_state = 25 }
+			set_variable = { PBC_days_to_retake_state = 25 }
+		}
+	}
+}
+
+#Event that gets triggered when the player is at war with both the Peruvians and Bolivians
+country_event = {
+	id = perubolivia.4
+	title = perubolivia.4.t
+	desc = perubolivia.4.d
+	picture = GFX_report_event_generic_sign_treaty3
+
+	fire_only_once = yes
+	trigger = {
+		has_country_flag = is_PBC
+		OR = {
+			original_tag = PRU
+			original_tag = BOL
+		}
+		has_war_with = BOA
+		has_war_with = PRA
+		has_capitulated = no
+		is_subject = no
+	}
+
+	mean_time_to_happen = { days = 4 }
+
+	option = { #will allow the player to dissolve the union
+		name = perubolivia.4.a
+		ai_chance = {
+			base = 1
+		}
+		if = {
+			limit = {
+				original_tag = BOL
+			}
+			effect_tooltip = {
+				white_peace = BOA
+				white_peace = PRA
+			}
+			custom_effect_tooltip = PBC_union_will_be_disbanded_tt
+			hidden_effect = {
+				drop_cosmetic_tag = yes
+				clr_country_flag = is_PBC
+				set_variable = { PBC_PRU_states_controlled_by_nationalists = 0 }
+				set_variable = { PBC_BOL_states_controlled_by_nationalists = 0 }
+				remove_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise }
+				every_other_country = {
+					limit = { has_war_with = ROOT }
+					ROOT = {
+						white_peace = PREV
+					}
+				}
+				load_focus_tree = {
+					tree = bolivia_focus
+					keep_completed = yes
+				}
+				every_state = {
+					limit = {
+						is_core_of = BOL
+						NOT = {
+							OR = {
+								is_core_of = PAR
+								is_core_of = CHL
+								is_core_of = PRU
+								is_core_of = BRA
+							}
+						}
+					}
+					ROOT = {
+						transfer_state = PREV
+					}
+				}
+				every_state = {
+					limit = {
+						is_core_of = PRU
+						NOT = {
+							OR = {
+								is_core_of = ECU
+								is_core_of = CHL
+							}
+						}
+					}
+					PRU = {
+						transfer_state = PREV
+					}
+				}
+				PRU = {
+					load_focus_tree = {
+						tree = peru_focus
+						keep_completed = yes
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				original_tag = PRU
+			}
+			effect_tooltip = {
+				white_peace = BOA
+				white_peace = PRA
+			}
+			custom_effect_tooltip = PBC_union_will_be_disbanded_tt
+			hidden_effect = {
+				drop_cosmetic_tag = yes
+				clr_country_flag = is_PBC
+				set_variable = { PBC_PRU_states_controlled_by_nationalists = 0 }
+				set_variable = { PBC_BOL_states_controlled_by_nationalists = 0 }
+				remove_dynamic_modifier = { modifier = PBC_nationalism_on_the_rise }
+				every_other_country = {
+					limit = { has_war_with = ROOT }
+					ROOT = {
+						white_peace = PREV
+					}
+				}
+				load_focus_tree = {
+					tree = peru_focus
+					keep_completed = yes
+				}
+				every_state = {
+					limit = {
+						is_core_of = PRU
+						NOT = {
+							OR = {
+								is_core_of = ECU
+								is_core_of = CHL
+							}
+						}
+					}
+					ROOT = {
+						transfer_state = PREV
+					}
+				}
+				every_state = {
+					limit = {
+						is_core_of = BOL
+						NOT = {
+							OR = {
+								is_core_of = PAR
+								is_core_of = CHL
+								is_core_of = PRU
+								is_core_of = BRA
+							}
+						}
+					}
+					BOL = {
+						transfer_state = PREV
+					}
+				}
+				BOL = {
+					load_focus_tree = {
+						tree = bolivia_focus
+						keep_completed = yes
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+						create_unit = {
+							division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = { #keep going
+		name = perubolivia.4.b
+		ai_chance = {
+			base = 25
+		}
+		add_war_support = 0.05
+	}
+}
+
+#FROM gets event to join the defense pact proposed by the Peru-Bolivian Confederation
+country_event = {
+	id = perubolivia.5
+	title = perubolivia.5.t
+	desc = perubolivia.5.d
+	picture = GFX_report_event_second_vienna_award_pact
+
+	is_triggered_only = yes
+
+	option = { #accept the proposal
+		name = perubolivia.5.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 40
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 50
+				threat > 0.5
+			}
+		}
+		custom_effect_tooltip = PBC_will_protect_us_tt
+		add_ideas = EUYL_defense_pact
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.16 hours = 6 }
+			}
+		}
+	}
+
+	option = { #deny it
+		name = perubolivia.5.b
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 50
+				threat < 0.05
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.17 hours = 6 }
+			}
+		}
+	}
+}
+
+#The Confederation gets an event to join the war a nation with the defense pact idea has
+country_event = {
+	id = perubolivia.6
+	title = perubolivia.6.t
+	desc = perubolivia.6.d
+	picture = GFX_report_event_soldiers_marching
+
+	is_triggered_only = yes
+
+	option = { #honor the pact
+		name = perubolivia.6.a
+		ai_chance = {
+			base = 80
+			modifier = {
+				factor = 1
+				has_civil_war = yes
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_war_with = FROM
+				}
+			}
+			declare_war_on = {
+				target = FROM
+				type = annex_everything
+			}
+		}
+		else = {
+			add_war_support = 0.02
+		}
+	}
+
+	option = { #don't honor the pact
+		name = perubolivia.6.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = 15
+				has_war = yes
+			}
+		}
+		add_war_support = -0.5
+		add_stability = -0.15
+		random_other_country = {
+			limit = {
+				has_idea = EUYL_defense_pact
+				has_war_with = FROM
+			}
+			add_opinion_modifier = { target = ROOT modifier = EUYL_defense_pact_call_refused }
+		}
+	}
+}
+
+#Colombia gets event from the Confederation asking for territory
+country_event = {
+	id = perubolivia.7
+	title = perubolivia.7.t
+	desc = perubolivia.7.d
+	picture = GFX_report_event_hitler_handshake
+
+	is_triggered_only = yes
+
+	option = { #accept offer
+		name = perubolivia.7.a
+		ai_chance = {
+			base = 35
+			modifier = {
+				add = 70
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 30
+				FROM = {
+					has_army_manpower = { size > 199999 }
+				}
+			}
+		}
+		FROM = {
+			transfer_state = 491
+		}
+		custom_effect_tooltip = PBC_will_protect_us_tt
+		add_ideas = EUYL_defense_pact
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.16 hours = 6 }
+			}
+		}
+	}
+
+	option = { #decline offer
+		name = perubolivia.7.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 50
+				has_war = yes
+			}
+			modifier = {
+				add = 100
+				has_civil_war = yes
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.17 hours = 6 }
+			}
+		}
+	}
+}
+
+#Paraguay gets event from the Confederation asking for territory
+country_event = {
+	id = perubolivia.8
+	title = perubolivia.8.t
+	desc = perubolivia.8.d
+	picture = GFX_report_event_hitler_handshake
+
+	is_triggered_only = yes
+
+	option = { #accept offer
+		name = perubolivia.7.a
+		ai_chance = {
+			base = 35
+			modifier = {
+				add = 70
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 30
+				FROM = {
+					has_army_manpower = { size > 199999 }
+				}
+			}
+		}
+		FROM = {
+			transfer_state = 688
+		}
+		custom_effect_tooltip = PBC_will_protect_us_tt
+		add_ideas = EUYL_defense_pact
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.16 hours = 6 }
+			}
+		}
+	}
+
+	option = { #decline offer
+		name = perubolivia.7.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 50
+				has_war = yes
+			}
+			modifier = {
+				add = 100
+				has_civil_war = yes
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.17 hours = 6 }
+			}
+		}
+	}
+}
+
+#Brazil gets offer from the confederation to purchase lands and offer gurantee
+country_event = {
+	id = perubolivia.9
+	title = perubolivia.9.t
+	desc = perubolivia.9.d
+	picture = GFX_report_event_hitler_handshake
+
+	is_triggered_only = yes
+
+	option = { #accept offer
+		name = perubolivia.7.a
+		ai_chance = {
+			base = 35
+			modifier = {
+				add = 70
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 30
+				FROM = {
+					has_army_manpower = { size > 199999 }
+				}
+			}
+		}
+		FROM = {
+			transfer_state = 495
+			transfer_state = 280
+			transfer_state = 504
+			random_owned_controlled_state = {
+				limit = { industrial_complex > 1 }
+				remove_building = {
+					type = industrial_complex
+					level = 1
+				}
+			}
+		}
+		random_owned_controlled_state = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		custom_effect_tooltip = PBC_will_protect_us_tt
+		add_ideas = EUYL_defense_pact
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.16 hours = 6 }
+			}
+		}
+	}
+
+	option = { #decline offer
+		name = perubolivia.7.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 50
+				has_war = yes
+			}
+			modifier = {
+				add = 100
+				has_civil_war = yes
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.17 hours = 6 }
+			}
+		}
+	}
+}

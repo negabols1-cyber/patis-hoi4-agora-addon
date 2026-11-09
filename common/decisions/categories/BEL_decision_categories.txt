@@ -1,0 +1,128 @@
+#################
+#### BELGIUM ####
+#################
+
+BEL_belgian_political_decisions = {
+	icon = GFX_ARG_elections
+
+	allowed = {
+		original_tag = BEL
+	}
+
+	visible = {
+		has_completed_focus = BEL_incoming_elections
+	}
+
+	priority = 102
+}
+
+BEL_defence_our_country = {
+	icon = GFX_decision_SOV_place_hq
+
+	picture = GFX_decision_cat_picture_government_in_exile
+
+	allowed = {
+		original_tag = BEL
+	}
+	priority = 101
+}
+
+BEL_monarchist_decisions_category = {
+	icon = generic_monarchism
+
+	allowed = {
+		original_tag = BEL
+	}
+
+	visible = {
+		has_completed_focus = BEL_declare_state_of_emergency
+	}
+
+	priority = 101
+}
+
+BEL_convince_belgium_alliance_category = {
+
+	icon = hol_gateway_to_europe
+
+	allowed = {
+		OR = {
+			original_tag = BEL
+			original_tag = GER
+			original_tag = ENG
+		}
+	}
+
+	picture = GFX_decision_cat_picture_gateway_to_europe
+	priority = 100
+
+	custom_icon = {
+		tag = ENG
+		value = eng_convince_belgium_icon_value
+		desc = eng_convince_belgium_full_influence_breakdown
+
+		visible = {
+			country_exists = ENG
+			ENG = { is_faction_leader = yes }
+		}
+	}
+
+	custom_icon = {
+		tag = GER
+		value = ger_convince_belgium_icon_value
+		desc = ger_convince_belgium_full_influence_breakdown
+
+		visible = {
+			country_exists = GER
+			GER = { is_faction_leader = yes }
+		}
+	}
+
+	custom_icon = {
+		tag = FRA
+		value = fra_convince_belgium_icon_value
+		desc = fra_convince_belgium_full_influence_breakdown
+
+		visible = {
+			country_exists = FRA
+			FRA = { is_faction_leader = yes }
+		}
+	}
+
+	visible_when_empty = yes
+
+	visible = {
+		NOT = { BEL = { is_in_faction = yes } }
+		NOT = { BEL = { has_war_with = FRA } }
+		NOT = { BEL = { has_war_with = ENG } }
+		NOT = { BEL = { has_war_with = GER } }
+		NOT = { BEL = { has_country_flag = BEL_joined_faction_flag } }
+		BEL = {
+			has_completed_focus = BEL_find_best_ally
+			exists = yes
+			is_subject = no
+		}
+	}
+}
+
+BEL_integrate_benelux_decision = {
+	icon = GFX_decision_SOV_place_hq
+	priority = 100001
+	scripted_gui = BEL_integrate_benelux_scripted_gui
+	picture = GFX_decision_cat_generic_united_netherlands
+
+	allowed = {
+		original_tag = BEL
+	}
+
+	visible = {
+		has_completed_focus = BEL_integrate_benelux
+		OR = {
+			country_exists = HOL
+			country_exists = LUX
+		}
+		NOT = { has_completed_focus = BEL_a_new_red_benelux }
+	}
+
+	visible_when_empty = yes
+}

@@ -1,0 +1,69 @@
+defined_text = { # Country
+	name = GetCustomsUnionIdea
+	text = {
+		trigger = {
+			has_global_flag = BEL_netherlands_joins_union
+		}
+		localization_key = BEL_CUSTOMS_UNION_BENELUX_IDEA
+	}
+	text = {
+		localization_key = BEL_CUSTOMS_UNION_NORMAL_IDEA
+	}
+}
+
+defined_text = {
+	name = GetConvinceBelgiumAllianceDesc
+	text = {
+		trigger = {
+			original_tag = BEL
+		}
+		localization_key = BEL_CONVINCE_BELGIUM_ALLIANCE_DESC
+	}
+	text = {
+		trigger = {
+			original_tag = GER
+		}
+		localization_key = BEL_CONVINCE_BELGIUM_ALLIANCE_GER_DESC
+	}
+	text = {
+		trigger = {
+			OR = {
+				original_tag = ENG
+				original_tag = FRA
+			}
+		}
+		localization_key = BEL_CONVINCE_BELGIUM_ALLIANCE_OTHER_DESC
+	}
+}
+
+defined_text = {
+	name = GetAttackEnemyFocusName
+	text = {
+		trigger = {
+			is_in_faction_with = ENG
+			ENG = { is_faction_leader = yes }
+		}
+		localization_key = BEL_ATTACK_ENEMY_ENG
+	}
+	text = {
+		trigger = {
+			is_in_faction_with = FRA
+			FRA = {
+				is_faction_leader = yes
+				NOT = { has_government = democratic }
+				NOT = { is_in_faction_with = ENG }
+			}
+		}
+		localization_key = BEL_ATTACK_ENEMY_FRA
+	}
+	text = {
+		trigger = {
+			is_in_faction_with = GER
+			GER = { is_faction_leader = yes }
+		}
+		localization_key = BEL_ATTACK_ENEMY_GER
+	}
+	text = {
+		localization_key = BEL_ATTACK_ENEMY_NORMAL
+	}
+}

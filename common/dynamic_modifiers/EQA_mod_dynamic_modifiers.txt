@@ -1,0 +1,60 @@
+#	Example:
+#
+#	example_dynamic_modifier = {
+	#		icon = "GFX_idea_unknown" # optional, will show up in guis if icon is specified
+	#		enable = { always = yes } #optional, the modifier won't apply if not enabled
+	#		remove_trigger = { always = no } #optional, will remove the modifier if true
+	#
+	#		# list of modifiers
+	#		fuel_cost = 321
+	#		max_fuel = var_max_fuel # will be taken from a variable
+	#	}
+#
+#
+#	In a script file:
+#
+#	effect = {
+	#		add_dynamic_modifier = {
+		#			modifier = example_dynamic_modifier
+		#			scope = GER # optional, if you specify this your dynamic modifier scoped to this scope (root is the effect scope)
+		#			days = 14 # optional, will be removed after this many days passes
+		#		}
+	#	}
+#
+#	can be added to countries, states or unit leaders
+#	will only updated daily, unless forced by force_update_dynamic_modifier effect
+
+EQA_religion_dynamic_modifier = {
+	#icon = "GFX_idea_unknown"
+
+	democratic_drift = var:religion_democratic_drift
+	communism_drift = var:religion_communism_drift
+	fascism_drift = var:religion_fascism_drift
+	neutrality_drift = var:religion_neutrality_drift
+	research_speed_factor = var:religion_research_speed_factor
+	political_power_factor = var:religion_political_power_factor
+	stability_factor = var:religion_stability_factor
+	war_support_factor = var:religion_war_support_factor
+	army_defence_factor = var:religion_army_defence_factor
+	army_attack_factor = var:religion_army_attack_factor
+	conscription_factor = var:religion_conscription_factor
+}
+
+ACR_compensation_trade_modifier = {
+	#icon = GFX_idea_ACR_syndicate_lobby
+
+	country_resource_steel = var:ACR_compensantion_trade_steel_import
+	country_resource_aluminium = var:ACR_compensantion_trade_aluminium_import
+	country_resource_oil = var:ACR_compensantion_trade_oil_import
+	country_resource_chromium = var:ACR_compensantion_trade_chromium_import
+	country_resource_tungsten = var:ACR_compensantion_trade_tungsten_import
+	country_resource_cost_rubber = var:ACR_compensantion_trade_rubber_export
+}
+
+XIN_modifier_ruling_party_popularity = {
+	#icon = GFX_XIN_imperial_guard
+
+	army_org_factor = var:XIN_imperial_guard_modifier
+	army_morale_factor = var:XIN_imperial_guard_modifier
+	conscription_factor = var:XIN_imperial_guard_modifier
+}

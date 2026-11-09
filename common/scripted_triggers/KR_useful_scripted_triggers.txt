@@ -1,0 +1,68 @@
+# this is a check to see if a major is an actual major due to its number of factories
+# meaning it's the top 7 in the world or has at least 70% of the average of those 7
+# we're also including a number of tags which should act like majors even if they're not in that category
+is_actual_major = {
+	custom_trigger_tooltip = {
+		tooltip = is_actual_major
+		is_major = yes
+		num_of_factories > 35 #MAJOR_MIN_FACTORIES
+
+		# rank the majors according to their num_of_factories
+		get_sorted_scored_countries_temp = {
+			scorer = major_industry_count_scorer
+			array = actual_majors
+		}
+
+		# limit that ranking to the top 7
+		resize_temp_array = { actual_majors = 7 }
+
+		OR = {
+			# is one of the seven largest
+			is_in_array = { actual_majors = THIS }
+
+			#is an exception
+			tag = ENT
+			tag = GEX
+
+			# has more than 70% of the average of the top 7
+			set_temp_variable = { factory_average = 0 }
+			all_of_scopes = {
+				array = actual_majors
+				add_to_temp_variable = { factory_average = THIS.num_of_factories }
+			}
+			divide_temp_variable = { factory_average = 4.9 }
+			num_of_factories > factory_average
+		}
+	}
+}
+
+is_actual_major_without_exceptions = {
+	custom_trigger_tooltip = {
+		tooltip = is_actual_major_without_exceptions
+		is_major = yes
+		num_of_factories > 35 #MAJOR_MIN_FACTORIES
+
+		# rank the majors according to their num_of_factories
+		get_sorted_scored_countries_temp = {
+			scorer = major_industry_count_scorer
+			array = actual_majors
+		}
+
+		# limit that ranking to the top 7
+		resize_temp_array = { actual_majors = 7 }
+
+		OR = {
+			# is one of the seven largest
+			is_in_array = { actual_majors = THIS }
+
+			# has more than 70% of the average of the top 7
+			set_temp_variable = { factory_average = 0 }
+			all_of_scopes = {
+				array = actual_majors
+				add_to_temp_variable = { factory_average = THIS.num_of_factories }
+			}
+			divide_temp_variable = { factory_average = 4.9 }
+			num_of_factories > factory_average
+		}
+	}
+}

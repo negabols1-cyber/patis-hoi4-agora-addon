@@ -1,0 +1,32 @@
+###########################################################################
+# Syria (SYR) on actions
+#
+# on_capitulation: when France capitulates while Syria is still a loyal
+# French subject, Syria chooses between Free France, the Vichy government
+# and independence (event syria.60). The event waits ten days so the Vichy
+# state from events/France.txt exists before Syria decides.
+# Design notes: docs/systems/syria_focus_tree.md
+###########################################################################
+
+on_actions = {
+	# ROOT is the capitulated country, FROM is the winner
+	on_capitulation = {
+		effect = {
+			if = {
+				limit = {
+					tag = FRA
+					country_exists = SYR
+					SYR = {
+						is_subject_of = FRA
+						SYR_is_loyalist = yes
+						NOT = { has_country_flag = SYR_france_fell }
+					}
+				}
+				SYR = {
+					set_country_flag = SYR_france_fell
+					country_event = { id = syria.60 days = 10 }
+				}
+			}
+		}
+	}
+}

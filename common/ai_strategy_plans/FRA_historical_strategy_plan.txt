@@ -1,0 +1,149 @@
+UFRA_historical_plan = {
+	name = "France historical plan"
+	desc = "Historical behavior for France"
+
+	allowed = {
+		original_tag = FRA
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = FRA_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_game_rule = {
+				rule = FRA_ai_behavior
+				option = DEMOCRATIC_HISTORICAL
+			}
+			has_country_flag = FRA_AI_DEMOCRATIC_HISTORICAL
+		}
+	}
+	abort = {
+		OR = {
+			GER = { has_completed_focus = GER_oppose_hitler }
+			GER = { has_completed_focus = GER_oppose_hitler_ww }
+			AND = {
+				ENG = { has_completed_focus = ENG_a_change_in_course }
+				NOT = {
+					GER = { has_completed_focus = GER_oppose_hitler }
+					GER = { has_completed_focus = GER_oppose_hitler_ww }
+				}
+			}
+		}
+		has_game_rule = {
+			rule = FRA_ai_behavior
+			option = DEFAULT
+		}
+	}
+
+	ai_national_focuses = {
+		UFRA_diplomatic_freedom
+		UFRA_devalue_the_franc
+		UFRA_economic_policies
+		UFRA_hydroelectricity
+		UFRA_republic_lives
+		UFRA_popular_front_victory
+		UFRA_review_foreign_policy
+		UFRA_appoint_daladier
+		UFRA_reynaud_financial_reforms
+		UFRA_firmness_and_rearmement
+		UFRA_continue_popfront
+		UFRA_buy_time
+		UFRA_strengthen_government_support #July 10 1938
+		UFRA_left
+		UFRA_reform_the_labour_laws
+		UFRA_form_the_state_arsenals
+		UFRA_reorganize_the_aviation_industry
+		UFRA_general_work_council
+		UFRA_nationalize_key_industry
+		UFRA_go_with_britain
+		UFRA_reform_project_Gaston_Doumergue
+		UFRA_begin_rearmament
+		UFRA_aggressive_focus
+		UFRA_battle_of_maneuver
+		UFRA_motorized_focus
+		UFRA_mechanized_focus
+		UFRA_light_medium_armor
+		UFRA_review_tanks_role
+		UFRA_review_radio_role
+		UFRA_army_reform
+		UFRA_commit_air_industry
+		UFRA_improve_motor_industry
+		UFRA_create_matra
+		UFRA_invest_in_the_colonies
+		UFRA_algerie_france #April 30 1938
+		UFRA_military_factories
+		UFRA_invest_in_the_metropole
+		UFRA_metropolitan_france #March 10 1936
+		UFRA_industrial_expansion #May 20 1936
+		UFRA_war_games
+		UFRA_open_to_the_world
+		UFRA_the_blum_viollette_proposal
+		UFRA_naval_rearmament #October 10 1936
+		UFRA_capital_ship_focus #October 10 1936
+		UFRA_mouvement_national_laval
+		UFRA_ils_ne_passeront_pas
+		UFRA_update_weaponry
+		UFRA_military_factories #December 10 1937
+		UFRA_improved_screen_ships #February 20 1938
+		UFRA_reform_project_Gaston_Doumergue
+		UFRA_division_cuirassee
+		UFRA_extra_research_slot #November 30 1938
+		UFRA_commit_air_industry
+		UFRA_review_radio_role #February 10 1939
+		UFRA_nationalize_key_industry
+		UFRA_alpine_forts #April 20 1939
+		UFRA_war_games
+		UFRA_review_tanks_role #June 30 1939
+		UFRA_army_reform #September 10 1939
+		#UFRA_extra_research_slot_2	#November 20 1939
+		UFRA_foreign_guest_workers
+		UFRA_air_focus #January 30 1940
+		UFRA_invest_in_west_africa
+		UFRA_fighter_focus #April 10 1940
+		UFRA_cas_focus #June 20 1940
+		UFRA_invest_in_indochina
+		UFRA_heavy_fighter_focus #August 30 1940
+		UFRA_defensive_strategems #March 30 1941
+		UFRA_army_reform
+		UFRA_invest_in_syria
+		UFRA_industrialists_alliance #June 10 1941
+		UFRA_expand_the_citizenship	#August 20 1941
+		UFRA_colonial_industry
+		UFRA_reinforce_la_royale #October 30 1941
+		UFRA_encourage_immigration #January 10
+		UFRA_global_integration #March 20 1942
+		UFRA_air_doctrine #May 30 1942
+		UFRA_second_paris_renovation #August 10 1942
+		UFRA_secret_services #March 10 1943
+		UFRA_further_armament_program
+		UFRA_create_dga #May 20 1943
+		UFRA_natural_inequalities #July 30 1943
+	}
+	focus_factors = {
+	}
+	research = {
+	}
+	ideas = {
+		finances_army = 50
+		FRA_henri_marie_auguste_bineau = 100
+		smn = 60
+		r56i_laws_social_hierarchy = 100
+	}
+	traits = {
+		silent_workhorse = 70
+		financial_expert = 50
+		war_industrialist = 30
+	}
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}

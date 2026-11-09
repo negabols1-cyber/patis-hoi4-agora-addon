@@ -1,0 +1,2181 @@
+﻿###########################
+# Congo Events
+###########################
+
+add_namespace = congo_tour
+add_namespace = congo_hist
+add_namespace = congo_dem
+add_namespace = congo_escape
+
+#Tour of Congo
+country_event = {
+	id = congo_tour.1
+	title = congo_tour.1.t
+	desc = congo_tour.1.d
+	picture = GFX_report_event_COG_tour_1
+
+	is_triggered_only = yes
+
+	option = { # Long tour begins
+		name = congo_tour.1.a
+		ai_chance = { base = 1 }
+
+		custom_effect_tooltip = congo_tour.francqui
+		custom_effect_tooltip = congo_tour.1.a_custom
+		unlock_decision_category_tooltip = COG_tour_of_congo_category
+		add_political_power = 30
+		hidden_effect = {
+			set_country_flag = COG_long_tour_flag
+			set_country_flag = COG_security_2
+			activate_mission = COG_long_tour
+			country_event = { id = congo_tour.2 days = 30 }
+		}
+	}
+
+	option = { # Short tour begins
+		name = congo_tour.1.b
+		ai_chance = { base = 100 }
+
+		custom_effect_tooltip = congo_tour.francqui
+		custom_effect_tooltip = congo_tour.1.b_custom
+		unlock_decision_category_tooltip = COG_tour_of_congo_category
+		hidden_effect = {
+			set_country_flag = COG_short_tour_flag
+			set_country_flag = COG_security_2
+			activate_mission = COG_short_tour
+			country_event = { id = congo_tour.2 days = 30 }
+		}
+	}
+}
+
+#Port Francqui
+country_event = {
+	id = congo_tour.2
+	title = congo_tour.2.t
+	desc = congo_tour.2.d
+	picture = GFX_report_event_bul_boris_tour
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = COG_ryckmans_in_port_francqui
+		}
+	}
+
+	option = { #Kitawala is good
+		name = congo_tour.2.a
+		ai_chance = { base = 1 }
+
+		custom_effect_tooltip = congo_tour.kamina
+		custom_effect_tooltip = congo_tour.2.a_custom
+		add_political_power = -20
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		hidden_effect = {
+			country_event = { id = congo_tour.4 days = 30 }
+		}
+	}
+
+	option = { #Kitawala is bad
+		name = congo_tour.2.b
+
+		custom_effect_tooltip = congo_tour.kamina
+		custom_effect_tooltip = congo_tour.2.b_custom
+		trigger = {
+			has_country_flag = COG_long_tour_flag
+		}
+		add_stability = 0.03
+		ai_chance = { base = 100 }
+
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		hidden_effect = {
+			set_country_flag = COG_kitawala
+			country_event = { id = congo_tour.3 days = 5 }
+			country_event = { id = congo_tour.4 days = 30 }
+		}
+	}
+}
+
+#Kitawala finds german weapons
+country_event = {
+	id = congo_tour.3
+	title = congo_tour.3.t
+	desc = congo_tour.3.d
+	picture = GFX_report_event_african_soldiers
+
+	is_triggered_only = yes
+
+	option = { #nota bene/be careful
+		name = congo_tour.3.a
+		ai_chance = { base = 1}
+
+		custom_effect_tooltip = congo_tour.3.a_custom
+		add_stability = -0.01
+		add_political_power = -10
+		hidden_effect = {
+			clr_country_flag = COG_security_2
+			set_country_flag = COG_security_3
+			set_country_flag = COG_kamina
+			set_country_flag = COG_kitawala_is_angry
+		}
+	}
+
+	option = { #No way
+		name = congo_tour.3.b
+		ai_chance = { base = 100 }
+
+		custom_effect_tooltip = congo_tour.3.b_custom
+		add_stability = -0.02
+		add_political_power = 10
+		hidden_effect = {
+			clr_country_flag = COG_security_2
+			set_country_flag = COG_kamina
+			set_country_flag = COG_security_1
+			set_country_flag = COG_kitawala_is_angry
+		}
+	}
+}
+
+#Kamina
+country_event = {
+	id = congo_tour.4
+	title = congo_tour.4.t
+	desc = congo_tour.4.d
+	picture = GFX_report_event_spr_army_of_africa
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = COG_ryckmans_in_kamina
+		}
+	}
+
+	option = { #go to Elisabethville
+		name = congo_tour.4.a
+
+		custom_effect_tooltip = congo_tour.elisabethville
+		trigger = {
+			has_country_flag = COG_short_tour_flag
+		}
+		ai_chance = { base = 100 }
+
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		hidden_effect = {
+			country_event = { id = congo_tour.8 days = 30 }
+			clr_country_flag = COG_security_2
+		}
+	}
+
+	option = { #go to Kabalo
+		name = congo_tour.4.b
+		trigger = {
+			has_country_flag = COG_long_tour_flag
+		}
+		ai_chance = { base = 1 }
+
+		custom_effect_tooltip = congo_tour.kabalo
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		hidden_effect = {
+			clr_country_flag = COG_kamina
+			country_event = { id = congo_tour.9 days = 30 }
+		}
+	}
+
+	option = { #assasination
+		name = congo_tour.4.c
+		trigger = {
+			has_country_flag = COG_kitawala
+		}
+		ai_chance = { base = 1 }
+
+		random_list = {
+			15 = {
+				country_event = { id = congo_tour.5 hours = 6 }
+				modifier = {
+					add = -1
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_2
+					}
+				}
+				modifier = {
+					add = -2
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_3
+					}
+				}
+			}
+			2 = {
+				modifier = {
+					add = -3
+					has_country_flag = {
+						flag = COG_security_1
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_security_2
+					}
+				}
+				modifier = {
+					add = 3
+					has_country_flag = {
+						flag = COG_security_3
+					}
+				}
+				modifier = {
+					add = 1
+					has_country_flag = {
+						flag = COG_security_3
+						flag = COG_kitawala_is_angry
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_security_3
+						flag = COG_kitawala_is_angry_2
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_security_3
+						flag = COG_kitawala_is_angry_3
+					}
+				}
+				country_event = { id = congo_tour.6 hours = 6 }
+			}
+			3 = {
+				modifier = {
+					add = 1
+					has_country_flag = {
+						flag = COG_kitawala_is_angry
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_2
+					}
+				}
+				modifier = {
+					add = 3
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_3
+					}
+				}
+				country_event = { id = congo_tour.7 hours = 6 }
+			}
+		}
+	}
+}
+
+#assasination blocked Kamina
+country_event = {
+	id = congo_tour.5
+	title = congo_tour.5.t
+	desc = congo_tour.5.d
+	picture = GFX_report_event_czech_soldiers_01
+
+	is_triggered_only = yes
+
+	option = { #go to Kabalo
+		name = congo_tour.5.a
+		ai_chance = { base = 1 }
+
+		custom_effect_tooltip = congo_tour.kabalo
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		add_stability = -0.02
+		hidden_effect = {
+			clr_country_flag = COG_kamina
+			set_country_flag = COG_crazy
+			country_event = { id = congo_tour.9 days = 30 }
+		}
+	}
+}
+
+#assasination failed
+country_event = {
+	id = congo_tour.6
+	title = congo_tour.6.t
+	desc = congo_tour.6.d
+	picture = GFX_report_event_japanese_soldiers_02
+
+	is_triggered_only = yes
+
+	option = { #go to home
+		name = congo_tour.6.a
+		ai_chance = { base = 100 }
+
+		add_stability = -0.1
+		hidden_effect = {
+			clr_country_flag = COG_kamina
+			set_country_flag = COG_tour_is_ended
+			set_country_flag = COG_assasination_failed
+		}
+	}
+}
+
+#assasination succesful
+country_event = {
+	id = congo_tour.7
+	title = congo_tour.7.t
+	desc = congo_tour.7.d
+	picture = GFX_report_event_gre_political_upheaval
+
+	is_triggered_only = yes
+
+	option = { #goodbye
+		name = congo_tour.7.a
+		ai_chance = { base = 100 }
+		retire_country_leader = yes
+		promote_character = COG_Colonial_Council
+		add_stability = -0.10
+		hidden_effect = {
+			clr_country_flag = COG_kamina
+			set_country_flag = COG_tour_is_ended
+			set_country_flag = COG_assasination_sucsessful
+		}
+	}
+}
+
+#tour ended in elisabethville
+country_event = {
+	id = congo_tour.8
+	title = congo_tour.8.t
+	desc = congo_tour.8.d
+	picture = GFX_report_event_tanks_mexico_city
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = COG_ryckmans_in_elisabethville
+		}
+	}
+
+	option = { #End of the Tour
+		name = congo_tour.8.a
+		ai_chance = { base = 1 }
+
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		add_stability = 0.05
+		add_offsite_building = { type = industrial_complex level = 1 }
+
+		hidden_effect = {
+			set_country_flag = COG_governor_is_alive
+			set_country_flag = COG_tour_is_ended
+		}
+	}
+}
+
+#Kabalo
+country_event = {
+	id = congo_tour.9
+	title = congo_tour.9.t
+	desc = congo_tour.9.d
+	picture = GFX_report_event_gre_greek_cavalry
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = COG_ryckmans_in_kabalo
+		}
+	}
+
+	option = { #go to Stanleyville
+		name = congo_tour.9.a
+		ai_chance = { base = 1 }
+
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		country_event = { id = congo_tour.11 days = 30 }
+	}
+
+	option = { #go to Stanleyville
+		name = congo_tour.9.b
+		ai_chance = { base = 1 }
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		custom_effect_tooltip = COG_church_tt
+		set_country_flag = COG_church
+		country_event = { id = congo_tour.11 days = 30 }
+	}
+
+	option = { #assasination
+		name = congo_tour.9.c
+		trigger = {
+			has_country_flag = COG_kitawala
+		}
+		ai_chance = { base = 1 }
+
+		random_list = {
+			13 = {
+				modifier = {
+					add = -1
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_2
+					}
+				}
+				modifier = {
+					add = -2
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_3
+					}
+				}
+				country_event = { id = congo_tour.10 hours = 6 }
+			}
+			4 = {
+				modifier = {
+					add = -3
+					has_country_flag = {
+						flag = COG_security_1
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_security_2
+					}
+				}
+				modifier = {
+					add = 3
+					has_country_flag = {
+						flag = COG_security_3
+					}
+				}
+				modifier = {
+					add = 1
+					has_country_flag = {
+						flag = COG_security_3
+						flag = COG_kitawala_is_angry
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_security_3
+						flag = COG_kitawala_is_angry_2
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_security_3
+						flag = COG_kitawala_is_angry_3
+					}
+				}
+				country_event = { id = congo_tour.6 hours = 6 }
+			}
+			4 = {
+				modifier = {
+					add = 1
+					has_country_flag = {
+						flag = COG_kitawala_is_angry
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_2
+					}
+				}
+				modifier = {
+					add = 3
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_3
+					}
+				}
+				country_event = { id = congo_tour.7 hours = 6 }
+			}
+		}
+	}
+}
+
+#assasination blocked Kabalo
+country_event = {
+	id = congo_tour.10
+	title = congo_tour.10.t
+	desc = congo_tour.10.d
+	picture = GFX_report_event_SOV_mongolia_cavalry
+
+	is_triggered_only = yes
+
+	option = { #go to Stanleyville
+		name = congo_tour.10.a
+		ai_chance = { base = 1 }
+
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		country_event = { id = congo_tour.11 days = 30 }
+		hidden_effect = {
+			set_country_flag = COG_crazy_2
+		}
+	}
+}
+
+#Stanleyville
+country_event = {
+	id = congo_tour.11
+	title = congo_tour.11.t
+	desc = congo_tour.11.d
+	picture = GFX_report_event_por_return_of_the_monarchy
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = COG_ryckmans_in_stanleyville
+		}
+	}
+
+	option = { #End
+		name = congo_tour.11.a
+		ai_chance = { base = 1 }
+
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		hidden_effect = {
+			set_country_flag = COG_governor_is_alive
+			set_country_flag = COG_tour_is_ended
+		}
+	}
+
+	option = { #assasination
+		name = congo_tour.11.b
+		trigger = {
+			has_country_flag = COG_kitawala
+		}
+		ai_chance = { base = 1 }
+
+		random_list = {
+			11 = {
+				modifier = {
+					add = -1
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_2
+					}
+				}
+				modifier = {
+					add = -2
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_3
+					}
+				}
+				country_event = { id = congo_tour.12 hours = 6 }
+			}
+			4 = {
+				modifier = {
+					add = -3
+					has_country_flag = {
+						flag = COG_security_1
+					}
+				}
+				modifier = {
+					add = 1
+					has_country_flag = {
+						flag = COG_security_2
+					}
+				}
+				modifier = {
+					add = 3
+					has_country_flag = {
+						flag = COG_security_3
+					}
+				}
+				modifier = {
+					add = 1
+					has_country_flag = {
+						flag = COG_security_3
+						flag = COG_kitawala_is_angry
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_security_3
+						flag = COG_kitawala_is_angry_2
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_security_3
+						flag = COG_kitawala_is_angry_3
+					}
+				}
+				country_event = { id = congo_tour.6 hours = 6 }
+			}
+			4 = {
+				modifier = {
+					add = 1
+					has_country_flag = {
+						flag = COG_kitawala_is_angry
+					}
+				}
+				modifier = {
+					add = 2
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_2
+					}
+				}
+				modifier = {
+					add = 3
+					has_country_flag = {
+						flag = COG_kitawala_is_angry_3
+					}
+				}
+				country_event = { id = congo_tour.7 hours = 6 }
+			}
+		}
+	}
+}
+
+#assasination blocked Stanleyville
+country_event = {
+	id = congo_tour.12
+	title = congo_tour.12.t
+	desc = congo_tour.12.d
+	picture = GFX_report_event_tur_kurds_traditionalists_thwarted
+
+	is_triggered_only = yes
+
+	option = { #End of the Tour
+		name = congo_tour.12.a
+		ai_chance = { base = 1 }
+
+		if = {
+			limit = {
+				has_country_flag = COG_tour_good_place
+			}
+			custom_effect_tooltip = congo_tour.good_tour_tooltip
+			add_stability = 0.05
+			clr_country_flag = COG_tour_good_place
+		}
+		add_stability = 0.05
+		hidden_effect = {
+			if = {
+				limit = {
+					AND = {
+						has_country_flag = COG_crazy
+						has_country_flag = COG_crazy_2
+					}
+				}
+				country_event = { id = congo_tour.13 hours = 6 }
+			}
+		}
+		hidden_effect = {
+			set_country_flag = COG_governor_is_alive
+			set_country_flag = COG_tour_is_ended
+		}
+	}
+}
+
+country_event = {
+	id = congo_tour.13
+	title = congo_tour.13.t
+	desc = congo_tour.13.d
+	picture = GFX_report_event_tur_kurds_traditionalists_thwarted
+
+	is_triggered_only = yes
+
+	option = { #End of the Tour
+		name = congo_tour.13.a
+		ai_chance = { base = 1 }
+		create_country_leader = {
+			name = "Gorilla"
+			picture = "gfx/leaders/COG/COG_gorilla.dds"
+			expire = "1965.1.1"
+			ideology = despotism
+			traits = {
+			}
+		}
+		create_corps_commander = {
+			name = "Great Commender Mahmood"
+			picture = "COG_monkey.dds"
+			traits = { trickster brilliant_strategist }
+			skill = 4
+			attack_skill = 5
+			defense_skill = 2
+			planning_skill = 4
+			logistics_skill = 3
+		}
+	}
+}
+
+#DEMOCRATIC
+
+#to belgium
+country_event = {
+	id = congo_dem.1
+	title = congo_dem.1.t
+	desc = congo_dem.1.d
+	picture = GFX_report_event_SOV_purge_administration
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.1.a
+		ai_chance = { base = 1 }
+		add_political_power = -30
+		custom_effect_tooltip = COG_dem.1.a_custom
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_dem.2 days = 1 }
+			}
+		}
+	}
+}
+
+#reach brussless
+country_event = {
+	id = congo_dem.2
+	title = congo_dem.2.t
+	desc = congo_dem.2.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.2.a
+		ai_chance = { base = 1 }
+		hidden_effect = {
+			retire_country_leader = yes
+		}
+		promote_character = COG_Octave_Louwers
+		add_stability = 0.05
+		country_event = { id = congo_dem.3 days = 10 }
+	}
+}
+
+#crate political Emancipation
+country_event = {
+	id = congo_dem.3
+	title = congo_dem.3.t
+	desc = congo_dem.3.d
+	picture = GFX_report_event_hol_polderen
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.3.a
+		ai_chance = { base = 1 }
+		add_popularity = {
+			ideology = democratic
+			popularity = 0.1
+		}
+		add_ideas = COG_democrasies_idea
+		country_event = { id = congo_dem.4 days = 20 }
+	}
+}
+
+#found of abako
+country_event = {
+	id = congo_dem.4
+	title = congo_dem.4.t
+	desc = congo_dem.4.d
+	picture = GFX_report_event_DEN_danish_politics
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.4.a
+		ai_chance = { base = 1 }
+		set_country_flag = COG_abako_founded
+		set_party_name = {
+			ideology = democratic
+			long_name = COG_abako_long
+			name = COG_abako
+		}
+	}
+}
+
+#to belgium union law
+country_event = {
+	id = congo_dem.5
+	title = congo_dem.5.t
+	desc = congo_dem.5.d
+	picture = GFX_report_event_poland_funeral
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.5.a
+		ai_chance = { base = 100 }
+		add_stability = 0.05
+		add_political_power = 10
+		custom_effect_tooltip = COG_dem.5.a_custom
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_dem.6 days = 1 }
+			}
+		}
+	}
+	option = {
+		name = congo_dem.5.b
+		add_stability = -0.10
+		add_political_power = -60
+		custom_effect_tooltip = COG_dem.5.b_custom
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_dem.7 days = 1 }
+			}
+		}
+	}
+}
+
+#good
+country_event = {
+	id = congo_dem.6
+	title = congo_dem.6.t
+	desc = congo_dem.6.d
+	picture = GFX_report_event_canada_patriation
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.6.a
+		set_country_flag = COG_union_flag
+		set_cosmetic_tag = COG_union
+		add_stability = 0.1
+		add_political_power = 50
+		swap_ideas = {
+			add_idea = civilian_economy
+			remove_idea = COG_free_trade_zone
+		}
+	}
+
+	option = {
+		name = congo_dem.6.b
+		add_stability = 0.1
+		add_political_power = 50
+		OVERLORD = {
+			set_autonomy = {
+				target = COG
+				autonomy_state = autonomy_free
+			}
+		}
+		add_stability = -0.10
+		create_country_leader = {
+			name = "Octave Louwers"
+			desc = ""
+			picture = "gfx/leaders/COG/Portrait_Octave_louwers.dds"
+			expire = "1965.1.1"
+			ideology = liberalism
+			traits = {
+			}
+		}
+		start_civil_war = {
+			ruling_party = democratic
+			ideology = neutrality
+			size = 0.60
+			states = {
+				295 538
+			}
+			capital = 295
+			keep_political_leader = yes
+			keep_political_party_members = yes
+		}
+		remove_ideas = COG_leopold_iii_idea
+		hidden_effect = {
+			889 = {
+				add_victory_points = {
+					province = 191
+					value = 15
+				}
+			}
+			add_ideas = COG_death_before_surrender_capitulation
+			set_country_flag = COG_union_denied_flag
+			set_country_flag = COG_coup
+			set_cosmetic_tag = COG_cog
+			random_other_country = {
+				limit = {
+					original_tag = COG
+					has_government = neutrality
+				}
+				remove_ideas = COG_Casement_Report
+				set_cosmetic_tag = COG_deli
+				create_country_leader = {
+					name = "Emile Janssens"
+					desc = ""
+					picture = "gfx/leaders/COG/Portrait_Baptiste_Agos.dds"
+					expire = "1965.1.1"
+					ideology = colonial_government
+					traits = {
+					}
+				}
+			}
+		}
+		swap_ideas = {
+			add_idea = partial_economic_mobilisation
+			remove_idea = COG_free_trade_zone
+		}
+	}
+}
+
+#denied
+country_event = {
+	id = congo_dem.7
+	title = congo_dem.7.t
+	desc = congo_dem.7.d
+	picture = GFX_report_event_tur_political_rally
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.7.a
+		set_country_flag = COG_union_denied_flag
+		create_country_leader = {
+			name = "Eugène Jungers"
+			desc = ""
+			picture = "gfx/leaders/COG/Eugene_Jungers.dds"
+			expire = "1965.1.1"
+			ideology = despotism
+			traits = {
+			}
+		}
+		add_popularity = { ideology = communism popularity = 0.15 }
+		swap_ideas = {
+			add_idea = civilian_economy
+			remove_idea = COG_free_trade_zone
+		}
+	}
+
+	option = {
+		name = congo_dem.7.b
+		set_country_flag = COG_union_denied_flag
+		OVERLORD = {
+			set_autonomy = {
+				target = COG
+				autonomy_state = autonomy_free
+			}
+		}
+		add_stability = -0.10
+		create_country_leader = {
+			name = "Jean Bolikango"
+			desc = ""
+			picture = "gfx/leaders/COG/Jean_Bolikango.dds"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+			}
+		}
+		start_civil_war = {
+			ruling_party = democratic
+			ideology = neutrality
+			size = 0.60
+			states = {
+				295 888 538
+			}
+			capital = 295
+			keep_political_leader = yes
+			keep_political_party_members = yes
+		}
+		remove_ideas = COG_leopold_iii_idea
+		hidden_effect = {
+			add_ideas = COG_death_before_surrender_capitulation
+			889 = {
+				add_victory_points = {
+					province = 191
+					value = 15
+				}
+			}
+			set_cosmetic_tag = COG_free
+			random_other_country = {
+				limit = {
+					original_tag = COG
+					has_government = neutrality
+				}
+				remove_ideas = COG_Casement_Report
+				set_cosmetic_tag = COG_deli
+				create_country_leader = {
+					name = "Eugène Jungers"
+					desc = ""
+					picture = "gfx/leaders/COG/Eugene_Jungers.dds"
+					expire = "1965.1.1"
+					ideology = despotism
+					traits = {
+					}
+				}
+			}
+		}
+		swap_ideas = {
+			add_idea = partial_economic_mobilisation
+			remove_idea = COG_free_trade_zone
+		}
+	}
+
+}
+
+#gitme sana muhtacim
+country_event = {
+	id = congo_dem.8
+	title = congo_dem.8.t
+	desc = congo_dem.8.d
+	picture = GFX_report_event_canada_patriation
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.8.a
+		BEL ={
+			end_puppet = COG
+		}
+	}
+}
+
+#election
+country_event = {
+	id = congo_dem.9
+	title = congo_dem.9.t
+	desc = congo_dem.9.d
+	picture = GFX_report_event_election_vote
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.9.a
+		set_party_name = {
+			ideology = democratic
+			long_name = COG_chr_dem_long
+			name = COG_chr_dem
+		}
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+			election_frequency = 60
+		}
+		COG_Octave_Louwers = {
+			remove_country_leader_role = {
+				ideology = moderatism
+			}
+			add_country_leader_role = {
+				character = COG_Octave_Louwers
+				country_leader = {
+					expire = "1965.1.1"
+					ideology = liberalism
+					traits = {
+						ICE_judge_and_editor
+					}
+				}
+				promote_leader = yes
+			}
+		}
+		custom_effect_tooltip = COG_dem.9.a_custom
+		hidden_effect = {
+			set_party_name = {
+				ideology = neutrality
+				long_name = COG_abako_long
+				name = COG_abako
+			}
+			create_country_leader = {
+				name = "Jean Bolikango"
+				desc = ""
+				picture = "gfx/leaders/COG/Jean_Bolikango.dds"
+				expire = "1965.1.1"
+				ideology = despotism
+				traits = {
+					modernizer_and_diplomat
+				}
+			}
+		}
+	}
+
+	option = {
+		name = congo_dem.9.b
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = no
+			election_frequency = 60
+		}
+		create_country_leader = {
+			name = "Jean Bolikango"
+			desc = ""
+			picture = "gfx/leaders/COG/Jean_Bolikango.dds"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+				modernizer_and_diplomat
+			}
+		}
+		set_party_name = {
+			ideology = neutrality
+			long_name = COG_chr_dem_long
+			name = COG_chr_dem
+		}
+	}
+}
+
+#English
+
+country_event = {
+	id = congo_dem.10
+	title = congo_dem.10.t
+	desc = congo_dem.10.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.10.a
+		custom_effect_tooltip = congo_dem.10.a_tt
+		hidden_effect = {
+			ENG = {
+				puppet = COG
+			}
+			COG = {
+				country_event = { id = congo_dem.11 }
+				add_popularity = { ideology = democratic popularity = -1.0 }
+				set_party_name = {
+					ideology = neutrality
+					long_name = COG_eng_party
+					name = COG_eng_party
+				}
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = no
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_dem.11
+	title = congo_dem.11.t
+	desc = congo_dem.11.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.11.a
+		add_stability = 0.10
+	}
+}
+
+country_event = {
+	id = congo_dem.12
+	title = congo_dem.12.t
+	desc = congo_dem.12.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.12.a
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_dem.13 }
+			}
+		}
+	}
+
+	option = {
+		name = congo_dem.12.b
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_dem.14 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_dem.13
+	title = congo_dem.13.t
+	desc = congo_dem.13.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.13.a
+		set_cosmetic_tag = COG_ENG_mid
+		if = {
+			limit = {
+				ENG = { owns_state = 546 }
+			}
+			transfer_state = 546
+			hidden_effect = {
+				546 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 905 }
+			}
+			transfer_state = 905
+			hidden_effect = {
+				905 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 903 }
+			}
+			transfer_state = 903
+			hidden_effect = {
+				903 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 547 }
+			}
+			transfer_state = 547
+			hidden_effect = {
+				547 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 904 }
+			}
+			transfer_state = 904
+			hidden_effect = {
+				904 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 548 }
+			}
+			transfer_state = 548
+			hidden_effect = {
+				548 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 771 }
+			}
+			transfer_state = 771
+			hidden_effect = {
+				771 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 770 }
+			}
+			transfer_state = 770
+			hidden_effect = {
+				770 = {
+					add_core_of = COG
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_dem.14
+	title = congo_dem.14.t
+	desc = congo_dem.14.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.14.a
+		add_stability = -0.05
+	}
+}
+
+country_event = {
+	id = congo_dem.15
+	title = congo_dem.15.t
+	desc = congo_dem.15.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.15.a
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_dem.16 }
+			}
+		}
+	}
+
+	option = {
+		name = congo_dem.15.b
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_dem.14 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_dem.16
+	title = congo_dem.16.t
+	desc = congo_dem.16.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.16.a
+		if = {
+			limit = {
+				ENG = { owns_state = 885 }
+			}
+			transfer_state = 885
+			hidden_effect = {
+				885 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 884 }
+			}
+			transfer_state = 884
+			hidden_effect = {
+				884 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 887 }
+			}
+			transfer_state = 887
+			hidden_effect = {
+				887 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 549 }
+			}
+			transfer_state = 549
+			hidden_effect = {
+				549 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 886 }
+			}
+			transfer_state = 886
+			hidden_effect = {
+				886 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 551 }
+			}
+			transfer_state = 551
+			hidden_effect = {
+				551 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 883 }
+			}
+			transfer_state = 883
+			hidden_effect = {
+				883 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				ENG = { owns_state = 767 }
+			}
+			transfer_state = 767
+			hidden_effect = {
+				767 = {
+					add_core_of = COG
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_dem.17
+	title = congo_dem.17.t
+	desc = congo_dem.17.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_dem.17.a
+		OVERLORD = {
+			set_autonomy = {
+				target = COG
+				autonomy_state = autonomy_free
+			}
+		}
+		add_stability = 0.15
+		add_popularity = { ideology = communism popularity = 0.20 }
+		start_civil_war = {
+			ruling_party = communism
+			ideology = democratic
+			size = 0.20
+			states = {
+				295 888 889
+			}
+			capital = 295
+			keep_political_leader = yes
+			keep_political_party_members = yes
+		}
+		remove_ideas = COG_leopold_iii_idea
+		swap_ideas = {
+			add_idea = partial_economic_mobilisation
+			remove_idea = COG_free_trade_zone
+		}
+		hidden_effect = {
+			create_country_leader = {
+				name = "André Matsoua"
+				desc = ""
+				picture = "gfx/leaders/COG/COG_andre_Matsoua.dds"
+				expire = "1965.1.1"
+				ideology = stalinism
+				traits = {
+				}
+			}
+			set_cosmetic_tag = COG_free
+		}
+	}
+}
+
+#Escape
+
+country_event = {
+	id = congo_escape.1
+	title = congo_escape.1.t
+	desc = congo_escape.1.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.1.a
+		custom_effect_tooltip = congo_escape.1.a_tt
+		hidden_effect = {
+			FRA = {
+				puppet = COG
+			}
+			COG = {
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = no
+				}
+				COG = {
+					add_popularity = { ideology = democratic popularity = -1.0 }
+				}
+			}
+		}
+	}
+
+	option = {
+		name = congo_escape.1.b
+		trigger = {
+			has_government = democratic
+		}
+		custom_effect_tooltip = congo_escape.1.b_tt
+		hidden_effect = {
+			FRA = {
+				puppet = COG
+			}
+			COG = {
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+				}
+				set_party_name = {
+					ideology = democratic
+					long_name = COG_TEK_long
+					name = COG_TEK
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.2
+	title = congo_escape.2.t
+	desc = congo_escape.2.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.2.a
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_escape.3 }
+			}
+		}
+	}
+
+	option = {
+		name = congo_escape.2.b
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_escape.4 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.3
+	title = congo_escape.3.t
+	desc = congo_escape.3.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.3.a
+		set_cosmetic_tag = COG_FRA_kingdom
+		if = {
+			limit = {
+				FRA = { owns_state = 660 }
+			}
+			transfer_state = 660
+			hidden_effect = {
+				660 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				FRA = { owns_state = 772 }
+			}
+			transfer_state = 772
+			hidden_effect = {
+				772 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				FRA = { owns_state = 539 }
+			}
+			transfer_state = 539
+			hidden_effect = {
+				539 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				FRA = { owns_state = 773 }
+			}
+			transfer_state = 773
+			hidden_effect = {
+				773 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				FRA = { owns_state = 774 }
+			}
+			transfer_state = 774
+			hidden_effect = {
+				774 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				FRA = { owns_state = 297 }
+			}
+			transfer_state = 297
+			hidden_effect = {
+				297 = {
+					add_core_of = COG
+				}
+			}
+		}
+		if = {
+			limit = {
+				FRA = { owns_state = 796 }
+			}
+			transfer_state = 796
+			hidden_effect = {
+				796 = {
+					add_core_of = COG
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.4
+	title = congo_escape.4.t
+	desc = congo_escape.4.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.4.a
+		add_stability = -0.05
+	}
+}
+
+country_event = {
+	id = congo_escape.5
+	title = congo_escape.5.t
+	desc = congo_escape.5.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.5.a
+		COG = {
+			country_event = { id = congo_escape.6 }
+		}
+	}
+
+	option = {
+		name = congo_escape.5.b
+		COG = {
+			country_event = { id = congo_escape.7 }
+			add_stability = -0.05
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.6
+	title = congo_escape.6.t
+	desc = congo_escape.6.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.6.a
+		FRA= {
+			every_owned_state = {
+				limit = {
+					is_on_continent = africa
+				}
+				COG = {
+					transfer_state = PREV
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.7
+	title = congo_escape.7.t
+	desc = congo_escape.7.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.7.a
+		add_stability = -0.10
+	}
+}
+
+country_event = {
+	id = congo_escape.8
+	title = congo_escape.8.t
+	desc = congo_escape.8.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.8.a
+		custom_effect_tooltip = congo_escape.8.a_tt
+		hidden_effect = {
+			COG = {
+				country_event = { id = congo_escape.9 }
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.9
+	title = congo_escape.9.t
+	desc = congo_escape.9.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.9.a
+		add_stability = -0.10
+		ITA = {
+			puppet = COG
+		}
+		create_country_leader = {
+			name = "Rodolfo Graziani"
+			picture = "gfx/leaders/ITA/portrait_italy_radolfo_graziani.dds"
+			expire = "1965.1.1"
+			ideology = fascism
+			traits = {
+			}
+		}
+		hidden_effect = {
+			COG = {
+				set_party_name = {
+					ideology = fascism
+					long_name = COG_ita_party
+					name = COG_ita_party
+				}
+			}
+			COG = {
+				set_politics = {
+					ruling_party = fascism
+					elections_allowed = no
+				}
+				COG = {
+					add_popularity = { ideology = democratic popularity = -1.0 }
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.10
+	title = congo_escape.10.t
+	desc = congo_escape.10.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.10.a
+		COG = {
+			country_event = { id = congo_escape.11 }
+		}
+	}
+
+	option = {
+		name = congo_escape.10.b
+		trigger = {
+			271 = {
+				is_owned_and_controlled_by = YEM
+			}
+		}
+		YEM = {
+			country_event = { id = congo_escape.12 }
+		}
+	}
+
+	option = {
+		name = congo_escape.10.b
+		COG = {
+			country_event = { id = congo_escape.15 }
+			add_stability = -0.05
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.11
+	title = congo_escape.11.t
+	desc = congo_escape.11.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.11.a
+		ITA = {
+			every_owned_state = {
+				limit = {
+					OR = {
+						is_core_of = ETH
+						is_core_of = ERI
+						is_core_of = SOM
+					}
+				}
+				COG = {
+					transfer_state = PREV
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.12
+	title = congo_escape.12.t
+	desc = congo_escape.12.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.12.a
+		COG = {
+			country_event = { id = congo_escape.13 }
+		}
+		ITA = {
+			country_event = { id = congo_escape.13 }
+		}
+	}
+	option = {
+		name = congo_escape.12.b
+		COG = {
+			country_event = { id = congo_escape.14 }
+			add_stability = -0.05
+		}
+		ITA = {
+			country_event = { id = congo_escape.14 }
+			add_stability = -0.05
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.13
+	title = congo_escape.13.t
+	desc = congo_escape.13.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.11.a
+		if = {
+			limit = {
+				YEM = { owns_state = 844 }
+			}
+			COG = {
+				transfer_state = 844
+			}
+		}
+		if = {
+			limit = {
+				YEM = { owns_state = 835 }
+			}
+			COG = {
+				transfer_state = 835
+			}
+		}
+		if = {
+			limit = {
+				YEM = { owns_state = 836 }
+			}
+			COG = {
+				transfer_state = 836
+			}
+		}
+		if = {
+			limit = {
+				YEM = { owns_state = 837 }
+			}
+			COG = {
+				transfer_state = 837
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.14
+	title = congo_escape.14.t
+	desc = congo_escape.14.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.14.a
+	}
+}
+
+country_event = {
+	id = congo_escape.15
+	title = congo_escape.15.t
+	desc = congo_escape.15.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.15.a
+	}
+}
+
+country_event = {
+	id = congo_escape.16
+	title = congo_escape.16.t
+	desc = congo_escape.16.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.16.a
+		COG = {
+			country_event = { id = congo_escape.17 }
+		}
+	}
+	option = {
+		name = congo_escape.16.b
+		COG = {
+			country_event = { id = congo_escape.18 }
+			add_stability = -0.05
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.17
+	title = congo_escape.17.t
+	desc = congo_escape.17.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.17.a
+		if = {
+			limit = {
+				OR = {
+					ITA = { owns_state = 273 }
+					LBA = { owns_state = 273 }
+				}
+			}
+			273 = {
+				add_core_of = COG
+			}
+			COG = {
+				transfer_state = 273
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					ITA = { owns_state = 663 }
+					LBA = { owns_state = 663 }
+				}
+			}
+			663 = {
+				add_core_of = COG
+			}
+			COG = {
+				transfer_state = 663
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					ITA = { owns_state = 451 }
+					LBA = { owns_state = 451 }
+				}
+			}
+			451 = {
+				add_core_of = COG
+			}
+			COG = {
+				transfer_state = 451
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					ITA = { owns_state = 450 }
+					LBA = { owns_state = 450 }
+				}
+			}
+			450 = {
+				add_core_of = COG
+			}
+			COG = {
+				transfer_state = 450
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					ITA = { owns_state = 449 }
+					LBA = { owns_state = 449 }
+				}
+			}
+			449 = {
+				add_core_of = COG
+			}
+			COG = {
+				transfer_state = 449
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					ITA = { owns_state = 662 }
+					LBA = { owns_state = 662 }
+				}
+			}
+			662 = {
+				add_core_of = COG
+			}
+			COG = {
+				transfer_state = 662
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					ITA = { owns_state = 661 }
+					LBA = { owns_state = 661 }
+				}
+			}
+			661 = {
+				add_core_of = COG
+			}
+			COG = {
+				transfer_state = 661
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					ITA = { owns_state = 448 }
+					LBA = { owns_state = 448 }
+				}
+			}
+			448 = {
+				add_core_of = COG
+			}
+			COG = {
+				transfer_state = 448
+			}
+		}
+	}
+}
+
+country_event = {
+	id = congo_escape.18
+	title = congo_escape.18.t
+	desc = congo_escape.18.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = congo_escape.18.a
+		COG = {
+			country_event = { id = congo_escape.18 }
+		}
+	}
+}

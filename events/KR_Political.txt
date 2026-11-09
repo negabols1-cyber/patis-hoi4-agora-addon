@@ -1,0 +1,202 @@
+﻿###########################
+# Political Events
+###########################
+# By Kallar, Nijato, Sir Rogers, Zankoas and ~mw~
+###########################
+
+add_namespace = kr.political
+
+##################################
+###   Demobilization Events    ###
+##################################
+
+# Check after a war whether we should be demobilizing
+country_event = {
+	id = kr.political.120
+	immediate = { log = "[GetDateText]: [Root.GetName]: event kr.political.120 FROM = [From.GetName]" }
+
+	hidden = yes
+	is_triggered_only = yes
+
+	trigger = {
+		is_ai = yes
+		has_war = no
+		OR = {
+			has_unsupported_economic_law_ai = yes
+			has_unsupported_manpower_law_ai = yes
+		}
+		NOT = {
+			has_global_flag = KR_no_demob
+			any_other_country = {
+				OR = {
+					is_justifying_wargoal_against = ROOT
+					has_wargoal_against = ROOT
+					ROOT = { is_justifying_wargoal_against = PREV }
+					ROOT = { has_wargoal_against = PREV }
+				}
+			}
+		}
+	}
+
+	immediate = {
+		clr_country_flag = has_demobilization_check
+		if = {
+			limit = {
+				has_unsupported_economic_law_ai = yes
+				has_unattained_important_goals = no
+				has_war_support < 0.25
+			}
+			if = {
+				limit = { has_idea = tot_economic_mobilisation }
+				add_political_power = 200
+			}
+			else_if = {
+				limit = { has_idea = war_economy }
+				add_political_power = 150
+			}
+			else_if = {
+				limit = { has_idea = partial_economic_mobilisation }
+				add_political_power = 100
+			}
+			else = {
+				add_political_power = 50
+			}
+			add_ideas = civilian_economy
+		}
+		else_if = {
+			limit = {
+				has_unsupported_economic_law_ai = yes
+				has_unattained_important_goals = no
+				has_war_support < 0.50
+			}
+			if = {
+				limit = { has_idea = tot_economic_mobilisation }
+				add_political_power = 150
+			}
+			else_if = {
+				limit = { has_idea = war_economy }
+				add_political_power = 100
+			}
+			else = {
+				add_political_power = 50
+			}
+			add_ideas = low_economic_mobilisation
+		}
+		else_if = {
+			limit = { has_unsupported_economic_law_ai = yes }
+			if = {
+				limit = { has_idea = tot_economic_mobilisation }
+				add_political_power = 100
+			}
+			else = {
+				add_political_power = 50
+			}
+			add_ideas = partial_economic_mobilisation
+		}
+
+		if = {
+			limit = {
+				has_unsupported_manpower_law_ai = yes
+				has_unattained_important_goals = no
+				OR = {
+					has_war_support < 0.25
+					has_government = democratic #social_liberal ✖ MODDED BY KEN
+					#has_government = market_liberal ✖ MODDED BY KEN
+					#has_government = social_democrat ✖ MODDED BY KEN
+				}
+			}
+			if = {
+				limit = { has_idea = scraping_the_barrel }
+				add_political_power = 250
+			}
+			else_if = {
+				limit = { has_idea = all_adults_serve }
+				add_political_power = 200
+			}
+			else_if = {
+				limit = { has_idea = service_by_requirement }
+				add_political_power = 150
+			}
+			else_if = {
+				limit = { has_idea = extensive_conscription }
+				add_political_power = 100
+			}
+			else = {
+				add_political_power = 50
+			}
+			add_ideas = volunteer_only
+		}
+		else_if = {
+			limit = {
+				has_unsupported_manpower_law_ai = yes
+				has_unattained_important_goals = no
+				has_war_support < 0.50
+			}
+			if = {
+				limit = { has_idea = scraping_the_barrel }
+				add_political_power = 200
+			}
+			else_if = {
+				limit = { has_idea = all_adults_serve }
+				add_political_power = 150
+			}
+			else_if = {
+				limit = { has_idea = service_by_requirement }
+				add_political_power = 100
+			}
+			else = {
+				add_political_power = 50
+			}
+			add_ideas = limited_conscription
+		}
+		else_if = {
+			limit = { has_unsupported_manpower_law_ai = yes }
+			if = {
+				limit = { has_idea = scraping_the_barrel }
+				add_political_power = 150
+			}
+			else_if = {
+				limit = { has_idea = all_adults_serve }
+				add_political_power = 100
+			}
+			else = {
+				add_political_power = 50
+			}
+			add_ideas = extensive_conscription
+		}
+
+		if = {
+			limit = {
+				NOT = { has_country_flag = has_reduce_units_check }
+			}
+			set_country_flag = has_reduce_units_check
+			country_event = { id = kr.political.121 days = 4 random = 96 }
+		}
+	}
+}
+
+# Repeated check for whether an AI country should reduce its number of units
+country_event = {
+	id = kr.political.121
+
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+		log = "[GetLogInfo]: event kr.political.121 option 1"
+		if = {
+			limit = {
+				has_exceeded_maximum_divisions = yes
+				is_ai = yes
+				NOT = { has_game_rule = { rule = unit_limit_options option = NONE } }
+				ROOT_is_threatened_cautious = no
+				has_unattained_important_goals = no
+			}
+			disband_one_to_three_divisions = yes
+			country_event = { id = kr.political.121 days = 7 random_hours = 72 }
+		}
+		else = {
+			clr_country_flag = has_reduce_units_check
+		}
+	}
+}

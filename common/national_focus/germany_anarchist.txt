@@ -1,0 +1,1399 @@
+﻿# ### search_filters = {FOCUS_FILTER_POLITICAL}
+# ### search_filters = {FOCUS_FILTER_RESEARCH}
+# ### search_filters = {FOCUS_FILTER_INDUSTRY}
+# ### search_filters = {FOCUS_FILTER_STABILITY}
+# ### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+# ### search_filters = {FOCUS_FILTER_MANPOWER}
+# ### search_filters = {FOCUS_FILTER_ANNEXATION}
+
+# focus_tree = {
+	# 	id = german_anarch
+
+	# 	country = {
+		# 		factor = 0
+
+		# 		modifier = {
+			# 			add = 10
+			# 			tag = GER
+			# 		}
+		# 	}
+
+	# 	default = no
+
+	# 	shared_focus = GER_nationalize_resource_industries
+	# 	shared_focus = GER_wehrmacht_focus
+	# 	shared_focus = GER_anarsim_on_asia
+
+	# 	focus = {
+		# 		id = GER_second_bavarian_uprising2
+		# 		text = GER_second_bavarian_uprising
+		# 		icon = GFX_goal_anarcho_communism
+		# 		x = 37
+		# 		y = 0
+		# 		cost = 5
+		# 		bypass = {
+			# 			always = yes
+			# 		}
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL}
+		# 		completion_reward = {
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_last_stand_of_anarc
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_second_bavarian_uprising2 }
+		# 		icon = GFX_ARG_commence_plans
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_second_bavarian_uprising2
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+		# 		search_filters = { FOCUS_FILTER_POLITICAL}
+		# 		completion_reward = {
+			# 			add_threat = 25
+			# 			remove_ideas = comintern_influence
+			# 			set_politics = {
+				# 				ruling_party = neutrality
+				# 			}
+			# 		    set_cosmetic_tag = GER_anarchism
+			# 		    add_ideas = SPR_collectivized_society
+			# 		    add_ideas = uncontrolled_exports
+			# 			create_country_leader = {
+				# 				name = "Anarchist Commune"
+				# 				desc = "POLITICS_ANARCHIST_COMMUNE_DESC"
+				# 				picture = "GFX_portrait_SPR_anarchist_commune"
+				# 				expire = "1965.1.1"
+				# 				ideology = anarchism
+				# 				traits = {
+					# 					our_right_to_survive
+					# 				}
+				# 			}
+			# 			if = {
+				# 				limit = {
+					# 					NOT = { has_idea = closed_economy }
+					# 				}
+				# 				add_ideas = closed_economy
+				# 			}
+			# 			add_stability = -0.1
+			# 			add_war_support = 0.1
+			# 			add_popularity = {
+				# 				ideology = neutrality
+				# 				popularity = 0.25
+				# 			}
+			# 			start_civil_war = {
+				#                 ruling_party = neutrality
+				#                 ideology = communism
+				#                 size = 0.5
+				#                 capital = 64
+				#                 states = {
+					# 			        50 55 60 59 58 61 64 65 68 66 67 63 62 42 51 57 56
+					#                 }
+				#             }
+			# 			hidden_effect = {
+				# 				random_other_country = {
+					# 					limit = {
+						# 						original_tag = GER
+						# 						has_government = communism
+						# 					}
+					# 					set_cosmetic_tag = GER_civil_war
+					# 					remove_ideas = SPR_anarchist_society_1
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_appropriate_the_means_of_production
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_last_stand_of_anarc }
+
+		# 		icon = GFX_ARG_federalize_our_economy
+		# 		x = -1
+		# 		y = 1
+		# 		relative_position_id = GER_last_stand_of_anarc
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+
+		# 		completion_reward = {
+			# 			swap_ideas = {
+				# 				remove_idea = SPR_anarchist_society_1
+				# 				add_idea = SPR_anarchist_society_2
+				# 			}
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_autogestion
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_appropriate_the_means_of_production }
+
+		# 		icon = GFX_goal_generic_production
+		# 		x = -1
+		# 		y = 1
+		# 		relative_position_id = GER_appropriate_the_means_of_production
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_INDUSTRY}
+		# 		completion_reward = {
+			# 			if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_2
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_2
+					# 					add_idea = SPR_anarchist_society_3
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_5
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_5
+					# 					add_idea = SPR_anarchist_society_6
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_8
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_8
+					# 					add_idea = SPR_anarchist_society_9
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_11
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_11
+					# 					add_idea = SPR_anarchist_society_12
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_13
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_13
+					# 					add_idea = SPR_anarchist_society_14
+					# 				}
+				# 			}
+			# 			else = {
+				# 				effect_tooltip = {
+					# 					swap_ideas = {
+						# 						remove_idea = SPR_anarchist_society_2
+						# 						add_idea = SPR_anarchist_society_3
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_collectivization_and_workers_control
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_autogestion }
+		# 		prerequisite = { focus = GER_seize_public_transport }
+		# 		prerequisite = { focus = GER_agrarian_collectivization }
+
+		# 		icon = GFX_focus_eng_concessions_to_the_trade_unions
+		# 		x = 0
+		# 		y = 2
+		# 		relative_position_id = GER_autogestion
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_INDUSTRY}
+		# 		completion_reward = {
+			# 			if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_3
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_3
+					# 					add_idea = SPR_anarchist_society_4
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_6
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_6
+					# 					add_idea = SPR_anarchist_society_7
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_9
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_9
+					# 					add_idea = SPR_anarchist_society_10
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_12
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_12
+					# 					add_idea = SPR_anarchist_society_15
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_14
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_14
+					# 					add_idea = SPR_anarchist_society_16
+					# 				}
+				# 			}
+			# 			else = {
+				# 				effect_tooltip = {
+					# 					swap_ideas = {
+						# 						remove_idea = SPR_anarchist_society_3
+						# 						add_idea = SPR_anarchist_society_4
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_arm_the_people
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_last_stand_of_anarc }
+
+		# 		icon = GFX_ARG_gain_back_trust
+		# 		x = 1
+		# 		y = 1
+		# 		relative_position_id = GER_last_stand_of_anarc
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+		# 		completion_reward = {
+			# 			add_war_support = 0.1
+			#               add_ideas = GER_army_1
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_the_maximum_concession
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_appropriate_the_means_of_production }
+		# 		prerequisite = { focus = GER_arm_the_people }
+
+		# 		icon =  GFX_ARG_go_against_military
+		# 		x = 1
+		# 		y = 1
+		# 		relative_position_id = GER_appropriate_the_means_of_production
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+
+		# 		completion_reward = {
+			# 			add_ideas = GER_the_maximum_concession
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_seize_public_transport
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_the_maximum_concession }
+
+		# 		icon = GFX_ARG_armored_trains
+		# 		x = -1
+		# 		y = 1
+		# 		relative_position_id = GER_the_maximum_concession
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+
+		# 		completion_reward = {
+			# 			add_ideas = GER_anarchist_public_transport
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_agrarian_collectivization
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_the_maximum_concession }
+
+		# 		icon = GFX_BOL_export_wheat
+		# 		x = 1
+		# 		y = 1
+		# 		relative_position_id = GER_the_maximum_concession
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_INDUSTRY}
+		# 		completion_reward = {
+			# 			if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_2
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_2
+					# 					add_idea = SPR_anarchist_society_5
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_5
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_5
+					# 					add_idea = SPR_anarchist_society_8
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_3
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_3
+					# 					add_idea = SPR_anarchist_society_6
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_6
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_6
+					# 					add_idea = SPR_anarchist_society_9
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_4
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_4
+					# 					add_idea = SPR_anarchist_society_7
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_7
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_7
+					# 					add_idea = SPR_anarchist_society_10
+					# 				}
+				# 			}
+			# 			else = {
+				# 				effect_tooltip = {
+					# 					swap_ideas = {
+						# 						remove_idea = SPR_anarchist_society_2
+						# 						add_idea = SPR_anarchist_society_5
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_mujeres_libres
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_seize_public_transport }
+		# 		prerequisite = { focus = GER_agrarian_collectivization }
+
+		# 		icon = GFX_BOL_mil_puppet
+		# 		x = 1
+		# 		y = 1
+		# 		relative_position_id = GER_seize_public_transport
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_MANPOWER}
+		# 		completion_reward = {
+			# 			if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_5
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_5
+					# 					add_idea = SPR_anarchist_society_11
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_8
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_8
+					# 					add_idea = SPR_anarchist_society_13
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_6
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_6
+					# 					add_idea = SPR_anarchist_society_12
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_9
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_9
+					# 					add_idea = SPR_anarchist_society_14
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_7
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_7
+					# 					add_idea = SPR_anarchist_society_15
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_10
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_10
+					# 					add_idea = SPR_anarchist_society_16
+					# 				}
+				# 			}
+			# 			else = {
+				# 				effect_tooltip = {
+					# 					swap_ideas = {
+						# 						remove_idea = SPR_anarchist_society_5
+						# 						add_idea = SPR_anarchist_society_11
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_literacy_programs
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_collectivization_and_workers_control }
+		# 		prerequisite = { focus = GER_mujeres_libres }
+
+		# 		icon = GFX_focus_research
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_collectivization_and_workers_control
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_RESEARCH}
+		# 		completion_reward = {
+			# 			add_research_slot = 1
+			# 			add_ideas = GER_encourage_scientists
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_shared_burdens
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_arm_the_people }
+		# 		prerequisite = { focus = GER_appropriate_the_means_of_production }
+
+		# 		icon = GFX_goal_generic_consumer_goods
+		# 		x = 1
+		# 		y = 1
+		# 		relative_position_id = GER_arm_the_people
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_INDUSTRY}
+		# 		completion_reward = {
+			# 			if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_2
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_2
+					# 					add_idea = SPR_anarchist_society_5
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_5
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_5
+					# 					add_idea = SPR_anarchist_society_8
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_3
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_3
+					# 					add_idea = SPR_anarchist_society_6
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_6
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_6
+					# 					add_idea = SPR_anarchist_society_9
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_4
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_4
+					# 					add_idea = SPR_anarchist_society_7
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_7
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_7
+					# 					add_idea = SPR_anarchist_society_10
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_15
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_15
+					# 					add_idea = SPR_anarchist_society_16
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_17
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_17
+					# 					add_idea = SPR_anarchist_society_18
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_18
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_18
+					# 					add_idea = SPR_anarchist_society_19
+					# 				}
+				# 			}
+			# 			else = {
+				# 				effect_tooltip = {
+					# 					swap_ideas = {
+						# 						remove_idea = SPR_anarchist_society_2
+						# 						add_idea = SPR_anarchist_society_5
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_all_must_bear_the_torch
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_mujeres_libres }
+		# 		prerequisite = { focus = GER_collectivization_and_workers_control }
+		# 	    mutually_exclusive = { focus = GER_empower_your_crafters }
+		# 		icon = GFX_goal_ANQ_court_vermilion_society
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_mujeres_libres
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		search_filters = {}
+		# 		completion_reward = {
+			# 			remove_ideas = GER_civil_war_idea
+			# 			create_country_leader = {
+				# 				name = "Rudolf Rocker"
+				# 				picture = Portrait_GER_rudolf_rocker.dds
+				# 				expire = "1965.1.1"
+				# 				ideology = anarchism
+				# 				traits = {
+					#                     anarchist_zeal
+					# 				}
+				# 			}
+			# 			#add_ideas = GER_collectivized_society
+			# 			if = {
+				# 				limit = {
+					# 					NOT = { has_idea = closed_economy }
+					# 				}
+				# 				add_ideas = closed_economy
+				# 			}
+			# 			if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_15
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_15
+					# 					add_idea = SPR_anarchist_society_17
+					# 				}
+				# 			}
+			# 			if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_16
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_16
+					# 					add_idea = SPR_anarchist_society_18
+					# 				}
+				# 			}
+			# 			else = {
+				# 				effect_tooltip = {
+					# 					swap_ideas = {
+						# 						remove_idea = SPR_anarchist_society_15
+						# 						add_idea = SPR_anarchist_society_17
+						# 					}
+					# 				}
+				# 			}
+
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_the_threats_abound
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_all_must_bear_the_torch }
+		# 		icon = GFX_EGY_Palestine_Defence
+		# 		x = -1
+		# 		y = 1
+		# 		relative_position_id = GER_all_must_bear_the_torch
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		completion_reward = {
+			# 			add_ideas = GER_the_threats_abound_1
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_avusturia_anarchism
+		# 		available = {
+			# 			any_state = {
+				# 				is_fully_controlled_by = ROOT
+				# 				any_neighbor_state = {
+					# 					is_owned_by = AUS
+					# 				}
+				# 			}
+			# 		}
+		# 		bypass = {
+			# 			owns_state = 153
+			# 			owns_state = 152
+			# 			owns_state = 4
+			# 			AUS = {
+				# 				exists = no
+				# 			}
+			# 		}
+		# 		will_lead_to_war_with = AUS
+		# 		prerequisite = { focus = GER_the_threats_abound }
+		# 		icon = GFX_goal_austria
+		# 		x = -2
+		# 		y = 1
+		# 		relative_position_id = GER_the_threats_abound
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		completion_reward = {
+			# 				AUS = { country_event = { id = germany.11154 hours = 6 random_hours = 18 } }
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_cze_anarsi
+		# 		available = {
+			# 			any_state = {
+				# 				is_fully_controlled_by = ROOT
+				# 				any_neighbor_state = {
+					# 					is_owned_by = CZE
+					# 				}
+				# 			}
+			# 		}
+		# 		bypass = {
+			# 			CZE = {
+				# 				exists = no
+				# 			}
+			# 		}
+		# 		prerequisite = { focus = GER_avusturia_anarchism }
+		# 		icon = GFX_goal_CZE_czechoslovakia
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_avusturia_anarchism
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		completion_reward = {
+			#              CZE = { country_event = germany.813}
+			# 		}
+		# 	}
+
+	# 	focus = {
+		# 		id = GER_a_new_way_of_warfare
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_the_threats_abound }
+		# 		icon = GFX_goal_generic_army_tanks
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_the_threats_abound
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_RESEARCH}
+		# 		completion_reward = {
+			# 			add_tech_bonus = {
+				# 				name = GER_a_new_way_of_warfare
+				# 				bonus = 1.0
+				# 				uses = 1
+				# 				category = air_equipment
+				# 			}
+			# 			add_tech_bonus = {
+				# 				name = GER_a_new_way_of_warfare
+				# 				bonus = 1.0
+				# 				uses = 1
+				# 				category = armor
+				# 			}
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_communal_military_strategies
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_a_new_way_of_warfare }
+		# 		icon = GFX_goal_generic_army_doctrines
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_a_new_way_of_warfare
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_RESEARCH}
+		# 		completion_reward = {
+			# 			add_doctrine_cost_reduction = {
+				# 				name = GER_communal_military_strategies
+				# 				cost_reduction = 0.5
+				# 				uses = 3
+				# 				category = land_doctrine
+				# 			}
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_maintaining_the_fire
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_all_must_bear_the_torch }
+
+		# 		icon = GFX_goal_COS_War
+		# 		x = 1
+		# 		y = 1
+		# 		relative_position_id = GER_all_must_bear_the_torch
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+		# 		completion_reward = {
+			# 			add_war_support = 0.35
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_freedom_of_thought
+		# 		available = {
+			# 			num_of_factories > 50
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_maintaining_the_fire }
+		# 		icon = GFX_focus_research2
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_maintaining_the_fire
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_RESEARCH}
+		# 		completion_reward = {
+			# 			add_research_slot = 1
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_the_inevitable_counterblow
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_cze_anarsi }
+		# 		icon = GFX_goal_generic_construct_military
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_cze_anarsi
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_POLITICAL}
+		# 		completion_reward = {
+			#             add_ideas = GER_stablile_soldiers
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_improve_military_infrastructure
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_the_inevitable_counterblow }
+		# 		icon = GFX_goal_forced_inf
+		# 		x = -2
+		# 		y = 1
+		# 		relative_position_id = GER_the_inevitable_counterblow
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_INDUSTRY}
+		# 		completion_reward = {
+			# 			POL = {
+				#             remove_state_core = 807
+				# 			remove_state_core = 86
+				# 			remove_state_core = 85
+				# 			remove_state_core = 762
+				# 			}
+			# 			FRA = {
+				#             remove_state_core = 28
+				# 			remove_state_core = 22
+				# 			remove_state_core = 21
+				# 			remove_state_core = 31
+				# 			}
+			# 			random_owned_controlled_state = {
+				# 				limit = {
+					# 					is_core_of = ROOT
+					# 					free_building_slots = {
+						# 						building = infrastructure
+						# 						size > 1
+						# 					}
+					# 				}
+				# 				set_state_flag = GER_improve_military_infrastructure_1inf
+				# 				add_building_construction = {
+					# 					type = infrastructure
+					# 					level = 1
+					# 					instant_build = yes
+					# 				}
+				# 			}
+			# 			random_owned_controlled_state = {
+				# 				limit = {
+					# 					is_core_of = ROOT
+					# 					NOT = { has_state_flag = GER_improve_military_infrastructure_1inf }
+					# 					free_building_slots = {
+						# 						building = infrastructure
+						# 						size > 1
+						# 					}
+					# 				}
+				# 				set_state_flag = GER_improve_military_infrastructure_1inf
+				# 				add_building_construction = {
+					# 					type = infrastructure
+					# 					level = 1
+					# 					instant_build = yes
+					# 				}
+				# 			}
+			# 			random_owned_controlled_state = {
+				# 				limit = {
+					# 					is_core_of = ROOT
+					# 					NOT = { has_state_flag = GER_improve_military_infrastructure_1inf }
+					# 					free_building_slots = {
+						# 						building = infrastructure
+						# 						size > 1
+						# 					}
+					# 				}
+				# 				set_state_flag = GER_improve_military_infrastructure_1inf
+				# 				add_building_construction = {
+					# 					type = infrastructure
+					# 					level = 1
+					# 					instant_build = yes
+					# 				}
+				# 			}
+			# 			random_owned_controlled_state = {
+				# 				limit = {
+					# 					is_core_of = ROOT
+					# 					NOT = { has_state_flag = GER_improve_military_infrastructure_1inf }
+					# 					free_building_slots = {
+						# 						building = infrastructure
+						# 						size > 1
+						# 					}
+					# 				}
+				# 				set_state_flag = GER_improve_military_infrastructure_1inf
+				# 				add_building_construction = {
+					# 					type = infrastructure
+					# 					level = 1
+					# 					instant_build = yes
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_fortify_the_pyrenees
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_improve_military_infrastructure }
+		# 		icon = GFX_goal_generic_fortify_city
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_improve_military_infrastructure
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		completion_reward = {
+			#           807 = {
+				# 	       start_resistance = yes
+				# 	       add_resistance = 30
+				#            }
+			#           86 = {
+				# 	       start_resistance = yes
+				# 	       add_resistance = 30
+				#            }
+			#           85 = {
+				# 	       start_resistance = yes
+				# 	       add_resistance = 30
+				#            }
+			#           762 = {
+				# 	       start_resistance = yes
+				# 	       add_resistance = 30
+				#            }
+			#           28 = {
+				# 	       start_resistance = yes
+				# 	       add_resistance = 30
+				#            }
+			#           31 = {
+				# 	       start_resistance = yes
+				# 	       add_resistance = 30
+				#            }
+			#           22 = {
+				# 	       start_resistance = yes
+				# 	       add_resistance = 30
+				#            }
+
+			#           21 = {
+				# 	       start_resistance = yes
+				# 	       add_resistance = 30
+				#            }
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_fortify_la_linea_de_la_concepcion
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_fortify_the_pyrenees }
+		# 		icon = GFX_goal_ger_wolrd_anarc
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_fortify_the_pyrenees
+		# 		cost = 20
+		# 		completion_reward = {
+			# 			add_named_threat = {
+				# 			    threat = 20
+				# 			    name = GER_fortify_la_linea_de_la_concepcion
+				# 			}
+			# 			FROM = {
+				# 				every_state = {
+					# 					limit = {
+						# 						NOT = {
+							# 							is_controlled_by = ROOT
+							# 							is_core_of = THIS
+							# 						}
+						# 						has_resistance = yes
+						# 					}
+					# 					add_resistance = 35
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_militarize_the_industry
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_the_inevitable_counterblow }
+		# 		icon = GFX_goal_generic_construct_mil_factory
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_the_inevitable_counterblow
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_INDUSTRY}
+		# 		completion_reward = {
+			# 			random_owned_controlled_state = {
+				# 				limit = {
+					# 					is_core_of = ROOT
+					# 					is_in_home_area = yes
+					# 				    free_building_slots = {
+						# 				        building = arms_factory
+						# 				        size > 0
+						# 				        include_locked = yes
+						# 				    }
+					# 				}
+				# 				add_extra_state_shared_building_slots = 2
+				# 				add_building_construction = {
+					# 				    type = arms_factory
+					# 				    level = 2
+					# 				    instant_build = yes
+					# 				}
+				# 			}
+			# 			random_owned_controlled_state = {
+				# 				limit = {
+					# 					is_core_of = ROOT
+					# 					is_in_home_area = yes
+					# 				    free_building_slots = {
+						# 				        building = arms_factory
+						# 				        size > 0
+						# 				        include_locked = yes
+						# 				    }
+					# 				}
+				# 				add_extra_state_shared_building_slots = 2
+				# 				add_building_construction = {
+					# 				    type = arms_factory
+					# 				    level = 2
+					# 				    instant_build = yes
+					# 				}
+				# 			}
+			# 			random_owned_controlled_state = {
+				# 				limit = {
+					# 					is_core_of = ROOT
+					# 					is_in_home_area = yes
+					# 				    free_building_slots = {
+						# 				        building = arms_factory
+						# 				        size > 0
+						# 				        include_locked = yes
+						# 				    }
+					# 				}
+				# 				add_extra_state_shared_building_slots = 2
+				# 				add_building_construction = {
+					# 				    type = arms_factory
+					# 				    level = 2
+					# 				    instant_build = yes
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_communal_autarky
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_militarize_the_industry }
+
+		# 		icon = GFX_goal_generic_construction2
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_militarize_the_industry
+		# 		cost = 5
+
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH}
+		# 		completion_reward = {
+			# 			if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_17
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_17
+					# 					add_idea = SPR_anarchist_society_18
+					# 				}
+				# 			}
+			# 			else_if = {
+				# 				limit = {
+					# 					has_idea = SPR_anarchist_society_18
+					# 				}
+				# 				swap_ideas = {
+					# 					remove_idea = SPR_anarchist_society_18
+					# 					add_idea = SPR_anarchist_society_19
+					# 				}
+				# 			}
+			# 			else = {
+				# 				effect_tooltip = {
+					# 					swap_ideas = {
+						# 						remove_idea = SPR_anarchist_society_17
+						# 						add_idea = SPR_anarchist_society_18
+						# 					}
+					# 				}
+				# 			}
+			# 			add_tech_bonus = {
+				# 				name = GER_communal_autarky
+				# 				bonus = 1
+				# 				uses = 1
+				# 				category = excavation_tech
+				# 			}
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_anarchism_knows_no_borders
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_communal_military_strategies }
+		# 		icon = GFX_focus_spr_anarchism_knows_no_borders
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_communal_military_strategies
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+		# 		completion_reward = {
+			# 			add_ideas = SPR_anarchism_knows_no_borders
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_global_defense_council
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_anarchism_knows_no_borders }
+		# 		icon = GFX_goal_ger_wolrd_consul
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_anarchism_knows_no_borders
+		# 		cost = 12
+		# 		available_if_capitulated = yes
+		# 		completion_reward = {
+			# 			custom_effect_tooltip = SPR_global_defense_council_tt
+			# 			hidden_effect = {
+				# 				drop_cosmetic_tag = yes
+				# 				set_cosmetic_tag = SPC_global_defense_council
+				# 			}
+			# 			custom_effect_tooltip = SPR_global_defense_council_tt_2
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_empower_your_crafters
+		# 		icon = GFX_goal_generic_positive_trade_relations_gold
+		#         mutually_exclusive = { focus = GER_all_must_bear_the_torch }
+		# 		prerequisite = { focus = GER_mujeres_libres }
+		# 		available = {
+			# 				GER = {
+				# 				exists = yes
+				# 				has_government = neutrality
+				# 			}
+			# 			has_war = no
+			# 		}
+		# 		x = 3
+		# 		y = 1
+		# 		relative_position_id = GER_mujeres_libres
+		# 		cost = 5
+		# 		ai_will_do = {
+			# 			factor = 9
+			# 			modifier = {
+				# 				add = 4
+				# 			}
+			# 		}
+		# 		completion_reward = {
+			# 			remove_ideas = GER_civil_war_idea
+			# 			random_owned_controlled_state = {
+				# 				limit = {
+					# 					free_building_slots = {
+						# 						building = industrial_complex
+						# 						size > 1
+						# 						include_locked = yes
+						# 					}
+					# 				}
+				# 				add_extra_state_shared_building_slots = 2
+				# 				add_building_construction = {
+					# 					type = industrial_complex
+					# 					level = 2
+					# 					instant_build = yes
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_protect_our_private_businesses
+		# 		icon = GFX_goal_LEP_tea_trade
+		# 		prerequisite = { focus = GER_empower_your_crafters  }
+		# 		relative_position_id = GER_empower_your_crafters
+		# 		available = {
+			# 			GER = {
+				# 				exists = yes
+				# 			}
+			# 			has_war = no
+			# 		}
+		# 		x = 0
+		# 		y = 1
+		# 		cost = 5
+		# 		ai_will_do = {
+			# 			factor = 9
+			# 		}
+		# 		completion_reward = {
+			# 			add_ideas = GER_protect_our_private_businesses
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_free_our_markets
+		# 		icon = GFX_goal_QIE_coin
+		# 		prerequisite = { focus = GER_protect_our_private_businesses }
+		# 		relative_position_id = GER_protect_our_private_businesses
+		# 		available = {
+			# 				GER = {
+				# 				exists = yes
+				# 			}
+			# 			has_war = no
+			# 		}
+		# 		x = 0
+		# 		y = 1
+		# 		cost = 5
+		# 		ai_will_do = {
+			# 			factor = 10.1
+			# 		}
+		# 		completion_reward = {
+			# 			hidden_effect = {
+				# 					create_country_leader = {
+					# 						name = "Consumer Councils"
+					# 						picture = "gfx/leaders/GER/Consul_free_trade.dds"
+					# 						expire = "1965.1.1"
+					# 						ideology = anarchism
+					# 						traits = {
+						# 							our_right_to_survive
+						# 						}
+					# 					}
+				# 			}
+			# 			add_ideas = GER_anarko_comisim
+			# 			if = {
+				# 				limit = {
+					# 					NOT = { has_idea = free_trade }
+					# 				}
+				# 				add_ideas = free_trade
+				# 			}
+			# 			set_cosmetic_tag = GEAK_anarchism
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_empower_the_consumer_council
+		# 		icon = GFX_goal_ANQ_use_anticoncessionists
+		# 		available = {
+			# 			NOT = {
+				# 				OR = {
+					# 					has_government = communism
+					# 					has_government = fascism
+					# 				}
+				# 			}
+			# 		}
+		# 		prerequisite = { focus = GER_free_our_markets }
+		# 		relative_position_id = GER_free_our_markets
+		# 		ai_will_do = {
+			# 			factor = 10
+			# 		}
+		# 		x = 0
+		# 		y = 1
+		# 		cost = 5
+		# 		completion_reward = {
+			# 			add_ideas = GER_power_the_consumer_council
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_anacy_fact
+		# 		available = {
+			# 		}
+		# 		bypass = {
+			# 		}
+		# 		prerequisite = { focus = GER_fortify_la_linea_de_la_concepcion }
+		# 		icon = GFX_goal_CSA_master_west
+		# 		x = 0
+		# 		y = 1
+		# 		relative_position_id = GER_fortify_la_linea_de_la_concepcion
+		# 		cost = 5
+		# 		available_if_capitulated = yes
+		# 		completion_reward = {
+			# 			custom_effect_tooltip = GER_anacy_fact_tt
+			# 			effect_tooltip = {
+				# 				add_ideas = GER_anarchist_society_1
+				# 			}
+			# 			hidden_effect = {
+				# 				FROM = {
+					# 					every_state = {
+						# 						limit = {
+							# 							NOT = {
+								# 								is_controlled_by = ROOT
+								# 								is_core_of = THIS
+								# 							}
+							# 							has_resistance = yes
+							# 						}
+						# 						controller = {
+							# 							add_ideas = GER_anarchist_society_1
+							# 						}
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	# }

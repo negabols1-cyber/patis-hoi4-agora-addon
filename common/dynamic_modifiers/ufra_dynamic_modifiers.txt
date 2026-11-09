@@ -1,0 +1,179 @@
+#	Example:
+#
+#	example_dynamic_modifier = {
+	#		icon = "GFX_idea_unknown" # optional, will show up in guis if icon is specified
+	#		enable = { always = yes } #optional, the modifier won't apply if not enabled
+	#		remove_trigger = { always = no } #optional, will remove the modifier if true
+	#
+	#		# list of modifiers
+	#		fuel_cost = 321
+	#		max_fuel = var_max_fuel # will be taken from a variable
+	#	}
+#
+#
+#	In a script file:
+#
+#	effect = {
+	#		add_dynamic_modifier = {
+		#			modifier = example_dynamic_modifier
+		#			scope = GER # optional, if you specify this your dynamic modifier scoped to this scope (root is the effect scope)
+		#			days = 14 # optional, will be removed after this many days passes
+		#		}
+	#	}
+#
+#	can be added to countries, states or unit leaders
+#	will only updated daily, unless forced by force_update_dynamic_modifier effect
+
+FRA_integrated_berlin_cinema = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_ufra_cinema
+
+	compliance_growth = 0.1
+	resistance_decay = 0.1
+	state_resources_factor = 0.1
+	local_factories = 0.1
+}
+
+FRA_integrated_hollywood_cinema = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_ufra_cinema
+
+	compliance_growth = 0.1
+	resistance_decay = 0.1
+	state_resources_factor = 0.1
+	local_factories = 0.1
+}
+
+
+FRA_integrating_african_province = { #
+	enable = { always = yes }
+
+	icon = GFX_idea_generic_fortify_the_borders
+
+	weekly_manpower = -1500
+	compliance_growth = -0.5
+	resistance_growth = 0.3
+	resistance_target = 0.25
+	resistance_decay = -0.25
+	state_resources_factor = -0.75
+	local_factories = -0.75
+}
+
+FRA_fleeing_citizens = { #
+	enable = { always = yes }
+
+	icon = GFX_modifiers_ufra_exodus_panic
+
+	army_speed_factor_for_controller = -0.2
+	disable_strategic_redeployment_for_controller = 1
+	local_supplies_for_controller = -0.25
+}
+
+FRA_catastrophic_fleeing_citizens = { #
+	enable = { always = yes }
+
+	icon = GFX_modifiers_ufra_exodus_panic
+
+	army_speed_factor_for_controller = -0.35
+	disable_strategic_redeployment_for_controller = 1
+	local_supplies_for_controller = -0.35
+}
+
+FRA_ordered_fleeing_citizens = { #
+	enable = { always = yes }
+
+	icon = GFX_modifiers_ufra_exodus
+
+	army_speed_factor_for_controller = -0.1
+	local_supplies_for_controller = -0.10
+}
+
+FRA_partial_abandoned_state = { #
+	enable = { always = yes }
+
+	icon = GFX_modifiers_ufra_abandoned
+
+	local_supplies_for_controller = 0.15
+	state_resources_factor = -0.25
+	local_factories = -0.25
+	resistance_growth = -0.1
+}
+
+FRA_abandoned_state = { #
+	enable = { always = yes }
+
+	icon = GFX_modifiers_ufra_abandoned
+
+	local_manpower = -0.1
+	local_supplies_for_controller = 0.25
+	resistance_growth = -0.5 #New
+	state_resources_factor = -0.75
+	local_factories = -0.75
+}
+
+FRA_transaharian_railway_modifier = {
+	enable = { always = yes }
+	icon = GFX_modifiers_generic_railways
+
+	state_production_speed_rail_way_factor = 0.25
+	state_production_speed_infrastructure_factor = 0.25
+	state_production_speed_supply_node_factor = 0.25
+	local_building_slots = 1
+	resistance_growth = -0.1
+	compliance_gain = 0.03
+}
+
+FRA_transaharian_completed_modifier = {
+	enable = { always = yes }
+	icon = GFX_modifiers_ufra_afria_conscription
+
+	state_production_speed_infrastructure_factor = 0.1
+	local_building_slots = 2
+	local_resources = 0.5
+	local_manpower = 0.02
+}
+
+FRA_CCFM = { #Commandement en chef français civil et militaire
+	enable = { always = yes }
+	icon = GFX_modifiers_conscription_exemptions_granted
+
+	local_factories = -1
+	local_resources = -1
+	local_manpower = -1
+}
+
+FRA_FFL = { #Forces françaises libres
+	enable = { always = yes }
+	icon = GFX_modifiers_conscription_exemptions_granted
+	resistance_growth = 0.1
+	local_factories = -1
+	local_resources = -1
+	local_manpower = -1
+}
+
+FRA_la_grande_armee_modifier = {
+	enable = { always = yes }
+	icon = GFX_idea_grande_armee_idea
+
+	custom_modifier_tooltip = FRA_la_grande_armee_buff_tt
+	experience_gain_army_factor = FRA_grande_armee_experience_gain_army_factor
+	army_artillery_attack_factor = FRA_grande_armee_army_artillery_attack_factor
+	army_artillery_defence_factor = FRA_grande_armee_army_artillery_defence_factor
+	org_loss_when_moving = FRA_grande_armee_org_loss_when_moving
+	army_org_factor = FRA_grande_armee_army_org_factor
+	army_morale_factor = FRA_grande_armee_army_morale_factor
+	planning_speed = FRA_grande_armee_planning_speed
+	supply_consumption_factor = FRA_grande_armee_supply_consumption_factor
+	breakthrough_factor = FRA_grande_armee_breakthrough_factor
+	recon_factor = FRA_grande_armee_recon_factor
+	coordination_bonus = FRA_grande_armee_coordination_bonus
+	army_defence_factor = FRA_grande_armee_army_defence_factor
+	air_mission_efficiency = FRA_grande_armee_air_mission_efficiency
+	special_forces_cap = FRA_grande_armee_special_forces_cap
+	special_forces_attack_factor = FRA_grande_armee_special_forces_attack_factor
+	special_forces_defence_factor = FRA_grande_armee_special_forces_defence_factor
+	land_doctrine_cost_factor = FRA_grande_armee_land_doctrine_cost_factor
+	command_power_gain_mult = FRA_grande_armee_command_power_gain_mult
+}

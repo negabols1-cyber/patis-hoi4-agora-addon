@@ -1,0 +1,83 @@
+﻿add_namespace = swiss
+
+country_event = {
+	id = swiss.1
+	title = "Switzerland wants a guarantee"
+	desc = ""
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = {
+			base = 5
+		}
+		ROOT = {give_guarantee = SWI}
+		ROOT = {
+			add_opinion_modifier = {
+				target = SWI
+				modifier = large_increase
+			}
+		}
+		SWI = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = large_increase
+			}
+		}
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = {
+			base = 12
+		}
+		SWI = {
+			country_event = { days = 1 id = swiss.2 }
+			SWI = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_decrease
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = swiss.2
+	title = "They refuse"
+	desc = ""
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+	option = {
+		name = "Sad"
+	}
+}
+country_event = {
+	id = swiss.3
+	title = "Italian Switzerland wants land"
+	desc = ""
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 5 }
+		SWI = {
+			transfer_state = 158
+			158 = { add_core_of = SWI}
+		}
+
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = { base = 10 }
+		SWI = {
+			country_event = { days = 1 id = swiss.2 }
+		}
+	}
+}

@@ -1,0 +1,106 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			49 = {
+				add_victory_points = {
+					province = 11747
+					value = 5
+				}
+			}
+		}
+	}
+	on_declare_war = {
+		effect = {
+			if = {
+				limit = {
+					tag = TUR
+					FROM = { tag = SOV }
+					TUR = {
+						has_completed_focus = TUR_attack_the_soviets
+						NOT = { has_country_flag = TUR_eat_once }
+					}
+				}
+				hidden_effect = { #Declare war gui brokes
+					UZB = {
+						set_state_owner = 405
+						set_cosmetic_tag = FORM_TRK
+						create_country_leader = {
+							name = "Mustafa Çokay"
+							desc = ""
+							picture = "gfx/leaders/TUR/portrait_tur_mustafa_cokay.dds"
+							expire = "1965.1.1"
+							ideology = fascism_ideology
+							traits = {
+								AFG_reformist_aristocrat
+							}
+						}
+						create_country_leader = {
+							name = "Mustafa Çokay"
+							desc = ""
+							picture = "gfx/leaders/TUR/portrait_tur_mustafa_cokay.dds"
+							expire = "1965.1.1"
+							ideology = centrism
+							traits = {
+								AFG_reformist_aristocrat
+							}
+						}
+						country_event = { id = bftb_turkey.171 days = 15 }
+					}
+					TUR = {
+						puppet = UZB
+						set_country_flag = TUR_eat_once
+					}
+					UZB = {
+						declare_war_on = {
+							target = SOV
+							type = annex_everything
+						}
+						add_manpower = 200000
+						set_popularities = {
+							democratic = 20
+							neutrality = 15
+							fascism = 40
+							communism = 15
+						}
+						every_state = {
+							limit = {
+								OR = {
+									is_core_of = KAZ
+									is_core_of = TJK
+									is_core_of = TMS
+									is_core_of = KGZ
+									is_core_of = TAT
+									state = 651
+									state = 652
+									state = 582
+									state = 251
+									state = 401
+									state = 654
+									state = 40
+								}
+							}
+							add_core_of = UZB
+							remove_core_of = KAZ
+							remove_core_of = TMS
+							remove_core_of = TAT
+							remove_core_of = KGZ
+							remove_core_of = TJK
+						}
+					}
+					SOV = {
+						set_state_controller = 405
+					}
+					ETS = {
+						give_military_access = UZB
+					}
+				}
+				ETS = {
+					declare_war_on = {
+						target = SOV
+						type = annex_everything
+					}
+				}
+			}
+		}
+	}
+}

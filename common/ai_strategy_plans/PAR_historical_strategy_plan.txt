@@ -1,0 +1,46 @@
+#####-----> PAR: Historical AI Behavior <><> <><> <><> <><> <><>
+
+PAR_historical_plan = {
+	name = "Paraguay Hisorical Plan"
+	desc = "Historical behavior for Paraguay."
+	allowed = {
+		original_tag = PAR
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = PAR_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = PAR_AI_HISTORICAL_BEHAVIOR
+			has_game_rule = {
+				rule = PAR_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	focus_factors = {
+		PAR_laissez_faire = 0
+		PAR_fight_for_our_freedom = 0
+		PAR_go_with_franco = 0
+		PAR_go_against_right_wing = 0
+		PAR_seize_equipment_reserves = 0
+		PAR_empower_the_fascists = 0
+		PAR_looking_outwards = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

@@ -1,0 +1,2730 @@
+characters={
+	ARG_agustín_pedro_justo={
+		name="Agustín Pedro Justo"
+		advisor={
+			slot = theorist
+			idea_token = ARG_agustin_pedro_justo
+			ledger  = army
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				military_theorist
+			}
+		}
+		portraits={
+			army={
+				small="GFX_idea_ARG_minister_agustin_pedro"
+			}
+			civilian={
+				large="gfx/leaders/ARG/Portrait_Agustin_Pedro_Justo.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_AGUSTIN_PEDRO_JUSTO_DESC"
+			ideology=despotism
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_manuel_antonio_fresco = {
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_manuel_antonio_fresco_idea
+			available = {
+				OR = {
+					has_completed_focus = ARG_concordancia
+					has_government = fascism
+				}
+				NOT = {
+					has_country_leader = {
+						character = ARG_manuel_antonio_fresco
+						ruling_only = yes
+					}
+				}
+			}
+			allowed  = {
+				original_tag = ARG
+			}
+			traits  = {
+				captain_of_industry
+			}
+		}
+		name="Manuel Antonio Fresco"
+		portraits={
+			civilian = {
+				large = "gfx/leaders/ARG/portrait_ARG_manuel_fresco.dds"
+			}
+			army={
+				small="GFX_idea_ARG_manuel_fresco_idea_icon"
+			}
+		}
+		country_leader={ ## becomes fascist later on
+			desc="POLITICS_MANUEL_FRESCO_DESC"
+			ideology=despotism
+			traits = {
+				anti_communist ARG_admiror_of_fascism
+			}
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_the_military_junta = {
+		name = "Junta Militar Argentina"
+		portraits = {
+			civilian = {
+				large="gfx/leaders/ARG/ARG_military_junta.dds"
+			}
+		}
+		country_leader = {
+			desc="POLITICS_JUNTA_MILITAR_DESC"
+			ideology=militarism
+			traits = { BRA_disorganized_leadership }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	EUYL_ARG_roberto_maria_ortiz = {
+		name = "Roberto Marcelino Ortiz"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/ARG/Portrait_Roberto_M_Ortiz.dds"
+			}
+			army={
+				small="GFX_idea_ARG_minister_roberto_ortiz"
+			}
+		}
+		country_leader = {
+			desc = "POLITICS_ROBERTO_MARIA_ORTIZ_DESC"
+			ideology = centrism
+			traits = {
+				ARG_brutal_leader_2
+				dislikes_germany
+			}
+			expire="1965.1.1.1"
+			id = -1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_roberto_maria
+			allowed  = {
+				original_tag  = ARG
+			}
+			available = {
+				has_civil_war = no
+				NOT = {
+					OR = {
+						has_government = fascism
+						has_government = communism
+					}
+				}
+				NOT = {
+					has_country_leader = {
+						character = EUYL_ARG_roberto_maria_ortiz
+						ruling_only = yes
+					}
+				}
+			}
+			on_add = {
+				ROOT = {
+					if = {
+						limit = {
+							is_power_balance_side_active = {
+								id = ARG_general_balance_of_power
+								side = ARG_government_side
+							}
+						}
+						ARG_move_5_right = yes
+					}
+				}
+			}
+			can_be_fired = no
+			traits  = {
+				silent_workhorse
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	ARG_leopoldo_melo = {
+		name = "Leopoldo Melo"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/ARG/ARG_leopoldo_melo.dds"
+			}
+			army={
+				small="GFX_idea_ARG_leopoldo_melo_icon"
+			}
+		}
+		country_leader = {
+			desc = "POLITICS_LEOPOLDO_MELO_DESC"
+			ideology = centrism
+			traits = {
+				##
+			}
+			expire="1965.1.1.1"
+			id = -1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_leopoldo_melo_idea
+			allowed  = {
+				original_tag = ARG
+			}
+			available = {
+				has_country_flag = ARG_elected_concordancia
+				NOT = {
+					has_country_leader = {
+						character = ARG_leopoldo_melo
+						ruling_only = yes
+					}
+				}
+			}
+			on_add = {
+				ROOT = {
+					if = {
+						limit = {
+							is_power_balance_side_active = {
+								id = ARG_general_balance_of_power
+								side = ARG_government_side
+							}
+						}
+						ARG_move_5_right = yes
+					}
+				}
+			}
+			can_be_fired = no
+			traits  = {
+				ARG_minister_of_interior
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	ARG_robustiano_patron_costas = {
+		name = "Robustiano Patrón Costas"
+		portraits = {
+			civilian = {
+				large = "gfx/leaders/ARG/ARG_robustiano_patron_costas.dds"
+			}
+			army={
+				small="GFX_idea_ARG_robustiano_icon"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_robustiano_patron_costas_idea
+			allowed  = {
+				original_tag = ARG
+			}
+			available = {
+				has_country_flag = ARG_elected_concordancia
+				NOT = {
+					has_country_leader = {
+						character = ARG_robustiano_patron_costas
+						ruling_only = yes
+					}
+				}
+			}
+			on_add = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = ARG_robustiano_patron_costas_hired_flag
+						}
+					}
+					508 = {
+						add_extra_state_shared_building_slots = 1
+					}
+					set_global_flag = ARG_robustiano_patron_costas_hired_flag
+				}
+			}
+			can_be_fired = no
+			traits  = {
+				ARG_governor_of_the_people
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		country_leader = {
+			desc = "POLITICS_ROBUSTIANO_DESC"
+			ideology = centrism
+			traits = {
+				##
+			}
+			expire="1965.1.1.1"
+			id = -1
+		}
+	}
+	EUYL_ARG_fanny_edelman = {
+		name="Fanny Edelman"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/Portrait_Argentina_Fanny_Jabcovsky.dds"
+			}
+			army={
+				small="GFX_idea_ARG_fanny_icon"
+			}
+		}
+		country_leader={
+			desc="POLITICS_FANNY_JABCOVSKY_DESC"
+			ideology=marxism
+			traits={
+				ARG_mother_of_the_revolution
+			}
+			expire="1965.1.1.1"
+			id=-1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_fanny_ad
+			allowed  = {
+				original_tag  = ARG
+			}
+			available = {
+				NOT = { has_government = fascism }
+				has_civil_war = no
+				num_of_factories > 39
+				NOT = {
+					OR = {
+						has_country_leader = {
+							character = ARG_fanny_edelman_official
+							ruling_only = yes
+						}
+						has_country_leader = {
+							character = EUYL_ARG_fanny_edelman
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			on_add = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = ARG_fanny_edelman_hired
+						}
+					}
+					ROOT = {
+						add_popularity = {
+							ideology = communism
+							popularity = 0.02
+						}
+						if = {
+							limit = {
+								is_power_balance_side_active = {
+									id = ARG_general_balance_of_power
+									side = ARG_socialist_side
+								}
+							}
+							ARG_move_5_right = yes
+						}
+					}
+					set_global_flag = ARG_fanny_edelman_hired
+				}
+			}
+			ai_will_do = {
+				factor = 55
+			}
+			traits  = {
+				financial_expert
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		corps_commander={
+			visible = {
+				has_government = communism
+			}
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=3
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	ARG_fanny_edelman_official = {
+		name="Fanny Edelman"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/Portrait_Argentina_Fanny_Jabcovsky.dds"
+			}
+			army={
+				small="GFX_idea_ARG_fanny_icon"
+			}
+		}
+		country_leader={
+			desc="POLITICS_FANNY_JABCOVSKY_DESC"
+			ideology=marxism
+			traits={
+				ARG_mother_of_the_revolution
+			}
+			expire="1965.1.1.1"
+			id=-1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_fanny_ad
+			allowed  = {
+				original_tag  = ARG
+			}
+			available = {
+				NOT = { has_government = fascism }
+				has_civil_war = no
+				num_of_factories > 39
+				NOT = {
+					OR = {
+						has_country_leader = {
+							character = ARG_fanny_edelman_official
+							ruling_only = yes
+						}
+						has_country_leader = {
+							character = EUYL_ARG_fanny_edelman
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			visible = {
+				NOT = {
+					has_character = EUYL_ARG_fanny_edelman
+				}
+			}
+			on_add = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = ARG_fanny_edelman_hired_official_flag
+						}
+					}
+					ROOT = {
+						add_popularity = {
+							ideology = communism
+							popularity = 0.02
+						}
+						if = {
+							limit = {
+								is_power_balance_side_active = {
+									id = ARG_general_balance_of_power
+									side = ARG_socialist_side
+								}
+							}
+							ARG_move_5_right = yes
+						}
+					}
+					set_global_flag = ARG_fanny_edelman_hired_official_flag
+				}
+			}
+			ai_will_do = {
+				factor = 55
+			}
+			traits  = {
+				financial_expert
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		corps_commander={
+			visible = {
+				has_government = communism
+				NOT = {
+					has_character = EUYL_ARG_fanny_edelman
+				}
+			}
+			skill=2
+			attack_skill=2
+			defense_skill=2
+			planning_skill=3
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	ARG_liborio_justo = {
+		name="Liborio Justo"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/ARG_liborio_justo.dds"
+			}
+			army={
+				small="GFX_idea_ARG_liborio_justo_icon"
+			}
+		}
+		country_leader={
+			desc="POLITICS_LIBORIO_JUSTO_DESC"
+			ideology=marxism
+			traits={
+				ARG_father_of_the_revolution
+			}
+			expire="1965.1.1.1"
+			id=-1
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_liborio_justo_ad
+			allowed  = {
+				original_tag  = ARG
+			}
+			available = {
+				NOT = { has_government = fascism }
+				ROOT = {
+					NOT = {
+						has_country_leader = {
+							character = ARG_liborio_justo
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			on_add = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = ARG_liborio_justo_hired_flag
+						}
+					}
+					ROOT = {
+						add_popularity = {
+							ideology = communism
+							popularity = 0.02
+						}
+						if = {
+							limit = {
+								is_power_balance_side_active = {
+									id = ARG_general_balance_of_power
+									side = ARG_socialist_side
+								}
+							}
+							ARG_move_5_right = yes
+						}
+					}
+					set_global_flag = ARG_liborio_justo_hired_flag
+				}
+			}
+			traits  = {
+				technocrat
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+	ARG_simon_radowitzky = {
+		name = "Simón Radowitzky"
+		portraits = {
+			army = {
+				large = "gfx/leaders/ARG/ARG_Simon_Rdowitzky.dds"
+			}
+		}
+		country_leader = {
+			desc = "POLITICS_SIMON_RADOWITZKY_DESC"
+			expire = "1965.1.1"
+			ideology = anarchism
+			traits = {
+				ARG_hero_of_the_anarchists
+			}
+		}
+		corps_commander={
+			visible = {
+				has_cosmetic_tag = AARC
+				ARG_simon_radowitzky = {
+					NOT = {
+						has_character_flag = BRA_imprisoned
+					}
+				}
+			}
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=3
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	ARG_simon_radowitzky_official = {
+		name = "Simón Radowitzky"
+		portraits = {
+			army = {
+				large = "gfx/leaders/ARG/ARG_Simon_Rdowitzky.dds"
+			}
+		}
+		country_leader = {
+			desc = "POLITICS_SIMON_RADOWITZKY_DESC"
+			expire = "1965.1.1"
+			ideology = anarchism
+			traits = {
+				ARG_hero_of_the_anarchists
+			}
+		}
+		corps_commander={
+			visible = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_character = ARG_simon_radowitzky
+				}
+				ARG_simon_radowitzky = {
+					NOT = {
+						has_character_flag = BRA_imprisoned
+					}
+				}
+			}
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			planning_skill=3
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	ARG_virginia_bolten = {
+		name="Virginia Bolten"
+
+		portraits={
+			civilian={
+				large="gfx/leaders/URG/portrait_URG_virginia_bolten.dds"
+			}
+			army={
+				large="gfx/leaders/URG/portrait_URG_virginia_bolten.dds"
+			}
+		}
+
+		country_leader = {
+			desc = "POLITICS_VIRGINIA_BOLTEN_DESC"
+			expire = "1965.1.1"
+			ideology = anarchism
+			traits = {
+				ARG_mama_anarquia
+			}
+		}
+		corps_commander={
+			visible = {
+				has_cosmetic_tag = AARC
+				ARG_virginia_bolten = {
+					NOT = {
+						has_character_flag = BRA_living_in_the_exterior
+					}
+				}
+			}
+			traits={ fortress_buster }
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			planning_skill=4
+			logistics_skill=2
+		}
+	}
+	ARG_anarchist_council = {
+		name = "Consejo Anarquísta"
+		portraits = {
+			army = {
+				large = "gfx/leaders/ARG/ARG_conserje_anarquista.dds"
+			}
+		}
+
+		country_leader = {
+			desc = "POLITICS_ANARCHIST_COUNCIL_DESC"
+			expire = "1965.1.1"
+			ideology = anarchism
+		}
+		corps_commander={
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=2
+		}
+	}
+	ARG_juan_posadas = {
+		name = "Juan Posadas"
+		portraits = {
+			army = {
+				large = "gfx/leaders/ARG/ARG_juan_posada.dds"
+			}
+		}
+
+		country_leader = {
+			desc = "POLITICS_POSADAS_DESC"
+			expire = "1965.1.1"
+			ideology = marxism
+			traits = {
+				ARG_inexperienced_leader_1
+				ARG_leader_of_the_revolution
+			}
+		}
+	}
+
+	EUYL_ARG_honorio_pueyrredon = {
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_honorio_pueyrredon_idea
+			available = {
+				custom_trigger_tooltip = {
+					tooltip = ARG_not_exiled_tt
+					NOT = {
+						has_character_flag = ARG_exiled
+					}
+				}
+				NOT = {
+					has_country_leader = {
+						character = EUYL_ARG_honorio_pueyrredon
+						ruling_only = yes
+					}
+				}
+			}
+			on_add = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = ARG_honorio_pueyrredon_hired
+						}
+					}
+					ROOT = {
+						if = {
+							limit = {
+								is_power_balance_side_active = {
+									id = ARG_general_balance_of_power
+									side = ARG_oligarchs_side
+								}
+							}
+							ARG_move_5_left = yes
+						}
+					}
+					set_global_flag = ARG_honorio_pueyrredon_hired
+				}
+			}
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				minister_of_education
+			}
+		}
+		country_leader = {
+			desc = "POLITICS_PUEYREDDON_DESC"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+				## gains trait in focus
+			}
+		}
+		name="Honorio Pueyrredón"
+		portraits={
+			army={
+				small="GFX_idea_ARG_honorio_pueyrredon_icon"
+				large = "gfx/leaders/ARG/ARG_honorio_pueyrredon.dds"
+			}
+		}
+	}
+
+	ARG_jose_p_tamborini = {
+		name = "Jose P. Tamborini"
+		country_leader = {
+			desc = "POLITICS_TAMBORINI_DESC"
+			expire = "1965.1.1"
+			ideology = conservatism
+			traits = {
+				## gains trait in focus
+			}
+		}
+		portraits={
+			army={
+				large = "gfx/leaders/ARG/ARG_tamborini.dds"
+			}
+		}
+	}
+
+	ARG_pistolero_mate_cocido = {
+		name = "David 'Mate Cosido' Perelta"
+		portraits = {
+			army = {
+				large = "gfx/leaders/ARG/ARG_pistolero_mate_cocido.dds"
+			}
+		}
+
+		corps_commander={
+			traits={ trait_ARG_rural_bandit trickster }
+			skill=4
+			attack_skill=3
+			defense_skill=2
+			planning_skill=2
+			logistics_skill=4
+			legacy_id=-1
+			visible = { has_character_flag = ARG_recruited }
+		}
+	}
+
+	EUYL_ARG_arturo_rawson = {
+		name="Arturo Rawson"
+		portraits={
+			army={
+				large="gfx/leaders/ARG/r56_portrait_ARG_Arturo_Rawson.dds"
+			}
+		}
+		field_marshal={
+			traits={ defensive_doctrine }
+			skill=3
+			attack_skill=3
+			defense_skill=3
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+		country_leader = {
+			desc="POLITICS_ARTURO_RAWSON_DESC"
+			ideology=militarism
+			traits = { ARG_inexperienced_leader_1 }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_arturo_rawson_federal = {
+		name="Arturo Rawson"
+		portraits={
+			army={
+				large="gfx/leaders/ARG/r56_portrait_ARG_Arturo_Rawson_federal.dds"
+			}
+		}
+		field_marshal={
+			visible = { ARG_is_the_argentine_confederation = yes }
+			traits={ defensive_doctrine }
+			skill=3
+			attack_skill=3
+			defense_skill=3
+			planning_skill=1
+			logistics_skill=2
+			legacy_id=-1
+		}
+		country_leader = {
+			desc="POLITICS_ARTURO_RAWSON_DESC"
+			ideology=militarism
+			traits = { ARG_inexperienced_leader_1 }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	EUYL_ARG_juan_pistarini = {
+		name="Juan Pistarini"
+		portraits={
+			army={
+				large="gfx/leaders/ARG/r56_portrait_ARG_Juan_Pistarini.dds"
+			}
+		}
+		corps_commander={
+			traits={ infantry_officer urban_assault_specialist }
+			skill=3
+			attack_skill=1
+			defense_skill=2
+			planning_skill=4
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	EUYL_ARG_alberto_teisaire = {
+		name="Alberto Teisaire"
+		portraits={
+			army={
+				large="gfx/leaders/ARG/r56_portrait_ARG_Alberto_Teisaire.dds"
+			}
+		}
+		navy_leader={
+			traits={ chief_engineer }
+			skill=3
+			attack_skill=2
+			defense_skill=2
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+	EUYL_ARG_pedro_pablo_ramirez = {
+		name="Pedro Pablo Ramirez"
+		advisor={
+			slot = army_chief
+			idea_token = EUYL_ARG_pedro_pablo_ramirez
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				army_chief_defensive_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		portraits={
+			army={
+				small="GFX_idea_ARG_pedro_pablo"
+			}
+			army={
+				large="gfx/leaders/ARG/Portrait_Pedro_Pablo_Ramirez.dds"
+			}
+		}
+		corps_commander={
+			traits={ infantry_officer urban_assault_specialist fortress_buster }
+			skill=3
+			attack_skill=1
+			defense_skill=3
+			planning_skill=1
+			logistics_skill=3
+		}
+		country_leader = {
+			desc="POLITICS_PEDRO_PABLO_RAMIREZ_DESC"
+			ideology=militarism
+			traits = { dictator }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_pedro_pablo_ramirez_federal = {
+		name="Pedro Pablo Ramirez"
+		portraits={
+			army={
+				small="GFX_idea_ARG_pedro_pablo_federal"
+			}
+			army={
+				large="gfx/leaders/ARG/Portrait_Pedro_Pablo_Ramirez_federal.dds"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = ARG_pedro_pablo_ramirez_federal
+			visible = { ARG_is_the_argentine_confederation = yes }
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				army_chief_defensive_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		corps_commander={
+			visible = { ARG_is_the_argentine_confederation = yes }
+			traits={ infantry_officer urban_assault_specialist fortress_buster }
+			skill=3
+			attack_skill=1
+			defense_skill=3
+			planning_skill=1
+			logistics_skill=3
+		}
+	}
+	ARG_juan_domingo_peron = {
+		name="Juan Domingo Peron"
+		#advisor={
+			#	slot = political_advisor
+			#	idea_token = ARG_juan_domingo_peron_idea
+			#	cost = 65
+			#	allowed = {
+				#		original_tag  = ARG
+				#	}
+			#	visible = {
+				#		ROOT = {
+					#			NOT = {
+						#				OR = {
+							#					has_country_leader = {
+								#						character = ARG_juan_domingo_peron
+								#						ruling_only = yes
+								#					}
+							#					has_country_leader = {
+								#						character = ARG_juan_domingo_peron_fascist
+								#						ruling_only = yes
+								#					}
+							#				}
+						#			}
+					#		}
+				#		NOT = { has_idea = ARG_juan_domingo_peron_country_idea }
+				#	}
+			#	ai_will_do = {
+				#		factor = 1
+				#		modifier = { ## hardcoded events will deal with this historically
+					#			factor = 0
+					#			is_historical_focus_on = yes
+					#		}
+				#		modifier = { ## Peron is needed for this branch
+					#			factor = 375
+					#			has_completed_focus = ARG_kill_off_roberto
+					#		}
+				#	}
+			#	available  = {
+				#		custom_trigger_tooltip = {
+					#			tooltip = ARG_is_not_currently_studying_italian_warfare_tt
+					#			NOT = { has_character_flag = ARG_in_italy }
+					#		}
+				#		custom_trigger_tooltip = {
+					#			tooltip = ARG_is_not_in_chile_tt
+					#			NOT = { has_character_flag = ARG_in_chile }
+					#		}
+				#		custom_trigger_tooltip = {
+					#			tooltip = BRA_has_not_been_imprisoned_tt
+					#			NOT = { has_character_flag = BRA_imprisoned }
+					#		}
+				#		NOT = { has_government = communism }
+				#		NOT = {
+					#			OR = {
+						#				has_completed_focus = ARG_create_the_CNU
+						#				has_completed_focus = ARG_an_imminent_revolution
+						#			}
+					#		}
+				#		OR = {
+					#			has_global_flag = ARG_peron_returned_from_chile
+					#			has_global_flag = ARG_peron_returned_from_italy
+					#		}
+				#		OR = {
+					#			date > 1940.6.1
+					#			has_country_leader = {
+						#				character = ARG_the_military_junta
+						#				ruling_only = yes
+						#			}
+					#			has_country_flag = ARG_military_movement_present_in_country_flag
+					#			has_idea = ARG_GOU_idea
+					#		}
+				#	}
+			#	traits  = {
+				#		ARG_minister_of_labor_employment_social_security
+				#	}
+			#	on_add = {
+				#		hidden_effect = {
+					#			if = {
+						#				limit = {
+							#					ROOT = {
+								#						NOT = {
+									#							has_country_flag = ARG_peronist_mechanic_active_flag
+									#						}
+								#					}
+							#				}
+						#				ROOT = {
+							#					country_event = {
+								#						id = argentina.rework.48
+								#						days = 45
+								#						random_days = 25
+								#					}
+							#				}
+						#			}
+					#			ROOT = { add_ideas = ARG_juan_domingo_peron_country_idea }
+					#		}
+				#	}
+			#}
+		portraits={
+			army={
+				small="GFX_idea_ARG_minister_juan_peron"
+			}
+			civilian={
+				large="gfx/leaders/ARG/Portrait_Argentina_Juan_Domingo_Peron.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_JUAN_DOMINGO_PERON_DESC"
+			ideology=fascism_ideology
+			traits={ fascist_sympathies }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_juan_domingo_peron_fascist = {
+		name = "Juan Domingo Peron"
+		portraits = {
+			civilian={
+				large="gfx/leaders/ARG/ARG_juan_peron_fascist.dds"
+			}
+		}
+
+		country_leader={
+			desc="POLITICS_JUAN_DOMINGO_PERON_DESC"
+			ideology=fascism_ideology
+			traits={ fascist_sympathies }
+			expire="1965.1.1.1"
+			id=-1
+		}
+
+	}
+	EUYL_ARG_nimio_de_anquin = {
+		name="Nimio de Anquin"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/Portrait_Nimo_De_Anquin.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_NIMO_DE_ANQUIN_DESC"
+			ideology=fascism_ideology
+			traits={  }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_juan_queralto = {
+		name = "Juan Queraltó"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/portrait_ARG_juan_queralto.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_JUAN_QUERALTO_DESC"
+			ideology=fascism_ideology
+			traits={ PRU_compassionate_leader }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_manuel_carles = {
+		name = "Manuel Carlés"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/portrait_ARG_carles.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_MANUEL_CARLES_DESC"
+			ideology=gen_nazism
+			traits={ ARG_ruthless_leader }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_juan_bautista_molina = {
+		name = "Juan Bautista Molina"
+		portraits={
+			army = {
+				small = "GFX_idea_ARG_bautista_icon"
+			}
+			civilian={
+				large="gfx/leaders/ARG/portrait_ARG_juan_bautista_molina.dds"
+			}
+		}
+		corps_commander={
+			traits={  }
+			skill=1
+			attack_skill=1
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+		country_leader={
+			desc="POLITICS_BAUTISTA_DESC"
+			ideology=fascism_ideology
+			traits={ COL_el_general }
+			expire="1965.1.1.1"
+			id=-1
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = ARG_juan_bautista
+			allowed = {
+				original_tag = ARG
+			}
+			available = {
+				NOT = { has_government = communism }
+				NOT = {
+					has_country_leader = {
+						character = ARG_juan_bautista_molina
+						ruling_only = yes
+					}
+				}
+				OR = {
+					has_government = fascism
+					has_country_leader = {
+						character = ARG_the_military_junta
+						ruling_only = yes
+					}
+					has_country_leader = {
+						character = EUYL_ARG_arturo_rawson
+						ruling_only = yes
+					}
+					has_country_leader = {
+						character = EUYL_ARG_pedro_pablo_ramirez
+						ruling_only = yes
+					}
+					has_country_leader = {
+						character = EUYL_ARG_edelmiro_julian_farrell
+						ruling_only = yes
+					}
+				}
+			}
+			ai_will_do = { factor = 20 }
+			traits = {
+				falangist_militarist
+			}
+		}
+	}
+	ARG_julio_meinvielle_normal = {
+		name = "Julio Meinvielle"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/ARG_meinvielle.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_MEINVIELLE_DESC"
+			ideology=falangism
+			traits={ ARG_preacher_of_the_gospel }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_julio_meinvielle_pope = {
+		name = "Papa Meinvielle"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/ARG_meinvielle_pope.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_MEINVIELLE_DESC"
+			ideology=falangism
+			traits={ ARG_preacher_of_the_gospel }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_leopoldo_lugones = {
+		name = "Leopoldo Lugones"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/ARG_leopoldo_lugones.dds"
+			}
+			army={
+				small="GFX_idea_ARG_leopoldo_lugones_icon"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_leopoldo_lugones_idea
+			allowed  = {
+				original_tag = ARG
+			}
+			cost = 75
+			available = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
+				NOT = {
+					OR = {
+						has_country_leader = {
+							character = ARG_leopoldo_lugones
+							ruling_only = yes
+						}
+						has_country_leader = {
+							character = ARG_leopoldo_lugones_federal
+							ruling_only = yes
+						}
+					}
+				}
+			}
+			on_add = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = ARG_lugones_hired_flag
+						}
+					}
+					ROOT = {
+						if = {
+							limit = {
+								is_power_balance_side_active = {
+									id = ARG_general_balance_of_power
+									side = ARG_government_side
+								}
+							}
+							ARG_move_5_left = yes
+						}
+						if = {
+							limit = {
+								is_power_balance_side_active = {
+									id = ARG_general_balance_of_power
+									side = ARG_coalition_side
+								}
+							}
+							ARG_move_5_right = yes
+						}
+						add_war_support = 0.03
+						set_global_flag = ARG_lugones_hired_flag
+					}
+				}
+			}
+			traits  = {
+				editor
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		country_leader={
+			desc="POLITICS_LUGONES_DESC"
+			ideology=fascism_ideology
+			traits={ ARG_the_charming_poet }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	ARG_leopoldo_lugones_federal = {
+		name = "Leopoldo Lugones"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/ARG_leopoldo_lugones_federal.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_LUGONES_DESC"
+			ideology=federalism
+			traits={ ARG_the_charming_poet }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+
+	ARG_walter_darre = {
+		name = "Richard Walther Darré"
+		portraits={
+			army = {
+				small = "GFX_idea_ARG_walter_darre_icon"
+			}
+			civilian={
+				large="gfx/leaders/ARG/portrait_ARG_walter_darre.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_DARRE_DESC"
+			ideology=nazism
+			traits={ ARG_devout_nazi }
+			expire="1965.1.1.1"
+			id=-1
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = ARG_juan_bautista
+			allowed = {
+				original_tag = ARG
+			}
+			available = {
+				custom_trigger_tooltip = {
+					tooltip = ARG_not_in_germany_tt
+					NOT = { has_character_flag = BRA_living_in_the_exterior }
+				}
+			}
+			traits = {
+				ARG_minister_of_food_and_agriculture
+			}
+		}
+	}
+	ARG_adolf_hitler = {
+		name=GER_adolf_hitler
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/portrait_ARG_adolf_hitler.dds"
+			}
+			army = {
+				small = "GFX_idea_ARG_adolf_hilter_icon"
+			}
+		}
+		country_leader={
+			ideology=nazism
+			traits={ dictator }
+			expire="1965.1.1.1"
+			id=-1
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = ARG_adolf_hitler_idea
+			allowed = {
+				original_tag = ARG
+			}
+			cost = 50
+			on_add = {
+				ROOT = {
+					set_country_flag = {
+						flag = ARG_hitler_recently_appointed_flag
+						days = 60
+						value = 1
+					}
+				}
+			}
+			can_be_fired = no
+			visible = {
+				has_country_flag = ARG_allowed_hitler_government_role_flag
+			}
+			traits = {
+				nazi_sympathizer
+			}
+		}
+	}
+	EUYL_ARG_victorio_codovilla = {
+		name = "Victorio Codovilla"
+		portraits = {
+			army = {
+				small = "GFX_idea_ARG_victorio_codovillo_icon"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = EUYL_ARG_victorio_codovilla_idea
+			allowed = {
+				original_tag = ARG
+			}
+
+			ai_will_do = {
+				base = 25
+				modifier = {
+					factor = 15
+					has_active_mission = ARG_government_collapse
+				}
+			}
+
+			cost = 20
+
+			available = {
+				OR = {
+					has_completed_focus = ARG_an_imminent_revolution
+					has_government = communism
+				}
+			}
+			traits = {
+				marxist_academic
+			}
+		}
+	}
+	EUYL_ARG_marcelo_t_de_alvear = {
+		name="Marcelo T. de Alvear"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/Portrait_Marcelo_T_de_Alvear.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_MARCELO_ALVEAR_DESC"
+			ideology=socialism
+			traits = { PRU_compassionate_leader }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_nicolas_repetto = {
+		name = "Nicolás Repetto"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/portrait_ARG_nicolas_repetto.dds"
+			}
+		}
+		country_leader={
+			desc="POLITICS_NICOLAS_REPETTO_DESC"
+			ideology=social_democracy
+			expire="1965.1.1.1"
+			id=-1
+		}
+		} ## Both will have unique traits later on ##
+	ARG_alfredo_palacios = {
+		name = "Alfredo Lorenzo Palacios"
+		portraits={
+			civilian={
+				large="gfx/leaders/ARG/portrait_ARG_alfredo_palacios.dds"
+			}
+			army={
+				small="GFX_idea_ARG_alfredo_palacios_icon"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_alfredo_palacios_idea
+			allowed  = {
+				original_tag = ARG
+			}
+			cost = 100
+			available = {
+				OR = {
+					has_country_flag = ARG_elected_partido_socialista
+					AND = {
+						has_completed_focus = ARG_union_civica_radical
+						NOT = { has_completed_focus = ARG_los_azules }
+					}
+				}
+				NOT = {
+					has_country_leader = {
+						character = ARG_alfredo_palacios
+						ruling_only = yes
+					}
+				}
+			}
+			on_add = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = ARG_palacios_hired_flag
+						}
+					}
+					ROOT = {
+						if = {
+							limit = {
+								is_power_balance_side_active = {
+									id = ARG_general_balance_of_power
+									side = ARG_socialist_side
+								}
+							}
+							ARG_move_10_right = yes
+						}
+						add_stability = 0.03
+						set_global_flag = ARG_palacios_hired_flag
+					}
+				}
+			}
+			can_be_fired = no
+			traits  = {
+				pragmatic_socialist
+			}
+			ai_will_do = {
+				factor = 1
+			}
+		}
+		country_leader={
+			desc="POLITICS_ALFREDO_PALACIOS_DESC"
+			ideology=social_democracy
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_abraham_schweizer={
+		name="Abraham Schweizer"
+		portraits={
+			army={
+				large="gfx/leaders/ARG/portrait_ARG_Abraham_Schweizer.dds"
+			}
+		}
+		field_marshal={
+			traits={ offensive_doctrine }
+			skill=4
+			attack_skill=4
+			defense_skill=3
+			planning_skill=3
+			logistics_skill=2
+			legacy_id=51225
+		}
+	}
+	EUYL_ARG_edelmiro_julian_farrell={
+		name="Edelmiro Julián Farrell"
+		advisor={
+			slot = theorist
+			idea_token = ARG_edelmiro_farrell
+			ledger  = navy
+			allowed  = {
+				original_tag  = ARG
+			}
+			research_bonus  = {
+				naval_doctrine  = 0.100
+			}
+			traits  = {
+				naval_theorist
+			}
+		}
+		portraits={
+			army={
+				small="GFX_idea_ARG_edelmiro_farrell_icon"
+			}
+			army={
+				large="gfx/leaders/ARG/Portrait_Edelmiro_Julian_Farrell.dds"
+			}
+		}
+		corps_commander={
+			traits={ fortress_buster }
+			skill=2
+			attack_skill=3
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+		country_leader = {
+			desc="POLITICS_JULIAN_FARRELL_DESC"
+			ideology=militarism
+			traits = { dictator }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_edelmiro_julian_farrell_federal={
+		name="Edelmiro Julián Farrell"
+		advisor={
+			slot = theorist
+			idea_token = ARG_edelmiro_farrell
+			visible = { ARG_is_the_argentine_confederation = yes }
+			ledger  = navy
+			allowed  = {
+				original_tag  = ARG
+			}
+			research_bonus  = {
+				naval_doctrine  = 0.100
+			}
+			traits  = {
+				naval_theorist
+			}
+		}
+		portraits={
+			army={
+				small="GFX_idea_ARG_edelmiro_farrell_icon"
+			}
+			army={
+				large="gfx/leaders/ARG/Portrait_Edelmiro_Julian_Farrell_federal.dds"
+			}
+		}
+		corps_commander={
+			visible = { ARG_is_the_argentine_confederation = yes }
+			traits={ fortress_buster }
+			skill=2
+			attack_skill=3
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=1
+			legacy_id=-1
+		}
+		country_leader = {
+			desc="POLITICS_JULIAN_FARRELL_DESC"
+			ideology=militarism
+			traits = { dictator }
+			expire="1965.1.1.1"
+			id=-1
+		}
+	}
+	ARG_nicolas_accame={
+		name="Nicolas Accame"
+		portraits={
+			army={
+				large="gfx/leaders/ARG/r56_portrait_ARG_Nicolas_Accame.dds"
+			}
+		}
+		corps_commander={
+			traits={ brilliant_strategist }
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	EUYL_ARG_carlos_marquez={
+		name="Carlos Marquez"
+		portraits={
+			army={
+				large="gfx/leaders/ARG/r56_portrait_ARG_Carlos_Marquez.dds"
+			}
+		}
+		corps_commander={
+			traits={ harsh_leader armor_officer }
+			skill=3
+			attack_skill=2
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	ARG_nicolas_accame_federal={
+		name="Nicolas Accame"
+		portraits={
+			#army={
+				#	small=""
+				#}
+			army={
+				large="gfx/leaders/ARG/r56_portrait_ARG_Nicolas_Accame_federal.dds"
+			}
+		}
+		corps_commander={
+			visible = { ARG_is_the_argentine_confederation = yes }
+			traits={ brilliant_strategist }
+			skill=2
+			attack_skill=1
+			defense_skill=2
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	ARG_carlos_marquez_federal={
+		name="Carlos Marquez"
+		portraits={
+			#army={
+				#	small=""
+				#}
+			army={
+				large="gfx/leaders/ARG/r56_portrait_ARG_Carlos_Marquez_federal.dds"
+			}
+		}
+		corps_commander={
+			visible = { ARG_is_the_argentine_confederation = yes }
+			traits={ harsh_leader armor_officer }
+			skill=3
+			attack_skill=2
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	ARG_carlos_von_der = {
+		name = "Carlos von der Becke"
+		portraits = {
+			army = {
+				large = "gfx/leaders/ARG/ARG_carlos_von_der_becke.dds"
+			}
+		}
+		corps_commander = {
+			traits = {}
+			skill = 2
+			attack_skill=1
+			defense_skill=1
+			planning_skill=2
+			logistics_skill=4
+			legacy_id=-1
+		}
+	}
+	ARG_rodolfo_freude = {
+		name = "Rodolfo Freude"
+		portraits = {
+			army = {
+				small = "GFX_ARG_rodolfo_freude"
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = ARG_rodolfo_f
+			allowed = {
+				original_tag = ARG
+				has_dlc = "La Resistance"
+			}
+			available = {
+				has_intelligence_agency = yes
+			}
+			traits = {
+				head_of_intelligence
+			}
+		}
+	}
+	ARG_juan_carlos_onganía = {
+		name="Juan Carlos Onganía"
+		portraits={
+			# army={
+				# 	small=""
+				# }
+			army={
+				large="gfx/leaders/ARG/ARG_juan_carlos_ongania.dds"
+			}
+		}
+		#corps_commander={
+			#	traits={  }
+			#	skill=1
+			#	attack_skill=1
+			#	defense_skill=1
+			#	planning_skill=1
+			#	logistics_skill=1
+			#	legacy_id=-1
+			#}
+	}
+	ARG_basilio_pertiné={
+		name="Basilio Pertiné"
+		portraits={
+			army={
+				large="gfx/leaders/ARG/portrait_ARG_Basilio_Pertine.dds"
+			}
+		}
+		corps_commander={
+			traits={ old_guard cavalry_officer armor_officer }
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			planning_skill=1
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	ARG_basilio_pertiné_federal={
+		name="Basilio Pertiné"
+		portraits={
+			#army={
+				#	small=""
+				#}
+			army={
+				large="gfx/leaders/ARG/portrait_ARG_Basilio_Pertine_federal.dds"
+			}
+		}
+		corps_commander={
+			visible = { ARG_is_the_argentine_confederation = yes }
+			traits={ old_guard cavalry_officer armor_officer }
+			skill=3
+			attack_skill=2
+			defense_skill=3
+			planning_skill=1
+			logistics_skill=3
+			legacy_id=-1
+		}
+	}
+	ARG_diego_mason_EUYL = {
+		name = "Diego Mason"
+		portraits = {
+			army = {
+				large=GFX_portrait_ARG_diego_mason
+				small=GFX_portrait_ARG_diego_mason_small
+			}
+		}
+		corps_commander={
+			skill=2
+			attack_skill=2
+			defense_skill=1
+			planning_skill=3
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	ARG_eduardo_avalos_EUYL = {
+		name = "Eduardo Avalos"
+		portraits = {
+			army = {
+				large=GFX_portrait_ARG_eduardo_avalos
+				small=GFX_portrait_ARG_eduardo_avalos_small
+			}
+		}
+		corps_commander={
+			skill=1
+			attack_skill=1
+			defense_skill=1
+			planning_skill=1
+			logistics_skill=1
+			legacy_id=-1
+		}
+	}
+	ARG_isaac_francisco_rojas={
+		name="Isaac Francisco Rojas"
+		portraits={
+			army={
+				large="gfx/leaders/ARG/portrait_ARG_Isaac_Francisco_Rojas.dds"
+			}
+		}
+		navy_leader={
+			traits={ gunnery_expert }
+			skill=3
+			attack_skill=3
+			defense_skill=2
+			maneuvering_skill=1
+			coordination_skill=1
+			legacy_id=-1
+		}
+	}
+	EUYL_ARG_uribaldi_diaz_brittenberg={
+		advisor={
+			slot = high_command
+			idea_token = EUYL_ARG_uribaldi_diaz_brittenberg
+			ledger  = air
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				air_close_air_support_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="EUYL_ARG_uribaldi_diaz_brittenberg"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+	}
+	EUYL_ARG_jose_tamborni={
+		advisor={
+			slot = air_chief
+			idea_token = EUYL_ARG_jose_tamborni
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				air_chief_night_operations_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="EUYL_ARG_jose_tamborni"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_2"
+			}
+		}
+	}
+	EUYL_ARG_manuel_maria_de_iriondo = {
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_ARG_manuel_maria_de_iriondo
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				prince_of_terror
+			}
+		}
+		name="EUYL_ARG_manuel_maria_de_iriondo"
+		portraits={
+			army={
+				small="GFX_idea_ARG_minister_manuel_maria"
+			}
+		}
+	}
+	EUYL_ARG_manuel_a_rodriguez = {
+		advisor={
+			slot = army_chief
+			idea_token = EUYL_ARG_manuel_a_rodriguez
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				army_chief_offensive_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="EUYL_ARG_manuel_a_rodriguez"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_3"
+			}
+		}
+	}
+	EUYL_ARG_ramon_castillo = {
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_ARG_ramon_castillo
+			allowed  = {
+				original_tag  = ARG
+			}
+			available = {
+				has_country_flag = ARG_elected_concordancia
+				NOT = {
+					has_country_leader = {
+						character = EUYL_ARG_honorio_pueyrredon
+						ruling_only = yes
+					}
+				}
+			}
+			traits  = {
+				quartermaster_general
+			}
+		}
+		country_leader={
+			desc="POLITICS_RAMON_CASTILLO_DESC"
+			ideology=despotism
+			expire="1965.1.1.1"
+			traits = { ARG_inexperienced_leader_2 }
+			id=-1
+		}
+		name="EUYL_ARG_ramon_castillo"
+		portraits={
+			army={
+				small="GFX_idea_ARG_minister_ramon_castillo"
+			}
+			civilian = {
+				large = "gfx/leaders/ARG/Portrait_Ramon_Castillo.dds"
+			}
+		}
+	}
+	EUYL_ARG_antonio_parodi = {
+		advisor={
+			slot = air_chief
+			idea_token = EUYL_ARG_antonio_parodi
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				air_chief_ground_support_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="EUYL_ARG_antonio_parodi"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_3"
+			}
+		}
+	}
+	EUYL_ARG_eleazar_videla={
+		advisor={
+			slot = high_command
+			idea_token = EUYL_ARG_eleazar_videla
+			ledger  = navy
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				navy_capital_ship_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="EUYL_ARG_eleazar_videla"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_2"
+			}
+		}
+	}
+	EUYL_ARG_francisco_m_velez={
+		advisor={
+			slot = high_command
+			idea_token = EUYL_ARG_francisco_m_velez
+			ledger  = army
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				army_regrouping_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="EUYL_ARG_francisco_m_velez"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_1"
+			}
+		}
+	}
+	EUYL_ARG_hortensio_quijano={
+		advisor={
+			slot = theorist
+			idea_token = EUYL_ARG_hortensio_quijano
+			ledger  = air
+			allowed  = {
+				original_tag  = ARG
+			}
+			research_bonus  = {
+				air_doctrine  = 0.100
+			}
+			traits  = {
+				air_warfare_theorist
+			}
+		}
+		name="EUYL_ARG_hortensio_quijano"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+	}
+	ARG_enzo_bordabehere={
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_enzo_bordabehere
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				compassionate_gentleman
+			}
+		}
+		name="ARG_enzo_bordabehere"
+		portraits={
+			army={
+				small="GFX_idea_ARG_minister_enzo_bordabehere"
+			}
+		}
+	}
+	EUYL_ARG_pedro_s_casal={
+		advisor={
+			slot = navy_chief
+			idea_token = EUYL_ARG_pedro_s_casal
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				navy_chief_maneuver_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="EUYL_ARG_pedro_s_casal"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_2"
+			}
+		}
+	}
+	ARG_carlos_ibarguren={
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_carlos_ibarguren
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				war_industrialist
+			}
+		}
+		name="ARG_carlos_ibarguren"
+		portraits={
+			army={
+				small="GFX_idea_ARG_minister_carlos_orbarguren"
+			}
+		}
+	}
+	ARG_carlos_alberto_pueyrredon={
+		advisor={
+			slot = political_advisor
+			idea_token = ARG_carlos_alberto_pueyrredon
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				connected_citizen
+			}
+		}
+		name="ARG_carlos_alberto_pueyrredon"
+		portraits={
+			army={
+				small="GFX_idea_ARG_minister_carlos_alberto"
+			}
+		}
+	}
+	EUYL_ARG_heriberto_la_galine={
+		advisor={
+			slot = navy_chief
+			idea_token = EUYL_ARG_heriberto_la_galine
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				navy_chief_commerce_raiding_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="EUYL_ARG_heriberto_la_galine"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_1"
+			}
+		}
+	}
+	EUYL_ARG_thomas_martinez={
+		advisor={
+			slot = high_command
+			idea_token = EUYL_ARG_thomas_martinez
+			ledger  = army
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				army_logistics_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="EUYL_ARG_thomas_martinez"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_4"
+			}
+		}
+	}
+	EUYL_ARG_luis_podesta_costa={
+		advisor={
+			slot = political_advisor
+			idea_token = EUYL_ARG_luis_podesta_costa
+			allowed  = {
+				original_tag  = ARG
+			}
+			traits  = {
+				backroom_backstabber
+			}
+			cost = 75
+		}
+		name="EUYL_ARG_luis_podesta_costa"
+		portraits={
+			army={
+				small="GFX_idea_ARG_minister_luis_podesta"
+			}
+		}
+	}
+
+	ARG_defensive_military_council={ #Anarchist
+		advisor={
+			slot = army_chief
+			idea_token = ARG_defensive_military_council
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				army_chief_defensive_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Defensive Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_offensive_military_council={ #Anarchist
+		advisor={
+			slot = army_chief
+			idea_token = ARG_offensive_military_council
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				army_chief_offensive_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Offensive Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_organizational_military_council={ #Anarchist
+		advisor={
+			slot = army_chief
+			idea_token = ARG_organizational_military_council
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				army_chief_organizational_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Organizational Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_air_safety_aviation_council={ #Anarchist
+		advisor={
+			slot = air_chief
+			idea_token = ARG_air_safety_aviation_council
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				air_chief_safety_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Air Safety Aviation Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_all_weather_aviation_council={ #Anarchist
+		advisor={
+			slot = air_chief
+			idea_token = ARG_all_weather_aviation_council
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				air_chief_all_weather_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="All Weather Aviation Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_commerce_raiding_naval_council={ #Anarchist
+		advisor={
+			slot = navy_chief
+			idea_token = ARG_commerce_raiding_naval_council
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				navy_chief_commerce_raiding_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Commerce Raiding Naval Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_reform_naval_council={ #Anarchist
+		advisor={
+			slot = navy_chief
+			idea_token = ARG_reform_naval_council
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				navy_chief_reform_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Reform Naval Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_infantry_military_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = ARG_infantry_military_council
+			ledger = army
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				army_infantry_3
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Infantry Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_army_regrouping_military_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = ARG_army_regrouping_military_council
+			ledger = army
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				army_regrouping_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Army Regrouping Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_concealment_military_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = ARG_concealment_military_council
+			ledger = army
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				army_concealment_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Concealment Military Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_naval_strike_aviation_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = ARG_naval_strike_aviation_council
+			ledger = navy
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				air_naval_strike_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Naval Strike Aviation Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_close_air_support_aviation_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = ARG_close_air_support_aviation_council
+			ledger = air
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				air_close_air_support_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Close Air Support Aviation Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_logistics_naval_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = ARG_logistics_naval_council
+			ledger = navy
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				navy_fleet_logistics_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Logistics Naval Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	ARG_anti_submarine_naval_council={ #Anarchist
+		advisor={
+			slot = high_command
+			idea_token = ARG_anti_submarine_naval_council
+			ledger = navy
+			allowed  = {
+				original_tag  = ARG
+			}
+			visible = {
+				has_cosmetic_tag = AARC
+			}
+
+			available = {
+				has_cosmetic_tag = AARC
+				NOT = {
+					has_government = democratic
+				}
+			}
+			traits  = {
+				navy_anti_submarine_2
+			}
+			ai_will_do  = {
+				factor  = 1.000
+			}
+		}
+		name="Anti-Submarine Naval Council"
+		portraits={
+			army={
+				small="GFX_idea_spr_anarchist_council"
+			}
+		}
+	}
+
+	##### SCIENTISTS #####
+
+	ARG_ronald_richter = {
+		name = "Ronald Richter"
+		portraits = {
+			army = {
+				large = "gfx/leaders/ARG/ARG_ronald_richter_portrait.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_nuclear_power_expert scientist_trait_brilliant_theorist }
+			skills = {
+				specialization_nuclear = 3
+			}
+
+			visible = {
+				owner = {
+					has_completed_focus = ARG_project_huemul
+				}
+			}
+		}
+	}
+
+	ARG_kurt_tank = {
+		name = "Kurt Tank"
+		portraits = {
+			army = {
+				large = GFX_portrait_GER_kurt_tank
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_aircraft_specialist scientist_trait_fast_learner }
+			skills = {
+				specialization_air = 2
+			}
+
+			visible = {
+				owner = {
+					has_completed_focus = ARG_develop_new_fighters
+				}
+			}
+		}
+	}
+
+	ARG_mario_bancora = {
+		name = "Mario Báncora"
+		portraits = {
+			army = {
+				large = "gfx/leaders/scientists/generic_scientists/portrait_generic_europe_male_03.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_nuclear_specialist scientist_trait_fast_learner }
+			skills = {
+				specialization_nuclear = 1
+			}
+		}
+	}
+
+	ARG_francisco_de_arteaga = {
+		name = "Francisco de Arteaga"
+		portraits = {
+			army = {
+				large = "gfx/leaders/ARG/ARG_francisco_de_arteaga_portrait.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_guidance_systems_expert }
+			skills = {
+				specialization_air = 2
+			}
+		}
+	}
+
+	ARG_elisa_bachofen = {
+		name = "Elisa Bachofen"
+		portraits = {
+			army = {
+				large = "gfx/leaders/scientists/generic_scientists/portrait_generic_southamerica_female_02.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_electronics_specialist scientist_trait_bright scientist_trait_fast_learner }
+			skills = {
+				specialization_air = 2
+			}
+		}
+	}
+
+	ARG_pablo_groppo = {
+		name = "Pablo Groppo"
+		portraits = {
+			army = {
+				large = "gfx/leaders/scientists/generic_scientists/portrait_generic_europe_male_05.dds"
+			}
+		}
+
+		scientist = {
+			traits = { scientist_trait_armored_specialist }
+			skills = {
+				specialization_land = 2
+			}
+		}
+	}
+}

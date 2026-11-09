@@ -1,0 +1,2648 @@
+###########################
+# Chile Events
+###########################
+
+add_namespace = chile
+
+
+#NAP
+country_event = {
+	id = chile.1
+	title = chile.1.t
+	desc = chile.1.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.1.a
+		ai_chance = {
+			base = 10
+		}
+		add_opinion_modifier = {
+			target = FROM
+			modifier = NAP
+		}
+		diplomatic_relation = {
+			country = FROM
+			relation = non_aggression_pact
+		}
+		FROM = {
+			country_event = {
+				id = chile.12
+				hours = 4
+				random_hours = 2
+			}
+		}
+	}
+	option = { # No
+		name = chile.1.b
+		ai_chance = {
+			base = 2
+		}
+		FROM = {
+			country_event = {
+				id = chile.13
+				hours = 4
+				random_hours = 2
+			}
+		}
+	}
+}
+
+#If NAP is accepted
+country_event = {
+	id = chile.12
+	title = chile.12.t
+	desc = chile.12.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.12.a
+		ai_chance = {
+			base = 10
+		}
+		add_opinion_modifier = {
+			target = FROM
+			modifier = NAP
+		}
+		diplomatic_relation = {
+			country = FROM
+			relation = non_aggression_pact
+		}
+	}
+}
+
+#If NAP is rejected
+country_event = {
+	id = chile.13
+	title = chile.13.t
+	desc = chile.13.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.13.a
+
+		ai_chance = {
+			base = 10
+		}
+	}
+}
+
+#ARG Invite
+country_event = {
+	id = chile.2
+	title = chile.2.t
+	desc = chile.2.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.2.a
+		ai_chance = {
+			base = 10
+		}
+		FROM = {
+			add_to_faction = ROOT
+			country_event = {
+				id = chile.3
+				hours = 4
+				random_hours = 2
+			}
+		}
+		add_ideas = democratic_influence
+		add_ai_strategy = {
+			type = alliance
+			id = FROM
+			value = 200
+		}
+	}
+	option = { # No
+		name = chile.2.b
+		ai_chance = {
+			base = 5
+		}
+		FROM = {
+			country_event = {
+				id = chile.4
+				hours = 4
+				random_hours = 2
+			}
+		}
+	}
+}
+
+#If Argentina Accepts
+country_event = {
+	id = chile.3
+	title = chile.3.t
+	desc = chile.3.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.3.a
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+#If Argentina Refuses
+country_event = {
+	id = chile.4
+	title = chile.4.t
+	desc = chile.4.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.4.a
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+#Join SOV
+country_event = {
+	id = chile.5
+	title = chile.5.t
+	desc = chile.5.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.5.a
+		ai_chance = {
+			base = 90
+		}
+		ROOT = {
+			add_to_faction = FROM
+			country_event = {
+				id = chile.6
+				hours = 4
+				random_hours = 2
+			}
+		}
+		add_ai_strategy = {
+			type = alliance
+			id = FROM
+			value = 200
+		}
+	}
+	option = { # No
+		name = chile.5.b
+		ai_chance = {
+			base = 10
+		}
+		FROM = {
+			country_event = {
+				id = chile.7
+				hours = 4
+				random_hours = 2
+			}
+		}
+	}
+}
+
+#If SOV Accepts
+country_event = {
+	id = chile.6
+	title = chile.6.t
+	desc = chile.6.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.6.a
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+#If SOV Declines
+country_event = {
+	id = chile.7
+	title = chile.7.t
+	desc = chile.7.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.7.a
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+#Join GER
+country_event = {
+	id = chile.8
+	title = chile.8.t
+	desc = chile.8.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.8.a
+		ai_chance = {
+			base = 90
+		}
+		ROOT = {
+			add_to_faction = FROM
+			country_event = {
+				id = chile.9
+				hours = 4
+				random_hours = 2
+			}
+		}
+		add_ai_strategy = {
+			type = alliance
+			id = FROM
+			value = 200
+		}
+	}
+	option = { # No
+		name = chile.9.b
+		ai_chance = {
+			base = 10
+		}
+		FROM = {
+			country_event = {
+				id = chile.91
+				hours = 4
+				random_hours = 2
+			}
+		}
+	}
+}
+
+#If GER Accepts
+country_event = {
+	id = chile.9
+	title = chile.9.t
+	desc = chile.9.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.9.a
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+#If GER Declines
+country_event = {
+	id = chile.91
+	title = chile.91.t
+	desc = chile.91.d
+	#picture = " "
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.91.a
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+#Chile Demands Bolivian Lands!
+country_event = {
+	id = chile.110
+	title = chile.110.t
+	desc = chile.110.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.110.a
+		ai_chance = {
+			base = 0
+			modifier = {
+				is_in_faction_with = CHL
+				add = 10
+			}
+			modifier = {
+				is_subject_of = CHL
+				add = 100
+			}
+		}
+		effect_tooltip = {
+			FROM = {
+				transfer_state = 953
+			}
+
+			ARG = {
+				add_state_core = 953
+				transfer_state = 953
+			}
+		}
+		FROM = {
+			country_event = {
+				id = chile.111
+				hours = 3
+				random_hours = 2
+			}
+		}
+	}
+	option = { # No
+		name = chile.110.b
+		ai_chance = {
+			base = 5
+			modifier = {
+				is_subject_of = CHL
+				factor = 0
+			}
+		}
+		FROM = {
+			country_event = {
+				id = chile.112
+				hours = 3
+				random_hours = 2
+			}
+		}
+	}
+}
+#Bolivia says Yes
+country_event = {
+	id = chile.111
+	title = chile.111.t
+	desc = chile.111.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.111.a
+		transfer_state = 302
+
+		ARG = {
+			add_state_core = 953
+			transfer_state = 953
+		}
+	}
+}
+
+#Bolivia says No
+country_event = {
+	id = chile.112
+	title = chile.112.t
+	desc = chile.112.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # War
+		name = chile.112.a
+		create_wargoal = {
+			target = FROM
+			type = take_state_focus
+			generator = { 302 }
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { # No War
+		name = chile.112.b
+		add_political_power = -50
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+#Chile Demands Peruvian Lands!
+country_event = {
+	id = chile.310
+	title = chile.310.t
+	desc = chile.310.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.310.a
+		ai_chance = {
+			base = 0
+			modifier = {
+				is_in_faction_with = CHL
+				add = 10
+			}
+			modifier = {
+				is_subject_of = CHL
+				add = 100
+			}
+		}
+		effect_tooltip = {
+			FROM = {
+				transfer_state = 947
+			}
+
+		}
+		FROM = {
+			country_event = {
+				id = chile.311
+				hours = 3
+				random_hours = 2
+			}
+		}
+	}
+	option = { # No
+		name = chile.310.b
+		ai_chance = {
+			base = 5
+			modifier = {
+				is_subject_of = CHL
+				factor = 0
+			}
+		}
+		FROM = {
+			country_event = {
+				id = chile.312
+				hours = 3
+				random_hours = 2
+			}
+		}
+	}
+}
+#Peru says Yes
+country_event = {
+	id = chile.311
+	title = chile.311.t
+	desc = chile.311.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.311.a
+		transfer_state = 947
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+#Peru says No
+country_event = {
+	id = chile.312
+	title = chile.312.t
+	desc = chile.312.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # War
+		name = chile.312.a
+		create_wargoal = {
+			target = FROM
+			type = take_state_focus
+			generator = { 947 }
+		}
+		ai_chance = {
+			base = 10
+		}
+	}
+	option = { # No War
+		name = chile.312.b
+		add_political_power = -50
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+#ARG Ult
+country_event = {
+	id = chile.410
+	title = chile.410.t
+	desc = chile.410.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.410.a
+		ai_chance = {
+			base = 0
+			modifier = {
+				is_in_faction_with = CHL
+				add = 10
+			}
+			modifier = {
+				is_subject_of = CHL
+				add = 100
+			}
+		}
+		effect_tooltip = {
+			FROM = {
+				transfer_state = 953
+			}
+
+		}
+		FROM = {
+			country_event = {
+				id = chile.411
+				hours = 3
+				random_hours = 2
+			}
+		}
+	}
+	option = { # No
+		name = chile.410.b
+		ai_chance = {
+			base = 5
+			modifier = {
+				is_subject_of = CHL
+				factor = 0
+			}
+		}
+		FROM = {
+			country_event = {
+				id = chile.412
+				hours = 3
+				random_hours = 2
+			}
+		}
+	}
+}
+
+#ARG says Yes
+country_event = {
+	id = chile.411
+	title = chile.411.t
+	desc = chile.411.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.411.a
+		transfer_state = 953
+		add_state_core = 953
+
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+#ARG says No
+country_event = {
+	id = chile.412
+	title = chile.412.t
+	desc = chile.412.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # War
+		name = chile.412.a
+		create_wargoal = {
+			target = FROM
+			type = take_state_focus
+			generator = { 953 }
+		}
+		ai_chance = {
+			base = 10
+		}
+		add_state_core = 953
+	}
+	option = { # No War
+		name = chile.412.b
+		add_political_power = -50
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+#ARG Ult 2
+country_event = {
+	id = chile.510
+	title = chile.510.t
+	desc = chile.510.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # Ok
+		name = chile.510.a
+		ai_chance = {
+			base = 12
+			modifier = {
+				is_in_faction_with = CHL
+				add = 10
+			}
+			modifier = {
+				is_subject_of = CHL
+				add = 100
+			}
+		}
+		effect_tooltip = {
+			FROM = {
+				transfer_state = 954
+				transfer_state = 955
+				transfer_state = 512
+				add_state_core = 954
+				add_state_core = 955
+				add_state_core = 512
+			}
+
+		}
+		FROM = {
+			country_event = {
+				id = chile.511
+				hours = 3
+				random_hours = 2
+			}
+		}
+	}
+	option = { # Puppet
+		name = chile.510.c
+		ai_chance = {
+			base = 5
+			modifier = {
+				is_subject_of = CHL
+				factor = 0
+			}
+		}
+		effect_tooltip = {
+			FROM = {
+				custom_effect_tooltip = CHL_puppet_ARG
+			}
+		}
+		FROM = {
+			country_event = {
+				id = chile.513
+				hours = 3
+				random_hours = 2
+			}
+		}
+	}
+	option = { # No
+		name = chile.510.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				is_subject_of = CHL
+				factor = 0
+			}
+		}
+
+		effect_tooltip = {
+			FROM = {
+				create_wargoal = {
+					target = FROM
+					type = take_state_focus
+					generator = { 954 955 512 }
+				}
+				transfer_state = 954
+				transfer_state = 955
+				transfer_state = 512
+				add_state_core = 954
+				add_state_core = 955
+				add_state_core = 512
+			}
+
+		}
+
+		FROM = {
+			country_event = {
+				id = chile.512
+				hours = 3
+				random_hours = 2
+			}
+		}
+	}
+}
+#ARG Cedes Lands
+country_event = {
+	id = chile.511
+	title = chile.511.t
+	desc = chile.511.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # Ok
+		ai_chance = {
+			base = 10
+		}
+		name = chile.511.a
+		transfer_state = 954
+		transfer_state = 955
+		transfer_state = 512
+		add_state_core = 954
+		add_state_core = 955
+		add_state_core = 512
+	}
+}
+
+#ARG bows to our will
+country_event = {
+	id = chile.513
+	title = chile.513.t
+	desc = chile.513.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # War
+		name = chile.513.a
+		ai_chance = {
+			base = 10
+		}
+		diplomatic_relation = {
+			country = FROM
+			relation = puppet
+			active = yes
+		}
+	}
+}
+
+#ARG says No
+country_event = {
+	id = chile.512
+	title = chile.512.t
+	desc = chile.512.d
+	#picture = ""
+	is_triggered_only = yes
+	option = { # War
+		name = chile.512.a
+		create_wargoal = {
+			target = FROM
+			type = take_state_focus
+			generator = { 954 955 512 }
+		}
+		ai_chance = {
+			base = 10
+		}
+		add_state_core = 954
+		add_state_core = 955
+		add_state_core = 512
+	}
+	option = { # No War
+		name = chile.512.b
+		add_political_power = -50
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+#Anarchist Chile asks Anarchist Spain to combine arms
+country_event = {
+	id = chile.15
+	title = chile.15.t
+	desc = chile.15.d
+	#picture = #something will be here
+
+	is_triggered_only = yes
+
+	option = {	#accept
+		name = chile.15.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 4
+				strength_ratio = {
+					tag = FROM
+					ratio < 1
+				}
+			}
+			modifier = {
+				factor = 3
+				has_opinion = {
+					target = FROM
+					value > 50
+				}
+			}
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				FROM = {
+					num_of_factories > 34
+				}
+			}
+		}
+		if = {
+			limit = {
+				FROM = {
+					original_tag = CHL
+				}
+			}
+			set_global_flag = CHL_spain_accepted_unification
+		}
+		FROM = {
+			annex_country = {
+				target = SPC
+				transfer_troops = yes
+			}
+			hidden_effect = {
+				country_event = { id = peru.16 days = 1 }
+			}
+		}
+	}
+
+	option = { #decline
+		name = chile.15.b
+		ai_chance = {
+			base = 15
+			modifier = {
+				factor = 4
+				strength_ratio = {
+					tag = FROM
+					ratio > 1
+				}
+			}
+			modifier = {
+				factor = 2
+				num_of_factories > 24
+			}
+			modifier = {
+				factor = 3
+				FROM = { has_war = yes }
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_civil_war = yes
+					FROM = { has_civil_war = yes }
+				}
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.17 days = 1 }
+			}
+		}
+	}
+}
+
+#Chile gets notif of Spain accepting
+country_event = {
+	id = chile.16
+	title = chile.16.t
+	desc = chile.16.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.16.a
+	}
+}
+
+#Chile gets notif of Spain not accepting
+country_event = {
+	id = chile.17
+	title = chile.17.t
+	desc = chile.17.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.17.a
+	}
+}
+
+#temporary event to promte discord and patreon, will be removed in a week
+country_event = {
+	id = chile.18
+	title = chile.18.t
+	desc = chile.18.d
+
+	hidden = yes
+
+	picture = GFX_discord_and_patreon
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.18.a
+	}
+}
+
+#Event to choose leader during civil war
+country_event = {
+	id = chile.19
+	title = chile.19.t
+	desc = chile.19.d
+	picture = GFX_CHL_chile.19
+
+	is_triggered_only = yes
+
+	option = { #Marees
+		name = chile.19.a
+	}
+
+	option = {
+		name = chile.19.b
+		create_country_leader = {
+			name = "Carlos Ibáñez del Campo"
+			desc = "POLITICS_CARLOS_IBANEZ_DEL_CAMPO_DESC"
+			picture = "Portrait_CHL_Carlos_Ibanez_del_Campo.dds"
+			expire = "1965.1.1"
+			ideology = nazism
+			traits = {
+				CHL_military_leader
+				CHL_economist
+			}
+		}
+	}
+}
+
+#Paraguay gets event to join the comintern
+country_event = {
+	id = chile.20
+	title = chile.20.t
+	desc = chile.20.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = { #accept
+		name = chile.20.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				add = 20
+				has_government = communism
+			}
+			modifier = {
+				add = 40
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 20
+				num_of_factories > 24
+			}
+			modifier = {
+				add = 30
+				has_army_manpower = { size > 199999 }
+			}
+		}
+		hidden_effect = {
+			SOV = { add_opinion_modifier = { modifier = cheat_opinion_modifier_good target = ROOT } }
+			hidden_effect = {
+				FROM = {
+					country_event = { id = peru.16 hours = 6 }
+				}
+			}
+		}
+		SOV = {
+			country_event = { id = generic.2 hours = 6 }
+		}
+	}
+
+	option = { #decline
+		name = chile.20.b
+		ai_chance = {
+			base = 40
+		}
+		effect_tooltip = {
+			random_list = {
+				50 = {
+					FROM = {
+						create_wargoal = {
+							type = annex_everything
+							target = ROOT
+						}
+					}
+				}
+				50 = {
+
+				}
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = peru.17 hours = 4 }
+			}
+		}
+	}
+}
+
+#Communist party forms the Frente Popular
+country_event = {
+	id = chile.21
+	title = chile.21.t
+	desc = chile.21.d
+	picture = GFX_CHL_chile_21
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = CHL
+		date > 1936.5.1
+		NOT = {
+			has_completed_focus = CHL_communist_path
+		}
+	}
+
+	option = {
+		name = chile.21.a
+		add_stability = -0.01
+		custom_effect_tooltip = CHL_increase_communist_by_2
+		set_party_name = {
+			ideology = communism
+			long_name = CHL_frente_popular_long
+			name = CHL_frente_popular
+		}
+		retire_ideology_leader = communism
+		promote_character = EUYL_CHL_pedro_aguirre_cerda
+		hidden_effect = {
+			add_to_variable = { CHL_communists_power = 2 }
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+			set_country_flag = CHL_FP_formed
+		}
+	}
+}
+
+#Nacistas protest supression of their party
+country_event = {
+	id = chile.22
+	title = chile.22.t
+	desc = chile.22.d
+	picture = GFX_report_event_soldiers_marching
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.22.a
+		custom_effect_tooltip = CHL_random_state_rebel_f_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_demilitarized_zone = no
+					is_core_of = ROOT
+				}
+				set_demilitarized_zone = yes
+				add_dynamic_modifier = { modifier = CHL_organized_nacista_rebellion }
+				add_to_array = {
+					array = CHL_organized_nacista_rebellion_states
+				}
+			}
+		}
+	}
+}
+
+#Communists protest supression of their party
+country_event = {
+	id = chile.23
+	title = chile.23.t
+	desc = chile.23.d
+	picture = GFX_report_event_soldiers_marching
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.23.a
+		custom_effect_tooltip = CHL_random_state_rebel_c_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_demilitarized_zone = no
+					is_core_of = ROOT
+				}
+				set_demilitarized_zone = yes
+				add_dynamic_modifier = { modifier = CHL_organized_communist_rebellion }
+				add_to_array = {
+					array = CHL_organized_communist_rebellion_states
+				}
+			}
+		}
+	}
+}
+
+#Nacistas demand increased recognition
+country_event = {
+	id = chile.25
+	title = chile.25.t
+	desc = chile.25.d
+	picture = GFX_CHL_chile_25
+
+	is_triggered_only = yes
+
+	option = { #accept their demand
+		name = chile.25.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 2
+				check_variable = { CHL_nacista_power < 6 }
+			}
+		}
+		custom_effect_tooltip = CHL_increase_nacista_by_3
+		add_popularity = { ideology = fascism popularity = 0.02 }
+		hidden_effect = {
+			add_to_variable = { CHL_nacista_power = 3 }
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+		}
+	}
+
+	option = { #refuse their demands
+		name = chile.25.b
+		ai_chance = {
+			base = 15
+		}
+		add_stability = -0.04
+		custom_effect_tooltip = CHL_random_state_rebel_f_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_demilitarized_zone = no
+					is_core_of = ROOT
+				}
+				set_demilitarized_zone = yes
+				add_dynamic_modifier = { modifier = CHL_organized_nacista_rebellion }
+				add_to_array = {
+					array = CHL_organized_nacista_rebellion_states
+				}
+			}
+		}
+	}
+}
+
+#Communists demand increased recognition
+country_event = {
+	id = chile.26
+	title = chile.26.t
+	desc = chile.26.d
+	picture = GFX_CHL_chile_26
+
+	is_triggered_only = yes
+
+	option = { #accept their demand
+		name = chile.25.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 2
+				check_variable = { CHL_communists_power < 6 }
+			}
+		}
+		custom_effect_tooltip = CHL_increase_communist_by_3
+		add_popularity = { ideology = communism popularity = 0.02 }
+		hidden_effect = {
+			add_to_variable = { CHL_communists_power = 3 }
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+		}
+	}
+
+	option = { #refuse their demands
+		name = chile.25.b
+		ai_chance = {
+			base = 15
+		}
+		add_stability = -0.04
+		custom_effect_tooltip = CHL_random_state_rebel_c_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_demilitarized_zone = no
+					is_core_of = ROOT
+				}
+				set_demilitarized_zone = yes
+				add_dynamic_modifier = { modifier = CHL_organized_communist_rebellion }
+				add_to_array = {
+					array = CHL_organized_communist_rebellion_states
+				}
+			}
+		}
+	}
+}
+
+#Nacistas increment slightly their power
+country_event = {
+	id = chile.28
+	title = chile.28.t
+	desc = chile.28.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Ok"
+		custom_effect_tooltip = CHL_increase_nacista_by_2
+		add_popularity = { ideology = fascism popularity = 0.01 }
+		hidden_effect = {
+			add_to_variable = { CHL_nacista_power = 2 }
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+		}
+	}
+}
+
+#Communists slightly increase their power
+country_event = {
+	id = chile.29
+	title = chile.29.t
+	desc = chile.29.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Ok"
+		custom_effect_tooltip = CHL_increase_communist_by_2
+		add_popularity = { ideology = communism popularity = 0.01 }
+		hidden_effect = {
+			add_to_variable = { CHL_communists_power = 2 }
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+		}
+	}
+}
+
+#Dispute between fascists and communists
+country_event = {
+	id = chile.30
+	title = chile.30.t
+	desc = chile.30.d
+	picture = GFX_report_event_generic_rally2
+
+	is_triggered_only = yes
+
+	immediate = {
+		add_stability = -0.01
+	}
+
+	option = {
+		name = chile.30.a
+		random_list = {
+			50 = {
+				modifier = {
+					factor = 0
+					has_country_flag = CHL_nacista_defeated
+				}
+				custom_effect_tooltip = CHL_nacista_triumphant_over_c_tt
+				custom_effect_tooltip = CHL_increase_nacista_by_5
+				custom_effect_tooltip = CHL_decrease_comunista_by_5
+				hidden_effect = {
+					add_to_variable = { CHL_nacista_power = 5 }
+					if = {
+						limit = { check_variable = { CHL_communists_power > 4 } }
+						subtract_from_variable = { CHL_communists_power = 5 }
+					}
+					else_if = {
+						limit = { check_variable = { CHL_communists_power > 3 } }
+						subtract_from_variable = { CHL_communists_power = 4 }
+					}
+					else_if = {
+						limit = { check_variable = { CHL_communists_power > 2 } }
+						subtract_from_variable = { CHL_communists_power = 3 }
+					}
+					else_if = {
+						limit = { check_variable = { CHL_communists_power > 1 } }
+						subtract_from_variable = { CHL_communists_power = 2 }
+					}
+					else_if = {
+						limit = { check_variable = { CHL_communists_power > 0 } }
+						subtract_from_variable = { CHL_communists_power = 1 }
+					}
+					else = {
+						add_popularity = { ideology = communism popularity = -0.01 }
+					}
+					add_popularity = { ideology = fascism popularity = 0.02 }
+					add_popularity = { ideology = communism popularity = -0.02 }
+					set_temp_variable = { CHL_temp_power = 100 }
+					set_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+					add_to_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+					subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+					set_variable = { CHL_control_over_nation = CHL_temp_power }
+				}
+			}
+			50 = {
+				modifier = {
+					factor = 0
+					has_country_flag = CHL_communist_defeated
+				}
+				custom_effect_tooltip = CHL_communist_triumpthant_over_f_tt
+				custom_effect_tooltip = CHL_increase_communist_by_5
+				custom_effect_tooltip = CHL_decrease_nacista_by_5
+				hidden_effect = {
+					add_to_variable = { CHL_communists_power = 5 }
+					if = {
+						limit = { check_variable = { CHL_nacista_power > 4 } }
+						subtract_from_variable = { CHL_nacista_power = 5 }
+					}
+					else_if = {
+						limit = { check_variable = { CHL_nacista_power > 3 } }
+						subtract_from_variable = { CHL_nacista_power = 4 }
+					}
+					else_if = {
+						limit = { check_variable = { CHL_nacista_power > 2 } }
+						subtract_from_variable = { CHL_nacista_power = 3 }
+					}
+					else_if = {
+						limit = { check_variable = { CHL_nacista_power > 1 } }
+						subtract_from_variable = { CHL_nacista_power = 2 }
+					}
+					else_if = {
+						limit = { check_variable = { CHL_nacista_power > 0 } }
+						subtract_from_variable = { CHL_nacista_power = 1 }
+					}
+					else = {
+						add_popularity = { ideology = fascism popularity = -0.01 }
+					}
+					add_popularity = { ideology = fascism popularity = -0.02 }
+					add_popularity = { ideology = communism popularity = 0.02 }
+					set_temp_variable = { CHL_temp_power = 100 }
+					set_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+					add_to_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+					subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+					set_variable = { CHL_control_over_nation = CHL_temp_power }
+				}
+			}
+			25 = { }
+		}
+	}
+}
+
+#Nacistas demand that the economy be closed
+country_event = {
+	id = chile.31
+	title = chile.31.t
+	desc = chile.31.d
+	picture = GFX_CHL_chile_31
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #abide by their demands
+		name = chile.31.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 10
+				has_stability > 0.8
+			}
+		}
+		add_stability = 0.02
+		add_ideas = closed_economy
+		custom_effect_tooltip = CHL_increase_nacista_by_1
+		add_popularity = { ideology = fascism popularity = 0.005 }
+		hidden_effect = {
+			add_to_variable = { CHL_nacista_power = 1 }
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+		}
+	}
+
+	option = { #not abide by their demands
+		name = chile.31.b
+		ai_chance = {
+			base = 20
+		}
+		add_stability = -0.05
+		custom_effect_tooltip = CHL_random_state_rebel_f_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_demilitarized_zone = no
+					is_core_of = ROOT
+				}
+				set_demilitarized_zone = yes
+				add_dynamic_modifier = { modifier = CHL_organized_nacista_rebellion }
+				add_to_array = {
+					array = CHL_organized_nacista_rebellion_states
+				}
+			}
+		}
+	}
+}
+
+#Nacistas demand increased parliamentary representation
+country_event = {
+	id = chile.32
+	title = chile.32.t
+	desc = chile.32.d
+	picture = GFX_report_event_fascist_gathering
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #abide by their demands
+		name = chile.32.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 10
+				has_stability > 0.8
+			}
+		}
+		custom_effect_tooltip = CHL_increase_nacista_by_1
+		add_popularity = { ideology = fascism popularity = 0.06 }
+		hidden_effect = {
+			add_to_variable = { CHL_nacista_power = 1 }
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+		}
+	}
+
+	option = { #not abide by their demands
+		name = chile.32.b
+		ai_chance = {
+			base = 20
+		}
+		add_stability = -0.04
+		custom_effect_tooltip = CHL_random_state_rebel_f_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_demilitarized_zone = no
+					is_core_of = ROOT
+				}
+				set_demilitarized_zone = yes
+				add_dynamic_modifier = { modifier = CHL_organized_nacista_rebellion }
+				add_to_array = {
+					array = CHL_organized_nacista_rebellion_states
+				}
+			}
+		}
+	}
+}
+
+#Communists demand balancing of social classes
+country_event = {
+	id = chile.33
+	title = chile.33.t
+	desc = chile.33.d
+	picture = GFX_CHL_chile_26
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #abide by their demands
+		name = chile.33.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 10
+				has_stability > 0.8
+			}
+		}
+		add_stability = 0.01
+		custom_effect_tooltip = CHL_activate_balance_social_classes_mission_tt
+		add_timed_idea = {
+			idea = CHL_communists_political_power
+			days = 750
+		}
+		hidden_effect = {
+			set_country_flag = CHL_balance_the_social_classes
+		}
+	}
+
+	option = { #deny their demands
+		name = chile.33.b
+		ai_chance = {
+			base = 20
+		}
+		add_stability = -0.08
+		custom_effect_tooltip = CHL_random_state_rebel_c_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_demilitarized_zone = no
+					is_core_of = ROOT
+				}
+				set_demilitarized_zone = yes
+				add_dynamic_modifier = { modifier = CHL_organized_communist_rebellion }
+				add_to_array = {
+					array = CHL_organized_communist_rebellion_states
+				}
+			}
+		}
+	}
+}
+
+#Communists demand increased welfare plans
+country_event = {
+	id = chile.34
+	title = chile.34.t
+	desc = chile.34.d
+	picture = GFX_report_event_hungary_parliament
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #abide by their demands
+		name = chile.34.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 10
+				has_stability > 0.8
+			}
+		}
+		add_timed_idea = {
+			idea = CHL_welfare_plans
+			days = 200
+		}
+		custom_effect_tooltip = CHL_increase_communist_by_1
+		add_popularity = { ideology = communism popularity = 0.005 }
+		hidden_effect = {
+			add_to_variable = { CHL_communists_power = 1 }
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+		}
+	}
+
+	option = { #deny their demands
+		name = chile.34.b
+		ai_chance = {
+			base = 20
+		}
+		add_stability = -0.04
+		custom_effect_tooltip = CHL_random_state_rebel_c_tt
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_demilitarized_zone = no
+					is_core_of = ROOT
+				}
+				set_demilitarized_zone = yes
+				add_dynamic_modifier = { modifier = CHL_organized_communist_rebellion }
+				add_to_array = {
+					array = CHL_organized_communist_rebellion_states
+				}
+			}
+		}
+	}
+}
+
+#Chileans prepare for the 1938 elections
+country_event = {
+	id = chile.35
+	title = chile.35.t
+	desc = chile.35.d
+	picture = GFX_report_event_generic_parliament
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = CHL
+		date > 1937.1.1
+		NOT = {
+			OR = {
+				has_completed_focus = CHL_begin_preperations_for_uprising
+				has_completed_focus = CHL_take_over_via_blood
+				has_completed_focus = CHL_victory_for_the_fp
+			}
+		}
+	}
+
+	option = {
+		name = chile.35.a
+		activate_mission_tooltip = CHL_the_1938_elections
+		hidden_effect = {
+			set_country_flag = CHL_election_preperations
+			set_variable = { CHL_chance_of_f_winning = party_popularity@fascism }
+			set_variable = { CHL_chance_of_c_winning = party_popularity@communism }
+			set_variable = { CHL_chance_of_d_winning = party_popularity@democratic }
+			multiply_variable = { CHL_chance_of_f_winning = 100 }
+			multiply_variable = { CHL_chance_of_c_winning = 100 }
+			multiply_variable = { CHL_chance_of_d_winning = 100 }
+			round_variable = CHL_chance_of_f_winning
+			round_variable = CHL_chance_of_c_winning
+			round_variable = CHL_chance_of_d_winning
+		}
+	}
+}
+
+#Nacistas win the elections
+country_event = {
+	id = chile.36
+	title = chile.36.t
+	desc = chile.36.d
+	picture = GFX_report_event_generic_rally2
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.36.a
+		set_politics = {
+			ruling_party = fascism
+		}
+		hidden_effect = {
+			set_country_flag = CHL_fascists_win
+		}
+	}
+}
+
+#Frente Popular win the Elections
+country_event = {
+	id = chile.37
+	title = chile.37.t
+	desc = chile.37.d
+	picture = GFX_report_event_generic_rally_3
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_rule = {
+				can_create_collaboration_government = no
+				can_declare_war_on_same_ideology = no
+				can_force_government = yes
+				can_send_volunteers = no
+				can_puppet = no
+				can_lower_tension = yes
+				can_only_justify_war_on_threat_country = yes
+				can_guarantee_other_ideologies = yes
+			}
+		}
+	}
+
+	option = {
+		name = chile.37.a
+		set_politics = {
+			ruling_party = communism
+			elections_allowed = yes
+		}
+		hidden_effect = {
+			set_cosmetic_tag = CHL_UNIFIED #social democratic Chile
+			set_country_flag = CHL_socialists_win
+		}
+	}
+}
+
+#Democrats win the elections
+country_event = {
+	id = chile.38
+	title = chile.38.t
+	desc = chile.38.d
+	picture = GFX_report_event_generic_rally
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.38.a
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+		}
+		retire_ideology_leader = democratic
+		promote_character = CHL_gustavo_ross
+		hidden_effect = {
+			set_country_flag = CHL_democrats_win
+		}
+	}
+}
+
+#Formation of the Alianza Popular Libertadora
+country_event = {
+	id = chile.39
+	title = chile.39.t
+	desc = chile.39.d
+	picture = GFX_report_event_generic_conference
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = CHL
+		has_dynamic_modifier = { modifier = CHL_political_instability }
+		date > 1938.6.1
+		has_country_flag = CHL_election_preperations
+		NOT = {
+			has_completed_focus = CHL_side_with_the_nacistas
+		}
+	}
+
+	option = {
+		name = chile.39.a
+		set_party_name = {
+			ideology = fascism
+			long_name = CHL_APL_long
+			name = CHL_APL
+		}
+		retire_ideology_leader = fascism
+		create_country_leader = {
+			name = "Carlos Ibáñez del Campo"
+			desc = "POLITICS_CARLOS_IBANEZ_DEL_CAMPO_DESC"
+			picture = "Portrait_CHL_Carlos_Ibanez_del_Campo.dds"
+			expire = "1965.1.1"
+			ideology = nazism
+			traits = {
+				CHL_military_leader
+				CHL_economist
+			}
+		}
+		activate_mission_tooltip = CHL_possible_coup_attempt
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_completed_focus = CHL_form_the_apl }
+				}
+				set_country_flag = CHL_nacista_coup
+			}
+			else = {
+				set_country_flag = CHL_nacista_coup_player
+			}
+		}
+	}
+}
+
+#Chilean government supresses the Nacista/Communist power (only happens when the player goes Fascist/Communist)
+country_event = {
+	id = chile.40
+	title = chile.40.t
+	desc = chile.40.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.40.a
+		if = {
+			limit = { has_country_flag = CHL_nacista_friendly }
+			custom_effect_tooltip = CHL_decrease_nacista_by_2_bad
+			hidden_effect = {
+				if = {
+					limit = { check_variable = { CHL_nacista_power > 1 } }
+					subtract_from_variable = { CHL_nacista_power = 2 }
+				}
+				else_if = {
+					limit = { check_variable = { CHL_nacista_power > 0 } }
+					subtract_from_variable = { CHL_nacista_power = 1 }
+				}
+				set_temp_variable = { CHL_temp_power = 100 }
+				set_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+				add_to_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+				subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+				set_variable = { CHL_control_over_nation = CHL_temp_power }
+			}
+		}
+		else = {
+			custom_effect_tooltip = CHL_decrease_comunista_by_2_bad
+			hidden_effect = {
+				if = {
+					limit = { check_variable = { CHL_communists_power > 1 } }
+					subtract_from_variable = { CHL_communists_power = 2 }
+				}
+				else_if = {
+					limit = { check_variable = { CHL_communists_power > 0 } }
+					subtract_from_variable = { CHL_communists_power = 1 }
+				}
+				set_temp_variable = { CHL_temp_power = 100 }
+				set_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+				add_to_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+				subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+				set_variable = { CHL_control_over_nation = CHL_temp_power }
+			}
+		}
+		hidden_effect = {
+			set_variable = { CHL_fascist_drift = CHL_nacista_power }
+			set_variable = { CHL_communist_drift = CHL_communists_power }
+			divide_variable = { CHL_fascist_drift = 450 }
+			divide_variable = { CHL_communist_drift = 450 }
+		}
+	}
+}
+
+#Argentina gets event of Chile willing to purchase the Patagonia
+country_event = {
+	id = chile.42
+	title = chile.42.t
+	desc = chile.42.d
+	picture = GFX_report_event_spr_carlists2
+
+	is_triggered_only = yes
+
+	option = { #accept
+		name = chile.42.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				add = 25
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				add = 20
+				ARG = {
+					num_of_factories < 30
+				}
+			}
+			modifier = {
+				add = 15
+				ARG = {
+					is_in_faction_with = FROM
+				}
+			}
+			modifier = {
+				add = 10
+				FROM = {
+					has_army_manpower = { size > 179999}
+				}
+			}
+			modifier = {
+				factor = 0
+				ARG = {
+					has_civil_war = yes
+				}
+			}
+		}
+		FROM = {
+			random_owned_controlled_state = {
+				limit = { industrial_complex > 1 }
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { industrial_complex > 1 }
+				remove_building = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+			add_timed_idea = {
+				idea = PRU_purchasing_arica
+				days = 240
+			}
+			transfer_state = 953
+			transfer_state = 954
+			transfer_state = 955
+			transfer_state = 512
+			hidden_effect = {
+				country_event = { id = peru.16 hours = 4 }
+			}
+		}
+		add_offsite_building = {
+			type = industrial_complex
+			level = 4
+		}
+		add_timed_idea = {
+			idea = CHL_purchasing_arica
+			days = 240
+		}
+	}
+
+	option = { #decline
+		name = chile.42.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				add = 50
+				has_war = yes
+			}
+		}
+		FROM = {
+			country_event = { id = peru.17 hours = 4 }
+		}
+	}
+}
+
+#Britain gets event of Chile asking for Pitcairn Island
+country_event = {
+	id = chile.43
+	title = chile.43.t
+	desc = chile.43.d
+	picture = GFX_report_event_hitler_handshake
+
+	is_triggered_only = yes
+
+	option = { #accept
+		name = chile.43.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 40
+				has_opinion = {
+					target = CHL
+					value > 80
+				}
+			}
+			modifier = {
+				add = 20
+				CHL = {
+					has_completed_focus = CHL_invite_british_architects
+				}
+			}
+		}
+		CHL = {
+			transfer_state = 270
+		}
+		hidden_effect = {
+			CHL = {
+				country_event = { id = peru.16 hours = 4 }
+			}
+		}
+	}
+
+	option = { #decline
+		name = chile.43.b
+		ai_chance = {
+			base = 2
+		}
+	}
+}
+
+#ROOT gets event of FROM demanding Pitcairn Island
+country_event = {
+	id = chile.430
+	title = chile.430.t
+	desc = chile.430.d
+	picture = GFX_report_event_generic_army
+
+	is_triggered_only = yes
+
+	option = { ## Let them have it
+		name = chile.430.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 2.5
+				has_war_with_major = yes
+			}
+			modifier = {
+				factor = 5
+				surrender_progress > 0.01
+			}
+			modifier = {
+				factor = 2
+				FROM = {
+					has_army_manpower = {
+						size > 149999
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = {
+					has_navy_size = {
+						size > 39
+					}
+				}
+			}
+			modifier = {
+				factor = 3
+				has_opinion = {
+					target = FROM
+					value > 49
+				}
+			}
+		}
+		FROM = {
+			transfer_state = 270
+			country_event = {
+				id = peru.16
+				hours = 8
+			}
+		}
+	}
+
+	option = { ## The islands shall remain British
+		name = chile.430.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 3
+				has_opinion = {
+					target = FROM
+					value < 0
+				}
+			}
+			modifier = {
+				factor = 2
+				has_war = no
+			}
+			modifier = {
+				factor = 0
+				has_civil_war = yes
+			}
+		}
+		FROM = {
+			country_event = {
+				id = peru.17
+				hours = 6
+			}
+		}
+	}
+}
+
+#Arturo's Assasination
+country_event = {
+	id = chile.44
+	title = chile.44.t
+	desc = chile.44.d
+	picture = GFX_report_event_usa_funeral
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.44.a
+		start_civil_war = {
+			ruling_party = fascism
+			ideology = ROOT
+			size = 0.65
+			capital = 951
+			states = {
+				951 952 949
+			}
+			keep_unit_leaders_trigger = {
+				has_trait = trait_CHL_fascist_sympathies
+			}
+		}
+		hidden_effect = {
+			remove_dynamic_modifier = { modifier = CHL_political_instability }
+			set_country_flag = CHL_nacista_coup_executed
+			country_event = { id = chile.45 days = 35 }
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+			}
+			if = {
+				limit = { is_ai = yes }
+				every_controlled_state = {
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 0.95"
+						owner = PREV
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 0.95"
+						owner = PREV
+						count = 3
+					}
+				}
+			}
+			279 = {
+				if = {
+					limit = {
+						has_state_flag = CHL_garnered_support_in_state
+					}
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+			random_owned_controlled_state = {
+				if = {
+					limit = {
+						has_state_flag = CHL_garnered_support_in_state
+					}
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+			507 = {
+				if = {
+					limit = {
+						has_state_flag = CHL_garnered_support_in_state
+					}
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+			random_other_country = {
+				limit = {
+					original_tag = CHL
+					NOT = {
+						has_government = fascism
+					}
+					has_civil_war = yes
+				}
+				add_ideas = CHL_state_of_near_anarchy
+				remove_dynamic_modifier = { modifier = CHL_political_instability }
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+						owner = PREV
+					}
+				}
+			}
+		}
+	}
+}
+
+#Communists cooperate with government in civil war OR Nacistas cooperate with government in civil war
+country_event = {
+	id = chile.45
+	title = chile.45.t
+	desc = chile.45.d
+	picture = GFX_report_event_hitler_handshake
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.45.a
+		if = {
+			limit = { has_completed_focus = CHL_take_over_via_blood }
+			if = {
+				limit = {
+					check_variable = { CHL_communists_power > 10 }
+				}
+				custom_effect_tooltip = CHL_government_gains_4_militias_tt
+				hidden_effect = {
+					random_other_country = {
+						limit = {
+							original_tag = CHL
+							has_civil_war = yes
+							NOT = {
+								has_government = fascism
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+					}
+				}
+			}
+			else = {
+				custom_effect_tooltip = CHL_government_gains_2_militias_tt
+				hidden_effect = {
+					random_other_country = {
+						limit = {
+							original_tag = CHL
+							has_civil_war = yes
+							NOT = {
+								has_government = fascism
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+					}
+				}
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					check_variable = { CHL_nacista_power > 10 }
+				}
+				custom_effect_tooltip = CHL_government_gains_4_militias_tt
+				hidden_effect = {
+					random_other_country = {
+						limit = {
+							original_tag = CHL
+							has_civil_war = yes
+							NOT = {
+								has_government = communism
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+					}
+				}
+			}
+			else = {
+				custom_effect_tooltip = CHL_government_gains_2_militias_tt
+				hidden_effect = {
+					random_other_country = {
+						limit = {
+							original_tag = CHL
+							has_civil_war = yes
+							NOT = {
+								has_government = communism
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+						random_owned_controlled_state = {
+							create_unit = {
+								division = "name = \"Militares\" division_template = \"Militares\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+								owner = PREV
+							}
+						}
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			set_variable = { CHL_communists_power = 0 }
+			set_variable = { CHL_nacista_power = 0 }
+		}
+	}
+}
+
+#Communist party forms the Frente Popular (this is for the focus version)
+country_event = {
+	id = chile.46
+	title = chile.21.t
+	desc = chile.21.d
+	picture = GFX_CHL_chile_21
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.21.a
+		add_stability = -0.01
+		custom_effect_tooltip = CHL_increase_communist_by_2
+		set_party_name = {
+			ideology = communism
+			long_name = CHL_frente_popular_long
+			name = CHL_frente_popular
+		}
+		promote_character = EUYL_CHL_pedro_aguirre_cerda
+		hidden_effect = {
+			add_to_variable = { CHL_communists_power = 2 }
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+			set_country_flag = CHL_FP_formed
+			set_country_flag = CHL_FP_player
+		}
+	}
+}
+
+#Formation of the Alianza Popular Libertadora (focus version of event)
+country_event = {
+	id = chile.47
+	title = chile.39.t
+	desc = chile.39.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.39.a
+		set_party_name = {
+			ideology = fascism
+			long_name = CHL_APL_long
+			name = CHL_APL
+		}
+		retire_ideology_leader = fascism
+		create_country_leader = {
+			name = "Carlos Ibáñez del Campo"
+			desc = "POLITICS_CARLOS_IBANEZ_DEL_CAMPO_DESC"
+			picture = "Portrait_CHL_Carlos_Ibanez_del_Campo.dds"
+			expire = "1965.1.1"
+			ideology = nazism
+			traits = {
+				CHL_military_leader
+				CHL_economist
+			}
+		}
+		activate_mission_tooltip = CHL_possible_coup_attempt
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_completed_focus = CHL_form_the_apl }
+				}
+				set_country_flag = CHL_nacista_coup
+			}
+			else = {
+				set_country_flag = CHL_nacista_coup_player
+			}
+		}
+	}
+}
+
+#Pedro's death
+country_event = {
+	id = chile.48
+	title = chile.48.t
+	desc = chile.48.d
+	picture = GFX_CHL_chile_48
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = CHL
+		has_country_leader = {
+			name = "Pedro Aguirre Cerda"
+			ruling_only = yes
+		}
+		date > 1941.9.25
+		has_civil_war = no
+	}
+
+	option = {
+		name = chile.48.a
+		kill_country_leader = yes
+		add_stability = -0.02
+		if = {
+			limit = { has_government = democratic }
+			create_country_leader = {
+				name = "Jerónimo Méndez"
+				desc = "POLITICS_JERONIMO_MENDEZ_DESC"
+				picture = "gfx/leaders/CHL/portrait_CHL_Jeronimo_Mendez.dds"
+				expire = "1965.1.1"
+				ideology = socialism
+				traits = {
+					#
+				}
+			}
+		}
+		else = {
+			create_country_leader = {
+				name = "Jerónimo Méndez"
+				desc = "POLITICS_JERONIMO_MENDEZ_DESC"
+				picture = "gfx/leaders/CHL/portrait_CHL_Jeronimo_Mendez.dds"
+				expire = "1965.1.1"
+				ideology = social_democracy
+				traits = {
+					#
+				}
+			}
+		}
+	}
+}
+
+#1942 elections
+country_event = {
+	id = chile.49
+	title = chile.49.t
+	desc = chile.49.d
+	picture = GFX_report_event_election_vote
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = CHL
+		date > 1942.2.1
+		OR = {
+			has_country_leader = {
+				name = "Jerónimo Méndez"
+				ruling_only = yes
+			}
+			has_country_leader = {
+				name = "Gustavo Ross Santa María"
+				ruling_only = yes
+			}
+		}
+		has_civil_war = no
+	}
+
+	option = { #Juan Antonio Rios
+		name = chile.49.a
+		trigger = {
+			has_country_leader = {
+				name = "Jerónimo Méndez"
+				ruling_only = yes
+			}
+		}
+		ai_chance = {
+			base = 20
+		}
+		retire_country_leader = yes
+		if = {
+			limit = { has_government = democratic }
+			create_country_leader = {
+				name = "Juan Antonio Riós"
+				desc = "POLITICS_JUAN_ANTONIO_DESC"
+				picture = "gfx/leaders/CHL/portrait_CHL_Jaun_Antonio_Riós.dds"
+				expire = "1965.1.1"
+				ideology = socialism
+				traits = {
+					ARG_expert_commercialist
+				}
+			}
+		}
+		else = {
+			create_country_leader = {
+				name = "Juan Antonio Riós"
+				desc = "POLITICS_JUAN_ANTONIO_DESC"
+				picture = "gfx/leaders/CHL/portrait_CHL_Jaun_Antonio_Riós.dds"
+				expire = "1965.1.1"
+				ideology = social_democracy
+				traits = {
+					ARG_expert_commercialist
+				}
+			}
+		}
+	}
+
+	option = { #Gustavo Ross
+		name = chile.49.b
+		trigger = {
+			has_country_leader = {
+				name = "Gustavo Ross Santa María"
+				ruling_only = yes
+			}
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+	option = { #Carlos Ibanez
+		name = chile.49.c
+		ai_chance = {
+			base = 5
+		}
+		set_politics = {
+			ruling_party = neutrality
+		}
+		retire_country_leader = yes
+		create_country_leader = {
+			name = "Carlos Ibáñez del Campo"
+			desc = "POLITICS_CARLOS_IBANEZ_DEL_CAMPO_DESC"
+			picture = "Portrait_CHL_Carlos_Ibanez_del_Campo.dds"
+			expire = "1965.1.1"
+			ideology = despotism
+			traits = {
+				CHL_military_leader
+				CHL_economist
+			}
+		}
+		hidden_effect = {
+			set_cosmetic_tag = CHL_UNIFIED
+			add_popularity = { ideology = neutrality popularity = 0.35 }
+		}
+	}
+}
+
+### Huelga Ferroviaria de [GetYear]
+country_event = {
+	id = chile.50
+	title = chile.50.t
+	desc = chile.50.d
+	picture = GFX_report_event_generic_strike
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.50.a
+		add_timed_idea = {
+			idea = CHL_railway_strikes
+			days = 90
+		}
+	}
+}
+
+## Fascist Coup in Chile ##
+news_event = {
+	id = chile.51
+	title = chile.51.t
+	desc = chile.51.d
+	picture = GFX_news_event_nacista_coup
+
+	major = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = chile.51.a
+		trigger = {
+			NOT = {
+				original_tag = CHL
+			}
+			has_government = fascism
+		}
+	}
+	option = {
+		name = chile.51.b
+		trigger = {
+			NOT = {
+				original_tag = CHL
+				has_government = fascism
+			}
+		}
+	}
+	option = {
+		name = chile.51.c
+		trigger = { original_tag = CHL }
+	}
+}

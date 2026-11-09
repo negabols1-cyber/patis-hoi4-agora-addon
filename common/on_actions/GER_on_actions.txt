@@ -1,0 +1,70 @@
+on_actions = {
+	# on_weekly_GER = { #Unused after Götterdämmerung
+		# 	effect = {
+			# 		if = {
+				# 			limit = {
+					# 				NOT = { is_ai = yes }
+					# 				NOT = {
+						# 					OR = {
+							# 						has_global_flag = his_only
+							# 						has_game_rule = {
+								# 							rule = ef_historical_only
+								# 							option = ENABLED
+								# 						}
+							# 					}
+						# 				}
+					# 				is_power_balance_in_range = {
+						# 					id = GER_ss_wehrmacht_conflict_bop
+						# 					range > GER_wehrmacht_high_control_range
+						# 				}
+					# 			}
+				# 			add_to_variable = {
+					# 				var = ss_anger
+					# 				value = 0.5
+					# 				tooltip = add_1_to_wh_anger
+					# 			}
+				# 			add_to_variable = { var = ss_wehrmacht_anger_check value = 1 }
+				# 			if = {
+					# 				limit = {
+						# 					check_variable = { var = ss_wehrmacht_anger_check value = 10 compare = greater_than_or_equals }
+						# 				}
+					# 				SS_resolve_effects_wehrmacht = yes
+					# 				set_variable = { var = ss_wehrmacht_anger_check value = 0 }
+					# 			}
+				# 		}
+			# 	}
+		# }
+	# effect = {
+		# 	if = {
+			# 		limit = {
+				# 			NOT = { is_ai = yes }
+				# 			NOT = {
+					# 				OR = {
+						# 					has_global_flag = his_only
+						# 					has_game_rule = {
+							# 						rule = ef_historical_only
+							# 						option = ENABLED
+							# 					}
+						# 				}
+					# 			}
+				# 			is_power_balance_in_range = {
+					# 				id = GER_ss_wehrmacht_conflict_bop
+					# 				range < GER_ss_high_control_range
+					# 			}
+				# 		}
+			# 		add_to_variable = {
+				# 			var = wehrmacht_anger
+				# 			value = 0.5
+				# 			tooltip = add_1_to_wh_anger
+				# 		}
+			# 		add_to_variable = { var = ss_wehrmacht_anger_check value = 1 }
+			# 		if = {
+				# 			limit = {
+					# 				check_variable = { var = ss_wehrmacht_anger_check value = 10 compare = greater_than_or_equals }
+					# 			}
+				# 			SS_resolve_effects_wehrmacht = yes
+				# 			set_variable = { var = ss_wehrmacht_anger_check value = 0 }
+				# 		}
+			# 	}
+		# }
+}

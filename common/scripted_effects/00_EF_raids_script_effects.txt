@@ -1,0 +1,223 @@
+RAID_NUKE_remove_manpower = {
+	set_temp_variable = { actual_state_manpower = 0 }
+	add_to_temp_variable = { actual_state_manpower = state_population_k }
+	set_variable_to_random = {
+		var = state_manpower_multiply
+		min = 95
+		max = 105
+	}
+	multiply_temp_variable = { actual_state_manpower = state_manpower_multiply }
+	set_temp_variable = { actual_state_manpower_minus = actual_state_manpower }
+	multiply_temp_variable = { actual_state_manpower_minus = -1 }
+	add_manpower = var:actual_state_manpower_minus
+	custom_effect_tooltip = generic_skip_one_line_tt
+	#custom_effect_tooltip = EF_NUKE_deaths_tt #For testing
+	# if = {
+		# 	limit = { state_population > 10000000 }
+		# 	custom_effect_tooltip = EF_NUKE_9M_deaths_tt
+		# 	hidden_effect = {
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 		add_manpower = -1000000
+			# 	}
+		# }
+	# else_if = {
+		# 	limit = { state_population > 9000000 }
+		# 	custom_effect_tooltip = EF_NUKE_8M_deaths_tt
+		# 	hidden_effect = {
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 	}
+		# }
+	# else_if = {
+		# 	limit = { state_population > 8000000 }
+		# 	custom_effect_tooltip = EF_NUKE_7M_deaths_tt
+		# 	hidden_effect = {
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 		add_manpower = -1000000
+			# 	}
+		# }
+	# else_if = {
+		# 	limit = { state_population > 7000000 }
+		# 	custom_effect_tooltip = EF_NUKE_6M_deaths_tt
+		# 	hidden_effect = {
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 	}
+		# }
+	# else_if = {
+		# 	limit = { state_population > 6000000 }
+		# 	custom_effect_tooltip = EF_NUKE_5M_deaths_tt
+		# 	hidden_effect = {
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 		add_manpower = -1000000
+			# 	}
+		# }
+	# else_if = {
+		# 	limit = { state_population > 5000000 }
+		# 	custom_effect_tooltip = EF_NUKE_4M_deaths_tt
+		# 	hidden_effect = {
+			# 		add_manpower = -2000000
+			# 		add_manpower = -2000000
+			# 	}
+		# }
+	# else_if = {
+		# 	limit = { state_population > 4000000 }
+		# 	custom_effect_tooltip = EF_NUKE_3M_deaths_tt
+		# 	hidden_effect = {
+			# 		add_manpower = -2000000
+			# 		add_manpower = -1000000
+			# 	}
+		# }
+	# else_if = {
+		# 	limit = { state_population > 3000000 }
+		# 	custom_effect_tooltip = EF_NUKE_2M_deaths_tt
+		# 	hidden_effect = { add_manpower = -2000000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 2000000 }
+		# 	custom_effect_tooltip = EF_NUKE_1M_deaths_tt
+		# 	hidden_effect = { add_manpower = -1000000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 1000000 }
+		# 	custom_effect_tooltip = EF_NUKE_900K_deaths_tt
+		# 	hidden_effect = { add_manpower = -900000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 900000 }
+		# 	custom_effect_tooltip = EF_NUKE_800K_deaths_tt
+		# 	hidden_effect = { add_manpower = -800000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 800000 }
+		# 	custom_effect_tooltip = EF_NUKE_700K_deaths_tt
+		# 	hidden_effect = { add_manpower = -700000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 700000 }
+		# 	custom_effect_tooltip = EF_NUKE_600K_deaths_tt
+		# 	hidden_effect = { add_manpower = -600000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 600000 }
+		# 	custom_effect_tooltip = EF_NUKE_500K_deaths_tt
+		# 	hidden_effect = { add_manpower = -500000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 500000 }
+		# 	custom_effect_tooltip = EF_NUKE_400K_deaths_tt
+		# 	hidden_effect = { add_manpower = -400000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 400000 }
+		# 	custom_effect_tooltip = EF_NUKE_300K_deaths_tt
+		# 	hidden_effect = { add_manpower = -300000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 300000 }
+		# 	custom_effect_tooltip = EF_NUKE_200K_deaths_tt
+		# 	hidden_effect = { add_manpower = -200000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 200000 }
+		# 	custom_effect_tooltip = EF_NUKE_100K_deaths_tt
+		# 	hidden_effect = { add_manpower = -100000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population > 100000 }
+		# 	custom_effect_tooltip = EF_NUKE_50K_deaths_tt
+		# 	hidden_effect = { add_manpower = -50000 }
+		# }
+	# else_if = {
+		# 	limit = { state_population < 100000 }
+		# 	custom_effect_tooltip = EF_NUKE_10K_deaths_tt
+		# 	hidden_effect = {
+
+			# 	}
+		# 	add_manpower = -10000
+		# }
+	#add_dynamic_modifier = { modifier = EF_radiation_state_modifier }
+	hidden_effect = {
+		set_state_flag = {
+			flag = ef_has_radiation
+			days = 120
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 3
+		}
+		if = {
+			limit = {
+				supply_node > 0
+			}
+			damage_building = {
+				type = supply_node
+				damage = 1
+			}
+		}
+	}
+}
+RAID_THERMONUKE_remove_manpower = {
+	set_temp_variable = { actual_state_manpower = 0 }
+	add_to_temp_variable = { actual_state_manpower = state_population_k }
+	set_variable_to_random = {
+		var = state_manpower_multiply
+		min = 100
+		max = 110
+	}
+	multiply_temp_variable = { actual_state_manpower = state_manpower_multiply }
+	set_temp_variable = { actual_state_manpower_minus = actual_state_manpower }
+	multiply_temp_variable = { actual_state_manpower_minus = -1 }
+	add_manpower = var:actual_state_manpower_minus
+	custom_effect_tooltip = generic_skip_one_line_tt
+	hidden_effect = {
+		set_state_flag = {
+			flag = ef_has_radiation
+			days = 120
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 3
+		}
+		if = {
+			limit = {
+				supply_node > 0
+			}
+			damage_building = {
+				type = supply_node
+				damage = 1
+			}
+		}
+	}
+
+}
+add_war_crime_effect = {
+	add_to_variable = {
+		var = war_crime_rate
+		value = 0.05
+	}
+	clamp_variable = {
+		var = war_crime_rate
+		max = 1
+	}
+}
+
+add_war_crime_effect_thermonuclear = {
+	add_to_variable = {
+		var = war_crime_rate
+		value = 0.10
+	}
+	clamp_variable = {
+		var = war_crime_rate
+		max = 1
+	}
+}

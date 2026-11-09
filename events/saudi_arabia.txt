@@ -1,0 +1,4082 @@
+###########################
+# Saudi Events
+###########################
+
+add_namespace = saudi
+add_namespace = saudi_news
+
+# Find Partners for Oil Exploration
+country_event = {
+	id = saudi.1
+	title = saudi.1.t
+	desc = saudi.1.d
+	picture = GFX_report_event_generic_handshake
+
+	is_triggered_only = yes
+
+	option = { #Americans
+		name = saudi.1.a
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 5
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 5
+				OR = {
+					SAU_is_historical_ai = yes
+					SAU_is_allies_ai = yes
+					SAU_is_arab_league_ai = yes
+				}
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					SAU_is_axis_ai = yes
+					SAU_is_islamist_ai = yes
+				}
+			}
+		}
+		custom_effect_tooltip = SAU_standard_oil_focus_available_tt
+		hidden_effect = {
+			set_country_flag = SAU_cooperation_with_americans_flag
+		}
+	}
+
+	option = { #British
+		name = saudi.1.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 2
+				OR = {
+					SAU_is_allies_ai = yes
+					SAU_is_arab_league_ai = yes
+				}
+			}
+		}
+		custom_effect_tooltip = SAU_aioc_focus_available_tt
+		hidden_effect = {
+			set_country_flag = SAU_cooperation_with_british_flag
+		}
+	}
+
+	option = { #Germans
+		name = saudi.1.c
+		trigger = {
+			GER = {
+				NOT = { has_government = communism }
+			}
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 50
+				OR = {
+					SAU_is_axis_ai = yes
+					SAU_is_islamist_ai = yes
+				}
+			}
+		}
+		custom_effect_tooltip = SAU_germans_focus_available_tt
+		hidden_effect = {
+			set_country_flag = SAU_cooperation_with_germans_flag
+		}
+	}
+
+	option = { #Soviets
+		name = saudi.1.f
+		trigger = {
+			date > 1937.11.1
+			has_completed_focus = SAU_regulations_on_slavery
+			has_completed_focus = SAU_treaty_of_friendship_with_iraq
+			NOT = { has_completed_focus = SAU_use_slaves_in_oil_exploration }
+			NOT = { has_completed_focus = SAU_use_slaves_in_the_construction_industry }
+			NOT = { SOV = { has_completed_focus = SOV_beaten_but_not_defeated } }
+			SOV = {
+				has_opinion = {
+					target = SAU
+					value > 49
+				}
+			}
+		}
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 5
+				is_historical_focus_on = no
+			}
+		}
+		custom_effect_tooltip = SAU_soviets_focus_available_tt
+		hidden_effect = {
+			set_country_flag = SAU_cooperation_with_soviets_flag
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+}
+
+# Treaty of Friendship with FROM
+country_event = {
+	id = saudi.2
+	title = saudi.2.t
+	desc = saudi.2.d
+	picture = GFX_report_event_SAU_treaty_of_friendship
+
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = saudi.2.a
+		ai_chance = {
+			base = 6
+			modifier = {
+				factor = 2
+				is_historical_focus_on = yes
+			}
+		}
+		if = {
+			limit = {
+				original_tag = IRQ
+			}
+			#give_guarantee = FROM
+			add_opinion_modifier = {
+				target = FROM
+				modifier = SAU_treaty_of_friendship
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			FROM = {
+				#give_guarantee = ROOT
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = SAU_treaty_of_friendship
+				}
+				country_event = { id = saudi.3 hours = 2 random_hours = 4 }
+			}
+		}
+		else = {
+			give_market_access = FROM
+			add_opinion_modifier = {
+				target = FROM
+				modifier = SAU_treaty_of_friendship
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			FROM = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = SAU_treaty_of_friendship
+				}
+				country_event = { id = saudi.3 hours = 2 random_hours = 4 }
+			}
+		}
+
+		hidden_effect = {
+			add_ai_strategy = {
+				type = befriend
+				id = FROM
+				value = 20
+			}
+			FROM = {
+				add_ai_strategy = {
+					type = befriend
+					id = ROOT
+					value = 20
+				}
+			}
+		}
+	}
+
+	option = { #No
+		name = saudi.2.b
+		ai_chance = {
+			base = 1
+		}
+		FROM = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = BUL_rejected_our_proposal
+			}
+			country_event = { id = saudi.4 hours = 2 random_hours = 4 }
+		}
+	}
+}
+
+# Treaty of Friendship with FROM - Accepted
+country_event = {
+	id = saudi.3
+	title = saudi.3.t
+	desc = saudi.3.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.3.a
+		if = {
+			limit = {
+				FROM = {
+					original_tag = IRQ
+				}
+			}
+			effect_tooltip = {
+				FROM = {
+					#give_guarantee = ROOT
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = SAU_treaty_of_friendship
+					}
+				}
+
+				custom_effect_tooltip = generic_skip_one_line_tt
+
+				#give_guarantee = FROM
+				add_opinion_modifier = {
+					target = FROM
+					modifier = SAU_treaty_of_friendship
+				}
+			}
+		}
+		else = {
+			effect_tooltip = {
+				FROM = {
+					give_market_access = ROOT
+					add_opinion_modifier = {
+						target = ROOT
+						modifier = SAU_treaty_of_friendship
+					}
+				}
+
+				custom_effect_tooltip = generic_skip_one_line_tt
+
+				add_opinion_modifier = {
+					target = FROM
+					modifier = SAU_treaty_of_friendship
+				}
+			}
+		}
+	}
+}
+
+# Treaty of Friendship with FROM - Refused
+country_event = {
+	id = saudi.4
+	title = saudi.4.t
+	desc = saudi.4.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.4.a
+		effect_tooltip = {
+			add_opinion_modifier = {
+				target = FROM
+				modifier = BUL_rejected_our_proposal
+			}
+		}
+	}
+}
+
+# Ask for British Colonies / Demand Syria and Lebanon
+country_event = {
+	id = saudi.5
+	title = {
+		text = saudi.5.t
+		trigger = {
+			NOT = { has_completed_focus = SAU_invite_germans }
+		}
+	}
+	title = {
+		text = saudi.5.alt.t
+		trigger = {
+			has_completed_focus = SAU_invite_germans
+		}
+	}
+	desc = {
+		text = saudi.5.d
+		trigger = {
+			NOT = { has_completed_focus = SAU_invite_germans }
+		}
+	}
+	desc = {
+		text = saudi.5.alt.d
+		trigger = {
+			has_completed_focus = SAU_invite_germans
+		}
+	}
+	picture = "[GetAskForColoniesGFX]"
+
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = saudi.5.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				threat > 40
+				factor = 1.5
+			}
+			modifier = {
+				threat > 60
+				factor = 2
+			}
+			modifier = {
+				is_in_faction = no
+				is_major = no
+				factor = 2.5
+			}
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 0.8
+			}
+			modifier = {
+				is_in_faction_with = SAU
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion = {
+					target = SAU
+					value > 65
+				}
+				factor = 1.5
+			}
+			modifier = {
+				strength_ratio = { tag = SAU ratio < 1 }
+				factor = 2
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = SAU_demanding_country_arab_flag
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 656
+						state = 658
+						state = 1013
+						state = 659
+						state = 992
+						state = 765
+						state = 1014
+						state = 455
+						state = 454
+					}
+					is_controlled_by_ROOT_or_subject = yes
+				}
+				set_state_flag = SAU_demanding_states_flag
+				transfer_state_to = FROM
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SAU_demanding_country_syr_flag
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 680
+						state = 677
+						state = 554
+						state = 553
+					}
+					is_controlled_by_ROOT_or_subject = yes
+				}
+				set_state_flag = SAU_demanding_states_flag
+				transfer_state_to = FROM
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SAU_demanding_country_libya_flag
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 451
+						state = 461
+						state = 663
+						state = 450
+						state = 662
+						state = 449
+						state = 661
+						state = 448
+						state = 273
+					}
+					is_controlled_by_ROOT_or_subject = yes
+				}
+				set_state_flag = SAU_demanding_states_flag
+				transfer_state_to = FROM
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SAU_demanding_country_djibouti_flag
+			}
+			every_state = {
+				limit = {
+					state = 268
+					is_controlled_by_ROOT_or_subject = yes
+				}
+				set_state_flag = SAU_demanding_states_flag
+				transfer_state_to = FROM
+			}
+		}
+		hidden_effect = {
+			SAU_remove_demand_flags_effect = yes
+			FROM = { country_event = { id = saudi.6 hours = 2 random_hours = 4 } }
+		}
+	}
+
+	option = { #No
+		name = saudi.5.b
+		ai_chance = {
+			base = 20
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 2
+			}
+			modifier = {
+				is_major = yes
+				NOT = { has_non_aggression_pact_with = FROM }
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				factor = 1.2
+				has_opinion = {
+					target = FROM
+					value < 0
+				}
+			}
+			modifier = {
+				SAU = {
+					is_ai = yes
+				}
+				factor = 0.5
+			}
+		}
+		custom_effect_tooltip = maybe_war_tt
+		effect_tooltip = {
+			FROM = {
+				add_opinion_modifier = { target = ROOT modifier = SOV_rejected_our_demands }
+			}
+			if = {
+				limit = {
+					original_tag = ENG
+					has_resources_rights = {
+						state = 292
+					}
+				}
+				remove_resource_rights = 292
+			}
+		}
+		hidden_effect = {
+			SAU_remove_demand_flags_reject_effect = yes
+			FROM = { country_event = { id = saudi.7 hours = 2 random_hours = 4 } }
+		}
+	}
+}
+
+# Ask for British Colonies / Demand Syria and Lebanon - FROM Accepts
+country_event = {
+	id = saudi.6
+	title = saudi.6.t
+	desc = saudi.6.d
+	picture = GFX_report_event_generic_peaceful_annexation
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.6.a
+		every_state = {
+			limit = {
+				has_state_flag = SAU_demanding_states_flag
+			}
+			effect_tooltip = {
+				transfer_state_to = ROOT
+			}
+			clr_state_flag = SAU_demanding_states_flag
+		}
+	}
+}
+
+# Ask for British Colonies / Demand Syria and Lebanon - FROM Refuses
+country_event = {
+	id = saudi.7
+	title = saudi.7.t
+	desc = saudi.7.d
+	picture = GFX_report_event_generic_military_parade
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.7.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				threat < 20
+				factor = 0
+			}
+		}
+		add_opinion_modifier = { target = FROM modifier = SOV_rejected_our_demands }
+
+		if = {
+			limit = {
+				FROM = {
+					original_tag = ENG
+					has_resources_rights = {
+						state = 292
+					}
+				}
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			ENG = { remove_resource_rights = 292 }
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		custom_effect_tooltip = SAU_demand_event_wargoals_tt
+		every_other_country = {
+			limit = {
+				OR = {
+					has_country_flag = SAU_rejected_syr_flag
+					has_country_flag = SAU_rejected_arab_flag
+					has_country_flag = SAU_rejected_libya_flag
+					AND = {
+						has_country_flag = SAU_rejected_djibouti_flag
+						NOT = { is_in_faction_with = ROOT }
+					}
+				}
+			}
+		}
+
+		hidden_effect = {
+			every_other_country = {
+				limit = {
+					has_country_flag = SAU_rejected_arab_flag
+				}
+				ROOT = {
+					create_wargoal = {
+						type = take_state
+						target = PREV
+						generator = { 656 658 1013 659 992 765 1014 455 }
+						expire = 0
+					}
+				}
+			}
+			every_other_country = {
+				limit = {
+					has_country_flag = SAU_rejected_syr_flag
+				}
+				ROOT = {
+					create_wargoal = {
+						type = take_state
+						target = PREV
+						generator = { 680 677 554 553 }
+						expire = 0
+					}
+				}
+			}
+			every_other_country = {
+				limit = {
+					has_country_flag = SAU_rejected_libya_flag
+				}
+				ROOT = {
+					create_wargoal = {
+						type = take_state
+						target = PREV
+						generator = { 461 663 450 662 449 661 448 273 }
+						expire = 0
+					}
+				}
+			}
+			every_other_country = {
+				limit = {
+					has_country_flag = SAU_rejected_djibouti_flag
+					NOT = { is_in_faction_with = ROOT }
+				}
+				ROOT = {
+					create_wargoal = {
+						type = take_state
+						target = PREV
+						generator = { 268 }
+						expire = 0
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = saudi.7.b
+		ai_chance = {
+			base = 1
+		}
+		add_political_power = -10
+		add_opinion_modifier = { target = FROM modifier = SOV_rejected_our_demands }
+		if = {
+			limit = {
+				FROM = {
+					original_tag = ENG
+					has_resources_rights = {
+						state = 292
+					}
+				}
+			}
+			ENG = { remove_resource_rights = 292 }
+		}
+	}
+}
+
+# Demand Submission FROM
+country_event = {
+	id = saudi.8
+	title = saudi.8.t
+	desc = saudi.8.d
+	picture = GFX_report_event_generic_troops_at_rivier_in_iraq
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = saudi.8.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				threat > 40
+				factor = 1.5
+			}
+			modifier = {
+				threat > 60
+				factor = 2
+			}
+			modifier = {
+				is_in_faction = no
+				is_major = no
+				factor = 2.5
+			}
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 0.8
+			}
+			modifier = {
+				is_in_faction_with = SAU
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion = {
+					target = SAU
+					value > 65
+				}
+				factor = 1.5
+			}
+			modifier = {
+				strength_ratio = { tag = SAU ratio < 1 }
+				factor = 2
+			}
+			modifier = {
+				factor = 2
+				SAU = {
+					has_army_manpower = { size > 199999 }
+				}
+			}
+			modifier = { #Minister of Foreign Affairs
+				factor = 1.5
+				SAU = { has_idea = SAU_faisal_bin_abdulaziz_al_saud }
+			}
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+		effect_tooltip = {
+			FROM = {
+				annex_country = { target = ROOT transfer_troops = yes }
+			}
+		}
+		hidden_effect = {
+			FROM = { country_event = { id = saudi.9 hours = 2 random_hours = 4 } }
+		}
+	}
+
+	option = { #No
+		name = saudi.8.b
+		ai_chance = {
+			base = 20
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 2
+			}
+			modifier = {
+				is_major = yes
+				NOT = { has_non_aggression_pact_with = FROM }
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				factor = 1.2
+				has_opinion = {
+					target = FROM
+					value < 0
+				}
+			}
+			modifier = {
+				SAU = {
+					is_ai = yes
+				}
+				factor = 0.5
+			}
+		}
+		effect_tooltip = {
+			FROM = {
+				add_opinion_modifier = { target = ROOT modifier = AUS_refuses_to_submit }
+				create_wargoal = {
+					type = annex_everything
+					target = ROOT
+					expire = 0
+				}
+			}
+		}
+		hidden_effect = {
+			FROM = { country_event = { id = saudi.10 hours = 2 random_hours = 4 } }
+		}
+	}
+}
+
+# Demand Submission FROM - Country Accepts
+country_event = {
+	id = saudi.9
+	title = saudi.9.t
+	desc = saudi.9.d
+	picture = GFX_report_event_generic_peaceful_annexation
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.9.a
+		if = {
+			limit = {
+				FROM = {
+					OR = {
+						original_tag = KUW
+						original_tag = QAT
+						original_tag = BHR
+						original_tag = UAE
+						original_tag = JOR
+						original_tag = FSA
+					}
+				}
+			}
+			annex_country = { target = FROM transfer_troops = no }
+		}
+		else = {
+			annex_country = { target = FROM transfer_troops = yes }
+		}
+	}
+}
+
+# Demand Submission FROM - Country Refuses
+country_event = {
+	id = saudi.10
+	title = saudi.10.t
+	desc = saudi.10.d
+	picture = GFX_report_event_generic_panzer_attack
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.10.a
+		ai_chance = {
+			base = 10
+			modifier = {
+				threat < 10
+				factor = 0
+			}
+		}
+		add_opinion_modifier = { target = FROM modifier = AUS_refuses_to_submit }
+		create_wargoal = {
+			type = annex_everything
+			target = FROM
+			expire = 0
+		}
+	}
+
+	option = {
+		name = saudi.10.b
+		ai_chance = {
+			base = 1
+		}
+		add_opinion_modifier = { target = FROM modifier = AUS_refuses_to_submit }
+	}
+}
+
+# Oil Discovery
+country_event = {
+	id = saudi.11
+	title = saudi.11.t
+	desc = saudi.11.d
+	picture = GFX_report_event_SAU_oil_discovery
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SAU
+		controls_state = 859
+		if = {
+			limit = {
+				has_country_flag = SAU_delay_oil_deposit_found_flag
+			}
+			date > 1938.4.1
+		}
+		else_if = {
+			limit = {
+				has_completed_focus = SAU_use_slaves_in_oil_exploration
+			}
+			date > 1937.8.1
+		}
+		else = {
+			date > 1937.12.1
+		}
+		#has_completed_focus = SAU_find_partners_for_oil_exploration
+	}
+
+	mean_time_to_happen = {
+		days = 5
+		modifier = {
+			add = 25
+			has_country_flag = SAU_cooperation_with_british_flag
+		}
+		modifier = {
+			add = 45
+			has_country_flag = SAU_cooperation_with_germans_flag
+		}
+	}
+
+	option = {
+		name = saudi.11.a
+		859 = {
+			add_dynamic_modifier = { modifier = SAU_main_oil_extraction_area }
+			add_resource = {
+				type = oil
+				amount = 4
+			}
+		}
+		hidden_effect = {
+			set_country_flag = SAU_biggest_oil_deposit_found_flag
+		}
+	}
+}
+
+# The Fall of Mecca
+country_event = {
+	id = saudi.12
+	title = saudi.12.t
+	desc = saudi.12.d
+	picture = GFX_report_event_SAU_fall_of_mecca
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SAU
+		has_war = yes
+		NOT = { controls_province = 5037 }
+		NOT = { has_country_flag = fall_of_mecca }
+		NOT = { has_completed_focus = SAU_secularize_the_state }
+	}
+
+	immediate = {
+		set_country_flag = fall_of_mecca
+	}
+
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = saudi.12.a
+		add_stability = -0.15
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_timed_idea = { idea = SAU_rekate_mecca_ns days = 100 }
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		activate_mission = SAU_retake_mecca_mission
+	}
+}
+
+# Mecca Retaken
+country_event = {
+	id = saudi.13
+	title = saudi.13.t
+	desc = saudi.13.d
+	picture = GFX_report_event_SAU_fallen_city_retaken
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.12.a
+		add_stability = 0.15
+		add_war_support = 0.05
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_timed_idea = { idea = SAU_high_morale_ns days = 100 }
+	}
+}
+
+# The Fall of Dhahran
+country_event = {
+	id = saudi.14
+	title = saudi.14.t
+	desc = saudi.14.d
+	picture = GFX_report_event_SAU_fall_of_dhahran
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SAU
+		has_war = yes
+		has_country_flag = SAU_biggest_oil_deposit_found_flag
+		NOT = { controls_province = 10791 }
+		NOT = { has_country_flag = fall_of_dhahran }
+	}
+
+	immediate = {
+		set_country_flag = fall_of_dhahran
+	}
+
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = { #Leave it
+		name = saudi.14.a
+		ai_chance = {
+			base = 1
+		}
+		add_stability = -0.02
+		add_political_power = 25
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_timed_idea = { idea = SAU_economic_crisis days = 365 }
+	}
+
+	option = { #Sabotage
+		name = saudi.14.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				surrender_progress > 0.5
+				factor = 2
+			}
+			modifier = {
+				casualties_k > 200
+				factor = 2
+			}
+			modifier = {
+				is_in_faction = no
+				factor = 2
+			}
+		}
+		add_stability = 0.02
+		859 = { add_dynamic_modifier = { modifier = SAU_sabotaged_oil_wells days = 400 } }
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_timed_idea = { idea = SAU_economic_crisis days = 365 }
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		custom_effect_tooltip = SAU_repair_cost_very_high_tt
+		hidden_effect = {
+			set_country_flag = SAU_oil_well_sabotaged_flag
+		}
+	}
+}
+
+# Dhahran Retaken
+country_event = {
+	id = saudi.15
+	title = saudi.15.t
+	desc = {
+		text = saudi.15.d
+		trigger = {
+			NOT = { has_country_flag = SAU_oil_well_sabotaged_flag }
+		}
+	}
+	desc = {
+		text = saudi.15.alt.d
+		trigger = {
+			has_country_flag = SAU_oil_well_sabotaged_flag
+		}
+	}
+	picture = GFX_report_event_SAU_fallen_city_retaken
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.15.a
+		if = {
+			limit = {
+				has_country_flag = SAU_oil_well_sabotaged_flag
+			}
+			unlock_decision_tooltip = SAU_repair_oil_wells
+		}
+		else = {
+			add_stability = 0.02
+		}
+
+		if = {
+			limit = {
+				has_idea = SAU_economic_crisis
+			}
+			modify_timed_idea = { idea = SAU_economic_crisis days = -50 }
+		}
+	}
+}
+
+# Arab League Agreement
+country_event = {
+	id = saudi.16
+	title = saudi.16.t
+	desc = saudi.16.d
+	picture = GFX_report_event_SAU_arab_league_agreement
+
+	is_triggered_only = yes
+
+	option = { #Yes
+		name = saudi.16.a
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 1.5
+				threat > 25
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = { target = FROM value > 40 }
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = { target = FROM value > 80 }
+			}
+			modifier = {
+				factor = 1.5
+				has_non_aggression_pact_with = FROM
+			}
+			modifier = {
+				factor = 1.5
+				FROM = { has_government = ROOT }
+			}
+		}
+		add_political_power = 25
+		custom_effect_tooltip = SAU_arab_league_establish_event_tt
+		effect_tooltip = {
+			add_ideas = SAU_arab_league_member
+		}
+		hidden_effect = {
+			set_country_flag = SAU_arab_league_member_flag
+			FROM = {
+				country_event = { id = saudi.17 hours = 2 random_hours = 8 }
+			}
+		}
+	}
+
+	option = { #No
+		name = saudi.16.b
+		ai_chance = {
+			base = 3
+			modifier = {
+				factor = 1.5
+				threat < 15
+			}
+			modifier = {
+				factor = 2
+				has_government = fascism
+			}
+			modifier = {
+				factor = 2
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					target = FROM
+					value < 0
+				}
+			}
+		}
+		custom_effect_tooltip = SAU_arab_league_establish_bad_tt
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		effect_tooltip = {
+			FROM = {
+				add_opinion_modifier = { target = ROOT modifier = BUL_rejected_our_proposal }
+			}
+		}
+
+		hidden_effect = {
+			set_country_flag = SAU_arab_league_rejected_flag
+			FROM = {
+				country_event = { id = saudi.18 hours = 2 random_hours = 8 }
+			}
+		}
+	}
+}
+
+# Arab League Agreement - FROM Accepts
+country_event = {
+	id = saudi.17
+	title = saudi.17.t
+	desc = saudi.17.d
+	picture = GFX_report_event_SAU_arab_league_accepted
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.17.a
+		add_political_power = 10
+		if = {
+			limit = {
+				NOT = { has_idea = SAU_arab_league_member_alternate }
+				NOT = { has_completed_focus = SAU_foundations_of_the_arab_league } #Just in case
+				has_completed_focus = SAU_alexandria_protocol
+			}
+			add_ideas = SAU_arab_league_member_alternate
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = { has_variable = SAU_arab_league_accepted_var }
+				}
+				set_variable = { SAU_arab_league_accepted_var = 0 }
+			}
+			else = {
+				add_to_variable = { SAU_arab_league_accepted_var = 1 }
+			}
+			if = {
+				limit = {
+					check_variable = { SAU_arab_league_accepted_var > 1 }
+				}
+				news_event = { id = saudi_news.1 days = 1 }
+			}
+		}
+	}
+}
+
+# Arab League Agreement - FROM Rejects
+country_event = {
+	id = saudi.18
+	title = saudi.18.t
+	desc = saudi.18.d
+	picture = GFX_report_event_generic_ruins
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.18.a
+		add_opinion_modifier = { target = FROM modifier = BUL_rejected_our_proposal }
+	}
+}
+
+# Demand Independence in the Middle East
+country_event = {
+	id = saudi.19
+	title = saudi.19.t
+	desc = {
+		text = saudi.19.d
+		trigger = {
+			OR = {
+				has_government = democratic
+				has_government = neutrality
+			}
+		}
+	}
+	desc = {
+		text = saudi.19.alt.d
+		trigger = {
+			NOT = {
+				has_government = democratic
+				has_government = neutrality
+			}
+		}
+	}
+	picture = GFX_report_event_generic_rally_3
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			every_state = {
+				limit = {
+					SAU_states_to_demand = yes
+					is_controlled_by_ROOT_or_subject = yes
+				}
+				set_state_flag = SAU_independence_granted_states_flag
+			}
+		}
+	}
+
+	option = { #Ok
+		name = saudi.19.a
+		ai_chance = {
+			base = 8
+			modifier = {
+				factor = 1.8
+				threat > 25
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = { target = FROM value > 40 }
+			}
+			modifier = {
+				factor = 1.5
+				has_war = yes
+			}
+			modifier = {
+				factor = 1.2
+				is_in_faction_with = SAU
+			}
+			modifier = {
+				factor = 1.2
+				has_government = democratic
+			}
+			modifier = {
+				factor = 0.7
+				has_government = fascism
+			}
+		}
+		every_other_country = {
+			limit = {
+				OR = {
+					original_tag = KUW
+					original_tag = LEB
+					original_tag = JOR
+					original_tag = PAL
+					original_tag = OMA
+					original_tag = YEM
+					original_tag = UAE
+					original_tag = QAT
+					original_tag = BHR
+					original_tag = SYR
+				}
+				exists = yes
+				is_subject_of = ROOT
+			}
+			ROOT = {
+				set_autonomy = {
+					target = PREV
+					autonomous_state = autonomy_free
+				}
+			}
+			hidden_effect = {
+				drop_cosmetic_tag = yes
+				leave_faction = yes
+				if = {
+					limit = {
+						original_tag = PAL
+						NOT = { has_country_flag = PAL_ideology_changed_flag }
+					}
+					set_country_flag = PAL_ideology_changed_flag
+					set_politics = {
+						ruling_party = democratic
+						elections_allowed = no
+					}
+					add_popularity = {
+						ideology = democratic
+						popularity = 0.25
+					}
+				}
+				add_ai_strategy = {
+					type = alliance
+					id = SAU
+					value = 50
+				}
+				add_ai_strategy = {
+					type = befriend
+					id = SAU
+					value = 50
+				}
+				add_opinion_modifier = {
+					target = SAU
+					modifier = SAU_supported_independence
+				}
+			}
+		}
+		every_state = {
+			limit = {
+				is_core_of = YEM
+				is_controlled_by_ROOT_or_subject = yes
+				has_state_flag = SAU_independence_granted_states_flag
+			}
+			transfer_state_to = YEM
+			clr_state_flag = SAU_independence_granted_states_flag
+		}
+		if = {
+			limit = {
+				NOT = { country_exists = UAE }
+				658 = {
+					is_controlled_by_ROOT_or_subject = yes
+				}
+			}
+			release_on_controlled = UAE
+			UAE = { set_country_flag = SAU_independence_granted_flag }
+		}
+		if = {
+			limit = {
+				NOT = { country_exists = QAT }
+				765 = {
+					is_controlled_by_ROOT_or_subject = yes
+				}
+			}
+			release_on_controlled = QAT
+			QAT = { set_country_flag = SAU_independence_granted_flag }
+		}
+		if = {
+			limit = {
+				NOT = { country_exists = BHR }
+				1014 = {
+					is_controlled_by_ROOT_or_subject = yes
+				}
+			}
+			release_on_controlled = BHR
+			BHR = { set_country_flag = SAU_independence_granted_flag }
+		}
+		if = {
+			limit = {
+				NOT = { country_exists = KUW }
+				656 = {
+					is_controlled_by_ROOT_or_subject = yes
+				}
+			}
+			release_on_controlled = KUW
+			KUW = { set_country_flag = SAU_independence_granted_flag }
+		}
+		if = {
+			limit = {
+				NOT = { country_exists = JOR }
+				455 = {
+					is_controlled_by_ROOT_or_subject = yes
+				}
+			}
+			release_on_controlled = JOR
+			JOR = { set_country_flag = SAU_independence_granted_flag }
+		}
+		if = {
+			limit = {
+				NOT = { country_exists = PAL }
+				454 = {
+					is_controlled_by_ROOT_or_subject = yes
+				}
+			}
+			release_on_controlled = PAL
+			PAL = { set_country_flag = SAU_independence_granted_flag }
+		}
+		if = {
+			limit = {
+				NOT = { country_exists = LEB }
+				553 = {
+					is_controlled_by_ROOT_or_subject = yes
+				}
+			}
+			release_on_controlled = LEB
+			LEB = { set_country_flag = SAU_independence_granted_flag }
+		}
+		if = {
+			limit = {
+				NOT = { country_exists = SYR }
+				OR = {
+					554 = { is_controlled_by_ROOT_or_subject = yes }
+					680 = { is_controlled_by_ROOT_or_subject = yes }
+					677 = { is_controlled_by_ROOT_or_subject = yes }
+				}
+			}
+			release_on_controlled = SYR
+			SYR = { set_country_flag = SAU_independence_granted_flag }
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = accepted_our_demands }
+			hidden_effect = {
+				country_event = { id = saudi.20 hours = 2 random_hours = 4 }
+			}
+		}
+	}
+
+	option = { #No
+		name = saudi.19.b
+		ai_chance = {
+			base = 6
+			modifier = {
+				factor = 1.4
+				threat < 25
+			}
+			modifier = {
+				factor = 1.2
+				has_opinion = { target = FROM value < 30 }
+			}
+			modifier = {
+				FROM = {
+					is_ai = yes
+				}
+				factor = 0.5
+			}
+		}
+		every_state = {
+			limit = {
+				SAU_states_to_demand = yes
+				is_controlled_by_ROOT_or_subject = yes
+				#has_resistance = yes
+			}
+			if = {
+				limit = {
+					is_controlled_by = ROOT
+					is_core_of = ROOT
+				}
+				remove_core_of = ROOT
+				custom_effect_tooltip = generic_skip_one_line_tt
+			}
+			add_resistance = 50
+			add_compliance = -20
+			add_resistance_target = {
+				amount = 50
+				days = 180
+				tooltip = SAU_independence_refused_tt
+			}
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		FROM = {
+			# effect_tooltip = {
+				# 	create_wargoal = {
+					#     	type = liberate_wargoal
+					#     	target = ROOT
+					#     	expire = 0
+					#     }
+				# }
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_opinion_modifier = { target = ROOT modifier = BUL_rejected_our_proposal }
+			add_opinion_modifier = { target = ROOT modifier = sanctions }
+			hidden_effect = {
+				country_event = { id = saudi.21 hours = 2 }
+			}
+		}
+	}
+}
+
+# Demand Independence in the Middle East - FROM Accepts
+country_event = {
+	id = saudi.20
+	title = saudi.20.t
+	desc = saudi.20.d
+	picture = GFX_report_event_generic_rally2
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.20.a
+		every_other_country = {
+			limit = {
+				OR = {
+					original_tag = KUW
+					original_tag = LEB
+					original_tag = JOR
+					original_tag = PAL
+					original_tag = OMA
+					original_tag = YEM
+					original_tag = UAE
+					original_tag = QAT
+					original_tag = BHR
+					original_tag = SYR
+				}
+				exists = yes
+				has_country_flag = SAU_independence_granted_flag
+			}
+			add_opinion_modifier = {
+				target = SAU
+				modifier = SAU_supported_independence
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_ideas = SAU_arab_league_member
+
+			hidden_effect = {
+				set_country_flag = SAU_arab_league_member_flag
+				SAU_set_up_arab_league_spirits = yes
+				add_ai_strategy = {
+					type = alliance
+					id = SAU
+					value = 50
+				}
+				add_ai_strategy = {
+					type = befriend
+					id = SAU
+					value = 50
+				}
+			}
+		}
+	}
+}
+
+# Demand Independence in the Middle East - FROM Rejects
+country_event = {
+	id = saudi.21
+	title = saudi.21.t
+	desc = saudi.21.d
+	picture = GFX_report_event_generic_strike
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.21.a
+		effect_tooltip = {
+			add_opinion_modifier = { target = FROM modifier = BUL_rejected_our_proposal }
+			add_opinion_modifier = { target = FROM modifier = sanctions }
+		}
+	}
+}
+
+# Arab League Information Event for Member States
+country_event = {
+	id = saudi.22
+	title = saudi.22.t
+	desc = saudi.22.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.22.a
+		effect_tooltip = {
+			add_ideas = SAU_arab_league_member
+		}
+	}
+}
+
+# Establish the United Arab State
+country_event = {
+	id = saudi.23
+	title = saudi.23.t
+	desc = saudi.23.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = saudi.23.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				threat > 40
+				factor = 1.5
+			}
+			modifier = {
+				threat > 60
+				factor = 2
+			}
+			modifier = {
+				is_in_faction = no
+				factor = 2.5
+			}
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 0.8
+			}
+			modifier = {
+				is_in_faction_with = SAU
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion = {
+					target = SAU
+					value > 65
+				}
+				factor = 1.5
+			}
+			modifier = {
+				strength_ratio = { tag = SAU ratio < 1 }
+				factor = 2
+			}
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+		FROM = { annex_country = { target = ROOT transfer_troops = yes } }
+		every_state = {
+			limit = { is_core_of = ROOT }
+			add_core_of = FROM
+		}
+		hidden_effect = {
+			transfer_navy = { target = FROM }
+			every_unit_leader = {
+				set_nationality = FROM
+			}
+			FROM = { country_event = { id = saudi.25 hours = 1 } }
+		}
+	}
+
+	option = { #No
+		name = saudi.23.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 2
+			}
+			modifier = {
+				SAU = {
+					is_ai = yes
+				}
+				factor = 0
+			}
+			modifier = {
+				factor = 1.2
+				has_opinion = { target = FROM value < 0 }
+			}
+		}
+		if = {
+			limit = {
+				is_in_faction_with = FROM
+			}
+			leave_faction = yes
+			custom_effect_tooltip = generic_skip_one_line_tt
+		}
+		SAU_remove_arab_league_ideas = yes
+	}
+}
+
+# Establish the United Arab Federation
+country_event = {
+	id = saudi.24
+	title = saudi.24.t
+	desc = saudi.24.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = saudi.24.a
+		ai_chance = {
+			base = 35
+			modifier = {
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				threat > 40
+				factor = 1.5
+			}
+			modifier = {
+				threat > 60
+				factor = 2
+			}
+			modifier = {
+				is_in_faction = no
+				factor = 2.5
+			}
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 0.8
+			}
+			modifier = {
+				is_in_faction_with = SAU
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion = {
+					target = SAU
+					value > 65
+				}
+				factor = 1.5
+			}
+			modifier = {
+				strength_ratio = { tag = SAU ratio < 1 }
+				factor = 2
+			}
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+		FROM = { annex_country = { target = ROOT transfer_troops = yes } }
+		every_state = {
+			limit = { is_core_of = ROOT }
+			add_core_of = FROM
+		}
+		hidden_effect = {
+			transfer_navy = { target = FROM }
+			FROM = { country_event = { id = saudi.25 hours = 1 } }
+		}
+	}
+
+	option = { #No
+		name = saudi.24.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 2
+			}
+			modifier = {
+				SAU = {
+					is_ai = yes
+				}
+				factor = 0
+			}
+			modifier = {
+				factor = 1.2
+				has_opinion = { target = FROM value < 0 }
+			}
+		}
+		if = {
+			limit = {
+				is_in_faction_with = FROM
+			}
+			leave_faction = yes
+			custom_effect_tooltip = generic_skip_one_line_tt
+		}
+		SAU_remove_arab_league_ideas = yes
+	}
+}
+
+# Establish the United Arab Federation / United Arab State - FROM Accepts
+country_event = {
+	id = saudi.25
+	title = saudi.25.t
+	desc = saudi.25.d
+	picture = GFX_report_event_generic_peaceful_annexation
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					has_completed_focus = SAU_establish_the_united_arab_state
+					NOT = { has_cosmetic_tag = SAU_united_arab_state }
+					NOT = { has_dynamic_modifier = { modifier = SAU_arab_state_army_dmod } }
+				}
+				set_cosmetic_tag = SAU_united_arab_state
+				remove_dynamic_modifier = { modifier = SAU_royal_saudi_army_dmod }
+				add_dynamic_modifier = { modifier = SAU_arab_state_army_dmod }
+			}
+			if = {
+				limit = {
+					has_completed_focus = SAU_establish_the_united_arab_federation
+					NOT = { has_cosmetic_tag = SAU_united_arab_federation }
+					NOT = { has_dynamic_modifier = { modifier = SAU_arab_federation_army_dmod } }
+				}
+				set_cosmetic_tag = SAU_united_arab_federation
+				remove_dynamic_modifier = { modifier = SAU_royal_saudi_army_dmod }
+				add_dynamic_modifier = { modifier = SAU_arab_federation_army_dmod }
+			}
+			if = {
+				limit = {
+					has_completed_focus = SAU_establish_the_united_arab_federation
+					NOT = { has_variable = SAU_arab_league_countries_var }
+				}
+				set_variable = { SAU_arab_league_countries_var = 1 } #ROOT Included
+			}
+			else = {
+				add_to_variable = { SAU_arab_league_countries_var = 1 }
+				SAU_check_federation_tag = yes
+			}
+		}
+	}
+
+	option = {
+		name = saudi.25.a
+		effect_tooltip = {
+			annex_country = { target = FROM transfer_troops = yes }
+			every_state = {
+				limit = { is_core_of = FROM }
+				add_core_of = ROOT
+			}
+		}
+	}
+}
+
+# Establish the United Arab Federation / United Arab State - FROM Rejects
+country_event = {
+	id = saudi.26
+	title = saudi.26.t
+	desc = saudi.26.d
+	picture = GFX_report_event_generic_rally
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.26.a
+	}
+}
+
+# Abdulaziz is very sick
+country_event = {
+	id = saudi.27
+	title = saudi.27.t
+	desc = saudi.27.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.27.a
+		#add_country_leader_trait = SAU_very_sick
+		swap_ideas = {
+			remove_idea = SAU_king_abdulaziz_ns
+			add_idea = SAU_king_abdulaziz_sick_ns
+		}
+	}
+}
+
+# Death of Abdulaziz
+country_event = {
+	id = saudi.28
+	title = saudi.28.t
+	desc = saudi.28.d
+	picture = GFX_report_event_SAU_death_of_abdulaziz
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.28.a
+		retire_character = SAU_abdulaziz_ibn_saud
+		remove_ideas = SAU_king_abdulaziz_sick_ns
+	}
+}
+
+# Alexandria Protocol
+country_event = {
+	id = saudi.29
+	title = saudi.29.t
+	desc = saudi.29.d
+	picture = GFX_report_event_generic_rally_3
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = saudi.29.a
+		ai_chance = {
+			base = 10
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 65
+				}
+				factor = 1.5
+			}
+			modifier = {
+				FROM = { has_government = ROOT }
+				factor = 1.5
+			}
+		}
+		add_ideas = SAU_arab_league_member_alternate
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.17 hours = 2 random_hours = 8 }
+			}
+		}
+	}
+
+	option = { #No
+		name = saudi.29.b
+		ai_chance = {
+			base = 2
+			modifier = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+				factor = 2
+			}
+		}
+		effect_tooltip = {
+			FROM = {
+				add_opinion_modifier = { target = ROOT modifier = BUL_rejected_our_proposal }
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.18 hours = 2 random_hours = 8 }
+			}
+		}
+	}
+}
+
+# Deal with Islamists in Iran
+country_event = {
+	id = saudi.30
+	title = saudi.30.t
+	desc = saudi.30.d
+	picture = GFX_report_event_generic_handshake
+
+	is_triggered_only = yes
+
+	option = { #Ok
+		name = saudi.30.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 65
+				}
+				factor = 1.5
+			}
+			modifier = { #Minister of Foreign Affairs
+				SAU = { has_idea = SAU_faisal_bin_abdulaziz_al_saud }
+				factor = 1.5
+			}
+			modifier = {
+				strength_ratio = { tag = SAU ratio < 1 }
+				factor = 2
+			}
+		}
+		trigger = {
+			NOT = { has_completed_focus = PER_islamic_state_of_iran }
+		}
+		if = {
+			limit = {
+				has_stability > 0.9
+			}
+			add_stability = -0.2
+			custom_effect_tooltip = generic_skip_one_line_tt
+		}
+
+		activate_mission = PER_impending_islamist_uprising_in_iran
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_ideas = SAU_supporting_islamists
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+
+		custom_effect_tooltip = SAU_if_civil_war_tt
+		effect_tooltip = {
+			add_ideas = SAU_saudi_backed_militia
+		}
+		hidden_effect = {
+			set_country_flag = SAU_supported_civil_war_flag
+			set_country_flag = PER_civil_war_in_progress_flag
+			FROM = { country_event = { id = saudi.31 hours = 2 random_hours = 4 } }
+		}
+	}
+
+	option = { #Ok
+		name = saudi.30.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 65
+				}
+				factor = 1.5
+			}
+			modifier = { #Minister of Foreign Affairs
+				SAU = { has_idea = SAU_faisal_bin_abdulaziz_al_saud }
+				factor = 1.5
+			}
+			modifier = {
+				strength_ratio = { tag = SAU ratio < 1 }
+				factor = 2
+			}
+			modifier = {
+				FROM = { has_government = ROOT }
+				factor = 2
+			}
+		}
+		trigger = {
+			has_completed_focus = PER_islamic_state_of_iran
+		}
+		add_timed_idea = { idea = SAU_very_low_popular_support days = 1460 }
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		if = {
+			limit = {
+				NOT = { has_government = fascism }
+			}
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			custom_effect_tooltip = generic_skip_one_line_tt
+		}
+
+		create_country_leader = {
+			name = "Mohammad Osman Naqshbandi"
+			desc = ""
+			picture = GFX_portrait_PER_Mohammad_Osman_Naqshbandi
+			expire = "1965.1.1"
+			ideology = islamism
+			traits = {
+			}
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.05
+		}
+		hidden_effect = {
+			FROM = { country_event = { id = saudi.31 hours = 2 random_hours = 4 } }
+		}
+	}
+
+	option = { #No
+		name = saudi.30.b
+		ai_chance = {
+			base = 3
+			modifier = {
+				strength_ratio = { tag = SAU ratio > 1 }
+				factor = 2
+			}
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 2 #we're good thanks
+			}
+		}
+		if = {
+			limit = {
+				has_stability > 0.9
+			}
+			add_stability = -0.2
+			custom_effect_tooltip = generic_skip_one_line_tt
+		}
+
+		activate_mission = PER_impending_islamist_uprising_in_iran
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		if = {
+			limit = {
+				NOT = { has_completed_focus = PER_islamic_state_of_iran }
+			}
+			add_ideas = SAU_supporting_islamists_weak
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					is_ai = no
+				}
+				set_country_flag = PER_player_chooses_no_flag
+			}
+			set_country_flag = PER_civil_war_in_progress_flag
+			FROM = { country_event = { id = saudi.32 hours = 2 random_hours = 4 } }
+		}
+	}
+}
+
+# Deal with Islamists in Iran - Iran Supports
+country_event = {
+	id = saudi.31
+	title = saudi.31.t
+	desc = saudi.31.d
+	picture = GFX_report_event_generic_handshake
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.31.a
+		activate_mission = SAU_impending_islamist_uprising_in_iran
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		FROM = {
+			effect_tooltip = {
+				if = {
+					limit = {
+						has_country_flag = SAU_supported_civil_war_flag
+					}
+					add_ideas = SAU_supporting_islamists
+					add_popularity = {
+						ideology = fascism
+						popularity = 0.05
+					}
+				}
+				else = {
+					add_ideas = SAU_supporting_islamists_weak
+				}
+			}
+		}
+	}
+}
+
+# Deal with Islamists in Iran - Iran Rejects
+country_event = {
+	id = saudi.32
+	title = saudi.32.t
+	desc = saudi.32.d
+	picture = GFX_report_event_generic_panzer_attack
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.32.a
+		activate_mission = SAU_impending_islamist_uprising_in_iran
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		effect_tooltip = {
+			FROM = {
+				if = {
+					limit = {
+						has_stability > 0.9
+					}
+					add_stability = -0.2
+					custom_effect_tooltip = generic_skip_one_line_tt
+				}
+
+				if = {
+					limit = {
+						NOT = { has_completed_focus = PER_islamic_state_of_iran }
+					}
+					add_ideas = SAU_supporting_islamists_weak
+				}
+			}
+		}
+	}
+}
+
+# Hidden Event for muslim revolts
+country_event = {
+	id = saudi.33
+
+	is_triggered_only = yes
+	hidden = yes
+
+	option = {
+		name = saudi.33.a
+		ai_chance = {
+			base = 10
+		}
+		var:previous_overlord = {
+			country_event = {
+				id = saudi.34
+				hours = 1 # For testing
+			}
+		}
+		set_variable = { global.arabian_revolt_country = ROOT } # This country
+		set_variable = { global.arabian_supporting_country = FROM } # Instigator (Arabia in standard case)
+		set_variable = { global.arabian_colonial_country = var:previous_overlord }
+	}
+}
+
+# Arabia demands cease fire
+country_event = {
+	id = saudi.34
+	title = saudi.34.t
+	desc = saudi.34.d
+	is_triggered_only = yes
+	picture = GFX_report_event_generic_parliament
+
+	option = { # yes we should give this thing up
+		name = saudi.34.a
+		ai_chance = {
+			base = 10
+		}
+		trigger = {
+			NOT = { has_war_with = var:global.arabian_supporting_country }
+			var:global.arabian_revolt_country = { exists = yes } # Country has not been destroyed in the meantime
+		}
+		IF = {
+			limit = { var:global.arabian_revolt_country = { exists = yes } }
+			var:global.arabian_revolt_country = { # Former Colony
+				country_event = {
+					id = saudi.35
+					hours = 2
+				}
+			}
+		}
+		ELSE = { # just an emergency back up
+			var:global.arabian_supporting_country = {
+				country_event = {
+					id = saudi.36
+					hours = 2
+				}
+			}
+		}
+
+	}
+
+	option = { # no we refuse
+		name = saudi.34.b
+		ai_chance = {
+			base = 10
+		}
+		var:global.arabian_supporting_country = { # Arabia in this case
+			country_event = {
+				id = saudi.36
+				hours = 2
+			}
+		}
+	}
+}
+
+# Freedom
+country_event = {
+	id = saudi.35
+	title = saudi.35.t
+	desc = saudi.35.d
+	is_triggered_only = yes
+	picture = GFX_report_event_generic_sign_treaty2
+
+	option = {
+		name = saudi.35.a
+		ai_chance = {
+			base = 10
+		}
+		var:global.arabian_supporting_country = { # Arabia in this case
+			country_event = {
+				id = saudi.38
+				hours = 1
+			}
+		}
+		white_peace = FROM # Colonial Power
+		every_other_country = {
+			limit = {
+				is_in_faction_with = FROM
+				has_war_with = ROOT
+			}
+			white_peace = ROOT
+		}
+		# Join Arabia's faction if they have any
+		IF = {
+			limit = {
+				var:global.arabian_supporting_country = { is_faction_leader = yes }
+				ROOT = { is_in_faction = no }
+			}
+			var:global.arabian_supporting_country = { add_to_faction = ROOT }
+		}
+	}
+}
+
+# For Arabia: Colonial Power Refuses
+country_event = {
+	id = saudi.36
+	title = saudi.36.t
+	desc = saudi.36.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_soldiers_marching
+
+	option = { # Too bad
+		name = saudi.36.a
+		ai_chance = {
+			base = 10
+		}
+		add_war_support = -0.05
+		add_popularity = {
+			ideology = ROOT
+			popularity = -0.05
+		}
+		SAU = {
+			clr_country_flag = SAU_currently_demanding_peace_flag
+		}
+		clear_variable = global.arabian_revolt_country
+		clear_variable = global.arabian_supporting_country
+		clear_variable = global.arabian_colonial_country
+	}
+
+	option = { # Declare War
+		name = saudi.36.b
+		ai_chance = {
+			base = 10
+		}
+		add_war_support = 0.05
+		add_popularity = {
+			ideology = ROOT
+			popularity = 0.05
+		}
+		declare_war_on = {
+			target = FROM
+			type = liberate_wargoal
+		}
+		IF = {
+			limit = {
+				ROOT = { is_faction_leader = yes }
+				var:global.arabian_revolt_country = { is_in_faction = no }
+			}
+			add_to_faction = var:global.arabian_revolt_country
+		}
+		var:global.arabian_revolt_country = {
+			country_event = {
+				id = saudi.37
+				hours = 1
+			}
+		}
+	}
+}
+
+# Fomer Colony: Arabia joins war
+country_event = {
+	id = saudi.37
+	title = saudi.37.t
+	desc = saudi.37.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_battle
+
+
+	option = {
+		name = saudi.37.a
+		ai_chance = {
+			base = 10
+		}
+		SAU = {
+			clr_country_flag = SAU_currently_demanding_peace_flag
+		}
+		clear_variable = global.arabian_revolt_country
+		clear_variable = global.arabian_supporting_country
+		clear_variable = global.arabian_colonial_country
+	}
+}
+
+# Arabia: Colony is liberated
+country_event = {
+	id = saudi.38
+	title = saudi.38.t
+	desc = saudi.38.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+
+	option = {
+		name = saudi.38.a
+		ai_chance = {
+			base = 10
+		}
+		SAU = {
+			clr_country_flag = SAU_currently_demanding_peace_flag
+		}
+		clear_variable = global.arabian_revolt_country
+		clear_variable = global.arabian_supporting_country
+		clear_variable = global.arabian_colonial_country
+	}
+}
+
+# Hidden Event for Iranian Civil War
+country_event = {
+	id = saudi.39
+
+	is_triggered_only = yes
+	hidden = yes
+
+	immediate = {
+		PER_set_up_islamist_civil_war = yes
+		if = {
+			limit = {
+				has_country_flag = SAU_supported_civil_war_flag
+			}
+			add_ideas = SAU_saudi_backed_militia
+		}
+		SAU = {
+			set_country_flag = SAU_islamist_civil_war_break_out_flag
+			puppet = {
+				target = PER
+				end_wars = no
+				end_civil_wars = no
+			}
+		}
+	}
+}
+
+# Hidden Event for Asir Rebellion
+country_event = {
+	id = saudi.40
+
+	is_triggered_only = yes
+	hidden = yes
+
+	immediate = {
+		SAU_set_up_asir_rebellion = yes
+	}
+}
+
+# German Oil Agreement
+country_event = {
+	id = saudi.41
+	title = saudi.41.t
+	desc = saudi.41.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	option = { #Ok
+		name = saudi.41.a
+		ai_chance = {
+			base = 60
+			modifier = {
+				factor = 2.0
+				has_government = FROM
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_in_faction = no
+				}
+			}
+			modifier = {
+				factor = 1.5
+				has_opinion = {
+					target = FROM
+					value > 60
+				}
+			}
+		}
+		FROM = {
+			give_resource_rights = { receiver = ROOT state = 292 }
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_tech_bonus = {
+				name = SAU_german_oil_agreement
+				ahead_reduction = 1
+				bonus = 1
+				uses = 1
+				category = armor
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_ideas = SAU_oil_agreement_ns
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.42 hours = 2 random_hours = 4 }
+			}
+		}
+	}
+
+	option = { #No
+		name = saudi.41.b
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 0
+				FROM = {
+					is_in_faction_with = ROOT
+				}
+			}
+			modifier = {
+				factor = 0.5
+				FROM = {
+					has_government = ROOT
+				}
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_enemy_ideology = yes
+				}
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_in_faction_with = USA
+				}
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_in_faction_with = ENG
+				}
+			}
+			modifier = {
+				factor = 2.0
+				FROM = {
+					is_in_faction_with = SOV
+				}
+			}
+		}
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = SWI_broke_trade_agreement }
+			add_opinion_modifier = { target = ROOT modifier = BUL_rejected_our_proposal }
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.43 hours = 2 random_hours = 4 }
+			}
+		}
+	}
+}
+
+# German Oil Agreement - Germany Accepts
+country_event = {
+	id = saudi.42
+	title = saudi.42.t
+	desc = saudi.42.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	option = {
+		name = saudi.42.a
+		effect_tooltip = {
+			give_resource_rights = { receiver = FROM state = 292 }
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_tech_bonus = {
+				name = SAU_german_oil_agreement
+				ahead_reduction = 1
+				bonus = 1
+				uses = 1
+				category = armor
+			}
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_ideas = SAU_oil_agreement_ns
+		}
+	}
+}
+
+# German Oil Agreement - Germany Refuses
+country_event = {
+	id = saudi.43
+	title = saudi.43.t
+	desc = saudi.43.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	option = {
+		name = saudi.43.a
+		effect_tooltip = {
+			add_opinion_modifier = { target = FROM modifier = SWI_broke_trade_agreement }
+			add_opinion_modifier = { target = FROM modifier = BUL_rejected_our_proposal }
+		}
+	}
+}
+
+# Secret Pact with the Allies
+country_event = {
+	id = saudi.44
+	title = saudi.44.t
+	desc = saudi.44.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_sign_treaty3
+
+	option = { #Ok
+		name = saudi.44.a
+		ai_chance = {
+			base = 10
+		}
+		FROM = {
+			country_event = { id = saudi.45 hours = 8 }
+		}
+	}
+
+	option = { #No
+		name = saudi.44.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				add = 10
+				is_historical_focus_on = yes
+			}
+			modifier = {
+				factor = 0
+				ROOT = { is_ai = yes }
+				FROM = { is_ai = no  }
+			}
+		}
+		FROM = {
+			country_event = { id = saudi.46 hours = 8 }
+		}
+	}
+}
+
+# Allies accepted secret pact
+country_event = {
+	id = saudi.45
+	title = saudi.45.t
+	desc = saudi.45.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	option = {
+		name = saudi.45.a
+		set_country_flag = SAU_in_secret_pact_with_allies
+		set_variable = { SAU_secret_ally = FROM }
+		custom_effect_tooltip = SWI_secret_pact_with_allies_TT
+	}
+}
+
+# Allies rejected secret pact
+country_event = {
+	id = saudi.46
+	title = saudi.46.t
+	desc = saudi.46.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_SWI_parliament_members
+
+	option = {
+		name = saudi.46.a
+	}
+}
+
+# Slaves cause unrest
+country_event = {
+	id = saudi.47
+	title = saudi.47.t
+	desc = saudi.47.d
+
+	picture = GFX_report_event_generic_riot
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SAU
+		date > 1936.5.1
+		date < 1937.1.1
+		NOT = { has_completed_focus = SAU_regulations_on_slavery }
+	}
+
+	mean_time_to_happen = {
+		days = 10
+	}
+
+	option = {
+		name = saudi.47.a
+		activate_mission = SAU_slaves_cause_unrest
+	}
+}
+
+# Request Protection from the United States
+country_event = {
+	id = saudi.48
+	title = saudi.48.t
+	desc = saudi.48.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_SAU_treaty_of_friendship
+
+	option = {
+		name = saudi.48.a #Ok
+		ai_chance = {
+			base = 5
+			modifier = {
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				threat > 40
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 40
+				}
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 80
+				}
+				factor = 1.5
+			}
+			modifier = { #Minister of Foreign Affairs
+				SAU = { has_idea = SAU_faisal_bin_abdulaziz_al_saud }
+				factor = 1.5
+			}
+			modifier = {
+				USA = { has_completed_focus = USA_limited_intervention }
+				factor = 2
+			}
+		}
+		give_guarantee = SAU
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		custom_effect_tooltip = SAU_us_divisions_2_tt
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.49 hours = 4 }
+			}
+		}
+	}
+
+	option = {
+		name = saudi.48.b #No
+		ai_chance = {
+			base = 2
+		}
+		FROM = {
+			add_opinion_modifier = { target = ROOT modifier = BUL_rejected_our_proposal }
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.50 hours = 4 }
+			}
+		}
+	}
+}
+
+# Request Protection from the United States - US Accepts
+country_event = {
+	id = saudi.49
+	title = saudi.49.t
+	desc = saudi.49.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_usa_treaty
+
+	option = {
+		name = saudi.49.a
+		effect_tooltip = {
+			custom_effect_tooltip = SAU_us_divisions_tt
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			USA = {
+				give_guarantee = SAU
+			}
+		}
+		hidden_effect = {
+			set_country_flag = SAU_protected_by_usa_flag
+		}
+	}
+}
+
+# Request Protection from the United States - US Refuses
+country_event = {
+	id = saudi.50
+	title = saudi.50.t
+	desc = saudi.50.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_us_panay_demands
+
+	option = {
+		name = saudi.50.a
+		add_opinion_modifier = { target = FROM modifier = BUL_rejected_our_proposal }
+	}
+}
+
+# Saudi Protection / Did Somebody say oil?
+country_event = {
+	id = saudi.51
+	title = saudi.51.t
+	desc = saudi.51.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_usa_heavy_cruiser #TODO Mandalina
+
+	immediate = {
+		hidden_effect = {
+			every_other_country = {
+				limit = {
+					has_war_with = SAU
+					has_country_flag = SAU_agressor_country_flag
+				}
+				SAU = { add_to_war = { targeted_alliance = ROOT enemy = PREV hostility_reason = asked_to_join } }
+			}
+			SAU = {
+				if = {
+					limit = {
+						NOT = { has_military_access_to = USA }
+					}
+					give_military_access = USA
+				}
+			}
+		}
+	}
+
+	option = {
+		name = saudi.51.a
+		if = {
+			limit = {
+				SAU = { has_completed_focus = SAU_creation_of_rdjtf }
+			}
+			custom_effect_tooltip = {
+				localization_key = USA_spawned_american_divisions_tt
+				COUNT = "24"
+			}
+			hidden_effect = {
+				load_oob = "USA_arab_reinforcements_2"
+			}
+		}
+		else = {
+			custom_effect_tooltip = {
+				localization_key = USA_spawned_american_divisions_tt
+				COUNT = "12"
+			}
+			hidden_effect = {
+				load_oob = "USA_arab_reinforcements"
+			}
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_timed_idea = {
+			idea = SAU_joint_task_force_usa
+			days = 180
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		SAU = { country_event = { id = saudi.52 hours = 2 } }
+		hidden_effect = {
+			news_event = { id = saudi_news.2 days = 1 }
+		}
+	}
+}
+
+# Americans Arrived Our Help
+country_event = {
+	id = saudi.52
+	title = saudi.52.t
+	desc = saudi.52.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_usa_heavy_cruiser #TODO Mandalina
+
+	option = {
+		name = saudi.52.a
+		add_timed_idea = {
+			idea = SAU_joint_task_force_aid
+			days = 180
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		if = {
+			limit = {
+				has_completed_focus = SAU_creation_of_rdjtf
+			}
+			custom_effect_tooltip = {
+				localization_key = SAU_spawned_american_divisions_tt
+				COUNT = "24"
+			}
+		}
+		else = {
+			custom_effect_tooltip = {
+				localization_key = SAU_spawned_american_divisions_tt
+				COUNT = "12"
+			}
+		}
+		hidden_effect = {
+			clr_country_flag = SAU_protected_by_usa_flag #Single use
+		}
+	}
+}
+
+# Saudi Demand Neutrality
+country_event = {
+	id = saudi.53
+	title = saudi.53.t
+	desc = saudi.53.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_read_write
+
+	option = { #Ok
+		name = saudi.53.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				threat > 40
+				factor = 1.5
+			}
+			modifier = {
+				has_non_aggression_pact_with = FROM
+				factor = 1.5
+			}
+			modifier = {
+				is_in_faction = no
+				factor = 2
+			}
+			modifier = {
+				has_opinion = {
+					target = FROM
+					value > 65
+				}
+				factor = 1.5
+			}
+		}
+		add_ideas = SAU_neutrality_guarantee
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.54 hours = 4 }
+			}
+		}
+	}
+
+	option = { #No
+		name = saudi.53.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 2 #we're good thanks
+			}
+			modifier = {
+				strength_ratio = { tag = SAU ratio < 1 }
+				factor = 0.5
+			}
+		}
+		add_political_power = -25
+		effect_tooltip = {
+			FROM = {
+				add_opinion_modifier = { target = ROOT modifier = BUL_rejected_our_proposal }
+			}
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.55 hours = 4 }
+			}
+		}
+	}
+}
+
+# Saudi Demand Neutrality - FROM Accepts
+country_event = {
+	id = saudi.54
+	title = saudi.54.t
+	desc = saudi.54.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_handshake
+
+	option = {
+		name = saudi.54.a
+		effect_tooltip = {
+			add_ideas = SAU_neutrality_guarantee_fake
+
+			custom_effect_tooltip = SAU_right_to_intervene_tt
+		}
+	}
+}
+
+# Saudi Demand Neutrality - FROM Rejects
+country_event = {
+	id = saudi.55
+	title = saudi.55.t
+	desc = saudi.55.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_army
+
+	option = {
+		name = saudi.55.a
+		add_opinion_modifier = { target = FROM modifier = BUL_rejected_our_proposal }
+	}
+}
+
+# Saudi Demand Neutrality - Neutrality Broken
+country_event = {
+	id = saudi.56
+	title = saudi.56.t
+	desc = saudi.56.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_troops_at_rivier_in_iraq
+
+	option = {
+		name = saudi.56.a
+		ai_chance = {
+			base = 10
+			modifier = {
+				is_in_faction = yes
+				factor = 2
+			}
+		}
+		if = {
+			limit = {
+				YEM = { has_idea = yem_treaty_taif }
+			}
+			YEM = { remove_ideas = yem_treaty_taif }
+			custom_effect_tooltip = generic_skip_one_line_tt
+		}
+		declare_war_on = {
+			target = YEM
+			type = topple_government
+		}
+	}
+
+	option = {
+		name = saudi.56.b
+		ai_chance = {
+			base = 2
+		}
+		send_embargo = YEM
+	}
+}
+
+# Drought Strikes the Heart of Arabia
+country_event = {
+	id = saudi.57
+	title = saudi.57.t
+	desc = saudi.57.d
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SAU
+		date > 1939.1.1
+		date < 1940.1.1
+	}
+
+	mean_time_to_happen = {
+		days = 10
+	}
+
+	picture = GFX_report_event_generic_destroyed_vehicles #TODO Mandalina
+
+	option = {
+		name = saudi.57.a
+		add_political_power = -25
+		add_timed_idea = { idea = SAU_drought_crisis days = 180 }
+	}
+}
+
+# Slaves cause unrest
+country_event = {
+	id = saudi.58
+	title = saudi.58.t
+	desc = saudi.58.d
+
+	picture = GFX_report_event_generic_riot
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = SAU
+		date > 1937.5.1
+		date < 1938.1.1
+		NOT = { has_completed_focus = SAU_regulations_on_slavery }
+		has_country_flag = SAU_slaves_cause_unrest_flag
+	}
+
+	mean_time_to_happen = {
+		days = 10
+	}
+
+	option = {
+		name = saudi.58.a
+		activate_mission = SAU_slaves_cause_unrest_second
+	}
+}
+
+# Demand Independence for Arab Minorities
+country_event = {
+	id = saudi.59
+	title = saudi.59.t
+	desc = saudi.59.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_read_write #TODO Mandalina
+
+	option = { #Ok
+		name = saudi.59.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				threat > 40
+				factor = 1.5
+			}
+			modifier = {
+				threat > 60
+				factor = 2
+			}
+			modifier = {
+				is_in_faction = no
+				is_major = no
+				factor = 2.5
+			}
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 0.8
+			}
+			modifier = {
+				is_in_faction_with = SAU
+				factor = 1.5
+			}
+			modifier = {
+				has_opinion = {
+					target = SAU
+					value > 65
+				}
+				factor = 1.5
+			}
+			modifier = {
+				strength_ratio = { tag = SAU ratio < 1 }
+				factor = 2
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = SAU_demanding_independence_mali_flag
+			}
+			if = {
+				limit = {
+					MLI = { is_subject_of = ROOT }
+				}
+				set_autonomy = {
+					target = MLI
+					autonomous_state = autonomy_free
+				}
+			}
+			if = {
+				limit = {
+					MLI = { exists = no }
+				}
+				release_on_controlled = MLI
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 782
+						state = 898
+						state = 899
+						state = 556
+					}
+					is_controlled_by_ROOT_or_subject = yes
+				}
+				set_state_flag = SAU_independence_states_flag
+				transfer_state_to = MLI
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SAU_demanding_independence_nigeria_flag
+			}
+			if = {
+				limit = {
+					NGA = { is_subject_of = ROOT }
+				}
+				set_autonomy = {
+					target = NGA
+					autonomous_state = autonomy_free
+				}
+			}
+			if = {
+				limit = {
+					NGA = { exists = no }
+				}
+				release_on_controlled = NGA
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 902
+						state = 901
+						state = 558
+						state = 900
+					}
+					is_controlled_by_ROOT_or_subject = yes
+				}
+				set_state_flag = SAU_independence_states_flag
+				transfer_state_to = NGA
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SAU_demanding_independence_chad_flag
+			}
+			if = {
+				limit = {
+					CHA = { is_subject_of = ROOT }
+				}
+				set_autonomy = {
+					target = CHA
+					autonomous_state = autonomy_free
+				}
+			}
+			if = {
+				limit = {
+					CHA = { exists = no }
+				}
+				release_on_controlled = CHA
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 775
+						state = 774
+					}
+					is_controlled_by_ROOT_or_subject = yes
+				}
+				set_state_flag = SAU_independence_states_flag
+				transfer_state_to = CHA
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = SAU_demanding_independence_somalia_flag
+			}
+			if = {
+				limit = {
+					SOM = { is_subject_of = ROOT }
+				}
+				set_autonomy = {
+					target = SOM
+					autonomous_state = autonomy_free
+				}
+			}
+			if = {
+				limit = {
+					SOM = { exists = no }
+				}
+				release_on_controlled = SOM
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 269
+						state = 559
+					}
+					is_controlled_by_ROOT_or_subject = yes
+				}
+				set_state_flag = SAU_independence_states_flag
+				transfer_state_to = SOM
+			}
+		}
+		hidden_effect = {
+			SAU_remove_demand_flags_effect = yes
+			FROM = { country_event = { id = saudi.60 hours = 2 random_hours = 4 } }
+		}
+	}
+
+	option = { #No
+		name = saudi.59.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				is_in_faction = yes
+				NOT = { is_in_faction_with = SAU }
+				factor = 2
+			}
+			modifier = {
+				is_major = yes
+				NOT = { has_non_aggression_pact_with = FROM }
+				threat > 20
+				factor = 1.5
+			}
+			modifier = {
+				factor = 1.2
+				has_opinion = {
+					target = FROM
+					value < 0
+				}
+			}
+			modifier = {
+				SAU = {
+					is_ai = yes
+				}
+				factor = 0.5
+			}
+		}
+		custom_effect_tooltip = maybe_war_tt
+		effect_tooltip = {
+			FROM = {
+				add_opinion_modifier = { target = ROOT modifier = SOV_rejected_our_demands }
+			}
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		every_state = {
+			limit = {
+				SAU_demand_independence_states = yes
+				is_controlled_by_ROOT_or_subject = yes
+				has_resistance = yes
+			}
+			add_resistance = 10
+			add_compliance = -5
+			add_resistance_target = {
+				amount = 20
+				days = 60
+				tooltip = SAU_independence_refused_alternate_tt
+			}
+		}
+
+		hidden_effect = {
+			SAU_remove_demand_flags_reject_effect = yes
+			FROM = { country_event = { id = saudi.61 hours = 2 random_hours = 4 } }
+		}
+
+	}
+}
+
+# Demand Independence for Arab Minorities - FROM Accepts
+country_event = {
+	id = saudi.60
+	title = saudi.60.t
+	desc = saudi.60.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_sign_treaty2
+
+	option = {
+		name = saudi.60.a
+		effect_tooltip = {
+			every_state = {
+				limit = {
+					OR = {
+						state = 782
+						state = 898
+						state = 899
+						state = 556
+					}
+					has_state_flag = SAU_independence_states_flag
+				}
+				transfer_state_to = MLI
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 902
+						state = 901
+						state = 558
+						state = 900
+					}
+					has_state_flag = SAU_independence_states_flag
+				}
+				transfer_state_to = NGA
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 775
+						state = 774
+					}
+					has_state_flag = SAU_independence_states_flag
+				}
+				transfer_state_to = CHA
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 269
+						state = 559
+					}
+					has_state_flag = SAU_independence_states_flag
+				}
+				transfer_state_to = SOM
+			}
+		}
+		hidden_effect = {
+			every_state = {
+				limit = {
+					has_state_flag = SAU_independence_states_flag
+				}
+				clr_state_flag = SAU_independence_states_flag
+			}
+		}
+	}
+}
+
+# Demand Independence for Arab Minorities - FROM Refuses
+country_event = {
+	id = saudi.61
+	title = saudi.61.t
+	desc = saudi.61.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_soldiers_marching
+
+	option = {
+		name = saudi.61.a
+		custom_effect_tooltip = SAU_independence_event_wargoals_tt
+		every_other_country = {
+			limit = {
+				OR = {
+					has_country_flag = SAU_rejected_mali_flag
+					has_country_flag = SAU_rejected_nigeria_flag
+					has_country_flag = SAU_rejected_chad_flag
+					has_country_flag = SAU_rejected_somalia_flag
+				}
+			}
+			hidden_effect = {
+				ROOT = {
+					create_wargoal = {
+						type = liberate_wargoal
+						target = PREV
+						expire = 0
+					}
+				}
+			}
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_opinion_modifier = { target = FROM modifier = SOV_rejected_our_demands }
+	}
+
+	option = {
+		name = saudi.61.b
+		add_opinion_modifier = { target = FROM modifier = SOV_rejected_our_demands }
+	}
+}
+
+# Country wants investment - Civilian
+country_event = {
+	id = saudi.62
+	title = saudi.62.t
+	desc = saudi.62.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_generic_sign_treaty3
+
+	option = { #Ok
+		name = saudi.62.a
+		ai_chance = {
+			base = 6
+			modifier = {
+				factor = 2
+				has_war = no
+			}
+		}
+		unlock_decision_tooltip = { decision = SAU_invest_in_state_factory show_effect_tooltip = yes }
+		event_target:SAU_federation_investment_state = {
+			set_state_flag = SAU_federation_build_factory
+			set_variable = { factory_goal = industrial_complex_level }
+			add_to_variable = { factory_goal = 1 }
+		}
+	}
+
+	option = { #No
+		name = saudi.62.b
+		ai_chance = {
+			base = 2
+		}
+		clr_country_flag = SAU_federation_investment
+		clear_global_event_target = SAU_federation_investment_state
+		hidden_effect = {
+			random_list = {
+				30 = {
+					country_event = { id = saudi.64 days = 60 random_days = 20 }
+				}
+				70 = {
+				}
+			}
+		}
+	}
+}
+
+# Country wants investment - Military
+country_event = {
+	id = saudi.63
+	title = saudi.63.t
+	desc = saudi.63.d
+	is_triggered_only = yes
+
+	picture = GFX_report_event_tank_factory
+
+	option = { #Ok
+		name = saudi.63.a
+		ai_chance = {
+			base = 6
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 0.5
+				has_war = no
+			}
+		}
+		unlock_decision_tooltip = { decision = SAU_invest_in_state_arms_factory show_effect_tooltip = yes }
+		event_target:SAU_federation_investment_state = {
+			set_state_flag = SAU_federation_build_arms_factory
+			set_variable = { arms_factory_goal = arms_factory_level }
+			add_to_variable = { arms_factory_goal = 1 }
+		}
+	}
+
+	option = { #No
+		name = saudi.63.b
+		ai_chance = {
+			base = 2
+		}
+		clr_country_flag = SAU_federation_investment
+		clear_global_event_target = SAU_federation_investment_state
+		hidden_effect = {
+			random_list = {
+				30 = {
+					country_event = { id = saudi.64 days = 60 random_days = 20 }
+				}
+				70 = {
+				}
+			}
+		}
+	}
+}
+
+#Country wants investment - Dispatch event
+country_event = {
+	id = saudi.64
+
+	hidden = yes
+	is_triggered_only = yes
+
+	trigger = {
+		original_tag = SAU
+		has_completed_focus = SAU_establish_the_united_arab_federation
+		check_variable = { SAU_arab_league_countries_var > 1 }
+	}
+
+	immediate = {
+		set_country_flag = SAU_federation_investment
+		if = {
+			limit = { has_event_target = SAU_federation_investment_state }
+			clear_global_event_target = SAU_federation_investment_state
+		}
+		random_list = {
+			50 = {
+				modifier = {
+					NOT = {
+						any_owned_state = {
+							is_core_of = ROOT
+							is_controlled_by = ROOT
+							free_building_slots = {
+								building = industrial_complex
+								size > 0
+								include_locked = no
+							}
+						}
+					}
+					factor = 0
+				}
+				random_owned_state = {
+					limit = {
+						is_core_of = ROOT
+						is_controlled_by = ROOT
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = no
+						}
+						NOT = {
+							is_in_array = {
+								array = ROOT.owned_states_at_game_start
+								value = THIS
+							}
+						}
+					}
+					save_global_event_target_as = SAU_federation_investment_state
+					state_event = { id = saudi.62 trigger_for = controller }
+				}
+			}
+			50 = {
+				modifier = {
+					NOT = {
+						any_owned_state = {
+							is_core_of = ROOT
+							is_controlled_by = ROOT
+							free_building_slots = {
+								building = arms_factory
+								size > 0
+								include_locked = no
+							}
+						}
+					}
+					factor = 0
+				}
+				random_owned_state = {
+					limit = {
+						is_core_of = ROOT
+						is_controlled_by = ROOT
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = no
+						}
+						NOT = {
+							is_in_array = {
+								array = ROOT.owned_states_at_game_start
+								value = THIS
+							}
+						}
+					}
+					save_global_event_target_as = SAU_federation_investment_state
+					state_event = { id = saudi.63 trigger_for = controller }
+				}
+			}
+		}
+	}
+}
+
+# Abdulaziz Recovered
+country_event = {
+	id = saudi.65
+	title = saudi.65.t
+	desc = saudi.65.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.65.a
+		swap_ideas = {
+			remove_idea = SAU_king_abdulaziz_sick_ns
+			add_idea = SAU_king_abdulaziz_ns
+		}
+	}
+}
+
+# Encourage Revolt in Palestine - FROM
+country_event = {
+	id = saudi.66
+	title = saudi.66.t
+	desc = saudi.66.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.66.a
+		custom_effect_tooltip = SAU_arming_rebels_in_palestine_alt_tt
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		unlock_decision_tooltip = PAL_suppress_the_rebels
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		effect_tooltip = {
+			add_timed_idea = {
+				idea = SAU_arming_rebels_ns
+				days = 365
+			}
+		}
+	}
+}
+
+# Encourage Revolt in Palestine
+country_event = {
+	id = saudi.67
+	title = {
+		text = saudi.67.t
+		trigger = {
+			NOT = { original_tag = PAL }
+		}
+	}
+	title = {
+		text = saudi.67.alt.t
+		trigger = {
+			original_tag = PAL
+		}
+	}
+	desc = {
+		text = saudi.67.d
+		trigger = {
+			NOT = { original_tag = PAL }
+		}
+	}
+	desc = {
+		text = saudi.67.alt.d
+		trigger = {
+			original_tag = PAL
+		}
+	}
+	picture = GFX_report_event_generic_rally2
+
+	fire_only_once = yes
+
+	trigger = {
+		any_other_country = {
+			controls_state = 454
+			NOT = { is_ally_with = SAU }
+		}
+		SAU = { has_completed_focus = SAU_encourage_revolt_in_palestine }
+		OR = {
+			454 = { resistance > 69 }
+			AND = {
+				PAL = { has_idea = SAU_arming_rebels_ns }
+				PAL = { has_stability < 0.5 }
+			}
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 1
+	}
+
+	option = {
+		name = saudi.67.a
+		if = {
+			limit = {
+				NOT = { original_tag = PAL }
+			}
+			release_on_controlled = PAL
+		}
+		else = {
+			effect_tooltip = {
+				SAU = { puppet = PAL }
+			}
+		}
+		hidden_effect = {
+			SAU = {
+				puppet = PAL
+				country_event = { id = saudi.68 hours = 2 random_hours = 4 }
+			}
+			PAL = {
+				drop_cosmetic_tag = yes
+				add_popularity = { ideology = fascism popularity = 0.25 }
+				set_politics = {
+					ruling_party = fascism
+				}
+				promote_character = PAL_amin_al_husseini
+				remove_ideas = SAU_arming_rebels_ns
+			}
+		}
+	}
+}
+
+# Revolt Succesful
+country_event = {
+	id = saudi.68
+	title = saudi.68.t
+	desc = saudi.68.d
+	picture = GFX_report_event_generic_peaceful_annexation
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.68.a
+		effect_tooltip = {
+			puppet = PAL
+		}
+	}
+}
+
+# Encourage Revolt in Palestine - Alternate FROM
+country_event = {
+	id = saudi.69
+	title = saudi.69.t
+	desc = saudi.69.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.69.a
+		effect_tooltip = {
+			custom_effect_tooltip = SAU_encourage_revolt_in_palestine_alt_tt
+			454 = {
+				add_resistance_target = {
+					amount = 50
+					days = 180
+					tooltip = SAU_revolting_people_tt
+				}
+				if = {
+					limit = {
+						is_core_of = ROOT
+					}
+					remove_core_of = ROOT
+					add_resistance = 15
+				}
+				else = {
+					add_resistance = 15
+				}
+			}
+		}
+	}
+}
+
+# Workers Begin Protest
+country_event = {
+	id = saudi.70
+	title = saudi.70.t
+	desc = saudi.70.d
+	picture = GFX_report_event_generic_strike
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.70.a
+		add_ideas = SAU_poor_working_conditions
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		custom_effect_tooltip = SAU_improve_worker_conditions_tt
+	}
+}
+
+# The Red King
+country_event = {
+	id = saudi.71
+	title = saudi.71.t
+	desc = saudi.71.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.71.a
+		add_stability = -0.05
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_popularity = {
+			ideology = communism
+			popularity = 0.03
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_country_leader_trait = SAU_red_king
+	}
+}
+
+# A New Order in Arabia
+country_event = {
+	id = saudi.72
+	title = saudi.72.t
+	desc = saudi.72.d
+	picture = GFX_report_event_generic_handshake
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.72.a
+		effect_tooltip = {
+			SAU = {
+				give_military_access = ROOT
+				diplomatic_relation = {
+					country = ROOT
+					relation = docking_rights
+					active = yes
+				}
+			}
+		}
+	}
+
+	option = {
+		name = saudi.72.b
+		trigger = {
+			has_completed_focus = SOV_the_centre
+			has_opinion = {
+				target = SAU
+				value > 50
+			}
+			SAU = {
+				has_completed_focus = SAU_deepen_soviet_economic_integration
+				is_subject = no
+				has_civil_war = no
+				has_idea = r56i_laws_leadership_people
+				OR = {
+					has_idea = SAU_glavneft
+					has_idea = SAU_soviet_railways
+				}
+			}
+		}
+		puppet = SAU
+		hidden_effect = {
+			SAU = {
+				country_event = saudi.73
+			}
+		}
+	}
+}
+
+# A Nation Under Command
+country_event = {
+	id = saudi.73
+	title = saudi.73.t
+	desc = saudi.73.d
+	picture = GFX_report_event_generic_handshake
+
+	is_triggered_only = yes
+
+	option = {
+		name = saudi.73.a
+		add_political_power = 50
+		effect_tooltip = {
+			FROM = {
+				puppet = ROOT
+			}
+		}
+		hidden_effect = {
+			set_portraits = {
+				character = SAU_karim_khakimov
+				civilian = { large = GFX_Portrait_Saudi_Arabia_Karim_Khakimov_suit }
+			}
+			set_country_flag = SAU_soviet_puppet_flag
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+}
+
+# Appeal for Increased Autonomy - Event for SOV
+country_event = {
+	id = saudi.74
+	title = saudi.74.t
+	desc = saudi.74.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = { # Accept
+		name = saudi.74.a
+		ai_chance = {
+			base = 60
+		}
+		end_puppet = FROM
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.75 }
+			}
+		}
+	}
+
+	option = { # Decline
+		name = saudi.74.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			FROM = {
+				country_event = { id = saudi.76 }
+			}
+		}
+	}
+}
+
+# Appeal for Increased Autonomy - Event for Arabia - SOV accepted
+country_event = {
+	id = saudi.75
+	title = saudi.75.t
+	desc = saudi.75.d
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+
+	option = { # Ok
+		name = saudi.75.a
+		effect_tooltip = {
+			FROM = { end_puppet = ROOT }
+		}
+		hidden_effect = {
+			#drop_cosmetic_tag = yes
+		}
+	}
+}
+
+# Appeal for Increased Autonomy - Event for Arabia - SOV declined
+country_event = {
+	id = saudi.76
+	title = saudi.76.t
+	desc = saudi.76.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { # Damn
+		name = saudi.76.a
+	}
+}
+
+####### NEWS EVENTS #######
+
+# Alexandria/Riyadh Protocol
+news_event = {
+	id = saudi_news.1
+	title = saudi_news.1.t
+	desc = saudi_news.1.d
+	picture = GFX_news_event_SAU_alexandria_protocol
+
+	major = yes
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = saudi_news.1.a
+		trigger = {
+			OR = {
+				has_idea = SAU_arab_league_member_alternate
+				has_country_flag = SAU_arab_league_member_flag
+			}
+		}
+	}
+
+	option = {
+		name = saudi_news.1.b
+		trigger = {
+			NOT = { has_country_flag = SAU_arab_league_member_flag }
+			NOT = { has_idea = SAU_arab_league_member_alternate }
+		}
+	}
+}
+
+# The United States Intervenes to Defend Saudi Arabia
+news_event = {
+	id = saudi_news.2
+	title = saudi_news.2.t
+	desc = saudi_news.2.d
+	picture = GFX_news_event_usa_japan_at_war
+
+	major = yes
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = saudi_news.2.a
+		trigger = {
+			NOT = { has_government = communism }
+		}
+	}
+
+	option = {
+		name = saudi_news.2.b
+		trigger = {
+			has_government = communism
+		}
+	}
+}

@@ -1,0 +1,45 @@
+#####-----> URG: Historical AI Behavior <><> <><> <><> <><> <><>
+
+URG_historical_plan = {
+	name = "Uruguay Hisorical Plan"
+	desc = "Historical behavior for Uruguay."
+	allowed = {
+		original_tag = URG
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = URG_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = URG_AI_HISTORICAL
+			has_game_rule = {
+				rule = URG_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	focus_factors = {
+		URG_go_against_terra = 0
+		URG_placate_to_the_axis = 0
+		URG_rule_with_an_iron_fist = 0
+		URG_join_the_allies_euyl = 0
+		URG_join_the_axis = 0
+		URG_prepare_for_an_inevitable_conflict = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

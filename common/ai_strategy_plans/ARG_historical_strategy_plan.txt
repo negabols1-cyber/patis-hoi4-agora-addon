@@ -1,0 +1,51 @@
+#####-----> ARG: Historical AI Behavior <><> <><> <><> <><> <><>
+
+ARG_historical_plan = {
+	name = "Argentina Hisorical Plan"
+	desc = "Historical behavior for Argentina."
+	allowed = {
+		original_tag = ARG
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = ARG_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = ARG_AI_HISTORICAL_BEHAVIOR
+			has_game_rule = {
+				rule = ARG_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	focus_factors = {
+		ARG_create_the_CNU = 0
+		ARG_an_imminent_revolution = 0
+		ARG_union_civica_radical = 0
+		ARG_partido_socialista = 0
+		ARG_kill_off_roberto = 0
+		ARG_leopoldo_melo_for_president = 0
+		ARG_robustiano_for_president = 0
+		ARG_crack_down_on_our_generals = 0
+		ARG_go_against_the_peronists = 0
+		ARG_review_our_foreign_affairs = 0
+		ARG_al_amigo_todo_al_enemigo_nada = 0
+		ARG_side_with_the_axis = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

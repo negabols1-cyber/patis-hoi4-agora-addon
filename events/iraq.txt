@@ -1,0 +1,1054 @@
+#########################
+###### IRAQ EVENTS ######
+#########################
+add_namespace = iraq_all
+add_namespace = iraq_king
+add_namespace = iraq_junta
+add_namespace = iraq_khazal
+add_namespace = iraq_democratic
+add_namespace = iraq_communist
+add_namespace = iraq_fascist
+
+country_event = { # Mysterious Death
+
+	id = iraq_all.2
+	title = iraq_all.2.t
+	desc = iraq_all.2.d
+
+	picture = GFX_IRQ_death_of_qhazi
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_all.2.a
+		add_stability = -0.05
+	}
+}
+
+news_event = { # Mysterious Death # other countries
+
+	id = iraq_all.3
+	title = iraq_all.3.t
+	desc = iraq_all.3.d
+
+	picture = GFX_news_event_generic_ruins
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_all.3.a
+	}
+}
+
+country_event = { # Power in the hands of the Army
+
+	id = iraq_all.4
+	title = iraq_all.4.t
+	desc = iraq_all.4.d
+
+	picture = GFX_IRQ_iraqi_solidiers
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_all.4.a
+		complete_national_focus = IRQ_continue_with_the_hashemites
+
+		hidden_effect = {
+			if = {
+				limit = {
+					has_dlc = "Graveyard of Empires"
+				}
+				promote_character = IRQ_faisal_ii
+			}
+		}
+	}
+
+	option = {
+		name = iraq_all.4.b
+		complete_national_focus = IRQ_military_government
+
+		hidden_effect = {
+			promote_character = IRQ_nuri_pasha_al_said
+			set_cosmetic_tag = IRQ_junta
+			set_party_name = {
+				ideology = neutrality
+				long_name = IRQ_junta
+				name = IRQ_junta
+			}
+		}
+	}
+
+	option = {
+		name = iraq_all.4.c
+		complete_national_focus = IRQ_ask_khazal
+		hidden_effect = {
+			promote_character = IRQ_khazal_ibn_jabir
+			add_ideas = IRQ_opponents_of_khazal
+			set_party_name = {
+				ideology = neutrality
+				long_name = khazal_state
+				name = khazal_state
+			}
+			set_cosmetic_tag = IRQ_khazal
+		}
+	}
+}
+
+country_event = { # Iraq Wants Kuwait
+
+	id = iraq_all.5
+	title = iraq_all.5.t
+	desc = iraq_all.5.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_all.5.a
+		ai_chance = {
+			base = 0
+			modifier = {
+				ROOT = { has_government = IRQ }
+				factor = 10
+			}
+		}
+	}
+
+	option = {
+		name = iraq_all.5.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				ROOT = { has_government = IRQ }
+				factor = 0
+			}
+		}
+		IRQ = {
+			random_owned_state = {
+				limit = {
+					industrial_complex > 0
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = -1
+					instant_build = yes
+				}
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+		IRQ = { transfer_state = 656 656 = { add_core_of = IRQ } }
+	}
+
+}
+
+country_event = { # Iraq Demands Kuwait
+
+	id = iraq_all.6
+	title = iraq_all.6.t
+	desc = iraq_all.6.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_all.6.a
+		ai_chance = {
+			base = 0
+			modifier = {
+				ROOT = { has_government = IRQ }
+				factor = 10
+			}
+		}
+		IRQ = { transfer_state = 656 656 = { add_core_of = IRQ } }
+	}
+
+	option = {
+		name = iraq_all.6.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				ROOT = { has_government = IRQ }
+				factor = 0
+			}
+		}
+		IRQ = {
+			set_country_flag = border_war_option
+			country_event = {
+				id = iraq_all.7
+				days = 7
+			}
+			custom_effect_tooltip = effects_after_a_week_tt
+			effect_tooltip = {
+				start_border_war = {
+					change_state_after_war = no
+					attacker = {
+						state = 1011
+						num_provinces = 1
+						on_win = iraq_all.8
+						on_lose = iraq_all.9
+					}
+					defender = {
+						state = 656
+						num_provinces = 1
+						on_win = iraq_all.8
+						on_lose = iraq_all.9
+					}
+				}
+			}
+		}
+	}
+
+}
+
+country_event = { # Reject Kuwait Demand or Request
+
+	id = iraq_all.7
+	title = iraq_all.7.t
+	desc = iraq_all.7.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_all.7.a
+		add_stability = -0.05
+	}
+
+	option = {
+		name = iraq_all.7.b
+		trigger = { has_country_flag = border_war_option }
+		ai_chance = {
+			base = 100
+		}
+		clr_country_flag = border_war_option
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 1011
+				num_provinces = 1
+				on_win = iraq_all.8
+				on_lose = iraq_all.9
+			}
+			defender = {
+				state = 656
+				num_provinces = 1
+				on_win = iraq_all.8
+				on_lose = iraq_all.9
+			}
+		}
+	}
+
+}
+
+country_event = { # Win Kuwait
+
+	id = iraq_all.8
+	title = iraq_all.8.t
+	desc = iraq_all.8.d
+
+	picture = GFX_IRQ_win_kuwait
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_all.8.a
+		if = {
+			limit = { tag = IRQ }
+			IRQ = { transfer_state = 656 }
+		}
+		else = {
+			ROOT = {
+				add_timed_idea = {
+					idea = war_indemnity_winner
+					days = 120
+				}
+			}
+			IRQ = {
+				add_timed_idea = {
+					idea = war_indemnity_IRQ
+					days = 120
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Lose Kuwait
+
+	id = iraq_all.9
+	title = iraq_all.9.t
+	desc = iraq_all.9.d
+
+	picture = GFX_report_event_hungarian_soldiers
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_all.9.a
+		if = {
+			limit = { tag = IRQ }
+			effect_tooltip = {
+				IRQ = {
+					add_timed_idea = {
+						idea = war_indemnity_IRQ
+						days = 120
+					}
+				}
+				656 = {
+					controller = {
+						add_timed_idea = {
+							idea = war_indemnity_winner
+							days = 120
+						}
+					}
+				}
+			}
+		}
+		else = {
+			IRQ = { transfer_state = 656 }
+		}
+	}
+}
+
+country_event = { # Coup d'état
+	id = iraq_all.10
+	title = iraq_all.10.t
+	desc = iraq_all.10.d
+
+	picture = GFX_IRQ_military_coup
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = IRQ
+		has_completed_focus = IRQ_end_of_kingdom
+		date > 1936.10.20
+		OR = {
+			IRQ_ghazi_i = { is_country_leader = yes }
+			IRQ_yasin_al_hashimi = { is_country_leader = yes }
+		}
+	}
+
+	option = {
+		name = iraq_all.10.a
+		add_political_power = -50
+		if = {
+			limit = {
+				NOT = { has_dlc = "Graveyard of Empires" }
+			}
+			deactivate_advisor = IRQ_yasin_al_hashimi
+			activate_advisor = IRQ_hikmat_sulayman
+		}
+		else = {
+			retire_country_leader = yes
+			IRQ_hikmat_sulayman = {
+				add_country_leader_role = {
+					country_leader = {
+						ideology = despotism
+						expire = "1965.1.1.1"
+						traits = { IRQ_social_reformer_pm }
+					}
+					promote_leader = yes
+				}
+			}
+		}
+		set_country_flag = IRQ_coup
+	}
+}
+
+country_event = { # Revenge Day
+
+	id = iraq_all.11
+	title = iraq_all.11.t
+	desc = iraq_all.11.d
+
+	picture = GFX_IRQ_military_coup2
+	fire_only_once = yes
+	trigger = {
+		original_tag = IRQ
+		date > 1936.7.28
+		has_country_flag = IRQ_coup
+	}
+
+	option = {
+		name = iraq_all.11.a
+		ai_chance = {
+			base = 95
+			modifier = {
+				is_historical_focus_on = no
+				factor = 0
+			}
+		}
+		deactivate_advisor = IRQ_hikmat_sulayman
+		activate_advisor = IRQ_yasin_al_hashimi
+		custom_effect_tooltip = bakr_sidqi_will_assassinated_tt
+		hidden_effect = { retire_character = IRQ_bakr_sidqi_al_askari }
+		clr_country_flag = IRQ_coup
+	}
+	option = {
+		name = iraq_all.11.b
+		ai_chance = {
+			base = 5
+			modifier = {
+				is_historical_focus_on = no
+				factor = 100
+			}
+		}
+		add_stability = -0.05
+		clr_country_flag = IRQ_coup
+	}
+}
+
+country_event = { # Escape from Death
+	id = iraq_all.12
+	title = iraq_all.12.t
+	desc = iraq_all.12.d
+
+	picture = GFX_IRQ_khazaliyeh_palace
+	fire_only_once = yes
+	trigger = {
+		original_tag = IRQ
+		date > 1936.3.1
+	}
+
+	option = {
+		name = iraq_all.12.a
+		ai_chance = {
+			base = 5
+		}
+	}
+
+	option = {
+		name = iraq_all.12.b
+		ai_chance = {
+			base = 0
+		}
+		set_country_flag = khazal_in_iraq
+		add_political_power = -50
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -1500
+		}
+		reverse_add_opinion_modifier = {
+			target = PER
+			modifier = medium_decrease
+		}
+		PER = {
+			country_event = {
+				id = iraq_all.13
+				days = 2
+			}
+		}
+		effect_tooltip = {
+			unlock_national_focus = IRQ_ask_khazal
+		}
+	}
+}
+
+country_event = { # He Escape
+
+	id = iraq_all.13
+	title = iraq_all.13.t
+	desc = iraq_all.13.d
+
+	picture = GFX_IRQ_khazaliyeh_palace
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = iraq_all.13.a
+		add_opinion_modifier = {
+			target = IRQ
+			modifier = medium_decrease
+		}
+	}
+}
+########################
+###### GHAZI PATH ######
+########################
+country_event = { # Arab Unity
+
+	id = iraq_king.1
+	title = iraq_king.1.t
+	desc = iraq_king.1.d
+
+	picture = GFX_IRQ_arabs_unity
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_king.1.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_opinion = { target = IRQ value < 20 }
+				add = 10
+			}
+			modifier = {
+				is_in_faction = yes
+				add = -50
+			}
+		}
+		IRQ = {
+			add_to_faction = ROOT
+		}
+	}
+
+	option = {
+		name = iraq_king.1.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_opinion = { target = IRQ value < 20 }
+				add = -10
+			}
+			modifier = {
+				is_in_faction = yes
+				add = 50
+			}
+		}
+	}
+}
+
+#############################
+###### DEMOCRATIC PATH ######
+#############################
+country_event = { # We Want Democracy
+
+	id = iraq_democratic.1
+	title = iraq_democratic.1.t
+	desc = iraq_democratic.1.d
+
+	picture = GFX_IRQ_arabs_protest
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_democratic.1.a
+	}
+}
+country_event = { # Agreement Proposal
+
+	id = iraq_democratic.2
+	title = iraq_democratic.2.t
+	desc = iraq_democratic.2.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_democratic.2.a
+		if = {
+			limit = { has_completed_focus = IRQ_propose_military_agreements }
+			add_timed_idea = {
+				idea = IRQ_middle_military_agreement
+				days = 360
+			}
+		}
+		else = {
+			add_timed_idea = {
+				idea = IRQ_middle_econonmic_agreement
+				days = 360
+			}
+		}
+	}
+	option = {
+		name = iraq_democratic.2.b
+	}
+}
+country_event = { # Defensive Pact with Arabs
+
+	id = iraq_democratic.3
+	title = iraq_democratic.3.t
+	desc = iraq_democratic.3.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_democratic.3.a
+		ai_chance = {
+			base = 100
+			modifier = {
+				ROOT = {
+					has_government = fascism
+				}
+				factor = 0
+			}
+		}
+
+		IRQ = {
+			give_guarantee = ROOT
+		}
+		ROOT = {
+			give_guarantee = IRQ
+		}
+	}
+	option = {
+		name = iraq_democratic.3.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				ROOT = {
+					has_government = fascism
+				}
+				factor = 100
+			}
+		}
+
+		ROOT = {
+
+		}
+	}
+}
+country_event = { # Middle East Petroleum Organization
+
+	id = iraq_democratic.4
+	title = iraq_democratic.4.t
+	desc = iraq_democratic.4.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_democratic.4.a
+		ai_chance = {
+			base = 100
+		}
+		add_ideas = IRQ_middle_east_petroleum_organization_member
+	}
+	option = {
+		name = iraq_democratic.4.b
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+country_event = { # Election Time
+
+	id = iraq_democratic.8
+	title = iraq_democratic.5.t
+	desc = iraq_democratic.5.d
+
+	picture = GFX_report_event_election_vote
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_democratic.5.a
+		complete_national_focus = IRQ_leader_2
+		hidden_effect = {
+			promote_character = IRQ_yasin_al_hashimi
+			if = {
+				limit = { NOT = { has_government = democratic } }
+				set_politics = { ruling_party = democratic }
+			}
+		}
+		if = {
+			limit = { NOT = { has_country_flag = IRQ_elections } }
+			set_country_flag = IRQ_elections
+		}
+		add_political_power = 50
+		add_stability = 0.05
+	}
+	option = {
+		name = iraq_democratic.5.b
+		complete_national_focus = IRQ_leader_1
+		hidden_effect = {
+			promote_character = IRQ_hikmat_sulayman
+			if = {
+				limit = { NOT = { has_government = democratic } }
+				set_politics = { ruling_party = democratic }
+			}
+		}
+		if = {
+			limit = { NOT = { has_country_flag = IRQ_elections } }
+			set_country_flag = IRQ_elections
+		}
+		add_political_power = 50
+		add_war_support = 0.05
+	}
+}
+
+country_event = { # Iraq Wants to Enter the Allies
+
+	id = iraq_democratic.6
+	title = iraq_democratic.6.t
+	desc = iraq_democratic.6.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_democratic.6.a
+		ai_chance = {
+			base = 100
+		}
+		add_to_faction = IRQ
+	}
+	option = {
+		name = iraq_democratic.6.b
+	}
+}
+
+##########################
+###### FASCIST PATH ######
+##########################
+country_event = { # Iraq Wants to Enter the Axis
+
+	id = iraq_fascist.1
+	title = iraq_fascist.1.t
+	desc = iraq_fascist.1.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_fascist.1.a
+		ai_chance = {
+			base = 100
+		}
+		add_to_faction = IRQ
+	}
+	option = {
+		name = iraq_fascist.1.b
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+country_event = { # Iraq's Proposal to Attack Iran
+
+	id = iraq_fascist.2
+	title = iraq_fascist.2.t
+	desc = iraq_fascist.2.d
+
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_fascist.2.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				TUR = {
+					has_government = fascism
+				}
+				factor = 100
+			}
+			modifier = {
+				TUR = {
+					has_government = democratic
+				}
+				factor = 0
+			}
+		}
+		add_political_power = -25
+		TUR = {
+			create_wargoal = {
+				target = PER
+				type = annex_everything
+			}
+		}
+		IRQ = {
+			create_wargoal = {
+				target = PER
+				type = annex_everything
+			}
+			country_event = {
+				id = iraq_fascist.3
+				days = 1
+			}
+			set_country_flag = IraqFascist3Accept
+		}
+	}
+	option = {
+		name = iraq_fascist.2.b
+		ai_chance = {
+			base = 5
+			modifier = {
+				TUR = {
+					has_government = fascism
+				}
+				factor = 0
+			}
+			modifier = {
+				TUR = {
+					has_government = democratic
+				}
+				factor = 100
+			}
+		}
+		add_political_power = 25
+		TUR = {
+			give_guarantee = PER
+		}
+		IRQ = {
+			create_wargoal = {
+				target = PER
+				type = annex_everything
+			}
+			country_event = {
+				id = iraq_fascist.3
+				days = 1
+			}
+			set_country_flag = IraqFascist3Reject
+		}
+	}
+	option = {
+		name = iraq_fascist.2.c
+		ai_chance = {
+			base = 70
+			modifier = {
+				TUR = {
+					has_government = fascism
+				}
+				factor = 0
+			}
+			modifier = {
+				TUR = {
+					has_government = democratic
+				}
+				factor = 25
+			}
+		}
+		add_political_power = -25
+		TUR = {
+			diplomatic_relation = {
+				country = IRQ
+				relation = non_aggression_pact
+			}
+		}
+		IRQ = {
+			create_wargoal = {
+				target = PER
+				type = annex_everything
+			}
+			country_event = {
+				id = iraq_fascist.3
+				days = 1
+			}
+		}
+	}
+}
+country_event = { ## Iraq's Proposal to Attack Iran # Answer #
+
+	id = iraq_fascist.3
+	title = iraq_fascist.3.t
+	desc = iraq_fascist.3.d
+
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_fascist.3.a
+		if = {
+			limit = { has_country_flag = IraqFascist3Accept }
+			add_opinion_modifier = {
+				target = TUR
+				modifier = medium_increase
+			}
+			clr_country_flag = IraqFascist3Accept
+			effect_tooltip = {
+				TUR = {
+					give_guarantee = PER
+				}
+				IRQ = {
+					create_wargoal = {
+						target = PER
+						type = annex_everything
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = IraqFascist3Reject }
+			add_political_power = -25
+			clr_country_flag = IraqFascist3Reject
+			effect_tooltip = {
+				TUR = {
+					give_guarantee = PER
+				}
+				IRQ = {
+					create_wargoal = {
+						target = PER
+						type = annex_everything
+					}
+				}
+			}
+		}
+		else = {
+			effect_tooltip = {
+				TUR = {
+					diplomatic_relation = {
+						country = IRQ
+						relation = non_aggression_pact
+					}
+				}
+				IRQ = {
+					create_wargoal = {
+						target = PER
+						type = annex_everything
+					}
+				}
+			}
+		}
+	}
+}
+
+############################
+###### COMMUNIST PATH ######
+############################
+country_event = { # Iraq's Proposal to Attack Iran
+
+	id = iraq_communist.1
+	title = iraq_communist.1.t
+	desc = iraq_communist.1.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_communist.1.a
+		ai_chance = {
+			base = 100
+		}
+		SOV = {
+			add_to_faction = IRQ
+		}
+	}
+	option = {
+		name = iraq_communist.1.b
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+country_event = { # Iraq's Proposal to Attack Iran # Refuse
+
+	id = iraq_communist.2
+	title = iraq_communist.2.t
+	desc = iraq_communist.2.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_communist.2.a
+		add_political_power = -10
+		add_opinion_modifier = {
+			target = SOV
+			modifier = small_decrease
+		}
+	}
+}
+###########################
+###### KHAZAL EVENTS ######
+###########################
+country_event = { # A proposal to take back our Lands
+
+	id = iraq_khazal.1
+	title = iraq_khazal.1.t
+	desc = iraq_khazal.1.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_khazal.1.a
+		ai_chance = {
+			base = 100
+		}
+		custom_effect_tooltip = khazal_occupy_azerbaican_effect2
+		IRQ = {
+			set_country_flag = khazal_occupy_azerbaican
+		}
+		hidden_effect = {
+			IRQ = {
+				country_event = iraq_khazal.2
+			}
+		}
+	}
+	option = {
+		name = iraq_khazal.1.b
+		ai_chance = {
+			base = 0
+		}
+		hidden_effect = {
+			IRQ = {
+				country_event = iraq_khazal.3
+			}
+		}
+	}
+}
+
+country_event = { # Aceept # A proposal to take back our Lands
+
+	id = iraq_khazal.2
+	title = iraq_khazal.2.t
+	desc = iraq_khazal.2.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_khazal.2.a
+		custom_effect_tooltip = khazal_occupy_azerbaican_effect
+	}
+}
+
+country_event = { # Refuse # A proposal to take back our Lands
+
+	id = iraq_khazal.3
+	title = iraq_khazal.3.t
+	desc = iraq_khazal.3.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_khazal.3.a
+	}
+}
+
+country_event = { # Demand from Iraq
+
+	id = iraq_khazal.4
+	title = iraq_khazal.4.t
+	desc = iraq_khazal.4.d
+
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	option = {
+		name = iraq_khazal.4.a
+		ai_chance = {
+			base = 5
+			modifier = {
+				has_war_with_major = yes
+				factor = 10
+			}
+			modifier = {
+				has_war_with_major = yes
+				IRQ = { is_major = yes }
+				factor = 100
+			}
+		}
+		AZR = { transfer_state = 229 }
+	}
+
+	option = {
+		name = iraq_khazal.4.a
+		ai_chance = {
+			base = 95
+			modifier = {
+				has_war_with_major = yes
+				IRQ = { is_major = yes }
+				factor = 0
+			}
+		}
+		IRQ = {
+			hidden_effect = {
+				229 = {
+					add_claim_by = IRQ
+				}
+			}
+			create_wargoal = {
+				target = SOV
+				type = take_claimed_state
+			}
+		}
+	}
+}
+

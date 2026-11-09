@@ -1,0 +1,48 @@
+scripted_map_modes = {
+	EF_core_map_mode = {
+		top = {
+			type = state
+
+			color = {
+				FROM = {
+					set_temp_variable = { alpha = 1.0 }
+					if = {
+						limit = {
+							is_owned_by = ROOT
+						}
+						set_temp_variable = { blue = 1.0 }
+					}
+					else_if = {
+						limit = {
+							is_core_of = ROOT
+						}
+						set_temp_variable = { red = 1.0 }
+					}
+					else_if = {
+						limit = {
+							is_claimed_by = ROOT
+						}
+						set_temp_variable = { red = 1.0 }
+						set_temp_variable = { green = 0.4 }
+						set_temp_variable = { blue = 0.4 }
+					}
+					else = {
+						set_temp_variable = { red = 0.5 }
+						set_temp_variable = { green = 0.5 }
+						set_temp_variable = { blue = 0.5 }
+					}
+				}
+			}
+
+			thickness = no
+		}
+
+		bottom = {
+			type = none
+		}
+
+		far_text = country
+		near_text = state
+		update_daily = no
+	}
+}

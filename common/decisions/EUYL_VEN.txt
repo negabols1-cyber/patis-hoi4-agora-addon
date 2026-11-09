@@ -1,0 +1,227 @@
+VEN_political_crisis = {
+	ECU_la_gloriosa_mission = {
+		icon = generic_ignite_civil_war
+
+		allowed = {
+			original_tag = ECU
+		}
+
+		fire_only_once = yes
+
+		days_mission_timeout = 1240
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			has_stability > 0.84
+			NOT = {
+				has_completed_focus = ECU_support_la_gloriosa
+			}
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_character = ECU_jose_velasco_ibarra
+			}
+		}
+
+		cancel_effect = {
+			if = {
+				limit = {
+					has_idea = ECU_la_gloriosa
+				}
+				remove_ideas = ECU_la_gloriosa
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					has_idea = ECU_la_gloriosa
+				}
+				remove_ideas = ECU_la_gloriosa
+			}
+			retire_character = ECU_jose_velasco_ibarra
+			add_stability = 0.05
+		}
+
+		timeout_effect = {
+			country_event = ecu.18 ## La Gloriosa
+			effect_tooltip = {
+				promote_character = ECU_jose_velasco_ibarra
+			}
+		}
+	}
+
+	ECU_promote_pro_velasquist_protests_in_FROM = {
+		icon = eng_blackshirt_march
+
+		state_target = yes
+
+		target_array = core_states
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		cost = 20
+
+		visible = {
+			has_completed_focus = ECU_support_la_gloriosa
+		}
+
+		available = {
+			has_active_mission = ECU_la_gloriosa_mission
+		}
+
+		on_map_mode = map_only
+
+		fire_only_once = yes
+
+		complete_effect = {
+			add_days_mission_timeout = {
+				mission = ECU_la_gloriosa_mission
+				days = -60
+			}
+			add_stability = 0.01
+		}
+
+		days_remove = 70
+	}
+
+	ECU_repress_the_velasquists_in_FROM = {
+		icon = generic_army_support
+
+		state_target = yes
+
+		target_array = core_states
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		cost = 25
+
+		visible = {
+			has_completed_focus = ECU_prevent_la_gloriosa
+		}
+
+		available = {
+			has_active_mission = ECU_la_gloriosa_mission
+		}
+
+		on_map_mode = map_only
+
+		fire_only_once = yes
+
+		complete_effect = {
+			add_days_mission_timeout = {
+				mission = ECU_la_gloriosa_mission
+				days = 35
+			}
+			add_stability = 0.05
+		}
+
+		days_remove = 70
+	}
+
+	ECU_deal_with_the_draft_dodgers = {
+		icon = generic_civil_support
+
+		allowed = {
+			OR = {
+				original_tag = ECU
+				original_tag = PRU
+			}
+		}
+
+		available = {
+			OR = {
+				has_idea = draft_dodging
+				has_idea = draft_dodging_2
+				has_idea = draft_dodging_3
+			}
+		}
+
+		custom_cost_text = decision_cost_CP_25
+		custom_cost_trigger = {
+			command_power > 24
+		}
+		ai_will_do = {
+			base = 1
+		}
+
+		days_remove = 60
+
+		modifier = {
+			command_power_gain_mult = -0.1
+			political_power_gain = -0.1
+		}
+
+		visible = {
+			OR = {
+				has_idea = draft_dodging
+				has_idea = draft_dodging_2
+				has_idea = draft_dodging_3
+			}
+
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+			}
+			country_event = stability.21
+		}
+	}
+
+	ECU_handle_the_strikers = {
+		icon = generic_consumer_goods
+
+		allowed = {
+			OR = {
+				original_tag = ECU
+				original_tag = PRU
+			}
+		}
+
+		available = {
+			OR = {
+				has_idea = strikes_1
+				has_idea = strikes_2
+				has_idea = strikes_3
+			}
+		}
+
+		cost = 25
+		ai_will_do = {
+			base = 1
+		}
+
+		days_remove = 60
+
+		modifier = {
+			consumer_goods_factor = 0.25
+			political_power_gain = -0.1
+		}
+
+		visible = {
+			OR = {
+				has_idea = strikes_1
+				has_idea = strikes_2
+				has_idea = strikes_3
+			}
+
+		}
+
+		complete_effect = {
+			country_event = stability.22
+		}
+	}
+}

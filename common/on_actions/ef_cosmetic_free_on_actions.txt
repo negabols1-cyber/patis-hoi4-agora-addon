@@ -1,0 +1,314 @@
+on_actions = {
+
+	#ROOT is free nation FROM is releaser
+	on_release_as_free = {
+		effect = {
+			if = {
+				limit = {
+					OR = {
+						original_tag = ARM
+						original_tag = CYP
+						original_tag = SYR
+						original_tag = ISR
+						original_tag = LBA
+						original_tag = TUN
+						original_tag = ALG
+						original_tag = BRM
+						original_tag = YUN
+						original_tag = GXC
+						original_tag = XSM
+						original_tag = VIN
+						original_tag = SIK
+						original_tag = SHX
+						original_tag = MON
+						original_tag = MEN
+						original_tag = MAL
+						original_tag = INS
+						original_tag = KOR
+						original_tag = PHI
+						original_tag = BEL
+						original_tag = BLR
+						original_tag = CZE
+						original_tag = EST
+						original_tag = HOL
+						original_tag = LAT
+						original_tag = LIT
+						original_tag = POL
+						original_tag = SAF
+						original_tag = UKR
+						original_tag = ZIM
+						original_tag = NMB
+						original_tag = PNG
+						original_tag = SAM
+						original_tag = SUR
+						original_tag = BRA
+						original_tag = MZB
+						original_tag = ANG
+						original_tag = CAR
+						original_tag = CHA
+						original_tag = MRT
+						original_tag = NGR
+						original_tag = DAH
+						original_tag = TOG
+						original_tag = GAB
+						original_tag = CAM
+						original_tag = VOL
+						original_tag = RAJ
+						original_tag = IVO
+						original_tag = LAO
+						original_tag = SEN
+						original_tag = GNA
+						original_tag = RCG
+						original_tag = MLI
+						original_tag = MOR
+						original_tag = CMR
+						original_tag = YUG
+						original_tag = SOM
+						original_tag = ERI
+						original_tag = ALB
+						original_tag = FSM
+						original_tag = PAL
+						original_tag = MLT
+						original_tag = GRE
+						original_tag = ETH
+					}
+					has_country_flag = cosmetic_tagged_flag
+				}
+				ROOT = {
+					drop_cosmetic_tag = yes
+					clr_country_flag = cosmetic_tagged_flag
+				}
+			}
+		}
+	}
+
+	on_liberate = {
+		effect = {
+			if = {
+				limit = {
+					ef_dynamic_cosmetic_country = yes
+				}
+				ROOT = {
+					#Fascist ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = LBA_ITA
+							}
+						}
+						retire_ideology_leader = fascism
+					}
+					#Neutrality ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = CYP_TUR
+							}
+						}
+						retire_ideology_leader = neutrality
+					}
+					#Libya leader return
+					if = {
+						limit = {
+							original_tag = LBA
+						}
+						remove_ideas = ITA_ALB_italian_settlers
+						create_country_leader = {
+							name = "Muhammad ar-Reda"
+							desc = ""
+							picture = GFX_portrait_Muhammad_ar_Reda
+							ideology = fascism_ideology
+							traits = {
+								#
+							}
+						}
+					}
+					drop_cosmetic_tag = yes
+					clr_country_flag = cosmetic_tagged_flag
+				}
+			}
+		}
+	}
+
+	#ROOT is subject FROM is overlord
+	on_subject_free = {
+		effect = {
+			if = {
+				limit = {
+					ef_dynamic_cosmetic_country = yes
+				}
+				ROOT = {
+					#Fascist ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = LBA_ITA
+							}
+						}
+						retire_ideology_leader = fascism
+					}
+					#Neutrality ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = CYP_TUR
+							}
+						}
+						retire_ideology_leader = neutrality
+					}
+					#Libya leader return
+					if = {
+						limit = {
+							original_tag = LBA
+						}
+						remove_ideas = ITA_ALB_italian_settlers
+						create_country_leader = {
+							name = "Muhammad ar-Reda"
+							desc = ""
+							picture = GFX_portrait_Muhammad_ar_Reda
+							ideology = fascism_ideology
+							traits = {
+								#
+							}
+						}
+					}
+					drop_cosmetic_tag = yes
+					clr_country_flag = cosmetic_tagged_flag
+				}
+			}
+		}
+	}
+
+	#ROOT is subject FROM is overlord
+	on_subject_annexed = {
+		effect = {
+			if = {
+				limit = {
+					ef_dynamic_cosmetic_country = yes
+				}
+				ROOT = {
+					#Fascist ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = LBA_ITA
+							}
+						}
+						retire_ideology_leader = fascism
+					}
+					#Neutrality ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = CYP_TUR
+							}
+						}
+						retire_ideology_leader = neutrality
+					}
+					#Libya leader return
+					if = {
+						limit = {
+							original_tag = LBA
+						}
+						remove_ideas = ITA_ALB_italian_settlers
+						create_country_leader = {
+							name = "Muhammad ar-Reda"
+							desc = ""
+							picture = GFX_portrait_Muhammad_ar_Reda
+							ideology = fascism_ideology
+							traits = {
+								#
+							}
+						}
+					}
+					drop_cosmetic_tag = yes
+					clr_country_flag = cosmetic_tagged_flag
+				}
+			}
+		}
+	}
+
+	#Annexlenirse cosmetic tagi biraksin diye
+	on_annex = {
+		effect = {
+			if = {
+				limit = {
+					ROOT = { original_tag = ROOT }
+					FROM = {
+						ef_dynamic_cosmetic_country = yes
+					}
+				}
+				FROM = {
+					#Fascist ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = LBA_ITA
+							}
+						}
+						retire_ideology_leader = fascism
+					}
+					#Neutrality ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = CYP_TUR
+							}
+						}
+						retire_ideology_leader = neutrality
+					}
+					#Libya leader return
+					if = {
+						limit = {
+							original_tag = LBA
+						}
+						remove_ideas = ITA_ALB_italian_settlers
+						create_country_leader = {
+							name = "Muhammad ar-Reda"
+							desc = ""
+							picture = GFX_portrait_Muhammad_ar_Reda
+							ideology = fascism_ideology
+							traits = {
+								#
+							}
+						}
+					}
+					drop_cosmetic_tag = yes
+					clr_country_flag = cosmetic_tagged_flag
+					#log = "ON_ANNEX ON_ACTONS"
+				}
+			}
+		}
+	}
+
+	#Annexlenirse cosmetic tagi biraksin diye
+	#on_annex = {
+		#	effect = {
+			#		if = {
+				#			limit = {
+					#				ef_dynamic_cosmetic_country = yes
+					#				is_puppet = no
+					#			}
+				#			drop_cosmetic_tag = yes
+				#			clr_country_flag = cosmetic_tagged_flag
+				#			log = "ON_ANNEX PEACE"
+				#		}
+			#	}
+		#}
+
+	#Overlordu annexlenince cosmetic tagi biraksin diye
+	#on_peaceconference_ended = {
+		#	effect = {
+			#		if = {
+				#			limit = {
+					#				ef_dynamic_cosmetic_country = yes
+					#				is_puppet = no
+					#			}
+				#			drop_cosmetic_tag = yes
+				#		    clr_country_flag = cosmetic_tagged_flag
+				#			log = "PEACE CONFERENCE ENDED"
+				#		}
+			#	}
+		#}
+
+}

@@ -1,0 +1,1047 @@
+
+###########################
+##########YEM##############
+###########################
+
+add_namespace = YEM
+
+# İngilizden Aden'i Satın Alma
+country_event = {
+	id = YEM.5600
+	title = yemen.1.t
+	desc = yemen.1.d
+	picture = GFX_report_event_bul_ff_troops_panzer
+
+	is_triggered_only = yes
+
+	option = { # Accept
+		name = yemen.1.a
+		ai_chance = { base = 8 }
+		add_political_power = 50
+		every_state = {
+			limit = {
+				OR = {
+					state = 659
+					state = 992
+				}
+				is_controlled_by_ROOT_or_subject = yes
+			}
+			set_state_flag = YEM_demanding_states_flag
+			transfer_state_to = FROM
+		}
+		YEM = {
+			country_event = { id = YEM.5601 }
+		}
+	}
+	option = { # Refuse
+		name = yemen.1.b
+		ai_chance = { base = 2 }
+		YEM = {
+			country_event = { id = YEM.5602 }
+		}
+	}
+}
+
+# ENG Accepts
+country_event = {
+	id = YEM.5601
+	title = yemen.2.t
+	desc = yemen.2.d
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.2.a
+		every_state = {
+			limit = {
+				has_state_flag = YEM_demanding_states_flag
+			}
+			effect_tooltip = {
+				transfer_state_to = ROOT
+			}
+			clr_state_flag = YEM_demanding_states_flag
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_opinion_modifier = { target = FROM modifier = accepted_our_demands }
+	}
+}
+
+# ENG declines
+country_event = {
+	id = YEM.5602
+	title = yemen.3.t
+	desc = yemen.3.d
+	picture = GFX_report_event_war1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.3.a
+		add_political_power = -50
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		add_opinion_modifier = { target = FROM modifier = sau_trade_broken }
+	}
+}
+
+# İngilizle Anlaşma
+country_event = {
+	id = YEM.5603
+	title = yemen.4.t
+	desc = yemen.4.d
+	picture = GFX_report_event_hitler_handshake
+
+	is_triggered_only = yes
+
+	option = { # Accept
+		name = yemen.4.a
+		ai_chance = { base = 80 }
+		YEM = {
+			country_event = {  id = YEM.5604 }
+		}
+	}
+	option = { # Refuse
+		name = yemen.4.b
+		ai_chance = { base = 20 }
+		YEM = {
+			country_event = {  id = YEM.5605 }
+		}
+	}
+}
+
+# ENG Accepts
+country_event = {
+	id = YEM.5604
+	title = yemen.5.t
+	desc = yemen.5.d
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.5.a
+		add_ideas = yem_secret_deals
+	}
+}
+
+# ENG declines
+country_event = {
+	id = YEM.5605
+	title = yemen.6.t
+	desc = yemen.6.d
+	picture = GFX_report_event_war1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.6.a
+		#opinion modifier gelcek
+		add_stability = -0.05
+		uncomplete_national_focus = {
+			focus = YEM_agreement_with_british
+			uncomplete_children = yes
+			refund_political_power = no
+		}
+		set_country_flag = YEM_british_rejected
+	}
+}
+
+# İngilizler Toprak Veriyor
+country_event = {
+	id = YEM.5607
+	title = yemen.7.t
+	desc = yemen.7.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = { # Accept
+		name = yemen.7.a
+		ai_chance = { base = 80 }
+		YEM = {
+			country_event = {  id = YEM.5608 }
+		}
+	}
+	option = { # Refuse
+		name = yemen.7.b
+		ai_chance = { base = 20 }
+		YEM = {
+			country_event = {  id = YEM.5609 }
+		}
+	}
+}
+
+# ENG Accepts
+country_event = {
+	id = YEM.5608
+	title = yemen.8.t
+	desc = yemen.8.d
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.8.a
+		if = {
+			limit = {
+				FROM = {
+					controls_state = 659
+				}
+			}
+			transfer_state = 659
+		}
+		if = {
+			limit = {
+				FROM = {
+					controls_state = 658
+				}
+			}
+			transfer_state = 658
+		}
+		if = {
+			limit = {
+				FROM = {
+					controls_state = 765
+				}
+			}
+			transfer_state = 765
+		}
+		if = {
+			limit = {
+				FROM = {
+					controls_state = 656
+				}
+			}
+			transfer_state = 656
+		}
+	}
+}
+
+# ENG declines
+country_event = {
+	id = YEM.5609
+	title = yemen.9.t
+	desc = yemen.9.d
+	picture = GFX_report_event_war1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.9.a
+		add_opinion_modifier = { target = ENG modifier = sau_trade_broken }
+		add_political_power = -50
+	}
+}
+
+# Demand Oman
+country_event = {
+	id = YEM.5610
+	title = yemen.10.t
+	desc = yemen.10.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { # Accept
+		name = yemen.10.a
+		ai_chance = { base = 80 }
+		YEM = {
+			country_event = {  id = YEM.5611 }
+		}
+	}
+	option = { # Refuse
+		name = yemen.10.b
+		ai_chance = { base = 20 }
+		YEM = {
+			country_event = {  id = YEM.5612 }
+		}
+	}
+}
+
+# Oman Accepts
+country_event = {
+	id = YEM.5611
+	title = yemen.11.t
+	desc = yemen.11.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.11.a
+		annex_country = { target = OMA transfer_troops = yes }
+	}
+}
+
+# Oman Declines
+country_event = {
+	id = YEM.5612
+	title = yemen.12.t
+	desc = yemen.12.d
+	picture = GFX_report_event_war1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.12.a
+		add_opinion_modifier = { target = OMA modifier = holds_our_claims }
+		create_wargoal = {
+			type = annex_everything
+			target = OMA
+			generator = { 294 }
+		}
+	}
+}
+
+# Demand Arabia
+country_event = {
+	id = YEM.5613
+	title = yemen.13.t
+	desc = yemen.13.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = { # Accept
+		name = yemen.13.a
+		ai_chance = { base = 80 }
+		YEM = {
+			country_event = {  id = YEM.5614 }
+		}
+	}
+	option = { # Refuse
+		name = yemen.13.b
+		ai_chance = { base = 20 }
+		YEM = {
+			country_event = {  id = YEM.5615 }
+		}
+	}
+}
+
+# Arabia Accepts
+country_event = {
+	id = YEM.5614
+	title = yemen.14.t
+	desc = yemen.14.d
+	picture = GFX_report_event_generic_sign_treaty2
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.14.a
+		annex_country = { target = SAU transfer_troops = yes }
+	}
+}
+
+# Arabia Declines
+country_event = {
+	id = YEM.5615
+	title = yemen.15.t
+	desc = yemen.15.d
+	picture = GFX_report_event_war1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.15.a
+		add_opinion_modifier = { target = SAU modifier = holds_our_claims }
+		create_wargoal = {
+			type = annex_everything
+			target = SAU
+			generator = { 679 292 678 }
+		}
+	}
+}
+
+# Invitation to Sadabat Pact
+country_event = {
+	id = YEM.5617
+	title = yemen.17.t
+	desc = yemen.17.d
+	picture = GFX_report_event_worried_french
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.17.a
+		ai_chance = { base = 90 }
+		YEM = {
+			country_event = YEM.5618
+			add_to_faction = ROOT
+		}
+		add_ai_strategy = {
+			type = alliance
+			id = "TUR"
+			value = 200
+		}
+		add_ai_strategy = {
+			type = alliance
+			id = "YEM"
+			value = 200
+		}
+	}
+
+	option = {
+		name = yemen.17.b
+		ai_chance = { base = 10 }
+		YEM = { country_event = YEM.5619 }
+	}
+}
+
+# [Country] Accepts
+country_event = {
+	id = YEM.5618
+	title = yemen.18.t
+	desc = yemen.18.d
+	picture = GFX_report_event_soldiers_in_france
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.18.a
+		effect_tooltip = {
+			add_to_faction = FROM
+		}
+	}
+}
+
+# [Country] Refuses
+country_event = {
+	id = YEM.5619
+	title = yemen.19.t
+	desc = yemen.19.d
+	picture = GFX_report_event_finnish_letter
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.19.a
+	}
+}
+
+#Border War - Yemen Player Notified
+country_event = {
+	id = YEM.5620
+	title = yemen.20.t
+	desc = yemen.20.desc
+	picture = GFX_report_event_gre_greek_cavalry
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.20.a
+		add_war_support = 0.05
+		ENG = { country_event = {  id = YEM.5621 days = 1 } }
+		custom_effect_tooltip = YEM_border_war_possible_tt
+	}
+}
+
+#Border War - Yemen demands to UK
+country_event = {
+	id = YEM.5621
+	title = yemen.21.t
+	desc = yemen.21.desc
+	picture = GFX_report_event_tur_cakmak_general_staff
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.21.a #what could go wrong?
+		add_stability = -0.05
+		YEM = {
+			country_event = {  id = YEM.5622 days = 1 }
+		}
+	}
+	option = {
+		name = yemen.21.b #no
+		add_war_support = 0.05
+		YEM = {
+			country_event = {  id = YEM.5623 days = 1 }
+		}
+	}
+}
+
+#Tow the Yemen Line - UK submitted to us!
+country_event = {
+	id = YEM.5622
+	title = yemen.22.t
+	desc = yemen.22.desc
+	picture = GFX_report_event_gre_winter_soldiers_celebrating
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.22.a
+		add_war_support = -0.05
+		transfer_state = 659
+	}
+}
+
+#Border War - Escalation with Turkey
+country_event = {
+	id = YEM.5623
+	title = yemen.23.t
+	desc = yemen.23.desc
+	picture = GFX_report_event_tur_machine_gunners
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.23.a
+		start_border_war = {
+			change_state_after_war = no
+			attacker = {
+				state = 293
+				num_provinces = 1
+				on_win = YEM.5624
+				on_lose = YEM.5626
+			}
+
+			defender = {
+				state = 659
+				num_provinces = 1
+				on_win = YEM.5625 #uk wins
+				on_lose = YEM.5627 #uk loses
+			}
+		}
+	}
+}
+
+#Border War - Escalation with UK - Yemen wins engagement
+country_event = {
+	id = YEM.5624
+	title = yemen.24.t
+	desc = yemen.24.desc
+	picture = GFX_report_event_gre_city_devastated
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.24.a
+		add_stability = 0.1
+		add_war_support = 0.1
+		transfer_state = 659
+	}
+}
+#Border War - Escalation with UK - UK wins engagement
+country_event = {
+	id = YEM.5625
+	title = yemen.25.t
+	desc = yemen.25.desc
+	picture = GFX_report_event_tur_turkish_soldiers
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.25.a
+		declare_war_on = {
+			type = annex_everything
+			target = YEM
+			generator = { 293 }
+		}
+	}
+}
+
+#Border War - Escalation with UK - Yemen loses engagement
+country_event = {
+	id = YEM.5626
+	title = yemen.26.t
+	desc = yemen.26.desc
+	picture = GFX_report_event_gre_rural_rebels
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.26.a
+		add_stability = -0.05
+		add_war_support = 0.05
+		add_state_claim = 659
+	}
+}
+
+#Border War - Escalation with UK - UK loses engagement
+country_event = {
+	id = YEM.5627
+	title = yemen.27.t
+	desc = yemen.27.desc
+	picture = GFX_report_event_gre_greek_cavalry
+
+	is_triggered_only = yes
+
+	option = {
+		name = yemen.27.a
+		add_stability = -0.03
+		add_war_support = 0.03
+	}
+}
+
+# Taif Treaty
+country_event = {
+	id = YEM.5628
+	title = "Treaty of Taif"
+	desc = "The British got into trouble because of the peace deal we made with the Arabs a few years ago. What will we do now? "
+	picture = GFX_report_event_ast_parliament_house
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = YEM
+		has_idea = yem_treaty_taif
+		has_war_with = SAU
+		has_offensive_war = yes
+	}
+
+	option = {
+		ai_chance = { base = 5 }
+		name = "Forget the British, keep fighting!"
+		add_war_support = 0.10
+		ENG = {
+			country_event = {  id = YEM.5629 }
+		}
+	}
+
+	option = { #truce
+		ai_chance = { base = 4 }
+		name = "We cannot afford a war with a major power. Back off!"
+		white_peace = {
+			tag = SAU
+			message = whitepeace
+		}
+	}
+}
+
+country_event = {
+	id = YEM.5629
+	title = "Treaty of Taif"
+	desc = "Yemen ignored the peace treaty it made with Arabia years ago and started to advance in Arabian territory as an aggressor. As the guarantor of the region, we need to do something. "
+	picture = GFX_report_event_ast_parliament_house
+	is_triggered_only = yes
+
+	option = { #yes
+		name = "We have to put our weight on it and put an end to this!"
+		ai_chance = { base = 1 }
+		declare_war_on = {
+			target = YEM
+			type = annex_everything
+		}
+	}
+
+	option = { #no
+		ai_chance = { base = 8 }
+		name = "We cannot allocate resources there when the world is on the brink of war. Leave them alone."
+		add_political_power = 100
+	}
+}
+
+# Assasinate Yahya
+country_event = {
+	id = YEM.5630
+	title = yem.30.t
+	desc = yem.30.d
+	picture = GFX_report_event_german_troops
+
+	is_triggered_only = yes
+
+	option = { # Ahmad Yahya
+		name = yem.30.a
+		ai_chance = {
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+			base = 1
+		}
+		add_stability = -0.05
+		add_war_support = -0.05
+		set_country_flag = YEM_yahya_assasinated
+		add_country_leader_role = {
+			character = YEM_Ahmad_bin_Yahya
+			promote_leader = yes
+			country_leader = {
+				ideology = monarchism
+				expire ="1965.1.1.1"
+				traits = {
+					army_infantry_2
+				}
+			}
+		}
+		hidden_effect = {
+			YEM_imam_yahya = {
+				set_character_flag = YEM_executed_flag
+			}
+			mark_focus_tree_layout_dirty = yes
+		}
+		custom_effect_tooltip = YEM_national_tree_unlocked
+	}
+
+	option = { # Imam Yahya
+		name = yem.30.b
+		ai_chance = {
+			modifier = {
+				factor = 8
+				is_historical_focus_on = yes
+			}
+			base = 2
+		}
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_country_leader_trait = assassination_survivor
+	}
+}
+
+# Ask for Libya
+country_event = {
+	id = YEM.5631
+	title = arabia.78.t
+	desc = arabia.78.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = { # Accept
+		name = arabia.78.a
+		ai_chance = { base = 10 }
+		YEM = {
+			country_event = { id = YEM.5632 }
+		}
+	}
+	option = { # Refuse
+		name = arabia.78.b
+		ai_chance = { base = 1 }
+		YEM = {
+			country_event = { id = YEM.5633 }
+		}
+	}
+}
+
+# Italia Accepts
+country_event = {
+	id = YEM.5632
+	title = arabia.79.t
+	desc = arabia.79.d
+	picture = GFX_report_event_german_italian_pact
+
+	is_triggered_only = yes
+
+	option = {
+		name = arabia.79.a
+		add_opinion_modifier = { target = ITA modifier =  accepted_our_demands }
+		every_state = {
+			limit = {
+				is_core_of = LBA
+				OR = {
+					is_fully_controlled_by = ITA
+					controller = {
+						is_subject_of = ITA
+						has_full_control_of_state = PREV
+					}
+				}
+			}
+			YEM = {
+				transfer_state = PREV
+			}
+		}
+	}
+}
+
+# Italia Declines
+country_event = {
+	id = YEM.5633
+	title = arabia.80.t
+	desc = arabia.80.d
+	picture = GFX_report_event_war1
+
+	is_triggered_only = yes
+
+	option = {
+		name = arabia.80.a
+		add_opinion_modifier = { target = ITA modifier = holds_our_claims }
+		add_state_claim = 273
+		add_state_claim = 661
+		add_state_claim = 448
+		add_state_claim = 449
+		add_state_claim = 450
+		add_state_claim = 662
+		add_state_claim = 663
+		add_state_claim = 451
+	}
+}
+
+# Invite Hitler
+country_event = {
+	id = YEM.5634
+	title = yem.34.t
+	desc = yem.34.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = { # Accept
+		name = yem.34.a
+		ai_chance = { base = 10 }
+		GER = {
+			country_event = {
+				id = YEM.5635
+				days = 20
+			}
+
+		}
+	}
+}
+
+# Hitler decides
+country_event = {
+	id = YEM.5635
+	title = yem.35.t
+	desc = yem.35.d
+	picture = GFX_report_event_german_italian_pact
+
+	is_triggered_only = yes
+
+	# Full support
+	option = {
+		name = yem.35.a
+		ai_chance = { base = 10 }
+		effect_tooltip = {
+			YEM = {
+				add_ideas = yem_model_colony
+			}
+		}
+		hidden_effect = {
+			YEM = {
+				country_event = {
+					id = YEM.5636
+					days = 10
+				}
+			}
+		}
+	}
+
+	# Give a little support
+	option = {
+		name = yem.35.b
+		ai_chance = { base = 1 }
+		effect_tooltip = {
+			YEM = {
+				add_stability = 0.05
+				add_war_support = 0.05
+				add_political_power = 50
+				add_manpower = 50000
+			}
+		}
+		hidden_effect = {
+			YEM = {
+				country_event = {
+					id = YEM.5637
+					days = 10
+				}
+			}
+		}
+	}
+}
+
+# Hitler Supports
+country_event = {
+	id = YEM.5636
+	title = yem.36.t
+	desc = yem.36.d
+	picture = GFX_report_event_war1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yem.36.a
+		add_ideas = yem_model_colony
+	}
+}
+
+# Hitler Rejetcs
+country_event = {
+	id = YEM.5637
+	title = yem.37.t
+	desc = yem.37.d
+	picture = GFX_report_event_war1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yem.37.a
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 50
+		add_manpower = 50000
+	}
+}
+
+# İngilizden Ortadoğuyu İsteme
+country_event = {
+	id = YEM.5638
+	title = yem.38.t
+	desc = yem.38.d
+	picture = GFX_report_event_bul_ff_troops_panzer
+
+	is_triggered_only = yes
+
+	option = { # Accept
+		name = yem.38.a
+		ai_chance = { base = 80 }
+		YEM = {
+			country_event = { id = YEM.5639 }
+		}
+	}
+	option = { # Refuse
+		name = yem.38.b
+		ai_chance = { base = 20 }
+		YEM = {
+			country_event = { id = YEM.5640 }
+		}
+	}
+}
+
+# ENG Accepts
+country_event = {
+	id = YEM.5639
+	title = yem.39.t
+	desc = yem.39.d
+	picture = GFX_report_event_generic_sign_treaty3
+
+	is_triggered_only = yes
+
+	option = {
+		name = yem.39.a
+		add_opinion_modifier = { target = ENG modifier =  accepted_our_demands }
+		if = {
+			limit = {
+				ENG = { has_full_control_of_state = 656 }
+			}
+			transfer_state = 656
+		}
+		if = {
+			limit = {
+				ENG = { has_full_control_of_state = 658 }
+			}
+			transfer_state = 658
+		}
+		if = {
+			limit = {
+				ENG = { has_full_control_of_state = 659 }
+			}
+			transfer_state = 659
+		}
+		if = {
+			limit = {
+				ENG = { has_full_control_of_state = 765 }
+			}
+			transfer_state = 765
+		}
+		if = {
+			limit = {
+				ENG = { has_full_control_of_state = 455 }
+			}
+			transfer_state = 455
+		}
+	}
+}
+
+# ENG declines
+country_event = {
+	id = YEM.5640
+	title = yem.40.t
+	desc = yem.40.d
+	picture = GFX_report_event_war1
+
+	is_triggered_only = yes
+
+	option = {
+		name = yem.40.a
+		add_opinion_modifier = { target = ENG modifier = sau_trade_broken }
+		create_wargoal = {
+			type = take_state
+			target = ENG
+			generator = { 656 658 659 765 }
+		}
+	}
+}
+
+# Division Spawn
+country_event = {
+	id = YEM.5641
+	title = yem.41.t
+	desc = yem.41.d
+	picture = GFX_report_event_gre_rural_rebels
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = YEM_militas_spawned
+		}
+	}
+
+	option = {
+		name = yem.41.a
+		custom_effect_tooltip = YEM_militias_will_form_tt
+		hidden_effect = {
+			division_template = {
+				name = "Baranî Divisions"
+				division_names_group = YEM_INF_01
+				is_locked = yes
+				force_allow_recruiting = yes
+				regiments = {
+					irregular_infantry = { x = 0 y = 0 }
+					irregular_infantry = { x = 0 y = 1 }
+					irregular_infantry = { x = 1 y = 0 }
+					irregular_infantry = { x = 1 y = 1 }
+					irregular_infantry = { x = 2 y = 0 }
+					irregular_infantry = { x = 2 y = 1 }
+				}
+				division_cap = 5
+			}
+			random_owned_controlled_state = {
+				prioritize = { 293 }
+				limit = {
+					is_core_of = ROOT
+				}
+				create_unit = {
+					division = "name = \"Baranî Divisions\" division_template = \"Baranî Divisions\" start_experience_factor = 0.02 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Baranî Divisions\" division_template = \"Baranî Divisions\" start_experience_factor = 0.02 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Baranî Divisions\" division_template = \"Baranî Divisions\" start_experience_factor = 0.02 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Baranî Divisions\" division_template = \"Baranî Divisions\" start_experience_factor = 0.02 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+				create_unit = {
+					division = "name = \"Baranî Divisions\" division_template = \"Baranî Divisions\" start_experience_factor = 0.02 start_equipment_factor = 1.0"
+					owner = ROOT
+				}
+			}
+		}
+	}
+}
+
+# Division Spawn
+country_event = {
+	id = YEM.5642
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = YEM_militas_spawned
+		delete_unit_template_and_units = {
+			division_template = "Baranî Divisions"
+			disband = no
+		}
+	}
+}

@@ -1,0 +1,198 @@
+﻿add_namespace = andalusian
+
+country_event = {
+	id = andalusian.1
+	title = "Andalusia asks for help"
+	desc = "The newly liberated Andalusian asks for help"
+	picture = GFX_report_event_german_inspect_troops
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 90 }
+		add_political_power = -10
+		add_ideas = END_muslim_happines
+		END = {
+			country_event = andalusian.3
+			add_political_power = 100
+			add_war_support = 0.025
+
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 2500
+				#producer = END
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 150
+				#producer = END
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 150
+				#producer = END
+			}
+
+			add_equipment_to_stockpile = {
+				type = motorized_equipment_1
+				amount = 300
+				#producer = END
+			}
+		}
+
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = { base = 10 }
+		END = {
+			country_event = { days = 1 id = andalusian.2 }
+		}
+	}
+}
+country_event = {
+	id = andalusian.2
+	title = "Refused"
+	desc = ""
+	picture = GFX_report_event_german_inspect_troops
+
+	is_triggered_only = yes
+	option = {
+		name = "Darn"	#no way
+		ai_chance = { base = 10 }
+	}
+}
+country_event = {
+	id = andalusian.3
+	title = "They accept"
+	desc = ""
+	picture = GFX_report_event_german_inspect_troops
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 90 }
+
+	}
+}
+country_event = {
+	id = andalusian.4
+	title = "Andalusia became our puppet!"
+	desc = "Perfect"
+	picture = GFX_report_event_german_inspect_troops
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Perfect"	#sounds good
+		ai_chance = { base = 100 }
+	}
+}
+country_event = {
+	id = andalusian.5
+	title = "Andalusia wants independence"
+	desc = "We have provided so much support, ethical industry and military support in their civil wars, they want my independence!"
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 100 }
+		FROM = { end_puppet = ROOT }
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = { base = 0 }
+		add_stability = -0.50
+		END = {
+			country_event = { days = 1 id = andalusian.2 }
+		}
+	}
+}
+country_event = {
+	id = andalusian.6
+	title = "Armenian question"
+	desc = "Azerbaijan and Turkey want to open Armenian corridor"
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 90 }
+		AZR = {
+			transfer_state = 230}
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = { base = 10 }
+		AZR = {
+			create_wargoal = {
+				target = SOV
+				type = annex_everything
+			}
+			country_event = { days = 1 id = azerbai.2 }
+		}
+	}
+}
+
+country_event = {
+	id = andalusian.7
+	title = "Freedom for Azerbaijan"
+	desc = "Do you want Azerbaijan to live? This is a multiplayer event."
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		add_resource = {
+			type = oil
+			amount = 75
+			state = 232
+		}
+		hidden_effect = {
+			add_resource = {
+				type = oil
+				amount = 10
+				state = 229
+			}
+			229 = { remove_core_of = SOV }
+		}
+	}
+
+	option = {
+		name = "No way"	#no way
+		annex_country = {
+			target = AZR
+			transfer_troops = yes
+		}
+		add_resource = {
+			type = oil
+			amount = 75
+			state = 229
+		}
+	}
+}
+
+country_event = {
+	id = andalusian.8
+	title = "Andalusian uprising has begun"
+	desc = "Andalusian uprising has begun! Should we join them or crush them?"
+
+	is_triggered_only = yes
+
+	option = {
+		name = "I'am Andalusian"
+		change_tag_from = END
+	}
+
+	option = {
+		name = "Disgusting Muslims"
+		add_war_support = 0.10
+	}
+}

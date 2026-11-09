@@ -1,0 +1,305 @@
+###########################
+# Cyprus Events
+###########################
+
+add_namespace = cyprus
+
+# Shifting Demographics / A Turkish Cyprus
+country_event = {
+	id = cyprus.1
+	title = {
+		text = cyprus.1.t
+		trigger = {
+			OR = {
+				has_idea = CYP_greek_majority
+				has_idea = CYP_reduced_greek_majority
+				has_idea = CYP_fading_majority
+			}
+		}
+	}
+	title = {
+		text = cyprus.1.alt.t
+		trigger = {
+			has_idea = CYP_minority_opposition
+		}
+	}
+	desc = {
+		text = cyprus.1.d
+		trigger = {
+			OR = {
+				has_idea = CYP_greek_majority
+				has_idea = CYP_reduced_greek_majority
+			}
+		}
+	}
+	desc = {
+		text = cyprus.1.alt.d
+		trigger = {
+			has_idea = CYP_fading_majority
+		}
+	}
+	desc = {
+		text = cyprus.1.final.d
+		trigger = {
+			has_idea = CYP_minority_opposition
+		}
+	}
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = cyprus.1.a
+		trigger = {
+			NOT = { has_idea = CYP_minority_opposition }
+		}
+		if = {
+			limit = {
+				has_idea = CYP_greek_majority
+			}
+			swap_ideas = {
+				remove_idea = CYP_greek_majority
+				add_idea = CYP_reduced_greek_majority
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = CYP_reduced_greek_majority
+			}
+			swap_ideas = {
+				remove_idea = CYP_reduced_greek_majority
+				add_idea = CYP_fading_majority
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = CYP_fading_majority
+			}
+			swap_ideas = {
+				remove_idea = CYP_fading_majority
+				add_idea = CYP_minority_opposition
+			}
+		}
+		hidden_effect = {
+			country_event = { id = cyprus.1 days = 60 random_days = 10 }
+		}
+	}
+
+	option = {
+		name = cyprus.1.b
+		trigger = {
+			has_idea = CYP_minority_opposition
+		}
+		add_political_power = 200
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		remove_ideas = CYP_minority_opposition
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		swap_ideas = {
+			remove_idea = CYP_turkification_campaign
+			add_idea = CYP_unitary_state
+		}
+	}
+}
+
+# Cyprus Calls for Enosis
+country_event = {
+	id = cyprus.2
+	title = cyprus.2.t
+	desc = cyprus.2.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = cyprus.2.a
+		if = {
+			limit = {
+				CYP = {
+					NOT = { has_country_flag = CYP_warning_sent_flag }
+				}
+			}
+			CYP = {
+				country_event = { id = cyprus.3 days = 20 }
+				set_country_flag = CYP_warning_sent_flag
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					original_tag = TUR
+				}
+				CYP = {
+					set_country_flag = CYP_turkey_sent_warning_flag
+				}
+			}
+			if = {
+				limit = {
+					original_tag = ENG
+				}
+				CYP = {
+					set_country_flag = CYP_british_sent_warning_flag
+				}
+			}
+		}
+	}
+
+	option = {
+		name = cyprus.2.b
+		add_political_power = -10
+	}
+}
+
+# A Warning from the Guarantors
+country_event = {
+	id = cyprus.3
+	title = {
+		text = cyprus.3.t
+		trigger = {
+			has_country_flag = CYP_turkey_sent_warning_flag
+			has_country_flag = CYP_british_sent_warning_flag
+		}
+	}
+	title = {
+		text = cyprus.3.alt.t
+		trigger = {
+			has_country_flag = CYP_turkey_sent_warning_flag
+		}
+	}
+	desc = {
+		text = cyprus.3.d
+		trigger = {
+			has_country_flag = CYP_turkey_sent_warning_flag
+			has_country_flag = CYP_british_sent_warning_flag
+		}
+	}
+	desc = {
+		text = cyprus.3.alt.d
+		trigger = {
+			has_country_flag = CYP_turkey_sent_warning_flag
+		}
+	}
+	picture = GFX_report_event_generic_parliament
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = cyprus.3.a
+		custom_effect_tooltip = may_end_in_war
+		set_country_flag = CYP_continue_enosis_flag
+	}
+
+	option = {
+		name = cyprus.3.b
+		uncomplete_national_focus = {
+			focus = CYP_call_for_enosis
+			uncomplete_children = yes
+		}
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		custom_effect_tooltip = CYP_enosis_focus_cooldown_event_tt
+		set_country_flag = { flag = CYP_enosis_focus_cooldown_flag days = 365 }
+
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = CYP_turkey_sent_warning_flag
+				}
+				clr_country_flag = CYP_turkey_sent_warning_flag
+			}
+			if = {
+				limit = {
+					has_country_flag = CYP_british_sent_warning_flag
+				}
+				clr_country_flag = CYP_british_sent_warning_flag
+			}
+		}
+	}
+}
+
+# Cyprus Defies Warnings
+country_event = {
+	id = cyprus.4
+	title = cyprus.4.t
+	desc = cyprus.4.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = cyprus.4.a
+		declare_war_on = {
+			target = FROM
+			type = liberate_wargoal
+		}
+	}
+
+	option = {
+		name = cyprus.4.b
+		send_embargo = CYP
+	}
+
+	option = {
+		name = cyprus.4.c
+	}
+}
+
+# A New Governor Appointed
+country_event = {
+	id = cyprus.5
+	title = cyprus.5.t
+	desc = cyprus.5.d
+	picture = GFX_report_event_generic_parliament
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = CYP
+		date > 1939.7.2
+		NOT = {
+			has_completed_focus = CYP_approach_ankara
+			has_completed_focus = CYP_strengthen_ties_with_athens
+			has_completed_focus = CYP_legacy_of_hospitallers
+		}
+	}
+
+	option = {
+		name = cyprus.5.a
+		retire_character = CYP_richmond_palmer
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		remove_ideas = CYP_palmerokratia
+
+		custom_effect_tooltip = generic_skip_one_line_tt
+
+		effect_tooltip = {
+			promote_character = CYP_william_denis_battershill
+		}
+	}
+}
+
+# Harmony on the Island
+country_event = {
+	id = cyprus.6
+	title = cyprus.6.t
+	desc = cyprus.6.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = cyprus.6.a
+		swap_ideas = {
+			remove_idea = CYP_unitary_state_alt
+			add_idea = CYP_unitary_state
+		}
+
+		remove_ideas = CYP_turkish_minority
+	}
+}

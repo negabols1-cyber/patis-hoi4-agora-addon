@@ -1,0 +1,1451 @@
+###########################
+# Uruguayan Events
+###########################
+
+add_namespace = uruguay
+
+#event that will trigger
+
+country_event = {
+	id = uruguay.1
+	title = uruguay.1.t
+	desc = uruguay.1.d
+
+	hidden = yes
+
+	trigger = {
+		has_country_flag = URG_terra
+		check_variable = { URG_politicians_arrested > 4 }
+		date > 1936.2.1
+	}
+
+	mean_time_to_happen = { days = 85 }
+
+	immediate = {
+		random_list = {
+			50 = {
+				country_event = { id = uruguay.2 days = 25 }
+			}
+			50 = {
+				country_event = { id = uruguay.3 days = 25 }
+			}
+		}
+	}
+}
+
+#more people imprisoned
+
+country_event = {
+	id = uruguay.2
+	title = uruguay.2.t
+	desc = uruguay.2.d
+	picture = GFX_URG_event_2
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.2.a
+		custom_effect_tooltip = URG_five_imprisoned
+		hidden_effect = {
+			add_to_variable = { URG_politicians_arrested = 5 }
+			URG_set_up_prisoners_modifier = yes
+		}
+	}
+}
+
+#prisoners set free
+
+country_event = {
+	id = uruguay.3
+	title = uruguay.3.t
+	desc = uruguay.3.d
+	picture = GFX_URG_event_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.3.a
+		custom_effect_tooltip = URG_five_free
+		hidden_effect = {
+			subtract_from_variable = { URG_politicians_arrested = 5 }
+			URG_set_up_prisoners_modifier = yes
+		}
+	}
+}
+
+#second trigger event
+
+country_event = {
+	id = uruguay.4
+	title = uruguay.4.t
+	desc = uruguay.4.d
+
+	hidden = yes
+
+	is_triggered_only = yes
+
+	immediate = {
+		remove_ideas = URG_the_terra_dictatorship_idea
+	}
+}
+
+#Terra messes up the nation
+
+country_event = {
+	id = uruguay.5
+	title = uruguay.5.t
+	desc = uruguay.5.d
+	picture = GFX_report_event_american_hunger_march
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.5.a
+		add_stability = -0.35
+		add_ideas = URG_violent_protests
+		every_controlled_state = {
+			limit = { is_core_of = ROOT }
+			set_demilitarized_zone = yes
+			add_dynamic_modifier = { modifier = URG_terra_loyalities }
+		}
+	}
+}
+
+#Roosevelt Visits Uruguay
+
+country_event = {
+	id = uruguay.6
+	title = uruguay.6.t
+	desc = uruguay.6.d
+	picture = GFX_uruguay6
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.6.a
+		USA = {
+			add_opinion_modifier = { target = URG modifier = URG_roosevelt_visit }
+		}
+		add_opinion_modifier = { target = USA modifier = URG_roosevelt_visit }
+		add_stability = 0.03
+	}
+}
+
+#Uruguayan Elections
+
+country_event = {
+	id = uruguay.7
+	title = uruguay.7.t
+	desc = uruguay.7.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.7.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+		retire_country_leader = yes
+		clr_country_flag = URG_terra
+		remove_dynamic_modifier = { modifier = URG_the_terra_dictatorship }
+		set_politics = {
+			ruling_party = democratic
+			elections_allowed = yes
+		}
+	}
+
+	option = {
+		name = uruguay.7.b
+		ai_chance = { base = 50 }
+		clr_country_flag = URG_terra
+		remove_dynamic_modifier = { modifier = URG_the_terra_dictatorship }
+		URG_gabriel_terra_c = {
+			remove_country_leader_role = {
+				ideology = despotism
+			}
+		}
+		promote_character = URG_alfredo_baldomir_c
+	}
+}
+
+#Argentina gets event of Uruguay asking for allience
+
+country_event = {
+	id = uruguay.8
+	title = uruguay.8.t
+	desc = uruguay.8.d
+	picture = GFX_report_event_generic_sign_treaty1
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.8.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 150
+				has_government = fascism
+			}
+			modifier = {
+				factor = 0
+				has_government = communism
+			}
+		}
+		URG = {
+			country_event = { id = uruguay.9 hours = 6 }
+		}
+		effect_tooltip = {
+			ARG = {
+				add_to_faction = URG
+			}
+		}
+		if = {
+			limit = {
+				URG = { is_in_faction_with = GER }
+			}
+			GER = {
+				country_event = { id = generic.2 hours = 4 }
+			}
+		}
+	}
+
+	option = {
+		name = uruguay.8.b
+		ai_chance = { base = 50 }
+		URG = {
+			country_event = { id = uruguay.10 hours = 6 }
+		}
+	}
+}
+
+#Uruguay gets notification of Argentina accepting the pact
+
+country_event = {
+	id = uruguay.9
+	title = uruguay.9.t
+	desc = uruguay.9.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.9.a
+		if = {
+			limit = {
+				URG = {
+					is_in_faction = yes
+					is_faction_leader = yes
+				}
+			}
+			URG = {
+				add_to_faction = ARG
+			}
+			hidden_effect = {
+				URG = {
+					set_country_flag = URG_ARG_agreement
+				}
+				ARG = {
+					set_country_flag = URG_ARG_agreement
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				ARG = {
+					is_in_faction = yes
+					is_faction_leader = yes
+				}
+			}
+			ARG = {
+				add_to_faction = URG
+			}
+			hidden_effect = {
+				URG = {
+					set_country_flag = URG_ARG_agreement
+				}
+				ARG = {
+					set_country_flag = URG_ARG_agreement
+				}
+			}
+		}
+		else = {
+			diplomatic_relation = {
+				country = ARG
+				relation = non_aggression_pact
+			}
+			hidden_effect = {
+				URG = {
+					set_country_flag = URG_ARG_agreement
+				}
+				ARG = {
+					set_country_flag = URG_ARG_agreement
+				}
+			}
+		}
+	}
+}
+
+#Uruguay gets notification of Argentina not accepting
+
+country_event = {
+	id = uruguay.10
+	title = uruguay.10.t
+	desc = uruguay.10.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.10.a
+	}
+}
+
+#Argentina gets notification of troops getting blown up in Entre Rios
+
+country_event = {
+	id = uruguay.11
+	title = uruguay.11.t
+	desc = uruguay.11.d
+	picture = GFX_uruguay11
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.11.a
+		ai_chance = { base = 100 }
+		add_manpower = -72
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = -4
+		}
+		add_war_support = 0.2
+		declare_war_on = {
+			target = URG
+			type = annex_everything
+		}
+		effect_tooltip = {
+			unlock_national_focus = ARG_the_second_cisplatine_war_focus
+		}
+		hidden_effect = {
+			BRA = { country_event = { id = argentina.59 days = 2 } }
+			news_event = { days = 3 id = news.370 }
+		}
+	}
+
+	option = {
+		name = uruguay.11.b
+		ai_chance = { base = 1 }
+		add_manpower = -72
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = -4
+		}
+		add_stability = -0.15
+		add_political_power = -125
+		hidden_effect = {
+			URG = {
+				country_event = { id = uruguay.12 days = 1 }
+			}
+		}
+	}
+}
+
+#Uruguay gets event that Argentina did not declare war
+
+country_event = {
+	id = uruguay.12
+	title = uruguay.12.t
+	desc = uruguay.12.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.12.a
+		declare_war_on = {
+			target = ARG
+			type = annex_everything
+		}
+		URG = {
+			add_ideas = URG_the_great_patriotic_war
+			set_country_flag = URG_argentina_not_war
+		}
+	}
+}
+
+#Paraguay gets event of Uruguay asking them to join the war
+
+country_event = {
+	id = uruguay.13
+	title = uruguay.13.t
+	desc = uruguay.13.d
+	picture = GFX_report_event_hitler_handshake
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.13.a
+		ai_chance = {
+			base = 115
+			modifier = {
+				factor = 0
+				BRA = {
+					NOT = {
+						has_war_with = ARG
+					}
+				}
+			}
+		}
+		declare_war_on = {
+			target = ARG
+			type = annex_everything
+		}
+		hidden_effect = {
+			URG = {
+				set_country_flag = PAR_declared_war
+			}
+		}
+	}
+
+	option = {
+		name = uruguay.13.b
+		ai_chance = { base = 5 }
+		hidden_effect = {
+			URG = {
+				country_event = { id = uruguay.14 hours = 4 }
+			}
+		}
+	}
+}
+
+#Uruguay gets notification of Paraguay not joining the war
+
+country_event = {
+	id = uruguay.14
+	title = uruguay.14.t
+	desc = uruguay.14.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.14.a
+	}
+}
+
+#Brazil gets event of splitting up Argentina
+
+country_event = {
+	id = uruguay.15
+	title = uruguay.15.t
+	desc = uruguay.15.d
+	picture = GFX_ARG_argentina55
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			ARG = {
+				transfer_state = 511
+				transfer_state = 958
+				transfer_state = 960
+				transfer_state = 508
+				transfer_state = 957
+				transfer_state = 509
+			}
+		}
+	}
+
+	option = {
+		name = uruguay.15.a
+		ai_chance = { base = 100 }
+		if = {
+			limit = {
+				URG = { has_country_flag = PAR_declared_war }
+			}
+			PAR = {
+				transfer_state = 957
+			}
+			URG = {
+				transfer_state = 956
+				transfer_state = 278
+				transfer_state = 512
+				transfer_state = 955
+				transfer_state = 954
+				transfer_state = 953
+				hidden_effect = {
+					clr_country_flag = PAR_declared_war
+				}
+			}
+			BRA = {
+				transfer_state = 510
+				puppet = ARG
+			}
+		}
+		else = {
+			URG = {
+				transfer_state = 956
+				transfer_state = 278
+				transfer_state = 512
+				transfer_state = 955
+				transfer_state = 954
+				transfer_state = 953
+				hidden_effect = {
+					clr_country_flag = PAR_declared_war
+				}
+			}
+			BRA = {
+				transfer_state = 510
+				puppet = ARG
+			}
+		}
+	}
+
+	option = {
+		name = uruguay.15.b
+		ai_chance = { base = 0 }
+		hidden_effect = {
+			URG = { country_event = { id = uruguay.16 hours = 8 } }
+		}
+	}
+}
+
+#Uruguay gets event of Brazil declining peace treaty
+
+country_event = {
+	id = uruguay.16
+	title = uruguay.16.t
+	desc = uruguay.16.d
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.16.a
+	}
+}
+
+#Uruguay gets event of electing democracy or communism
+
+country_event = {
+	id = uruguay.17
+	title = uruguay.17.t
+	desc = uruguay.17.d
+	picture = GFX_report_event_generic_conference
+
+	fire_only_once = yes
+
+	trigger = {
+		original_tag = URG
+		exists = yes
+		has_civil_war = no
+		has_completed_focus = URG_imprison_Terra
+	}
+
+	option = { #Democratic Path
+		name = uruguay.17.a
+		ai_chance = {
+			base = 67
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = URG_ai_behavior
+					option = URG_COMMUNIST
+				}
+			}
+		}
+		custom_effect_tooltip = URG_extraordinary_elections_tt
+		URG_move_70_nacionales = yes
+		add_war_support = 0.15
+		complete_national_focus = URG_the_will_of_the_people
+		hidden_effect = {
+			country_event = { id = uruguay.18 days = 30 }
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = yes
+			}
+		}
+	}
+
+	option = { #Communist path
+		name = uruguay.17.b
+		ai_chance = {
+			base = 33
+			modifier = {
+				factor = 0
+				has_game_rule = {
+					rule = URG_ai_behavior
+					option = URG_LIBERAL_DEMOCRACY
+				}
+			}
+		}
+		add_popularity = { ideology = communism popularity = 0.25 }
+		add_war_support = 0.15
+		set_politics = {
+			ruling_party = communism
+			elections_allowed = no
+		}
+		complete_national_focus = URG_a_new_path
+		URG_bop_remove_bop_effect = yes
+	}
+}
+
+### Against Terra - Elections
+
+country_event = {
+	id = uruguay.18
+	title = uruguay.18.t
+	desc = uruguay.18.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.18.a
+		ai_chance = {
+			base = 33
+		}
+		clr_country_flag = URG_terra
+		URG_consejo_de_estado_provisorio_c = {
+			remove_country_leader_role = {
+				ideology = liberalism
+			}
+		}
+		add_country_leader_role = {
+			character = URG_luis_batlle_berres_c
+			country_leader = {
+				expire = "1965.1.1"
+				ideology = liberalism
+				traits = {
+					URG_torchbearer_of_batllism
+				}
+			}
+			promote_leader = yes
+		}
+		set_party_name = {
+			ideology = democratic
+			long_name = URG_partido_colorado_long
+			name = URG_partido_colorado
+		}
+	}
+
+	option = {
+		name = uruguay.18.b
+		ai_chance = { base = 34 }
+		clr_country_flag = URG_terra
+		URG_consejo_de_estado_provisorio_c = {
+			remove_country_leader_role = {
+				ideology = liberalism
+			}
+		}
+		add_country_leader_role = {
+			character = URG_emilio_frugoni_c
+			country_leader = {
+				expire = "1965.1.1"
+				ideology = socialism
+				traits = {
+					URG_reformist_socialist
+				}
+			}
+			promote_leader = yes
+		}
+		set_party_name = {
+			ideology = democratic
+			long_name = URG_partido_socialista_long
+			name = URG_partido_socialista
+		}
+	}
+
+	option = {
+		name = uruguay.18.c
+		ai_chance = {
+			base = 33
+		}
+		retire_country_leader = yes
+		clr_country_flag = URG_terra
+		URG_consejo_de_estado_provisorio_c = {
+			remove_country_leader_role = {
+				ideology = liberalism
+			}
+		}
+		add_country_leader_role = {
+			character = URG_luis_alberta_de_herrera_c
+			country_leader = {
+				expire = "1965.1.1"
+				ideology = conservatism
+				traits = {
+					URG_herrerist
+				}
+			}
+			promote_leader = yes
+		}
+		set_party_name = {
+			ideology = democratic
+			long_name = URG_partido_nacional_long
+			name = URG_partido_nacional
+		}
+		add_stability = -0.05
+	}
+}
+
+country_event = {  #Andres Martinez takes over
+	id = uruguay.19
+	title = uruguay.19.t
+	desc = uruguay.19.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.19.a
+		ai_chance = {
+			base = 33
+		}
+		URG_luis_batlle_berres_c = {
+			remove_country_leader_role = {
+				ideology = liberalism
+			}
+		}
+		add_country_leader_role = {
+			character = URG_andres_martinez_trueba_c
+			country_leader = {
+				expire = "1999.1.1"
+				ideology = liberalism
+				traits = {
+					backroom_backstabber
+				}
+			}
+			promote_leader = yes
+		}
+		hidden_effect = {
+			URG = {
+				country_event = { id = uruguay.20 days = 5 random_days = 10 }
+			}
+		}
+	}
+}
+
+country_event = {  #Colegiado
+	id = uruguay.20
+	title = uruguay.20.t
+	desc = uruguay.20.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.20.a
+		ai_chance = {
+			base = 90
+		}
+		URG_andres_martinez_trueba_c = {
+			remove_country_leader_role = {
+				ideology = liberalism
+			}
+		}
+		add_country_leader_role = {
+			character = URG_consejo_nacional_de_gobierno_c
+			country_leader = {
+				expire = "1999.1.1"
+				ideology = moderatism
+				traits = {
+					URG_colegiado
+				}
+			}
+			promote_leader = yes
+		}
+		set_politics = {
+			ruling_party = neutrality
+			elections_allowed = no
+		}
+		set_popularities = {
+			democratic = 20
+			neutrality = 75
+			fascism = 2
+			communism = 3
+		}
+		hidden_effect = {
+			add_country_leader_role = {
+				character = URG_luis_batlle_berres_c
+				promote_leader = yes
+				country_leader = {
+					expire = "1965.1.1"
+					ideology = liberalism
+					traits = {
+						URG_torchbearer_of_batllism
+					}
+				}
+			}
+			set_party_name = {
+				ideology = neutrality
+				long_name = URG_colegiado_neutral_long
+				name = URG_colegiado_neutral
+			}
+			set_party_name = {
+				ideology = democratic
+				long_name = URG_colegiado_democratic_long
+				name = URG_colegiado_democratic
+			}
+			set_party_name = {
+				ideology = communism
+				long_name = URG_colegiado_communist_long
+				name = URG_colegiado_communist
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = URG_colegiado_fascist_long
+				name = URG_colegiado_fascist
+			}
+		}
+	}
+
+	option = {
+		name = uruguay.20.b
+		ai_chance = {
+			base = 10
+		}
+
+		custom_effect_tooltip = URG_consequences_tt
+		hidden_effect = {
+			URG = {
+				country_event = { id = uruguay.21 days = 3 }
+			}
+		}
+	}
+}
+
+country_event = {  #Political Deadlock
+	id = uruguay.21
+	title = uruguay.21.t
+	desc = uruguay.21.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.21.a
+
+		add_ideas = URG_political_deadlock
+		add_political_power = -100
+		hidden_effect = {
+			country_event = { id = uruguay.22 days = 30 }
+		}
+	}
+}
+
+country_event = {  #Government Collapses
+	id = uruguay.22
+	title = uruguay.22.t
+	desc = uruguay.22.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.22.a
+		hidden_effect = {
+			set_country_flag = URG_anarchists
+			retire_country_leader = yes
+			add_country_leader_role = {
+				character = URG_collapsed_government_c
+				promote_leader = yes
+				country_leader = {
+					expire = "1965.1.1"
+					ideology = liberalism
+					traits = {
+						cabinet_crisis
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = uruguay.23
+	title = uruguay.23.t
+	desc = uruguay.23.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.23.a
+
+		URG = {
+			country_event = { id = uruguay.24 days = 1 }
+		}
+	}
+	option = {
+		name = uruguay.23.a
+
+		URG = {
+			country_event = { id = uruguay.25 days = 1 }
+		}
+	}
+}
+
+country_event = {
+	id = uruguay.24
+	title = uruguay.24.t
+	desc = uruguay.24.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.24.a
+
+		URG = {
+			set_rule = {
+				can_create_factions = yes
+			}
+			create_faction = URG_anarchist_alliance
+			add_to_faction = CHL
+		}
+	}
+}
+
+country_event = {
+	id = uruguay.25
+	title = uruguay.25.t
+	desc = uruguay.25.d
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.25.a
+	}
+}
+
+country_event = {
+	id = uruguay.26
+	title = uruguay.26.t
+	desc = {
+		text = uruguay.26.d
+	}
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.26.a
+
+		release_puppet = ARG
+		hidden_effect = {
+			ARG = {
+				set_cosmetic_tag = ARG_anarchist
+				# add_country_leader_role = {
+					# 	character = ARG_gino_gatti_c
+					# 	country_leader = {
+						# 		expire = "1965.1.1"
+						# 		ideology = anarchism
+						# 		traits = {
+
+							# 		}
+						# 	}
+					# promote_leader = yes
+					# }
+			}
+		}
+	}
+	option = {
+		name = uruguay.26.c
+	}
+}
+
+country_event = {
+	id = uruguay.27
+	title = uruguay.27.t
+	desc = {
+		text = uruguay.27.d
+	}
+	picture = GFX_report_event_generic_parliament
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.27.a
+		effect_tooltip = {
+			release_puppet = ARG
+			CHL = {
+				transfer_state = 953
+			}
+		}
+		hidden_effect = {
+			URG = {
+				release_puppet = ARG
+			}
+			CHL = {
+				transfer_state = 953
+			}
+			ARG = {
+				set_cosmetic_tag = ARG_anarchist
+				# add_country_leader_role = {
+					# 	character = ARG_gino_gatti_c
+					# 	country_leader = {
+						# 		expire = "1965.1.1"
+						# 		ideology = anarchism
+						# 		traits = {
+
+							# 		}
+						# 	}
+					# promote_leader = yes
+					# }
+			}
+		}
+	}
+	option = {
+		name = uruguay.27.b
+
+		annex_country = {
+			target = ARG
+			transfer_troops = no
+		}
+		CHL = {
+			set_state_owner = 954
+			set_state_owner = 955
+			set_state_owner = 512
+			set_state_owner = 953
+		}
+	}
+}
+
+country_event = {
+	id = uruguay.28
+	title = uruguay.28.t
+	desc = uruguay.28.d
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.28.a
+		URG_move_35_colorado = yes
+		swap_ideas = {
+			remove_idea = URG_INC
+			add_idea = URG_maintain_status_quo
+		}
+		hidden_effect = {
+			complete_national_focus = URG_agricultural_economy
+		}
+	}
+	option = {
+		name = uruguay.28.b
+		URG_move_35_nacionales = yes
+		add_ideas = URG_industrialize_the_economy
+		hidden_effect = {
+			complete_national_focus = URG_industrial_economy
+		}
+	}
+}
+
+country_event = {
+	id = uruguay.29
+	title = uruguay.29.t
+	desc = uruguay.29.de
+	picture = GFX_report_event_generic_rally_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.29.a
+		URG_move_10_colorado = yes
+		add_political_power = -50
+		add_stability = 0.05
+		add_war_support = 0.05
+	}
+	option = {
+		name = uruguay.29.b
+		URG_move_5_colorado = yes
+		swap_ideas = {
+			remove_idea = URG_welfare_state
+			add_idea = URG_welfare_state1
+		}
+	}
+	option = {
+		name = uruguay.29.d
+
+		swap_ideas = {
+			remove_idea = URG_welfare_state
+			add_idea = URG_welfare_state3
+		}
+	}
+	option = {
+		name = uruguay.29.e
+		URG_move_20_nacionales = yes
+		remove_ideas = URG_welfare_state
+		add_timed_idea = {
+			idea = URG_welfare_state4
+			days = 365
+		}
+	}
+}
+
+country_event = {
+	id = uruguay.30
+	title = uruguay.30.t
+	desc = uruguay.30.d
+	picture = GFX_URG_event_30
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.30.a
+
+		add_political_power = 25
+		add_timed_idea = {
+			idea = URG_corned_beef_profits
+			days = 365
+		}
+		if = {
+			limit = {
+				ENG = {
+					has_government = democratic
+				}
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = ENG
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+		else_if = {
+			limit = {
+				ENG = {
+					has_government = communism
+				}
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = ENG
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+		else_if = {
+			limit = {
+				ENG = {
+					has_government = fascism
+				}
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = ENG
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+		else_if = {
+			limit = {
+				ENG = {
+					has_government = neutrality
+				}
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = ENG
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+	}
+	option = {
+		name = uruguay.30.b
+
+		add_political_power = 25
+		add_timed_idea = {
+			idea = URG_corned_beef_profits
+			days = 365
+		}
+		if = {
+			limit = {
+				GER = {
+					has_government = democratic
+				}
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = GER
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+		else_if = {
+			limit = {
+				GER = {
+					has_government = communism
+				}
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = GER
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+		else_if = {
+			limit = {
+				GER = {
+					has_government = fascism
+				}
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = GER
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+		else_if = {
+			limit = {
+				GER = {
+					has_government = neutrality
+				}
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = GER
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+	}
+	option = {
+		name = uruguay.30.c
+
+		add_political_power = 25
+		add_timed_idea = {
+			idea = URG_corned_beef_profits
+			days = 365
+		}
+		if = {
+			limit = {
+				SOV = {
+					has_government = democratic
+				}
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = SOV
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+		else_if = {
+			limit = {
+				SOV = {
+					has_government = communism
+				}
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = SOV
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+		else_if = {
+			limit = {
+				SOV = {
+					has_government = fascism
+				}
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = SOV
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+		else_if = {
+			limit = {
+				SOV = {
+					has_government = neutrality
+				}
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.1
+			}
+			add_opinion_modifier = {
+				target = SOV
+				modifier = HOL_essential_dutch_trade
+			}
+		}
+	}
+	option = {
+		name = uruguay.30.do
+
+		add_timed_idea = {
+			idea = URG_local_consuption
+			days = 365
+		}
+	}
+}
+
+country_event = { #Nacionales protests erupt into a civil war
+	id = uruguay.31
+	title = uruguay.31.t
+	desc = uruguay.31.d
+	picture = GFX_report_event_generic_rally_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.31.a
+		hidden_effect = {
+			URG_move_70_nacionales = yes
+			division_template = {
+				name = "Milicias"
+				division_names_group = SPAN_INF_02
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+				}
+			}
+			remove_ideas = {
+				URG_blancos_in_opposition0
+				URG_blancos_in_opposition1
+				URG_blancos_in_opposition2
+			}
+		}
+		start_civil_war = {
+			ideology = democratic
+			size = 0.4
+		}
+		hidden_effect = {
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Milicias Leales\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+					owner = ROOT
+					count = 3
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Milicias Leales\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+					owner = ROOT
+					count = 3
+				}
+			}
+			random_other_country = {
+				limit = {
+					original_tag = URG
+					has_government = democratic
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Milicias Nacionales\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+						owner = PREV
+						count = 3
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Milicias Nacionales\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+						owner = PREV
+						count = 3
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Colorados protests erupt into a civil war
+	id = uruguay.32
+	title = uruguay.32.t
+	desc = uruguay.32.d
+	picture = GFX_report_event_generic_rally_3
+
+	is_triggered_only = yes
+
+	option = {
+		name = uruguay.32.a
+		hidden_effect = {
+			URG_move_70_colorado = yes
+			division_template = {
+				name = "Milicias"
+				division_names_group = SPAN_INF_02
+				is_locked = yes
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 0 y = 2 }
+				}
+			}
+			remove_ideas = {
+				URG_colorados_in_opposition0
+				URG_colorados_in_opposition1
+				URG_colorados_in_opposition2
+			}
+		}
+		start_civil_war = {
+			ideology = neutrality
+			size = 0.4
+		}
+		hidden_effect = {
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Milicias Leales\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+					owner = ROOT
+					count = 3
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Milicias Leales\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+					owner = ROOT
+					count = 3
+				}
+			}
+			random_other_country = {
+				limit = {
+					original_tag = URG
+					has_government = democratic
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Milicias Coloradas\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+						owner = PREV
+						count = 3
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Milicias Coloradas\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9"
+						owner = PREV
+						count = 3
+					}
+				}
+			}
+		}
+	}
+}

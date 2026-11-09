@@ -1,0 +1,1701 @@
+﻿focus_tree = {
+	id = pasific_states_focus
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = PSA
+		}
+	}
+
+	default = no
+	reset_on_civilwar = no
+
+	continuous_focus_position = { x = 50 y = 1900}
+
+	focus = {
+		id = PSA_start_occupation
+		icon = GFX_focus_generic_support_the_left_right
+		x = 5
+		y = 0
+		cost = 5
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+			is_puppet_of = JAP
+			has_war_with = USA
+		}
+		bypass = {
+		}
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_ideas = psa_occupation_idea
+			add_ideas = psa_civil_unrest
+		}
+	}
+
+	focus = {
+		id = PSA_military_police
+		icon = GFX_focus_generic_manpower
+		prerequisite = { focus = PSA_start_occupation }
+		x = 0
+		y = 1
+		relative_position_id = PSA_start_occupation
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_ideas = psa_military_police
+		}
+	}
+
+	focus = {
+		id = PSA_restore_civil_service
+		icon = GFX_JAP_sakura_tree
+		prerequisite = { focus = PSA_military_police }
+		x = -1
+		y = 1
+		relative_position_id = PSA_military_police
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = psa_occupation_idea
+				}
+				swap_ideas = {
+					remove_idea = psa_occupation_idea
+					add_idea = psa_occupation_idea_2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = psa_occupation_idea_2
+				}
+				swap_ideas = {
+					remove_idea = psa_occupation_idea_2
+					add_idea = psa_occupation_idea_3
+				}
+			}
+			swap_ideas = {
+				remove_idea = psa_civil_unrest
+				add_idea = psa_civil_unrest2
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_capture_government_buildings
+		icon = GFX_goal_Centralised_Government
+		prerequisite = { focus = PSA_military_police }
+		x = 1
+		y = 1
+		relative_position_id = PSA_military_police
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = psa_occupation_idea
+				}
+				swap_ideas = {
+					remove_idea = psa_occupation_idea
+					add_idea = psa_occupation_idea_2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = psa_occupation_idea_2
+				}
+				swap_ideas = {
+					remove_idea = psa_occupation_idea_2
+					add_idea = psa_occupation_idea_3
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_reduce_peoples_tension
+		icon = GFX_focus_generic_concessions
+		prerequisite = { focus = PSA_capture_government_buildings }
+		prerequisite = { focus = PSA_restore_civil_service }
+		x = 0
+		y = 2
+		relative_position_id = PSA_military_police
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = psa_occupation_idea_4
+				}
+				swap_ideas = {
+					remove_idea = psa_occupation_idea_4
+					add_idea = psa_occupation_idea_5
+				}
+			}
+			swap_ideas = {
+				remove_idea = psa_civil_unrest2
+				add_idea = psa_civil_unrest3
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_new_constitution
+		icon = GFX_goal_DOM_End_Judicial_Corruption
+		prerequisite = { focus = PSA_reduce_peoples_tension }
+		x = 0
+		y = 1
+		relative_position_id = PSA_reduce_peoples_tension
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+		bypass = {
+		}
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_ideas = psa_new_constitution
+		}
+	}
+
+	focus = {
+		id = PSA_start_from_scratch
+		icon = GFX_focus_generic_strike_at_democracy2
+		prerequisite = { focus = PSA_new_constitution }
+		x = 0
+		y = 1
+		relative_position_id = PSA_new_constitution
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 100
+			remove_ideas = psa_civil_unrest3
+		}
+	}
+
+	focus = {
+		id = PSA_bureau_of_ships
+		icon = GFX_goal_FNG_commission_japanese_ships
+		x = 7
+		y = 1
+		prerequisite = { focus = PSA_start_from_scratch }
+		relative_position_id = PSA_start_from_scratch
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_timed_idea = {
+				idea = PSA_maritime_idea
+				days = 600
+			}
+			if = {
+				limit = {
+					not = { has_dlc = "Man the Guns" }
+				}
+				add_tech_bonus = {
+					name = JAP_supremacy_of_the_battlefleet
+					bonus = 1.0
+					uses = 1
+					category = shbb_tech
+				}
+			}
+			else = {
+				navy_experience = 50
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+					is_core_of = ROOT
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+					is_core_of = ROOT
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+					is_core_of = ROOT
+					free_building_slots = {
+						building = dockyard
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_fleet_submarines
+		icon = GFX_goal_generic_navy_submarine
+		x = 6
+		y = 1
+		prerequisite = { focus = PSA_bureau_of_ships }
+		relative_position_id = PSA_bureau_of_ships
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				name = USA_fleet_submarines
+				bonus = 1.0
+				uses = 2
+				category = ss_tech
+			}
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+				}
+				set_technology = { cruiser_submarines = 1 }
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_unrestricted_submarine_warfare
+		icon = GFX_goal_generic_wolf_pack
+		x = 0
+		y = 1
+		prerequisite = { focus = PSA_fleet_submarines }
+		relative_position_id = PSA_fleet_submarines
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = USA_unrestricted_submarine_warfare
+		}
+	}
+
+	focus = {
+		id = PSA_escort_effort
+		icon = GFX_goal_generic_navy_anti_submarine
+		prerequisite = { focus = PSA_bureau_of_ships }
+		x = 4
+		y = 1
+		relative_position_id = PSA_bureau_of_ships
+		cost = 10
+		#ai_will_do = {
+			#	factor = 1
+			#}
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = escort_effort_focus
+
+		}
+	}
+
+	focus = {
+		id = PSA_convoy_tactics
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = PSA_escort_effort }
+		x = 0
+		y = 1
+		relative_position_id = PSA_escort_effort
+		cost = 10
+		#ai_will_do = {
+			#	factor = 1
+			#}
+
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			navy_experience = 25
+			add_doctrine_cost_reduction = {
+				name = USA_convoy_tactics
+				cost_reduction = 0.35
+				uses = 2
+				category = convoy_defense_tree
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_carrier_primacy
+		icon = GFX_goal_generic_navy_carrier
+		prerequisite = { focus = PSA_bureau_of_ships }
+		mutually_exclusive = { focus = PSA_battleship_primacy }
+		x = 2
+		y = 1
+		relative_position_id = PSA_bureau_of_ships
+		cost = 10
+		#ai_will_do = {
+			#	factor = 1
+			#}
+
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				name = USA_carrier_primacy
+				bonus = 1.0
+				uses = 2
+				category = cv_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_bureau_of_aeronautics
+		icon = GFX_goal_generic_air_naval_bomber
+		prerequisite = { focus = PSA_carrier_primacy }
+		x = 0
+		y = 1
+		relative_position_id = PSA_carrier_primacy
+		cost = 10
+		#ai_will_do = {
+			#	factor = 1
+			#}
+
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				name = USA_bureau_of_aeronautics
+				bonus = 1.0
+				uses = 1
+				category = naval_bomber
+				category = naval_air
+			}
+		}
+	}
+	focus = {
+		id = PSA_naval_radar
+		icon = GFX_goal_generic_radar
+		x = 0
+		y = 1
+		prerequisite = { focus = PSA_bureau_of_aeronautics }
+		relative_position_id = PSA_bureau_of_aeronautics
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		search_filters = {FOCUS_FILTER_RESEARCH}
+		completion_reward = {
+			add_tech_bonus = {
+				name = USA_naval_radar
+				uses = 2
+				bonus = 1.0
+				category = radar_tech
+			}
+
+		}
+	}
+
+	focus = {
+		id = PSA_battleship_primacy
+		icon = GFX_goal_JAP_south_seas_mandate
+		prerequisite = { focus = PSA_bureau_of_ships }
+		mutually_exclusive = { focus = PSA_carrier_primacy }
+		x = 0
+		y = 1
+		relative_position_id = PSA_bureau_of_ships
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = JAP_supremacy_of_the_battlefleet
+				bonus = 1.0
+				uses = 1
+				category = bb_tech
+			}
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = kure_naval_arsenal
+		}
+	}
+
+	focus = {
+		id = PSA_expand_the_snlf
+		icon = GFX_goal_JAP_Yokuseiha
+		prerequisite = { focus = PSA_battleship_primacy }
+		x = 0
+		y = 1
+		relative_position_id = PSA_battleship_primacy
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_ideas = JAP_expand_the_snlf
+			add_tech_bonus = {
+				name = JAP_expand_the_snlf
+				bonus = 1.0
+				uses = 1
+				category = marine_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_the_ultimate_battleship
+		icon = GFX_goal_generic_navy_battleship
+		prerequisite = { focus = PSA_expand_the_snlf }
+		x = 0
+		y = 1
+		relative_position_id = PSA_expand_the_snlf
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			if = {
+				limit = {
+					not = { has_dlc = "Man the Guns" }
+				}
+				add_tech_bonus = {
+					name = JAP_the_ultimate_battleship
+					bonus = 3.0
+					uses = 1
+					category = shbb_tech
+				}
+			}
+			add_tech_bonus = {
+				name = JAP_the_ultimate_battleship
+				bonus = 1.0
+				uses = 1
+				category = bb_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_cruiser_modernization
+		icon = GFX_PRU_purchasing_japanese_ships
+		prerequisite = { focus = PSA_bureau_of_ships }
+		x = 8
+		y = 1
+		relative_position_id = PSA_bureau_of_ships
+
+		cost = 5
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = JAP_cruiser_modernization
+				bonus = 3.0
+				uses = 1
+				category = ca_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_long_lance_torpedoes
+		icon = GFX_goal_generic_occupy_start_war
+		prerequisite = { focus = PSA_cruiser_modernization }
+		x = 0
+		y = 1
+		relative_position_id = PSA_cruiser_modernization
+
+		cost = 5
+		ai_will_do = {
+			base = 4
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = the_long_lance
+		}
+	}
+
+	focus = {
+		id = PSA_fighter_modernization
+		icon = GFX_goal_JAP_Navy_Air
+		prerequisite = { focus = PSA_start_from_scratch }
+		x = 4
+		y = 1
+		relative_position_id = PSA_start_from_scratch
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = JAP_fighter_modernization
+				bonus = 1.0
+				uses = 1
+				category = light_fighter
+			}
+			add_tech_bonus = {
+				name = JAP_fighter_modernization
+				bonus = 1.0
+				uses = 1
+				category = cat_heavy_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_range_focus
+		icon = GFX_goal_generic_air_production
+		prerequisite = { focus = PSA_fighter_modernization }
+		x = -1
+		y = 1
+		relative_position_id = PSA_fighter_modernization
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = psa_aichi
+		}
+	}
+
+	focus = {
+		id = PSA_strategic_bomber_effort
+		icon = GFX_goal_generic_air_bomber
+		prerequisite = { focus = PSA_range_focus }
+		x = 0
+		y = 1
+		relative_position_id = PSA_range_focus
+
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = JAP_strategic_bomber_effort
+				bonus = 1.0
+				uses = 2
+				category = cat_strategic_bomber
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_jet_prototypes
+		icon = GFX_goal_generic_build_airforce
+		prerequisite = { focus = PSA_the_zero focus = PSA_strategic_bomber_effort }
+		x = 0
+		y = 3
+		relative_position_id = PSA_fighter_modernization
+
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = JAP_jet_prototypes
+				bonus = 1.0
+				uses = 2
+				category = jet_technology
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_agility_focus
+		icon = GFX_goal_generic_air_production
+		prerequisite = { focus = PSA_fighter_modernization }
+		x = 1
+		y = 1
+		relative_position_id = PSA_fighter_modernization
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+		completion_reward = {
+			custom_effect_tooltip = available_designer
+			show_ideas_tooltip = psa_mitsubishi
+		}
+	}
+
+	focus = {
+		id = PSA_the_zero
+		icon = GFX_focus_jap_zero
+		prerequisite = { focus = PSA_agility_focus }
+		x = 0
+		y = 1
+		relative_position_id = PSA_agility_focus
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+			has_tech = cv_fighter2
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			custom_effect_tooltip = JAP_the_zero_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_dlc = "By Blood Alone"
+						}
+					}
+					set_technology = { cv_fighter2 = 1 }
+				}
+				else = {
+					create_equipment_variant = {
+						name = "A6M Zero-Sen"
+						type = cv_small_plane_airframe_2
+						allow_without_tech = yes
+						modules = {
+							fixed_main_weapon_slot = light_mg_2x
+							fixed_auxiliary_weapon_slot_1 = aircraft_cannon_1_2x
+							engine_type_slot = engine_3_1x
+							special_type_slot_1 = drop_tanks
+							special_type_slot_2 = fuel_tanks_small
+						}
+						icon = "GFX_JAP_cv_fighter2_medium"
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_army_expansion_law
+		icon = GFX_goal_Japanese_Glory
+		x = 0
+		y = 1
+		prerequisite = { focus = PSA_start_from_scratch }
+		relative_position_id = PSA_start_from_scratch
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+		completion_reward = {
+			army_experience = 30
+		}
+	}
+
+	focus = {
+		id = PSA_supremacy_of_will
+		icon = GFX_goal_JAP_samurai
+		prerequisite = { focus = PSA_army_expansion_law }
+		mutually_exclusive = { focus = PSA_supremacy_of_technology }
+		x = 1
+		y = 1
+		relative_position_id = PSA_army_expansion_law
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+
+		}
+		completion_reward = {
+			add_ideas = JAP_superior_will
+		}
+	}
+
+	focus = {
+		id = PSA_womens_armed_service_integration_act
+		icon = GFX_focus_generic_treaty
+		x = 0
+		y = 1
+		prerequisite = { focus = PSA_supremacy_of_will }
+		relative_position_id = PSA_supremacy_of_will
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			NOT = {
+				has_idea = tot_economic_mobilisation
+			}
+		}
+		bypass = {
+		}
+
+
+
+		search_filters = {FOCUS_FILTER_MANPOWER}
+		completion_reward = {
+			add_ideas = USA_womens_armed_service_integration_act
+		}
+	}
+
+	focus = {
+		id = PSA_raise_the_boeitai
+		icon = GFX_goal_generic_military_sphere
+		prerequisite = { focus = PSA_womens_armed_service_integration_act }
+		x = 0
+		y = 1
+		relative_position_id = PSA_womens_armed_service_integration_act
+
+		available = {
+			AND = {
+				OR = {
+					has_war_with = SOV
+					has_war_with = USA
+					has_war_with = ENG
+				}
+				casualties > 250000
+			}
+			surrender_progress > 0.4
+		}
+
+
+
+
+
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+		}
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = JAP_superior_will
+				add_idea = JAP_superior_will2
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_supremacy_of_technology
+		icon = GFX_PRU_arms_deal_japan
+		prerequisite = { focus = PSA_army_expansion_law }
+		mutually_exclusive = { focus = PSA_supremacy_of_will }
+		x = -1
+		y = 1
+		relative_position_id = PSA_army_expansion_law
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_ideas = JAP_supremacy_of_technology
+		}
+	}
+
+	focus = {
+		id = PSA_modern_infantry
+		icon = GFX_goal_japan_helmet
+		prerequisite = { focus = PSA_supremacy_of_technology }
+		x = 0
+		y = 1
+		relative_position_id = PSA_supremacy_of_technology
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_artillery_bonus
+				bonus = 1.0
+				uses = 1
+				category = infantry_weapons
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_armored_divisions
+		icon = GFX_goal_japanese_tank_import
+		prerequisite = { focus = PSA_modern_infantry }
+		x = 0
+		y = 1
+		relative_position_id = PSA_modern_infantry
+
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			army_experience = 10
+			add_tech_bonus = {
+				name = JAP_armored_divisions
+				bonus = 1
+				uses = 2
+				category = armor
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_zaibatsus_investments
+		icon = GFX_goal_JAP_industry
+		prerequisite = { focus = PSA_start_from_scratch }
+		x = -5
+		y = 1
+		relative_position_id = PSA_start_from_scratch
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+			is_puppet_of = JAP
+			OR = {
+				has_idea = JAP_guide_the_zaibatsus
+				has_idea = JAP_zaibatsus
+			}
+		}
+		bypass = {
+		}
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_guide_the_zaibatsus
+		icon = GFX_focus_jap_zaibatsu
+		prerequisite = { focus = PSA_zaibatsus_investments }
+		x = 0
+		y = 1
+		relative_position_id = PSA_zaibatsus_investments
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+		complete_tooltip = {
+			random_state = {
+				limit = {
+					has_state_flag = JAP_zaibatsus_factories
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			swap_ideas = {
+				remove_idea = JAP_zaibatsus
+				add_idea = JAP_guide_the_zaibatsus
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				set_state_flag = JAP_zaibatsus_factories
+			}
+			swap_ideas = {
+				remove_idea = JAP_zaibatsus
+				add_idea = JAP_guide_the_zaibatsus
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_nationalize_war_industry
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = PSA_guide_the_zaibatsus }
+		x = -1
+		y = 1
+		relative_position_id = PSA_guide_the_zaibatsus
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		complete_tooltip = {
+			random_state = {
+				limit = {
+					has_state_flag = JAP_nationalize_war_industry_AF
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_state = {
+				limit = {
+					has_state_flag = JAP_nationalize_war_industry_IC
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				set_state_flag = JAP_nationalize_war_industry_AF
+			}
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				set_state_flag = JAP_nationalize_war_industry_IC
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_focus_on_civilian_factories
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = PSA_nationalize_war_industry }
+		relative_position_id = PSA_nationalize_war_industry
+		x = 0
+		y = 1
+
+		cost = 10
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_imperial_highways
+		icon = GFX_goal_generic_construct_infrastructure
+		prerequisite = { focus = PSA_guide_the_zaibatsus }
+		relative_position_id = PSA_guide_the_zaibatsus
+		x = 1
+		y = 1
+
+		cost = 10
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			386 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = infrastructure
+						level = 5
+						instant_build = yes
+					}
+				}
+			}
+			385 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = infrastructure
+						level = 5
+						instant_build = yes
+					}
+				}
+			}
+			378 = {
+				if = {
+					limit = { is_controlled_by = ROOT }
+					add_building_construction = {
+						type = infrastructure
+						level = 5
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_extract_oil
+		icon = GFX_goal_generic_oil_refinery
+		prerequisite = { focus = PSA_imperial_highways }
+		relative_position_id = PSA_imperial_highways
+		x = 0
+		y = 1
+
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+		}
+
+		available = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				prioritize = { 378 375 }
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = infrastructure
+						size > 1
+					}
+				}
+				add_resource = {
+					type = oil
+					amount = 15
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = infrastructure
+						size > 1
+					}
+				}
+				add_resource = {
+					type = oil
+					amount = 15
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_national_research_policy
+		icon = GFX_focus_research
+		prerequisite = { focus = PSA_extract_oil focus = PSA_focus_on_civilian_factories }
+		x = -1
+		y = 1
+		relative_position_id = PSA_extract_oil
+
+		cost = 5
+
+		ai_will_do = {
+			base = 4
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = PSA_coal_liquification
+		icon = GFX_goal_generic_oil_refinery
+		prerequisite = { focus = PSA_national_research_policy }
+		x = 0
+		y = 1
+		relative_position_id = PSA_national_research_policy
+
+		cost = 10
+		ai_will_do = {
+			base = 2
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = infrastructure
+						size > 1
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				name = JAP_coal_liquification
+				bonus = 1.0
+				uses = 2
+				category = synth_resources
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_back_in_business
+		icon = GFX_focus_generic_home_defense
+		x = 12
+		y = 0
+		cost = 5
+		ai_will_do = {
+			base = 4
+		}
+		available = {
+			has_idea = psa_new_constitution
+			NOT = {
+				has_war_with = USA
+			}
+			OR = {
+				USA = {
+					exists = no
+				}
+				USA = {
+					is_puppet_of = JAP
+				}
+			}
+		}
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_stability = 0.1
+			add_war_support = 0.05
+		}
+	}
+
+	focus = {
+		id = PSA_japanese_imperialism
+		icon = GFX_focus_generic_strike_at_democracy1
+		x = 0
+		y = 1
+		cost = 5
+		prerequisite = { focus = PSA_back_in_business }
+		relative_position_id = PSA_back_in_business
+		ai_will_do = {
+			base = 4
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_political_power = 25
+			add_ideas = psa_japanese_imperialism
+		}
+	}
+
+	focus = {
+		id = PSA_attack_england
+		icon = GFX_focus_attack_britain
+		x = 0
+		y = 1
+		cost = 5
+		prerequisite = { focus = PSA_japanese_imperialism }
+		relative_position_id = PSA_japanese_imperialism
+		ai_will_do = {
+			base = 4
+		}
+		available = {
+			has_country_flag = PSA_cored_usa_states
+		}
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			unlock_decision_tooltip = { decision = JAP_psa_attack_england_decision show_effect_tooltip = yes }
+			swap_ideas = {
+				remove_idea = psa_japanese_imperialism
+				add_idea = psa_japanese_imperialism_2
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_demand_carribean
+		icon = GFX_goal_generic_political_pressure
+		x = 0
+		y = 1
+		cost = 5
+		prerequisite = { focus = PSA_attack_england }
+		relative_position_id = PSA_attack_england
+		ai_will_do = {
+			base = 4
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			every_country = {
+				limit = {
+					OR = {
+						original_tag = CUB
+						original_tag = HAI
+						original_tag = DOM
+						original_tag = GUA
+						original_tag = MEX
+						original_tag = HON
+						original_tag = NIC
+						original_tag = PAN
+						original_tag = COS
+						original_tag = ELS
+					}
+					not = { has_war_with = ROOT }
+					not = { is_subject_of = ROOT }
+					exists = yes
+				}
+				country_event = mtg_usa_north_american_dominion.1
+			}
+			swap_ideas = {
+				remove_idea = psa_japanese_imperialism_2
+				add_idea = psa_japanese_imperialism_3
+			}
+		}
+	}
+
+	focus = {
+		id = PSA_appeal_for_increased_autonomy
+		icon = GFX_focus_CZE_german_puppet
+		x = 0
+		y = 1
+		cost = 5
+		prerequisite = { focus = PSA_demand_carribean }
+		relative_position_id = PSA_demand_carribean
+		ai_will_do = {
+			base = 4
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = psa_japanese_imperialism_3
+				add_idea = psa_japanese_imperialism_4
+			}
+			add_autonomy_ratio = {
+				value = 0.08333
+				localization = JAP_appeal_for_increased_autonomy
+			}
+		}
+	}
+}
+
+

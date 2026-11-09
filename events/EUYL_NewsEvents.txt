@@ -1,0 +1,1796 @@
+﻿###########################
+# News Events
+###########################
+
+add_namespace = news
+add_namespace = news.bolivia 
+
+#Established the Argentine Confederation
+news_event = {
+	id = news.360
+	title = news.360.t
+	desc = news.360.d
+	picture = GFX_ARG_news_event_337
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.360.a
+		trigger = {
+			NOT = { tag = ARG }
+		}
+	}
+	
+	option = {
+		name = news.360.b
+		trigger = {
+			tag = ARG
+		}
+	}
+}
+
+#forming the Greater Argentine Confederation
+news_event = {
+	id = news.339
+	title = news.339.t 
+	desc = news.339.d 
+	picture = GFX_news_event_fascist_gathering
+	
+	major = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = news.339.a
+		trigger = {
+			NOT = {
+				OR = {
+					tag = ARG
+					tag = ENG
+					tag = CHL
+					tag = BRA
+					tag = BOL
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = news.339.b 
+		trigger = {
+			tag = ARG 
+		}
+	}
+	
+	option = {
+		name = news.339.c 
+		trigger = {
+			OR = {
+				tag = CHL
+				tag = ENG
+				tag = BRA
+				tag = BOL
+			}
+		}
+	}
+}
+
+#anarchist uprising in Chile
+news_event = {
+	id = news.340
+	title = news.340.t 
+	desc = news.340.d 
+	picture = GFX_news_event_soldiers_marching 
+	
+	major = yes
+	is_triggered_only = yes 
+	
+	option = {
+		name = news.340.a 
+		trigger = {
+			NOT = {
+				OR = {
+					tag = CHL 
+					tag = ARG 
+					tag = BOL 
+					tag = BRA 
+					tag = PRU 
+					tag = ECU 
+					tag = URG 
+					tag = USA 
+					tag = FRA 
+					tag = ENG 
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = news.340.b 
+		trigger = {
+			tag = CHL 
+		}
+	}
+	
+	option = {
+		name = news.340.c 
+		trigger = {
+			OR = {
+			tag = ARG 
+				tag = BOL 
+				tag = BRA 
+				tag = PRU 
+				tag = ECU 
+				tag = URG 
+				tag = USA 
+				tag = FRA 
+				tag = ENG 
+			}
+		}
+	}
+}
+
+#Great South American War 
+news_event = {
+	id = news.341
+	title = news.341.t 
+	desc = news.341.d 
+	picture = GFX_south_america_war
+	
+	major = yes 
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = {
+		name = news.341.a 
+		trigger = {
+			NOT = {
+				OR = {
+					tag = ARG
+					tag = CHL 
+					tag = BOL 
+					tag = BRA 
+					tag = PRU 
+					tag = ECU 
+					tag = URG 
+					tag = USA 
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = news.341.b 
+		trigger = {
+			tag = ARG 
+		}
+		add_ideas = ARG_the_great_south_american_war
+		hidden_effect = {
+			ARG = {
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.25 start_equipment_factor = 1.0" 
+						owner = ARG
+					}
+				}
+			}	
+		}
+	}
+	
+	option = {
+		name = news.341.c 
+		trigger = {
+			OR = {
+				tag = BOL 
+				tag = BRA 
+				tag = PRU 
+				tag = ECU 
+				tag = COL 
+				tag = CHL 
+				tag = URG 
+				tag = USA 
+			}
+		}
+		if = {
+			limit = { 
+				original_tag = CHL 
+				has_war_with = ARG 
+			}
+			CHL = {
+				add_ideas = the_great_south_american_war
+			}
+		}
+		if = {
+			limit = { 
+				original_tag = BRA 
+				has_war_with = ARG 
+			}
+			BRA = {
+				add_ideas = the_great_south_american_war
+			}
+		}
+		if = {
+			limit = { 
+				original_tag = BOL 
+				has_war_with = ARG 
+			}
+			BOL = {
+				add_ideas = the_great_south_american_war
+			}
+		}
+		if = {
+			limit = { 
+				original_tag = URG 
+				has_war_with = ARG 
+			}
+			URG = {
+				add_ideas = the_great_south_american_war
+			}
+		}
+	}
+}
+
+#Second war of the Confederation 
+news_event = {
+	id = news.342
+	title = news.342.t 
+	desc = news.342.d 
+	picture = GFX_newsevent_342
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.342.a 
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BOL 
+					original_tag = PRU 
+					original_tag = ARG 
+					original_tag = CHL 
+					original_tag = ECU 
+					original_tag = ECU 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.342.b 
+		trigger = {
+			OR = {
+				original_tag = BOL 
+				original_tag = PRU 
+			}
+		}
+		add_ideas = PBC_war_of_independence_1
+		if = {
+			limit = { has_country_flag = PBC_refused_cooperation }
+			clr_country_flag = PBC_refused_cooperation
+		}
+	}
+
+	option = {
+		name = news.342.c
+		trigger = {
+			OR = {
+				original_tag = ARG 
+				original_tag = CHL 
+				original_tag = ECU 
+				original_tag = COL 
+			}
+		}
+	}
+}
+
+#Second war of the Pacific 
+news_event = {
+	id = news.343
+	title = news.343.t 
+	desc = news.343.d 
+	picture = GFX_newsevent_343
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.343.a 
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BOL 
+					original_tag = PRU 
+					original_tag = CHL 
+					original_tag = ECU 
+					original_tag = COL
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.343.b 
+		trigger = {
+			OR = {
+				original_tag = PRU 
+				original_tag = BOL 
+			}
+			if = {
+				limit = { original_tag = BOL }
+				has_war_with = CHL 
+			}
+			if = {
+				limit = { original_tag = PRU }
+				has_war_with = CHL 
+			}
+		}
+		if = { ## Unlocks Second War of Pacific Focuses
+			limit = { original_tag = PRU }
+			custom_effect_tooltip = CHL_unlock_second_war_of_pacific_focuses
+			hidden_effect = {
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	option = {
+		name = news.343.c 
+		trigger = {
+			original_tag = CHL 
+		}
+		custom_effect_tooltip = CHL_unlock_second_war_of_pacific_focuses
+		hidden_effect = {
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+
+	option = {
+		name = news.343.d 
+		trigger = {
+			OR = {
+				original_tag = ECU 
+				original_tag = COL 
+			}
+		}
+	}
+}
+
+#Ecuador/Colombia joins the Second War of the Pacific 
+news_event = {
+	id = news.344 
+	title = news.344.t 
+	desc = news.334.d 
+	picture = GFX_news_event_soldiers_marching 
+
+	is_triggered_only = yes 
+
+	option = {
+		name = news.344.a 
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = PRU
+					original_tag = BOL 
+					original_tag = CHL 
+					original_tag = ECU 
+					original_tag = COL 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.344.b 
+		trigger = {
+			OR = {
+				original_tag = BOL 
+				original_tag = PRU 
+			}
+		}
+	}
+
+	option = {
+		name = news.344.c 
+		trigger = {
+			OR = {
+				original_tag = CHL 
+				original_tag = COL 
+				original_tag = ECU 
+			}
+		}
+	}
+}
+
+#The reformation of the Peru-Bolivian Confederation
+news_event = {
+	id = news.345
+	title = news.345.t 
+	desc = news.345.d 
+	picture = GFX_PBC_newsevent_345 
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.345.a 
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BOL 
+					original_tag = PRU 
+					original_tag = ARG 
+					original_tag = CHL 
+					original_tag = ECU 
+					original_tag = ECU 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.345.b
+		trigger = {
+			OR = {
+				original_tag = BOL 
+				original_tag = PRU 
+			}
+		}
+	}
+
+	option = {
+		name = news.345.c 
+		trigger = {
+			OR = {
+				original_tag = ARG 
+				original_tag = CHL 
+				original_tag = ECU 
+				original_tag = ECU 
+			}
+		}
+	}
+}
+
+#Peru Ecuador war 
+news_event = {
+	id = news.346
+	title = news.346.t
+	desc = news.346.d
+	picture = GFX_news_346_pic
+
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = news.346.a 
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BOL 
+					original_tag = PRU 
+					original_tag = ARG 
+					original_tag = CHL 
+					original_tag = ECU 
+					original_tag = BRA 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.346.b 
+		trigger = {
+			OR = {
+				original_tag = BOL 
+				original_tag = ARG 
+				original_tag = CHL 
+				original_tag = BRA 
+			}
+		}
+	}
+
+	option = {
+		name = news.346.c 
+		trigger = {
+			original_tag = PRU 
+		}
+		add_war_support = 0.05
+	}
+
+	option = {
+		name = news.346.e 
+		trigger = {
+			original_tag = ECU 
+		}
+	}
+}
+
+#Second Chaco War 
+news_event = {
+	id = news.347
+	title = news.347.t 
+	desc = news.347.d 
+	picture = GFX_news_347_pic
+
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = news.347.a 
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BOL 
+					original_tag = PRU 
+					original_tag = ARG 
+					original_tag = CHL 
+					original_tag = ECU 
+					original_tag = BRA 
+					original_tag = PAR
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.347.b 
+		trigger = {
+			OR = {
+				original_tag = ARG 
+				original_tag = CHL 
+				original_tag = BRA 
+				original_tag = PRU 
+				original_tag = ECU
+			}
+		}
+	}
+
+	option = {
+		name = news.347.c 
+		trigger = {
+			original_tag = BOL 
+		}
+		add_war_support = 0.05
+	}
+
+	option = {
+		name = news.347.e 
+		trigger = {
+			original_tag = PAR 
+		}
+	}
+}
+
+#Fall of Buenos Aires (Uruguay)
+news_event = {
+	id = news.348
+	title = news.348.t
+	desc = news.348.d
+	picture = GFX_news_buenos_aires
+	
+	major = yes
+	
+	trigger = {
+		278 = { is_controlled_by = URG }
+		278 = { is_owned_by = ARG }
+		ARG = { 
+			has_war_with = URG 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_buenos_aires_urg }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_buenos_aires_urg
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	option = {
+		name = news.348.a
+		trigger = {
+			NOT = {
+				TAG = URG
+				TAG = ARG
+			}
+		}
+	}
+	option = {
+		name = news.348.b
+		trigger = { TAG = URG }
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = ARG }
+	}
+}
+
+#Seguro Obrero Massacre 
+news_event = {
+	id = news.349 
+	title = news.349.t 
+	desc = news.349.d 
+	picture = GFX_news_349
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.349.a 
+		trigger = {
+			original_tag = CHL 
+			NOT = {
+				has_completed_focus = CHL_form_the_apl
+			}
+		}
+		add_stability = -0.1
+		add_manpower = -84
+		custom_effect_tooltip = CHL_decrease_nacista_by_5
+		custom_effect_tooltip = CHL_nacista_stop_being_threat_tt
+		set_party_name = {
+			ideology = fascism
+			long_name = CHL_VPS_long
+			name = CHL_VPS 
+		}
+		add_popularity = { ideology = fascism popularity = -0.05 }
+		retire_ideology_leader = fascism
+		create_country_leader = {
+			name = "Jorge González von Marées"
+			desc = "POLITICS_JORGE_GONZÁLEZ_VON_MARÉES_DESC"
+			picture = "portrait_chl_jorge_gonzales_von_mares.dds"
+			expire = "1965.1.1"
+			ideology = nazism
+			traits = {
+				CHL_el_jefe
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { check_variable = { CHL_nacista_power > 4 } }
+				subtract_from_variable = { CHL_nacista_power = 5 }
+			}
+			else_if = {
+				limit = { check_variable = { CHL_nacista_power > 3 } }
+				subtract_from_variable = { CHL_nacista_power = 4 }
+			}
+			else_if = {
+				limit = { check_variable = { CHL_nacista_power > 2 } }
+				subtract_from_variable = { CHL_nacista_power = 3 }
+			}
+			else_if = {
+				limit = { check_variable = { CHL_nacista_power > 1 } }
+				subtract_from_variable = { CHL_nacista_power = 2 }
+			}
+			else_if = {
+				limit = { check_variable = { CHL_nacista_power > 0 } }
+				subtract_from_variable = { CHL_nacista_power = 1 }
+			}
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			set_temp_variable = { CHL_democratic_boost = party_popularity@fascism }
+			divide_temp_variable = { CHL_democratic_boost = 4 }
+			add_popularity = { ideology = democratic popularity = CHL_democratic_boost }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+			set_country_flag = CHL_nacista_defeated
+			set_variable = { CHL_chance_of_fascist = 0 }
+			set_variable = { CHL_chance_of_communist = 100 }
+		}
+	}
+
+	option = {
+		name = news.349.b 
+		trigger = {
+			NOT = {
+				original_tag = CHL 
+			}
+		}
+	}
+
+	option = {
+		name = news.349.c 
+		trigger = {
+			original_tag = CHL 
+			has_completed_focus = CHL_form_the_apl
+		}
+		add_stability = -0.1
+		add_manpower = -84
+		custom_effect_tooltip = CHL_decrease_nacista_by_5_bad
+		set_party_name = {
+			ideology = fascism
+			long_name = CHL_VPS_long
+			name = CHL_VPS 
+		}
+		add_popularity = { ideology = fascism popularity = -0.05 }
+		retire_ideology_leader = fascism
+		create_country_leader = {
+			name = "Jorge González von Marées"
+			desc = "POLITICS_JORGE_GONZÁLEZ_VON_MARÉES_DESC"
+			picture = "portrait_chl_jorge_gonzales_von_mares.dds"
+			expire = "1965.1.1"
+			ideology = nazism
+			traits = {
+				CHL_el_jefe
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { check_variable = { CHL_nacista_power > 4 } }
+				subtract_from_variable = { CHL_nacista_power = 5 }
+			}
+			else_if = {
+				limit = { check_variable = { CHL_nacista_power > 3 } }
+				subtract_from_variable = { CHL_nacista_power = 4 }
+			}
+			else_if = {
+				limit = { check_variable = { CHL_nacista_power > 2 } }
+				subtract_from_variable = { CHL_nacista_power = 3 }
+			}
+			else_if = {
+				limit = { check_variable = { CHL_nacista_power > 1 } }
+				subtract_from_variable = { CHL_nacista_power = 2 }
+			}
+			else_if = {
+				limit = { check_variable = { CHL_nacista_power > 0 } }
+				subtract_from_variable = { CHL_nacista_power = 1 }
+			}
+			set_temp_variable = { CHL_temp_power = 100 }
+			set_temp_variable = { CHL_power_subtraction = CHL_nacista_power }
+			set_temp_variable = { CHL_democratic_boost = party_popularity@fascism }
+			divide_temp_variable = { CHL_democratic_boost = 4 }
+			add_popularity = { ideology = democratic popularity = CHL_democratic_boost }
+			add_to_temp_variable = { CHL_power_subtraction = CHL_communists_power }
+			subtract_from_temp_variable = { CHL_temp_power = CHL_power_subtraction }
+			set_variable = { CHL_control_over_nation = CHL_temp_power }
+			set_country_flag = CHL_nacista_defeated
+			set_variable = { CHL_chance_of_fascist = 0 }
+			set_variable = { CHL_chance_of_communist = 100 }
+		}
+	}
+}
+
+#Fall of Buenos Aires (Generic)
+news_event = {
+	id = news.750
+	title = news.750.t
+	desc = news.750.d
+	picture = GFX_news_event_soldiers_marching
+	
+	major = yes
+	
+	trigger = {
+		278 = { 
+			is_owned_by = ARG 
+			NOT = {
+				is_controlled_by = ARG 
+			}
+			NOT = {
+				is_controlled_by = URG
+			}
+		}
+		ARG = {
+			has_war = yes 
+			has_civil_war = no 
+			NOT = {
+				has_war_with = URG
+			}
+		}
+		NOT = { has_global_flag = fall_of_buenos_aires }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_buenos_aires
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+	
+	option = {
+		name = news.750.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = ARG 
+					controls_state = 278
+				}
+			}
+		}
+	}
+	option = {
+		name = news.750.b
+		trigger = { 
+			has_war_with = ARG 
+			controls_state = 278
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = ARG }
+	}
+}
+
+#Fall of Sau Paulo (Generic)
+news_event = {
+	id = news.351
+	title = news.351.t 
+	desc = news.351.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes
+	
+	trigger = {
+		501 = { 
+			is_owned_by = BRA 
+			NOT = {
+				is_controlled_by = BRA 
+			}
+		}
+		BRA = {
+			has_war = yes 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_sau_paulo }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_sau_paulo
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = news.351.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BRA 
+					controls_state = 501
+				}
+			}
+		}
+	}
+	option = {
+		name = news.351.b
+		trigger = { 
+			has_war_with = BRA 
+			controls_state = 501
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = BRA }
+	}
+}
+
+#Fall of Rio de Janeiro (generic)
+news_event = {
+	id = news.352
+	title = news.352.t 
+	desc = news.352.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes
+	
+	trigger = {
+		500 = { 
+			is_owned_by = BRA 
+			NOT = {
+				is_controlled_by = BRA 
+			}
+		}
+		BRA = {
+			has_war = yes 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_rio_de_janeiro }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_rio_de_janeiro
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = news.352.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BRA 
+					controls_state = 500
+				}
+			}
+		}
+	}
+	option = {
+		name = news.352.b
+		trigger = { 
+			has_war_with = BRA 
+			controls_state = 500
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = BRA }
+	}
+}
+
+#Fall of Montevideo (generic)
+news_event = {
+	id = news.353
+	title = news.353.t 
+	desc = news.353.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes
+	
+	trigger = {
+		300 = { 
+			is_owned_by = URG 
+			NOT = {
+				is_controlled_by = URG 
+			}
+		}
+		URG = {
+			has_war = yes 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_montevideo }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_montevideo
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = news.353.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = URG 
+					controls_state = 300
+				}
+			}
+		}
+	}
+	option = {
+		name = news.353.b
+		trigger = { 
+			has_war_with = URG 
+			controls_state = 300
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = URG }
+	}
+}
+
+#Fall of Santiago (Generic) 
+news_event = {
+	id = news.354
+	title = news.354.t 
+	desc = news.354.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes
+	
+	trigger = {
+		279 = { 
+			is_owned_by = CHL 
+			NOT = {
+				is_controlled_by = CHL 
+			}
+		}
+		CHL = {
+			has_war = yes 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_santiago }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_santiago
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = news.354.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = CHL 
+					controls_state = 279
+				}
+			}
+		}
+	}
+	option = {
+		name = news.354.b
+		trigger = { 
+			has_war_with = CHL 
+			controls_state = 279
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = CHL }
+	}
+}
+
+#Fall of La Paz (Generic)
+news_event = {
+	id = news.355
+	title = news.355.t 
+	desc = news.355.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes
+	
+	trigger = {
+		302 = { 
+			is_owned_by = BOL 
+			NOT = {
+				is_controlled_by = BOL 
+			}
+		}
+		BOL = {
+			has_war = yes 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_la_paz }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_la_paz
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = news.355.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BOL 
+					controls_state = 302
+				}
+			}
+		}
+	}
+	option = {
+		name = news.355.b
+		trigger = { 
+			has_war_with = BOL 
+			controls_state = 302
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = BOL }
+	}
+}
+
+#Fall of Asuncion (Generic) 
+news_event = {
+	id = news.356
+	title = news.356.t 
+	desc = news.356.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes
+	
+	trigger = {
+		301 = { 
+			is_owned_by = PAR 
+			NOT = {
+				is_controlled_by = PAR 
+			}
+		}
+		PAR = {
+			has_war = yes 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_asuncion }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_asuncion
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = news.356.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = PAR 
+					controls_state = 301
+				}
+			}
+		}
+	}
+	option = {
+		name = news.356.b
+		trigger = { 
+			has_war_with = PAR 
+			controls_state = 301
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = PAR }
+	}
+}
+
+#Fall of Lima (Generic) 
+news_event = {
+	id = news.357
+	title = news.357.t 
+	desc = news.357.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes
+	
+	trigger = {
+		303 = { 
+			is_owned_by = PRU 
+			NOT = {
+				is_controlled_by = PRU 
+			}
+		}
+		PRU = {
+			has_war = yes 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_lima }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_lima
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = news.357.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = PRU 
+					controls_state = 303
+				}
+			}
+		}
+	}
+	option = {
+		name = news.357.b
+		trigger = { 
+			has_war_with = PRU 
+			controls_state = 303
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = PRU }
+	}
+}
+
+country_event = {
+	id = news.500
+	title = "Tüm Sorumlusu Slaine"
+	desc = "Tüm Sorumlusu Slaine"
+
+	fire_only_once = yes
+	
+	trigger = {
+		has_template = "egg"
+	}
+	option = {
+		name = "Slaine"
+		THIS = {
+			#recruit_character = JAP_event
+			create_navy_leader = {
+				name = "Metehan (Slaine)"
+				gfx = GFX_JAP_slaine
+				traits = { navy_career_officer spotter }
+				skill = 1
+				attack_skill = 1
+				defense_skill = 1
+				maneuvering_skill = 1
+				coordination_skill = 1
+			}
+		}
+	}
+}
+
+#Fall of Bogota (Generic)
+news_event = {
+	id = news.358
+	title = news.358.t 
+	desc = news.358.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes
+	
+	trigger = {
+		306 = { 
+			is_owned_by = COL 
+			NOT = {
+				is_controlled_by = COL 
+			}
+		}
+		COL = {
+			has_war = yes 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_bogota }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_bogota
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = news.358.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = COL 
+					controls_state = 306
+				}
+			}
+		}
+	}
+	option = {
+		name = news.358.b
+		trigger = { 
+			has_war_with = COL 
+			controls_state = 306
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = COL }
+	}
+}
+
+#Fall of Caracas (Generic) 
+news_event = {
+	id = news.359
+	title = news.359.t 
+	desc = news.359.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes
+	
+	trigger = {
+		307 = { 
+			is_owned_by = VEN 
+			NOT = {
+				is_controlled_by = VEN 
+			}
+		}
+		VEN = {
+			has_war = yes 
+			has_civil_war = no
+		}
+		NOT = { has_global_flag = fall_of_caracas }
+	}
+	
+	immediate = {
+		set_global_flag = fall_of_caracas
+	}
+	
+	mean_time_to_happen = {
+		days = 2
+	}
+
+	option = {
+		name = news.359.a
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = VEN 
+					controls_state = 307
+				}
+			}
+		}
+	}
+	option = {
+		name = news.359.b
+		trigger = { 
+			has_war_with = VEN 
+			controls_state = 307
+		}
+	}
+	option = {
+		name = news.348.c
+		trigger = { TAG = VEN }
+	}
+}
+
+#Bolivian Civil War 
+news_event = {
+	id = news.bolivia 
+	title = news.bolivia.t 
+	desc = news.bolivia.d 
+	picture = GFX_news_event_generic_riot
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.bolivia.a 
+		trigger = { 
+			original_tag = BOL 
+		}
+	}
+
+	option = {
+		name = news.bolivia.b 
+		trigger = {
+			NOT = {
+				original_tag = BOL 
+			}
+		}
+	}
+}
+
+#Integralist Uprising 
+news_event = {
+	id = news.361
+	title = news.361.t 
+	desc = news.361.d 
+	picture = GFX_news_event_integralist_uprising
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.361.a 
+		trigger = {
+			original_tag = BRA 
+			has_government = fascism
+		}
+	}
+
+	option = {
+		name = news.361.b 
+		trigger = {
+			original_tag = BRA 
+			NOT = { has_government = fascism }
+		}
+	}
+
+	option = {
+		name = news.361.c 
+		trigger = {
+			NOT = { original_tag = BRA }
+		}
+	}
+}
+
+#Paulista Uprising 
+news_event = {
+	id = news.362
+	title = news.362.t 
+	desc = news.362.d 
+	picture = GFX_news_event_paulista_uprising
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.362.a 
+		trigger = {
+			original_tag = SAO 
+		}
+	}
+
+	option = {
+		name = news.362.b 
+		trigger = {
+			original_tag = BRA 
+		}
+	}
+
+	option = {
+		name = news.362.c 
+		trigger = {
+			NOT = {
+				original_tag = BRA 
+			}
+		}
+	}
+}
+
+#Communist Uprising in Brazil 
+news_event = {
+	id = news.363
+	title = news.363.t 
+	desc = news.363.d 
+	picture = GFX_news_event_communist_uprising
+
+	major = yes 
+	is_triggered_only = yes 
+	fire_only_once = yes 
+
+	option = {
+		name = news.363.a 
+		trigger = {
+			NOT = {
+				OR = {
+					tag = BRC 
+					original_tag = BRA 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.363.b 
+		trigger = {
+			original_tag = BRA 
+			NOT = {
+				tag = BRC 
+			}
+		}
+	}
+
+	option = {
+		name = news.363.c 
+		trigger = {
+			tag = BRC 
+		}
+	}
+}
+
+#Democratic insurrection in Brazil 
+news_event = {
+	id = news.364
+	title = news.364.t
+	desc = news.364.d 
+	picture = GFX_news_event_democratic_uprising
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.364.a 
+		trigger = {
+			NOT = {
+				OR = {
+					tag = BUS 
+					original_tag = BRA 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.364.b 
+		trigger = {
+			original_tag = BRA 
+			NOT = {
+				tag = BUS 
+			}
+		}
+	}
+
+	option = {
+		name = news.364.c 
+		trigger = {
+			tag = BUS 
+		}
+	}
+}
+
+#Imperial Uprising in Brazil 
+news_event = {
+	id = news.365
+	title = news.365.t
+	desc = news.365.d 
+	picture = GFX_news_imperial_uprising
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.365.a 
+		trigger = {
+			NOT = {
+				OR = {
+					tag = BZE 
+					original_tag = BRA 
+					original_tag = POR
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.365.b 
+		trigger = {
+			original_tag = BRA 
+			NOT = {
+				tag = BZE 
+			}
+		}
+	}
+
+	option = {
+		name = news.365.c 
+		trigger = {
+			tag = BZE 
+		}
+	}
+
+	option = {
+		name = news.365.e 
+		trigger = {
+			original_tag = POR
+		}
+	}
+}
+
+#Portugal Intervenes in the Brazilian Civil War 
+news_event = {
+	id = news.366
+	title = news.366.t 
+	desc = news.366.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.366.a 
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BRA
+					tag = BZE 
+					original_tag = POR
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.366.b 
+		trigger = {
+			original_tag = BRA 
+			NOT = {
+				OR = {
+					tag = BZE 
+					original_tag = POR 
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.366.c 
+		trigger = {
+			OR = {
+				tag = BZE 
+				original_tag = POR 
+			}
+		}
+	}
+}
+
+#Paraguay joins the second cisplatine war 
+news_event = {
+	id = news.367
+	title = news.367.t 
+	desc = news.367.d 
+	picture = GFX_news_event_soldiers_marching
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.367.a 
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = BRA
+					original_tag = ARG 
+					original_tag = PAR
+				}
+			}
+		}
+	}
+
+	option = {
+		name = news.367.b 
+		trigger = {
+			original_tag = BRA 
+		}
+	}
+
+	option = {
+		name = news.367.c 
+		trigger = {
+			OR = {
+				original_tag = ARG 
+				original_tag = PAR
+			}
+		}
+	}
+}
+
+#Papal State Declared in Argentina
+news_event = {
+	id = news.368
+	title = news.368.t 
+	desc = news.368.d 
+	picture = GFX_news_event_generic_parliament
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.368.a 
+		trigger = {
+			NOT = { original_tag = ARG }
+		}
+	}
+
+	option = {
+		name = news.368.b 
+		trigger = {
+			original_tag = ARG 
+		}
+	}
+}
+
+#Paraguayan War of Vengeance
+news_event = {
+	id = news.369
+	title = news.369.t
+	desc = news.369.d 
+	picture = GFX_news_event_PAR_war
+
+	major = yes 
+	is_triggered_only = yes 
+
+	option = {
+		name = news.369.a 
+		trigger = {
+			original_tag = PAR
+		}
+		PAR = { mark_focus_tree_layout_dirty = yes }
+	}
+
+	option = {
+		name = news.369.b 
+		trigger = {
+			NOT = { original_tag = PAR }
+			has_war_with = PAR
+		}
+	}
+
+	option = {
+		name = news.369.c 
+		trigger = {
+			NOT = {
+				OR = {
+					original_tag = PAR 
+					has_war_with = PAR
+				}
+			}
+		}
+	}
+}
+
+#The Second Cisplatine War
+news_event = {
+	id = news.370
+	title = news.370.t
+	desc = news.370.d 
+	picture = GFX_ARG_news_event_338
+	
+	major = yes
+	
+	is_triggered_only = yes
+	
+	option = {
+		name = news.370.a
+		trigger = {
+			NOT = {
+				OR = {
+					tag = ARG
+					tag = BRA
+				}
+			}
+		}
+	}
+	
+	option = { 
+		name = news.370.b
+		trigger = {
+			tag = ARG
+		}
+	}
+	
+	option = {
+		name = news.370.c 
+		trigger = {
+			tag = BRA
+		}
+	}
+}

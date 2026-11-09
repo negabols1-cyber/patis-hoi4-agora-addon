@@ -1,0 +1,764 @@
+ARG_general_balance_of_power = { ##Multiple balances of power
+	initial_value = 1
+	left_side = ARG_military_side
+	right_side = ARG_government_side
+	decision_category = ARG_bop
+	range = {
+		id = ARG_balanced_both
+		min = -0.1
+		max = 0.1
+		modifier = { political_power_factor = 0.01 } #only cuz i feel bad
+		on_activate = {
+			if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = ARG_general_balance_of_power
+						side = ARG_federalist_side
+					}
+				}
+				set_country_flag = ARG_marginally_weak_unitarians
+				custom_effect_tooltip = EUYL_start_of_civil_war_gain_following_tt
+				effect_tooltip = { add_ideas = ARG_unitarian_opposition_6 }
+			}
+		}
+		on_deactivate = {
+			if = {
+				limit = {
+					is_power_balance_side_active = {
+						id = ARG_general_balance_of_power
+						side = ARG_federalist_side
+					}
+				}
+				clr_country_flag = ARG_marginally_weak_unitarians
+			}
+		}
+	}
+	## EJERCITO ARGENTINO ##
+	side = {
+		id = ARG_military_side
+		icon = GFX_ARG_BoP_Military
+		range = {
+			id = ARG_dominant_army
+			min = -1
+			max = -0.85
+			modifier = {
+				political_power_factor = -0.075
+				industrial_capacity_factory = 0.05
+				war_support_factor = 0.05
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_increase_15_political_tension = yes
+					custom_effect_tooltip = ARG_tension_weekly_increment_1_tt
+					random_list = {
+						50 = {
+							custom_effect_tooltip = ARG_military_opinion_increase_tt
+							add_to_variable = { ARG_military_opinion = 1 }
+							clamp_variable = {
+								var = ARG_military_opinion
+								min = -2
+								max = 2
+							}
+						}
+						50 = {
+
+						}
+					}
+					hidden_effect = {
+						add_to_variable = { ARG_tension_increment_weekly = 1 }
+					}
+				}
+			}
+			on_deactivate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_decrease_5_political_tension = yes
+					custom_effect_tooltip = ARG_tension_weekly_decrease_1_tt
+					hidden_effect = {
+						subtract_from_variable = { ARG_tension_increment_weekly = 1 }
+					}
+				}
+			}
+		}
+		range = {
+			id = ARG_empowered_army
+			min = -0.85
+			max = -0.35
+			modifier = {
+				political_power_factor = -0.05
+				industrial_capacity_factory = 0.03
+				war_support_factor = 0.03
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_increase_10_political_tension = yes
+					random_list = {
+						25 = {
+							custom_effect_tooltip = ARG_military_opinion_increase_tt
+							add_to_variable = { ARG_military_opinion = 1 }
+							clamp_variable = {
+								var = ARG_military_opinion
+								min = -2
+								max = 2
+							}
+						}
+						75 = {
+
+						}
+					}
+				}
+			}
+			on_deactivate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_decrease_2_political_tension = yes
+				}
+			}
+		}
+		range = {
+			id = ARG_slight_army_influence
+			min = -0.35
+			max = -0.1
+			modifier = {
+				political_power_factor = -0.02
+				industrial_capacity_factory = 0.02
+				war_support_factor = 0.02
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_increase_3_political_tension = yes
+				}
+			}
+		}
+	}
+	## GOBIERNO ARGENTINO ## ARGENTINE GOVERNMENT
+	side = {
+		id = ARG_government_side
+		icon = GFX_ARG_BoP_Government
+		range = {
+			id = ARG_total_government_control
+			min = 0.85
+			max = 1
+			modifier = {
+				political_power_factor = 0.1
+				industrial_capacity_factory = -0.025
+				war_support_factor = -0.05
+				stability_factor = 0.075
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_decrease_5_political_tension = yes
+					custom_effect_tooltip = ARG_tension_weekly_decrease_1_tt
+					random_list = {
+						50 = {
+							custom_effect_tooltip = ARG_military_opinion_decrease_tt
+							subtract_from_variable = { ARG_military_opinion = 1 }
+							clamp_variable = {
+								var = ARG_military_opinion
+								min = -2
+								max = 2
+							}
+						}
+						50 = { }
+					}
+					hidden_effect = {
+						subtract_from_variable = { ARG_tension_increment_weekly = 1 }
+					}
+				}
+				else = { add_stability = 0.03 }
+			}
+			on_deactivate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_increase_2_political_tension = yes
+					custom_effect_tooltip = ARG_tension_weekly_increment_1_tt
+					hidden_effect = {
+						add_to_variable = { ARG_tension_increment_weekly = 1 }
+					}
+				}
+				else = { add_stability = -0.03 }
+			}
+		}
+		range = {
+			id = ARG_significant_government_control
+			min = 0.35
+			max = 0.85
+			modifier = {
+				political_power_factor = 0.05
+				industrial_capacity_factory = -0.02
+				war_support_factor = -0.03
+				stability_factor = 0.03
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_decrease_3_political_tension = yes
+					random_list = {
+						25 = {
+							custom_effect_tooltip = ARG_military_opinion_decrease_tt
+							subtract_from_variable = { ARG_military_opinion = 1 }
+							clamp_variable = {
+								var = ARG_military_opinion
+								min = -2
+								max = 2
+							}
+						}
+						75 = { }
+					}
+				}
+				else = { add_stability = 0.01 }
+			}
+			on_deactivate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_increase_1_political_tension = yes
+				}
+				else = { add_stability = -0.01 }
+			}
+		}
+		range = {
+			id = ARG_slight_government_control
+			min = 0.1
+			max = 0.35
+			modifier = {
+				political_power_factor = 0.03
+				stability_factor = 0.02
+				war_support_factor = -0.02
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_infamous_decade_idea }
+					}
+					ARG_decrease_2_political_tension = yes
+				}
+			}
+		}
+	}
+	## POLITICAL ENEMIES ##
+	side = {
+		id = ARG_political_enemies_side
+		icon = GFX_ARG_BoP_Political_Enemies
+		range = {
+			id = ARG_extreme_enemy_influence
+			min = -1
+			max = -0.9
+			on_activate = {
+				if = {
+					limit = {
+						has_idea = ARG_threatened_oligarchs
+					}
+					remove_ideas = ARG_threatened_oligarchs
+				}
+				country_event = argentina.rework.35 ## Political Enemies take up Arms! (Civil War)
+				effect_tooltip = {
+					start_civil_war = {
+						ideology = neutrality
+						size = 0.4
+					}
+				}
+			}
+		}
+		range = {
+			id = ARG_dominant_enemy_influence
+			min = -0.9
+			max = -0.4
+			modifier = {
+				political_power_factor = -0.05
+				stability_factor = -0.075
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_idea = ARG_threatened_oligarchs
+					}
+					remove_ideas = ARG_threatened_oligarchs
+				}
+			}
+		}
+		range = {
+			id = ARG_slight_enemy_influence
+			min = -0.4
+			max = -0.1
+			modifier = {
+				political_power_factor = -0.03
+				stability_factor = -0.03
+			}
+		}
+	}
+	## COALITION SIDE ##
+	side = {
+		id = ARG_coalition_side
+		icon = GFX_ARG_BoP_Coalition
+		range = {
+			id = ARG_total_coalition_control
+			min = 0.9
+			max = 1
+			modifier = {
+				political_power_factor = 0.075
+				stability_factor = 0.05
+				fascism_drift = 0.05
+				drift_defence_factor = 0.15
+				justify_war_goal_time = -0.1
+			}
+		}
+		range = {
+			id = ARG_dominant_coalition_control
+			min = 0.4
+			max = 0.9
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.03
+				fascism_drift = 0.01
+				drift_defence_factor = 0.05
+				justify_war_goal_time = -0.02
+			}
+		}
+		range = {
+			id = ARG_slight_coalition_control
+			min = 0.1
+			max = 0.4
+			modifier = {
+				political_power_factor = 0.02
+				stability_factor = 0.02
+			}
+		}
+	}
+	## OLIGARCHS SIDE ##
+	side = {
+		id = ARG_oligarchs_side
+		icon = GFX_ARG_BoP_Oligarchs
+		range = {
+			id = ARG_dominant_oligarchs
+			min = -1
+			max = -0.7
+			modifier = {
+				political_power_factor = -0.075
+				consumer_goods_factor = -0.3
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_corruption_scandal_idea }
+					}
+					ARG_increase_corruption_by_1 = yes
+					custom_effect_tooltip = ARG_people_begin_protesting_in_random_state_tt
+					if = {
+						limit = { has_dynamic_modifier = { modifier = ARG_infamous_decade_idea } }
+						ARG_increase_3_political_tension = yes
+					}
+					hidden_effect = {
+						random_owned_controlled_state = {
+							limit = {
+								is_core_of = ROOT
+								NOT = { has_dynamic_modifier = { modifier = ARG_active_ANL_terrorist_group } }
+							}
+							add_dynamic_modifier = {
+								modifier = ARG_protests
+								days = 120
+							}
+						}
+					}
+				}
+				else = {
+					if = {
+						limit = { has_dynamic_modifier = { modifier = ARG_infamous_decade_idea } }
+						ARG_increase_5_political_tension = yes
+					}
+					else = { add_stability = -0.03 }
+				}
+			}
+			on_deactivate = { add_stability = 0.01 }
+		}
+		range = {
+			id = ARG_influential_oligarchs
+			min = -0.7
+			max = -0.3
+			modifier = {
+				political_power_factor = -0.05
+				consumer_goods_factor = -0.15
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_corruption_scandal_idea }
+					}
+					random_list = {
+						50 = {
+							ARG_increase_corruption_by_1 = yes
+							custom_effect_tooltip = ARG_people_begin_protesting_in_random_state_tt
+							hidden_effect = {
+								random_owned_controlled_state = {
+									limit = {
+										is_core_of = ROOT
+										NOT = { has_dynamic_modifier = { modifier = ARG_active_ANL_terrorist_group } }
+									}
+									add_dynamic_modifier = {
+										modifier = ARG_protests
+										days = 120
+									}
+								}
+							}
+						}
+						50 = { }
+					}
+				}
+				if = {
+					limit = { has_dynamic_modifier = { modifier = ARG_infamous_decade_idea } }
+					ARG_increase_1_political_tension = yes
+				}
+				else = { add_stability = -0.01 }
+			}
+			on_deactivate = { add_stability = 0.01 }
+		}
+		range = {
+			id = ARG_slightly_influential_oligarchs
+			min = -0.3
+			max = -0.1
+			modifier = {
+				political_power_factor = -0.03
+				consumer_goods_factor = -0.03
+			}
+		}
+	}
+	## SOCIALISTS SIDE ##
+	side = {
+		id = ARG_socialist_side
+		icon = GFX_ARG_BoP_Socialists
+		range = {
+			id = ARG_dominant_socialists
+			min = 0.7
+			max = 1
+			modifier = {
+				political_power_factor = 0.1
+				consumer_goods_factor = 0.2
+
+			}
+			on_activate = {
+				add_popularity = {
+					ideology = communism
+					popularity = 0.05
+				}
+				## Make it so that corruption can go against you and that oligarchs will protest in a state
+				if = {
+					limit = {
+						has_dynamic_modifier = {
+							modifier = ARG_corruption_scandal_idea
+						}
+					}
+					if = {
+						limit = {
+							check_variable = { ARG_corruption_status = 1 } ## your government is corrupt
+						}
+						random_list = {
+							50 = {
+								custom_effect_tooltip = ARG_corruption_will_go_against_us_tt
+								add_ideas = ARG_agitated_oligarchs_idea
+								custom_effect_tooltip = ARG_oligarchs_will_rebel_in_random_state_tt
+								if = {
+									limit = { has_dynamic_modifier = { modifier = ARG_infamous_decade_idea } }
+									ARG_increase_2_political_tension = yes
+								}
+								set_variable = { ARG_corruption_status = 0 }
+								hidden_effect = {
+									random_owned_controlled_state = {
+										limit = {
+											is_core_of = ROOT
+											NOT = { has_dynamic_modifier = { modifier = ARG_protests } }
+											OR = {
+												arms_factory > 0
+												industrial_complex > 0
+											}
+											NOT = { has_dynamic_modifier = { modifier = ARG_agitated_oligarchs } }
+										}
+										add_dynamic_modifier = {
+											modifier = ARG_agitated_oligarchs
+											days = 365
+										}
+									}
+								}
+							}
+							50 = { }
+						}
+					}
+					else = {
+						add_ideas = ARG_agitated_oligarchs_idea
+						custom_effect_tooltip = ARG_oligarchs_will_rebel_in_random_state_tt
+						if = {
+							limit = { has_dynamic_modifier = { modifier = ARG_infamous_decade_idea } }
+							ARG_increase_2_political_tension = yes
+						}
+						hidden_effect = {
+							random_owned_controlled_state = {
+								limit = {
+									is_core_of = ROOT
+									NOT = { has_dynamic_modifier = { modifier = ARG_protests } }
+									OR = {
+										arms_factory > 0
+										industrial_complex > 0
+									}
+									NOT = { has_dynamic_modifier = { modifier = ARG_agitated_oligarchs } }
+								}
+								add_dynamic_modifier = {
+									modifier = ARG_agitated_oligarchs
+									days = 365
+								}
+							}
+						}
+					}
+				}
+				else = {
+					add_political_power = 20
+					if = {
+						limit = { has_dynamic_modifier = { modifier = ARG_infamous_decade_idea } }
+						ARG_increase_3_political_tension = yes
+					}
+					else = { add_stability = -0.02 }
+				}
+			}
+			on_deactivate = { add_stability = 0.01 }
+		}
+		range = {
+			id = ARG_influential_socialists
+			min = 0.3
+			max = 0.7
+			modifier = {
+				political_power_factor = 0.05
+				consumer_goods_factor = 0.1
+			}
+			on_activate = { ##later make sure to make scripted effects for removing random corrupt politician
+				add_popularity = {
+					ideology = communism
+					popularity = 0.03
+				}
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = ARG_corruption_scandal_idea }
+					}
+					random_list = {
+						50 = {
+							add_ideas = ARG_agitated_oligarchs_idea
+							custom_effect_tooltip = ARG_oligarchs_will_rebel_in_random_state_tt
+							if = {
+								limit = { has_dynamic_modifier = { modifier = ARG_infamous_decade_idea } }
+								ARG_increase_2_political_tension = yes
+							}
+							hidden_effect = {
+								random_owned_controlled_state = {
+									limit = {
+										is_core_of = ROOT
+										NOT = { has_dynamic_modifier = { modifier = ARG_protests } }
+										OR = {
+											arms_factory > 0
+											industrial_complex > 0
+										}
+										NOT = { has_dynamic_modifier = { modifier = ARG_agitated_oligarchs } }
+									}
+									add_dynamic_modifier = {
+										modifier = ARG_agitated_oligarchs
+										days = 365
+									}
+								}
+							}
+						}
+						50 = { }
+					}
+				}
+				else = {
+					add_political_power = 10
+					if = {
+						limit = { has_dynamic_modifier = { modifier = ARG_infamous_decade_idea } }
+						ARG_increase_2_political_tension = yes
+					}
+					else = { add_stability = -0.01 }
+				}
+			}
+			on_deactivate = { add_stability = 0.01 }
+		}
+		range = {
+			id = ARG_slightly_influential_socialists
+			min = 0.1
+			max = 0.3
+			modifier = {
+				political_power_factor = 0.03
+				consumer_goods_factor = 0.05
+			}
+		}
+	}
+	## STATE ## (Church - State)
+	side = {
+		id = ARG_state_side
+		icon = GFX_ARG_BoP_Government
+		range = {
+			id = ARG_dominant_state
+			min = -1
+			max = -0.6
+			modifier = {
+				consumer_goods_factor = -0.15
+				stability_factor = -0.05
+			}
+		}
+		range = {
+			id = ARG_influential_state
+			min = -0.6
+			max = -0.1
+			modifier = {
+				consumer_goods_factor = -0.075
+				stability_factor = -0.03
+			}
+		}
+	}
+	## CHURCH ## (Church - State)
+	side = {
+		id = ARG_church_side
+		icon = GFX_bop_ITA_pope_side
+		range = {
+			id = ARG_dominant_church
+			min = 0.6
+			max = 1
+			modifier = {
+				industrial_capacity_factory = 0.075
+				stability_factor = 0.05
+			}
+		}
+		range = {
+			id = ARG_influential_church
+			min = 0.1
+			max = 0.6
+			modifier = {
+				industrial_capacity_factory = 0.03
+				stability_factor = 0.03
+			}
+		}
+	}
+	## UNIONISTS ##
+	side = {
+		id = ARG_unionist_side
+		icon = GFX_ARG_BoP_Unionists
+		range = { ##will give the worst debuffs after federalist coup
+			id = ARG_total_unionist_control
+			min = -1
+			max = -0.75
+			modifier = {
+				political_power_factor = -0.1
+			}
+			on_activate = {
+				set_country_flag = ARG_weakest_federalists
+				custom_effect_tooltip = EUYL_start_of_civil_war_gain_following_tt
+				effect_tooltip = { add_ideas = ARG_unitarian_opposition_5 }
+			}
+			on_deactivate = {
+				clr_country_flag = ARG_weakest_federalists
+			}
+		}
+		range = {
+			id = ARG_unionist_dominance
+			min = -0.75
+			max = -0.4
+			modifier = {
+				political_power_factor = -0.05
+			}
+			on_activate = {
+				set_country_flag = ARG_weak_federalists
+				custom_effect_tooltip = EUYL_start_of_civil_war_gain_following_tt
+				effect_tooltip = { add_ideas = ARG_unitarian_opposition_4 }
+			}
+			on_deactivate = {
+				clr_country_flag = ARG_weak_federalists
+			}
+		}
+		range = {
+			id = ARG_unionist_preference
+			min = -0.4
+			max = -0.1
+			modifier = {
+				political_power_factor = -0.01
+			}
+			on_activate = {
+				set_country_flag = ARG_marginally_weak_federalists
+				custom_effect_tooltip = EUYL_start_of_civil_war_gain_following_tt
+				effect_tooltip = { add_ideas = ARG_unitarian_opposition_3 }
+			}
+			on_deactivate = {
+				clr_country_flag = ARG_marginally_weak_federalists
+			}
+		}
+	}
+	## FEDERALISTS ## || NEAR FUTURE ME REMEMBER TO ADD EFFECT TOOLTIPS PLEASE I BEG OF YOU
+	side = {
+		id = ARG_federalist_side
+		icon = GFX_ARG_BoP_Federalism
+		range = { ##will give no debuffs and instead get a slight buff
+			id = ARG_total_federalist_control
+			min = 0.75
+			max = 1
+			modifier = {
+				political_power_factor = 0.1
+				war_support_factor = 0.05
+			}
+			on_activate = {
+				set_country_flag = ARG_strongest_federalists
+			}
+			on_deactivate = {
+				clr_country_flag = ARG_strongest_federalists
+			}
+		}
+		range = {
+			id = ARG_federalist_dominance
+			min = 0.4
+			max = 0.75
+			modifier = {
+				political_power_factor = 0.05
+				war_support_factor = 0.03
+			}
+			on_activate = {
+				set_country_flag = ARG_strong_federalists
+				custom_effect_tooltip = EUYL_start_of_civil_war_gain_following_tt
+				effect_tooltip = { add_ideas = ARG_unitarian_opposition_1 }
+			}
+			on_deactivate = {
+				clr_country_flag = ARG_strong_federalists
+			}
+		}
+		range = {
+			id = ARG_federalist_preference
+			min = 0.1
+			max = 0.4
+			modifier = {
+				political_power_factor = 0.02
+				war_support_factor = 0.01
+			}
+			on_activate = {
+				set_country_flag = ARG_marginally_strong_federalists
+				custom_effect_tooltip = EUYL_start_of_civil_war_gain_following_tt
+				effect_tooltip = { add_ideas = ARG_unitarian_opposition_2 }
+			}
+			on_deactivate = {
+				clr_country_flag = ARG_marginally_strong_federalists
+			}
+		}
+	}
+
+}

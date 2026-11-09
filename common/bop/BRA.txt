@@ -1,0 +1,152 @@
+
+BRA_progress_to_dictatorship_bop = {
+	initial_value = 1
+	left_side = BRA_democracy_side
+	right_side = BRA_dictatorship_side
+	decision_category = BRA_BoP_decision_category
+	range = {
+		id = BRA_balanced_both
+		min = -0.1
+		max = 0.1
+		modifier = {
+			political_power_factor = 0.02
+		}
+	}
+	side = {
+		id = BRA_democracy_side
+		icon = GFX_BRA_BOP_democracy_side
+		range = {
+			id = BRA_true_democracy
+			min = -1
+			max = -0.85
+			modifier = {
+				stability_factor = 0.075
+				political_power_factor = -0.05
+				democratic_drift = 0.05
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = BRA_brazilian_political_crisis }
+					}
+					custom_effect_tooltip = BRA_congress_increase_influence_5_tt
+					add_to_variable = { BRA_congress_influence = 5 }
+					BRA_set_up_political_crisis = yes
+				}
+				else = {
+					add_political_power = -10
+				}
+			}
+		}
+		range = {
+			id = BRA_pseudo_democracy
+			min = -0.85
+			max = -0.45
+			modifier = {
+				stability_factor = 0.04
+				political_power_factor = -0.03
+				democratic_drift = 0.02
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = BRA_brazilian_political_crisis }
+					}
+					custom_effect_tooltip = BRA_congress_increase_influence_3_tt
+					add_to_variable = { BRA_congress_influence = 3 }
+					BRA_set_up_political_crisis = yes
+				}
+				else = {
+					add_political_power = -5
+				}
+			}
+		}
+		range = {
+			id = BRA_crippling_democracy
+			min = -0.45
+			max = -0.1
+			modifier = {
+				stability_factor = 0.02
+			}
+		}
+	}
+	side = {
+		id = BRA_dictatorship_side
+		icon = GFX_BRA_BOP_dictatorship_side
+		range = {
+			id = BRA_total_control
+			min = 0.9
+			max = 1
+			modifier = {
+				stability_factor = -0.05
+				political_power_factor = 0.1
+				industrial_capacity_factory = 0.05
+			}
+			on_activate = {
+				if = { ## basically acts as the estado novo mission enemy
+					limit = {
+						OR = {
+							has_completed_focus = BRA_manipulate_behind_the_scenes
+							has_completed_focus = BRA_reject_the_estado_navo
+						}
+						NOT = { has_country_flag = BRA_estado_novo_established }
+					}
+					set_country_flag = BRA_estado_novo_established
+					country_event = {
+						id = brazil.95
+						days = 1
+						random_hours = 4
+					}
+				}
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = BRA_brazilian_political_crisis }
+					}
+					custom_effect_tooltip = BRA_vargas_increase_influence_5_tt
+					add_to_variable = { BRA_vargas_influence = 5 }
+					BRA_set_up_political_crisis = yes
+				}
+				else = {
+					add_political_power = 20
+				}
+			}
+		}
+
+		range = {
+			id = BRA_dominant_control
+			min = 0.45
+			max = 0.9
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = 0.075
+				industrial_capacity_factory = 0.03
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = BRA_brazilian_political_crisis }
+					}
+					custom_effect_tooltip = BRA_vargas_increase_influence_3_tt
+					add_to_variable = { BRA_vargas_influence = 3 }
+					BRA_set_up_political_crisis = yes
+				}
+				else = {
+					add_political_power = 10
+				}
+			}
+		}
+		range = {
+			id = BRA_slight_control
+			min = 0.1
+			max = 0.45
+			modifier = {
+				stability_factor = -0.01
+				political_power_factor = 0.05
+			}
+			on_activate = {
+				add_political_power = 5
+			}
+		}
+	}
+}
+

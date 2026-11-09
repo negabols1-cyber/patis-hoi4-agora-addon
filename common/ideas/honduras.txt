@@ -1,0 +1,512 @@
+ideas = {
+
+	economy = {
+		law = yes
+		use_list_view = yes
+		HON_corporate_economy = {
+			picture = SPR_collectivized_society
+
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.15
+				production_speed_industrial_complex_factor = 0.15
+				production_speed_arms_factory_factor = 0.3
+				conversion_cost_civ_to_mil_factor= -0.3
+				conversion_cost_mil_to_civ_factor = -0.3
+				global_building_slots_factor = 0.1
+				industrial_capacity_factory = 0.4
+				industrial_capacity_dockyard = 0.4
+				research_speed_factor = -0.1
+				production_factory_efficiency_gain_factor = -0.2
+				line_change_production_efficiency_factor = -0.15
+			}
+
+			allowed_to_remove = {
+				always = no
+			}
+
+			cancel_if_invalid = no
+		}
+	}
+
+	country = {
+
+		HON_make_our_own_tanks = {
+			name = ARG_make_our_own_tanks
+			picture = FRA_motorized_focus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				medium_tank_chassis = {
+					build_cost_ic = -0.2
+					reliability = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		HON_make_our_own_planes = {
+			picture = generic_air_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				small_plane_airframe = {
+					air_agility = -0.15
+					build_cost_ic = -0.15
+					instant = yes
+				}
+			}
+		}
+
+		HON_king_royal_guards = {
+
+			picture = combined_bomber_offensive
+
+			allowed = {
+				original_tag = HON
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.05
+			}
+		}
+
+		HON_banana_republic = {
+
+			picture = banana_republic
+
+			allowed = {
+				original_tag = HON
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_factory_max_efficiency_factor = -0.1
+				industrial_capacity_factory	 = -0.1
+				stability_factor = -0.10
+			}
+		}
+
+		HON_ok_banana_republic = {
+
+			picture = banana_republic
+
+			allowed = {
+				original_tag = HON
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_factory_max_efficiency_factor = -0.05
+				industrial_capacity_factory	= -0.05
+				stability_factor = -0.10
+			}
+		}
+
+		HON_legacy_carias = {
+
+			picture = generic_intel_bonus
+
+			allowed = {
+				original_tag = HON
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_org_Factor = 0.05
+				planning_speed = 0.05
+				army_defence_factor = 0.05
+				army_attack_factor = 0.05
+				conscription = 0.03
+			}
+		}
+
+		HON_better_banana_republic = {
+
+			picture = banana_republic
+
+			allowed = {
+				original_tag = HON
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.10
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		HON_best_banana_republic = {
+
+			picture = banana_republic
+
+			allowed = {
+				original_tag = HON
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		HON_banana_empire = {
+
+			picture = banana_republic
+
+			allowed = {
+				original_tag = HON
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.1
+				production_factory_max_efficiency_factor = 0.1
+				production_factory_efficiency_gain_factor = 0.05
+				line_change_production_efficiency_factor = 0.05
+				industrial_capacity_factory	 = 0.1
+				conscription_factor = 0.05
+				non_core_manpower = 0.05
+			}
+		}
+
+		HON_banana_boat_payment = {
+
+			picture = liberty_ships_focus
+
+			allowed = {
+				original_tag = HON
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.10
+				production_speed_buildings_factor = -0.1
+			}
+		}
+
+		HON_banana_boat_payment2 = {
+			name = HON_banana_boat_payment
+			picture = liberty_ships_focus
+
+			allowed = {
+				original_tag = HON
+				always = no
+			}
+
+			allowed_civil_war = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.1
+				production_speed_buildings_factor = -0.1
+				industrial_capacity_dockyard = -0.1
+			}
+		}
+
+		HON_motorized_discount = {
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = generic_production_bonus
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				motorized_equipment = {
+					reliability = -0.05
+					build_cost_ic = -0.1
+					instant = yes
+				}
+				mechanized_equipment = {
+					reliability = -0.05
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		HON_convoy_discount = {
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			picture = escort_effort_focus
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				convoy = {
+					build_cost_ic = -0.2 instant = yes
+				}
+			}
+		}
+
+
+		HON_monarch_influence = {
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = neutrality
+			}
+
+			removal_cost = -1
+
+			picture = generic_king_handled
+
+			cancel = {
+				OR = {
+					is_subject = yes
+					is_puppet = yes
+				}
+				NOT = {
+					has_government = neutrality
+				}
+
+			}
+
+			modifier = {
+				neutrality_drift = 0.1
+			}
+		}
+
+		HON_rereconquista = {
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = neutrality
+			}
+
+			removal_cost = -1
+
+			picture = generic_infantry_bonus
+
+			modifier = {
+				army_attack_factor = 0.1
+			}
+		}
+
+		HON_better_hacienda_system = {
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = neutrality
+			}
+
+			removal_cost = -1
+
+			picture = can_wartime_prices_and_trade_board
+
+			modifier = {
+				local_resources_factor = 0.10
+				conscription_factor = 0.05
+				non_core_manpower = 0.05
+			}
+		}
+
+		HON_spaninquisition = {
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = neutrality
+			}
+
+			removal_cost = -1
+
+			picture = generic_spy_intel
+
+			modifier = {
+				political_power_gain = 0.3
+			}
+		}
+
+		HON_carlist_volunteers = {
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				has_government = neutrality
+			}
+
+			removal_cost = -1
+
+			picture = generic_spy_intel
+
+			modifier = {
+				weekly_manpower = 250
+				experience_gain_army = 0.1
+			}
+		}
+	}
+	tank_manufacturer = {
+
+		HON_porsche = {
+
+			picture = porsche
+
+			allowed = {
+				original_tag = HON
+			}
+
+			available = {
+				has_completed_focus = HON_invate_fort
+			}
+
+			research_bonus = {
+				armor = 0.15
+			}
+
+			equipment_bonus = {
+				heavy_tank_chassis = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+
+			traits = { heavy_tank_manufacturer }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+
+	}
+
+	industrial_concern = {
+		hon_fnh = {
+			picture = generic_industrial_concern_2
+
+			allowed = {
+				original_tag = HON
+			}
+
+			research_bonus = {
+				industry = 0.10
+			}
+
+			traits = { construction_company }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+	}
+}

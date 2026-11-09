@@ -1,0 +1,343 @@
+
+CHI_alternate_neutrality_plan = {
+	name = "Republic of China Internal Security Neutral Plan "
+	desc = "CHI goes after PRC and warlords and fends off Japan on its own!"
+
+	allowed = {
+		original_tag = CHI
+		NOT = {
+			has_dlc = "No Compromise, No Surrender"
+		}
+	}
+	enable = {
+		OR = {
+			AND = {
+				has_completed_focus = KMT_internal_stability
+				has_completed_focus = KMT_unitary_semi_presidential_republic
+			}
+			has_country_flag = CHI_AI_RANDOM_ALTERNATE
+			has_game_rule = {
+				rule = CHI_ai_behavior
+				option = ALTERNATE
+			}
+		}
+	}
+	abort = {
+		OR = {
+			has_government = fascism
+			has_government = communism
+			has_government = democratic
+		}
+	}
+
+	ai_national_focuses = {
+		#1936
+		KMT_political_effort
+		KMT_unitary_semi_presidential_republic
+		KMT_internal_stability		#damn everything, go for PRC and warlords!
+		CHI_overclaim_of_factions
+		KMT_zhonghua_minzu
+		KMT_SHX_offer
+		KMT_preparation
+		KMT_strike_PRC
+		KMT_warlord
+		#1937
+		KMT_science_effort			#a bit of investments or we are dead
+		KMT_extra_research_slot
+		KMT_industrial_effort
+		KMT_industrialization_NW
+		KMT_industrialization_S
+		#1938
+		KMT_national_defense_council
+		KMT_pioneering_the_north_east
+		KMT_national_resources_commission
+		KMT_excavation_NW
+		KMT_excavation_S
+		#1939
+		KMT_excavation_NE
+		KMT_armament_effort
+		#1940
+		KMT_revive_jiangnan_shipyard
+		KMT_gain_control_of_the_sea
+		#KMT_demand_taiwan
+		#1941
+		KMT_electronics_research
+		KMT_bold_hypothesis
+		KMT_extra_research_slot_2
+		KMT_study_foreign_ship
+	}
+
+	research = {
+
+	}
+
+	ideas = {
+
+	}
+
+	traits = {
+		silent_workhorse = 50
+	}
+
+	focus_factors = {
+		KMT_internal_stability = 500
+		KMT_external_defense = 0
+		KMT_unitary_semi_presidential_republic = 500
+		KMT_democratic_republic = 0
+		KMT_promote_nationalism = 0
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+}
+
+CHI_democratic_plan = {
+	name = "Republic of China Democratic Plan"
+	desc = "China will seek democratic path and bring Sun Yat-Sen values around Asia!"
+
+	allowed = {
+		original_tag = CHI
+		NOT = {
+			has_dlc = "No Compromise, No Surrender"
+		}
+	}
+	enable = {
+		OR = {
+			has_completed_focus = KMT_democratic_republic
+			has_country_flag = CHI_AI_RANDOM_CHI_DEMOCRATIC
+			has_game_rule = {
+				rule = CHI_ai_behavior
+				option = CHI_DEMOCRATIC
+			}
+		}
+	}
+	abort = {
+		OR = {
+			has_government = fascism
+			has_government = communism
+		}
+	}
+
+	ai_national_focuses = {			#no China-related policy - PRC bad, but rather indifferent, if Japan attacks - then unite
+		KMT_political_effort
+		KMT_democratic_republic
+		KMT_voting_rights
+		CHI_executive_yuan
+		CHI_republicanism
+		CHI_tax_reform
+		KMT_science_effort			#democrats love science!
+		KMT_extra_research_slot
+		KMT_implement_parliamentary_system
+		CHI_legislative_yuan
+		CHI_examination_yuan
+		CHI_open_research_institute
+		KMT_ministry_of_national_defense
+		KMT_universal_sufferage
+		#KMT_trans_pacific_friendship_focus
+		#KMT_introduce_shipbuilding_technology_usa
+		KMT_alone_in_the_east
+		KMT_knowledge_of_the_citizens
+		KMT_trade_port_demo
+		KMT_westernization
+	}
+
+	research = {
+
+	}
+
+	ideas = {
+		CHI_carsun_chang = 50
+	}
+
+	traits = {
+		silent_workhorse = 50
+	}
+
+	focus_factors = {
+		KMT_unitary_semi_presidential_republic = 0
+		KMT_democratic_republic = 500
+		KMT_promote_nationalism = 0
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+}
+
+CHI_fascist_pro_german_plan = {
+	name = "Republic of China Fascist Pro-German PLan"
+	desc = "CHI aligns with Germany and is trying to reclaim lost territories"
+
+	allowed = {
+		original_tag = CHI
+		NOT = {
+			has_dlc = "No Compromise, No Surrender"
+		}
+	}
+	enable = {
+		OR = {
+			has_completed_focus = KMT_fascism_focus
+			has_country_flag = CHI_AI_RANDOM_CHI_FASCIST_GERMAN
+			has_game_rule = {
+				rule = CHI_ai_behavior
+				option = CHI_FASCIST_GERMAN
+			}
+		}
+	}
+	abort = {
+		OR = {
+			has_government = communism
+			has_government = democratic
+		}
+	}
+
+	ai_national_focuses = {
+		#1936
+		KMT_political_effort			#ally Germany ASAP!
+		KMT_promote_nationalism
+		KMT_fascism_focus
+		CHI_increase_german_cooperation
+		CHI_request_army_platoon
+		KMT_force_japan_to_accept_peace	#will probably not work, but still worth an effort
+		KMT_military_first
+		KMT_ban_communism
+		#1937
+		KMT_war_fanaticism
+		KMT_planning_our_empire
+		KMT_join_the_axis
+		KMT_science_effort				#a bit of investments or we are dead
+		KMT_extra_research_slot
+		#1938
+		KMT_demand_indochina
+		KMT_demand_soviet_puppets
+		KMT_trade_port_fascism			#first ports, then China and then the WORLD!
+		#1939
+		KMT_pincer_soviet
+		KMT_oust_the_colonizers
+		KMT_extra_research_slot_2
+	}
+
+	research = {
+
+	}
+
+	ideas = {
+		CHI_deng_wenyi = 50
+	}
+
+	traits = {
+		silent_workhorse = 50
+	}
+
+	focus_factors = {
+		KMT_unitary_semi_presidential_republic = 0
+		KMT_democratic_republic = 0
+		KMT_promote_nationalism = 500
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+}
+
+CHI_pro_japan_plan = {
+	name = "Republic of China Fascist Pro-Japan PLan"
+	desc = "CHI will align Japan and establish friendly regime to secure itself"
+
+	allowed = {
+		original_tag = CHI
+		NOT = {
+			has_dlc = "No Compromise, No Surrender"
+		}
+	}
+	enable = {
+		OR = {
+			has_completed_focus = KMT_militarism_focus
+			has_country_flag = CHI_AI_RANDOM_CHI_FASCIST_JAPAN
+			has_game_rule = {
+				rule = CHI_ai_behavior
+				option = CHI_FASCIST_JAPAN
+			}
+		}
+	}
+	abort = {
+		OR = {
+			has_government = communism
+			has_government = democratic
+		}
+	}
+
+	ai_national_focuses = {
+		#1936
+		KMT_political_effort			#ally Japan before the do Marco Polo!
+		KMT_promote_nationalism
+		KMT_militarism_focus
+		KMT_support_pro_japanese_faction
+		KMT_military_first			#hello there warlords and PRC, I am with Japan now
+		#1937
+		KMT_ban_communism
+		CHI_accept_japans_requests
+		KMT_japanese_advisors
+		KMT_war_fanaticism
+		#1938
+		CHI_learn_shipbuilding_technology
+		KMT_science_effort				#a bit of investments before going into a full-blown war
+		KMT_extra_research_slot
+		KMT_planning_our_empire
+		#1939
+		KMT_demand_soviet_puppets
+		KMT_demand_indochina			#WAR ON EVERYBODY!
+		CHI_threaten_siam_to_join_the_alliance
+		KMT_trade_port_fascism
+		KMT_oust_the_colonizers			#if previous worked, this will surely let us go into war with them
+	}
+
+	research = {
+
+	}
+
+	ideas = {
+		CHI_deng_wenyi = 50
+	}
+
+	traits = {
+		silent_workhorse = 50
+	}
+
+	focus_factors = {
+		KMT_internal_stability = 500
+		KMT_external_defense = 0
+		KMT_unitary_semi_presidential_republic = 0
+		KMT_democratic_republic = 0
+		KMT_promote_nationalism = 500
+	}
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+}

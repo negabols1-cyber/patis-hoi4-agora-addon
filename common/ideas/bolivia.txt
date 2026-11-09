@@ -1,0 +1,1735 @@
+ideas = {
+	# MILITARY
+	country = {
+
+		BOL_underdeveloped_east_idea = {
+			picture = BOL_underdeveloped_east
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				army_speed_factor = -0.05
+				attrition = 0.05
+				industrial_capacity_factory = -0.05
+				production_speed_buildings_factor = -0.1
+				custom_modifier_tooltip = BOL_eastern_states_modifier_tt
+			}
+		}
+
+		BOL_corporacion_boliviana_de_fomento = {
+			picture = man_five_year_plan_industry
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_buildings_factor = 0.1
+			}
+		}
+
+		BOL_servicio_militar_obligatorio = {
+			picture = BOL_obligatory_service
+
+			allowed = {
+				original_tag = BOL
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				OR = {
+					NOT = { has_government = democratic }
+					NOT = {
+						OR = {
+							has_idea = service_by_requirement
+							has_idea = all_adults_serve
+							has_idea = scraping_the_barrel
+						}
+					}
+					NOT = {
+						has_country_flag = is_PBC
+					}
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.1
+				conscription = 0.04
+			}
+		}
+
+		BOL_catholic_support_1 = {
+			name = BOL_catholic_support
+			picture = SPA_carlism
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.005
+				industrial_capacity_factory = 0.05
+				war_support_factor = 0.1
+			}
+		}
+
+		BOL_catholic_support_2 = {
+			name = BOL_catholic_support
+			picture = SPA_carlism
+
+			allowed = {
+				original_tag = BOL
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.01
+				industrial_capacity_factory = 0.1
+				war_support_factor = 0.15
+			}
+		}
+
+		BOL_connect_the_country_idea = {
+			picture = generic_build_infrastructure
+
+			allowed = {
+				original_tag = BOL
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_infrastructure_factor = 0.1
+				production_speed_rail_way_factor = 0.1
+			}
+		}
+
+		BOL_sea_access_loss = {
+			picture = BOL_loser_to_chile
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					any_controlled_state = {
+						is_coastal = yes
+					}
+				}
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				stability_factor = -0.1
+				war_support_factor = -0.15
+			}
+		}
+
+		BOL_losers_in_the_chaco_war = {
+			name = BOL_losers_in_the_chaco_war_name
+			picture = BOL_loserofthechacowar
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					controls_state = 688
+				}
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = -0.5
+				army_attack_factor = -0.2
+				army_defence_factor = -0.2
+			}
+		}
+
+		BOL_losers_in_the_chaco_war_2 = {
+			name = BOL_losers_in_the_chaco_war_name
+			picture = BOL_loserofthechacowar
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					controls_state = 688
+				}
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = -0.25
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+			}
+		}
+
+		BOL_unstable_republic = {
+			name = BOL_unstable_republic_name
+			picture = BOL_unstablerepublic
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.4
+				disabled_ideas = 1
+			}
+		}
+
+		BOL_great_depression = {
+			name = BOL_great_depression_name
+			picture = usa_great_depression
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.75
+				industrial_capacity_factory = -0.2
+				production_speed_buildings_factor = -0.35
+			}
+		}
+
+		BOL_great_depression_2 = {
+			name = BOL_great_depression_name
+			picture = usa_great_depression_2
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.55
+				industrial_capacity_factory = -0.15
+				production_speed_buildings_factor = -0.25
+			}
+		}
+
+		BOL_great_depression_3 = {
+			name = BOL_great_depression_name
+			picture = usa_great_depression_3
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.35
+				industrial_capacity_factory = -0.075
+				production_speed_buildings_factor = -0.15
+			}
+		}
+
+		BOL_focused_on_what_were_good_at_1 = {
+			name = BOL_focused_on_what_were_good_at
+			picture = BOL_focused_on_mining
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.0075
+				production_speed_industrial_complex_factor = 0.05
+				production_oil_factor = 0.05
+				local_resources_factor = 0.1
+			}
+		}
+
+		BOL_focused_on_what_were_good_at_2 = {
+			name = BOL_focused_on_what_were_good_at
+			picture = BOL_focused_on_mining
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.1
+				production_speed_industrial_complex_factor = 0.1
+				industrial_capacity_factory = 0.05
+				production_oil_factor = 0.1
+				local_resources_factor = 0.2
+			}
+		}
+
+		BOL_switched_to_agrarian_society_1 = {
+			name = BOL_switched_to_an_agrarian_industry
+			picture = BOL_focused_on_agrarian
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				monthly_population = 0.2
+				consumer_goods_factor = -0.05
+				trade_opinion_factor = 0.15
+			}
+		}
+
+		BOL_switched_to_agrarian_society_2 = {
+			name = BOL_switched_to_an_agrarian_industry
+			picture = BOL_focused_on_agrarian
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				monthly_population = 0.3
+				production_speed_buildings_factor = 0.05
+				consumer_goods_factor = -0.07
+				trade_opinion_factor = 0.35
+			}
+		}
+
+		BOL_opened_wheat_markets = {
+			picture = generic_agrarian_society
+
+			allowed = {
+				OR = {
+					always = no
+					original_tag = PRU
+				}
+			}
+
+			available = {
+				has_idea = free_trade
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.1
+				production_speed_buildings_factor = 0.05
+				consumer_goods_factor = -0.03
+				trade_opinion_factor = 0.1
+			}
+		}
+
+		BOL_revivied_industry = {
+			picture = generic_economic_increase
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.1
+				production_speed_buildings_factor = 0.1
+			}
+		}
+
+		BOL_puppeted_military = {
+			picture = chi_forced_conscription
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.005
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+
+		BOL_went_against_the_civilians = {
+			name = BOL_went_against_the_civilians_name
+			picture = BOL_went_against_people
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.5
+				production_speed_buildings_factor = -0.35
+				industrial_capacity_factory = -0.2
+				political_power_factor = -0.15
+			}
+		}
+
+		BOL_went_against_the_civilians_2 = {
+			name = BOL_went_against_the_civilians_name
+			picture = BOL_went_against_people
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.4
+				production_speed_buildings_factor = -0.3
+				industrial_capacity_factory = -0.15
+				political_power_factor = -0.15
+			}
+		}
+
+		BOL_went_against_the_civilians_3 = {
+			name = BOL_went_against_the_civilians_name
+			picture = BOL_went_against_people
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.25
+				production_speed_buildings_factor = -0.25
+				industrial_capacity_factory = -0.15
+				political_power_factor = -0.1
+			}
+		}
+
+		BOL_went_against_the_civilians_4 = {
+			name = BOL_went_against_the_civilians_name
+			picture = BOL_went_against_people
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.2
+				production_speed_buildings_factor = -0.15
+				industrial_capacity_factory = -0.1
+				political_power_factor = -0.1
+			}
+		}
+
+		BOL_went_against_the_civilians_5 = {
+			name = BOL_went_against_the_civilians_name
+			picture = BOL_went_against_people
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.15
+				production_speed_buildings_factor = -0.1
+				industrial_capacity_factory = -0.05
+				political_power_factor = -0.05
+			}
+		}
+
+		BOL_went_against_the_civilians_6 = {
+			name = BOL_went_against_the_civilians_name
+			picture = BOL_went_against_people
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.1
+				production_speed_buildings_factor = -0.05
+				industrial_capacity_factory = -0.05
+				political_power_factor = -0.05
+			}
+		}
+
+		BOL_disbanded_the_army = {
+			name = BOL_disband_the_army_idea
+			picture = BOL_disbanded_army
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.25
+				army_defence_factor = -0.25
+				army_morale_factor = -0.2
+				war_support_factor = -0.15
+				production_speed_arms_factory_factor = -0.1
+			}
+		}
+
+		BOL_disbanded_the_army_2 = {
+			name = BOL_disband_the_army_idea
+			picture = BOL_disbanded_army
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.2
+				army_defence_factor = -0.2
+				army_morale_factor = -0.15
+				war_support_factor = -0.1
+				production_speed_arms_factory_factor = -0.08
+			}
+		}
+
+		BOL_disbanded_the_army_3 = {
+			name = BOL_disband_the_army_idea
+			picture = BOL_disbanded_army
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.13
+				army_defence_factor = -0.13
+				army_morale_factor = -0.1
+				war_support_factor = -0.1
+				production_speed_arms_factory_factor = -0.05
+			}
+		}
+
+		BOL_disbanded_the_army_4 = {
+			name = BOL_disband_the_army_idea
+			picture = BOL_disbanded_army
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				army_morale_factor = -0.05
+				war_support_factor = -0.05
+			}
+		}
+
+		BOL_the_bolivian_civil_war_government = {
+			name = BOL_the_bolivian_civil_war
+			picture = BOL_bolivian_civil_war_government
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_civil_war = yes
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.1
+			}
+		}
+
+		BOL_the_bolivian_civil_war_armed_forces = {
+			name = BOL_the_bolivian_civil_war
+			picture = BOL_bolivian_civil_war_armed_forces
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_civil_war = yes
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			available = {
+				has_civil_war = yes
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.1
+			}
+		}
+
+		BOL_purchasing_chaco = {
+
+			picture = generic_foreign_capital
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.07
+			}
+		}
+
+		PAR_purchasing_chaco = {
+
+			picture = generic_foreign_capital
+
+			allowed = {
+				OR = {
+					original_tag = PAR
+					original_tag = BRA
+					original_tag = ARG
+					original_tag = URG
+				}
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.07
+			}
+		}
+
+		BOL_purchasing_acre = {
+
+			picture = generic_foreign_capital
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.05
+			}
+		}
+
+		BRA_purchasing_acre = {
+
+			picture = generic_foreign_capital
+
+			allowed = {
+				OR = {
+					original_tag = PAR
+					original_tag = BRA
+					original_tag = ARG
+					original_tag = URG
+				}
+			}
+
+			available = {
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		BOL_german_rebelling = {
+
+			picture = BOL_rebelling_german
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.1
+				army_defence_factor = -0.05
+				production_speed_arms_factory_factor = -0.1
+				industrial_capacity_factory = -0.1
+			}
+		}
+
+		BOL_welfare_plans = {
+			picture = ARG_soviet_aid
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+				production_speed_buildings_factor = 0.05
+				consumer_goods_factor = -0.03
+			}
+		}
+
+		BOL_process_of_reforming_army = {
+			picture = generic_manpower_bonus
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.05
+				army_defence_factor = -0.05
+			}
+
+			on_remove = {
+				add_ideas = BOL_reformed_army
+			}
+		}
+
+		BOL_reformed_army = {
+			picture = generic_infantry_bonus
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				war_support_factor = 0.05
+			}
+		}
+
+		BOL_expanded_army = {
+			name = BOL_expanded_army
+			picture = MEX_politicised_army
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.015
+			}
+		}
+
+		BOL_expanded_army_2 = {
+			name = BOL_expanded_army
+			picture = MEX_politicised_army
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.03
+			}
+		}
+
+		BOL_the_tejada_dictatorship_idea = {
+			picture = BOL_tejada
+
+			allowed = { always = no }
+
+			available = {
+				NOT = {
+					has_country_flag = is_PBC
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				neutrality_drift = 0.01
+				generate_wargoal_tension = -0.3
+				send_volunteers_tension = -0.2
+				join_faction_tension = -0.2
+			}
+		}
+
+		### Peru-Bolivian Confederation Ideas ###
+
+		PBC_divided_ideological_sentiments_1 = {
+			name = PBC_divided_ideological_sentiments
+			picture = PBC_conflicting_ideals
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				stability_factor = -0.05
+				political_power_factor = -0.1
+				industrial_capacity_factory = -0.05
+				political_advisor_cost_factor = 0.1
+				trade_laws_cost_factor = 0.1
+				mobilization_laws_cost_factor = 0.1
+				economy_cost_factor = 0.15
+			}
+		}
+
+		PBC_divided_ideological_sentiments_2 = {
+			name = PBC_divided_ideological_sentiments
+			picture = PBC_conflicting_ideals
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				stability_factor = -0.2
+				political_power_factor = -0.15
+				industrial_capacity_factory = -0.1
+				political_advisor_cost_factor = 0.3
+				trade_laws_cost_factor = 0.3
+				mobilization_laws_cost_factor = 0.3
+				economy_cost_factor = 0.3
+			}
+		}
+
+		PBC_foreign_advisors = {
+			picture = generic_political_support
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				political_power_factor = 0.05
+				research_speed_factor = 0.05
+			}
+		}
+
+		PBC_split_armies_1 = {
+			name = PBC_split_armies
+			picture = PBC_divided_ideologies
+
+			allowed = {
+				OR = {
+					always = no
+					original_tag = PRU
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				war_support_factor = -0.1
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				army_morale_factor = -0.05
+			}
+		}
+
+		PBC_split_armies_2 = {
+			name = PBC_split_armies
+			picture = PBC_divided_ideologies
+
+			allowed = {
+				OR = {
+					always = no
+					original_tag = PRU
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				war_support_factor = -0.05
+				army_attack_factor = -0.05
+				army_defence_factor = -0.05
+				army_morale_factor = -0.05
+			}
+		}
+
+		PBC_divided_economy_1 = {
+			name = PBC_divided_economy
+			picture = PBC_split_economy
+
+			allowed = {
+				OR = {
+					always = no
+					original_tag = PRU
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				production_speed_buildings_factor = -0.2
+				industrial_capacity_factory = -0.15
+				consumer_goods_factor = 0.1
+				production_factory_efficiency_gain_factor = -0.1
+			}
+		}
+
+		PBC_divided_economy_2 = {
+			name = PBC_divided_economy
+			picture = PBC_split_economy
+
+			allowed = {
+				OR = {
+					always = no
+					original_tag = PRU
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				production_speed_buildings_factor = -0.1
+				industrial_capacity_factory = -0.11
+				consumer_goods_factor = 0.07
+				production_factory_efficiency_gain_factor = -0.05
+			}
+		}
+
+		PBC_war_of_independence_1 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.01
+				war_support_factor = 0.3
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				army_speed_factor = 0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+		PBC_war_of_independence_2 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.015
+				war_support_factor = 0.3
+				army_attack_factor = 0.08
+				army_defence_factor = 0.08
+				army_speed_factor = 0.1
+				industrial_capacity_factory = 0.1
+			}
+		}
+
+		PBC_war_of_independence_3 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.02
+				war_support_factor = 0.3
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				army_speed_factor = 0.1
+				industrial_capacity_factory = 0.1
+			}
+		}
+
+		PBC_war_of_independence_4 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.02
+				war_support_factor = 0.3
+				army_attack_factor = 0.13
+				army_defence_factor = 0.13
+				army_speed_factor = 0.12
+				industrial_capacity_factory = 0.1
+			}
+		}
+
+		PBC_war_of_independence_5 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.02
+				war_support_factor = 0.3
+				army_attack_factor = 0.13
+				army_defence_factor = 0.13
+				army_speed_factor = 0.12
+				industrial_capacity_factory = 0.1
+			}
+		}
+
+		PBC_war_of_independence_6 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.02
+				war_support_factor = 0.3
+				army_attack_factor = 0.15
+				army_defence_factor = 0.15
+				army_speed_factor = 0.15
+				industrial_capacity_factory = 0.15
+			}
+		}
+
+		PBC_war_of_independence_7 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.02
+				war_support_factor = 0.3
+				army_attack_factor = 0.16
+				army_defence_factor = 0.16
+				army_speed_factor = 0.16
+				industrial_capacity_factory = 0.15
+			}
+		}
+
+		PBC_war_of_independence_8 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.02
+				war_support_factor = 0.3
+				army_attack_factor = 0.18
+				army_defence_factor = 0.18
+				army_speed_factor = 0.18
+				industrial_capacity_factory = 0.15
+			}
+		}
+
+		PBC_war_of_independence_9 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.02
+				war_support_factor = 0.3
+				army_attack_factor = 0.2
+				army_defence_factor = 0.2
+				army_speed_factor = 0.2
+				industrial_capacity_factory = 0.17
+			}
+		}
+
+		PBC_war_of_independence_10 = {
+			name = PBC_war_of_independence
+			picture = PBC_war_of_independence
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.02
+				war_support_factor = 0.3
+				army_attack_factor = 0.2
+				army_defence_factor = 0.2
+				army_speed_factor = 0.2
+				industrial_capacity_factory = 0.2
+			}
+		}
+
+		PBC_investing_heavily_in_the_economy_1 = {
+			name = PBC_investing_heavily_in_the_economy
+			picture = generic_goods_red_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.05
+			}
+		}
+
+		PBC_investing_heavily_in_the_economy_2 = {
+			name = PBC_investing_heavily_in_the_economy
+			picture = generic_goods_red_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.1
+			}
+		}
+
+		PBC_investing_heavily_in_the_economy_3 = {
+			name = PBC_investing_heavily_in_the_economy
+			picture = generic_goods_red_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.15
+			}
+		}
+
+		PBC_investing_heavily_in_the_economy_4 = {
+			name = PBC_investing_heavily_in_the_economy
+			picture = generic_goods_red_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				consumer_goods_factor = 0.2
+			}
+		}
+
+		PBC_improved_army = {
+			picture = generic_infantry_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				conscription = 0.01
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+
+		PBC_advocated_public_works = {
+			picture = ast_all_in
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+		PBC_cooperating_with_french_resistance = {
+			picture = generic_spy_intel
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				operation_cost = -0.1
+				intel_network_gain_factor = 0.1
+				research_speed_factor = 0.05
+			}
+		}
+	}
+
+	industrial_concern = {
+		BOL_standard_oil = {
+			picture = BOL_standard_oil_icon
+
+			allowed = { original_tag = BOL }
+
+			research_bonus = {
+				industry = 0.05
+				synth_resources = 0.15
+			}
+
+			traits = { refinery_concern }
+
+			available = { NOT = { has_war_with = USA } }
+		}
+	}
+}

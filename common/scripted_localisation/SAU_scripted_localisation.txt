@@ -1,0 +1,166 @@
+# Demand/Ask Colonies Event for SAU
+defined_text = { #Country Becomes Puppet GFX
+	name = GetAskForColoniesGFX
+	text = { #Caliphate Demand
+		trigger = {
+			original_tag = SAU
+			has_completed_focus = SAU_invite_germans
+		}
+		localization_key = GFX_report_event_generic_military_parade
+	}
+	text = { #Default: Generic
+		localization_key = GFX_report_event_generic_sign_treaty3
+	}
+}
+
+# Dynamic Focus Name for SAU
+defined_text = {
+	name = GetSAUFlagType
+	text = { #Islamic State
+		trigger = {
+			original_tag = SAU
+			has_completed_focus = SAU_path_of_abd_al_wahhab
+		}
+		localization_key = SAU_black_flag_tt
+	}
+	text = { #Empire
+		localization_key = SAU_green_flag_tt
+	}
+}
+
+# Collaborator Name for Oil Discovery Event
+defined_text = {
+	name = GetSAUCollaboratorName
+	text = {
+		trigger = {
+			has_country_flag = SAU_cooperation_with_americans_flag
+		}
+		localization_key = SAU_american_name_tt
+	}
+	text = {
+		trigger = {
+			has_country_flag = SAU_cooperation_with_british_flag
+		}
+		localization_key = SAU_british_name_tt
+	}
+	text = {
+		trigger = {
+			has_country_flag = SAU_cooperation_with_germans_flag
+		}
+		localization_key = SAU_german_name_tt
+	}
+}
+
+# Collaborator Company Name for Oil Discovery Event
+defined_text = {
+	name = GetSAUCollaboratorCompanyName
+	text = {
+		trigger = {
+			has_country_flag = SAU_cooperation_with_americans_flag
+		}
+		localization_key = SAU_american_company_tt
+	}
+	text = {
+		trigger = {
+			has_country_flag = SAU_cooperation_with_british_flag
+		}
+		localization_key = SAU_british_company_tt
+	}
+	text = {
+		trigger = {
+			has_country_flag = SAU_cooperation_with_germans_flag
+		}
+		localization_key = SAU_german_company_tt
+	}
+}
+
+# Protocol City Name
+defined_text = {
+	name = GetProtocolCityName
+	text = {
+		trigger = {
+			OR = {
+				ENG = {
+					controls_state = 447
+					NOT = { 447 = { is_core_of = ENG } }
+					OR = {
+						NOT = { country_exists = EGY }
+						AND = {
+							country_exists = EGY
+							EGY = { is_subject_of = ENG }
+						}
+					}
+				}
+				EGY = {
+					controls_state = 447
+					OR = {
+						has_government = neutrality
+						has_government = democratic
+					}
+				}
+			}
+		}
+		localization_key = SAU_alexandria_protocol_tt
+	}
+	text = {
+		localization_key = SAU_riyadh_protocol_tt
+	}
+}
+
+# Armed Forces Name
+defined_text = {
+	name = GetArmedForcesName
+	text = {
+		trigger = {
+			has_completed_focus = SAU_establish_the_united_arab_federation
+			has_variable = SAU_arab_league_countries_var
+		}
+		localization_key = SAU_saudi_arabian_federation_forces
+	}
+	text = {
+		trigger = {
+			has_completed_focus = SAU_establish_the_united_arab_state
+			has_variable = SAU_arab_league_countries_var
+		}
+		localization_key = SAU_saudi_arabian_state_forces
+	}
+	text = {
+		trigger = {
+			has_completed_focus = SAU_abandon_monarchy
+			has_completed_focus = SAU_peaceful_transition
+		}
+		localization_key = SAU_saudi_arabian_communist_army_name
+	}
+	text = {
+		localization_key = SAU_royal_saudi_arabian_armed_forces
+	}
+}
+
+# Ground Forces Name
+defined_text = {
+	name = GetGroundForcesName
+	text = {
+		trigger = {
+			has_completed_focus = SAU_establish_the_united_arab_federation
+			has_variable = SAU_arab_league_countries_var
+		}
+		localization_key = SAU_arab_federation_army_name
+	}
+	text = {
+		trigger = {
+			has_completed_focus = SAU_establish_the_united_arab_state
+			has_variable = SAU_arab_league_countries_var
+		}
+		localization_key = SAU_arab_state_army_name
+	}
+	text = {
+		trigger = {
+			has_completed_focus = SAU_abandon_monarchy
+			has_completed_focus = SAU_peaceful_transition
+		}
+		localization_key = SAU_communist_army_name
+	}
+	text = {
+		localization_key = SAU_royal_saudi_army_dmod
+	}
+}

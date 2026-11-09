@@ -1,0 +1,356 @@
+scripted_gui = {
+	race_for_dominance_scripted_gui = {
+		window_name = race_for_dominance_container
+		context_type = decision_category
+
+		triggers = {
+			alhajara_occupying_ideology_visible = {
+				OR = {
+					has_country_flag = occupying_east_al_hajara_com_neu
+					has_country_flag = occupying_east_al_hajara_fas_neu
+					has_country_flag = occupying_east_al_hajara_com
+					has_country_flag = occupying_east_al_hajara_fas
+				}
+				check_variable = { IRQ_army_influence > 12.6 }
+			}
+			rumadiyah_occupying_ideology_visible = {
+				OR = {
+					has_country_flag = occupying_west_al_hajara_com_neu
+					has_country_flag = occupying_west_al_hajara_fas_neu
+					has_country_flag = occupying_west_al_hajara_com
+					has_country_flag = occupying_west_al_hajara_fas
+				}
+				check_variable = { IRQ_army_influence > 12.6 }
+			}
+			basrah_occupying_ideology_visible = {
+				OR = {
+					has_country_flag = occupying_basrah_com_neu
+					has_country_flag = occupying_basrah_fas_neu
+					has_country_flag = occupying_basrah_com
+					has_country_flag = occupying_basrah_fas
+				}
+				check_variable = { IRQ_army_influence > 12.6 }
+			}
+			karbala_occupying_ideology_visible = {
+				OR = {
+					has_country_flag = occupying_karbala_com_neu
+					has_country_flag = occupying_karbala_fas_neu
+					has_country_flag = occupying_karbala_com
+					has_country_flag = occupying_karbala_fas
+				}
+				check_variable = { IRQ_army_influence > 12.6 }
+			}
+			baghdad_occupying_ideology_visible = {
+				OR = {
+					has_country_flag = occupying_baghdad_com_neu
+					has_country_flag = occupying_baghdad_fas_neu
+					has_country_flag = occupying_baghdad_com
+					has_country_flag = occupying_baghdad_fas
+				}
+				check_variable = { IRQ_army_influence > 12.6 }
+			}
+			sulaymaniyah_occupying_ideology_visible = {
+				OR = {
+					has_country_flag = occupying_sulaymaniyah_com_neu
+					has_country_flag = occupying_sulaymaniyah_fas_neu
+					has_country_flag = occupying_sulaymaniyah_com
+					has_country_flag = occupying_sulaymaniyah_fas
+				}
+				check_variable = { IRQ_army_influence > 12.6 }
+			}
+			mosul_occupying_ideology_visible = {
+				OR = {
+					has_country_flag = occupying_mosul_com_neu
+					has_country_flag = occupying_mosul_fas_neu
+					has_country_flag = occupying_mosul_com
+					has_country_flag = occupying_mosul_fas
+				}
+				check_variable = { IRQ_army_influence > 12.6 }
+			}
+			erbil_occupying_ideology_visible = {
+				OR = {
+					has_country_flag = occupying_erbil_com_neu
+					has_country_flag = occupying_erbil_fas_neu
+					has_country_flag = occupying_erbil_com
+					has_country_flag = occupying_erbil_fas
+				}
+				check_variable = { IRQ_army_influence > 12.6 }
+			}
+
+		}
+
+		properties = {
+			alhajara_ideology = {
+				image = "[GetAlhajaraIdeology]"
+				frame = 1
+			}
+			rumadiyah_ideology = {
+				image = "[GetRumadiyahIdeology]"
+				frame = 2
+			}
+			basrah_ideology = {
+				image = "[GetBasrahIdeology]"
+				frame = 3
+			}
+			karbala_ideology = {
+				image = "[GetKarbalaIdeology]"
+				frame = 4
+			}
+			baghdad_ideology = {
+				image = "[GetBaghdadIdeology]"
+				frame = 5
+			}
+			sulaymaniyah_ideology = {
+				image = "[GetSulaymaniyahIdeology]"
+				frame = 6
+			}
+			mosul_ideology = {
+				image = "[GetMosulIdeology]"
+				frame = 7
+			}
+			erbil_ideology = {
+				image = "[GetErbilIdeology]"
+				frame = 8
+			}
+
+
+
+			alhajara_occupying_ideology = {
+				image = "[GetAlhajaraOccupyingIdeology]"
+				frame = 1
+			}
+			rumadiyah_occupying_ideology = {
+				image = "[GetRumadiyahOccupyingIdeology]"
+				frame = 2
+			}
+			basrah_occupying_ideology = {
+				image = "[GetBasrahOccupyingIdeology]"
+				frame = 3
+			}
+			karbala_occupying_ideology = {
+				image = "[GetKarbalaOccupyingIdeology]"
+				frame = 4
+			}
+			baghdad_occupying_ideology = {
+				image = "[GetBaghdadOccupyingIdeology]"
+				frame = 5
+			}
+			sulaymaniyah_occupying_ideology = {
+				image = "[GetSulaymaniyahOccupyingIdeology]"
+				frame = 6
+			}
+			mosul_occupying_ideology = {
+				image = "[GetMosulOccupyingIdeology]"
+				frame = 7
+			}
+			erbil_occupying_ideology = {
+				image = "[GetErbilOccupyingIdeology]"
+				frame = 8
+			}
+		}
+	}
+
+	army_academy_scripted_gui = {
+		window_name = army_academy_container
+		context_type = decision_category
+
+		effects = {
+			page_changer_right_click = {
+				add_to_variable = {
+					var = IRQ_army_book_page
+					value = 1
+				}
+			}
+			page_changer_left_click = {
+				add_to_variable = {
+					var = IRQ_army_book_page
+					value = -1
+				}
+			}
+			declare_modern_army_button_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				add_ideas = IRQ_modern_army
+			}
+			hide_show_button_click = {
+				if = {
+					limit = { has_country_flag = hide_IRQ_army_academy_decisions }
+					clr_country_flag = hide_IRQ_army_academy_decisions
+				}
+				else = {
+					set_country_flag = hide_IRQ_army_academy_decisions
+				}
+			}
+			first_page_pictures_1_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = learn_german_doctrine
+				set_country_flag = learn_german_doctrine_finished
+				set_country_flag = lock_select_picture
+			}
+			first_page_pictures_2_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = learn_british_doctrine
+				set_country_flag = learn_british_doctrine_finished
+				set_country_flag = lock_select_picture
+			}
+			second_page_pictures_1_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = learn_deceptive_tactics
+				set_country_flag = learn_deceptive_tactics_finished
+				set_country_flag = lock_select_picture
+			}
+			second_page_pictures_2_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = learn_defensive_tactics
+				set_country_flag = learn_defensive_tactics_finished
+				set_country_flag = lock_select_picture
+			}
+			second_page_pictures_3_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = learn_offensive_tactics
+				set_country_flag = learn_offensive_tactics_finished
+				set_country_flag = lock_select_picture
+			}
+			third_page_pictures_1_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = learn_law_of_war
+				set_country_flag = learn_law_of_war_finished
+				set_country_flag = lock_select_picture
+			}
+			third_page_pictures_2_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = learn_chemical_weapons
+				set_country_flag = learn_chemical_weapons_finished
+				set_country_flag = lock_select_picture
+			}
+			fourth_page_pictures_1_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = read_galipoli_campaign
+				set_country_flag = read_galipoli_campaign_finished
+				set_country_flag = lock_select_picture
+			}
+			fourth_page_pictures_2_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = read_battle_of_france
+				set_country_flag = read_battle_of_france_finished
+				set_country_flag = lock_select_picture
+			}
+			fourth_page_pictures_3_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = read_battle_of_the_somme
+				set_country_flag = read_battle_of_the_somme_finished
+				set_country_flag = lock_select_picture
+			}
+			fourth_page_pictures_4_click = {
+				add_to_variable = { var = army_learing_points value = -100 }
+				set_country_flag = read_first_battle_of_the_marne
+				set_country_flag = read_first_battle_of_the_marne_finished
+				set_country_flag = lock_select_picture
+			}
+		}
+
+		triggers = {
+			# buttons
+			declare_modern_army_button_click_enabled = {
+				has_country_flag = learn_german_doctrine_finished
+				has_country_flag = learn_british_doctrine_finished
+				has_country_flag = learn_deceptive_tactics_finished
+				has_country_flag = learn_defensive_tactics_finished
+				has_country_flag = learn_offensive_tactics_finished
+				has_country_flag = learn_law_of_war_finished
+				has_country_flag = learn_chemical_weapons_finished
+				has_country_flag = read_galipoli_campaign_finished
+				has_country_flag = read_battle_of_france_finished
+				has_country_flag = read_battle_of_the_somme_finished
+				has_country_flag = read_first_battle_of_the_marne_finished
+				check_variable = { army_learing_points > 99 }
+			}
+			declare_modern_army_button_visible = { NOT = { has_idea = IRQ_modern_army } }
+			# book buttons
+			first_page_pictures_1_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = learn_german_doctrine_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			first_page_pictures_2_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = learn_british_doctrine_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			second_page_pictures_1_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = learn_deceptive_tactics_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			second_page_pictures_2_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = learn_defensive_tactics_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			second_page_pictures_3_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = learn_offensive_tactics_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			third_page_pictures_1_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = learn_law_of_war_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			third_page_pictures_2_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = learn_chemical_weapons_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			fourth_page_pictures_1_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = read_galipoli_campaign_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			fourth_page_pictures_2_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = read_battle_of_france_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			fourth_page_pictures_3_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = read_battle_of_the_somme_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			fourth_page_pictures_4_click_enabled = {
+				check_variable = { army_learing_points > 99 }
+				NOT = { has_country_flag = read_first_battle_of_the_marne_finished }
+				NOT = { has_country_flag = lock_select_picture }
+			}
+			# page_changers
+			page_changer_right_visible = { NOT = { check_variable = { IRQ_army_book_page = 4 } } }
+			page_changer_left_visible = { NOT = { check_variable = { IRQ_army_book_page = 1 } } }
+			page_changer_right_click_enabled = { NOT = { check_variable = { IRQ_army_book_page = 4 } } }
+			page_changer_left_click_enabled = { NOT = { check_variable = { IRQ_army_book_page = 1 } } }
+			# first_page
+			first_page_texts_visible = { check_variable = { IRQ_army_book_page = 1 } }
+			first_page_titles_visible = { check_variable = { IRQ_army_book_page = 1 } }
+			first_page_pictures_1_visible = { check_variable = { IRQ_army_book_page = 1 } NOT = { has_country_flag = learn_german_doctrine_finished } }
+			first_page_pictures_2_visible = { check_variable = { IRQ_army_book_page = 1 } NOT = { has_country_flag = learn_british_doctrine_finished } }
+			# second_page
+			second_page_texts_visible = { check_variable = { IRQ_army_book_page = 2 } }
+			second_page_titles_visible = { check_variable = { IRQ_army_book_page = 2 } }
+			second_page_pictures_1_visible = { check_variable = { IRQ_army_book_page = 2 } NOT = { has_country_flag = learn_deceptive_tactics_finished } }
+			second_page_pictures_2_visible = { check_variable = { IRQ_army_book_page = 2 } NOT = { has_country_flag = learn_defensive_tactics_finished } }
+			second_page_pictures_3_visible = { check_variable = { IRQ_army_book_page = 2 } NOT = { has_country_flag = learn_offensive_tactics_finished } }
+			# third_page
+			third_page_texts_visible = { check_variable = { IRQ_army_book_page = 3 } }
+			third_page_titles_visible = { check_variable = { IRQ_army_book_page = 3 } }
+			third_page_pictures_1_visible = { check_variable = { IRQ_army_book_page = 3 } NOT = { has_country_flag = learn_law_of_war_finished } }
+			third_page_pictures_2_visible = { check_variable = { IRQ_army_book_page = 3 } NOT = { has_country_flag = learn_chemical_weapons_finished } }
+			# fourth_page
+			#fourth_page_texts_visible = { check_variable = { IRQ_army_book_page = 4 } }
+			fourth_page_titles_visible = { check_variable = { IRQ_army_book_page = 4 } }
+			fourth_page_pictures_1_visible = { check_variable = { IRQ_army_book_page = 4 } NOT = { has_country_flag = read_galipoli_campaign_finished } }
+			fourth_page_pictures_2_visible = { check_variable = { IRQ_army_book_page = 4 } NOT = { has_country_flag = read_battle_of_france_finished } }
+			fourth_page_pictures_3_visible = { check_variable = { IRQ_army_book_page = 4 } NOT = { has_country_flag = read_battle_of_the_somme_finished } }
+			fourth_page_pictures_4_visible = { check_variable = { IRQ_army_book_page = 4 } NOT = { has_country_flag = read_first_battle_of_the_marne_finished } }
+		}
+	}
+
+}
+

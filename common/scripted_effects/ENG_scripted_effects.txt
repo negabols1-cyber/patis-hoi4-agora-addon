@@ -1,0 +1,1390 @@
+# Reduce Mosley's pacifism
+ENG_mosley_pacifism_level_down = {
+	if = {
+		limit = {
+			has_country_leader_with_trait = champion_of_peace_5
+		}
+		remove_country_leader_trait = champion_of_peace_5
+	}
+	else_if = {
+		limit = {
+			has_country_leader_with_trait = champion_of_peace_4
+		}
+		swap_ruler_traits = { remove = champion_of_peace_4 add = champion_of_peace_5 }
+	}
+	else_if = {
+		limit = {
+			has_country_leader_with_trait = champion_of_peace_3
+		}
+		swap_ruler_traits = { remove = champion_of_peace_3 add = champion_of_peace_4 }
+	}
+	else_if = {
+		limit = {
+			has_country_leader_with_trait = champion_of_peace_2
+		}
+		swap_ruler_traits = { remove = champion_of_peace_2 add = champion_of_peace_3 }
+	}
+	else_if = {
+		limit = {
+			has_country_leader_with_trait = champion_of_peace_1
+		}
+		swap_ruler_traits = { remove = champion_of_peace_1 add = champion_of_peace_2 }
+	}
+}
+
+# Increase Imperial Defense spirit
+ENG_imperial_conference_defense_level_up = {
+	if = {
+		limit = {
+			has_idea = ENG_imperial_conference_defense_4
+		}
+		swap_ideas = {
+			remove_idea = ENG_imperial_conference_defense_4
+			add_idea = ENG_imperial_conference_defense_5
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = ENG_imperial_conference_defense_3
+		}
+		swap_ideas = {
+			remove_idea = ENG_imperial_conference_defense_3
+			add_idea = ENG_imperial_conference_defense_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = ENG_imperial_conference_defense_2
+		}
+		swap_ideas = {
+			remove_idea = ENG_imperial_conference_defense_2
+			add_idea = ENG_imperial_conference_defense_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = ENG_imperial_conference_defense_1
+		}
+		swap_ideas = {
+			remove_idea = ENG_imperial_conference_defense_1
+			add_idea = ENG_imperial_conference_defense_2
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = { has_idea = ENG_imperial_conference_defense_1 }
+			NOT = { has_idea = ENG_imperial_conference_defense_2 }
+			NOT = { has_idea = ENG_imperial_conference_defense_3 }
+			NOT = { has_idea = ENG_imperial_conference_defense_4 }
+			NOT = { has_idea = ENG_imperial_conference_defense_5 }
+		}
+		add_timed_idea = { idea = ENG_imperial_conference_defense_1 days = 365 }
+	}
+}
+
+# Increase Imperial Economy spirit
+ENG_imperial_conference_economy_level_up = {
+	if = {
+		limit = {
+			has_idea = ENG_imperial_conference_economy_4
+		}
+		swap_ideas = {
+			remove_idea = ENG_imperial_conference_economy_4
+			add_idea = ENG_imperial_conference_economy_5
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = ENG_imperial_conference_economy_3
+		}
+		swap_ideas = {
+			remove_idea = ENG_imperial_conference_economy_3
+			add_idea = ENG_imperial_conference_economy_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = ENG_imperial_conference_economy_2
+		}
+		swap_ideas = {
+			remove_idea = ENG_imperial_conference_economy_2
+			add_idea = ENG_imperial_conference_economy_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = ENG_imperial_conference_economy_1
+		}
+		swap_ideas = {
+			remove_idea = ENG_imperial_conference_economy_1
+			add_idea = ENG_imperial_conference_economy_2
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = { has_idea = ENG_imperial_conference_economy_1 }
+			NOT = { has_idea = ENG_imperial_conference_economy_2 }
+			NOT = { has_idea = ENG_imperial_conference_economy_3 }
+			NOT = { has_idea = ENG_imperial_conference_economy_4 }
+			NOT = { has_idea = ENG_imperial_conference_economy_5 }
+		}
+		add_timed_idea = { idea = ENG_imperial_conference_economy_1 days = 365 }
+	}
+}
+
+# Set amount of subjects in variable
+ENG_imperial_conference_set_subject_counter = {
+	set_variable = {
+		var = ENG_imperial_conference_number_of_subjects
+		value = 0
+	}
+	if = {
+		limit = {
+			CAN = {
+				exists = yes
+				is_subject_of = ROOT
+			}
+		}
+		add_to_variable = {
+			var = ENG_imperial_conference_number_of_subjects
+			value = 1
+		}
+	}
+	if = {
+		limit = {
+			SAF = {
+				exists = yes
+				is_subject_of = ROOT
+			}
+		}
+		add_to_variable = {
+			var = ENG_imperial_conference_number_of_subjects
+			value = 1
+		}
+	}
+	if = {
+		limit = {
+			RAJ = {
+				exists = yes
+				is_subject_of = ROOT
+			}
+		}
+		add_to_variable = {
+			var = ENG_imperial_conference_number_of_subjects
+			value = 1
+		}
+	}
+	if = {
+		limit = {
+			AST = {
+				exists = yes
+				is_subject_of = ROOT
+			}
+		}
+		add_to_variable = {
+			var = ENG_imperial_conference_number_of_subjects
+			value = 1
+		}
+	}
+	if = {
+		limit = {
+			NZL = {
+				exists = yes
+				is_subject_of = ROOT
+			}
+		}
+		add_to_variable = {
+			var = ENG_imperial_conference_number_of_subjects
+			value = 1
+		}
+	}
+}
+
+# Clear Imperial Conference flags
+ENG_imperial_conference_clear_in_progress_flags = {
+	if = {
+		limit = {
+			has_country_flag = ENG_imperial_defense_flag
+			check_variable = { var = ENG_imperial_conference_defense_answers value = ENG_imperial_conference_number_of_subjects compare = equals }
+		}
+		clr_country_flag = ENG_imperial_conference_discussion_in_progress
+		clr_country_flag = ENG_diplomatic_pressure_flag
+		clr_country_flag = ENG_extensive_diplomatic_pressure_flag
+		clr_country_flag = ENG_imperial_defense_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = ENG_imperial_trade_flag
+			check_variable = { var = ENG_imperial_conference_trade_answers value = ENG_imperial_conference_number_of_subjects compare = equals }
+		}
+		clr_country_flag = ENG_imperial_conference_discussion_in_progress
+		clr_country_flag = ENG_diplomatic_pressure_flag
+		clr_country_flag = ENG_extensive_diplomatic_pressure_flag
+		clr_country_flag = ENG_imperial_trade_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = ENG_imperial_economy_flag
+			check_variable = { var = ENG_imperial_conference_economy_answers value = ENG_imperial_conference_number_of_subjects compare = equals }
+		}
+		clr_country_flag = ENG_imperial_conference_discussion_in_progress
+		clr_country_flag = ENG_diplomatic_pressure_flag
+		clr_country_flag = ENG_extensive_diplomatic_pressure_flag
+		clr_country_flag = ENG_imperial_economy_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = ENG_imperial_appeasement_flag
+			check_variable = { var = ENG_imperial_conference_appeasement_answers value = ENG_imperial_conference_number_of_subjects compare = equals }
+		}
+		clr_country_flag = ENG_imperial_conference_discussion_in_progress
+		clr_country_flag = ENG_diplomatic_pressure_flag
+		clr_country_flag = ENG_extensive_diplomatic_pressure_flag
+		clr_country_flag = ENG_imperial_appeasement_flag
+	}
+	if = {
+		limit = {
+			has_country_flag = ENG_imperial_federation_flag
+			check_variable = { var = ENG_imperial_conference_federation_answers value = ENG_imperial_conference_number_of_subjects compare = equals }
+		}
+		clr_country_flag = ENG_imperial_conference_discussion_in_progress
+		clr_country_flag = ENG_diplomatic_pressure_flag
+		clr_country_flag = ENG_extensive_diplomatic_pressure_flag
+		clr_country_flag = ENG_imperial_federation_flag
+	}
+}
+
+# Increase Trade Union Support costs
+ENG_request_trade_union_support_cost_level_up = {
+	if = {
+		limit = {
+			NOT = { check_variable = { ENG_trade_unions_support_shared > 0 } }
+			NOT = { check_variable = { ENG_trade_unions_support_shared < 0 } }
+		}
+		set_variable = { var = ENG_trade_unions_support_shared value = 0 }
+	}
+	add_to_variable = { var = ENG_trade_unions_support_shared value = 10 }
+	set_variable = { var = ENG_trade_unions_support_50_cost value = 50 }
+	add_to_variable = { var = ENG_trade_unions_support_50_cost value = ENG_trade_unions_support_shared }
+	set_variable = { var = ENG_trade_unions_support_75_cost value = 75 }
+	add_to_variable = { var = ENG_trade_unions_support_75_cost value = ENG_trade_unions_support_shared }
+	custom_effect_tooltip = ENG_request_trade_union_support_cost_level_up_tt
+}
+
+# Decrease Trade Union Support costs
+ENG_request_trade_union_support_cost_level_down = {
+	if = {
+		limit = {
+			NOT = { check_variable = { ENG_trade_unions_support_shared > 0 } }
+			NOT = { check_variable = { ENG_trade_unions_support_shared < 0 } }
+		}
+		set_variable = { var = ENG_trade_unions_support_shared value = 0 }
+	}
+	add_to_variable = { var = ENG_trade_unions_support_shared value = -10 }
+	if = {
+		limit = {
+			check_variable = { ENG_trade_unions_support_shared < -40 }
+		}
+		set_variable = { var = ENG_trade_unions_support_shared value = -40 }
+	}
+	set_variable = { var = ENG_trade_unions_support_50_cost value = 50 }
+	add_to_variable = { var = ENG_trade_unions_support_50_cost value = ENG_trade_unions_support_shared }
+	set_variable = { var = ENG_trade_unions_support_75_cost value = 75 }
+	add_to_variable = { var = ENG_trade_unions_support_75_cost value = ENG_trade_unions_support_shared }
+	custom_effect_tooltip = ENG_request_trade_union_support_cost_level_down_tt
+}
+
+CAN_enforce_loyalty = {
+	set_country_flag = britain_enforced_our_loyalty
+	if = {
+		limit = {
+			has_completed_focus = CAN_patriation
+		}
+		complete_national_focus = CAN_strengthen_the_commonwealth_ties
+	}
+	if = {
+		limit = {
+			has_idea = CAN_swastika_clubs
+		}
+		remove_ideas = CAN_swastika_clubs
+	}
+	if = {
+		limit = {
+			has_idea = CAN_swastika_clubs_2
+		}
+		remove_ideas = CAN_swastika_clubs_2
+	}
+	if = {
+		limit = {
+			has_idea = CAN_swastika_clubs_skewer
+		}
+		remove_ideas = CAN_swastika_clubs_skewer
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = us_research
+		}
+		remove_from_tech_sharing_group = us_research
+	}
+	if = {
+		limit = {
+			has_idea = CAN_communist_ideals
+		}
+		remove_ideas = CAN_communist_ideals
+	}
+	if = {
+		limit = {
+			has_idea = CAN_communist_ideals_2
+		}
+		remove_ideas = CAN_communist_ideals_2
+	}
+	if = {
+		limit = {
+			has_idea = CAN_communist_ideals_3
+		}
+		remove_ideas = CAN_communist_ideals_3
+	}
+
+}
+
+SAF_enforce_loyalty = {
+	set_country_flag = britain_enforced_our_loyalty
+	if = {
+		limit = {
+			has_completed_focus = SAF_abandon_westminster
+		}
+		complete_national_focus = SAF_support_the_policy_of_appeasement
+	}
+	if = {
+		limit = {
+			has_idea = SAF_abandon_westminster
+		}
+		remove_ideas = SAF_abandon_westminster
+	}
+	if = {
+		limit = {
+			has_idea = SAF_abandon_westminster_fascism
+		}
+		remove_ideas = SAF_abandon_westminster_fascism
+	}
+	if = {
+		limit = {
+			has_idea = SAF_ossewabrandwag_fascism
+		}
+		swap_ideas = {
+			remove_idea = SAF_ossewabrandwag_fascism
+			add_idea = SAF_ossewabrandwag
+		}
+	}
+	if = {
+		limit = {
+			has_idea = SAF_voortrekker_monument_2
+		}
+		swap_ideas = {
+			remove_idea = SAF_voortrekker_monument_2
+			add_idea = SAF_voortrekker_monument
+		}
+	}
+	if = {
+		limit = {
+			has_idea = SAF_king_edward
+		}
+		remove_ideas = SAF_king_edward
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = axis_research
+		}
+		remove_from_tech_sharing_group = axis_research
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = comintern_research
+		}
+		remove_from_tech_sharing_group = comintern_research
+	}
+	if = {
+		limit = {
+			has_idea = SAF_abandon_westminster_communism
+		}
+		remove_ideas = SAF_abandon_westminster_communism
+	}
+	if = {
+		limit = {
+			has_idea = SAF_black_volunteers
+		}
+		remove_ideas = SAF_black_volunteers
+	}
+	if = {
+		limit = {
+			has_idea = SAF_voortrekker_monument_2
+		}
+		swap_ideas = {
+			remove_idea = SAF_ossewabrandwag_2
+			add_idea = SAF_ossewabrandwag
+		}
+	}
+	if = {
+		limit = {
+			has_idea = SAF_equal_opportunities
+		}
+		remove_ideas = SAF_equal_opportunities
+		add_ideas = SAF_ossewabrandwag
+	}
+	if = {
+		limit = {
+			has_idea = SAF_support_the_world_revolution
+		}
+		remove_ideas = SAF_support_the_world_revolution
+	}
+	if = {
+		limit = {
+			has_idea = SAF_soviet_advisers
+		}
+		remove_ideas = SAF_soviet_advisers
+	}
+
+}
+
+RAJ_enforce_loyalty = {
+	set_country_flag = britain_enforced_our_loyalty
+	if = {
+		limit = {
+			has_completed_focus = RAJ_swaraj
+		}
+		complete_national_focus = RAJ_indian_national_congress
+	}
+	if = {
+		limit = {
+			has_idea = RAJ_all_india_forward_bloc
+		}
+		remove_ideas = RAJ_all_india_forward_bloc
+	}
+	if = {
+		limit = {
+			has_idea = RAJ_all_india_forward_bloc_fascism
+		}
+		remove_ideas = RAJ_all_india_forward_bloc_fascism
+	}
+	if = {
+		limit = {
+			has_idea = RAJ_all_india_forward_bloc_communism
+		}
+		remove_ideas = RAJ_all_india_forward_bloc_communism
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = comintern_research
+		}
+		remove_from_tech_sharing_group = comintern_research
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = axis_research
+		}
+		remove_from_tech_sharing_group = axis_research
+	}
+	if = {
+		limit = {
+			has_idea = CAN_communist_ideals
+		}
+		remove_ideas = CAN_communist_ideals
+	}
+	if = {
+		limit = {
+			has_idea = CAN_communist_ideals_2
+		}
+		remove_ideas = CAN_communist_ideals_2
+	}
+	if = {
+		limit = {
+			has_idea = CAN_communist_ideals_3
+		}
+		remove_ideas = CAN_communist_ideals_3
+	}
+
+}
+
+AST_enforce_loyalty = {
+	set_country_flag = britain_enforced_our_loyalty
+	if = {
+		limit = {
+			has_completed_focus = AST_never_another_gallipoli
+		}
+		complete_national_focus = AST_support_the_policy_of_appeasement
+	}
+	if = {
+		limit = {
+			has_idea = AST_abandon_the_westminster_system
+		}
+		remove_ideas = AST_abandon_the_westminster_system
+	}
+	if = {
+		limit = {
+			has_idea = AST_abandon_the_westminster_system_fascism
+		}
+		remove_ideas = AST_abandon_the_westminster_system_fascism
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = us_research
+		}
+		remove_from_tech_sharing_group = us_research
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = japanese_research
+		}
+		remove_from_tech_sharing_group = japanese_research
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = swpi_research
+		}
+		remove_from_tech_sharing_group = swpi_research
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = comintern_research
+		}
+		remove_from_tech_sharing_group = comintern_research
+	}
+	if = {
+		limit = {
+			has_idea = AST_abandon_the_westminster_system_communism
+		}
+		remove_ideas = AST_abandon_the_westminster_system_communism
+	}
+	if = {
+		limit = {
+			has_idea = AST_arms_for_the_revolution
+		}
+		remove_ideas = AST_arms_for_the_revolution
+	}
+	if = {
+		limit = {
+			has_idea = AST_direct_support
+		}
+		remove_ideas = AST_direct_support
+	}
+
+}
+
+NZL_enforce_loyalty = {
+	set_country_flag = britain_enforced_our_loyalty
+	if = {
+		limit = {
+			has_completed_focus = NZL_statute_of_westminster
+		}
+		complete_national_focus = NZL_strengthen_the_commonwealth
+	}
+	if = {
+		limit = {
+			has_idea = NZL_in_the_darkness
+		}
+		swap_ideas = {
+			remove_idea = NZL_in_the_darkness
+			add_idea = NZL_first_labor_government
+		}
+	}
+	if = {
+		limit = {
+			has_idea = AST_abandon_the_westminster_system_fascism
+		}
+		remove_ideas = AST_abandon_the_westminster_system_fascism
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = japanese_research
+		}
+		remove_from_tech_sharing_group = japanese_research
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = comintern_research
+		}
+		remove_from_tech_sharing_group = comintern_research
+	}
+	if = {
+		limit = {
+			has_idea = NZL_the_workers_party_1
+		}
+		swap_ideas = {
+			remove_idea = NZL_the_workers_party_1
+			add_idea = NZL_first_labor_government
+		}
+	}
+	if = {
+		limit = {
+			has_idea = NZL_the_workers_party_2
+		}
+		remove_ideas = NZL_the_workers_party_2
+	}
+}
+
+ENG_viceroy_reduce_autonomy_effect = {
+	if = {
+		limit = {
+			ROOT = { has_country_leader_with_trait = viceroy_emeritus }
+		}
+		add_autonomy_ratio = {
+			value = -0.10
+			localization = uk_india_focus
+		}
+	}
+	else = {
+		add_autonomy_ratio = {
+			value = -0.05
+			localization = uk_india_focus
+		}
+	}
+}
+
+ENG_bop_high_increase_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.2
+	}
+}
+
+ENG_bop_medium_increase_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.15
+	}
+}
+
+ENG_bop_low_increase_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.1
+	}
+}
+
+ENG_bop_very_low_increase_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.05
+	}
+}
+
+ENG_bop_very_high_decrease_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.25
+	}
+}
+
+ENG_bop_high_decrease_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.2
+	}
+}
+
+ENG_bop_medium_decrease_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.15
+	}
+}
+
+ENG_bop_low_decrease_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.1
+	}
+}
+
+ENG_bop_very_low_decrease_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.05
+	}
+}
+
+ENG_bop_very_high_increase_king_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.25
+		tooltip_side = ENG_edward_side
+	}
+}
+
+ENG_bop_high_increase_king_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.2
+		tooltip_side = ENG_edward_side
+	}
+}
+
+ENG_bop_medium_increase_king_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.15
+		tooltip_side = ENG_edward_side
+	}
+}
+
+ENG_bop_low_increase_king_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.1
+		tooltip_side = ENG_edward_side
+	}
+}
+
+ENG_bop_very_low_increase_king_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.05
+		tooltip_side = ENG_edward_side
+	}
+}
+
+ENG_bop_very_high_increase_communism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.25
+		tooltip_side = ENG_communism_side
+	}
+}
+
+ENG_bop_high_increase_communism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.2
+		tooltip_side = ENG_communism_side
+	}
+}
+
+ENG_bop_medium_increase_communism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.15
+		tooltip_side = ENG_communism_side
+	}
+}
+
+ENG_bop_low_increase_communism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.1
+		tooltip_side = ENG_communism_side
+	}
+}
+
+ENG_bop_very_low_increase_communism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.05
+		tooltip_side = ENG_communism_side
+	}
+}
+
+ENG_bop_very_high_increase_democratic_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.25
+		tooltip_side = ENG_democratic_council_side
+	}
+}
+
+ENG_bop_high_increase_democratic_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.2
+		tooltip_side = ENG_democratic_council_side
+	}
+}
+
+ENG_bop_medium_increase_democratic_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.15
+		tooltip_side = ENG_democratic_council_side
+	}
+}
+
+ENG_bop_low_increase_democratic_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.1
+		tooltip_side = ENG_democratic_council_side
+	}
+}
+
+ENG_bop_very_low_increase_democratic_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = -0.05
+		tooltip_side = ENG_democratic_council_side
+	}
+}
+
+ENG_bop_very_high_increase_fascism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.25
+		tooltip_side = ENG_mosley_side
+	}
+}
+
+ENG_bop_high_increase_fascism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.2
+		tooltip_side = ENG_mosley_side
+	}
+}
+
+ENG_bop_medium_increase_fascism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.15
+		tooltip_side = ENG_mosley_side
+	}
+}
+
+ENG_bop_low_increase_fascism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.1
+		tooltip_side = ENG_mosley_side
+	}
+}
+
+ENG_bop_very_low_increase_fascism_side_effect = {
+	add_power_balance_value = {
+		id = ENG_ideology_balance
+		value = 0.05
+		tooltip_side = ENG_mosley_side
+	}
+}
+
+ENG_celtic_claims = {
+	custom_effect_tooltip = ENG_scottish_claims_tt
+
+	hidden_effect = {
+		#Spain
+		add_state_claim = 169
+		add_state_claim = 173
+		add_state_claim = 168
+		add_state_claim = 789
+		add_state_claim = 170
+		add_state_claim = 788
+		add_state_claim = 167
+		add_state_claim = 175
+		add_state_claim = 41
+		add_state_claim = 793
+		add_state_claim = 165
+		add_state_claim = 174
+		add_state_claim = 794
+		add_state_claim = 166
+		add_state_claim = 176
+		add_state_claim = 791
+		add_state_claim = 171
+		add_state_claim = 790
+		add_state_claim = 792
+		add_state_claim = 172
+		#Portugal
+		add_state_claim = 180
+		add_state_claim = 181
+		add_state_claim = 795
+		add_state_claim = 179
+		add_state_claim = 112
+		#France
+		add_state_claim = 31
+		add_state_claim = 806
+		add_state_claim = 19
+		add_state_claim = 22
+		add_state_claim = 21
+		add_state_claim = 851
+		add_state_claim = 735
+		add_state_claim = 32
+		add_state_claim = 20
+		add_state_claim = 26
+		add_state_claim = 25
+		add_state_claim = 23
+		add_state_claim = 33
+		add_state_claim = 14
+		add_state_claim = 30
+		add_state_claim = 24
+		add_state_claim = 27
+		add_state_claim = 17
+		add_state_claim = 28
+		add_state_claim = 18
+		add_state_claim = 16
+		add_state_claim = 15
+		add_state_claim = 29
+		add_state_claim = 785
+		#Switzerland
+		add_state_claim = 845
+		add_state_claim = 3
+		add_state_claim = 847
+		add_state_claim = 846
+		add_state_claim = 151
+		#Belgium
+		add_state_claim = 6
+		add_state_claim = 34
+		#Luxemburg
+		add_state_claim = 8
+		#Austria
+		add_state_claim = 848
+		add_state_claim = 153
+		add_state_claim = 152
+		add_state_claim = 4
+		#Germany
+		add_state_claim = 51
+		add_state_claim = 42
+		add_state_claim = 50
+		add_state_claim = 52
+		add_state_claim = 53
+		add_state_claim = 54
+		add_state_claim = 55
+	}
+}
+
+ENG_celtic_core = {
+	#Spain
+	169 = { add_core_of = ROOT }
+	173 = { add_core_of = ROOT }
+	168 = { add_core_of = ROOT }
+	789 = { add_core_of = ROOT }
+	170 = { add_core_of = ROOT }
+	788 = { add_core_of = ROOT }
+	167 = { add_core_of = ROOT }
+	175 = { add_core_of = ROOT }
+	41 = { add_core_of = ROOT }
+	793 = { add_core_of = ROOT }
+	165 = { add_core_of = ROOT }
+	174 = { add_core_of = ROOT }
+	794 = { add_core_of = ROOT }
+	166 = { add_core_of = ROOT }
+	176 = { add_core_of = ROOT }
+	791 = { add_core_of = ROOT }
+	171 = { add_core_of = ROOT }
+	790 = { add_core_of = ROOT }
+	792 = { add_core_of = ROOT }
+	172 = { add_core_of = ROOT }
+	#Portugal
+	180 = { add_core_of = ROOT }
+	181 = { add_core_of = ROOT }
+	795 = { add_core_of = ROOT }
+	179 = { add_core_of = ROOT }
+	112 = { add_core_of = ROOT }
+	#France
+	31 = { add_core_of = ROOT }
+	806 = { add_core_of = ROOT }
+	19 = { add_core_of = ROOT }
+	22 = { add_core_of = ROOT }
+	21 = { add_core_of = ROOT }
+	851 = { add_core_of = ROOT }
+	735 = { add_core_of = ROOT }
+	32 = { add_core_of = ROOT }
+	20 = { add_core_of = ROOT }
+	26 = { add_core_of = ROOT }
+	25 = { add_core_of = ROOT }
+	23 = { add_core_of = ROOT }
+	33 = { add_core_of = ROOT }
+	14 = { add_core_of = ROOT }
+	30 = { add_core_of = ROOT }
+	24 = { add_core_of = ROOT }
+	27 = { add_core_of = ROOT }
+	17 = { add_core_of = ROOT }
+	28 = { add_core_of = ROOT }
+	18 = { add_core_of = ROOT }
+	16 = { add_core_of = ROOT }
+	15 = { add_core_of = ROOT }
+	29 = { add_core_of = ROOT }
+	785 = { add_core_of = ROOT }
+	#Switzerland
+	845 = { add_core_of = ROOT }
+	3 = { add_core_of = ROOT }
+	847 = { add_core_of = ROOT }
+	846 = { add_core_of = ROOT }
+	151 = { add_core_of = ROOT }
+	#Belgium
+	6 = { add_core_of = ROOT }
+	34 = { add_core_of = ROOT }
+	#Luxemburg
+	8 = { add_core_of = ROOT }
+	#Austria
+	848 = { add_core_of = ROOT }
+	153 = { add_core_of = ROOT }
+	152 = { add_core_of = ROOT }
+	4 = { add_core_of = ROOT }
+	#Germany
+	51 = { add_core_of = ROOT }
+	42 = { add_core_of = ROOT }
+	50 = { add_core_of = ROOT }
+	52 = { add_core_of = ROOT }
+	53 = { add_core_of = ROOT }
+	54 = { add_core_of = ROOT }
+	55 = { add_core_of = ROOT }
+}
+
+ENG_hre_core = {
+	set_cosmetic_tag = HRE_UNIFIED
+	8 = { add_core_of = ROOT }
+	28 = { add_core_of = ROOT }
+	735 = { add_core_of = ROOT }
+	69 = { add_core_of = ROOT }
+	9 = { add_core_of = ROOT }
+	75 = { add_core_of = ROOT }
+	74 = { add_core_of = ROOT }
+	158 = { add_core_of = ROOT }
+	159 = { add_core_of = ROOT }
+	39 = { add_core_of = ROOT }
+	160 = { add_core_of = ROOT }
+	161 = { add_core_of = ROOT }
+	162 = { add_core_of = ROOT }
+	736 = { add_core_of = ROOT }
+	850 = { add_core_of = ROOT }
+	852 = { add_core_of = ROOT }
+	# Germany
+	custom_effect_tooltip = form_country_germany_coring_states_tt
+	hidden_effect = {
+		51 = { add_core_of = ROOT }
+		42 = { add_core_of = ROOT }
+		56 = { add_core_of = ROOT }
+		57 = { add_core_of = ROOT }
+		55 = { add_core_of = ROOT }
+		50 = { add_core_of = ROOT }
+		59 = { add_core_of = ROOT }
+		58 = { add_core_of = ROOT }
+		60 = { add_core_of = ROOT }
+		54 = { add_core_of = ROOT }
+		52 = { add_core_of = ROOT }
+		53 = { add_core_of = ROOT }
+		61 = { add_core_of = ROOT }
+		64 = { add_core_of = ROOT }
+		65 = { add_core_of = ROOT }
+		62 = { add_core_of = ROOT }
+		68 = { add_core_of = ROOT }
+		66 = { add_core_of = ROOT }
+		67 = { add_core_of = ROOT }
+		63 = { add_core_of = ROOT }
+		5 = { add_core_of = ROOT }
+		763 = { add_core_of = ROOT }
+	}
+	# Switzerland
+	custom_effect_tooltip = form_country_switzerland_coring_states_tt
+	hidden_effect = {
+		3 = { add_core_of = ROOT }
+		151 = { add_core_of = ROOT }
+		845 = { add_core_of = ROOT }
+		847 = { add_core_of = ROOT }
+		846 = { add_core_of = ROOT }
+	}
+	# Austria
+	custom_effect_tooltip = form_country_austria_coring_states_tt
+	hidden_effect = {
+		848 = { add_core_of = ROOT }
+		153 = { add_core_of = ROOT }
+		152 = { add_core_of = ROOT }
+		4 = { add_core_of = ROOT }
+	}
+	# Netherlands
+	custom_effect_tooltip = form_eu_netherlands_coring_states_tt
+	hidden_effect = {
+		7 = { add_core_of = ROOT }
+		35 = { add_core_of = ROOT }
+		36 = { add_core_of = ROOT }
+	}
+	# Belgium
+	custom_effect_tooltip = form_eu_belgium_coring_states_tt
+	hidden_effect = {
+		6 = { add_core_of = ROOT }
+		34 = { add_core_of = ROOT }
+	}
+	hidden_effect = {
+		set_global_flag = form_hre_flag
+	}
+}
+
+ENG_modify_german_king_title = {
+	if = {
+		limit = {
+			ENG = {
+				OR = {
+					has_subject = CAN
+					has_subject = SAF
+					has_subject = AST
+					has_subject = NZL
+					has_subject = RAJ
+					AND = {
+						has_subject = IRE
+						IRE = { has_cosmetic_tag = IRE_democratic_coalition }
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_female = yes
+			}
+			add_country_leader_trait = queen_of_uk_germany_and_dominions
+			if = {
+				limit = {
+					ENG = { has_subject = RAJ }
+				}
+				add_country_leader_trait = eng_empress_of_india
+			}
+		}
+		else = {
+			add_country_leader_trait = king_of_uk_germany_and_dominions
+			if = {
+				limit = {
+					ENG = { has_subject = RAJ }
+				}
+				add_country_leader_trait = eng_emperor_of_india
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				is_female = yes
+			}
+			add_country_leader_trait = queen_of_uk_and_germany
+		}
+		else = {
+			add_country_leader_trait = king_of_uk_and_germany
+		}
+	}
+}
+
+ENG_modify_german_king_title_alternate = { #Fuck dupe effects
+	if = {
+		limit = {
+			ENG = {
+				OR = {
+					has_subject = CAN
+					has_subject = SAF
+					has_subject = AST
+					has_subject = NZL
+					has_subject = RAJ
+					AND = {
+						has_subject = IRE
+						IRE = { has_cosmetic_tag = IRE_democratic_coalition }
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_female = yes
+			}
+			add_country_leader_trait = queen_of_uk_germany_amerika_dominions
+			if = {
+				limit = {
+					ENG = { has_subject = RAJ }
+				}
+				add_country_leader_trait = eng_empress_of_india
+			}
+		}
+		else = {
+			add_country_leader_trait = king_of_uk_germany_amerika_dominions
+			if = {
+				limit = {
+					ENG = { has_subject = RAJ }
+				}
+				add_country_leader_trait = eng_emperor_of_india
+			}
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				is_female = yes
+			}
+			add_country_leader_trait = queen_of_uk_germany_amerika
+		}
+		else = {
+			add_country_leader_trait = king_of_uk_germany_amerika
+		}
+	}
+}
+
+ENG_remove_german_king_title = {
+	if = {
+		limit = {
+			has_country_leader_with_trait = king_of_uk_and_germany
+		}
+		remove_country_leader_trait = king_of_uk_and_germany
+	}
+	if = {
+		limit = {
+			has_country_leader_with_trait = king_of_uk_germany_and_dominions
+		}
+		remove_country_leader_trait = king_of_uk_germany_and_dominions
+	}
+	if = {
+		limit = {
+			has_country_leader_with_trait = queen_of_uk_and_germany
+		}
+		remove_country_leader_trait = queen_of_uk_and_germany
+	}
+	if = {
+		limit = {
+			has_country_leader_with_trait = queen_of_uk_germany_and_dominions
+		}
+		remove_country_leader_trait = queen_of_uk_germany_and_dominions
+	}
+	if = {
+		limit = {
+			has_country_leader_with_trait = eng_emperor_of_india
+		}
+		remove_country_leader_trait = eng_emperor_of_india
+	}
+	if = {
+		limit = {
+			has_country_leader_with_trait = eng_empress_of_india
+		}
+		remove_country_leader_trait = eng_empress_of_india
+	}
+}
+
+ENG_german_king_country_leader = {
+	if = {
+		limit = {
+			USA = { has_country_flag = ENG_german_king_flag }
+		}
+		if = {
+			limit = {
+				GER = {
+					has_country_leader = {
+						character = GER_wilhelm_ii
+						ruling_only = yes
+					}
+				}
+			}
+			create_country_leader = {
+				name = "Wilhelm II"
+				desc = ""
+				picture = "gfx/leaders/GER/Portrait_GER_wilhelmii_emperor.dds"
+				expire = "1965.1.1"
+				ideology = monarchism
+				traits = {
+					anti_democrat
+					imperial_connections
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				GER = {
+					has_country_leader = {
+						character = GER_wilhelm_iii
+						ruling_only = yes
+					}
+				}
+			}
+			create_country_leader = {
+				name = "Wilhelm III"
+				desc = ""
+				picture = GFX_portrait_ger_wilhelm_iii
+				expire = "1965.1.1"
+				ideology = monarchism
+				traits = {
+					popular_figurehead2
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				GER = {
+					has_country_leader = {
+						character = GER_victoria
+						ruling_only = yes
+					}
+				}
+			}
+			create_country_leader = {
+				name = "Victoria"
+				desc = ""
+				picture = GFX_portrait_ger_victoria_louise
+				expire = "1965.1.1"
+				ideology = monarchism
+				female = yes
+				traits = {
+					kaiserin_of_the_people
+					victoria_iii
+				}
+			}
+		}
+	}
+	else = {
+		create_country_leader = {
+			name = ENG_ernest_august
+			desc = ""
+			picture = GFX_portrait_HAN_ernest_august
+			expire = "1965.1.1"
+			ideology = monarchism
+			traits = {
+			}
+		}
+	}
+}
+
+ENG_modify_army_modifier = {
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = ENG_royal_army_modifier }
+		}
+		custom_effect_tooltip = ENG_modify_ra_dynamic_modifier_tt
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = { modifier = ENG_communist_army_modifier }
+		}
+		custom_effect_tooltip = ENG_modify_communist_army_modifier_tt
+	}
+}
+
+ENG_modify_airforce_modifier = {
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = ENG_royal_air_force_dynamic_modifier }
+		}
+		custom_effect_tooltip = ENG_modify_airforce_modifier_tt
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = { modifier = ENG_communist_air_force_dynamic_modifier }
+		}
+		custom_effect_tooltip = ENG_modify_communist_airforce_modifier_tt
+	}
+}
+
+ENG_modify_navy_modifier = {
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = ENG_rn_dynamic_modifier }
+		}
+		custom_effect_tooltip = ENG_modify_royal_navy_modifier_tt
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = { modifier = ENG_red_navy_dynamic_modifier }
+		}
+		custom_effect_tooltip = ENG_modify_red_navy_modifier_tt
+	}
+}
+
+ENG_modify_economy_modifier = {
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = ENG_stagnant_industry_modifier }
+		}
+		custom_effect_tooltip = ENG_stagnant_industry_modifier_tt
+	}
+	else_if = {
+		limit = {
+			has_dynamic_modifier = { modifier = ENG_industrial_powerhouse_modifier }
+		}
+		custom_effect_tooltip = ENG_industrial_powerhouse_modifier_tt
+	}
+}

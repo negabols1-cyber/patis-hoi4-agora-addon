@@ -1,0 +1,443 @@
+scripted_gui = {
+
+	st_country_powers = {
+
+		context_type = selected_country_context
+
+		window_name = "st_subject_powers_container"
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				has_country_flag = transfer_enabled
+			}
+			NOT = {
+				has_global_flag = EF_disabled_stt
+			}
+		}
+
+		effects = {
+
+			mark_all_states_click = {
+				set_temp_variable = { ROOT.marks = this}
+				var:marks = {
+					every_owned_state = {
+						limit = {
+							NOT = { has_state_flag = marked_for_transfer }
+							NOT = { 
+								is_in_array = {
+									array = ROOT.EF_marked_for_transfer
+									value = THIS
+								}
+							}
+							NOT = { has_dynamic_modifier = { modifier = international_city } }
+							NOT = { has_dynamic_modifier = { modifier = international_city_2 } }
+						}
+						add_to_array = {
+							array = ROOT.EF_marked_for_transfer
+							value = THIS
+						}
+						set_state_flag = marked_for_transfer
+						add_to_variable = { ROOT.marked_states = 1 }
+						#set_border_war = yes
+					}
+				}
+			}
+
+			mark_colonial_states_click  = {
+				set_temp_variable = { ROOT.marks = this}
+				var:marks = {
+					every_owned_state = {
+						limit = {
+							NOT = { is_in_home_area = yes }
+							NOT = { is_core_of = PREV }
+							NOT = { has_state_flag = marked_for_transfer }
+							NOT = { 
+								is_in_array = {
+									array = ROOT.EF_marked_for_transfer
+									value = THIS
+								}
+							}
+							NOT = { has_dynamic_modifier = { modifier = international_city } }
+							NOT = { has_dynamic_modifier = { modifier = international_city_2 } }
+						}
+						add_to_array = {
+							array = ROOT.EF_marked_for_transfer
+							value = THIS
+						}
+						set_state_flag = marked_for_transfer
+						add_to_variable = { ROOT.marked_states = 1 }
+						#set_border_war = yes
+					}
+				}
+			}
+
+			clear_all_markings_click = {
+				ROOT = {
+					set_variable = { marked_states = 0 }
+				}
+				every_state = {
+					limit = {
+						has_state_flag = marked_for_transfer
+						OR = {
+							is_owned_and_controlled_by = ROOT
+							any_country = {
+								is_ai = yes
+								is_subject_of = ROOT
+								owns_state = PREV
+								NOT = {
+									has_autonomy_state = autonomy_supervised_state
+									has_autonomy_state = autonomy_protectorate
+								}
+							}
+						}
+					}
+					clr_state_flag = marked_for_transfer
+					#set_border_war = no
+				}
+				clear_array = ROOT.EF_marked_for_transfer
+			}
+			resource_transfer_click = {
+				set_country_flag = resource_award_states
+
+			}
+			disable_resource_transfer_click = { 
+				clr_country_flag = resource_award_states
+			}
+			award_states_click = {
+				ROOT = {
+					set_variable = { marked_states = 0 }
+				}
+				set_temp_variable = { ROOT.taker = this}
+				for_each_loop = {
+					array = ROOT.EF_marked_for_transfer
+					value = v
+					var:v = {
+						if = {
+							limit = {
+								var:v = {
+									NOT = {
+										is_owned_and_controlled_by = ROOT
+										owner = {
+											is_subject_of = ROOT
+											is_ai = yes
+											owns_state = var:v
+											NOT = {
+												has_autonomy_state = autonomy_supervised_state
+												has_autonomy_state = autonomy_protectorate
+											}
+										}
+									}
+								}
+							}
+							remove_from_array = {
+								array = ROOT.EF_marked_for_transfer
+							}
+							clr_state_flag = marked_for_transfer
+						}
+					}
+				}
+				ROOT = {
+					if = {
+						limit = { 
+							has_country_flag = resource_award_states
+						}
+						for_each_loop = {
+							array = ROOT.EF_marked_for_transfer
+							value = v
+							var:v = {
+								if = {
+									limit = {
+										NOT = {
+											steel > 0
+											coal > 0
+											chromium > 0
+											tungsten > 0
+											aluminium >	0
+											oil > 0
+										}
+										OR = {
+											NOT = {  
+												ROOT = { 
+													has_resources_rights = {
+														state = var:v
+													}
+												}
+												any_of_scopes = {
+													array = ROOT.subjects
+													has_resources_rights = {
+														state = var:v
+													}
+												}
+											}
+										}
+									}
+									PREV.PREV = { 
+										remove_from_array = {
+											array = ROOT.EF_marked_for_transfer
+										}
+										clr_state_flag = marked_for_transfer
+									}
+								}
+							}
+						}
+						for_each_loop = {
+							array = ROOT.EF_marked_for_transfer
+							value = v
+							var:v = { 
+								if = {
+									limit = { 
+										OR = { 
+											steel > 0
+											coal > 0
+											chromium > 0
+											tungsten > 0
+											aluminium >	0
+											oil > 0
+										}
+										OR = { 
+											ROOT = { 
+												has_resources_rights = {
+													state = PREV
+												}
+											}
+											any_of_scopes = {
+												array = ROOT.subjects
+												has_resources_rights = {
+													state = PREV
+												}
+											}
+										}
+									}
+									owner = {
+										if = {
+											limit = { 
+												is_subject = yes
+											}
+											set_temp_variable = {
+												taker = overlord.taker
+											}
+										}
+										give_resource_rights = {
+											receiver = taker
+											state = PREV
+										}
+										#log = "[PREV.GetName]"
+										#log = "[?taker.GetTag]"
+									}
+								}
+								set_state_flag = EF_res_transfered
+								clr_state_flag = marked_for_transfer	
+							}
+						}
+						clear_array = ROOT.EF_marked_for_transfer
+					}
+					else = {
+						for_each_loop = {
+							array = ROOT.EF_marked_for_transfer
+							value = v
+							var:v = { 
+								clr_state_flag = marked_for_transfer
+							}
+							var:taker = {
+								transfer_state = var:v	
+							}
+						}
+						clear_array = ROOT.EF_marked_for_transfer
+
+					}
+				}
+			}
+		}
+
+		triggers = {
+			resource_transfer_visible = {
+				NOT = { 
+					has_country_flag = resource_award_states
+				}
+				set_temp_variable = { ROOT.taker = this}
+				ROOT = {
+					tag = var:taker
+				}
+			}
+			disable_resource_transfer_visible = {
+				has_country_flag = resource_award_states
+				set_temp_variable = { ROOT.taker = this}
+				ROOT = {
+					tag = var:taker
+				}
+			}
+			mark_all_states_click_enabled = {
+				check_variable = { 
+					ROOT.EF_marked_for_transfer = 0
+				}
+			}
+			mark_all_states_visible = {
+				set_temp_variable = { ROOT.taker = this}
+				OR = {
+					ROOT = {
+						tag = var:taker
+					}
+					AND = {
+						has_game_rule = {
+							rule = allow_subject_transfers
+							option = FREE
+						}
+						any_subject_country = {
+							is_subject_of = ROOT
+							is_ai = yes
+							NOT = {
+								has_autonomy_state = autonomy_supervised_state
+								has_autonomy_state = autonomy_protectorate
+							}
+						}
+					}
+					AND = {
+						has_game_rule = {
+							rule = allow_subject_transfers
+							option = LOW_AUTONOMY_ONLY
+						}
+						any_subject_country = {
+							is_subject_of = ROOT
+							is_ai = yes
+							compare_autonomy_state < autonomy_colony
+							NOT = {
+								has_autonomy_state = autonomy_supervised_state
+								has_autonomy_state = autonomy_protectorate
+							}
+						}
+					}
+				}
+			}
+
+			mark_colonial_states_click_enabled = {
+				any_owned_state = {
+					NOT = { is_in_home_area = yes }
+					NOT = { has_state_flag = marked_for_transfer }
+					NOT = { is_core_of = this }
+				}
+			}
+
+			mark_colonial_states_visible = {
+				set_temp_variable = { ROOT.taker = this}
+				OR = {
+					ROOT = {
+						tag = var:taker
+					}
+					AND = {
+						has_game_rule = {
+							rule = allow_subject_transfers
+							option = FREE
+						}
+						any_subject_country = {
+							is_subject_of = ROOT
+							is_ai = yes
+							NOT = {
+								has_autonomy_state = autonomy_supervised_state
+								has_autonomy_state = autonomy_protectorate
+							}
+						}
+					}
+					AND = {
+						has_game_rule = {
+							rule = allow_subject_transfers
+							option = LOW_AUTONOMY_ONLY
+						}
+						any_subject_country = {
+							is_subject_of = ROOT
+							is_ai = yes
+							compare_autonomy_state < autonomy_colony
+							NOT = {
+								has_autonomy_state = autonomy_supervised_state
+								has_autonomy_state = autonomy_protectorate
+							}
+						}
+					}
+				}
+			}
+
+			clear_all_markings_click_enabled = {
+				check_variable = { ROOT.marked_states > 0 }
+			}
+
+			award_states_click_enabled = {
+				set_temp_variable = { ROOT.taker = this}
+				check_variable = { ROOT.marked_states > 0 }
+				ROOT = {
+					if = {
+						limit = { 
+							has_country_flag = resource_award_states
+						}
+						all_of_scopes = {
+							array = ROOT.EF_marked_for_transfer
+							OR = {
+								ROOT = {
+									has_resources_rights = {
+										state = PREV
+									}
+								}
+								
+								any_of_scopes = {
+									array = ROOT.subjects
+									has_resources_rights = {
+										state = PREV
+									}
+								}
+							}
+						}
+						ROOT = { 
+							any_of_scopes = {
+								array = ROOT.EF_marked_for_transfer
+								owner = {
+									if = {
+										limit = {
+											is_subject_of = ROOT
+										}
+										set_temp_variable = {
+											taker = overlord.taker
+										}
+										if = { 
+											limit = {
+												tag = var:taker
+											}
+											NOT = {
+												has_resources_rights = {
+													state = PREV
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+						ROOT = {
+							NOT = { 
+								tag = var:taker
+								any_owned_state = {
+									has_state_flag = marked_for_transfer
+									NOT = { 
+										ROOT = { 
+											has_resources_rights = {
+												state = PREV
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				ROOT = {
+					any_owned_state = {
+						NOT = {
+							has_state_flag = marked_for_transfer
+						}
+					}
+				}
+			}
+
+		}
+
+	}
+}
+

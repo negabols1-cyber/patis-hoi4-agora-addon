@@ -1,0 +1,528 @@
+IRE_balance_of_power = {
+	initial_value = 0.1
+	left_side = IRE_british_side
+	right_side = IRE_irish_side
+	decision_category = IRE_bop_decisions
+
+	### Neutral status
+	range = {
+		id = IRE_balance_range
+		min = -0.10
+		max = 0.10
+		modifier = {
+		}
+		on_activate = {
+			if = {
+				limit = {
+					has_idea = IRE_british_influence_1
+				}
+				swap_ideas = {
+					remove_idea = IRE_british_influence_1
+					add_idea = IRE_british_influence_4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = IRE_british_influence_2
+				}
+				swap_ideas = {
+					remove_idea = IRE_british_influence_2
+					add_idea = IRE_british_influence_4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = IRE_british_influence_3
+				}
+				swap_ideas = {
+					remove_idea = IRE_british_influence_3
+					add_idea = IRE_british_influence_4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = IRE_british_influence_5
+				}
+				swap_ideas = {
+					remove_idea = IRE_british_influence_5
+					add_idea = IRE_british_influence_4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = IRE_british_influence_6
+				}
+				swap_ideas = {
+					remove_idea = IRE_british_influence_6
+					add_idea = IRE_british_influence_4
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = IRE_british_influence_7
+				}
+				swap_ideas = {
+					remove_idea = IRE_british_influence_7
+					add_idea = IRE_british_influence_4
+				}
+			}
+			else = {
+				effect_tooltip = {
+					add_ideas = IRE_british_influence_4
+				}
+			}
+
+		}
+		on_deactivate = {
+
+		}
+	}
+
+	side = {
+		id = IRE_british_side
+		icon = GFX_bop_SWI_centralization_council_side
+
+		range = {
+			id = IRE_british_medium_control_range
+			min = -0.5
+			max = -0.1
+			modifier = {
+
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_idea = IRE_british_influence_1
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_1
+						add_idea = IRE_british_influence_3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_2
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_2
+						add_idea = IRE_british_influence_3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_4
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_4
+						add_idea = IRE_british_influence_3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_5
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_5
+						add_idea = IRE_british_influence_3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_6
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_6
+						add_idea = IRE_british_influence_3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_7
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_7
+						add_idea = IRE_british_influence_3
+					}
+				}
+				else = {
+					effect_tooltip = {
+						add_ideas = IRE_british_influence_3
+					}
+				}
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = IRE_british_high_control_range
+			min = -0.9
+			max = -0.5
+			modifier = {
+
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_idea = IRE_british_influence_1
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_1
+						add_idea = IRE_british_influence_2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_3
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_3
+						add_idea = IRE_british_influence_2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_4
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_4
+						add_idea = IRE_british_influence_2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_5
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_5
+						add_idea = IRE_british_influence_2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_6
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_6
+						add_idea = IRE_british_influence_2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_7
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_7
+						add_idea = IRE_british_influence_2
+					}
+				}
+				else = {
+					effect_tooltip = {
+						add_ideas = IRE_british_influence_2
+					}
+				}
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = IRE_british_total_control_range
+			min = -1
+			max = -0.9
+			modifier = {
+
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_idea = IRE_british_influence_2
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_2
+						add_idea = IRE_british_influence_1
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_3
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_3
+						add_idea = IRE_british_influence_1
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_4
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_4
+						add_idea = IRE_british_influence_1
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_5
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_5
+						add_idea = IRE_british_influence_1
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_6
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_6
+						add_idea = IRE_british_influence_1
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_7
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_7
+						add_idea = IRE_british_influence_1
+					}
+				}
+				else = {
+					effect_tooltip = {
+						add_ideas = IRE_british_influence_1
+					}
+				}
+			}
+			on_deactivate = {
+
+			}
+		}
+	}
+
+	side = {
+		id = IRE_irish_side
+		icon = GFX_bop_SWI_centralization_canton_side
+
+		range = {
+			id = IRE_irish_medium_control_range
+			min = 0.1
+			max = 0.5
+			modifier = {
+
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_idea = IRE_british_influence_1
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_1
+						add_idea = IRE_british_influence_5
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_2
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_2
+						add_idea = IRE_british_influence_5
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_3
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_3
+						add_idea = IRE_british_influence_5
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_4
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_4
+						add_idea = IRE_british_influence_5
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_6
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_6
+						add_idea = IRE_british_influence_5
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_7
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_7
+						add_idea = IRE_british_influence_5
+					}
+				}
+				else = {
+					effect_tooltip = {
+						add_ideas = IRE_british_influence_5
+					}
+				}
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = IRE_irish_high_control_range
+			min = 0.5
+			max = 0.9
+			modifier = {
+
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_idea = IRE_british_influence_1
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_1
+						add_idea = IRE_british_influence_6
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_2
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_2
+						add_idea = IRE_british_influence_6
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_3
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_3
+						add_idea = IRE_british_influence_6
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_4
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_4
+						add_idea = IRE_british_influence_6
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_5
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_5
+						add_idea = IRE_british_influence_6
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_7
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_7
+						add_idea = IRE_british_influence_6
+					}
+				}
+				else = {
+					effect_tooltip = {
+						add_ideas = IRE_british_influence_6
+					}
+				}
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = IRE_irish_total_control_range
+			min = 0.9
+			max = 1
+			modifier = {
+
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_idea = IRE_british_influence_1
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_1
+						add_idea = IRE_british_influence_7
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_2
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_2
+						add_idea = IRE_british_influence_7
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_3
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_3
+						add_idea = IRE_british_influence_7
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_4
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_4
+						add_idea = IRE_british_influence_7
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_5
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_5
+						add_idea = IRE_british_influence_7
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = IRE_british_influence_6
+					}
+					swap_ideas = {
+						remove_idea = IRE_british_influence_6
+						add_idea = IRE_british_influence_7
+					}
+				}
+				else = {
+					effect_tooltip = {
+						add_ideas = IRE_british_influence_7
+					}
+				}
+			}
+			on_deactivate = {
+
+			}
+		}
+	}
+}

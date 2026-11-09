@@ -1,0 +1,190 @@
+PAR_initiate_balance_of_power = {
+	set_power_balance = {
+		id = PAR_military_leader_bop
+		left_side = PAR_military_side # will keep the last set side if not specified
+		right_side = PAR_ayala_side # will keep the last set side if not specified
+		set_value = -0.5 # if specified will set the value of the power balance, this option will override the effect of set_default so the two options should not be used together. if neither set_default or set_value is specified the current value of the power balance will not change
+	}
+}
+
+PAR_move_5_leader = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = 0.05
+	}
+}
+
+PAR_move_10_leader = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = 0.1
+	}
+}
+
+PAR_move_15_leader = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = 0.15
+	}
+}
+
+PAR_move_20_leader = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = 0.2
+	}
+}
+
+PAR_move_25_leader = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = 0.25
+	}
+}
+
+PAR_move_35_leader = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = 0.35
+	}
+}
+
+PAR_move_70_leader = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = 0.7
+	}
+}
+
+PAR_move_5_military = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = -0.05
+	}
+}
+
+PAR_move_10_military = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = -0.1
+	}
+}
+
+PAR_move_15_military = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = -0.15
+	}
+}
+
+PAR_move_20_military = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = -0.2
+	}
+}
+
+PAR_move_35_military = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = -0.35
+	}
+}
+
+PAR_move_70_military = {
+	add_power_balance_value = {
+		id = PAR_military_leader_bop
+		value = -0.7
+	}
+}
+
+PAR_bop_remove_bop_effect = {
+	remove_power_balance = { id = PAR_military_leader_bop }
+}
+
+PAR_improve_worn_out_army = {
+	if = {
+		limit = { has_idea = PAR_worn_out_army_1 }
+		swap_ideas = {
+			remove_idea = PAR_worn_out_army_1
+			add_idea = PAR_worn_out_army_2
+		}
+	}
+	else_if = {
+		limit = { has_idea = PAR_worn_out_army_2 }
+		remove_ideas = PAR_worn_out_army_2
+	}
+	else = {
+		add_command_power = 15
+		army_experience = 5
+	}
+}
+
+PAR_worsen_public_concern = {
+	if = {
+		limit = { has_idea = PAR_public_concern_1 }
+		swap_ideas = {
+			remove_idea = PAR_public_concern_1
+			add_idea = PAR_public_concern_2
+		}
+	}
+	else_if = {
+		limit = { has_idea = PAR_public_concern_2 }
+		swap_ideas = {
+			remove_idea = PAR_public_concern_2
+			add_idea = PAR_public_concern_3
+		}
+	}
+	else_if = {
+		limit = { has_idea = PAR_public_concern_3 }
+		swap_ideas = {
+			remove_idea = PAR_public_concern_3
+			add_idea = PAR_public_concern_4
+		}
+	}
+	else_if = {
+		limit = { has_idea = PAR_public_concern_4 }
+		swap_ideas = {
+			remove_idea = PAR_public_concern_4
+			add_idea = PAR_public_concern_5
+		}
+	}
+	else = {
+		add_political_power = -25
+		PAR_move_15_military = yes
+	}
+}
+
+PAR_improve_public_concern = {
+	if = {
+		limit = { has_idea = PAR_public_concern_5 }
+		swap_ideas = {
+			remove_idea = PAR_public_concern_5
+			add_idea = PAR_public_concern_4
+		}
+	}
+	else_if = {
+		limit = { has_idea = PAR_public_concern_4 }
+		swap_ideas = {
+			remove_idea = PAR_public_concern_4
+			add_idea = PAR_public_concern_3
+		}
+	}
+	else_if = {
+		limit = { has_idea = PAR_public_concern_3 }
+		swap_ideas = {
+			remove_idea = PAR_public_concern_3
+			add_idea = PAR_public_concern_2
+		}
+	}
+	else_if = {
+		limit = { has_idea = PAR_public_concern_2 }
+		swap_ideas = {
+			remove_idea = PAR_public_concern_2
+			add_idea = PAR_public_concern_1
+		}
+	}
+	else = {
+		PAR_move_15_leader = yes
+	}
+}

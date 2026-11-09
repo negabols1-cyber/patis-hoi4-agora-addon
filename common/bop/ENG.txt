@@ -1,0 +1,439 @@
+ENG_ideology_balance = {
+	initial_value = 0.1
+	left_side = ENG_democratic_council_side
+	right_side = ENG_a_change_in_course_side
+	decision_category = ENG_ideology_balance_category
+
+	### Neutral status
+	range = {
+		id = ENG_balance_range
+		min = -0.10
+		max = 0.10
+		modifier = {
+		}
+		on_activate = {
+
+		}
+		on_deactivate = {
+
+		}
+	}
+
+	### Democratic Council
+	side = {
+		id = ENG_democratic_council_side
+		icon = GFX_bop_SWI_centralization_canton_side
+
+		range = {
+			id = ENG_democratic_council_low_control_range
+			min = -0.3
+			max = -0.1
+			modifier = {
+				political_advisor_cost_factor = -0.1
+				puppet_cost_factor = -0.05
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_democratic_council_medium_control_range
+			min = -0.6
+			max = -0.3
+			modifier = {
+				democratic_drift = 0.01
+				civil_war_involvement_tension = -0.02
+				political_advisor_cost_factor = -0.1
+				guarantee_tension = -0.02
+				puppet_cost_factor = -0.1
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_democratic_council_high_control_range
+			min = -0.9
+			max = -0.6
+			modifier = {
+				democratic_drift = 0.02
+				civil_war_involvement_tension = -0.05
+				political_advisor_cost_factor = -0.1
+				guarantee_tension = -0.05
+				puppet_cost_factor = -0.25
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_democratic_council_total_control_range
+			min = -1
+			max = -0.9
+			modifier = {
+				offensive_war_stability_factor = -0.1
+				democratic_drift = 0.05
+				civil_war_involvement_tension = -0.1
+				political_advisor_cost_factor = -0.15
+				guarantee_tension = -0.1
+				puppet_cost_factor = -0.5
+				starting_compliance = 0.1
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+	}
+
+	### A Change in Course
+	side = {
+		id = ENG_a_change_in_course_side
+		icon = GFX_bop_ETH_anarchist_side
+
+		range = {
+			id = ENG_a_change_in_course_low_control_range
+			min = 0.1
+			max = 0.3
+			modifier = {
+				democratic_drift = -0.05
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_a_change_in_course_medium_control_range
+			min = 0.3
+			max = 0.6
+			modifier = {
+				democratic_drift = -0.05
+				fascism_drift = 0.01
+				neutrality_drift = 0.01
+				communism_drift = 0.01
+				stability_factor = -0.05
+				political_power_factor = 0.05
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_a_change_in_course_high_control_range
+			min = 0.6
+			max = 0.9
+			modifier = {
+				democratic_drift = -0.05
+				fascism_drift = 0.01
+				neutrality_drift = 0.01
+				communism_drift = 0.01
+				stability_factor = -0.1
+				political_power_factor = 0.1
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_a_change_in_course_total_control_range
+			min = 0.9
+			max = 1
+			modifier = {
+				democratic_drift = -0.05
+				stability_factor = 0.05
+				war_support_factor = 0.05
+				political_power_factor = 0.1
+				neutrality_drift = 0.05
+			}
+			on_activate = {
+				set_power_balance_gfx = {
+					id = ENG_ideology_balance
+					side = ENG_a_change_in_course_side
+					gfx = GFX_idea_eng_the_sun_never_sets
+				}
+			}
+			on_deactivate = {
+				set_power_balance_gfx = {
+					id = ENG_ideology_balance
+					side = ENG_a_change_in_course_side
+					gfx = GFX_bop_ETH_anarchist_side
+				}
+			}
+		}
+	}
+
+	### Edward
+	side = {
+		id = ENG_edward_side
+		icon = GFX_bop_ENG_king_side
+
+		range = {
+			id = ENG_edward_low_control_range
+			min = 0.1
+			max = 0.3
+			modifier = {
+				stability_factor = 0.01
+				political_power_factor = 0.05
+				max_surrender_limit_offset = 0.02
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_edward_medium_control_range
+			min = 0.3
+			max = 0.6
+			modifier = {
+				stability_factor = 0.02
+				war_support_factor = 0.01
+				political_power_factor = -0.02
+				max_surrender_limit_offset = 0.04
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_edward_high_control_range
+			min = 0.6
+			max = 0.9
+			modifier = {
+				stability_factor = 0.03
+				war_support_factor = 0.02
+				max_surrender_limit_offset = 0.06
+				political_power_factor = -0.03
+				drift_defence_factor = 0.1
+				annex_cost_factor = -0.05
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_edward_total_control_range
+			min = 0.9
+			max = 1
+			modifier = {
+				stability_factor = 0.05
+				war_support_factor = 0.05
+				max_surrender_limit_offset = 0.08
+				political_power_factor = -0.05
+				drift_defence_factor = 0.2
+				annex_cost_factor = -0.1
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+	}
+
+	### Mosley
+	side = {
+		id = ENG_mosley_side
+		icon = GFX_bop_ENG_fascist_faction
+
+		range = {
+			id = ENG_mosley_low_control_range
+			min = 0.1
+			max = 0.3
+			modifier = {
+				stability_factor = -0.03
+				experience_gain_army = 0.05 #Good
+				mobilization_laws_cost_factor = -0.1 #Good
+				economy_cost_factor = -0.1 #Good
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_mosley_medium_control_range
+			min = 0.3
+			max = 0.6
+			modifier = {
+				stability_factor = -0.05
+				experience_gain_army = 0.05 #Good
+				industrial_capacity_factory = 0.05 #Good
+				mobilization_laws_cost_factor = -0.15 #Good
+				economy_cost_factor = -0.15 #Good
+			}
+			on_activate = {
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_mosley_high_control_range
+			min = 0.6
+			max = 0.9
+			modifier = {
+				stability_factor = -0.08
+				experience_gain_army = 0.1 #Good
+				industrial_capacity_factory = 0.05 #Good
+				mobilization_laws_cost_factor = -0.20 #Good
+				economy_cost_factor = -0.20 #Good
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_mosley_total_control_range
+			min = 0.9
+			max = 1
+			modifier = {
+				experience_gain_army = 0.1 #Good
+				industrial_capacity_factory = 0.1 #Good
+				production_lack_of_resource_penalty_factor = -0.10 #Good
+				mobilization_laws_cost_factor = -0.25 #Good
+				economy_cost_factor = -0.25 #Good
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+	}
+
+	### Communist
+	side = {
+		id = ENG_communism_side
+		icon = GFX_bop_ITA_communism_side
+
+		range = {
+			id = ENG_communism_low_control_range
+			min = 0.1
+			max = 0.3
+			modifier = {
+				communism_drift = 0.01
+				mobilization_speed = 0.03
+				decryption_factor = 0.02
+				non_core_manpower = 0.02
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_communism_medium_control_range
+			min = 0.3
+			max = 0.6
+			modifier = {
+				communism_drift = 0.02
+				mobilization_speed = 0.06
+				decryption_factor = 0.04
+				non_core_manpower = 0.04
+			}
+			on_activate = {
+
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_communism_high_control_range
+			min = 0.6
+			max = 0.9
+			modifier = {
+				communism_drift = 0.03
+				mobilization_speed = 0.09
+				decryption_factor = 0.06
+				non_core_manpower = 0.06
+				supply_node_range = 0.05
+			}
+			on_activate = {
+			}
+			on_deactivate = {
+
+			}
+		}
+
+		range = {
+			id = ENG_communism_total_control_range
+			min = 0.9
+			max = 1
+			modifier = {
+				stability_factor = 0.05
+				mobilization_speed = 0.1
+				communism_drift = 0.05
+				decryption_factor = 0.1
+				non_core_manpower = 0.1
+				supply_node_range = 0.1
+			}
+			on_activate = {
+				set_power_balance_gfx = {
+					id = ENG_ideology_balance
+					side = ENG_communism_side
+					gfx = GFX_bop_ITA_communism_improved_side
+				}
+			}
+			on_deactivate = {
+				set_power_balance_gfx = {
+					id = ENG_ideology_balance
+					side = ENG_communism_side
+					gfx = GFX_bop_ITA_communism_side
+				}
+			}
+		}
+	}
+}

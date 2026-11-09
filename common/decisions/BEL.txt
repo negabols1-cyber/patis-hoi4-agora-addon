@@ -1,0 +1,1964 @@
+BEL_belgian_political_decisions = {
+
+	BEL_1936_elections = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		icon = ger_mefo_bills
+
+		available = {
+			always = no #Focus
+		}
+
+		activation = {
+			always = no #Focus
+		}
+
+		days_mission_timeout = 123
+		is_good = yes
+		fire_only_once = yes
+
+		complete_effect = {
+		}
+
+		timeout_effect = {
+			set_country_flag = BEL_elections_finalized
+			country_event = belgium.1
+		}
+	}
+
+	BEL_postpone_election = {
+		icon = GFX_decision_hol_draw_up_staff_plans
+		allowed = {
+			original_tag = BEL
+		}
+		available = {
+		}
+
+		visible = {
+			has_active_mission = BEL_1936_elections
+			NOT = {
+				has_global_flag = his_only
+			}
+		}
+
+		fire_only_once = no
+
+		cost = BEL_postpone_election_cost
+		days_re_enable = 25
+
+		complete_effect = {
+			add_days_mission_timeout = {
+				mission = BEL_1936_elections
+				days = 15
+			}
+			custom_effect_tooltip = BEL_postpone_election_tt
+			BEL_election_stability_debuff = yes
+			hidden_effect = {
+				add_to_variable = { BEL_postpone_election_count = 1 }
+				add_to_variable = { BEL_postpone_election_cost = 15 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				BEL_is_socialist_ai = yes
+			}
+		}
+	}
+
+	BEL_communist_propaganda = {
+		icon = GFX_decision_hol_draw_up_staff_plans
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+		}
+
+		visible = {
+			has_active_mission = BEL_1936_elections
+			has_country_flag = BEL_labour_postpone_election
+		}
+
+		fire_only_once = yes
+		days_remove = 50
+		cost = 50
+		modifier = {
+			communism_drift = 0.05
+			democratic_drift = 0.02
+		}
+
+		remove_effect = {
+			add_popularity = { ideology = communism popularity = 0.02 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				BEL_is_communist_ai = yes
+			}
+		}
+	}
+
+	BEL_neutrality_act = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		icon = ger_mefo_bills
+
+		available = {
+			has_country_flag = BEL_veto_neutrality_act_flag
+		}
+
+		activation = {
+			has_country_flag = BEL_elections_finalized
+			has_country_flag = BEL_national_unity_wins_flag
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+
+		days_mission_timeout = 100
+		is_good = yes
+		fire_only_once = yes
+
+		complete_effect = {
+			add_stability = -0.01
+		}
+
+		timeout_effect = {
+			add_stability = 0.01
+			custom_effect_tooltip = BEL_neutrality_act_tt
+			set_country_flag = BEL_parliament_accepts_neutrality
+		}
+	}
+
+	BEL_veto_neutrality_act = {
+		icon = GFX_decision_hol_draw_up_staff_plans
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+		}
+
+		visible = {
+			has_active_mission = BEL_neutrality_act
+		}
+
+		fire_only_once = yes
+
+		cost = 50
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10
+				BEL_is_alternate_democratic_ai = yes
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = BEL_veto_neutrality_tt
+			set_country_flag = BEL_veto_neutrality_act_flag
+		}
+	}
+
+	BEL_paul_henri_foreign_minister = {
+		icon = GFX_decision_hol_draw_up_staff_plans
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			BEL_paul-henri_spaak = {
+				is_character_slot = political_advisor
+				NOT = { has_trait = BEL_minister_of_foreign_affairs }
+			}
+		}
+
+		visible = {
+			has_country_flag = BEL_appointment_available_spaak_flag
+			BEL_paul-henri_spaak = { NOT = { has_trait = BEL_minister_of_foreign_affairs }}
+		}
+
+		ai_will_do = {
+			base = 5
+		}
+
+		cost = 50
+		fire_only_once = yes
+
+		complete_effect = {
+			BEL_paul-henri_spaak = {
+				add_trait = {
+					slot = political_advisor
+					trait = BEL_minister_of_foreign_affairs
+				}
+			}
+		}
+	}
+
+	BEL_resignation_of_verdinaso = {
+		icon = GFX_decision_SWI_no_elected_president
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_country_leader = {
+				character = BEL_joris_van_severen
+				ruling_only = yes
+			}
+			custom_trigger_tooltip = { #Tooltip
+				tooltip = BEL_verdinaso_government_tt
+				check_variable = { BEL_goverment_formed = 5 } #Verdinaso
+			}
+		}
+
+		visible = {
+			always = no #No Need
+			has_completed_focus = BEL_march_on_the_capital
+			NOT = { has_completed_focus = BEL_meet_with_the_king }
+			check_variable = { BEL_goverment_formed = 5 } #Verdinaso
+			has_country_leader = {
+				character = BEL_joris_van_severen
+				ruling_only = yes
+			}
+		}
+
+		fire_only_once = yes
+
+		cost = 75
+
+		complete_effect = {
+			retire_country_leader = yes
+			if = {
+				limit = {
+					has_character = BEL_staf_de_clercq
+				}
+				promote_character = BEL_staf_de_clercq
+			}
+			else = {
+				promote_character = BEL_hendrik_elias
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = BEL_nati_vnv_long
+				name = BEL_nati_vnv
+			}
+			uncomplete_national_focus = {
+				focus = BEL_meet_with_the_king
+				uncomplete_children = yes
+			}
+			set_variable = { BEL_goverment_formed = 4 } #VNV
+		}
+	}
+
+	BEL_solve_language_problem_in_army_d = {
+		icon = GFX_decision_SWI_no_elected_president
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_idea = BEL_problems_in_the_army2
+			has_army_experience > 50
+		}
+
+		visible = {
+			has_completed_focus = BEL_rapid_mobilization
+			has_completed_focus = BEL_equipment_modernization
+			has_idea = BEL_problems_in_the_army2
+		}
+
+		ai_will_do = {
+			base = 50
+		}
+
+		fire_only_once = yes
+		cost = 50
+		days_remove = 60
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		complete_effect = {
+			army_experience = -50
+		}
+
+		remove_effect = {
+			remove_ideas = BEL_problems_in_the_army2
+		}
+	}
+
+	BEL_fix_economic_recession = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		icon = ger_mefo_bills
+
+		available = {
+			NOT = { has_idea = BEL_economic_recession }
+		}
+
+		activation = {
+			always = no #Focus
+		}
+
+		days_mission_timeout = 300
+		is_good = no
+		fire_only_once = yes
+
+		complete_effect = {
+			add_political_power = 75
+		}
+
+		timeout_effect = {
+			swap_ideas = {
+				remove_idea = BEL_economic_recession
+				add_idea = BEL_economic_recession2
+			}
+		}
+	}
+
+	BEL_propose_benelux_unification = {
+		name = HOL_propose_benelux_unification
+		icon = eng_trade_unions_support
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			is_in_faction_with = HOL
+			HOL = { has_government = ROOT }
+			is_in_faction_with = LUX
+			LUX = { has_government = ROOT }
+		}
+
+		cost = 300
+
+		fire_only_once = yes
+
+		visible = {
+			original_tag = BEL
+			has_completed_focus = BEL_form_the_benelux
+		}
+
+		complete_effect = {
+			effect_tooltip = {
+				set_cosmetic_tag = HOL_benelux_unified
+				HOL = {
+					every_unit_leader = {
+						set_nationality = ROOT
+					}
+				}
+				LUX = {
+					every_unit_leader = {
+						set_nationality = ROOT
+					}
+				}
+				every_country = {
+					limit = {
+						is_subject_of = HOL
+					}
+					ROOT = {
+						set_autonomy = {
+							target = PREV
+							autonomy_state = autonomy_puppet
+							end_wars  = no
+							end_civil_wars = no
+						}
+					}
+				}
+				every_country = {
+					limit = {
+						is_subject_of = LUX
+					}
+					ROOT = {
+						set_autonomy = {
+							target = PREV
+							autonomy_state = autonomy_puppet
+							end_wars  = no
+							end_civil_wars = no
+						}
+					}
+				}
+				annex_country = {
+					target = HOL
+					transfer_troops = yes
+				}
+				annex_country = {
+					target = LUX
+					transfer_troops = yes
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = HOL
+							is_core_of = LUX
+						}
+					}
+					add_core_of = ROOT
+				}
+			}
+			custom_effect_tooltip = BEL_propose_benelux_unification_tt
+			HOL = {
+				country_event = { id = belgium.23 days = 5 random_days = 3 }
+			}
+			LUX = {
+				country_event = { id = belgium.23 days = 1 random_days = 3 }
+			}
+		}
+	}
+}
+
+prospect_for_resources = {
+
+	BEL_uranium_concession_agreement = {
+
+		icon = eng_trade_unions_support
+
+		allowed = {
+			original_tag = BEL
+			#has_dlc = "Battle for the Bosporus"
+		}
+
+		target_array = allies
+
+		target_trigger = {
+			FROM = {
+				is_in_faction_with = ROOT
+				OR = {
+					is_faction_leader = yes
+					AND = {
+						is_major = yes
+						BEL = { is_faction_leader = yes }
+					}
+				}
+			}
+		}
+
+		target_root_trigger = {
+			has_completed_focus = BEL_nuclear_research
+		}
+
+		ai_will_do = {
+			base = 0.1
+			modifier = {
+				factor = 10
+				FROM = {
+					is_ai = no
+					strength_ratio = {
+						tag = ROOT
+						ratio > 1
+					}
+				}
+			}
+		}
+
+		available = {
+			FROM = { has_tech = atomic_research }
+		}
+
+		visible = {
+			controls_state = 48
+		}
+
+		fire_only_once = yes
+		cost = 0
+
+		complete_effect = {
+			FROM = {
+				country_event = belgium.60
+				add_ideas = BEL_congo_uranium_mines
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = BUL_granted_uranium_mining_rights
+				}
+			}
+			remove_ideas = BEL_congo_uranium_mines
+			add_ideas = BEL_uranium_concession_agreement_ns
+		}
+	}
+}
+
+BEL_defence_our_country = {
+
+	BEL_start_rapid_armament = {
+		icon = GFX_decision_hol_draw_up_staff_plans
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_completed_focus = BEL_prepare_for_inevitable
+			GER = { has_war_with_major = yes }
+		}
+
+		visible = {
+			has_completed_focus = BEL_prepare_for_inevitable
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 5
+				threat > 0.5
+			}
+		}
+
+		fire_only_once = yes
+		cost = 50
+		days_remove = 75
+
+		complete_effect = {
+			add_stability = -0.05
+		}
+
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	BEL_increase_weapon_production = {
+		icon = GFX_decision_hol_attract_foreign_investors
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			OR = {
+				threat > 0.3
+				has_war_support > 0.55
+			}
+			custom_trigger_tooltip = {
+				tooltip = BEL_increase_weapon_production_tt
+			}
+		}
+
+		visible = {
+			has_completed_focus = BEL_prepare_for_inevitable
+			check_variable = { var = BEL_increase_weapon_production_var value = 2 compare = less_than }
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 5
+				threat > 0.5
+			}
+		}
+
+		fire_only_once = no
+		cost = 50
+		days_remove = 60
+
+		modifier = {
+			industrial_capacity_factory = 0.05
+			line_change_production_efficiency_factor = 0.05
+		}
+
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1750
+				producer = BEL
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 450
+				producer = BEL
+			}
+			add_to_variable = { BEL_increase_weapon_production_var = 1 }
+		}
+	}
+
+	BEL_resist_foreign_powers = {
+		icon = GFX_decision_eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			GER = { has_war_with_major = yes }
+		}
+
+		visible = {
+			has_completed_focus = BEL_prepare_for_inevitable
+		}
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				factor = 5
+				threat > 0.5
+			}
+		}
+
+		fire_only_once = yes
+		cost = 75
+		days_remove = 50
+
+		remove_effect = {
+			swap_ideas = {
+				remove_idea = BEL_armed_neutrality
+				add_idea = BEL_armed_neutrality2
+			}
+		}
+	}
+
+	BEL_start_making_propaganda = {
+		icon = GFX_decision_eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			prca_tokens_not_maxed_out = yes
+		}
+
+		visible = {
+			has_completed_focus = BEL_prepare_for_inevitable
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 2
+				threat > 0.5
+			}
+		}
+
+		fire_only_once = yes
+		cost = 50
+		days_remove = 30
+
+		remove_effect = {
+			custom_effect_tooltip = prca_tokens_tt_add_30
+			add_to_variable = { THIS.prca_tokens = 30 }
+			THIS_clamp_max_tokens = yes
+		}
+	}
+}
+
+BEL_monarchist_decisions_category = {
+
+	BEL_propagandise_monarchist_sentiment = {
+		icon = eng_propaganda_campaigns
+
+		available = {
+		}
+
+		visible = {
+			NOT = { has_completed_focus = BEL_the_kingdom_of_belgium }
+		}
+
+		modifier = {
+			political_power_cost = 0.15
+		}
+
+		days_remove = 25
+		days_re_enable = 10
+		#fire_only_once = yes
+		cost = 50
+
+		remove_effect =	{
+			add_to_variable = {
+				var = BEL_public_approval
+				value = 5
+				tooltip = BEL_adding_approval_TT
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = { BEL_public_approval < 35 }
+				factor = 300
+			}
+		}
+	}
+
+
+	BEL_prop_up_the_economy = {
+		icon = GFX_decision_generic_consumer_goods
+
+		available = {
+		}
+
+		visible = {
+			OR = {
+				has_idea = BEL_great_depression1
+				has_idea = BEL_great_depression2
+				has_idea = BEL_great_depression3
+				has_idea = BEL_great_depression4
+			}
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.2
+			stability_weekly = 0.005
+		}
+
+		days_remove = 50
+		fire_only_once = yes
+		cost = 60
+
+		remove_effect =	{
+			BEL_lower_great_depression_effects_alt = yes
+			add_to_variable = {
+				var = BEL_public_approval
+				value = 5
+				tooltip = BEL_adding_approval_TT
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 25
+				BEL_check_great_depression_idea = yes
+			}
+		}
+	}
+
+	BEL_assure_the_population_d = {
+		icon = GFX_decision_generic_political_address
+
+		available = {
+		}
+
+		visible = {
+			has_completed_focus = BEL_assure_the_population
+			NOT = { has_completed_focus = BEL_the_kingdom_of_belgium }
+		}
+
+		modifier = {
+			stability_weekly = 0.0075
+		}
+
+		days_remove = 70
+		fire_only_once = yes
+		cost = 75
+
+		remove_effect =	{
+			add_to_variable = {
+				var = BEL_public_approval
+				value = 5
+				tooltip = BEL_adding_approval_TT
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = { BEL_public_approval < 35 }
+				factor = 300
+			}
+		}
+	}
+}
+
+political_actions = {
+
+	BEL_accept_the_title_of_queen = {
+		icon = GFX_decision_category_eng_appeal_to_imperial_loyalists
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		visible = {
+			has_country_leader = {
+				character = BEL_princess_lilian
+				ruling_only = yes
+			}
+		}
+
+		cost = 25
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_leader_name = { ideology = neutrality name = BEL_queen_lilian }
+			remove_country_leader_trait = BEL_princess_of_belgium
+			add_country_leader_trait = BEL_queen_of_belgium
+		}
+	}
+
+	EU_ecsc_conferance = {
+
+		allowed = {
+			OR = {
+				original_tag = BEL
+				original_tag = HOL
+				original_tag = LUX
+				original_tag = FRA
+				original_tag = GER
+				original_tag = WGR
+				original_tag = ITA
+			}
+		}
+
+		icon = ger_mefo_bills
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			always = no #Event
+		}
+
+		visible = {
+			has_country_flag = EU_ecsc_accepted_flag
+		}
+
+		days_mission_timeout = 30
+		is_good = yes
+		fire_only_once = yes
+
+		complete_effect = {
+			add_stability = -0.03
+		}
+
+		timeout_effect = {
+			add_ideas = BEL_european_coal_steel_community
+			hidden_effect = {
+				news_event = { id = belgium_news.1 days = 3 }
+			}
+		}
+	}
+}
+
+BEL_convince_belgium_alliance_category = {
+
+	BEL_approach_the_british = {
+
+		icon = eng_trade_unions_support
+
+		allowed = {
+			tag = BEL
+		}
+
+		available = {
+			ENG = {
+				exists = yes
+			}
+		}
+
+		visible = {
+			ENG = { is_faction_leader = yes }
+		}
+
+		targets = { ENG }
+
+		target_trigger = {
+			FROM = {
+				tag = ENG
+			}
+		}
+
+		days_remove = 10
+
+		cost = 10
+
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 0.1
+		}
+
+		complete_effect = {
+		}
+
+		remove_effect = {
+			ENG = {
+				custom_effect_tooltip = convince_belgium_bel_tt
+				add_to_variable = { var = eng_convince_belgium_alliance_points value = 5 }
+			}
+			set_variable = { var = eng_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+			subtract_from_variable = { var = eng_temp_persuasion_points value = GER.ger_convince_belgium_alliance_points }
+			subtract_from_variable = { var = eng_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+			set_variable = { var = ger_temp_persuasion_points value = GER.ger_convince_belgium_alliance_points }
+			subtract_from_variable = { var = ger_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+			subtract_from_variable = { var = ger_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+			set_variable = { var = fra_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+			subtract_from_variable = { var = fra_temp_persuasion_points value = GER.eng_convince_belgium_alliance_points }
+			subtract_from_variable = { var = fra_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+		}
+	}
+
+	BEL_approach_the_germans = {
+
+		icon = eng_trade_unions_support
+
+		allowed = {
+			tag = BEL
+		}
+
+		available = {
+			GER = {
+				exists = yes
+			}
+		}
+
+		visible = {
+			GER = { is_faction_leader = yes }
+		}
+
+		targets = { GER }
+
+		target_trigger = {
+			FROM = {
+				tag = GER
+			}
+		}
+
+		days_remove = 10
+
+		cost = 10
+
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 0.1
+		}
+
+		complete_effect = {
+		}
+
+		remove_effect = {
+			GER = {
+				custom_effect_tooltip = convince_belgium_bel_tt
+				add_to_variable = { var = ger_convince_belgium_alliance_points value = 5 }
+			}
+			set_variable = { var = eng_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+			subtract_from_variable = { var = eng_temp_persuasion_points value = GER.ger_convince_belgium_alliance_points }
+			subtract_from_variable = { var = eng_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+			set_variable = { var = ger_temp_persuasion_points value = GER.ger_convince_belgium_alliance_points }
+			subtract_from_variable = { var = ger_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+			subtract_from_variable = { var = ger_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+			set_variable = { var = fra_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+			subtract_from_variable = { var = fra_temp_persuasion_points value = GER.eng_convince_belgium_alliance_points }
+			subtract_from_variable = { var = fra_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+		}
+	}
+
+	BEL_approach_the_french = {
+
+		icon = eng_trade_unions_support
+
+		allowed = {
+			tag = BEL
+		}
+
+		available = {
+			FRA = {
+				exists = yes
+			}
+		}
+
+		visible = {
+			FRA = { is_faction_leader = yes }
+		}
+
+		targets = { FRA }
+
+		target_trigger = {
+			FROM = {
+				tag = FRA
+			}
+		}
+
+		days_remove = 10
+
+		cost = 10
+
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 0.1
+		}
+
+		complete_effect = {
+		}
+
+		remove_effect = {
+			FRA = {
+				custom_effect_tooltip = convince_belgium_bel_tt
+				add_to_variable = { var = fra_convince_belgium_alliance_points value = 5 }
+			}
+			set_variable = { var = eng_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+			subtract_from_variable = { var = eng_temp_persuasion_points value = GER.ger_convince_belgium_alliance_points }
+			subtract_from_variable = { var = eng_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+			set_variable = { var = ger_temp_persuasion_points value = GER.ger_convince_belgium_alliance_points }
+			subtract_from_variable = { var = ger_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+			subtract_from_variable = { var = ger_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+			set_variable = { var = fra_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+			subtract_from_variable = { var = fra_temp_persuasion_points value = GER.eng_convince_belgium_alliance_points }
+			subtract_from_variable = { var = fra_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+		}
+	}
+
+	ROOT_send_a_diplomat = {
+
+		icon = eng_trade_unions_demand
+
+		allowed = {
+			OR = {
+				tag = GER
+				tag = ENG
+				tag = FRA
+			}
+		}
+
+		available = {
+			NOT = { has_government = communism }
+		}
+
+		targets = { BEL }
+
+		target_trigger = {
+			FROM = {
+				tag = BEL
+			}
+		}
+
+		days_remove = 20
+
+		cost = 10
+
+		fire_only_once = no
+
+		ai_will_do = {
+			base = 0.01
+			modifier = {
+				factor = 5
+				date > 1938.08.01
+			}
+			modifier = {
+				factor = 10
+				date > 1939.08.01
+			}
+			modifier = {
+				factor = 10
+				date > 1940.01.01
+			}
+		}
+
+		complete_effect = {
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = convince_belgium_bel_tt
+			if = {
+				limit = {
+					tag = GER
+				}
+				add_to_variable = { var = ger_convince_belgium_alliance_points value = 5 }
+			}
+			else_if = {
+				limit = {
+					tag = ENG
+				}
+				add_to_variable = { var = eng_convince_belgium_alliance_points value = 5 }
+			}
+			else_if = {
+				limit = {
+					tag = FRA
+				}
+				add_to_variable = { var = fra_convince_belgium_alliance_points value = 5 }
+			}
+			BEL = {
+				set_variable = { var = ger_temp_persuasion_points value = GER.ger_convince_belgium_alliance_points }
+				subtract_from_variable = { var = ger_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+				subtract_from_variable = { var = ger_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+				set_variable = { var = eng_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+				subtract_from_variable = { var = eng_temp_persuasion_points value = GER.ger_convince_belgium_alliance_points }
+				subtract_from_variable = { var = eng_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+				set_variable = { var = fra_temp_persuasion_points value = FRA.fra_convince_belgium_alliance_points }
+				subtract_from_variable = { var = fra_temp_persuasion_points value = GER.eng_convince_belgium_alliance_points }
+				subtract_from_variable = { var = fra_temp_persuasion_points value = ENG.eng_convince_belgium_alliance_points }
+			}
+		}
+	}
+
+	ROOT_invite_belgium_faction = {
+
+		icon = eng_trade_unions_demand
+
+		allowed = {
+			OR = {
+				tag = GER
+				tag = ENG
+				tag = FRA
+			}
+		}
+
+		available = {
+			NOT = { has_government = communism }
+			if = {
+				limit = {
+					tag = GER
+				}
+				custom_trigger_tooltip = {
+					tooltip = BEL_invite_belgium_faction_tt
+					check_variable = { var = ger_convince_belgium_alliance_points value = 35 compare = greater_than_or_equals }
+				}
+			}
+			else_if = {
+				limit = {
+					tag = ENG
+				}
+				custom_trigger_tooltip = {
+					tooltip = BEL_invite_belgium_faction_tt
+					check_variable = { var = eng_convince_belgium_alliance_points value = 35 compare = greater_than_or_equals }
+				}
+			}
+			else_if = {
+				limit = {
+					tag = FRA
+				}
+				custom_trigger_tooltip = {
+					tooltip = BEL_invite_belgium_faction_tt
+					check_variable = { var = fra_convince_belgium_alliance_points value = 35 compare = greater_than_or_equals }
+				}
+			}
+		}
+
+		targets = { BEL }
+
+		target_trigger = {
+			FROM = {
+				tag = BEL
+			}
+		}
+
+		days_remove = 20
+		cost = 10
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 0.01
+			modifier = {
+				factor = 10
+				date > 1939.06.01
+			}
+			modifier = {
+				factor = 10
+				date > 1940.01.01
+			}
+		}
+
+		complete_effect = {
+			BEL = { set_country_flag = BEL_joining_faction_flag }
+		}
+
+		remove_effect = {
+			BEL = { country_event = { id = generic.5 } }
+		}
+	}
+
+	BEL_join_faction_dec = {
+
+		icon = eng_trade_unions_demand
+
+		allowed = {
+			tag = BEL
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BEL_join_belgium_faction_tt
+				if = {
+					limit = {
+						FROM = { tag = GER }
+					}
+					check_variable = { var = ger_convince_belgium_alliance_points value = 35 compare = greater_than_or_equals }
+				}
+				else_if = {
+					limit = {
+						FROM = { tag = ENG }
+					}
+					check_variable = { var = eng_convince_belgium_alliance_points value = 35 compare = greater_than_or_equals }
+				}
+				else_if = {
+					limit = {
+						FROM = { tag = FRA }
+					}
+					check_variable = { var = fra_convince_belgium_alliance_points value = 35 compare = greater_than_or_equals }
+				}
+			}
+		}
+
+		targets = { FRA ENG GER }
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					AND = {
+						tag = FRA
+						is_faction_leader = yes
+					}
+					AND = {
+						tag = ENG
+						is_faction_leader = yes
+					}
+					AND = {
+						tag = GER
+						is_faction_leader = yes
+					}
+				}
+			}
+		}
+
+		days_remove = 20
+		cost = 10
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 0.01
+			modifier = {
+				factor = 10
+				date > 1939.06.01
+			}
+			modifier = {
+				factor = 10
+				date > 1940.01.01
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = BEL_joining_faction_flag
+		}
+
+		remove_effect = {
+			FROM = { country_event = { id = generic.2 } }
+		}
+	}
+}
+
+BEL_integrate_benelux_decision = {
+
+	DEBUG_setup_variables = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			set_variable = { BEL_integration_hol = 0 }
+			set_variable = { BEL_integration_lux = 0 }
+			set_variable_to_random = {
+				var = BEL_integration_hol
+				max = 0.15
+			}
+			set_variable_to_random = {
+				var = BEL_integration_lux
+				max = 0.15
+			}
+			add_to_variable = {
+				var = BEL_netherlands_integration_progress
+				value = BEL_integration_hol
+			}
+			add_to_variable = {
+				var = BEL_luxembourg_integration_progress
+				value = BEL_integration_lux
+			}
+			clamp_variable = {
+				var = BEL_netherlands_integration_progress
+				min = 0
+				max = 1
+			}
+			clamp_variable = {
+				var = BEL_luxembourg_integration_progress
+				min = 0
+				max = 1
+			}
+			clear_variable = BEL_integration_hol
+			clear_variable = BEL_integration_lux
+		}
+	}
+
+	DEBUG_max_variables = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			set_variable = {
+				var = BEL_netherlands_integration_progress
+				value = 1
+			}
+			set_variable = {
+				var = BEL_luxembourg_integration_progress
+				value = 1
+			}
+			clamp_variable = {
+				var = BEL_netherlands_integration_progress
+				min = 0
+				max = 1
+			}
+			clamp_variable = {
+				var = BEL_luxembourg_integration_progress
+				min = 0
+				max = 1
+			}
+		}
+	}
+
+	DEBUG_min_variables = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			set_variable = {
+				var = BEL_netherlands_integration_progress
+				value = 0
+			}
+			set_variable = {
+				var = BEL_luxembourg_integration_progress
+				value = 0
+			}
+		}
+	}
+
+	BEL_start_integration_campaign = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_government = communism
+		}
+
+		visible = {
+		}
+
+		ai_will_do = {
+			base = 25
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			add_to_variable = {
+				var = BEL_netherlands_integration_progress
+				value = 0.02
+				tooltip = integration_hol_gain_tt
+			}
+			add_to_variable = {
+				var = BEL_luxembourg_integration_progress
+				value = 0.02
+				tooltip = integration_lux_gain_tt
+			}
+			clamp_variable = {
+				var = BEL_netherlands_integration_progress
+				min = 0
+				max = 1
+			}
+			clamp_variable = {
+				var = BEL_luxembourg_integration_progress
+				min = 0
+				max = 1
+			}
+			add_timed_idea = { idea = BEL_integration_campaign days = 180 }
+		}
+	}
+
+	BEL_invite_from_to_the_alliance = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_government = communism
+		}
+
+		visible = {
+			OR = {
+				NOT = { is_in_faction_with = HOL }
+				NOT = { is_in_faction_with = LUX }
+			}
+		}
+
+		targets = { HOL LUX }
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					AND = {
+						tag = HOL
+						NOT = { has_war_with = ROOT }
+					}
+					AND = {
+						tag = LUX
+						NOT = { has_war_with = ROOT }
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				FROM = { NOT = { is_in_faction_with = ROOT } }
+			}
+		}
+
+		cost = 25
+		fire_only_once = yes
+
+		complete_effect = {
+			FROM = {
+				country_event = { id = generic.5 }
+			}
+		}
+	}
+
+	BEL_open_shared_schools = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_government = communism
+			HOL = {
+				NOT = { has_war_with = ROOT }
+			}
+			LUX = {
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		visible = {
+		}
+
+		days_remove = 60
+		cost = 50
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 25
+		}
+
+		modifier = {
+			civilian_factory_use = 1
+			research_speed_factor = 0.04
+		}
+
+		remove_effect = {
+			add_to_variable = {
+				var = BEL_netherlands_integration_progress
+				value = 0.1
+				tooltip = integration_hol_gain_tt
+			}
+			add_to_variable = {
+				var = BEL_luxembourg_integration_progress
+				value = 0.1
+				tooltip = integration_lux_gain_tt
+			}
+			clamp_variable = {
+				var = BEL_netherlands_integration_progress
+				min = 0
+				max = 1
+			}
+			clamp_variable = {
+				var = BEL_luxembourg_integration_progress
+				min = 0
+				max = 1
+			}
+		}
+	}
+
+	BEL_start_integrating_armies = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_government = communism
+		}
+
+		visible = {
+		}
+
+		targets = { HOL LUX }
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					AND = {
+						tag = HOL
+						is_in_faction_with = ROOT
+					}
+					AND = {
+						tag = LUX
+						is_in_faction_with = ROOT
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 25
+		}
+
+		cost = 25
+		fire_only_once = yes
+
+		complete_effect = {
+			army_experience = 10
+			FROM = {
+				country_event = { id = belgium.48 hours = 8 }
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				add_ideas = BEL_army_integration_started
+				FROM = { add_ideas = BEL_army_integration_started }
+				if = {
+					limit = {
+						FROM = { tag = HOL }
+					}
+					add_to_variable = {
+						var = BEL_netherlands_integration_progress
+						value = 0.06
+						tooltip = integration_hol_gain_tt
+					}
+				}
+				else_if = {
+					limit = {
+						FROM = { tag = LUX }
+					}
+					add_to_variable = {
+						var = BEL_luxembourg_integration_progress
+						value = 0.06
+						tooltip = integration_lux_gain_tt
+					}
+				}
+			}
+
+			custom_effect_tooltip = if_they_refuse_tt
+			effect_tooltip = {
+				if = {
+					limit = {
+						FROM = { tag = HOL }
+					}
+					add_to_variable = {
+						var = BEL_netherlands_integration_progress
+						value = -0.04
+						tooltip = integration_hol_gain_tt
+					}
+				}
+				else_if = {
+					limit = {
+						FROM = { tag = LUX }
+					}
+					add_to_variable = {
+						var = BEL_luxembourg_integration_progress
+						value = -0.04
+						tooltip = integration_lux_gain_tt
+					}
+				}
+			}
+		}
+	}
+
+	BEL_complete_the_integration_of_armies = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_government = communism
+			HOL = { has_government = communism }
+			LUX = { has_government = communism }
+		}
+
+		visible = {
+			if = {
+				limit = {
+					HOL = { has_idea = BEL_army_integration_started }
+				}
+				HOL = { is_in_faction_with = ROOT }
+			}
+			if = {
+				limit = {
+					LUX = { has_idea = BEL_army_integration_started }
+				}
+				LUX = { is_in_faction_with = ROOT }
+			}
+			has_idea = BEL_army_integration_started
+		}
+
+		ai_will_do = {
+			base = 25
+		}
+
+		days_remove = 60
+		cost = 75
+		fire_only_once = yes
+
+		remove_effect = {
+			army_experience = 25
+			swap_ideas = {
+				remove_idea = BEL_army_integration_started
+				add_idea = BEL_benelux_armed_forces
+			}
+			set_country_flag = BEL_army_integration_completed
+			for_each_scope_loop = {
+				array = faction_members
+				if = {
+					limit = {
+						NOT = { tag = ROOT }
+						OR = {
+							original_tag = HOL
+							original_tag = LUX
+						}
+						has_idea = BEL_army_integration_started
+					}
+					army_experience = 25
+					swap_ideas = {
+						remove_idea = BEL_army_integration_started
+						add_idea = BEL_benelux_armed_forces
+					}
+					set_country_flag = BEL_army_integration_completed
+				}
+			}
+			if = {
+				limit = {
+					HOL = {
+						OR = {
+							has_idea = BEL_army_integration_started
+							has_idea = BEL_benelux_armed_forces
+						}
+					}
+				}
+				custom_effect_tooltip = BEL_netherlands_army_integration_tt
+				add_to_variable = {
+					var = BEL_netherlands_integration_progress
+					value = 0.09
+					tooltip = integration_hol_gain_tt
+				}
+			}
+			if = {
+				limit = {
+					LUX = {
+						OR = {
+							has_idea = BEL_army_integration_started
+							has_idea = BEL_benelux_armed_forces
+						}
+					}
+				}
+				add_to_variable = {
+					var = BEL_luxembourg_integration_progress
+					value = 0.09
+					tooltip = integration_lux_gain_tt
+				}
+			}
+			clamp_variable = {
+				var = BEL_netherlands_integration_progress
+				min = 0
+				max = 1
+			}
+			clamp_variable = {
+				var = BEL_luxembourg_integration_progress
+				min = 0
+				max = 1
+			}
+		}
+	}
+
+	BEL_open_integration_courses_for_the_new_generation = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_government = communism
+			HOL = {
+				has_government = communism
+				is_in_faction_with = ROOT
+			}
+			LUX = {
+				has_government = communism
+				is_in_faction_with = ROOT
+			}
+		}
+
+		visible = {
+		}
+
+		ai_will_do = {
+			base = 25
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			HOL = {
+				country_event = { id = belgium.49 hours = 8 }
+			}
+			LUX = {
+				country_event = { id = belgium.49 days = 1 random_days = 3 }
+			}
+			custom_effect_tooltip = if_they_accept_tt
+			effect_tooltip = {
+				HOL = { add_timed_idea = { idea = BEL_supports_integration days = 100 } }
+				LUX = { add_timed_idea = { idea = BEL_supports_integration days = 100 } }
+			}
+
+			custom_effect_tooltip = if_they_refuse_tt
+			effect_tooltip = {
+				add_to_variable = {
+					var = BEL_netherlands_integration_progress
+					value = -0.04
+					tooltip = integration_hol_gain_tt
+				}
+				add_to_variable = {
+					var = BEL_luxembourg_integration_progress
+					value = -0.04
+					tooltip = integration_lux_gain_tt
+				}
+			}
+		}
+	}
+
+	BEL_complete_integration_from = {
+
+		allowed = {
+			original_tag = BEL
+		}
+
+		available = {
+			has_government = communism
+			if = {
+				limit = {
+					FROM = { tag = HOL }
+				}
+				check_variable = {
+					var = BEL_netherlands_integration_progress
+					value = 1
+					compare = greater_than_or_equals
+				}
+			}
+			if = {
+				limit = {
+					FROM = { tag = LUX }
+				}
+				check_variable = {
+					var = BEL_luxembourg_integration_progress
+					value = 1
+					compare = greater_than_or_equals
+				}
+			}
+			has_completed_focus = BEL_communist_education_centers
+		}
+
+		visible = {
+		}
+
+		targets = { HOL LUX }
+
+		target_root_trigger = {
+			has_completed_focus = BEL_integrate_benelux
+		}
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					AND = {
+						tag = HOL
+						is_in_faction_with = ROOT
+						ROOT = {
+							check_variable = {
+								var = BEL_netherlands_integration_progress
+								value = 0.75
+								compare = greater_than_or_equals
+							}
+						}
+					}
+					AND = {
+						tag = LUX
+						is_in_faction_with = ROOT
+						ROOT = {
+							check_variable = {
+								var = BEL_luxembourg_integration_progress
+								value = 0.75
+								compare = greater_than_or_equals
+							}
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+		days_remove = 60
+		cost = 100
+		fire_only_once = yes
+
+		modifier = {
+			political_power_cost = 0.5
+		}
+
+		remove_effect = {
+			set_country_flag = BEL_integrate_completed_flag
+			if = {
+				limit = {
+					FROM = { tag = HOL }
+					INS = { is_subject_of = HOL }
+				}
+				puppet = INS
+			}
+			if = {
+				limit = {
+					FROM = {
+						tag = HOL
+						has_country_flag = BEL_army_integration_completed
+					}
+				}
+				HOL = {
+					every_unit_leader = {
+						set_nationality = ROOT
+					}
+				}
+			}
+			annex_country = {
+				target = FROM
+				transfer_troops = yes
+			}
+		}
+	}
+}
+
+political_actions = {
+
+	BEL_benelux_summit_decision = {
+
+		icon = GFX_decision_generic_form_nation
+
+		allowed = {
+			original_tag = BUL
+		}
+
+		available = {
+			any_other_country = {
+				BEL_is_benelux_nation = yes
+				communism > 0.05
+				has_capitulated = no
+				NOT = { has_war_with = ROOT }
+				OR = {
+					is_subject_of = ROOT
+					is_subject = no
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = BEL_rise_socialist_workers
+			has_government = communism
+		}
+
+		cost = 75
+		days_re_enable = 365
+		ai_will_do = {
+			base = 2
+		}
+
+		complete_effect = {
+			every_other_country = {
+				limit = {
+					BEL_is_benelux_nation = yes
+					has_capitulated = no
+					NOT = { has_war_with = ROOT }
+					OR = {
+						is_subject_of = ROOT
+						is_subject = no
+					}
+				}
+				add_popularity = { ideology = communism popularity = 0.1 }
+			}
+			custom_effect_tooltip = BEL_balkan_summit_cooldown_tt
+		}
+	}
+}

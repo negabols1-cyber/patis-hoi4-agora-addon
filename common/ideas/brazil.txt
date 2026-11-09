@@ -1,0 +1,2872 @@
+ideas = {
+
+	country = {
+
+		BRA_supporting_private_rubber_companies = {
+			picture = generic_foreign_capital
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				local_resources_factor = 0.1
+				production_speed_rubber_refinery_factor = 0.05
+			}
+		}
+
+		BRA_the_temporary_monarchist_state_idea = {
+			picture = BRA_temporary_monarchist_state_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.05
+				custom_modifier_tooltip = BRA_removed_when_emperor_chosen_tt
+			}
+		}
+
+		BRA_long_live_the_monarchy_idea = {
+			picture = BRA_long_live_monarchy_icon
+
+			allowed = {
+				always = no
+			}
+
+			available = {
+				has_civil_war = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.05
+				army_attack_factor = 0.075
+				army_defence_factor = 0.075
+				army_morale_factor = 0.05
+				custom_modifier_tooltip = EUYL_will_be_removed_when_civil_war_concludes_tt
+			}
+		}
+
+		BRA_banned_press_idea = {
+			picture = BRA_banned_press_icon
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				drift_defence_factor = 0.5
+				fascism_drift = 0.05
+			}
+		}
+
+		BRA_our_eternal_rival_idea = {
+			name = BRA_our_eternal_rival
+			picture = ARG_death_to_the_unitarios
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_war_with = ARG
+			}
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = ARG
+				attack_bonus_against = 0.05
+				defense_bonus_against = 0.05
+			}
+
+			modifier = {
+				army_morale_factor = 0.05
+			}
+		}
+
+		BRA_aftermath_of_the_political_crisis = {
+			picture = BRA_political_crisis
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.1
+				political_power_factor = -0.15
+				political_advisor_cost_factor = 0.2
+				consumer_goods_factor = 0.35
+				production_speed_buildings_factor = -0.2
+				industrial_capacity_factory = -0.2
+				industrial_capacity_dockyard = -0.2
+			}
+		}
+
+		BRA_the_conquest_of_france = {
+			picture = BRA_target_france_idea
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				FRA = {
+					exists = yes
+					NOT = {
+						is_subject_of = ROOT
+					}
+				}
+			}
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = FRA
+				attack_bonus_against = 0.05
+				defense_bonus_against = 0.05
+			}
+
+			modifier = {
+				army_morale_factor = 0.05
+			}
+		}
+
+		BRA_establishing_estado_novo = {
+			picture = BRA_estado_novo_preperation
+
+			allowed = { original_tag = BRA }
+
+			available = {
+				NOT = { has_global_flag = BRA_civil_war_in_progress }
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				power_balance_weekly = 0.02 #LOOOL
+			}
+		}
+
+		BRA_economic_recession_1 = {
+			name = BRA_economic_recession
+			picture = great_depression
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.1
+				production_speed_buildings_factor = -0.1
+				industrial_capacity_factory = -0.05
+				industrial_capacity_dockyard = -0.05
+			}
+		}
+
+		BRA_very_slight_dependency_on_coffee = {
+			picture = coffee_1
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				any_core_state = {
+					OR = {
+						has_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+						has_dynamic_modifier = { modifier = BRA_widespread_coffee_plantations }
+					}
+				}
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.1
+				production_speed_buildings_factor = 0.05
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+			}
+		}
+
+		BRA_slight_dependency_on_coffee = {
+			picture = coffee_2
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				any_core_state = {
+					OR = {
+						has_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+						has_dynamic_modifier = { modifier = BRA_widespread_coffee_plantations }
+					}
+				}
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.03
+				local_resources_factor = 0.05
+			}
+		}
+
+		BRA_dependent_on_coffee = {
+			picture = coffee_3
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				any_core_state = {
+					OR = {
+						has_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+						has_dynamic_modifier = { modifier = BRA_widespread_coffee_plantations }
+					}
+				}
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.04
+				production_speed_buildings_factor = -0.03
+				industrial_capacity_factory = -0.03
+				global_building_slots_factor = 0.05
+				local_resources_factor = 0.05
+			}
+		}
+
+		BRA_very_dependent_on_coffee = {
+			picture = coffee_4
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				any_core_state = {
+					OR = {
+						has_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+						has_dynamic_modifier = { modifier = BRA_widespread_coffee_plantations }
+					}
+				}
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.07
+				production_speed_buildings_factor = -0.04
+				industrial_capacity_factory = -0.08
+				global_building_slots_factor = 0.1
+				local_resources_factor = 0.1
+			}
+		}
+
+		BRA_extremely_dependent_on_coffee = {
+			picture = coffee_5
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				any_core_state = {
+					OR = {
+						has_dynamic_modifier = { modifier = BRA_small_coffee_plantations }
+						has_dynamic_modifier = { modifier = BRA_widespread_coffee_plantations }
+					}
+				}
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.12
+				production_speed_buildings_factor = -0.1
+				industrial_capacity_factory = -0.1
+				global_building_slots_factor = 0.2
+				local_resources_factor = 0.15
+			}
+		}
+
+		BRA_economic_boost = {
+			picture = BRA_industrial_boost
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				BRA_coffee_plantations_active = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.06
+				industrial_capacity_factory = 0.04
+			}
+		}
+
+		BRA_rebellious_coffee_plantations_1 = {
+			name = BRA_rebellious_coffee_plantations
+			picture = BRA_rebellious_coffee
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				BRA_coffee_plantations_active = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.05
+				local_resources_factor = -0.05
+				consumer_goods_factor = 0.1
+			}
+		}
+
+		BRA_rebellious_coffee_plantations_idea = {
+			picture = BRA_rebellious_coffee
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				any_controlled_state = {
+					has_dynamic_modifier = { modifier = BRA_rebelling_coffee_plantations }
+				}
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.1
+				local_resources_factor = -0.15
+				consumer_goods_factor = 0.15
+			}
+		}
+
+		BRA_brazilian_mining_industry_1 = {
+			name = BRA_brazilian_mining_industry
+			picture = generic_exploit_mines
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				local_resources_factor = 0.05
+				consumer_goods_factor = 0.2
+			}
+		}
+
+		BRA_brazilian_mining_industry_2 = {
+			name = BRA_brazilian_mining_industry
+			picture = generic_exploit_mines
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.05
+				political_power_factor = -0.05
+				local_resources_factor = 0.1
+			}
+		}
+
+
+		BRA_scars_of_the_1930_revolution_1 = {
+			name = BRA_scars_of_the_1930_revolution
+
+			picture = BRA_scars_of_the_1930_revolution
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.05
+				war_support_factor = -0.25
+				army_attack_factor = -0.2
+				army_defence_factor = -0.2
+				army_speed_factor = -0.15
+				surrender_limit = -0.2
+			}
+		}
+
+		BRA_scars_of_the_1930_revolution_2 = {
+			name = BRA_scars_of_the_1930_revolution
+
+			picture = BRA_scars_of_the_1930_revolution
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.03
+				war_support_factor = -0.2
+				army_attack_factor = -0.15
+				army_defence_factor = -0.15
+				army_speed_factor = -0.15
+				surrender_limit = -0.15
+			}
+		}
+
+		BRA_scars_of_the_1930_revolution_3 = {
+			name = BRA_scars_of_the_1930_revolution
+
+			picture = BRA_scars_of_the_1930_revolution
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = -0.15
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				army_speed_factor = -0.1
+				surrender_limit = -0.15
+			}
+		}
+
+		BRA_scars_of_the_1930_revolution_4 = {
+			name = BRA_scars_of_the_1930_revolution
+
+			picture = BRA_scars_of_the_1930_revolution
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_civil_war = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = -0.1
+				army_attack_factor = -0.05
+				army_defence_factor = -0.05
+				army_speed_factor = -0.05
+				surrender_limit = -0.05
+			}
+		}
+
+		BRA_trained_jungle_regiments = {
+			picture = BRA_jungle_regi
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				acclimatization_hot_climate_gain_factor = 0.15
+				attrition = -0.1
+				dig_in_speed_factor = 0.05
+				conscription = 0.005
+			}
+		}
+
+		BRA_efficient_support_equipment_production = {
+			picture = man_five_year_plan_industry
+
+			allowed = { original_tag = BRA }
+
+			available = {
+			}
+
+			cancel = {
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				support_equipment = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		BRA_improved_naval_equipment = {
+			picture = generic_navy_bonus
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_dockyard = -0.1
+				critical_receive_chance = -0.1
+				naval_accidents_chance = -0.1
+				naval_coordination = 0.1
+				naval_damage_factor = 0.05
+				naval_defense_factor = 0.05
+			}
+		}
+
+		BRA_cheaper_naval_equipment = {
+			picture = generic_navy_bonus
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_dockyard = 0.1
+				critical_receive_chance = 0.1
+				naval_accidents_chance = 0.1
+				naval_coordination = -0.1
+				naval_damage_factor = -0.05
+				naval_defense_factor = -0.05
+			}
+		}
+
+		BRA_strengthened_marinha_1 = {
+			name = BRA_strengthened_marinha
+			picture = generic_sea_focused_navy
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_dockyard_factor = 0.1
+			}
+		}
+
+		BRA_strengthened_marinha_2 = {
+			name = BRA_strengthened_marinha
+			picture = generic_sea_focused_navy
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_dockyard_factor = 0.15
+				naval_accidents_chance = -0.05
+				naval_coordination = 0.05
+				naval_damage_factor = 0.05
+				naval_defense_factor = 0.05
+			}
+		}
+
+		BRA_anti_german_u_boat_campaign = {
+			picture = SOV_mine_warfare
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			available = {
+				has_war_with = GER
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				naval_detection = 0.2
+				naval_defense_factor = 0.05
+				naval_damage_factor = 0.1
+			}
+		}
+
+		BRA_trained_pilots = {
+			picture = eng_special_air_service
+
+			allowed = { always = no }
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				air_accidents_factor = -0.15
+				air_agility_factor = 0.05
+				air_attack_factor = 0.05
+				air_defence_factor = 0.05
+			}
+		}
+
+		BRA_increased_fighter_production_idea = {
+			picture = generic_air_bonus
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				small_plane_airframe = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		BRA_increased_heavy_fighter_production_idea = {
+			picture = generic_air_bonus
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				medium_plane_fighter_airframe = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		BRA_increased_cas_production_idea = {
+			picture = generic_air_bonus
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				small_plane_cas_airframe = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		BRA_increased_tac_bomber_production_idea = {
+			picture = generic_air_bonus
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				medium_plane_airframe = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		BRA_increased_strat_bomber_production_idea = {
+			picture = generic_air_bonus
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				large_plane_airframe = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		BRA_increased_naval_bomber_production_idea = {
+			picture = generic_air_bonus
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			equipment_bonus = {
+				small_plane_naval_bomber_airframe = {
+					build_cost_ic = -0.1
+					instant = yes
+				}
+			}
+		}
+
+		BRA_protests_against_influence_increase_1 = {
+			name = BRA_protests_against_influence_increase
+			picture = chi_war_of_resistance
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				OR = {
+					NOT = { has_government = fascism }
+					has_civil_war = no
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_gain = -0.05
+				stability_factor = -0.03
+			}
+		}
+
+		BRA_protests_against_influence_increase_2 = {
+			name = BRA_protests_against_influence_increase
+			picture = chi_war_of_resistance3
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				OR = {
+					NOT = { has_government = fascism }
+					has_civil_war = no
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_gain = -0.1
+				stability_factor = -0.05
+			}
+		}
+
+		BRA_police_brutality_1 = {
+			picture = BRA_brutality_low
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				has_dynamic_modifier = { modifier = BRA_brazilian_political_crisis }
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.07
+				political_power_factor = 0.1
+				#will make it so that as long as you have this idea, protests will be less frequent
+			}
+		}
+
+		BRA_police_brutality_2 = {
+			picture = BRA_brutality_medium
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				has_dynamic_modifier = { modifier = BRA_brazilian_political_crisis }
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.15
+				political_power_factor = 0.15
+				#will make it so that as long as you have this idea, protests will be less frequent
+			}
+		}
+
+		BRA_police_brutality_3 = {
+			picture = BRA_police_brutality
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				has_dynamic_modifier = { modifier = BRA_brazilian_political_crisis }
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.3
+				political_power_factor = 0.2
+				neutrality_drift = 0.04
+				#protests and influence increase will straight up never occur#
+			}
+		}
+
+		BRA_low_literacy_rate = {
+			picture = BRA_low_literacy
+
+			allowed = { original_tag = BRA }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				research_speed_factor = -0.2
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+		EUYL_investing_in_the_brazilian = {
+			picture = EUYL_investing_brazil_economy
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.15
+			}
+
+			on_remove = {
+				EUYL_add_1_civilian = yes
+			}
+		}
+
+		BRA_integralist_protests_1 = { #each one of these will add integralist influence
+			name = BRA_integralist_protests
+			picture = BRA_protests_1
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.1
+				war_support_factor = -0.05
+				political_power_factor = 0.05
+				fascism_drift = 0.02
+			}
+		}
+
+		BRA_integralist_protests_2 = { #each one of these will add integralist influence
+			name = BRA_integralist_protests
+			picture = BRA_protests_2
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.25
+				war_support_factor = -0.1
+				fascism_drift = 0.05
+			}
+		}
+
+		BRA_integralist_protests_3 = { #each one of these will add integralist influence
+			name = BRA_integralist_protests
+			picture = BRA_protests_3
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.4
+				war_support_factor = -0.2
+				political_power_factor = -0.05
+				fascism_drift = 0.1
+			}
+			} #this one in particular will lead to a civil war!
+
+		BRA_civil_war_integralists = {
+			name = BRA_civil_war
+			picture = BRA_civil_war_integralism
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.1
+				ai_get_ally_desire_factor = -1000
+				ai_join_ally_desire_factor = -1000
+			}
+		}
+
+		BRA_civil_war_vargas = {
+			name = BRA_civil_war
+			picture = GFX_idea_BRA_civil_war_vargas
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+				OR = {
+					has_full_control_of_state = 500
+					has_full_control_of_state = 501
+					controls_state = 505
+					controls_state = 496
+				}
+			}
+
+			on_remove = {
+				if = {
+					limit = {
+						has_global_flag = BRA_civil_war_in_progress
+					}
+					add_ideas = BRA_civil_war_vargas_2
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.25
+				ai_get_ally_desire_factor = -1000
+				ai_join_ally_desire_factor = -1000
+			}
+		}
+
+		BRA_civil_war_vargas_2 = {
+			name = BRA_civil_war
+			picture = BRA_civil_war_vargas
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.6
+				ai_get_ally_desire_factor = -1000
+				ai_join_ally_desire_factor = -1000
+			}
+		}
+
+		BRA_civil_war_communist = {
+			name = BRA_civil_war
+			picture = GFX_idea_BRA_civil_war_communist
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.1
+				ai_get_ally_desire_factor = -1000
+				ai_join_ally_desire_factor = -1000
+			}
+		}
+
+		BRA_civil_war_democratic = {
+			name = BRA_civil_war
+			picture = BRA_civil_war_democrats
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.1
+				ai_get_ally_desire_factor = -1000
+				ai_join_ally_desire_factor = -1000
+			}
+		}
+
+		BRA_civil_war_imperialist = {
+			name = BRA_civil_war
+			picture = GFX_idea_BRA_civil_war_imperialist
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.1
+				ai_get_ally_desire_factor = -1000
+				ai_join_ally_desire_factor = -1000
+			}
+		}
+
+		BRA_poorly_trained_militias_1 = { #will serve as the sort of civil war slower down, similar to how spain does it with the unplanned offensive
+			name = BRA_poorly_trained_militias
+
+			picture = BRA_ill_equipped_army
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.05
+				army_morale_factor = -0.05
+				army_defence_factor = -0.07
+				army_speed_factor = -0.07
+			}
+		}
+
+		BRA_poorly_trained_militias_2 = { #will serve as the sort of civil war slower down, similar to how spain does it with the unplanned offensive
+			name = BRA_poorly_trained_militias
+
+			picture = BRA_ill_equipped_army
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.1
+				army_morale_factor = -0.1
+				army_defence_factor = -0.12
+				army_speed_factor = -0.12
+			}
+		}
+
+		BRA_poorly_trained_militias_3 = { #will serve as the sort of civil war slower down, similar to how spain does it with the unplanned offensive
+			name = BRA_poorly_trained_militias
+
+			picture = BRA_ill_equipped_army
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.15
+				army_morale_factor = -0.15
+				army_defence_factor = -0.15
+				army_speed_factor = -0.20
+			}
+		}
+
+		BRA_poorly_trained_militias_4 = { #will serve as the sort of civil war slower down, similar to how spain does it with the unplanned offensive
+			name = BRA_poorly_trained_militias
+
+			picture = BRA_ill_equipped_army
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.2
+				army_morale_factor = -0.2
+				army_defence_factor = -0.25
+				army_speed_factor = -0.30
+			}
+		}
+
+		BRA_poorly_trained_militias_5 = { #will serve as the sort of civil war slower down, similar to how spain does it with the unplanned offensive
+			name = BRA_poorly_trained_militias
+
+			picture = BRA_ill_equipped_army
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_global_flag = BRA_civil_war_in_progress
+				NOT = { ## to prevent it from getting duplicated (which happens for some reason)
+					OR = {
+						has_idea = BRA_poorly_trained_militias_4
+						has_idea = BRA_poorly_trained_militias_3
+						has_idea = BRA_poorly_trained_militias_2
+						has_idea = BRA_poorly_trained_militias_1
+					}
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.25
+				army_morale_factor = -0.25
+				army_defence_factor = -0.3
+				army_speed_factor = -0.35
+			}
+		}
+
+		BRA_labor_rights = {
+			picture = generic_constitutional_guarantees
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.05
+				political_power_factor = 0.05
+			}
+		}
+
+		BRA_exploiting_coffee_profits = {
+			picture = generic_foreign_capital
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = 0.1
+				production_speed_buildings_factor = 0.1
+			}
+		}
+
+		SAO_war_of_independence_idea = {
+			picture = SAO_war_of_independence
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				tag = SAO
+				has_war = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.05
+				army_core_defence_factor = 0.1
+				army_speed_factor = 0.05
+				war_support_factor = 0.15
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.05
+			}
+		}
+
+		BRA_anarchist_seperatists = {
+			picture = SPR_disbanded_army
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_civil_war = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				war_support_factor = -0.15
+				conscription_factor = -0.1
+			}
+		}
+
+		BRA_soviet_war_administration_idea = {
+			picture = SOV_third_five_year_plan_military
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				has_civil_war = yes
+				SOV = {
+					exists = yes
+					has_civil_war = no
+					has_war = no
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.05
+				production_speed_arms_factory_factor = 0.2
+				industrial_capacity_factory = 0.2
+			}
+		}
+
+		BRA_women_in_the_army_idea = {
+			picture = generic_infantry_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.01
+			}
+		}
+
+		BRA_railroad_construction = {
+			picture = generic_build_infrastructure
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_civil_war = yes }
+
+			modifier = {
+				production_speed_rail_way_factor = 0.2
+			}
+		}
+
+		BRA_soviet_railways = {
+			picture = generic_build_infrastructure
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_civil_war = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_rail_way_factor = 0.15
+				production_speed_supply_node_factor = 0.1
+			}
+		}
+
+		BRA_crush_the_paulistas = {
+			picture = BRA_war_on_paulista
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_war_with = SAO }
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = SAO
+				attack_bonus_against = 0.1
+				defense_bonus_against = 0.05
+			}
+		}
+
+		BRA_push_through_paraguay_idea = {
+			picture = BRA_push_paraguay
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_war_with = PAR }
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = PAR
+				attack_bonus_against = 0.05
+				defense_bonus_against = 0.05
+			}
+		}
+
+		BRA_war_on_communism_idea = {
+			picture = generic_purge
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				has_civil_war = yes
+				has_war_with = BRC
+			}
+
+			removal_cost = -1
+
+			targeted_modifier = {
+				tag = BRC
+				attack_bonus_against = 0.07
+				defense_bonus_against = 0.07
+			}
+
+			modifier = {
+				communism_drift = -0.05
+			}
+		}
+
+		BRA_paulistas_to_the_frontlines = {
+			picture = BRA_paulistas_to_frontlines
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_civil_war = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.01
+			}
+		}
+
+		FROM_war_bonds = {
+			picture = generic_economic_increase
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			#available = { has_civil_war = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = 0.15
+				production_speed_buildings_factor = 0.1
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		BRA_brazilian_civil_war_commitments = {
+
+			picture = generic_manpower_bonus
+
+			allowed = {
+				always = no
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteer_size = 3
+				send_volunteer_divisions_required = -1
+				lend_lease_tension = -0.30
+			}
+		}
+
+		BRA_resouces_for_the_army = {
+			picture = generic_goods_red_bonus
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				has_civil_war = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				local_resources_factor = 0.1
+				industrial_capacity_factory = 0.05
+				war_support_factor = 0.05
+			}
+		}
+
+		BRA_post_civil_war_economic_recession_1 = {
+			name = BRA_post_civil_war_economic_recession
+			picture = usa_great_depression_3
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.1
+			}
+		}
+
+		BRA_post_civil_war_economic_recession_2 = {
+			name = BRA_post_civil_war_economic_recession
+			picture = usa_great_depression_2
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.2
+				production_speed_industrial_complex_factor = -0.025
+				production_speed_arms_factory_factor = -0.025
+			}
+		}
+
+		BRA_post_civil_war_economic_recession_3 = {
+			name = BRA_post_civil_war_economic_recession
+			picture = great_depression
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.3
+				industrial_capacity_factory = -0.025
+				production_speed_industrial_complex_factor = -0.05
+				production_speed_arms_factory_factor = -0.05
+			}
+		}
+
+		BRA_post_civil_war_economic_recession_4 = {
+			name = BRA_post_civil_war_economic_recession_severe
+			picture = great_depression
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.4
+				industrial_capacity_factory = -0.05
+				production_speed_industrial_complex_factor = -0.075
+				production_speed_arms_factory_factor = -0.075
+			}
+		}
+
+		BRA_post_civil_war_economic_recession_5 = {
+			name = BRA_post_civil_war_economic_recession_severe
+			picture = great_depression
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.5
+				industrial_capacity_factory = -0.1
+				production_speed_industrial_complex_factor = -0.1
+				production_speed_arms_factory_factor = -0.1
+			}
+		}
+
+		BRA_rapid_army_expansion_idea = {
+			picture = MEX_politicised_army_2
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.01
+				minimum_training_level = 0.05
+			}
+		}
+
+		BRA_efficient_supply_consumption_idea = {
+			picture = generic_acquire_tanks
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				supply_consumption_factor = -0.1
+				supply_node_range = 0.05
+			}
+		}
+
+		BRA_active_agrarian_reforms = {
+			picture = LIT_invested_in_farms
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.01
+				industrial_capacity_factory = -0.02
+			}
+		}
+
+		BRA_the_agrarian_syndicate_council = {
+			picture = BRA_agrarian_council
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				industrial_capacity_factory = 0.15
+				industrial_capacity_dockyard = 0.15
+				production_speed_buildings_factor = 0.1
+			}
+		}
+
+		BRA_the_second_cisplatine_war_1 = {
+			name = BRA_the_second_cisplatine_war
+			picture = BRA_second_cisplatine_war
+
+			allowed = { always = no }
+
+			available = { has_war_with = ARG }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = 0.15
+				army_attack_factor = 0.05
+				army_core_defence_factor = 0.1
+			}
+		}
+
+		BRA_the_second_cisplatine_war_2 = {
+			name = BRA_the_second_cisplatine_war
+			picture = BRA_second_cisplatine_war
+
+			allowed = { always = no }
+
+			available = { has_war_with = ARG }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = 0.2
+				army_attack_factor = 0.1
+				army_core_defence_factor = 0.15
+			}
+		}
+
+		BRA_the_transition_to_democracy_1 = {
+			name = BRA_the_transition_to_democracy
+			picture = generic_democratic_drift_bonus
+
+			allowed = { always = no }
+
+			available = { has_government = communism }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.05
+				democratic_drift = 0.07
+			}
+		}
+
+		BRA_the_transition_to_democracy_2 = {
+			name = BRA_the_transition_to_democracy
+			picture = generic_democratic_drift_bonus
+
+			allowed = { always = no }
+
+			available = { has_government = communism }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.1
+				democratic_drift = 0.12
+			}
+		}
+
+		BRA_the_transition_to_democracy_3 = {
+			name = BRA_the_transition_to_democracy
+			picture = generic_democratic_drift_bonus
+
+			allowed = { always = no }
+
+			available = { has_government = communism }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.2
+				democratic_drift = 0.15
+			}
+		}
+
+		BRA_rebelling_prestes_3 = {
+			name = BRA_rebelling_prestes
+			picture = BRA_rebelling_prestes
+
+			allowed = { always = no }
+
+			available = {
+				NOT = {
+					has_country_leader = {
+						name = "Luís Carlos Prestes"
+						ruling_only = yes
+					}
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.15
+				stability_factor = -0.15
+				production_speed_buildings_factor = -0.15
+			}
+		}
+
+		BRA_rebelling_prestes_2 = {
+			name = BRA_rebelling_prestes
+			picture = BRA_rebelling_prestes
+
+			allowed = { always = no }
+
+			available = {
+				NOT = {
+					has_country_leader = {
+						name = "Luís Carlos Prestes"
+						ruling_only = yes
+					}
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.1
+				stability_factor = -0.1
+				production_speed_buildings_factor = -0.1
+			}
+		}
+
+		BRA_rebelling_prestes_1 = {
+			name = BRA_rebelling_prestes
+			picture = BRA_rebelling_prestes
+
+			allowed = { always = no }
+
+			available = {
+				NOT = {
+					has_country_leader = {
+						name = "Luís Carlos Prestes"
+						ruling_only = yes
+					}
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.05
+				stability_factor = -0.05
+				production_speed_buildings_factor = -0.05
+			}
+		}
+
+		BRA_re_established_congress = {
+			picture = generic_political_support
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_government = democratic }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.05
+				war_support_factor = 0.05
+			}
+		}
+
+		BRA_coffee_exportations = {
+			picture = can_wartime_prices_and_trade_board
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_idea = free_trade }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.05
+			}
+		}
+
+		BRA_anit_jewish_administration = {
+			picture = BRA_anti_jew_administration
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				hidden_trigger = { #must be playing as the integralists
+					check_variable = { BRA_playing_as_integralists = 1 }
+				}
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.05
+				monthly_population = -0.2
+				political_power_factor = 0.15
+			}
+		}
+
+		BRA_hostile_patrianovistas_idea = {
+			picture = BRA_hostile_patrianovistas
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.1
+				stability_factor = -0.05
+				army_attack_factor = -0.03
+				army_defence_factor = -0.03
+			}
+		}
+
+		BRA_cooperation_with_patrianovistas_1 = {
+			name = BRA_cooperation_with_patrianovistas
+			picture = BRA_cooperation_aptrianovistas
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = {
+				has_civil_war = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.1
+				stability_factor = -0.03
+				fascism_drift = 0.04
+				army_attack_factor = -0.02
+				army_defence_factor = -0.02
+			}
+		}
+
+		BRA_cooperation_with_patrianovistas_2 = {
+			name = BRA_cooperation_with_patrianovistas
+			picture = BRA_cooperation_aptrianovistas
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_civil_war = no
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.15
+				stability_factor = -0.07
+				fascism_drift = 0.08
+				army_attack_factor = -0.05
+				army_defence_factor = -0.05
+			}
+		}
+
+		BRA_cooperation_with_patrianovistas_3 = {
+			name = BRA_cooperation_with_patrianovistas
+			picture = BRA_cooperation_aptrianovistas
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = no }
+
+			available = {
+				has_civil_war = no
+			}
+
+			available = {
+				has_civil_war = yes
+				has_active_mission = BRA_impending_imperial_uprising
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = 0.2
+				stability_factor = -0.1
+				fascism_drift = 0.15
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+			}
+		}
+
+		BRA_the_imperial_army_1 = {
+			name = BRA_the_imperial_army
+			picture = BRA_second_cisplatine_imperial
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { is_subject = no }
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				conscription = 0.01
+				production_speed_buildings_factor = -0.03
+			}
+		}
+
+		BRA_the_imperial_army_2 = {
+			name = BRA_the_imperial_army
+			picture = BRA_second_cisplatine_imperial
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { is_subject = no }
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				conscription = 0.015
+				consumer_goods_factor = 0.05
+				production_speed_buildings_factor = -0.05
+			}
+		}
+
+		BRA_the_imperial_army_3 = {
+			name = BRA_the_imperial_army
+			picture = BRA_second_cisplatine_imperial
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { is_subject = no }
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				conscription = 0.02
+				consumer_goods_factor = 0.1
+				production_speed_buildings_factor = -0.1
+			}
+		}
+
+		BRA_push_to_victory = {
+			picture = general_staff
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			available = { has_civil_war = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				army_speed_factor = 0.05
+			}
+		}
+
+		BRA_expanded_school_systems = {
+			picture = generic_research_bonus
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				research_speed_factor = 0.05
+			}
+		}
+
+		BRA_nationalizing_industry = {
+			picture = BRA_nationalized_ind
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			on_remove = {
+				EUYL_add_2_civilian = yes
+			}
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.05
+				production_speed_buildings_factor = -0.15
+			}
+		}
+
+		BRA_problems_royal_family = {
+			picture = BRA_problems_in_the_family
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.04
+				political_power_factor = -0.05
+			}
+		}
+
+		BRA_imperial_scholars = {
+			picture = generic_research_bonus
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = 0.05
+				research_speed_factor = 0.1
+			}
+		}
+
+		BRA_german_architects = {
+			picture = BRA_german_architect
+
+			allowed = { always = no }
+
+			available = {
+				NOT = { has_war_with = GER }
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				production_speed_buildings_factor = 0.1
+			}
+		}
+
+		BRA_disjointed_industries_unif = {
+			picture = BRA_disjointed_industries
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = 0.1
+				production_speed_buildings_factor = -0.2
+				local_resources_factor = -0.1
+			}
+		}
+
+		BRA_disjointed_armies_unif = {
+			picture = BRA_disjointed_armies
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				war_support_factor = -0.1
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				command_power_gain = -0.15
+			}
+		}
+
+		BRA_portuguese_nationalists_unif = {
+			picture = BRA_portuguese_nationalism
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = -0.05
+			}
+		}
+
+		BRA_european_theater = {
+			picture = war_of_survival
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				justify_war_goal_time = -0.4
+				army_attack_factor = 0.03
+				army_defence_factor = 0.03
+				war_support_factor = 0.15
+			}
+		}
+
+		BRA_strengthened_army = {
+			picture = SOV_third_five_year_plan_military
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				conscription = 0.01
+				production_speed_arms_factory_factor = 0.05
+			}
+		}
+
+		BRA_minimum_wage_established = {
+			picture = generic_foreign_capital
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.1
+				production_speed_industrial_complex_factor = -0.05
+			}
+		}
+
+		BRA_the_smoking_snakes_1 = {
+			name = BRA_the_smoking_snakes
+			picture = BRA_smoking_snake
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteer_size = 3
+				send_volunteer_divisions_required = -1
+				lend_lease_tension = -0.30
+			}
+		}
+
+		BRA_the_smoking_snakes_2 = { #took army experience decision only
+			name = BRA_the_smoking_snakes
+			picture = BRA_smoking_snake
+
+			allowed = { always = no }
+
+			available = {
+				OR = {
+					any_other_country = {
+						has_volunteers_amount_from = {
+							tag = BRA
+							count > 1
+						}
+					}
+					has_war_with = GER
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteer_size = 3
+				send_volunteer_divisions_required = -1
+				lend_lease_tension = -0.30
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+
+		BRA_the_smoking_snakes_3 = { #took the navy experience decision only
+			name = BRA_the_smoking_snakes
+			picture = BRA_smoking_snake
+
+			allowed = { always = no }
+
+			available = {
+				OR = {
+					any_other_country = {
+						has_volunteers_amount_from = {
+							tag = BRA
+							count > 1
+						}
+					}
+					has_war_with = GER
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteer_size = 3
+				send_volunteer_divisions_required = -1
+				lend_lease_tension = -0.30
+				naval_accidents_chance = -0.1
+				naval_attrition = -0.1
+				naval_damage_factor = 0.05
+			}
+		}
+
+		BRA_the_smoking_snakes_4 = { #took the air experience decision only
+			name = BRA_the_smoking_snakes
+			picture = BRA_smoking_snake
+
+			allowed = { always = no }
+
+			available = {
+				OR = {
+					any_other_country = {
+						has_volunteers_amount_from = {
+							tag = BRA
+							count > 1
+						}
+					}
+					has_war_with = GER
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteer_size = 3
+				send_volunteer_divisions_required = -1
+				lend_lease_tension = -0.30
+				air_superiority_bonus_in_combat = 0.1
+				air_accidents_factor = -0.05
+				air_attack_factor = 0.1
+				air_defence_factor = 0.1
+			}
+		}
+
+		BRA_the_smoking_snakes_5 = { #took both army and navy
+			name = BRA_the_smoking_snakes
+			picture = BRA_smoking_snake
+
+			allowed = { always = no }
+
+			available = {
+				OR = {
+					any_other_country = {
+						has_volunteers_amount_from = {
+							tag = BRA
+							count > 1
+						}
+					}
+					has_war_with = GER
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteer_size = 3
+				send_volunteer_divisions_required = -1
+				lend_lease_tension = -0.30
+				air_superiority_bonus_in_combat = 0.1
+				air_accidents_factor = -0.05
+				air_attack_factor = 0.1
+				air_defence_factor = 0.1
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+
+		BRA_the_smoking_snakes_6 = { #took both air and navy
+			name = BRA_the_smoking_snakes
+			picture = BRA_smoking_snake
+
+			allowed = { always = no }
+
+			available = {
+				OR = {
+					any_other_country = {
+						has_volunteers_amount_from = {
+							tag = BRA
+							count > 1
+						}
+					}
+					has_war_with = GER
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteer_size = 3
+				send_volunteer_divisions_required = -1
+				lend_lease_tension = -0.30
+				air_superiority_bonus_in_combat = 0.1
+				air_accidents_factor = -0.05
+				air_attack_factor = 0.05
+				air_defence_factor = 0.05
+				naval_accidents_chance = -0.1
+				naval_attrition = -0.1
+				naval_damage_factor = 0.05
+			}
+		}
+
+		BRA_the_smoking_snakes_7 = { #took both army and air
+			name = BRA_the_smoking_snakes
+			picture = BRA_smoking_snake
+
+			allowed = { always = no }
+
+			available = {
+				OR = {
+					any_other_country = {
+						has_volunteers_amount_from = {
+							tag = BRA
+							count > 1
+						}
+					}
+					has_war_with = GER
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteer_size = 3
+				send_volunteer_divisions_required = -1
+				lend_lease_tension = -0.30
+				air_superiority_bonus_in_combat = 0.1
+				air_accidents_factor = -0.05
+				air_attack_factor = 0.05
+				air_defence_factor = 0.05
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+			}
+		}
+
+		BRA_the_smoking_snakes_8 = { #took all three
+			name = BRA_the_smoking_snakes
+			picture = BRA_smoking_snake
+
+			allowed = { always = no }
+
+			available = {
+				OR = {
+					any_other_country = {
+						has_volunteers_amount_from = {
+							tag = BRA
+							count > 1
+						}
+					}
+					has_war_with = GER
+				}
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				send_volunteer_size = 3
+				send_volunteer_divisions_required = -1
+				lend_lease_tension = -0.30
+				air_superiority_bonus_in_combat = 0.1
+				air_accidents_factor = -0.05
+				air_attack_factor = 0.05
+				air_defence_factor = 0.05
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				naval_accidents_chance = -0.1
+				naval_attrition = -0.1
+				naval_damage_factor = 0.05
+			}
+		}
+
+		BRA_empowered_church = {
+			picture = MEX_church_power_5
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				political_power_factor = -0.1
+				stability_factor = 0.05
+				consumer_goods_factor = -0.1
+			}
+		}
+
+		BRA_empowered_social_democrats = {
+			picture = generic_pp_unity_bonus
+
+			allowed = { always = no }
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+			modifier = {
+				communism_drift = 0.02
+				democratic_drift = 0.07
+				political_power_factor = -0.1
+				political_advisor_cost_factor = -0.15
+			}
+		}
+
+		BRA_universal_central_bank = {
+			picture = tur_balkan_central_bank_wealthy_greece
+
+			allowed = { always = no }
+
+			available = {
+				is_in_faction = yes
+			}
+
+			allowed_civil_war = { always = yes }
+
+			removal_cost = -1
+
+			modifier = {
+				consumer_goods_factor = -0.05
+				production_speed_buildings_factor = 0.05
+				political_power_factor = -0.1
+			}
+		}
+
+		######################## TOA ########################
+
+		BRA_rail_investment = {
+			
+			allowed = {
+				always = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+			
+			picture = generic_build_infrastructure
+			
+			modifier = {
+				production_speed_rail_way_factor = 0.1
+				production_speed_supply_node_factor = 0.1 
+			}
+		}
+
+		BRA_road_investment = {
+			
+			allowed = {
+				always = yes
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			removal_cost = -1
+			
+			picture = FRA_motorized_focus
+			
+			modifier = {
+				production_speed_infrastructure_factor = 0.1
+			}
+		}
+
+	}
+
+	hidden_ideas = {
+		BRA_south_american_country = {
+
+			allowed = {
+
+			}
+
+			available = {
+			}
+
+			modifier = {
+				army_attack_factor = -0.2
+				army_defence_factor = -0.2
+			}
+
+			ai_will_do = {
+				base = 0
+			}
+		}
+	}
+
+	industrial_concern = {
+
+		BRA_csn = {
+			picture = BRA_csn_icon
+
+			cost = 75
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				has_completed_focus = BRA_establish_csn
+			}
+
+			research_bonus = {
+				industry = 0.1
+				synth_resources = 0.1
+			}
+
+			modifier = {
+				trade_laws_cost_factor = -0.25
+			}
+
+			traits = { mining_company_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		BRA_vale_company = {
+			picture = BRA_VALE
+
+			cost = 25
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				#has_completed_focus = BRA_the_brazilian_mining_industry
+				custom_trigger_tooltip = {
+					tooltip = BRA_better_than_industrializing_tt
+					NOT = {
+						OR = {
+							has_idea = rural_economy
+							has_idea = semi_rural_economy
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				industry = 0.05
+			}
+
+			modifier = {
+				trade_laws_cost_factor = -0.25
+			}
+
+			traits = { construction_company }
+
+			on_add = {
+
+			}
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		BRA_petrobras = {
+			picture = RIO_petrobras
+
+			cost = 100
+
+			allowed = { original_tag = BRA }
+
+			available = {
+				custom_trigger_tooltip = {
+					tooltip = BRA_better_than_industrializing_tt
+					NOT = {
+						OR = {
+							has_idea = rural_economy
+							has_idea = semi_rural_economy
+						}
+					}
+				}
+			}
+
+			research_bonus = {
+				industry = 0.1
+				synth_resources = 0.1
+			}
+
+			modifier = {
+				local_resources_factor = 0.1
+			}
+
+			traits = { refinery_concern }
+		}
+	}
+
+	materiel_manufacturer = {
+
+		designer = yes
+
+		BRA_FNM = {
+
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				has_completed_focus = BRA_establish_the_FNM
+			}
+
+			cost = 100
+
+			picture = BRA_FNM_icon
+
+			research_bonus = {
+				infantry_weapons = 0.2
+			}
+
+			traits = { infantry_equipment_manufacturer }
+		}
+
+		BRA_ENGESA = {
+			allowed = {
+				original_tag = BRA
+			}
+
+			available = {
+				has_completed_focus = BRA_modern_mechanized_units
+			}
+
+			cost = 100
+
+			picture = BRA_icon_ENGESA
+
+			research_bonus = {
+				motorized_equipment = 0.15
+			}
+
+			traits = { motorized_equipment_manufacturer }
+
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.05 instant = yes
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,269 @@
+﻿add_namespace = azerbai
+
+country_event = {
+	id = azerbai.1
+	title = "Other Soviet caucasian republics"
+	desc = "Azerbaijan soviet republic wants autonomy of other caucasian countries"
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 90 }
+		add_political_power = -10
+		ARM = {
+			transfer_state = 230
+			set_political_party= {
+				ideology = communism
+				popularity = 1.0
+			}
+			add_popularity= {
+				ideology = communism
+				popularity = 1.0
+			}
+		}
+		GEO = {
+			transfer_state = 231
+			transfer_state = 826
+			set_political_party= {
+				ideology = communism
+				popularity = 1.0
+			}
+			add_popularity= {
+				ideology = communism
+				popularity = 1.0
+			}
+		}
+		DAG = {
+			transfer_state = 232
+			set_political_party= {
+				ideology = communism
+				popularity = 1.0
+			}
+			add_popularity= {
+				ideology = communism
+				popularity = 1.0
+			}
+		}
+		CIN = {
+			transfer_state = 821
+			set_political_party= {
+				ideology = communism
+				popularity = 1.0
+			}
+			add_popularity= {
+				ideology = communism
+				popularity = 1.0
+			}
+		}
+		NOA = {
+			transfer_state = 828
+			set_political_party= {
+				ideology = communism
+				popularity = 1.0
+			}
+			add_popularity= {
+				ideology = communism
+				popularity = 1.0
+			}
+		}
+		KBK = {
+			transfer_state = 827
+			set_political_party= {
+				ideology = communism
+				popularity = 1.0
+			}
+			add_popularity= {
+				ideology = communism
+				popularity = 1.0
+			}
+		}
+		SOV = {puppet = KBK
+			puppet = NOA
+			puppet = CIN
+			puppet = DAG
+			puppet = GEO
+			puppet = ARM}
+
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = { base = 10 }
+		AZR = {
+			country_event = { days = 1 id = azerbai.3 }
+		}
+	}
+}
+country_event = {
+	id = azerbai.2
+	title = "Refused"
+	desc = ""
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+	option = {
+		name = "Badbextlik"	#no way
+		ai_chance = { base = 10 }
+	}
+}
+country_event = {
+	id = azerbai.3
+	title = "One Nation One Flag"
+	desc = "Azerbaijan want to unite countries"
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 90 }
+		AZR = {
+			annex_country = { target = TUR transfer_troops = yes }
+			TUR = {
+				every_unit_leader = {
+					set_nationality = AZR
+				}
+				}}
+
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = { base = 10 }
+		AZR = {
+			country_event = { days = 1 id = azerbai.2  }
+		}
+	}
+}
+country_event = {
+	id = azerbai.4
+	title = "Azerbaijan wants a referendum"
+	desc = "Azerbaijan wants to be annexed to the state of Azerbaijan by holding a referendum in Tıbriz and Gilan."
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 90 }
+		AZR = {
+			transfer_state = 419
+			transfer_state = 420
+			transfer_state = 1000
+		}
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = { base = 10 }
+		AZR = {
+			country_event = { days = 1 id = azerbai.2 }
+		}
+	}
+}
+country_event = {
+	id = azerbai.5
+	title = "Azerbaijan wants Qajakar reestablished"
+	desc = "Azerbaijan wants to unite the Persian crown with the azerbaijan crown and establish a single government"
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 90 }
+		AZR = {
+			annex_country = { target = PER transfer_troops = yes }
+			set_cosmetic_tag = AZQ_neutrality
+		}
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = { base = 10 }
+		AZR = {
+			country_event = { days = 1 id = azerbai.2 }
+		}
+	}
+}
+country_event = {
+	id = azerbai.6
+	title = "Armenian question"
+	desc = "Azerbaijan and Turkey want to open Armenian corridor"
+	picture = GFX_report_event_physics_lab_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = { base = 90 }
+		AZR = {
+			transfer_state = 230}
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = { base = 10 }
+		AZR = {
+			create_wargoal = {
+				target = SOV
+				type = annex_everything
+			}
+			country_event = { days = 1 id = azerbai.2 }
+		}
+	}
+}
+
+country_event = {
+	id = azerbai.7
+	title = "Freedom for Azerbaijan"
+	desc = "Do you want Azerbaijan to live? This is a multiplayer event."
+
+	is_triggered_only = yes
+
+	option = {
+		name = "Sure"	#sounds good
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 0
+				is_ai = yes
+			}
+		}
+		add_resource = {
+			type = oil
+			amount = 75
+			state = 232
+		}
+		hidden_effect = {
+			add_resource = {
+				type = oil
+				amount = 10
+				state = 229
+			}
+			229 = { remove_core_of = SOV }
+		}
+	}
+
+	option = {
+		name = "No way"	#no way
+		ai_chance = {
+			base = 10
+			modifier = {
+				factor = 100
+				is_ai = yes
+			}
+		}
+		annex_country = {
+			target = AZR
+			transfer_troops = yes
+		}
+		add_resource = {
+			type = oil
+			amount = 75
+			state = 229
+		}
+	}
+}

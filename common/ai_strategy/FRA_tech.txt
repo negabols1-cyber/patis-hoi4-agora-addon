@@ -1,0 +1,286 @@
+FRA_tech_banned = {
+	allowed = {
+		original_tag = FRA
+	}
+	enable = {
+
+		always = yes
+	}
+	abort = {
+		OR = {
+			date > 1946.1.1
+			all_enemy_country = {
+				is_neighbor_of = ROOT
+				has_capitulated = yes
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = smoke_generator
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_sonar
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_depth_charges
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_ship_hull_light
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_ship_hull_cruiser
+		value = -100
+	}
+	# ai_strategy = {
+		# 	type = research_weight_factor
+		# 	id = improved_airplane_launcher
+		# 	value = -100
+		# }
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_heavy_armor_scheme
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_ship_hull_heavy
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = early_ship_hull_carrier
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_light_shell
+		value = -100
+	}
+	# ai_strategy = {
+		# 	type = research_weight_factor
+		# 	id = basic_medium_shell
+		# 	value = -100
+		# }
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_heavy_shell
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = fire_control_methods_1
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = landing_craft
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_naval_mines
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_submarine_mine_laying
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = damage_control_1
+		value = -100
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_fire_control_system
+		value = -100
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_fire_control_system
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_small_airframe
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_medium_airframe
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_large_airframe
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = engines_3
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = aa_hmg
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = survivability_studies
+		value = -100
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = range_improvements
+		value = -100
+	}
+}
+FRA_research_tankkkk = {
+	allowed = {
+		original_tag = FRA
+	}
+	enable = {
+		NOT = { has_tech = improved_medium_tank_chassis }
+		has_completed_focus = UFRA_heavy_armor_focus
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_medium_tank_chassis
+		value = 2000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = improved_medium_tank_chassis
+		value = 2000
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = improved_radio
+		value = 2000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = improved_radio
+		value = 2000
+	}
+}
+FRA_radio_tech = {
+	allowed = {
+		original_tag = FRA
+	}
+	enable = {
+
+		NOT = { has_tech = radio }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = radio
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_tech
+		id = radio
+		value = 9999
+	}
+}
+FRA_on_start_tech = {
+	allowed = {
+		original_tag = FRA
+	}
+	enable = {
+
+		date > 1936.3.1
+		OR = {
+			has_tech = concentrated_industry
+			has_tech = dispersed_industry
+		}
+		OR = {
+			NOT = { has_tech = interwar_antitank }
+			NOT = { has_tech = range_improvements }
+			NOT = { has_tech = basic_medium_tank_chassis }
+			NOT = { has_tech = mechanical_computing }
+			NOT = { has_tech = sp_armored_engineer_tech }
+			NOT = { has_tech = sp_armored_maintenance_tech }
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = sp_armored_engineer_tech
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = sp_armored_maintenance_tech
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = interwar_antitank
+		value = 9999
+	}
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_medium_tank_chassis
+		value = 9999
+	}
+
+	ai_strategy = {
+		type = research_tech
+		id = basic_medium_tank_chassis
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_weight_factor
+		id = mechanical_computing
+		value = 9999
+	}
+}
+FRA_mechanised_infantry_tech = {
+	allowed = {
+		original_tag = FRA
+	}
+	enable = {
+
+		OR = {
+			has_completed_focus = UFRA_improve_motor_industry
+			date > 1939.11.1
+		}
+		NOT = { has_tech = mechanised_infantry }
+
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = research_weight_factor
+		id = mechanised_infantry
+		value = 9999
+	}
+	ai_strategy = {
+		type = research_tech
+		id = mechanised_infantry
+		value = 9999
+	}
+}

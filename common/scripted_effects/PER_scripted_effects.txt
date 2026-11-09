@@ -1,0 +1,1151 @@
+PER_bop_high_increase_effect = {
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		add_power_balance_value = {
+			id = PER_clergy_balance
+			value = 0.2
+		}
+	}
+}
+
+PER_bop_medium_increase_effect = {
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		add_power_balance_value = {
+			id = PER_clergy_balance
+			value = 0.15
+		}
+	}
+}
+
+PER_bop_low_increase_effect = {
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		add_power_balance_value = {
+			id = PER_clergy_balance
+			value = 0.1
+		}
+	}
+}
+
+PER_bop_very_low_increase_effect = {
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		add_power_balance_value = {
+			id = PER_clergy_balance
+			value = 0.05
+		}
+	}
+}
+
+PER_bop_very_high_decrease_effect = {
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		add_power_balance_value = {
+			id = PER_clergy_balance
+			value = -0.25
+		}
+	}
+}
+
+PER_bop_high_decrease_effect = {
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		add_power_balance_value = {
+			id = PER_clergy_balance
+			value = -0.2
+		}
+	}
+}
+
+PER_bop_medium_decrease_effect = {
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		add_power_balance_value = {
+			id = PER_clergy_balance
+			value = -0.15
+		}
+	}
+}
+
+PER_bop_low_decrease_effect = {
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		add_power_balance_value = {
+			id = PER_clergy_balance
+			value = -0.1
+		}
+	}
+}
+
+PER_bop_very_low_decrease_effect = {
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		add_power_balance_value = {
+			id = PER_clergy_balance
+			value = -0.05
+		}
+	}
+}
+
+PER_agrarian_economy_level_down = {
+	if = {
+		limit = {
+			has_idea = PER_agrarian_economy
+		}
+		swap_ideas = {
+			remove_idea = PER_agrarian_economy
+			add_idea = PER_agrarian_economy2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = PER_agrarian_economy2
+		}
+		swap_ideas = {
+			remove_idea = PER_agrarian_economy2
+			add_idea = PER_agrarian_economy3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = PER_agrarian_economy3
+		}
+		swap_ideas = {
+			remove_idea = PER_agrarian_economy3
+			add_idea = PER_agrarian_economy4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = PER_agrarian_economy4
+		}
+		add_stability = 0.02
+		add_ideas = low_economic_mobilisation
+	}
+	else = {
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ROOT
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+PER_check_inefficient_army = {
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = PER_inefficient_army_dmod }
+		}
+		if = {
+			limit = {
+				NOT = { has_country_flag = PER_inefficient_army_name_change_flag }
+				check_variable = {
+					var = PER_buffed_inefficient_army
+					value = 3
+					compare = greater_than_or_equals
+				}
+			}
+			hidden_effect = {
+				set_country_flag = PER_inefficient_army_name_change_flag
+				remove_dynamic_modifier = { modifier = PER_inefficient_army_dmod }
+				add_dynamic_modifier = { modifier = PER_iran_army_dmod }
+			}
+		}
+	}
+	else = {
+		army_experience = 10
+	}
+}
+
+PER_check_power_of_clergy_level = {
+	hidden_effect = {
+		if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 1 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_army_org_factor = -0.04 }
+			set_variable = { PER_power_of_clergy_dmod_political_power_gain = 0.15 }
+			set_variable = { PER_power_of_clergy_dmod_stability_factor = 0.04 }
+			set_variable = { PER_power_of_clergy_dmod_surrender_limit = -0.02 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 2 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_army_morale_factor = -0.02 }
+			set_variable = { PER_power_of_clergy_dmod_stability_factor = 0 }
+			set_variable = { PER_power_of_clergy_dmod_surrender_limit = 0 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 3 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_army_org_factor = -0.02 }
+			set_variable = { PER_power_of_clergy_dmod_army_morale_factor = 0 }
+			set_variable = { PER_power_of_clergy_dmod_political_power_gain = 0.05 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 4 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_army_org_factor = 0 }
+			set_variable = { PER_power_of_clergy_dmod_political_power_gain = 0 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 5 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_army_org_factor = 0.02 }
+			set_variable = { PER_power_of_clergy_dmod_army_morale_factor = 0.02 }
+			set_variable = { PER_power_of_clergy_dmod_political_power_gain = -0.05 }
+			set_variable = { PER_power_of_clergy_dmod_stability_factor = -0.02 }
+			set_variable = { PER_power_of_clergy_dmod_surrender_limit = 0.02 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 6 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_army_org_factor = 0.04 }
+			set_variable = { PER_power_of_clergy_dmod_army_morale_factor = 0.04 }
+			set_variable = { PER_power_of_clergy_dmod_political_power_gain = -0.15 }
+			set_variable = { PER_power_of_clergy_dmod_stability_factor = -0.04 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 7 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_political_power_gain = -0.25 }
+			set_variable = { PER_power_of_clergy_dmod_stability_factor = -0.06 }
+			set_variable = { PER_power_of_clergy_dmod_surrender_limit = 0.04 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 8 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_army_org_factor = 0.06 }
+			set_variable = { PER_power_of_clergy_dmod_surrender_limit = 0.06 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 9 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_army_morale_factor = 0.06 }
+			set_variable = { PER_power_of_clergy_dmod_political_power_gain = -0.35 }
+			set_variable = { PER_power_of_clergy_dmod_stability_factor = -0.08 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { var = PER_power_of_clergy_level value = 10 compare = equals }
+			}
+			set_variable = { PER_power_of_clergy_dmod_army_org_factor = 0.1 }
+			set_variable = { PER_power_of_clergy_dmod_political_power_gain = -0.45 }
+			set_variable = { PER_power_of_clergy_dmod_surrender_limit = 0.1 }
+		}
+		force_update_dynamic_modifier = yes
+	}
+}
+
+PER_hateful_dynasty_level_down = {
+	if = {
+		limit = {
+			has_idea = PER_hateful_dynasty
+		}
+		swap_ideas = {
+			remove_idea = PER_hateful_dynasty
+			add_idea = PER_hateful_dynasty2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = PER_hateful_dynasty2
+		}
+		swap_ideas = {
+			remove_idea = PER_hateful_dynasty2
+			add_idea = PER_hateful_dynasty3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = PER_hateful_dynasty3
+		}
+		swap_ideas = {
+			remove_idea = PER_hateful_dynasty3
+			add_idea = PER_hateful_dynasty4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = PER_hateful_dynasty4
+		}
+		remove_ideas = PER_hateful_dynasty4
+	}
+}
+
+PER_islamisation_program_level_up = {
+	if = {
+		limit = {
+			NOT = {
+				has_idea = PER_islamisation_program
+				has_idea = PER_islamisation_program2
+				has_idea = PER_islamisation_program3
+			}
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = PER_islamisation_program
+				add_idea = PER_islamisation_program2
+			}
+		}
+	}
+	if = {
+		limit = {
+			has_idea = PER_islamisation_program
+		}
+		swap_ideas = {
+			remove_idea = PER_islamisation_program
+			add_idea = PER_islamisation_program2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = PER_islamisation_program2
+		}
+		swap_ideas = {
+			remove_idea = PER_islamisation_program2
+			add_idea = PER_islamisation_program3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = PER_islamisation_program3
+		}
+		swap_ideas = {
+			remove_idea = PER_islamisation_program3
+			add_idea = PER_islamisation_program4
+		}
+	}
+}
+
+PER_civil_war_mission_effect = {
+	if = {
+		limit = {
+			has_completed_focus = PER_overthrow_the_shah
+			NOT = { has_completed_focus = PER_gather_support_for_qajar_dynasty }
+			NOT = { has_completed_focus = PER_restart_jungle_movement }
+			NOT = { has_completed_focus = PER_islamic_revolution }
+		}
+		start_civil_war = {
+			ruling_party = neutrality
+			ideology = fascism
+			size = 0.6
+		}
+		hidden_effect = {
+			random_other_country = {
+				limit = {
+					original_tag = PER
+					has_government = fascism
+				}
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.25
+				}
+				save_event_target_as = PER_breakaway_country_shah
+				PER_set_up_dynamic_modifiers_civil_war = yes
+				add_ideas = PER_reza_pahlavi_idea
+				PER_fazlollah_zahedi = {
+					add_country_leader_role = {
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = fascism_ideology
+							traits = {
+								anti_communist
+							}
+						}
+						promote_leader = yes
+					}
+				}
+				division_template = {
+					name = "Loyalists"
+					division_names_group = PER_INF_01
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+					}
+					support = {
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Loyalists\" division_template = \"Loyalists\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+						owner = PREV
+						count = 6
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_completed_focus = PER_gather_support_for_qajar_dynasty
+		}
+		if = {
+			limit = {
+				has_completed_focus = PER_raid_the_arms_depots
+			}
+			subtract_from_variable = { PER_qajar_cw_size_of_breakaway_country = 0.05 }
+		}
+		if = {
+			limit = {
+				has_completed_focus = PER_get_support_from_religious_scholars
+			}
+			subtract_from_variable = { PER_qajar_cw_size_of_breakaway_country = 0.1 }
+		}
+		start_civil_war = {
+			ruling_party = neutrality
+			ideology = fascism
+			size = PER_qajar_cw_size_of_breakaway_country
+			states = all
+			states_filter = {
+				NOT = { has_dynamic_modifier = { modifier = PER_qajar_influence } }
+			}
+			keep_unit_leaders = {
+			}
+			keep_unit_leaders_trigger = {
+				has_trait = trait_PER_qajar_loyalty
+				NOT = { has_character_flag = PER_do_not_align_me_flag }
+			}
+		}
+		set_party_name = {
+			ideology = neutrality
+			long_name = PER_qajar_dynasty_party_long
+			name = PER_qajar_dynasty_party
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					all_army_leader = {
+						NOT = {
+							has_trait = trait_PER_qajar_loyalty
+						}
+					}
+				}
+				random_army_leader = {
+					limit = {
+						skill > 1
+						NOT = { has_character_flag = PER_do_not_align_me_flag }
+					}
+					add_unit_leader_trait = trait_PER_qajar_loyalty
+					set_unit_leader_flag = PER_swayed_leader_loyalty_flag
+				}
+			}
+			random_army_leader = {
+				limit = {
+					skill > 1
+					has_trait = trait_PER_qajar_loyalty
+				}
+				add_country_leader_role = {
+					country_leader = {
+						expire = "1965.1.1"
+						ideology = military_junta
+						traits = {
+							indomitable_perseverance
+						}
+					}
+					promote_leader = yes
+				}
+			}
+			every_owned_state = {
+				limit = {
+					has_dynamic_modifier = { modifier = PER_qajar_influence }
+				}
+				remove_dynamic_modifier = { modifier = PER_qajar_influence }
+			}
+			if = {
+				limit = {
+					has_completed_focus = PER_raid_the_arms_depots
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment_1
+					amount = PER_stockpiled_guns
+					producer = ROOT
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment_1
+					amount = PER_stockpiled_support
+					producer = ROOT
+				}
+			}
+			random_other_country = {
+				limit = {
+					original_tag = PER
+					has_government = fascism
+				}
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.25
+				}
+				save_event_target_as = PER_breakaway_country_shah
+				PER_set_up_dynamic_modifiers_civil_war = yes
+				add_ideas = PER_reza_pahlavi_idea
+				PER_fazlollah_zahedi = {
+					add_country_leader_role = {
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = fascism_ideology
+							traits = {
+								anti_communist
+							}
+						}
+						promote_leader = yes
+					}
+				}
+				division_template = {
+					name = "Loyalists"
+					division_names_group = PER_INF_01
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+					}
+					support = {
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Loyalists\" division_template = \"Loyalists\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+						owner = PREV
+						count = 6
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_completed_focus = PER_restart_jungle_movement
+		}
+		start_civil_war = {
+			ruling_party = communism
+			ideology = fascism
+			size = 0.5
+			states = all
+			states_filter = {
+				NOT = { has_dynamic_modifier = { modifier = PER_subversive_communist_activity_in_state } }
+			}
+			keep_unit_leaders = {
+			}
+			keep_unit_leaders_trigger = {
+				has_trait = trait_PER_communist_loyalty
+				NOT = { has_character_flag = PER_do_not_align_me_flag }
+			}
+		}
+		PER_iraj_eskandari = {
+			add_country_leader_role = {
+				country_leader = {
+					expire = "1965.1.1"
+					ideology = marxism
+					traits = {
+					}
+				}
+				promote_leader = yes
+			}
+		}
+		hidden_effect = {
+			set_power_balance_gfx = {
+				id = PER_clergy_balance
+				side = PER_shah_side
+				gfx = GFX_bop_ITA_communism_side
+			}
+			set_cosmetic_tag = PER_communist_civil_war_cosmetic
+			if = {
+				limit = {
+					has_dynamic_modifier = { modifier = PER_iran_army_dmod }
+				}
+				remove_dynamic_modifier = { modifier = PER_iran_army_dmod }
+				add_dynamic_modifier = { modifier = PER_red_army_dmod }
+			}
+			else = {
+				remove_dynamic_modifier = { modifier = PER_inefficient_army_dmod }
+				add_dynamic_modifier = { modifier = PER_red_army_dmod }
+			}
+			set_country_flag = PER_inefficient_army_name_change_flag
+			every_owned_state = {
+				limit = {
+					has_dynamic_modifier = { modifier = PER_subversive_communist_activity_in_state }
+				}
+				remove_dynamic_modifier = { modifier = PER_subversive_communist_activity_in_state }
+			}
+			if = {
+				limit = {
+					has_completed_focus = PER_request_soviet_support
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 1500
+					producer = SOV
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 100
+					producer = SOV
+				}
+			}
+			division_template = {
+				name = "Militia"
+				division_names_group = PER_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Militia\" division_template = \"Militia\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+					owner = PREV
+					count = 4
+				}
+			}
+			random_other_country = {
+				limit = {
+					original_tag = PER
+					has_government = fascism
+				}
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.25
+				}
+				save_event_target_as = PER_breakaway_country_shah
+				PER_set_up_dynamic_modifiers_civil_war = yes
+				add_ideas = PER_reza_pahlavi_idea
+				PER_fazlollah_zahedi = {
+					add_country_leader_role = {
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = fascism_ideology
+							traits = {
+								anti_communist
+							}
+						}
+						promote_leader = yes
+					}
+				}
+				division_template = {
+					name = "Loyalists"
+					division_names_group = PER_INF_01
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+					}
+					support = {
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Loyalists\" division_template = \"Loyalists\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+						owner = PREV
+						count = 6
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_completed_focus = PER_islamic_revolution
+		}
+		remove_power_balance = { id = PER_clergy_balance }
+		start_civil_war = {
+			ruling_party = fascism
+			ideology = neutrality
+			size = 0.5
+			keep_unit_leaders = {
+			}
+			keep_unit_leaders_trigger = {
+				NOT = { has_character_flag = PER_do_not_align_me_flag }
+			}
+		}
+		PER_abdul_hussein_dastghaib = {
+			add_country_leader_role = {
+				country_leader = {
+					expire = "1965.1.1"
+					ideology = islamism
+					traits = {
+						PER_mojtahed
+					}
+				}
+				promote_leader = yes
+			}
+		}
+		set_party_name = {
+			ideology = fascism
+			long_name = PER_islamist_party_long
+			name = PER_islamist_party
+		}
+		hidden_effect = {
+			division_template = {
+				name = "Religious Militia"
+				division_names_group = PER_INF_01
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+				}
+				support = {
+				}
+			}
+			random_owned_controlled_state = {
+				create_unit = {
+					division = "name = \"Religious Militia\" division_template = \"Religious Militia\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+					owner = ROOT
+					count = 4
+				}
+			}
+			if = {
+				limit = {
+					has_dynamic_modifier = { modifier = PER_iran_army_dmod }
+				}
+				remove_dynamic_modifier = { modifier = PER_iran_army_dmod }
+				add_dynamic_modifier = { modifier = PER_islam_army_dmod }
+			}
+			else = {
+				remove_dynamic_modifier = { modifier = PER_inefficient_army_dmod }
+				add_dynamic_modifier = { modifier = PER_islam_army_dmod }
+			}
+			set_country_flag = PER_inefficient_army_name_change_flag
+			remove_dynamic_modifier = { modifier = PER_power_of_clergy_dmod }
+			random_other_country = {
+				limit = {
+					original_tag = PER
+					has_government = neutrality
+				}
+				add_popularity = {
+					ideology = neutrality
+					popularity = 0.25
+				}
+				save_event_target_as = PER_breakaway_country_shah
+				remove_dynamic_modifier = { modifier = PER_power_of_clergy_dmod }
+				PER_set_up_dynamic_modifiers_civil_war = yes
+				add_ideas = PER_reza_pahlavi_idea
+				PER_fazlollah_zahedi = {
+					add_country_leader_role = {
+						country_leader = {
+							expire = "1965.1.1"
+							ideology = monarchism
+							traits = {
+								anti_communist
+								naw_driven_monarchists
+							}
+						}
+						promote_leader = yes
+					}
+				}
+				division_template = {
+					name = "Loyalists"
+					division_names_group = PER_INF_01
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+					}
+					support = {
+					}
+				}
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"Loyalists\" division_template = \"Loyalists\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+						owner = PREV
+						count = 6
+					}
+				}
+			}
+		}
+	}
+	hidden_effect = {
+		every_character = {
+			limit = {
+				has_character_flag = PER_monarchist_leader_flag
+			}
+			set_nationality = event_target:PER_breakaway_country_shah
+		}
+		random_other_country = {
+			limit = {
+				original_tag = PER
+				has_government = fascism
+			}
+			promote_character = PER_reza_shah_pahlavi
+		}
+		set_global_flag = PER_persian_civil_war_flag
+		clr_country_flag = PER_civil_war_path_flag
+	}
+}
+
+PER_assassination_effect = {
+	if = {
+		limit = {
+			has_character = PER_reza_shah_pahlavi
+		}
+		add_stability = -0.05
+		PER_bop_medium_increase_effect = yes
+		if = {
+			limit = {
+				has_country_leader = {
+					character = PER_reza_shah_pahlavi
+					ruling_only = yes
+				}
+			}
+			promote_character = PER_mohammed_reza_pahlavi
+			hidden_effect = {
+				retire_character = PER_reza_shah_pahlavi
+			}
+		}
+		else = {
+			remove_ideas = PER_reza_pahlavi_idea
+			add_ideas = PER_mohammed_reza_pahlavi_idea
+		}
+	}
+	else_if = {
+		limit = {
+			has_character = PER_mohammed_reza_pahlavi
+		}
+		add_stability = -0.05
+		PER_bop_medium_increase_effect = yes
+		if = {
+			limit = {
+				has_country_leader = {
+					character = PER_mohammed_reza_pahlavi
+					ruling_only = yes
+				}
+			}
+			promote_character = PER_ali_reza_pahlavi
+			hidden_effect = {
+				retire_character = PER_mohammed_reza_pahlavi
+			}
+		}
+		else = {
+			remove_ideas = PER_mohammed_reza_pahlavi_idea
+		}
+	}
+	else_if = {
+		limit = {
+			has_character = PER_ali_reza_pahlavi
+		}
+		if = {
+			limit = {
+				has_country_leader = {
+					character = PER_ali_reza_pahlavi
+					ruling_only = yes
+				}
+			}
+			start_civil_war = {
+				ruling_party = ROOT
+				ideology = fascism
+				size = 0.15
+				states = { 412 414 410 }
+				keep_all_characters = yes
+				PREV = {  # Original country
+					PER_abdul_hussein_dastghaib = { # Character
+						set_nationality = PREV.PREV # Transfers to breakaway
+					}
+				}
+			}
+			hidden_effect = {
+				random_other_country = {
+					limit = {
+						original_tag = PER
+						has_government = fascism
+					}
+					PER_abdul_hussein_dastghaib = {
+						add_country_leader_role = {
+							country_leader = {
+								expire = "1965.1.1"
+								ideology = islamism
+								traits = {
+									PER_mojtahed
+								}
+							}
+							promote_leader = yes
+						}
+					}
+					set_party_name = {
+						ideology = fascism
+						long_name = PER_islamist_party_long
+						name = PER_islamist_party
+					}
+					set_cosmetic_tag = PER_iran_islamic_state
+					set_rule = {
+						can_join_factions = no
+					}
+					add_ideas = PER_jihad_ns
+				}
+			}
+		}
+	}
+}
+
+PER_set_up_dynamic_modifiers_civil_war = {
+	#Army
+	set_variable = { PER_inefficient_army_dmod_army_org_factor = PER.PER_inefficient_army_dmod_army_org_factor }
+	set_variable = { PER_inefficient_army_dmod_army_morale_factor = PER.PER_inefficient_army_dmod_army_morale_factor }
+	set_variable = { PER_inefficient_army_dmod_army_org_regain = PER.PER_inefficient_army_dmod_army_org_regain }
+	set_variable = { PER_inefficient_army_dmod_army_attack_factor = PER.PER_inefficient_army_dmod_army_attack_factor }
+	set_variable = { PER_inefficient_army_dmod_army_attack_against_major_factor = PER.PER_inefficient_army_dmod_army_attack_against_major_factor }
+	set_variable = { PER_inefficient_army_dmod_army_defence_factor = PER.PER_inefficient_army_dmod_army_defence_factor }
+	set_variable = { PER_inefficient_army_dmod_land_reinforce_rate = PER.PER_inefficient_army_dmod_land_reinforce_rate }
+	set_variable = { PER_inefficient_army_dmod_war_support_factor = PER.PER_inefficient_army_dmod_war_support_factor }
+	set_variable = { PER_inefficient_army_dmod_experience_gain_army_factor = PER.PER_inefficient_army_dmod_experience_gain_army_factor }
+	set_variable = { PER_inefficient_army_dmod_training_time_army_factor = PER.PER_inefficient_army_dmod_training_time_army_factor }
+	set_variable = { PER_inefficient_army_dmod_land_doctrine_cost_factor = PER.PER_inefficient_army_dmod_land_doctrine_cost_factor }
+	set_variable = { PER_inefficient_army_dmod_conscription_factor = PER.PER_inefficient_army_dmod_conscription_factor }
+	set_variable = { PER_inefficient_army_dmod_special_forces_cap = PER.PER_inefficient_army_dmod_special_forces_cap }
+	set_variable = { PER_inefficient_army_dmod_unit_limit_bonus = PER.PER_inefficient_army_dmod_unit_limit_bonus }
+	set_variable = { PER_inefficient_army_dmod_resistance_target = PER.PER_inefficient_army_dmod_resistance_target }
+	set_variable = { PER_inefficient_army_dmod_heat_attrition_factor = PER.PER_inefficient_army_dmod_heat_attrition_factor }
+	set_variable = { PER_inefficient_army_dmod_conscription = PER.PER_inefficient_army_dmod_conscription }
+	set_variable = { PER_inefficient_army_dmod_max_command_power = PER.PER_inefficient_army_dmod_max_command_power }
+	set_variable = { PER_buffed_inefficient_army = PER.PER_buffed_inefficient_army }
+	set_variable = { PER_conducted_army_drills = PER.PER_conducted_army_drills }
+	add_dynamic_modifier = { modifier = PER_inefficient_army_dmod }
+
+	#Air
+	set_variable = { PER_iran_airforce_dmod_experience_gain_air_factor = PER.PER_iran_airforce_dmod_experience_gain_air_factor }
+	set_variable = { PER_iran_airforce_dmod_untrained_pilots_penalty_factor = PER.PER_iran_airforce_dmod_untrained_pilots_penalty_factor }
+	set_variable = { PER_iran_airforce_dmod_air_doctrine_cost_factor = PER.PER_iran_airforce_dmod_air_doctrine_cost_factor }
+	set_variable = { PER_iran_airforce_dmod_air_accidents_factor = PER.PER_iran_airforce_dmod_air_accidents_factor }
+	set_variable = { PER_iran_airforce_dmod_air_superiority_efficiency = PER.PER_iran_airforce_dmod_air_superiority_efficiency }
+	set_variable = { PER_iran_airforce_dmod_air_home_defence_factor = PER.PER_iran_airforce_dmod_air_home_defence_factor }
+	set_variable = { PER_iran_airforce_dmod_air_ace_generation_chance_factor = PER.PER_iran_airforce_dmod_air_ace_generation_chance_factor }
+	set_variable = { PER_iran_airforce_dmod_air_range_factor = PER.PER_iran_airforce_dmod_air_range_factor }
+	set_variable = { PER_iran_airforce_dmod_conscription_factor = PER.PER_iran_airforce_dmod_conscription_factor }
+	set_variable = { PER_iran_airforce_dmod_air_mission_xp_gain_factor = PER.PER_iran_airforce_dmod_air_mission_xp_gain_factor }
+	set_variable = { PER_iran_airforce_dmod_naval_strike_targetting_factor = PER.PER_iran_airforce_dmod_naval_strike_targetting_factor }
+	set_variable = { PER_iran_airforce_dmod_industrial_capacity_factory = PER.PER_iran_airforce_dmod_industrial_capacity_factory }
+	if = {
+		limit = {
+			PER = { has_completed_focus = PER_send_pilots_abroad_for_training }
+		}
+		add_dynamic_modifier = { modifier = PER_iran_airforce_dmod }
+	}
+}
+
+PER_set_up_islamist_civil_war = {
+	hidden_effect = {
+		retire_character = PER_reza_shah_pahlavi
+		set_country_flag = PER_reza_shah_pahlavi_died_flag
+	}
+	if = {
+		limit = {
+			has_any_power_balance = yes
+		}
+		remove_power_balance = { id = PER_clergy_balance }
+	}
+	start_civil_war = {
+		ruling_party = fascism
+		ideology = neutrality
+		states = {
+			266 419 420 418 416 1000 1004 1001 417 411 1002 1003
+		}
+		size = 0.45
+		keep_unit_leaders = {
+		}
+		keep_unit_leaders_trigger = {
+			NOT = { has_character_flag = PER_do_not_align_me_flag }
+		}
+	}
+	create_country_leader = {
+		name = "Mohammad Osman Naqshbandi"
+		desc = ""
+		picture = GFX_portrait_PER_Mohammad_Osman_Naqshbandi
+		expire = "1965.1.1"
+		ideology = islamism
+		traits = {
+		}
+	}
+	set_party_name = {
+		ideology = fascism
+		long_name = PER_islamist_party_long
+		name = PER_islamist_party
+	}
+	set_cosmetic_tag = PER_civil_war_islamist_cos
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = PER_iran_army_dmod }
+		}
+		remove_dynamic_modifier = { modifier = PER_iran_army_dmod }
+		add_dynamic_modifier = { modifier = PER_islam_army_dmod }
+	}
+	else = {
+		remove_dynamic_modifier = { modifier = PER_inefficient_army_dmod }
+		add_dynamic_modifier = { modifier = PER_islam_army_dmod }
+	}
+	set_country_flag = PER_inefficient_army_name_change_flag
+	set_country_flag = PER_reza_shah_pahlavi_died_flag
+	remove_dynamic_modifier = { modifier = PER_power_of_clergy_dmod }
+	division_template = {
+		name = "Religious Militia"
+		division_names_group = PER_INF_01
+		regiments = {
+			infantry = { x = 0 y = 0 }
+			infantry = { x = 0 y = 1 }
+			infantry = { x = 1 y = 0 }
+			infantry = { x = 1 y = 1 }
+		}
+		support = {
+		}
+	}
+	random_owned_controlled_state = {
+		create_unit = {
+			division = "name = \"Religious Militia\" division_template = \"Religious Militia\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+			owner = ROOT
+			count = 4
+		}
+	}
+	random_owned_controlled_state = { #Saudi backed militia
+		create_unit = {
+			division = "name = \"Religious Militia\" division_template = \"Religious Militia\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+			owner = ROOT
+			count = 2
+		}
+	}
+	capital_scope = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+	}
+	if = {
+		limit = {
+			has_completed_focus = PER_weakening_influence_clergy
+		}
+		uncomplete_national_focus = {
+			focus = PER_weakening_influence_clergy
+			uncomplete_children = yes
+		}
+	}
+	if = {
+		limit = {
+			NOT = { has_completed_focus = PER_side_with_islamists }
+		}
+		unlock_national_focus = PER_side_with_islamists
+		unlock_national_focus = PER_invite_islamists_to_government
+		unlock_national_focus = PER_overthrow_the_shah
+		unlock_national_focus = PER_islamic_revolution
+		unlock_national_focus = PER_rise_against_the_king
+		unlock_national_focus = PER_death_to_the_king
+	}
+	if = {
+		limit = {
+			has_completed_focus = PER_gather_support_for_qajar_dynasty
+		}
+		uncomplete_national_focus = {
+			focus = PER_gather_support_for_qajar_dynasty
+			uncomplete_children = yes
+		}
+	}
+	if = {
+		limit = {
+			has_completed_focus = PER_restart_jungle_movement
+		}
+		uncomplete_national_focus = {
+			focus = PER_restart_jungle_movement
+			uncomplete_children = yes
+		}
+	}
+	random_other_country = {
+		limit = {
+			original_tag = PER
+			has_government = neutrality
+		}
+		add_popularity = {
+			ideology = neutrality
+			popularity = 0.25
+		}
+		remove_dynamic_modifier = { modifier = PER_power_of_clergy_dmod }
+		PER_set_up_dynamic_modifiers_civil_war = yes
+		add_ideas = PER_mohammed_reza_pahlavi_idea
+		PER_fazlollah_zahedi = {
+			add_country_leader_role = {
+				country_leader = {
+					expire = "1965.1.1"
+					ideology = monarchism
+					traits = {
+						anti_communist
+						naw_driven_monarchists
+					}
+				}
+				promote_leader = yes
+			}
+		}
+		division_template = {
+			name = "Loyalists"
+			division_names_group = PER_INF_01
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+			}
+			support = {
+			}
+		}
+		random_owned_controlled_state = {
+			create_unit = {
+				division = "name = \"Loyalists\" division_template = \"Loyalists\" start_experience_factor = 0.1 start_equipment_factor = 1.0"
+				owner = PREV
+				count = 4
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = PER_player_chooses_no_flag
+			}
+			change_tag_from = PER
+		}
+	}
+	news_event = { id = persia_misc.2 days = 1 }
+	clr_country_flag = PER_civil_war_path_flag
+	clr_country_flag = PER_civil_war_in_progress_flag
+	set_global_flag = PER_persian_civil_war_flag
+}

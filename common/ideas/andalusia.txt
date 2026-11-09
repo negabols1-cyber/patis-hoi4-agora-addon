@@ -1,0 +1,471 @@
+ideas = {
+	hidden_ideas = { # Used to prevent AI to hold outside of the Iberian Peninsula during the SCW
+		END_death_before_surrender_capitulation = {
+
+			name = SPR_death_before_surrender
+
+			allowed = {
+				original_tag = SPR
+				tag = END
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 1
+			}
+		}
+	}
+
+	country = {
+		END_muslim_happines = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+				original_tag = SPR
+				tag = END
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				consumer_goods_factor = -0.05
+				war_support_factor = 0.05
+				stability_factor = 0.10
+			}
+		}
+		END_last_guardian = {
+
+			picture = air_war_plans_division_focus
+
+			allowed = {
+				original_tag = SPR
+				tag = END
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				surrender_limit = 1
+				max_surrender_limit_offset = 0.15
+			}
+		}
+		END_spain_attack = {
+
+			picture = SPR_nationalist_remnants
+
+			allowed = {
+				original_tag = SPR
+				tag = END
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+			targeted_modifier = {
+				tag = SPC
+				attack_bonus_against = 0.15
+				defense_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = SPA
+				attack_bonus_against = 0.15
+				defense_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = SPB
+				attack_bonus_against = 0.15
+				defense_bonus_against = 0.05
+			}
+			targeted_modifier = {
+				tag = SPR
+				attack_bonus_against = 0.15
+				defense_bonus_against = 0.05
+			}
+		}
+		END_french_military_advisors = {
+
+			picture = advisors_france2
+
+			allowed = {
+				original_tag = SPR
+				tag = END
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				planning_speed = 0.1
+				max_planning = 0.1
+			}
+		}
+		END_industrial_aid = {
+
+			picture = eng_spirit_of_the_industrial_revolution
+
+			allowed = {
+				original_tag = SPR
+				tag = END
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				communism_drift = 0.05
+				production_speed_industrial_complex_factor = 0.1
+				production_speed_arms_factory_factor = 0.1
+			}
+		}
+		END_recovery_aid = {
+
+			picture = generic_production_bonus
+
+			allowed = {
+				original_tag = SPR
+				tag = END
+			}
+
+			allowed_civil_war = {
+				always = yes
+			}
+
+			modifier = {
+				stability_weekly = 0.002
+				industry_repair_factor = 0.1
+			}
+		}
+	}
+
+	political_advisor = {
+
+		ADU_democratic_guy = {
+
+			picture = generic_political_advisor_arab_1
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { democratic_reformer }
+
+			do_effect = {
+				NOT = {
+					has_government = democratic
+				}
+			}
+
+			ai_will_do = {
+				base = 0
+			}
+		}
+
+		ADU_communist_guy = {
+
+			picture = generic_political_advisor_arab_3
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { communist_revolutionary }
+
+			do_effect = {
+				NOT = {
+					has_government = communism
+				}
+			}
+
+			ai_will_do = {
+				base = 0
+			}
+		}
+
+		ADU_fascist_guy = {
+
+			picture = generic_political_advisor_arab_2
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { fascist_demagogue }
+
+			do_effect = {
+				NOT = {
+					has_government = fascism
+				}
+			}
+
+			ai_will_do = {
+				base = 0
+			}
+		}
+
+		ADU_pot = {
+
+			picture = generic_political_advisor_arab_2
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { prince_of_terror }
+		}
+
+		ADU_coi = {
+
+			picture = generic_political_advisor_arab_1
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { captain_of_industry }
+		}
+
+		ADU_stc = {
+
+			picture = generic_political_advisor_arab_3
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { smooth_talking_charmer }
+		}
+	}
+
+	army_chief = {
+
+		ADU_aco2 = {
+
+			picture = generic_army_arab_2
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { army_chief_organizational_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		ADU_acd2 = {
+
+			picture = generic_army_arab_1
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { army_chief_defensive_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	air_chief = {
+
+		ADU_acr = {
+
+			picture = generic_air_arab_3
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { air_chief_reform_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		ADU_acgs = {
+
+			picture = generic_air_arab_3
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { air_chief_ground_support_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+	}
+
+	navy_chief = {
+
+		ADU_nccr = {
+
+			picture = generic_navy_arab_2
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { navy_chief_commerce_raiding_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		ADU_ncm = {
+
+			picture = generic_navy_arab_3
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { navy_chief_maneuver_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	high_command = {
+
+		ADU_ar = {
+			ledger = army
+
+			picture = generic_army_arab_1
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { army_regrouping_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		ADU_ai2 = {
+			ledger = army
+
+			picture = generic_army_arab_3
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { army_infantry_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		ADU_aa2 = {
+			ledger = army
+
+			picture = generic_army_arab_2
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { army_armored_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		ADU_acas = {
+			ledger = air
+
+			picture = generic_air_arab_2
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { air_close_air_support_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+		ADU_ncs = {
+			ledger = navy
+
+			picture = generic_navy_arab_2
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { navy_capital_ship_2 }
+
+			ai_will_do = {
+				factor = 1
+			}
+		}
+	}
+
+	theorist = {
+		ADU_mt = {
+			ledger = army
+
+			picture = generic_army_arab_1
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { military_theorist }
+		}
+
+		ADU_nt = {
+			ledger = navy
+
+			picture = generic_navy_arab_3
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { naval_theorist }
+		}
+
+		ADU_awt = {
+			ledger = air
+
+			picture = generic_air_arab_2
+
+			allowed = {
+				original_tag = ADU
+			}
+
+			traits = { air_warfare_theorist }
+		}
+
+	}
+}

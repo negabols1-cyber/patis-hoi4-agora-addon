@@ -1,0 +1,511 @@
+ef_ai_behavior_category = {
+	ef_ai_national_ideas_economic = {
+		icon = eng_propaganda_campaigns
+		available = {
+		}
+		priority = 1
+
+		visible = {
+
+		}
+		cost = ROOT.economic_decision_cost
+
+		ai_will_do = {
+			base = 11
+			modifier = {
+				tag = GER
+				NOT = {
+					has_country_flag = natideas_economic_3_completed
+				}
+				factor = 1.5
+			}
+			modifier = {
+				tag = ENG
+				has_country_flag = natideas_innovation_1_completed
+				add = 9
+			}
+			modifier = {
+				has_country_flag = natideas_economic_5_completed
+				factor = 0
+			}
+			modifier = {
+				has_country_flag = natideas_production_1_completed
+				factor = 0
+			}
+		}
+		complete_effect = {
+			hidden_effect = {
+				##ECONOMIC
+				if = {
+					limit = {
+						NOT = { #eğer oyuncu diplomatic seçtiyse diye
+							has_country_flag = natideas_production_1_completed
+							has_country_flag = natideas_economic_1_completed
+						}
+					}
+					set_country_flag = natideas_economic_1_completed
+					add_ideas = nateconomic_1
+					add_to_variable = {
+						var = ROOT.economic_decision_cost
+						value = 50
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_economic_1_completed
+						NOT = {
+							has_country_flag = natideas_economic_2_completed
+						}
+					}
+					set_country_flag = natideas_economic_2_completed
+					swap_ideas = {
+						remove_idea = nateconomic_1
+						add_idea = nateconomic_2
+					}
+					add_to_variable = {
+						var = ROOT.economic_decision_cost
+						value = 25
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_economic_2_completed
+						NOT = {
+							has_country_flag = natideas_economic_3_completed
+						}
+					}
+					set_country_flag = natideas_economic_3_completed
+					swap_ideas = {
+						remove_idea = nateconomic_2
+						add_idea = nateconomic_3
+					}
+					add_to_variable = {
+						var = ROOT.economic_decision_cost
+						value = 50
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_economic_3_completed
+						NOT = {
+							has_country_flag = natideas_economic_4_completed
+						}
+					}
+					set_country_flag = natideas_economic_4_completed
+					swap_ideas = {
+						remove_idea = nateconomic_3
+						add_idea = nateconomic_4
+					}
+					add_to_variable = {
+						var = ROOT.economic_decision_cost
+						value = 100
+					}
+				}
+				else = {
+					set_country_flag = natideas_economic_5_completed
+					swap_ideas = {
+						remove_idea = nateconomic_4
+						add_idea = nateconomic_5
+					}
+				}
+			}
+		}
+	}
+	ef_ai_national_ideas_diplomatic = {
+		icon = eng_propaganda_campaigns
+		available = {
+		}
+		priority = 1
+
+		visible = {
+
+		}
+		cost = ROOT.diplomatic_decision_cost
+
+		ai_will_do = {
+			base = 60
+			modifier = {
+				has_country_flag = natideas_diplomatic_1_completed
+				add = -52
+			}
+			modifier = {
+				has_country_flag = natideas_diplomatic_3_completed
+				factor = 0
+			}
+		}
+		complete_effect = {
+			hidden_effect = {
+				##diplomatic
+				if = {
+					limit = {
+						NOT = { #eğer oyuncu diplomatic seçtiyse diye
+							has_country_flag = natideas_diplomatic_1_completed
+						}
+					}
+					set_country_flag = natideas_diplomatic_1_completed
+					add_ideas = natdiplomatic_1
+					add_to_variable = {
+						var = ROOT.diplomatic_decision_cost
+						value = 50
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_diplomatic_1_completed
+						NOT = {
+							has_country_flag = natideas_diplomatic_2_completed
+						}
+					}
+					set_country_flag = natideas_diplomatic_2_completed
+					swap_ideas = {
+						remove_idea = natdiplomatic_1
+						add_idea = natdiplomatic_2
+					}
+					add_to_variable = {
+						var = ROOT.diplomatic_decision_cost
+						value = 25
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_diplomatic_2_completed
+						NOT = {
+							has_country_flag = natideas_diplomatic_3_completed
+						}
+					}
+					set_country_flag = natideas_diplomatic_3_completed
+					swap_ideas = {
+						remove_idea = natdiplomatic_2
+						add_idea = natdiplomatic_3
+					}
+					add_to_variable = {
+						var = ROOT.diplomatic_decision_cost
+						value = 50
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_diplomatic_3_completed
+						NOT = {
+							has_country_flag = natideas_diplomatic_4_completed
+						}
+					}
+					set_country_flag = natideas_diplomatic_4_completed
+					swap_ideas = {
+						remove_idea = natdiplomatic_3
+						add_idea = natdiplomatic_4
+					}
+					add_to_variable = {
+						var = ROOT.diplomatic_decision_cost
+						value = 100
+					}
+				}
+				else = {
+					set_country_flag = natideas_diplomatic_5_completed
+					swap_ideas = {
+						remove_idea = natdiplomatic_4
+						add_idea = natdiplomatic_5
+					}
+				}
+			}
+		}
+	}
+	ef_ai_national_ideas_innovation = {
+		icon = eng_propaganda_campaigns
+		available = {
+		}
+		priority = 1
+
+		visible = {
+
+		}
+		cost = ROOT.innovation_decision_cost
+
+		ai_will_do = {
+			base = 14
+			modifier = {
+				has_country_flag = natideas_innovation_5_completed
+				factor = 0
+			}
+			modifier = {
+				has_country_flag = natideas_innovation_1_completed
+				add = -9
+			}
+			modifier = {
+				has_country_flag = natideas_innovation_2_completed
+				add = -3
+			}
+			modifier = {
+				tag = ENG
+				has_idea_with_trait = silent_workhorse
+				NOT = {
+					has_country_flag = natideas_innovation_1_completed
+				}
+				add = 10
+			}
+			modifier = {
+				tag = ENG
+				has_idea = r56i_laws_security_rights
+				NOT = {
+					has_country_flag = natideas_innovation_4_completed
+				}
+				add = 2
+			}
+			modifier = {
+				has_country_flag = natideas_innovation_1_completed
+				NOT = {
+					has_country_flag = natideas_quantity_3_completed
+					has_country_flag = natideas_quality_3_completed
+				}
+				factor = 0
+			}
+		}
+		complete_effect = {
+			hidden_effect = {
+				##INNOVATION
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = natideas_innovation_1_completed
+						}
+					}
+					set_country_flag = natideas_innovation_1_completed
+					add_ideas = natinnovation_1
+					add_to_variable = {
+						var = ROOT.innovation_decision_cost
+						value = 50
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_innovation_1_completed
+						NOT = {
+							has_country_flag = natideas_innovation_2_completed
+						}
+					}
+					set_country_flag = natideas_innovation_2_completed
+					swap_ideas = {
+						remove_idea = natinnovation_1
+						add_idea = natinnovation_2
+					}
+					add_to_variable = {
+						var = ROOT.innovation_decision_cost
+						value = 25
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_innovation_2_completed
+						NOT = {
+							has_country_flag = natideas_innovation_3_completed
+						}
+					}
+					set_country_flag = natideas_innovation_3_completed
+					swap_ideas = {
+						remove_idea = natinnovation_2
+						add_idea = natinnovation_3
+					}
+					add_to_variable = {
+						var = ROOT.innovation_decision_cost
+						value = 50
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_innovation_3_completed
+						NOT = {
+							has_country_flag = natideas_innovation_4_completed
+						}
+					}
+					set_country_flag = natideas_innovation_4_completed
+					swap_ideas = {
+						remove_idea = natinnovation_3
+						add_idea = natinnovation_4
+					}
+					add_to_variable = {
+						var = ROOT.innovation_decision_cost
+						value = 100
+					}
+				}
+				else = {
+					set_country_flag = natideas_innovation_5_completed
+					swap_ideas = {
+						remove_idea = nateconomic_4
+						add_idea = nateconomic_5
+					}
+				}
+			}
+		}
+	}
+	ef_ai_national_ideas_quantity = {
+		icon = eng_propaganda_campaigns
+		available = {
+		}
+		priority = 1
+
+		visible = {
+
+		}
+		cost = ROOT.quantity_decision_cost
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_country_flag = natideas_economic_5_completed
+				NOT = {
+					has_country_flag = natideas_quality_1_completed
+				}
+				add = 5
+			}
+			modifier = {
+				has_country_flag = natideas_quantity_3_completed
+				add = -2.5
+			}
+			modifier = {
+				has_idea = age_17
+				NOT = {
+					has_country_flag = natideas_quantity_1_completed
+				}
+				add = 20
+			}
+			modifier = {
+				has_manpower < 30000
+				add = 20
+			}
+			modifier = {
+				date < 1939.5.15
+				has_manpower > 100000
+				factor = 0.5
+			}
+			modifier = {
+				tag = SOV
+				factor = 0
+			}
+			modifier = {
+				amount_taken_ideas = {
+					amount < 1
+					slots = { army_chief }
+				}
+				factor = 0
+			}
+		}
+		complete_effect = {
+			hidden_effect = {
+				##QUANTITY
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = natideas_quantity_1_completed
+						}
+						NOT = {
+							has_country_flag = natideas_quality_1_completed
+						}
+					}
+					set_country_flag = natideas_quantity_1_completed
+					add_ideas = natquantity_1
+					add_to_variable = {
+						var = ROOT.quantity_decision_cost
+						value = 50
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_quantity_1_completed
+						NOT = {
+							has_country_flag = natideas_quantity_2_completed
+						}
+					}
+					set_country_flag = natideas_quantity_2_completed
+					swap_ideas = {
+						remove_idea = natquantity_1
+						add_idea = natquality_2
+					}
+					add_to_variable = {
+						var = ROOT.quantity_decision_cost
+						value = 25
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_quantity_2_completed
+						NOT = {
+							has_country_flag = natideas_quantity_3_completed
+						}
+					}
+					set_country_flag = natideas_quantity_3_completed
+					swap_ideas = {
+						remove_idea = natquantity_2
+						add_idea = natquantity_3
+					}
+					add_to_variable = {
+						var = ROOT.quantity_decision_cost
+						value = 50
+					}
+				}
+				else_if = {
+					limit = {
+						has_country_flag = natideas_quantity_3_completed
+						NOT = {
+							has_country_flag = natideas_quantity_4_completed
+						}
+					}
+					set_country_flag = natideas_quantity_4_completed
+					swap_ideas = {
+						remove_idea = natquantity_3
+						add_idea = natquantity_4
+					}
+					add_to_variable = {
+						var = ROOT.quantity_decision_cost
+						value = 100
+					}
+				}
+				else = {
+					set_country_flag = natideas_quantity_5_completed
+					swap_ideas = {
+						remove_idea = natquantity_4
+						add_idea = natquantity_5
+					}
+				}
+			}
+		}
+	}
+	ef_ai_agency_upgrade_training_centers = {
+		icon = eng_propaganda_campaigns
+		allowed = {
+			original_tag = JAP
+		}
+		available = {
+			NOT = {
+				has_done_agency_upgrade = upgrade_training_centers
+			}
+		}
+		priority = 1
+
+		visible = {
+
+		}
+
+		cost = 1
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+		days_remove = 30
+
+		modifier = {
+			civilian_factory_use = 10
+		}
+
+		remove_effect = {
+			IF = {
+				limit = {
+					NOT = {
+						has_done_agency_upgrade = upgrade_training_centers
+					}
+				}
+				upgrade_intelligence_agency = upgrade_training_centers
+			}
+		}
+	}
+}

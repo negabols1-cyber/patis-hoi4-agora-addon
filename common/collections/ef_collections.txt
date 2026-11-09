@@ -1,0 +1,19 @@
+countries_in_europe = {
+	input = game:all_countries
+	name = COLLECTION_COUNTRIES_IN_EUROPE
+	operators = {
+		limit = {
+			capital_scope = { is_on_continent = europe }
+		}
+	}
+}
+
+europen_faction_members = {
+	input = collection:countries_in_europe
+	name = COLLECTION_EUROPEAN_FACTION_MEMBERS
+	operators = {
+		limit = {
+			is_in_faction_with = ROOT
+		}
+	}
+}

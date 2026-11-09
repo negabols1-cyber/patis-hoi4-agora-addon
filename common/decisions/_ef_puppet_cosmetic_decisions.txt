@@ -1,0 +1,60 @@
+ef_puppet_cosmetic_category = {
+	ef_clear_cosmetic_tag = {
+
+		icon = generic_army_support
+
+		visible = {
+			NOT = { has_country_flag = ai_country }
+			has_country_flag = cosmetic_tagged_flag
+		}
+		cost = 0
+		fire_only_once = no
+		ai_will_do = {
+			base = -100
+		}
+		complete_effect = {
+			if = {
+				limit = {
+					ef_dynamic_cosmetic_country = yes
+				}
+				ROOT = {
+					#Fascist ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = LBA_ITA
+							}
+						}
+						retire_ideology_leader = fascism
+					}
+					#Neutrality ban
+					if = {
+						limit = {
+							OR = {
+								has_cosmetic_tag = CYP_TUR
+							}
+						}
+						retire_ideology_leader = neutrality
+					}
+					#Libya leader return
+					if = {
+						limit = {
+							original_tag = LBA
+						}
+						create_country_leader = {
+							name = "Muhammadar-Reda"
+							desc = ""
+							picture = GFX_portrait_Muhammad_ar_Reda
+							ideology = fascism_ideology
+							traits = {
+								#
+							}
+						}
+					}
+					drop_cosmetic_tag = yes
+					clr_country_flag = cosmetic_tagged_flag
+				}
+			}
+		}
+	}
+}

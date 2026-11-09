@@ -1,0 +1,36 @@
+on_actions = {
+	on_weekly_IRE = {
+		effect = {
+			if = {
+				limit = {
+					check_variable = {
+						var = iaos_equality_of_farmers_var
+						value = 100
+						compare = less_than_or_equals
+					}
+					has_idea = IRE_Horace_Plunkett
+					has_completed_focus = IRE_fund_to_IAOS
+				}
+				add_to_variable = {
+					var = iaos_equality_of_farmers_var
+					value = 0.1
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						var = iaos_equality_of_farmers_var
+						value = 100
+						compare = less_than_or_equals
+					}
+					has_idea = IRE_George_William_Russell
+					has_completed_focus = IRE_fund_to_IAOS
+				}
+				add_to_variable = {
+					var = iaos_equality_of_farmers_var
+					value = 0.15
+				}
+			}
+		}
+	}
+}

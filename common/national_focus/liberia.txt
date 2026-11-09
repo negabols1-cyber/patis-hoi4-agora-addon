@@ -1,0 +1,8914 @@
+﻿### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_RESEARCH}
+### search_filters = {FOCUS_FILTER_INDUSTRY}
+### search_filters = {FOCUS_FILTER_STABILITY}
+### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+### search_filters = {FOCUS_FILTER_MANPOWER}
+### search_filters = {FOCUS_FILTER_ANNEXATION}
+
+focus_tree = {
+	id = liberian_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = LIB
+		}
+	}
+
+	default = no
+
+	continuous_focus_position = { x = 1200 y = 820 }
+
+	############################
+	##### INDUSTRY SECTION #####
+	############################
+
+	focus = {
+		id = LIB_expand_rubber_cultivation
+		icon = GFX_focus_generic_rubber
+		x = 0
+		y = 0
+
+		cost = 5.13
+		mutually_exclusive = { focus = LIB_steel_prospecting }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			298 = {
+				add_resource = {
+					type = rubber
+					amount = 6
+				}
+			}
+			custom_effect_tooltip = LIB_available_company_tt
+			show_ideas_tooltip = LIB_national_port_authority
+		}
+	}
+
+	focus = {
+		id = LIB_steel_prospecting
+		icon = GFX_focus_generic_steel
+		x = 2
+		y = 0
+
+		cost = 5.14
+		mutually_exclusive = { focus = LIB_expand_rubber_cultivation }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			298 = {
+				add_resource = {
+					type = steel
+					amount = 6
+				}
+			}
+			custom_effect_tooltip = LIB_available_company_tt
+			show_ideas_tooltip = LIB_the_liberian_registry
+		}
+	}
+
+	focus = {
+		id = LIB_oil_proccesing
+		icon = GFX_z_goal_oil_derrick
+		x = -3
+		y = 1
+
+		cost = 8.65
+		relative_position_id = LIB_expand_rubber_cultivation
+		prerequisite = { focus = LIB_expand_rubber_cultivation focus = LIB_steel_prospecting }
+		mutually_exclusive = { focus = LIB_gold_extraction }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			298 = {
+				add_resource = {
+					type = oil
+					amount = 8
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_allimium_mining
+		icon = GFX_focus_generic_aluminum
+		x = 1
+		y = 1
+
+		cost = 8.65
+		mutually_exclusive = { focus = LIB_ban_the_use_of_cyanide }
+		relative_position_id = LIB_oil_proccesing
+		prerequisite = { focus = LIB_oil_proccesing }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_resource = {
+					amount = 8
+					type = aluminium
+				}
+			}
+			modify_building_resources = {
+				building = aluminum_mill
+				resource = aluminium
+				amount = 1
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_ban_the_use_of_cyanide
+		icon = GFX_z_goal_white_rice
+		x = -1
+		y = 1
+
+		cost = 8.65
+		mutually_exclusive = { focus = LIB_allimium_mining }
+		relative_position_id = LIB_oil_proccesing
+		prerequisite = { focus = LIB_oil_proccesing }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_ideas = LIB_ban_of_cyanide_idea
+		}
+	}
+
+	focus = {
+		id = LIB_Liberated_Uranium
+		icon = GFX_z_goal_uranium_project
+		x = 1
+		y = 1
+
+		cost = 7
+		relative_position_id = LIB_ban_the_use_of_cyanide
+		prerequisite = { focus = LIB_ban_the_use_of_cyanide focus = LIB_allimium_mining }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = LIB_ban_the_use_of_cyanide
+				}
+				add_tech_bonus = {
+					name = LIB_Liberated_Uranium
+					bonus = 1.5
+					uses = 1
+					category = nuclear
+				}
+			}
+			else = {
+				add_tech_bonus = {
+					name = LIB_Liberated_Uranium
+					bonus = 1.0
+					uses = 1
+					category = nuclear
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_gold_extraction
+		icon = GFX_z_goal_gold_mines2
+		x = 3
+		y = 1
+
+		cost = 8.65
+		relative_position_id = LIB_steel_prospecting
+		prerequisite = { focus = LIB_expand_rubber_cultivation focus = LIB_steel_prospecting }
+		mutually_exclusive = { focus = LIB_oil_proccesing }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_ideas = LIB_gold_extraction_idea
+		}
+	}
+
+	focus = {
+		id = LIB_tungsten_mills
+		icon = GFX_focus_generic_tungsten
+		x = 1
+		y = 1
+
+		cost = 8.65
+		mutually_exclusive = { focus = LIB_chromium_mills }
+		relative_position_id = LIB_gold_extraction
+		prerequisite = { focus = LIB_gold_extraction }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = tungsten_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			modify_building_resources = {
+				building = tungsten_factory
+				resource = tungsten
+				amount = 1
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_chromium_mills
+		icon = GFX_z_goal_development_of_chrome
+		x = -1
+		y = 1
+
+		cost = 8.65
+		mutually_exclusive = { focus = LIB_tungsten_mills }
+		relative_position_id = LIB_gold_extraction
+		prerequisite = { focus = LIB_gold_extraction }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = chromium_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			modify_building_resources = {
+				building = chromium_factory
+				resource = chromium
+				amount = 1
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Steel_mills
+		icon = GFX_goal_generic_coal_mining
+		x = 0
+		y = 2
+
+		cost = 7
+		relative_position_id = LIB_gold_extraction
+		prerequisite = { focus = LIB_chromium_mills focus = LIB_tungsten_mills }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = steel_mill
+					level = 1
+					instant_build = yes
+				}
+			}
+			modify_building_resources = {
+				building = steel_mill
+				resource = steel
+				amount = 1
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_research_2
+		icon = GFX_focus_NORDIC_dem_capstone_research
+		prerequisite = { focus = LIB_Steel_mills }
+		x = 0
+		y = 1
+		relative_position_id = LIB_Steel_mills
+		cost = 8.65
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+
+	focus = {
+		id = LIB_cofee_economy
+		icon = GFX_z_goal_coffee_plantation
+		x = 2
+		y = 2
+
+		cost = 7.80
+		mutually_exclusive = { focus = LIB_centralised_economy }
+		relative_position_id = LIB_expand_rubber_cultivation
+		prerequisite = { focus = LIB_steel_prospecting focus = LIB_expand_rubber_cultivation }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_popularity = {
+				ideology = ROOT
+				popularity = -0.15
+			}
+			add_ideas = LIB_cofee_economy_idea
+		}
+	}
+
+	focus = {
+		id = LIB_pearl_mining
+		icon = GFX_z_goal_pearl
+		x = 1
+		y = 1
+
+		cost = 7.80
+		relative_position_id = LIB_cofee_economy
+		prerequisite = { focus = LIB_cofee_economy }
+
+		available = {
+			has_stability > 0.60
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			country_event = { id = liberia.9 days = 1 }
+			unlock_decision_category_tooltip = LIB_pearl_mining_category
+		}
+	}
+
+	focus = {
+		id = LIB_farming
+		icon = GFX_z_goal_stimulating_development_of_farms
+		x = -1
+		y = 1
+
+		cost = 10.26
+		relative_position_id = LIB_pearl_mining
+		prerequisite = { focus = LIB_pearl_mining focus = LIB_hydropower }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_stability = 0.05
+			if = {
+				limit = {
+					has_completed_focus = LIB_hydropower
+					has_completed_focus = LIB_cofee_economy
+				}
+				random_state = {
+					limit = {
+						is_owned_and_controlled_by = ROOT
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			else = {
+				random_state = {
+					limit = {
+						is_owned_and_controlled_by = ROOT
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_centralised_economy
+		icon = GFX_focus_generic_agricultural_subsidies
+		x = -2
+		y = 2
+
+		cost = 7.80
+		mutually_exclusive = { focus = LIB_cofee_economy }
+		relative_position_id = LIB_steel_prospecting
+		prerequisite = { focus = LIB_steel_prospecting focus = LIB_expand_rubber_cultivation }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_popularity = {
+				ideology = ROOT
+				popularity = 0.10
+			}
+			add_ideas = LIB_centralised_economy_idea
+		}
+	}
+
+	focus = {
+		id = LIB_hydropower
+		icon = GFX_focus_generic_hydroelectric_energy
+		x = 1
+		y = 1
+
+		cost = 10.26
+		relative_position_id = LIB_centralised_economy
+		prerequisite = { focus = LIB_centralised_economy focus = LIB_cofee_economy }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_stability = 0.05
+			random_state = {
+				limit = {
+					is_owned_and_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_mechanic_calculations
+		icon = GFX_GER_ENIGMA
+		x = -1
+		y = 1
+
+		cost = 7
+		relative_position_id = LIB_centralised_economy
+		prerequisite = { focus = LIB_centralised_economy }
+		search_filters = {FOCUS_FILTER_RESEARCH}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = ICE_heavy_industry
+				bonus = 0.5
+				uses = 2
+				category = electronics
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_integrated_rail_network
+		icon = GFX_z_goal_industrial_ref
+		prerequisite = { focus = LIB_hydropower focus = LIB_mechanic_calculations }
+		x = 1
+		y = 1
+		relative_position_id = LIB_mechanic_calculations
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_completed_focus = LIB_hydropower
+					has_completed_focus = LIB_mechanic_calculations
+				}
+				random_state = {
+					limit = {
+						is_owned_and_controlled_by = ROOT
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			else = {
+				random_state = {
+					limit = {
+						is_owned_and_controlled_by = ROOT
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_idea = LIB_gold_extraction_idea
+					}
+				}
+				custom_effect_tooltip = LIB_gold_extraction_idea_have_tt
+				effect_tooltip = {
+					swap_ideas = {
+						add_idea = LIB_gold_extraction_idea_2
+						remove_idea = LIB_gold_extraction_idea
+					}
+				}
+			}
+			else = {
+				swap_ideas = {
+					add_idea = LIB_gold_extraction_idea_2
+					remove_idea = LIB_gold_extraction_idea
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_inspired_by_goddard
+		icon = GFX_focus_NORDIC_com_selector_research
+		prerequisite = { focus = LIB_integrated_rail_network }
+		mutually_exclusive = { focus = LIB_way_of_Thomas_Faulkner focus = LIB_Increase_the_sea_trade_score }
+		x = -1
+		y = 1
+		relative_position_id = LIB_integrated_rail_network
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_completed_focus = LIB_Liberated_Uranium
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_inspired_by_goddard
+				bonus = 1.0
+				uses = 1
+				ahead_reduction = 1
+				category = rocketry
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Monrovia_radar_stations
+		icon = GFX_focus_NORDIC_com_selector_civilian
+		prerequisite = { focus = LIB_inspired_by_goddard }
+		prerequisite = { focus = LIB_research }
+		x = -2
+		y = 1
+		relative_position_id = LIB_inspired_by_goddard
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_Monrovia_radar_stations
+				bonus = 1.0
+				uses = 2
+				category = radar_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_research
+		icon = GFX_focus_NORDIC_com_capstone_research
+		prerequisite = { focus = LIB_Liberated_Uranium }
+		x = -3
+		y = 0
+		relative_position_id = LIB_integrated_rail_network
+		cost = 8.65
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+		search_filters = { FOCUS_FILTER_RESEARCH }
+	}
+
+	focus = {
+		id = LIB_syntetich_resources
+		icon = GFX_focus_NORDIC_com_capstone_civilian
+		prerequisite = { focus = LIB_inspired_by_goddard }
+		x = 0
+		y = 1
+		relative_position_id = LIB_inspired_by_goddard
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_inspired_by_goddard
+				bonus = 1.0
+				uses = 1
+				category = cat_synth_resources
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Uranium_purification
+		icon = GFX_focus_NORDIC_com_institution_2
+		prerequisite = { focus = LIB_syntetich_resources }
+		prerequisite = { focus = LIB_Monrovia_radar_stations }
+		x = -1
+		y = 1
+		relative_position_id = LIB_syntetich_resources
+
+		cost = 13.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_inspired_by_goddard
+				bonus = 2.5
+				uses = 1
+				ahead_reduction = 1
+				category = nuclear
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_way_of_Thomas_Faulkner
+		icon = GFX_focus_LIB_thomas_way
+		prerequisite = { focus = LIB_integrated_rail_network focus = LIB_farming }
+		mutually_exclusive = { focus = LIB_inspired_by_goddard focus = LIB_Increase_the_sea_trade_score }
+		x = 1
+		y = 1
+		relative_position_id = LIB_integrated_rail_network
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_completed_focus = LIB_victrix
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			add_ideas = LIB_way_of_Thomas_Faulkner_idea
+			add_tech_bonus = {
+				name = LIB_way_of_Thomas_Faulkner
+				bonus = 0.5
+				uses = 1
+				category = industry
+			}
+			custom_effect_tooltip = LIB_available_company_tt
+			show_ideas_tooltip = LIB_LAMCO
+		}
+	}
+
+	focus = {
+		id = LIB_war_industry
+		icon = GFX_z_goal_military_mobilisation
+		prerequisite = { focus = LIB_way_of_Thomas_Faulkner focus = LIB_inspired_by_goddard focus = LIB_Increase_the_sea_trade_score }
+		x = 0
+		y = 1
+		relative_position_id = LIB_way_of_Thomas_Faulkner
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			298 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_liberated_workers
+		icon = GFX_z_goal_generic_industrial_production2
+		prerequisite = { focus = LIB_war_industry }
+		x = -1
+		y = 1
+		relative_position_id = LIB_war_industry
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_completed_focus = LIB_way_of_Thomas_Faulkner
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_inspired_by_goddard
+				bonus = 1.0
+				uses = 1
+				category = cat_synth_resources
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_extraction
+		icon = GFX_z_goal_coop_resourses
+		x = 1
+		y = 1
+
+		cost = 10.26
+		relative_position_id = LIB_liberated_workers
+		prerequisite = { focus = LIB_liberated_workers }
+		prerequisite = { focus = LIB_Monroiva_dockyards }
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_pearl_mining
+				bonus = 1.5
+				uses = 2
+				category = excavation_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Monroiva_dockyards
+		icon = GFX_focus_FIN_acquire_andros_dockyards
+		prerequisite = { focus = LIB_war_industry }
+		x = 1
+		y = 1
+		relative_position_id = LIB_war_industry
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_completed_focus = LIB_way_of_Thomas_Faulkner
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			IF = {
+				limit = {
+					298 = {
+						naval_base < 10
+					}
+				}
+				298 = {
+					add_building_construction = {
+						type = naval_base
+						level = 2
+						instant_build = yes
+						province = 7959
+					}
+				}
+			}
+			IF = {
+				limit = {
+					100 = {
+						free_building_slots = {
+							building = dockyard
+							size > 0
+							include_locked = yes
+						}
+					}
+				}
+				298 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = dockyard
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Increase_the_sea_trade_score
+		icon = GFX_focus_NORDIC_dem_selector_navy
+		prerequisite = { focus = LIB_farming }
+		mutually_exclusive = { focus = LIB_inspired_by_goddard focus = LIB_way_of_Thomas_Faulkner }
+		x = 1
+		y = 1
+		relative_position_id = LIB_farming
+
+		cost = 10
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			298 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_cover_our_trade_convoys
+		icon = GFX_focus_NORDIC_dem_institution_1
+		prerequisite = { focus = LIB_Increase_the_sea_trade_score }
+		prerequisite = { focus =LIB_research_2 }
+		x = 2
+		y = 1
+		relative_position_id = LIB_Increase_the_sea_trade_score
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			navy_experience = 50
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 1.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_crate_trade_convoys
+		icon = GFX_focus_NORDIC_dem_navy
+		prerequisite = { focus = LIB_Increase_the_sea_trade_score }
+		x = 0
+		y = 1
+		relative_position_id = LIB_Increase_the_sea_trade_score
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			298 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_modern_trade_convoys
+		icon = GFX_focus_NORDIC_dem_capstone_navy
+		prerequisite = { focus = LIB_cover_our_trade_convoys focus = LIB_crate_trade_convoys }
+		x = -1
+		y = 1
+		relative_position_id = LIB_cover_our_trade_convoys
+
+		cost = 13.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			add_ideas = LIB_modern_trade_convoys_idea
+		}
+	}
+
+	############################
+	####### ARMY SECTION #######
+	############################
+
+	focus = {
+		id = LIB_New_National_Defense_Law
+		icon = GFX_z_goal_conscription_experienced_warriors
+		x = 14
+		y = 0
+		relative_position_id = LIB_steel_prospecting
+
+		cost = 5.13
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 15
+			add_doctrine_cost_reduction = {
+				name = LIB_New_National_Defense_Law
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			swap_ideas = {
+				add_idea = LIB_army_idea_2
+				remove_idea = LIB_army_idea
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_tribal_officers
+		icon = GFX_goal_SAF_army
+		x = 6
+		y = 1
+		relative_position_id = LIB_New_National_Defense_Law
+		prerequisite = { focus = LIB_New_National_Defense_Law }
+		mutually_exclusive = { focus = LIB_aristocrat_officers }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 25
+			add_doctrine_cost_reduction = {
+				name = LIB_New_National_Defense_Law
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+			swap_ideas = {
+				add_idea = 	LIB_army_idea_tribal
+				remove_idea = LIB_army_idea_2
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_frontier_recons
+		icon = GFX_z_goal_chinese_soldiers
+		x = 1
+		y = 1
+		relative_position_id = LIB_tribal_officers
+		prerequisite = { focus = LIB_tribal_officers }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = recon_tech_bonus
+				bonus = 1.0
+				uses = 1
+				category = recon_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_tribal_forces
+		icon = GFX_z_goal_rely_on_your_own_strength
+		x = 0
+		y = 1
+		relative_position_id = LIB_frontier_recons
+		prerequisite = { focus = LIB_frontier_recons }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_tribal_forces
+				bonus = 0.75
+				uses = 2
+				category = jungle_infantry_tech
+				category = jaeger_infantry_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_found_cannons
+		icon = GFX_goal_generic_mountain_artillery
+		x = -2
+		y = 2
+		relative_position_id = LIB_tribal_forces
+		prerequisite = { focus = LIB_tribal_forces }
+		prerequisite = { focus = LIB_traditional_education }
+		prerequisite = { focus = LIB_new_weapons }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = infantry_weapons_bonus
+				bonus = 0.75
+				uses = 2
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_aristocrat_officers
+		icon = GFX_goal_LIB_army
+		x = 2
+		y = 1
+		relative_position_id = LIB_New_National_Defense_Law
+		prerequisite = { focus = LIB_New_National_Defense_Law }
+		mutually_exclusive = { focus = LIB_tribal_officers }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = LIB_not_going_here_aristocrat_officers
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 10
+			swap_ideas = {
+				add_idea = LIB_army_idea_aristocrat
+				remove_idea = LIB_army_idea_2
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_emergency_militarisation
+		icon = GFX_z_goal_expansion_of_army
+		x = 2
+		y = 1
+		relative_position_id = LIB_aristocrat_officers
+		prerequisite = { focus = LIB_aristocrat_officers focus = LIB_tribal_officers }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+			threat > 0.15
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 25
+			298 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					has_idea = LIB_army_idea_tribal
+				}
+				swap_ideas = {
+					add_idea = 	LIB_army_idea_tribal_2
+					remove_idea = LIB_army_idea_tribal
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = LIB_army_idea_aristocrat
+				}
+				swap_ideas = {
+					add_idea = 	LIB_army_idea_aristocrat_2
+					remove_idea = LIB_army_idea_aristocrat
+				}
+			}
+			else = {
+				effect_tooltip = {
+					custom_effect_tooltip = LIB_army_idea_tribal_have_tt
+					swap_ideas = {
+						add_idea = 	LIB_army_idea_tribal_2
+						remove_idea = LIB_army_idea_tribal
+					}
+					custom_effect_tooltip = LIB_army_idea_aristocrat_have_tt
+					swap_ideas = {
+						add_idea = 	LIB_army_idea_aristocrat_2
+						remove_idea = LIB_army_idea_aristocrat
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_traditional_education
+		icon = GFX_z_goal_artisanal_production_of_weapons2
+		x = 1
+		y = 1
+		relative_position_id = LIB_emergency_militarisation
+		prerequisite = { focus = LIB_emergency_militarisation }
+		prerequisite = { focus = LIB_tribal_officers }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 25
+			swap_ideas = {
+				add_idea = LIB_army_idea_tribal_3
+				remove_idea = LIB_army_idea_tribal_2
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_standartisation
+		icon = GFX_z_goal_production_of_cartridges
+		x = -1
+		y = 1
+		relative_position_id = LIB_aristocrat_officers
+		prerequisite = { focus = LIB_aristocrat_officers }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_ideas = POR_standardization
+		}
+	}
+
+	focus = {
+		id = LIB_enter_jungles_with_trucks
+		icon = GFX_z_goal_halftruck_sdkfz
+		x = 0
+		y = 1
+		relative_position_id = LIB_standartisation
+		prerequisite = { focus = LIB_standartisation }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = engineers_tech_bonus
+				bonus = 1
+				uses = 2
+				category = motorized_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_National_Supply_forces
+		icon = GFX_z_goal_supply_of_weapons
+		x = 2
+		y = 2
+		relative_position_id = LIB_enter_jungles_with_trucks
+		prerequisite = { focus = LIB_enter_jungles_with_trucks }
+		prerequisite = { focus = LIB_innovative_education }
+		prerequisite = { focus = LIB_new_weapons }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_National_Supply_forces
+				bonus = 0.50
+				uses = 2
+				category = logistics_tech
+			}
+			swap_ideas = {
+				add_idea = LIB_army_idea_aristocrat_4
+				remove_idea = LIB_army_idea_aristocrat_3
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_innovative_education
+		icon = GFX_z_goal_dominant_position_of_men
+		x = -1
+		y = 1
+		relative_position_id = LIB_emergency_militarisation
+		prerequisite = { focus = LIB_emergency_militarisation }
+		prerequisite = { focus = LIB_aristocrat_officers }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 25
+			swap_ideas = {
+				add_idea = LIB_army_idea_aristocrat_3
+				remove_idea = LIB_army_idea_aristocrat_2
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_new_weapons
+		icon = GFX_z_goal_study_new_equipment
+		x = 0
+		y = 2
+		relative_position_id = LIB_emergency_militarisation
+		prerequisite = { focus = LIB_emergency_militarisation }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_new_weapons
+				bonus = 0.75
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Barclay_Military_Academy
+		icon = GFX_z_goal_vienna_circle
+		x = 0
+		y = 2
+		relative_position_id = LIB_new_weapons
+		prerequisite = { focus = LIB_new_weapons }
+
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 75
+			add_tech_bonus = {
+				name = engineers_tech_bonus
+				bonus = 0.75
+				uses = 2
+				category = engineers_tech
+			}
+		}
+	}
+
+	############################
+	####### NAVY SECTION #######
+	############################
+
+	focus = {
+		id = LIB_Liberian_National_Coast_Guard
+		icon = GFX_goal_LIB_navy
+		x = -7
+		y = 1
+		relative_position_id = LIB_New_National_Defense_Law
+		prerequisite = { focus = LIB_New_National_Defense_Law }
+		mutually_exclusive = { focus = LIB_air_force }
+
+		search_filters = { FOCUS_FILTER_NAVY_XP }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_timed_idea = { idea = LIB_yavas_cigerimi_soktun_idea days = 120 }
+			remove_ideas = LIB_ship_ban
+		}
+	}
+
+	focus = {
+		id = LIB_Guard_the_coasts
+		icon = GFX_goal_generic_naval_base
+		x = 1
+		y = 1
+		relative_position_id = LIB_Liberian_National_Coast_Guard
+		prerequisite = { focus = LIB_Liberian_National_Coast_Guard }
+		mutually_exclusive = { focus = LIB_Dominance_the_sea }
+
+		search_filters = { FOCUS_FILTER_NAVY_XP }
+
+		cost = 7.70
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			navy_experience = 25
+			add_ideas = LIB_National_Coast_Guard
+		}
+	}
+
+	focus = {
+		id = LIB_Escort_Protection
+		icon = GFX_z_goal_experimental_large_tonnage_ships
+		x = 1
+		y = 1
+		relative_position_id = LIB_Guard_the_coasts
+		prerequisite = { focus = LIB_Guard_the_coasts }
+
+		search_filters = { FOCUS_FILTER_NAVY_XP }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			navy_experience = 25
+			swap_ideas = {
+				add_idea = LIB_National_Coast_Guard_2
+				remove_idea = LIB_National_Coast_Guard
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Doctrinisation
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = LIB_Escort_Protection }
+		x = 0
+		y = 1
+		relative_position_id = LIB_Escort_Protection
+
+		cost = 8.65
+
+		available_if_capitulated = yes
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_XP}
+		completion_reward = {
+			navy_experience = 25
+			add_doctrine_cost_reduction = {
+				name = USA_convoy_tactics
+				cost_reduction = 0.35
+				uses = 2
+				category = convoy_defense_tree
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Dominance_the_sea
+		icon = GFX_z_goal_ger_sabmarine
+		x = -1
+		y = 1
+		relative_position_id = LIB_Liberian_National_Coast_Guard
+		prerequisite = { focus = LIB_Liberian_National_Coast_Guard }
+		mutually_exclusive = { focus = LIB_Guard_the_coasts }
+
+		search_filters = { FOCUS_FILTER_NAVY_XP }
+
+		cost = 7.70
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			navy_experience = 25
+			add_ideas = LIB_Liberation_navy_forces
+		}
+	}
+
+
+	focus = {
+		id = LIB_naval_effort
+		icon = GFX_focus_generic_refit_civilian_ships
+		prerequisite = { focus = LIB_Dominance_the_sea focus = LIB_Guard_the_coasts }
+		x = -1
+		y = 1
+		cost = 8.65
+		relative_position_id = LIB_Guard_the_coasts
+		search_filters = {FOCUS_FILTER_INDUSTRY FOCUS_FILTER_NAVY_XP}
+		available = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					any_owned_state = {
+						is_coastal = yes
+					}
+				}
+				random_owned_controlled_state = {
+					limit = {
+						is_coastal = yes
+						free_building_slots = {
+							building = dockyard
+							size > 2
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = dockyard
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+
+		}
+	}
+
+	focus = {
+		id = LIB_submarine_effort
+		icon = GFX_goal_generic_naval_submarine2
+		prerequisite = { focus = LIB_Dominance_the_sea }
+		x = -1
+		y = 1
+		relative_position_id = LIB_Dominance_the_sea
+
+		cost = 7
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_XP}
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+				name = ss_bonus
+				bonus = 0.75
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_submarine_effort_2
+		icon = GFX_goal_generic_navy_submarine
+		prerequisite = { focus = LIB_submarine_effort }
+		x = 0
+		y = 1
+		relative_position_id = LIB_submarine_effort
+
+		cost = 8.65
+
+		search_filters = {  FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_XP }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+				name = ss_bonus
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_destroyer_effort
+		icon = GFX_goal_generic_naval_destroyer2
+		prerequisite = { focus = LIB_naval_effort}
+		x = 0
+		y = 1
+		relative_position_id = LIB_naval_effort
+		cost = 8.65
+
+		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_NAVY_XP}
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 1.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_finalize_the_fleet
+		icon = GFX_z_goal_expand_coast_guard
+		x = -1
+		y = 1
+		relative_position_id = LIB_destroyer_effort
+		prerequisite = { focus = LIB_destroyer_effort }
+		prerequisite = { focus = LIB_submarine_effort_2 focus = LIB_Doctrinisation }
+		mutually_exclusive = { focus = LIB_Budget_transfer_naval }
+
+		search_filters = { FOCUS_FILTER_NAVY_XP }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+			NOT = { has_completed_focus = LIB_budget_transfer_air }
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			navy_experience = 35
+			if = {
+				limit = {
+					NOT = {
+						has_idea = LIB_Liberation_navy_forces
+						has_idea = LIB_National_Coast_Guard_2
+					}
+				}
+				effect_tooltip = {
+					custom_effect_tooltip = LIB_Liberation_navy_forces_have_tt
+					swap_ideas = {
+						add_idea = LIB_Liberation_navy_forces_2
+						remove_idea = LIB_Liberation_navy_forces
+					}
+					custom_effect_tooltip = LIB_LIB_National_Coast_Guard_have_tt
+					swap_ideas = {
+						add_idea = LIB_National_Coast_Guard_3
+						remove_idea = LIB_National_Coast_Guard_2
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = LIB_Liberation_navy_forces
+				}
+				swap_ideas = {
+					add_idea = LIB_Liberation_navy_forces_2
+					remove_idea = LIB_Liberation_navy_forces
+				}
+			}
+			else = {
+				swap_ideas = {
+					add_idea = LIB_National_Coast_Guard_3
+					remove_idea = LIB_National_Coast_Guard_2
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Budget_transfer_naval
+		icon = GFX_z_goal_generic_strategic_aviation
+		x = 1
+		y = 1
+		relative_position_id = LIB_destroyer_effort
+		prerequisite = { focus = LIB_destroyer_effort }
+		prerequisite = { focus = LIB_destroyer_effort focus = LIB_Doctrinisation }
+		mutually_exclusive = { focus = LIB_finalize_the_fleet }
+
+		search_filters = { FOCUS_FILTER_AIR_XP }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+			NOT = { has_completed_focus = LIB_air_force }
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_timed_idea = { idea = LIB_yavas_cigerimi_soktun_idea days = 240 }
+			complete_national_focus = LIB_air_force
+			add_tech_bonus = {
+				name = LIB_Budget_transfer_naval
+				bonus = 1.0
+				uses = 1
+				category = mio_cat_all_naval_bomber_and_modules
+			}
+		}
+	}
+
+	############################
+	######## AIR SECTION #######
+	############################
+
+	focus = {
+		id = LIB_air_force
+		icon = GFX_goal_LIB_air_force
+		x = -2
+		y = 1
+		relative_position_id = LIB_New_National_Defense_Law
+		prerequisite = { focus = LIB_New_National_Defense_Law }
+		mutually_exclusive = { focus = LIB_Liberian_National_Coast_Guard }
+		search_filters = { FOCUS_FILTER_AIR_XP }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			air_experience = 25
+			add_timed_idea = { idea = LIB_yavas_cigerimi_soktun_idea days = 120 }
+			remove_ideas = LIB_aircraft_ban
+		}
+	}
+
+	focus = {
+		id = LIB_integrate_aircrafts
+		icon = GFX_z_goal_generic_air_dominations
+		x = 0
+		y = 1
+		cost = 7.70
+		search_filters = { FOCUS_FILTER_AIR_XP }
+		available_if_capitulated = yes
+
+		completion_reward = {
+			air_experience = 50
+			add_manpower = 6000
+			if = {
+				limit = {
+					NOT = { has_dlc = "By Blood Alone" }
+				}
+				add_equipment_to_stockpile = {
+					type = fighter_equipment_1
+					amount = 30
+					producer = USA
+				}
+				add_equipment_to_stockpile = {
+					type = CAS_equipment_1
+					amount = 30
+					producer = USA
+				}
+			}
+			else = {
+				hidden_effect = {
+					USA = {
+						create_equipment_variant = {
+							name = "Model 299" #
+							type = small_plane_airframe_1
+							allow_without_tech = yes #For tooltip purposes, doesn't affect anything really
+							modules = {
+								fixed_main_weapon_slot = heavy_mg_4x
+								fixed_auxiliary_weapon_slot_1 = heavy_mg_2x
+								fixed_auxiliary_weapon_slot_2 = empty
+								engine_type_slot = engine_3_1x
+								special_type_slot_1 = drop_tanks
+							}
+						}
+					}
+				}
+				add_equipment_to_stockpile = {
+					producer = USA
+					type = small_plane_airframe_1
+					amount = 100
+					variant_name = "Model 299"
+				}
+				add_equipment_to_stockpile = {
+					type = small_plane_cas_airframe_0
+					amount = 100
+					variant_name = "Br. 19"
+					producer = USA
+				}
+			}
+		}
+		prerequisite = { focus = LIB_air_force }
+		relative_position_id = LIB_air_force
+	}
+
+	focus = {
+		id = LIB_create_our_designs
+		icon = GFX_focus_generic_jet
+		x = 1
+		y = 1
+		cost = 8.65
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_AIR_XP }
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			air_experience = 50
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 1.0
+				uses = 1
+				category = light_fighter
+			}
+			add_tech_bonus = {
+				name = fighter_bonus
+				bonus = 1.0
+				uses = 1
+				category = cat_air_engine
+			}
+		}
+		prerequisite = { focus = LIB_integrate_aircrafts }
+		relative_position_id = LIB_integrate_aircrafts
+	}
+
+	focus = {
+		id = LIB_Air_Innovations
+		icon = GFX_focus_SOV_women_in_aviation
+		x = -1
+		y = 1
+		prerequisite = { focus = LIB_integrate_aircrafts }
+		relative_position_id = LIB_integrate_aircrafts
+
+		cost = 8.65
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		search_filters = { FOCUS_FILTER_AIR_XP }
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 2
+				category = air_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_justice_air_wing
+		icon = GFX_z_national_liber
+		x = 1
+		y = 1
+		prerequisite = {focus = LIB_Air_Innovations}
+		prerequisite = {focus = LIB_create_our_designs}
+		relative_position_id = LIB_Air_Innovations
+		search_filters = { FOCUS_FILTER_AIR_XP }
+		cost = 8.65
+
+		ai_will_do = {
+			factor = 75
+		}
+
+		search_filters = {  }
+		completion_reward = {
+			add_manpower = 10000
+			add_ideas = LIB_justice_air_wing_idea
+		}
+	}
+
+	focus = {
+		id = LIB_solve_range_problem
+		icon = GFX_z_goal_camouflage
+		x = -1
+		y = 1
+		cost = 8.65
+		search_filters = { FOCUS_FILTER_AIR_XP }
+		available_if_capitulated = yes
+		prerequisite = { focus = LIB_justice_air_wing }
+		relative_position_id = LIB_justice_air_wing
+		mutually_exclusive = { focus = LIB_budget_transfer_air }
+
+		available = {
+			NOT = { has_completed_focus = LIB_Budget_transfer_naval }
+		}
+
+		completion_reward = {
+			add_resource = {
+				type = oil
+				amount = 6
+				state = 298
+			}
+			swap_ideas = {
+				add_idea = LIB_justice_air_wing_idea_long
+				remove_idea =  LIB_justice_air_wing_idea
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_budget_transfer_air
+		icon = GFX_z_goal_generic_development_of_navy_aviation
+		x = 1
+		y = 1
+		cost = 8.65
+		search_filters = { FOCUS_FILTER_NAVY_XP }
+		available_if_capitulated = yes
+		prerequisite = { focus = LIB_justice_air_wing }
+		relative_position_id = LIB_justice_air_wing
+		mutually_exclusive = { focus = LIB_solve_range_problem }
+
+		available = {
+			NOT = {
+				has_completed_focus = LIB_Liberian_National_Coast_Guard
+			}
+		}
+
+		completion_reward = {
+			add_timed_idea = { idea = LIB_yavas_cigerimi_soktun_idea days = 240 }
+			complete_national_focus = LIB_Liberian_National_Coast_Guard
+		}
+	}
+
+	############################
+	##### POLITIC-STARTUP  #####
+	############################
+
+	focus = {
+		id = LIB_dolarisation
+		icon = GFX_focus_LIB_dolarisation_focus
+		x = 32
+		y = 0
+		cost = 5.13
+		available_if_capitulated = yes
+		relative_position_id = LIB_New_National_Defense_Law
+		mutually_exclusive = { focus = LIB_integrate_West_African_pound }
+
+		offset = {
+			x = -17
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_dolarisation
+			}
+		}
+
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				OR = {
+					has_completed_focus = LIB_visa_policies
+					has_completed_focus = LIB_Willkommenskultur
+				}
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_integrate_West_African_pound
+				}
+			}
+		}
+
+		completion_reward = {
+			add_ideas = LIB_dolarisation_idea
+			unlock_decision_category_tooltip = LIB_dolarisation_category
+			hidden_effect = {
+				activate_mission = LIB_dolarisation_mission
+				USA = {
+					country_event = { id = liberia.20 hours = 10 }
+				}
+				if = {
+					limit = {
+						has_game_rule = {
+							rule = obsolete_focus_branches_visibility
+							option = HIDE
+						}
+					}
+					mark_focus_tree_layout_dirty = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_integrate_West_African_pound
+		icon = GFX_focus_LIB_poundisation_focus
+		x = -6
+		y = 0
+		cost = 5.13
+		available_if_capitulated = yes
+		relative_position_id = LIB_dolarisation
+		mutually_exclusive = { focus = LIB_dolarisation }
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_dolarisation
+				}
+			}
+		}
+
+		offset = {
+			x = -11
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_integrate_West_African_pound
+				has_completed_focus = LIB_contunie_new_deal
+			}
+		}
+
+		offset = {
+			x = -12
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				OR = {
+					has_completed_focus = LIB_hold_dearly_election
+					has_completed_focus =LIB_sounds_of_the_revolition
+				}
+			}
+		}
+
+		offset = {
+			x = 4
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				OR = {
+					has_completed_focus = LIB_visa_policies
+					has_completed_focus = LIB_Willkommenskultur
+				}
+				has_completed_focus = LIB_crush_the_union_rats
+			}
+		}
+
+		completion_reward = {
+			add_stability = 0.025
+			add_ideas = LIB_pound_idea
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_contunie_new_deal
+		icon = GFX_goal_USA_new_deal
+		x = 0
+		y = 1
+		relative_position_id = LIB_dolarisation
+		prerequisite = { focus = LIB_dolarisation focus = LIB_integrate_West_African_pound }
+		mutually_exclusive = { focus = LIB_crush_the_union_rats }
+
+		cost = 7.80
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_crush_the_union_rats
+				}
+			}
+		}
+
+		offset = {
+			x = -17
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_contunie_new_deal
+				has_completed_focus = LIB_integrate_West_African_pound
+			}
+		}
+
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_to_variable = { THIS.prca_tokens = 10 }
+			custom_effect_tooltip = prca_tokens_tt_add_10
+			add_political_power = 125
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = 0.025
+				tooltip = stability_factor_tt
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_crush_the_union_rats
+		icon = GFX_focus_LIB_crush_rats
+		x = 0
+		y = 1
+		relative_position_id = LIB_integrate_West_African_pound
+		prerequisite = { focus = LIB_integrate_West_African_pound }
+		mutually_exclusive = { focus = LIB_contunie_new_deal }
+
+		cost = 7
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_dolarisation
+					has_completed_focus = LIB_contunie_new_deal
+				}
+			}
+		}
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = -0.025
+			add_popularity = {
+				ideology = ROOT
+				popularity = -0.15
+			}
+			remove_ideas = LIB_deals
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+
+	focus = {
+		id = LIB_crisis_of_the_black_sunday
+		icon = {
+			trigger = { has_government = communism }
+			value = GFX_focus_LIB_black_sunday
+		}
+		icon = {
+			value = GFX_z_goal_dead_prisoner
+		}
+		x = -10
+		y = 1
+		relative_position_id = LIB_crush_the_union_rats
+		prerequisite = { focus = LIB_crush_the_union_rats }
+
+		cost = 5.13
+
+		offset = {
+			x = 7
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				OR = {
+					has_completed_focus = LIB_hold_dearly_election
+					has_completed_focus =LIB_sounds_of_the_revolition
+				}
+			}
+		}
+
+
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = -0.075
+			country_event = { id = liberia.1 days = 1 }
+		}
+	}
+
+	############################
+	##### LONE STAR FOREV  #####
+	############################
+
+	focus = {
+		id = LIB_The_Lone_Star_Forever
+		icon = GFX_focus_LIB_lone_star
+		x = 10
+		y = 1
+		relative_position_id = LIB_contunie_new_deal
+		prerequisite = { focus = LIB_contunie_new_deal }
+		mutually_exclusive = { focus = LIB_Republican_conspiracy }
+
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_dolarisation
+			}
+		}
+
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_contunie_new_deal
+				has_completed_focus = LIB_integrate_West_African_pound
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_crush_the_union_rats
+					has_completed_focus = LIB_Republican_conspiracy
+				}
+			}
+		}
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_war_support = 0.05
+			swap_ruler_traits = { remove = LIB_man_of_the_nation add = LIB_man_of_the_nation_2 }
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Firestone_payouts
+		icon = GFX_focus_LIB_firestone_payout
+		x = -3
+		y = 1
+		relative_position_id = LIB_The_Lone_Star_Forever
+		prerequisite = { focus = LIB_The_Lone_Star_Forever }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_idea = LIB_firestone_company
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.075
+			}
+			if = {
+				limit = {
+					has_idea = LIB_firestone_company2
+				}
+				swap_ideas = {
+					add_idea = LIB_firestone_company3
+					remove_idea = LIB_firestone_company2
+				}
+			}
+			else = {
+				swap_ideas = {
+					add_idea = LIB_firestone_company2
+					remove_idea = LIB_firestone_company
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_urbanization_Monrovia
+		icon = GFX_z_goal_invest_in_the_construction_industry
+		x = 0
+		y = 1
+
+		cost = 10.26
+		relative_position_id = LIB_The_Lone_Star_Forever
+		prerequisite = { focus = LIB_The_Lone_Star_Forever }
+
+		available = {
+
+		}
+
+		offset = {
+			x = 3
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_clocks_go_back
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			298 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_review_interior_policy
+		icon = GFX_focus_LIB_review_interior_policy
+		x = 3
+		y = 1
+		relative_position_id = LIB_The_Lone_Star_Forever
+		prerequisite = { focus = LIB_The_Lone_Star_Forever }
+
+		cost = 5.13
+
+
+		offset = {
+			x = -1
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_pop_some_champagne
+			}
+		}
+
+		offset = {
+			x = -3
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_clocks_go_back
+			}
+		}
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_political_power = 50
+			every_other_country = {
+				limit = {
+					NOT = {
+						OR = {
+							has_war_with = ROOT
+							is_in_faction_with = ROOT
+						}
+					}
+					has_government = communism
+				}
+				add_opinion_modifier = { target = ROOT modifier = ARG_against_us }
+			}
+			if = {
+				limit = {
+					fascism > 0.05
+				}
+				country_event = { id = liberia.12 hours = 8 }
+			}
+			else = {
+				custom_effect_tooltip = LIB_fascism_way_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_clocks_go_back
+		icon = GFX_focus_LIB_clock_is_ringing
+		x = 1
+		y = 1
+		relative_position_id = LIB_review_interior_policy
+		prerequisite = { focus = LIB_review_interior_policy }
+		mutually_exclusive = { focus = LIB_pop_some_champagne }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			AND = {
+				has_country_flag = LIB_go_to_clocks_go_back
+				NOT = {
+					has_completed_focus = LIB_visa_policies
+				}
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_pop_some_champagne
+					has_completed_focus = LIB_Republican_conspiracy
+					has_completed_focus = LIB_crush_the_union_rats
+				}
+			}
+		}
+
+		offset = {
+			x = -1
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_clocks_go_back
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			set_country_flag = LIB_not_going_here_visa_policies
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.05
+			}
+			add_to_variable = { THIS.prca_tokens = 20 }
+			custom_effect_tooltip = prca_tokens_tt_add_20
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+	focus = {
+		id = LIB_unrest_of_workes
+		icon = GFX_z_focus_the_workers
+		x = 1
+		y = 1
+		relative_position_id = LIB_clocks_go_back
+		prerequisite = { focus = LIB_clocks_go_back }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			add_ideas = LIB_workers_unrest_idea
+			country_event = { id = liberia.14 days = 40 }
+		}
+	}
+	focus = {
+		id = LIB_look_dad_you_at_the_headline
+		icon = GFX_focus_PER_blackmail_clergy
+		x = -1
+		y = 1
+		relative_position_id = LIB_clocks_go_back
+		prerequisite = { focus = LIB_clocks_go_back }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.025
+			}
+			add_to_variable = { THIS.prca_tokens = 20 }
+			custom_effect_tooltip = prca_tokens_tt_add_20
+			country_event = { id = liberia.13 hours = 8 }
+		}
+	}
+	focus = {
+		id = LIB_government_resigns
+		icon = GFX_z_goal_strengthen_role_of_government
+		x = 0
+		y = 2
+		relative_position_id = LIB_clocks_go_back
+		prerequisite = { focus = LIB_unrest_of_workes }
+		prerequisite = { focus = LIB_look_dad_you_at_the_headline }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_idea = LIB_workers_unrest_idea2
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.05
+			}
+			retire_country_leader = yes
+			add_country_leader_role = {
+				character = LIB_Charles_D_B_King
+				promote_leader = yes
+				country_leader = {
+					ideology = centrism_democratic
+					expire = "1965.1.1.1"
+					traits = { collaborator_king}
+				}
+			}
+			add_ideas = PER_government_corruption
+		}
+	}
+	focus = {
+		id = LIB_agreement_of_firestone
+		icon = GFX_goal_generic_crush_unions
+		x = 6
+		y = 1
+		relative_position_id = LIB_government_resigns
+		prerequisite = { focus = LIB_government_resigns }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+			remove_ideas = LIB_workers_unrest_idea2
+		}
+	}
+
+	focus = {
+		id = LIB_reorganise_the_government
+		icon = GFX_focus_generic_authoritarian_government
+		x = 0
+		y = 2
+		relative_position_id = LIB_agreement_of_firestone
+		prerequisite = { focus = LIB_agreement_of_firestone }
+		prerequisite = { focus = LIB_liberity_forces }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_completed_focus = LIB_coup
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = PER_government_corruption
+				add_idea = PER_organized_government
+			}
+		}
+	}
+	focus = {
+		id = LIB_militarisation
+		icon = GFX_z_goal_construction_of_military_industrial_complex
+		x = -1
+		y = 1
+		relative_position_id = LIB_agreement_of_firestone
+		prerequisite = { focus = LIB_agreement_of_firestone }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_completed_focus = LIB_coup
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			298 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = LIB_agreement_of_expand_the_plantation
+		icon = GFX_focus_LIB_firestone_plantasion
+		x = 1
+		y = 1
+		relative_position_id = LIB_agreement_of_firestone
+		prerequisite = { focus = LIB_agreement_of_firestone }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_completed_focus = LIB_Firestone_payouts
+			has_completed_focus = LIB_coup
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.075
+			}
+			if = {
+				limit = {
+					has_idea = LIB_firestone_company2
+				}
+				swap_ideas = {
+					add_idea = LIB_firestone_company3
+					remove_idea = LIB_firestone_company2
+				}
+			}
+			else = {
+				effect_tooltip = {
+					swap_ideas = {
+						add_idea = LIB_firestone_company3
+						remove_idea = LIB_firestone_company2
+					}
+				}
+				hidden_effect = {
+					add_ideas = LIB_firestone_company3
+				}
+			}
+		}
+	}
+	focus = {
+		id = LIB_old_faces
+		icon = GFX_goal_generic_culture2
+		x = 0
+		y = 1
+		relative_position_id = LIB_government_resigns
+		prerequisite = { focus = LIB_government_resigns }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = LIB_Henry_Too_wesley
+			show_ideas_tooltip = LIB_Allen_Yancy
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.025
+			}
+		}
+	}
+	focus = {
+		id = LIB_crush_political_dissent
+		icon = GFX_u_fra_FRA_purge_political_opponents
+		x = 1
+		y = 1
+		relative_position_id = LIB_old_faces
+		prerequisite = { focus = LIB_old_faces }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = -0.075
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.025
+			}
+			add_timed_idea = {
+				idea = collectivist_ethos_focus
+				days = 730
+			}
+		}
+	}
+	focus = {
+		id = LIB_invite_the_mason
+		icon = GFX_goal_LIB_freemason_coup
+		x = -1
+		y = 1
+		relative_position_id = LIB_old_faces
+		prerequisite = { focus = LIB_old_faces }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = -0.075
+		}
+	}
+	focus = {
+		id = LIB_coup
+		icon = GFX_z_goal_popular_representation
+		x = 1
+		y = 1
+		relative_position_id = LIB_invite_the_mason
+		prerequisite = { focus = LIB_invite_the_mason }
+		prerequisite = { focus = LIB_crush_political_dissent }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			country_event = { id = liberia.17 hours = 5 }
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+				election_frequency = 48
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.075
+			}
+			effect_tooltip = { add_ideas = LIB_state_of_emergency }
+		}
+	}
+	focus = {
+		id = LIB_pan_africanism
+		icon = GFX_z_goal_create_west_afro_gigant
+		x = -1
+		y = 1
+		relative_position_id = LIB_coup
+		prerequisite = { focus = LIB_coup }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_war_support = 0.10
+			add_ideas = LIB_african_revanchism_idea
+		}
+	}
+	focus = {
+		id = LIB_eagle_of_west_africa
+		icon = GFX_z_goal_true_eagle
+		x = 0
+		y = 1
+		relative_position_id = LIB_pan_africanism
+		prerequisite = { focus = LIB_pan_africanism }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_eagle_of_west_africa_tt
+			hidden_effect = {
+				create_wargoal = {
+					target = FRA
+					type = puppet_wargoal_focus
+					expire = 0
+				}
+				create_wargoal = {
+					target = ENG
+					type = puppet_wargoal_focus
+					expire = 0
+				}
+				create_wargoal = {
+					target = POR
+					type = puppet_wargoal_focus
+					expire = 0
+				}
+				every_state = {
+					limit = {
+						OR = {
+							state = 779
+							state = 778
+							state = 780
+							state = 781
+							state = 556
+							state = 899
+							state = 898
+							state = 781
+							state = 776
+							state = 777
+							state = 272
+							state = 557
+							state = 700
+							state = 701
+							state = 274
+							state = 900
+							state = 901
+							state = 902
+							state = 558
+							state = 296
+						}
+						is_controlled_by_ROOT_or_ally = no
+						controller = {
+							NOT = {
+								capital_scope = {
+									is_on_continent = africa
+								}
+							}
+						}
+					}
+					controller = {
+						ROOT = {
+							create_wargoal = {
+								target = PREV
+								type = puppet_wargoal_focus
+								expire = 0
+							}
+						}
+					}
+					add_claim_by = LIB
+				}
+			}
+		}
+	}
+	focus = {
+		id = LIB_king_of_nation
+		icon = GFX_z_goal_return_monarchism
+		x = 0
+		y = 1
+		relative_position_id = LIB_eagle_of_west_africa
+		prerequisite = { focus = LIB_eagle_of_west_africa }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_state_core = 700
+			add_state_core = 780
+			add_state_core = 779
+			add_country_leader_trait = 	LIB_the_king_of_West_Africa
+		}
+	}
+	focus = {
+		id = LIB_close_the_masonic_lobby
+		icon = GFX_goal_DEI_focus_disband_volksraad
+		x = 1
+		y = 1
+		relative_position_id = LIB_coup
+		prerequisite = { focus = LIB_coup }
+
+		allow_branch = {
+			NOT = {
+				has_country_flag = LIB_masonic_flag
+			}
+		}
+
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_war_support = 0.10
+			add_timed_idea = {
+				idea = LIB_seizure_of_freemason_property
+				days = 730
+			}
+		}
+	}
+	focus = {
+		id = LIB_paramilitary_youth
+		icon = GFX_goal_generic_paramilitary
+		x = 2
+		y = 2
+		relative_position_id = LIB_coup
+		prerequisite = { focus = LIB_close_the_masonic_lobby }
+		prerequisite = { focus = LIB_liberty_will }
+
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			swap_ideas = {
+				add_idea = LIB_Liberty_will_idea_2
+				remove_idea = LIB_Liberty_will_idea
+			}
+		}
+	}
+	focus = {
+		id = LIB_new_constitution
+		icon = GFX_ef_goal_generic_treaty
+		x = -1
+		y = 1
+		relative_position_id = LIB_paramilitary_youth
+		prerequisite = { focus = LIB_close_the_masonic_lobby }
+
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = 0.15
+		}
+	}
+	#OMG MASONIC
+	focus = {
+		id = LIB_assistance_from_american_freemasons
+		icon = GFX_goal_DEI_focus_disband_volksraad
+		x = 1
+		y = 1
+		relative_position_id = LIB_coup
+		prerequisite = { focus = LIB_coup }
+
+		allow_branch = {
+			has_country_flag = LIB_masonic_flag
+		}
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = LIB_american_masonic_help
+				days = 730
+			}
+		}
+	}
+	focus = {
+		id = LIB_brainwashing
+		icon = GFX_ef_goal_generic_treaty
+		x = -1
+		y = 1
+		relative_position_id = LIB_coup
+		prerequisite = { focus = LIB_coup }
+
+		allow_branch = {
+			has_country_flag = LIB_masonic_flag
+		}
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_ideas = LIB_brainwashing_ns
+		}
+	}
+	#END OF MASONIC
+	focus = {
+		id = LIB_liberity_forces
+		icon = GFX_goal_SWE_Military_Coup
+		x = 3
+		y = 1
+		relative_position_id = LIB_old_faces
+		prerequisite = { focus = LIB_old_faces }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.075
+			}
+			custom_effect_tooltip = LIB_Liberty_forces_tt
+			hidden_effect = {
+				division_template = {
+					name = "Liberty Forces"
+					template_counter = 107
+					is_locked = no
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+						infantry = { x = 1 y = 3 }
+
+					}
+					support = {
+						artillery = { x = 0 y = 0 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"1.Liberty Forces\" division_template = \"Liberty Forces\" start_experience_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"2.Liberty Forces\" division_template = \"Liberty Forces\" start_experience_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"3.Liberty Forces\" division_template = \"Liberty Forces\" start_experience_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"4.Liberty Forces\" division_template = \"Liberty Forces\" start_experience_factor = 1.0"
+						owner = PREV
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = LIB_liberty_will
+		icon = GFX_goal_NFA_liberty
+		x = 0
+		y = 2
+		relative_position_id = LIB_liberity_forces
+		prerequisite = { focus = LIB_liberity_forces }
+		prerequisite = { focus = LIB_coup }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 25
+			add_ideas = LIB_Liberty_will_idea
+		}
+	}
+
+	focus = {
+		id = LIB_pop_some_champagne
+		icon = GFX_goal_generic_party_bottle
+		x = 2
+		y = 1
+		relative_position_id = LIB_urbanization_Monrovia
+		prerequisite = { focus = LIB_review_interior_policy }
+		mutually_exclusive = { focus = LIB_clocks_go_back }
+
+		cost = 5.13
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_clocks_go_back
+					has_completed_focus = LIB_Republican_conspiracy
+					has_completed_focus = LIB_crush_the_union_rats
+				}
+			}
+		}
+
+		ai_will_do = {
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = LIB_go_to_clocks_go_back
+			}
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_political_power = 75
+			add_stability = 0.1
+			swap_ruler_traits = { remove = LIB_man_of_the_nation_2 add = LIB_man_of_the_nation_3 }
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_agree_with_unions
+		icon = GFX_goal_generic_workers_democracy
+		x = -2
+		y = 1
+		relative_position_id = LIB_pop_some_champagne
+		prerequisite = { focus = LIB_pop_some_champagne }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_to_variable = { THIS.prca_tokens = 50 }
+			custom_effect_tooltip = prca_tokens_tt_add_50
+			swap_ideas = {
+				add_idea = LIB_deals_2
+				remove_idea = LIB_deals
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_five_days_work
+		icon = GFX_GENERIC_Justice_System_Socialist
+		x = -1
+		y = 1
+		relative_position_id = LIB_agree_with_unions
+		prerequisite = { focus = LIB_agree_with_unions }
+		mutually_exclusive = { focus = LIB_electricisation_of_urbans }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_to_variable = { THIS.prca_tokens = 20 }
+			custom_effect_tooltip = prca_tokens_tt_add_20
+			swap_ideas = {
+				add_idea = LIB_deals_3
+				remove_idea = LIB_deals_2
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_electricisation_of_urbans
+		icon = GFX_focus_generic_electricity
+		x = 1
+		y = 1
+		relative_position_id = LIB_agree_with_unions
+		prerequisite = { focus = LIB_agree_with_unions }
+		mutually_exclusive = { focus = LIB_five_days_work }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			random_state = {
+				limit = {
+					is_owned_and_controlled_by = ROOT
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			remove_ideas = LIB_deals_2
+		}
+	}
+
+	focus = {
+		id = LIB_evolition_program
+		icon = GFX_focus_LIB_one_star
+		x = 0
+		y = 5
+		relative_position_id = LIB_The_Lone_Star_Forever
+		prerequisite = { focus = LIB_american_machines focus = LIB_government_resigns }
+
+		cost = 10.26
+
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_clocks_go_back
+			}
+		}
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_to_variable = { THIS.prca_tokens = 20 }
+			custom_effect_tooltip = prca_tokens_tt_add_20
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = 0.05
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_weekly_manpower
+				value = 250
+				tooltip = weekly_manpower_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_national_car
+		icon = GFX_goal_generic_automobile
+		x = -1
+		y = 1
+		relative_position_id = LIB_evolition_program
+		prerequisite = { focus = LIB_evolition_program }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			effect_tooltip = {
+				add_tech_bonus = {
+					name = LIB_american_machines
+					bonus = 1.0
+					uses = 1
+					category = electronics
+				}
+			}
+			hidden_effect = {
+				add_tech_bonus = {
+					name = LIB_american_machines
+					bonus = 3.0
+					uses = 2
+					category = motorized_equipment
+					category = electronics
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_national_defense_council
+		icon = GFX_z_goal_race_defend
+		x = 1
+		y = 1
+		relative_position_id = LIB_evolition_program
+		prerequisite = { focus = LIB_evolition_program }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_ideas = BALTIC_defending_the_nation
+		}
+	}
+
+	focus = {
+		id = LIB_declare_martial_law
+		icon = GFX_goal_generic_martial_law
+		x = 0
+		y = 2
+		relative_position_id = LIB_evolition_program
+		prerequisite = { focus = LIB_evolition_program }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_war_support < 0.8
+				}
+				add_war_support = 0.1
+			}
+			if = {
+				limit = {
+					has_idea = war_economy
+				}
+				add_political_power = 150
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_idea = tot_economic_mobilisation
+						has_idea = war_economy
+					}
+				}
+				add_ideas = war_economy
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_trade_usa
+		icon = GFX_z_goal_USA_trade
+		x = -1
+		y = 1
+		relative_position_id = LIB_Firestone_payouts
+		prerequisite = { focus = LIB_Firestone_payouts }
+
+		cost = 5.13
+
+		ai_will_do = {
+		}
+
+		available = {
+			is_puppet = no
+			NOT = { has_war_with = USA }
+			hidden_trigger = {
+				country_exists = USA
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_ideas = GER_marshall_plan
+		}
+	}
+
+	focus = {
+		id = LIB_oil
+		icon = GFX_goal_generic_pipeline
+		x = 1
+		y = 1
+		relative_position_id = LIB_Firestone_payouts
+		prerequisite = { focus = LIB_Firestone_payouts }
+
+		cost = 5.13
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			298 = {
+				add_resource = {
+					type = oil
+					amount = 6
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_us_roads
+		icon = GFX_z_goal_new_brigdes
+		x = 0
+		y = 1
+		relative_position_id = LIB_trade_usa
+		prerequisite = { focus = LIB_trade_usa }
+		prerequisite = { focus = LIB_pop_some_champagne }
+		prerequisite = { focus = LIB_oil }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			OR = {
+				is_puppet_of = USA
+				is_puppet = no
+			}
+			NOT = { has_war_with = USA }
+			country_exists = USA
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			random_state = {
+				limit = {
+					is_owned_and_controlled_by = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_american_machines
+		icon = GFX_z_goal_american_machines
+		x = 1
+		y = 1
+		relative_position_id = LIB_us_roads
+		prerequisite = { focus = LIB_us_roads }
+		mutually_exclusive = { focus = LIB_us_military_coop }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			OR = {
+				is_puppet_of = USA
+				is_puppet = no
+			}
+			NOT = { has_war_with = USA }
+			country_exists = USA
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_us_military_coop
+					has_completed_focus = LIB_clocks_go_back
+					has_completed_focus = LIB_Republican_conspiracy
+					has_completed_focus = LIB_crush_the_union_rats
+				}
+			}
+		}
+
+		offset = {
+			x = -1
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_american_machines
+			}
+		}
+
+		bypass = {
+			OR = {
+				NOT = {
+					is_puppet_of = USA
+				}
+				NOT = {
+					is_puppet = no
+				}
+			}
+			has_war_with = USA
+			NOT = { country_exists = USA }
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_american_machines
+				bonus = 1.0
+				uses = 2
+				category = industry
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_us_military_coop
+		icon = GFX_goal_USA_army
+		x = -1
+		y = 2
+		relative_position_id = LIB_trade_usa
+		prerequisite = { focus = LIB_us_roads }
+		mutually_exclusive = { focus = LIB_american_machines }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			OR = {
+				is_puppet_of = USA
+				is_puppet = no
+			}
+			NOT = { has_war_with = USA }
+			country_exists = USA
+		}
+
+		offset = {
+			x = 1
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_us_military_coop
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_american_machines
+					has_completed_focus = LIB_clocks_go_back
+					has_completed_focus = LIB_Republican_conspiracy
+					has_completed_focus = LIB_crush_the_union_rats
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 40
+			navy_experience = 20
+			air_experience = 20
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.50
+				uses = 1
+				category = land_doctrine
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_american_motor_factories
+		icon = GFX_z_goal_armor_car_puma
+		x = -3
+		y = 1
+		relative_position_id = LIB_us_military_coop
+		prerequisite = { focus = LIB_us_military_coop }
+
+		cost = 12.1
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 15
+			add_tech_bonus = {
+				name = LIB_american_motor_factories
+				bonus = 3.0
+				uses = 1
+				category = motorized_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_american_garnison
+		icon = GFX_USA_Expand_the_Youth_Programs
+		x = 1
+		y = 1
+		relative_position_id = LIB_american_motor_factories
+		prerequisite = { focus = LIB_american_motor_factories }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 15
+			custom_effect_tooltip = LIB_american_garnison_tt
+			hidden_effect = {
+				division_template = {
+					name = "US Garrison Division"
+					template_counter = 107
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+						infantry = { x = 1 y = 3 }
+						artillery_brigade = { x = 2 y = 0 }
+						artillery_brigade = { x = 2 y = 1 }
+						anti_air_brigade = { x = 2 y = 2 }
+						anti_tank_brigade = { x = 2 y = 3 }
+						infantry = { x = 3 y = 0 }
+						infantry = { x = 3 y = 1 }
+						infantry = { x = 3 y = 2 }
+
+					}
+					support = {
+						artillery = { x = 0 y = 0 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"1.US Garrison Division\" division_template = \"US Garrison Division\" start_experience_factor = 0.80"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"2.US Garrison Division\" division_template = \"US Garrison Division\" start_experience_factor = 0.80"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"3.US Garrison Division\" division_template = \"US Garrison Division\" start_experience_factor = 0.80"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"4.US Garrison Division\" division_template = \"US Garrison Division\" start_experience_factor = 0.80"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"5.US Garrison Division\" division_template = \"US Garrison Division\" start_experience_factor = 0.80"
+						owner = PREV
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_american_advisors
+		icon = GFX_goal_USA_navy
+		x = -1
+		y = 1
+		relative_position_id = LIB_american_motor_factories
+		prerequisite = { focus = LIB_american_motor_factories }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 15
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.50
+				uses = 1
+				category = land_doctrine
+			}
+			add_ideas = LIB_american_advisors
+		}
+	}
+
+	focus = {
+		id = LIB_reform_the_army
+		icon = GFX_goal_USA_troops
+		x = 1
+		y = 1
+		relative_position_id = LIB_american_advisors
+		prerequisite = { focus = LIB_american_advisors }
+		prerequisite = { focus = LIB_american_garnison }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 30
+			add_doctrine_cost_reduction = {
+				name = land_doc_bonus
+				cost_reduction = 0.75
+				uses = 1
+				category = land_doctrine
+			}
+			swap_ideas = {
+				add_idea = LIB_american_command
+				remove_idea = LIB_american_advisors
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_open_cotteje_hospital
+		icon = GFX_z_goal_american_mission_hospital_in_matrah
+		x = 0
+		y = 1
+		relative_position_id = LIB_us_military_coop
+		prerequisite = { focus = LIB_us_military_coop focus = LIB_american_machines }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = recon_tech_bonus
+				bonus = 0.75
+				uses = 2
+				category = hospital_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_american_sivil
+		icon = GFX_z_goal_nationalization_heavy_industry
+		x = 2
+		y = 1
+		relative_position_id = LIB_us_military_coop
+		prerequisite = { focus = LIB_us_military_coop focus = LIB_american_machines }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			298 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_sierra_leone
+		icon = GFX_focus_LIB_sierra_leone
+		x = 1
+		y = 1
+		relative_position_id = LIB_open_cotteje_hospital
+		prerequisite = { focus = LIB_open_cotteje_hospital focus = LIB_american_sivil focus = LIB_evolition_program }
+
+		cost = 7.80
+
+		offset = {
+			x = -3
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_clocks_go_back
+			}
+		}
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			700 = {
+				CONTROLLER = {
+					country_event = { id = liberia.2 hours = 5 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_develop_sierra_leone
+		icon = GFX_focus_LIB_develop_sierra_leone
+		x = 0
+		y = 1
+		relative_position_id = LIB_sierra_leone
+		prerequisite = { focus = LIB_sierra_leone }
+
+		cost = 15.55
+
+		ai_will_do = {
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = LIB_clocks_go_back
+			}
+			700 = {
+				is_owned_and_controlled_by = ROOT
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_clocks_go_back
+					has_completed_focus = LIB_Republican_conspiracy
+					has_completed_focus = LIB_crush_the_union_rats
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			700 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				add_resource = {
+					type = steel
+					amount = 8
+				}
+				add_resource = {
+					amount = 4
+					type = aluminium
+				}
+				add_resource = {
+					amount = 2
+					type = oil
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
+
+
+	############################
+	##### KOMINISTA BEYHU  #####
+	############################
+
+	focus = {
+		id = LIB_sounds_of_the_revolition
+		icon = GFX_z_goal_ball_and_chain
+		x = -6
+		y = 1
+		relative_position_id = LIB_crisis_of_the_black_sunday
+		prerequisite = { focus = LIB_crisis_of_the_black_sunday }
+		mutually_exclusive = { focus = LIB_hold_dearly_election }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = LIB_Willkommenskultur
+			}
+		}
+
+		offset = {
+			x = 6
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_sounds_of_the_revolition
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_hold_dearly_election
+					has_completed_focus = LIB_contunie_new_deal
+					has_completed_focus = LIB_dolarisation
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			set_country_flag = LIB_not_going_here_wilkommenskultur
+			add_stability = -0.025
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_student_activits
+		icon = GFX_focus_LIB_student_activits
+		x = -1
+		y = 1
+		relative_position_id = LIB_sounds_of_the_revolition
+		prerequisite = { focus = LIB_sounds_of_the_revolition }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			mark_focus_tree_layout_dirty = yes
+			add_popularity = {
+				ideology = communism
+				popularity = 0.125
+			}
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = -0.05
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_research_speed_factor
+				value = 0.10
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_raid_settlers
+		icon = GFX_z_goal_liberation_of_oppressed_peoples
+		x = 1
+		y = 1
+		relative_position_id = LIB_sounds_of_the_revolition
+		prerequisite = { focus = LIB_sounds_of_the_revolition }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = -0.025
+			add_popularity = {
+				ideology = communism
+				popularity = 0.075
+			}
+			mark_focus_tree_layout_dirty = yes
+			country_event = { id = liberia.11 days = 5 }
+		}
+	}
+
+	focus = {
+		id = LIB_revolision
+		icon = GFX_focus_LIB_revolition
+		x = -1
+		y = 1
+		relative_position_id = LIB_raid_settlers
+		prerequisite = { focus = LIB_raid_settlers }
+		prerequisite = { focus = LIB_student_activits }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_revolision_tt
+			hidden_effect = {
+				LIB_Sarah_Sawyer = {
+					add_country_leader_role = {
+						country_leader={
+							desc=""
+							ideology=syndicalism
+							expire="1965.1.1.1"
+							traits = {
+							}
+							id=-1
+						}
+						promote_leader = yes
+					}
+				}
+				set_politics = {
+					ruling_party = communism
+					elections_allowed = no
+					election_frequency = 48
+				}
+			}
+			set_cosmetic_tag = LIB_syndicalism
+		}
+	}
+
+	focus = {
+		id = LIB_west_africa_in_flames
+		icon = GFX_goal_SER_macedonia_in_flames
+		x = 3
+		y = 1
+		relative_position_id = LIB_revolision
+		prerequisite = { focus = LIB_revolision }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_country_leader_trait = 	unbreakable_anti_fascist_no_lar
+		}
+	}
+
+	focus = {
+		id = LIB_ignite_the_flame
+		icon = GFX_focus_LIB_ignite_the_flames
+		x = 0
+		y = 1
+		relative_position_id = LIB_west_africa_in_flames
+		prerequisite = { focus = LIB_west_africa_in_flames }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_war_support = 0.1
+			army_experience = 50
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_com_wargoal
+		icon = GFX_z_goal_unite_against_colonialism
+		x = 0
+		y = 1
+		relative_position_id = LIB_ignite_the_flame
+		prerequisite = { focus = LIB_ignite_the_flame }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_named_threat = {
+				threat = 2.5
+				name = LIB_com_wargoal
+			}
+			custom_effect_tooltip = LIB_com_wargoal_tt
+			hidden_effect = {
+				#FOR HARD COLONIERS
+				every_state = {
+					limit = {
+						is_on_continent = africa
+						is_controlled_by_ROOT_or_ally = no
+						controller = {
+							NOT = {
+								has_government = ROOT
+								capital_scope = {
+									is_on_continent = africa
+								}
+							}
+						}
+					}
+					controller = {
+						ROOT = {
+							create_wargoal = {
+								target = PREV
+								type = puppet_wargoal_focus
+								expire = 0
+							}
+						}
+					}
+				}
+				#For PUPPETS
+				every_state = {
+					limit = {
+						is_on_continent = africa
+						is_controlled_by_ROOT_or_ally = no
+						controller = {
+							is_subject = yes
+							OVERLORD = {
+								NOT = {
+									capital_scope = {
+										is_on_continent = africa
+									}
+								}
+							}
+						}
+					}
+					controller = {
+						ROOT = {
+							create_wargoal = {
+								target = PREV
+								type = puppet_wargoal_focus
+								expire = 0
+							}
+						}
+					}
+				}
+			}
+
+		}
+	}
+
+	focus = {
+		id = LIB_pep_akea_leta
+		icon = GFX_goal_ideology_syndicalist
+		x = -1
+		y = 1
+		relative_position_id = LIB_revolision
+		prerequisite = { focus = LIB_revolision }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = 0.1
+			add_popularity = {
+				ideology = communism
+				popularity = 0.075
+			}
+			set_rule = { can_create_factions = yes }
+			add_ideas = ENG_for_the_good_of_the_revolution_idea
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_conscription_factor
+				value = 0.15
+				tooltip = conscription_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_history_of_segregation_dmod_unit_limit_bonus
+				value = 5
+				tooltip = unit_limit_bonus_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_peoples_commissariat
+		icon = GFX_goal_LIB_Syndicalist_Rally
+		x = 2
+		y = 1
+		relative_position_id = LIB_west_africa_in_flames
+		prerequisite = { focus = LIB_west_africa_in_flames }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.075
+			}
+			add_ideas = LIB_peoples_commissariat_idea
+		}
+	}
+
+	focus = {
+		id = LIB_liberate_africans
+		icon = GFX_focus_LIB_united_africa
+		x = -1
+		y = 2
+		relative_position_id = LIB_peoples_commissariat
+		prerequisite = { focus = LIB_peoples_commissariat }
+		prerequisite = { focus = LIB_ignite_the_flame }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = 0.1
+			add_popularity = {
+				ideology = communism
+				popularity = 0.075
+			}
+			custom_effect_tooltip = LIB_liberate_africans_tt
+		}
+	}
+
+	focus = {
+		id = LIB_sydindacalist_reform
+		icon = GFX_goal_syndicalist_industry
+		x = -1
+		y = 1
+		relative_position_id = LIB_pep_akea_leta
+		prerequisite = { focus = LIB_pep_akea_leta }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = 0.05
+			add_popularity = {
+				ideology = communism
+				popularity = 0.075
+			}
+			add_ideas = ENG_decentralised_factories
+		}
+	}
+
+	focus = {
+		id = LIB_guarentee_the_utiopa
+		icon = GFX_GBR_fate_of_unions
+		x = 1
+		y = 1
+		relative_position_id = LIB_sydindacalist_reform
+		prerequisite = { focus = LIB_sydindacalist_reform }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = 0.15
+			add_war_support = 0.15
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					free_building_slots = {
+						building = arms_factory
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_expand_women_rights
+		icon = GFX_focus_generic_female_rights
+		x = -1
+		y = 1
+		relative_position_id = LIB_sydindacalist_reform
+		prerequisite = { focus = LIB_sydindacalist_reform }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = prca_tokens_tt_add_20
+			add_to_variable = { THIS.prca_tokens = 20 }
+			add_popularity = { ideology = communism popularity = 0.075 }
+			add_ideas = LIB_expanded_women_rights
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_history_of_segregation_dmod_unit_limit_bonus
+				value = 5
+				tooltip = unit_limit_bonus_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_syndacalist_manifesto
+		icon = GFX_goal_syndicalism
+		x = 0
+		y = 2
+		relative_position_id = LIB_sydindacalist_reform
+		prerequisite = { focus = LIB_sydindacalist_reform }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_ideas = ENG_spirit_of_the_industrial_revolution_idea
+		}
+	}
+
+	focus = {
+		id = LIB_dismiss_the_american_company
+		icon = GFX_z_goal_let_firestone_Germany
+		x = -3
+		y = 1
+		relative_position_id = LIB_sydindacalist_reform
+		prerequisite = { focus = LIB_sydindacalist_reform }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_bb_firstone_tt
+			show_ideas_tooltip = LIB_firestone_company
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = LIB_combined_syndacalist_assembly
+			set_country_flag = LIB_firestone_is_dead
+		}
+	}
+
+	focus = {
+		id = LIB_labour_act
+		icon = GFX_goal_syndicalist_workers
+		x = 1
+		y = 1
+		relative_position_id = LIB_dismiss_the_american_company
+		prerequisite = { focus = LIB_dismiss_the_american_company }
+		prerequisite = { focus = LIB_expand_women_rights }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			OR = {
+				has_completed_focus = LIB_centralised_economy
+				has_completed_focus = LIB_cofee_economy
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = LIB_centralised_economy_idea
+				}
+				swap_ideas = {
+					add_idea = LIB_centralised_economy_idea2
+					remove_idea = LIB_centralised_economy_idea
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = LIB_cofee_economy_idea
+				}
+				swap_ideas = {
+					add_idea = LIB_cofee_economy_idea2
+					remove_idea = LIB_cofee_economy_idea
+				}
+			}
+			else = {
+				effect_tooltip = {
+					custom_effect_tooltip = LIB_centralised_economy_idea_have_tt
+					swap_ideas = {
+						add_idea = LIB_centralised_economy_idea2
+						remove_idea = LIB_centralised_economy_idea
+					}
+					custom_effect_tooltip = LIB_cofee_economy_idea_have_tt
+					swap_ideas = {
+						add_idea = LIB_cofee_economy_idea2
+						remove_idea = LIB_cofee_economy_idea
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_guardians_of_the_proleteria
+		icon = GFX_goal_generic_red_guard
+		x = 1
+		y = 1
+		relative_position_id = LIB_pep_akea_leta
+		prerequisite = { focus = LIB_pep_akea_leta }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_guardians_of_the_proleteria_tt
+			hidden_effect = {
+				division_template = {
+					name = "Guardian of the Proleteria"
+					template_counter = 77
+					is_locked = yes
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+						infantry = { x = 1 y = 0 }
+						infantry = { x = 1 y = 1 }
+						infantry = { x = 1 y = 2 }
+						infantry = { x = 1 y = 3 }
+						artillery_brigade = { x = 2 y = 0 }
+						artillery_brigade = { x = 2 y = 1 }
+						anti_air_brigade = { x = 2 y = 2 }
+						anti_tank_brigade = { x = 2 y = 3 }
+						infantry = { x = 3 y = 0 }
+						infantry = { x = 3 y = 1 }
+						infantry = { x = 3 y = 2 }
+
+					}
+					support = {
+						artillery = { x = 0 y = 0 }
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"1.Guardian of the Proleteria\" division_template = \"Guardian of the Proleteria\" start_experience_factor = 1.00"
+						owner = PREV
+					}
+				}
+			}
+			add_ideas = LIB_guardians_of_the_proleteria_idea
+		}
+	}
+
+	focus = {
+		id = LIB_professionalisation_of_guardians
+		icon = GFX_focus_LIB_tribal
+		x = 1
+		y = 1
+		relative_position_id = LIB_guardians_of_the_proleteria
+		prerequisite = { focus = LIB_guardians_of_the_proleteria }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_guardians_of_the_proleteria_tt
+			hidden_effect = {
+				capital_scope = {
+					create_unit = {
+						division = "name = \"2.Guardian of the Proleteria\" division_template = \"Guardian of the Proleteria\" start_experience_factor = 1.00"
+						owner = PREV
+					}
+				}
+			}
+			swap_ideas = {
+				add_idea = LIB_guardians_of_the_proleteria_idea2
+				remove_idea = LIB_guardians_of_the_proleteria_idea
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_fight_against_imperialism
+		icon = GFX_z_goal_fight_against_colonialism
+		x = 2
+		y = 2
+		relative_position_id = LIB_guardians_of_the_proleteria
+		prerequisite = { focus = LIB_guardians_of_the_proleteria }
+		prerequisite = { focus = LIB_ignite_the_flame }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_fight_against_imperialism_tt
+			effect_tooltip = {
+				add_timed_idea = {
+					idea = LIB_fight_against_imperialism_idea
+					days = 200
+				}
+			}
+			every_country = {
+				limit = {
+					has_war_with =  ROOT
+				}
+				add_timed_idea = {
+					idea = LIB_fight_against_imperialism_idea
+					days = 200
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_spears_to_rifles
+		icon = GFX_z_goal_from_spears_to_rifles
+		x = 0
+		y = 2
+		relative_position_id = LIB_guardians_of_the_proleteria
+		prerequisite = { focus = LIB_professionalisation_of_guardians }
+		prerequisite = { focus = LIB_guarentee_the_utiopa }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_guardians_of_the_proleteria_2_tt
+			hidden_effect = {
+				capital_scope = {
+					create_unit = {
+						division = "name = \"3.Guardian of the Proleteria\" division_template = \"Guardian of the Proleteria\" start_experience_factor = 1.00"
+						owner = PREV
+					}
+				}
+				capital_scope = {
+					create_unit = {
+						division = "name = \"4.Guardian of the Proleteria\" division_template = \"Guardian of the Proleteria\" start_experience_factor = 1.00"
+						owner = PREV
+					}
+				}
+			}
+			swap_ideas = {
+				add_idea = LIB_guardians_of_the_proleteria_idea3
+				remove_idea = LIB_guardians_of_the_proleteria_idea2
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_help_to_spain
+		icon = GFX_focus_intervention_spain_republic
+		x = 1
+		y = 1
+		relative_position_id = LIB_revolision
+		prerequisite = { focus = LIB_revolision }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			set_rule = { can_send_volunteers = yes }
+			add_ideas = LIB_liberian_interventionism
+
+		}
+	}
+
+	############################
+	##### FAULKNER WAY OMG  ####
+	############################
+
+	focus = {
+		id = LIB_Republican_conspiracy
+		icon = GFX_focus_LIB_republican_concripsy
+		x = 21
+		y = 1
+		relative_position_id = LIB_contunie_new_deal
+		prerequisite = { focus = LIB_contunie_new_deal }
+		mutually_exclusive = { focus = LIB_The_Lone_Star_Forever }
+
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_dolarisation
+			}
+		}
+
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_integrate_West_African_pound
+				has_completed_focus = LIB_contunie_new_deal
+			}
+		}
+
+
+
+		offset = {
+			x = -10
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				#has_completed_focus = LIB_integrate_West_African_pound
+				has_completed_focus = LIB_contunie_new_deal
+				has_completed_focus = LIB_visa_policies
+				has_completed_focus = LIB_Republican_conspiracy
+			}
+		}
+
+		offset = {
+			x = -10
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_contunie_new_deal
+				#has_completed_focus = LIB_integrate_West_African_pound
+				has_completed_focus = LIB_Willkommenskultur
+				has_completed_focus = LIB_Republican_conspiracy
+			}
+		}
+
+		offset = {
+			x = -10
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_Republican_conspiracy
+				NOT = { has_completed_focus = LIB_Willkommenskultur }
+				NOT = { has_completed_focus = LIB_visa_policies }
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_crush_the_union_rats
+					has_completed_focus = LIB_The_Lone_Star_Forever
+				}
+			}
+		}
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			has_country_Flag = LIB_germans_agreement
+			NOT = {
+				has_completed_focus = LIB_visa_policies
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			set_country_flag = LIB_not_going_here_visa_policies
+			add_stability = -0.1
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.15
+			}
+			hidden_effect = {
+				retire_country_leader = yes
+			}
+			create_country_leader = {
+				name = "Transitional Government"
+				desc = ""
+				picture = "gfx/leaders/LIB/Portrait_LIB_american_junta.dds"
+				expire = "1965.1.1"
+				ideology = centrism_democratic
+			}
+			hidden_effect = {
+				add_country_leader_trait = LIB_us_backed
+			}
+			custom_effect_tooltip = LIB_bb_firstone_tt
+			show_ideas_tooltip = LIB_firestone_company
+			set_country_flag = LIB_firestone_is_dead
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_victrix
+		icon = GFX_goal_PSA_victory
+		x = 0
+		y = 1
+		relative_position_id = LIB_Republican_conspiracy
+		prerequisite = { focus = LIB_Republican_conspiracy }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+			neutrality > 0.30
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = 0.15
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.0125
+			}
+			hidden_effect = {
+				retire_country_leader = yes
+			}
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_neutrality_act
+		icon = GFX_focus_BEL_stay_neutral
+		x = 4
+		y = 1
+		relative_position_id = LIB_victrix
+		prerequisite = { focus = LIB_victrix }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.075
+			}
+			add_ideas = LIB_liberian_neutrality
+		}
+	}
+
+	focus = {
+		id = LIB_call_for_foreign_advisors
+		icon = GFX_z_goal_generic_political_correctness
+		x = 1
+		y = 1
+		relative_position_id = LIB_neutrality_act
+		prerequisite = { focus = LIB_neutrality_act }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = neutrality
+				popularity = -0.05
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = LIB_arthur_sweetser
+		}
+	}
+
+	focus = {
+		id = LIB_keep_control_settlers
+		icon = GFX_z_goal_limited_modernization
+		x = -1
+		y = 1
+		relative_position_id = LIB_neutrality_act
+		prerequisite = { focus = LIB_neutrality_act }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.075
+			}
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_conscription_factor
+				value = 0.15
+				tooltip = conscription_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_new_flag
+		icon = GFX_focus_LIB_new_state
+		x = -1
+		y = 1
+		relative_position_id = LIB_call_for_foreign_advisors
+		prerequisite = { focus = LIB_call_for_foreign_advisors focus = LIB_keep_control_settlers }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			set_cosmetic_tag = LIB_republic
+			add_country_leader_trait = LIB_trade_specialist
+		}
+	}
+
+	focus = {
+		id = LIB_demilitarisation
+		icon = GFX_goal_NFA_Marechal_Cap
+		x = 0
+		y = 1
+		relative_position_id = LIB_victrix
+		prerequisite = { focus = LIB_victrix }
+		mutually_exclusive = { focus = LIB_arms_trade }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.05
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+			add_ideas = IRE_demilitarization
+		}
+	}
+
+	focus = {
+		id = LIB_arms_trade
+		icon = GFX_z_goal_artisanal_production_of_weapons
+		x = -2
+		y = 1
+		relative_position_id = LIB_victrix
+		prerequisite = { focus = LIB_victrix }
+		mutually_exclusive = { focus = LIB_demilitarisation }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			298 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			if = {
+				limit = {
+					has_war_support < 0.8
+				}
+				add_war_support = 0.1
+			}
+			if = {
+				limit = {
+					has_idea = tot_economic_mobilisation
+				}
+				add_political_power = 150
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_idea = tot_economic_mobilisation
+					}
+				}
+				add_ideas = tot_economic_mobilisation
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_sell_arms_factories
+		icon = GFX_goal_generic_privatization
+		x = 1
+		y = 1
+		relative_position_id = LIB_demilitarisation
+		prerequisite = { focus = LIB_demilitarisation }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			hidden_effect = {
+				every_owned_state = {
+					limit = {
+						is_fully_controlled_by = ROOT
+						arms_factory > 1
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+					remove_building = {
+						type = arms_factory
+						level = 2
+					}
+				}
+			}
+			custom_effect_tooltip = LIB_sell_arm_factories_tt
+		}
+	}
+
+	focus = {
+		id = LIB_work_with_other_monopolies
+		icon = GFX_z_goal_trade_unions_for_white
+		x = -3
+		y = 1
+		relative_position_id = LIB_demilitarisation
+		prerequisite = { focus = LIB_demilitarisation focus = LIB_arms_trade }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+	}
+
+	focus = {
+		id = LIB_work_together_with_unions
+		icon = GFX_z_goal_trud_union
+		x = -1
+		y = 1
+		relative_position_id = LIB_demilitarisation
+		prerequisite = { focus = LIB_demilitarisation focus = LIB_arms_trade }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			remove_ideas = LIB_deals
+			if = {
+				limit = {
+					has_idea = POR_standardization
+				}
+				swap_ideas = {
+					add_idea = LIB_standardization2
+					remove_idea = POR_standardization
+				}
+			}
+			else = {
+				custom_effect_tooltip = LIB_standarisation_idea_have_tt
+				effect_tooltip = {
+					swap_ideas = {
+						add_idea = LIB_standardization2
+						remove_idea = POR_standardization
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_free_trade
+		icon = GFX_goal_generic_positive_trade_relations_gold
+		x = -2
+		y = 1
+		relative_position_id = LIB_sell_arms_factories
+		prerequisite = { focus = LIB_sell_arms_factories focus = LIB_work_with_other_monopolies }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_stability < 0.8
+				}
+				add_stability = 0.1
+			}
+			if = {
+				limit = {
+					has_idea = free_trade
+				}
+				add_political_power = 150
+				add_offsite_building = { type = industrial_complex level = 1 }
+			}
+			else_if = {
+				limit = {
+					NOT = {
+						has_idea = free_trade
+					}
+				}
+				add_ideas = free_trade
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_open_public_universities
+		icon = GFX_focus_generic_university_1
+		x = -4
+		y = 1
+		relative_position_id = LIB_Republican_conspiracy
+		prerequisite = { focus = LIB_Republican_conspiracy }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = LIB_communication
+		icon = GFX_focus_SWE_radiotjanst
+		x = 0
+		y = 3
+		relative_position_id = LIB_open_public_universities
+		prerequisite = { focus = LIB_open_public_universities }
+		prerequisite = { focus = LIB_work_with_other_monopolies }
+
+		cost = 6
+
+		available = {
+		}
+
+		completion_reward = {
+			298 = {
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = LIB_available_company_tt
+			show_ideas_tooltip = LIB_telekom
+		}
+	}
+
+	focus = {
+		id = LIB_computing_techs
+		icon = GFX_z_goal_Opening_of_the_school_of_Princes
+		x = -1
+		y = 1
+		relative_position_id = LIB_open_public_universities
+		prerequisite = { focus = LIB_open_public_universities }
+
+		cost = 6
+
+		available = {
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = LIB_american_machines
+				bonus = 1.0
+				uses = 2
+				category = electronics
+				category = industry
+			}
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_research_speed_factor
+				value = 0.075
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	############################
+	##### SOCIAL - KINGS   #####
+	############################
+
+	focus = {
+		id = LIB_hold_dearly_election
+		icon = GFX_goal_generic_elections
+		x = 6
+		y = 1
+		relative_position_id = LIB_crisis_of_the_black_sunday
+		prerequisite = { focus = LIB_crisis_of_the_black_sunday }
+		mutually_exclusive = { focus = LIB_sounds_of_the_revolition }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		offset = {
+			x = -6
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_hold_dearly_election
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_sounds_of_the_revolition
+					has_completed_focus = LIB_contunie_new_deal
+					has_completed_focus = LIB_dolarisation
+				}
+			}
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = -0.075
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.075
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.075
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_United_Tribes
+		icon = GFX_z_goal_piece_with_tribes
+		x = 1
+		y = 1
+		relative_position_id = LIB_hold_dearly_election
+		prerequisite = { focus = LIB_hold_dearly_election }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 5000
+				producer = LIB
+			}
+			if = {
+				limit = {
+					has_completed_focus = LIB_Disclosure
+				}
+				add_stability = 0.05
+				add_popularity = {
+					ideology = neutrality
+					popularity = 0.125
+				}
+			}
+			else = {
+				add_popularity = {
+					ideology = neutrality
+					popularity = 0.125
+				}
+				add_popularity = {
+					ideology = communism
+					popularity = -0.10
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Disclosure
+		icon = GFX_z_goal_EHB_purge_disloyal_japan_officials
+		x = -1
+		y = 1
+		relative_position_id = LIB_hold_dearly_election
+		prerequisite = { focus = LIB_hold_dearly_election }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.15
+			}
+			country_event = { id = liberia.3 days = 1 }
+		}
+	}
+
+	focus = {
+		id = LIB_parade_in_capital
+		icon = GFX_z_goal_empower_women
+		x = -1
+		y = 1
+		relative_position_id = LIB_United_Tribes
+		prerequisite = { focus = LIB_United_Tribes }
+		prerequisite = { focus = LIB_Disclosure }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = 0.15
+			country_event = { id = liberia.8 days = 1 }
+		}
+	}
+
+	############################
+	##### KINGS FRONTE OMG #####
+	############################
+
+	focus = {
+		id = LIB_Great_awakening
+		icon = GFX_focus_LIB_kingdom
+		x = 3
+		y = 1
+		relative_position_id = LIB_parade_in_capital
+		prerequisite = { focus = LIB_parade_in_capital }
+		mutually_exclusive = { focus = LIB_Victory_of_United_People_Party }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+			NOT = {
+				has_completed_focus = LIB_aristocrat_officers
+				has_completed_focus = LIB_Willkommenskultur
+			}
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_Victory_of_United_People_Party
+					has_completed_focus = LIB_contunie_new_deal
+					has_completed_focus = LIB_dolarisation
+					has_completed_focus = LIB_sounds_of_the_revolition
+				}
+			}
+		}
+
+		offset = {
+			x = -3
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_Great_awakening
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_political_power = 200
+			custom_effect_tooltip = LIB_great_awakening_tt
+			set_cosmetic_tag = LIB_kingdom
+			hidden_effect = {
+				LIB_varney_massaquoi = {
+					add_country_leader_role = {
+						country_leader={
+							desc="POLITICS_Varney_Massaquoi_DESC"
+							ideology=monarchism
+							expire="1965.1.1.1"
+							id=-1
+						}
+						promote_leader = yes
+					}
+				}
+				set_politics = {
+					ruling_party = neutrality
+					elections_allowed = no
+					long_name = LIB_monarchy_party_long
+					name = LIB_monarchy_party
+				}
+			}
+			700 = {
+				add_core_of = LIB
+			}
+			set_country_flag = LIB_not_going_here_wilkommenskultur
+			set_country_flag = LIB_not_going_here_aristocrat_officers
+			if = {
+				limit ={
+					communism > 0.01
+				}
+				set_temp_variable = {
+					var = ban_communism_var
+					value = party_popularity@communism
+				}
+				multiply_temp_variable = {
+					var = ban_communism_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = communism
+					popularity = ban_communism_var
+				}
+			}
+			if = {
+				limit ={
+					fascism > 0.01
+				}
+				set_temp_variable = {
+					var = ban_fascism_var
+					value = party_popularity@fascism
+				}
+				multiply_temp_variable = {
+					var = ban_fascism_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = fascism
+					popularity = ban_fascism_var
+				}
+			}
+			if = {
+				limit ={
+					democratic > 0.01
+				}
+				set_temp_variable = {
+					var = ban_democratic_var
+					value = party_popularity@democratic
+				}
+				multiply_temp_variable = {
+					var = ban_democratic_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = ban_democratic_var
+				}
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_approach_germany
+		icon = GFX_focus_generic_german_trade
+
+		x = 3
+		y = 1
+		relative_position_id = LIB_Great_awakening
+		prerequisite = { focus = LIB_Great_awakening }
+
+		cost = 5.13
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_ideas = LIB_german_advisors
+			GER = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			add_opinion_modifier = {
+				target = GER
+				modifier = large_increase
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_join_axis
+		icon = GFX_focus_chi_mission_to_germany
+		x = 0
+		y = 1
+		relative_position_id = LIB_approach_germany
+		prerequisite = { focus = LIB_approach_germany }
+
+		cost = 7
+
+		ai_will_do = {
+		}
+
+		available = {
+			GER = {
+				is_faction_leader = yes
+				NOT = { has_war_with = ROOT }
+				NOT = {
+					any_allied_country = {
+						has_war_with = ROOT
+					}
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			GER = { country_event = { id = generic.2 hours = 6 } }
+		}
+	}
+
+	focus = {
+		id = LIB_german_eq
+		icon = GFX_BUL_Remilitarization_of_Bulgaria
+		x = -1
+		y = 1
+		relative_position_id = LIB_join_axis
+		prerequisite = { focus = LIB_join_axis }
+		mutually_exclusive = { focus = LIB_german_specialisation }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+			is_in_faction_with = GER
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 5000
+				producer = GER
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 500
+				producer = GER
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment
+				amount = 500
+				producer = GER
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 500
+				producer = GER
+			}
+			if = {
+				limit = {
+					has_dlc = "By Blood Alone"
+				}
+				add_equipment_to_stockpile = {
+					type = small_plane_airframe_1
+					amount = 50
+					variant_name = "Bf 109 D"
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = small_plane_cas_airframe_1
+					amount = 50
+					variant_name = "Ju 87"
+					producer = GER
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = fighter_equipment_1
+					amount = 50
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = CAS_equipment_1
+					amount = 50
+					producer = GER
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_german_specialisation
+		icon = GFX_goal_generic_mountain_warfare
+		x = 1
+		y = 1
+		relative_position_id = LIB_join_axis
+		prerequisite = { focus = LIB_join_axis }
+		prerequisite = { focus = LIB_tribal_warriors }
+		mutually_exclusive = { focus = LIB_german_eq }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 40
+			swap_ideas = {
+				add_idea = LIB_tribal_militas2
+				remove_idea = LIB_tribal_militas
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_tribal_support
+		icon = GFX_z_goal_increase_mwami_council
+		x = 7
+		y = 1
+		relative_position_id = LIB_Great_awakening
+		prerequisite = { focus = LIB_Great_awakening }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 15
+			add_war_support = 0.15
+			add_ideas = LIB_tribal_militas
+		}
+	}
+
+	focus = {
+		id = LIB_adapt_vai_script
+		icon = GFX_focus_LIB_vai
+		x = 5
+		y = 1
+		relative_position_id = LIB_Great_awakening
+		prerequisite = { focus = LIB_Great_awakening }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_political_power = 150
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_conscription_factor
+				value = 0.15
+				tooltip = conscription_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_political_power_cost
+				value = -0.1
+				tooltip = political_power_cost_tt
+			}
+			add_to_variable = {
+				var = LIB_history_of_segregation_dmod_unit_limit_bonus
+				value = 5
+				tooltip = unit_limit_bonus_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_tribal_warriors
+		icon = GFX_goal_generic_paramilitary
+		x = -1
+		y = 1
+		relative_position_id = LIB_tribal_support
+		prerequisite = { focus = LIB_tribal_support }
+		prerequisite = { focus = LIB_adapt_vai_script }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 25
+			custom_effect_tooltip = LIB_tribal_warriors_tt
+			hidden_effect = {
+				load_oob = "LIB_irregular_army"
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_deal_with_other_tribes
+		icon = GFX_goal_SAF_kruger_park
+		x = 0
+		y = 1
+		relative_position_id = LIB_tribal_warriors
+		prerequisite = { focus = LIB_tribal_warriors }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_tribal_warriors_tt
+			hidden_effect = {
+				298 = {
+					create_unit = {
+						division = "name = \"5.Tribal Warriors\" division_template = \"Tribal Warriors\" start_experience_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"6.Tribal Warriors\" division_template = \"Tribal Warriors\" start_experience_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"7.Tribal Warriors\" division_template = \"Tribal Warriors\" start_experience_factor = 1.0"
+						owner = PREV
+					}
+					create_unit = {
+						division = "name = \"8.Tribal Warriors\" division_template = \"Tribal Warriors\" start_experience_factor = 1.0"
+						owner = PREV
+					}
+				}
+			}
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_history_of_segregation_dmod_unit_limit_bonus
+				value = 5
+				tooltip = unit_limit_bonus_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_glory_to_king
+		icon = GFX_focus_generic_monarchy_2
+		x = 0
+		y = 1
+		relative_position_id = LIB_Great_awakening
+		prerequisite = { focus = LIB_Great_awakening }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			army_experience = 25
+			add_country_leader_trait = the_soldier_king
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_history_of_segregation_dmod_unit_limit_bonus
+				value = 10
+				tooltip = unit_limit_bonus_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_african_revanchism
+		icon = GFX_z_goal_call_of_tribes
+		x = -1
+		y = 1
+		relative_position_id = LIB_glory_to_king
+		prerequisite = { focus = LIB_glory_to_king }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_ideas = LIB_african_revanchism_idea
+		}
+	}
+
+	focus = {
+		id = LIB_claim_all_africa
+		icon = GFX_goal_LIB_back_to_africa
+		x = 1
+		y = 1
+		relative_position_id = LIB_glory_to_king
+		prerequisite = { focus = LIB_glory_to_king }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_on_continent = africa
+					NOT = {
+						is_core_of = PREV
+					}
+				}
+				add_claim_by = LIB
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_empire_of_mande
+		icon = GFX_z_goal_monarchism_principles_of_dualism
+		x = -1
+		y = 1
+		relative_position_id = LIB_claim_all_africa
+		prerequisite = { focus = LIB_claim_all_africa }
+		prerequisite = { focus = LIB_african_revanchism }
+
+		cost = 13.80
+
+		ai_will_do = {
+		}
+
+		available = {
+			556 = {
+				is_controlled_by = ROOT
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_stability = 1.0
+			set_cosmetic_tag = LIB_empire
+			custom_effect_tooltip = LIB_empire_of_mande_tt
+			hidden_effect = {
+				add_state_core = 899
+				add_state_core = 898
+				add_state_core = 781
+				add_state_core = 780
+				add_state_core = 779
+				add_state_core = 778
+				add_state_core = 701
+				add_state_core = 700
+				add_state_core = 556
+				add_state_core = 296
+				add_state_core = 272
+			}
+		}
+	}
+
+	############################
+	##### SOZIAL COMOLOKKO #####
+	############################
+
+	focus = {
+		id = LIB_Victory_of_United_People_Party
+		icon = GFX_ENG_Defenders_of_Democracy
+		x = -3
+		y = 1
+		relative_position_id = LIB_parade_in_capital
+		prerequisite = { focus = LIB_parade_in_capital }
+		mutually_exclusive = { focus = LIB_Great_awakening }
+
+		cost = 8.65
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_Great_awakening
+					has_completed_focus = LIB_contunie_new_deal
+					has_completed_focus = LIB_dolarisation
+					has_completed_focus = LIB_sounds_of_the_revolition
+				}
+			}
+		}
+
+		offset = {
+			x = 3
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_Victory_of_United_People_Party
+			}
+		}
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			LIB_William_Tubman = {
+				add_country_leader_role = {
+					country_leader={
+						desc="POLITICS_LIB_William_Tubman_DESC"
+						ideology=centrism_democratic
+						expire="1965.1.1.1"
+						traits = {
+							resolute_social_democrat
+						}
+						id=-1
+					}
+					promote_leader = yes
+				}
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.15
+			}
+			hidden_effect = {
+				set_politics = {
+					ruling_party = democratic
+					elections_allowed = no
+					long_name = LIB_people_party_long
+					name = LIB_people_party
+				}
+			}
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = 0.075
+				tooltip = stability_factor_tt
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_autonomy_of_tribals
+		icon = GFX_z_expand_tribal_autonomy
+		x = 0
+		y = 1
+		relative_position_id = LIB_Victory_of_United_People_Party
+		prerequisite = { focus = LIB_Victory_of_United_People_Party }
+
+		cost = 5.13
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.075
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.025
+			}
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = 0.05
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_political_power_cost
+				value = -0.1
+				tooltip = political_power_cost_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_dissolve_hut_tax
+		icon = GFX_goal_generic_banking_legislation
+		x = -2
+		y = 1
+		relative_position_id = LIB_Victory_of_United_People_Party
+		prerequisite = { focus = LIB_Victory_of_United_People_Party }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.025
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_weekly_manpower
+				value = 500
+				tooltip = weekly_manpower_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_National_Bank_of_Liberia
+		icon = GFX_goal_generic_recovery
+		x = 1
+		y = 1
+		relative_position_id = LIB_dissolve_hut_tax
+		prerequisite = { focus = LIB_dissolve_hut_tax }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.025
+			}
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = LIB_national_bank_of_liberia_company
+		}
+	}
+
+	focus = {
+		id = LIB_Guardians_of_the_liberia
+		icon = GFX_z_goal_concept_of_technate
+		x = -1
+		y = 1
+		relative_position_id = LIB_dissolve_hut_tax
+		prerequisite = { focus = LIB_dissolve_hut_tax }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.075
+			}
+			298 = {
+				add_resource = {
+					type = steel
+					amount = 6
+				}
+			}
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = LIB_Thomas_Faulkner
+		}
+	}
+
+	focus = {
+		id = LIB_ekspe_balans
+		icon = GFX_goal_generic_stable_government
+		x = 1
+		y = 1
+		relative_position_id = LIB_Guardians_of_the_liberia
+		prerequisite = { focus = LIB_Guardians_of_the_liberia }
+		prerequisite = { focus = LIB_National_Bank_of_Liberia }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					communism > 0.01
+				}
+				set_temp_variable = {
+					var = ban_communism_var
+					value = party_popularity@communism
+				}
+				multiply_temp_variable = {
+					var = ban_communism_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = communism
+					popularity = ban_communism_var
+				}
+			}
+			if = {
+				limit = {
+					fascism > 0.01
+				}
+				set_temp_variable = {
+					var = ban_fascism_var
+					value = party_popularity@fascism
+				}
+				multiply_temp_variable = {
+					var = ban_fascism_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = fascism
+					popularity = ban_fascism_var
+				}
+			}
+			if = {
+				limit = {
+					neutrality > 0.01
+				}
+				set_temp_variable = {
+					var = ban_neutrality_var
+					value = party_popularity@neutrality
+				}
+				multiply_temp_variable = {
+					var = ban_neutrality_var
+					value = -1
+				}
+				add_popularity = {
+					ideology = neutrality
+					popularity = ban_neutrality_var
+				}
+			}
+			add_ideas = LIB_liberian_neutrality
+		}
+	}
+
+	focus = {
+		id = LIB_new_republic
+		icon = GFX_USA_Work_with_What_We_Have
+		x = 0
+		y = 2
+		relative_position_id = LIB_autonomy_of_tribals
+		prerequisite = { focus = LIB_autonomy_of_tribals }
+		prerequisite = { focus = LIB_National_Bank_of_Liberia }
+		prerequisite = { focus = LIB_Guardians_of_the_liberia }
+		prerequisite = { focus = LIB_Skilled_labor_projekt }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_war_support = 0.1
+			add_political_power = 65
+			add_ideas = LIB_new_republic
+		}
+	}
+
+	focus = {
+		id = LIB_Skilled_labor_projekt
+		icon = GFX_z_goal_craft_workshops2
+		x = 1
+		y = 2
+		relative_position_id = LIB_Victory_of_United_People_Party
+		prerequisite = { focus = LIB_Victory_of_United_People_Party }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.075
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_idea = POR_standardization
+					}
+					swap_ideas = {
+						add_idea = LIB_standardization
+						remove_idea = POR_standardization
+					}
+				}
+			}
+			add_offsite_building = { type = industrial_complex level = 2 }
+			custom_effect_tooltip = LIB_standarisation_idea_have_tt
+			effect_tooltip = {
+				swap_ideas = {
+					add_idea = LIB_standardization
+					remove_idea = POR_standardization
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_Kicking_Firestone_out
+		icon = GFX_z_goal_nac_Firestone
+		x = 3
+		y = 1
+		relative_position_id = LIB_Victory_of_United_People_Party
+		prerequisite = { focus = LIB_Victory_of_United_People_Party focus = LIB_Great_awakening }
+
+		cost = 7
+
+		offset = {
+			x = -3
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_Great_awakening
+			}
+		}
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.125
+			}
+			add_offsite_building = { type = industrial_complex level = 2 }
+			custom_effect_tooltip = LIB_bb_firstone_tt
+			show_ideas_tooltip = LIB_firestone_company
+			set_country_flag = LIB_firestone_is_dead
+		}
+	}
+
+	focus = {
+		id = LIB_land_reform
+		icon = GFX_goal_generic_land_reform
+		x = 0
+		y = 1
+		relative_position_id = LIB_Kicking_Firestone_out
+		prerequisite = { focus = LIB_Kicking_Firestone_out }
+
+		cost = 8.65
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			if ={
+				limit = {
+					has_completed_focus = LIB_Victory_of_United_People_Party
+				}
+				add_popularity = {
+					ideology = communism
+					popularity = 0.05
+				}
+			}
+			random_state = {
+				limit = {
+					is_controlled_by = LIB
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+			add_offsite_building = { type = industrial_complex level = 1 }
+		}
+	}
+
+	focus = {
+		id = LIB_national_companies
+		icon = GFX_z_goal_contacts_with_foreign_companies
+		x = 0
+		y = 1
+		relative_position_id = LIB_land_reform
+		prerequisite = { focus = LIB_land_reform }
+		prerequisite = { focus = LIB_Skilled_labor_projekt focus = LIB_Great_awakening }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_available_company_tt
+			show_ideas_tooltip = LIB_telekom
+		}
+	}
+
+	############################
+	##### ZETTLERS SELECT  #####
+	############################
+
+	focus = {
+		id = LIB_Willkommenskultur
+		icon = GFX_focus_LIB_Willkommenskultur
+		x =-1
+		y = 1
+		relative_position_id = LIB_contunie_new_deal
+		prerequisite = { focus = LIB_crush_the_union_rats focus = LIB_contunie_new_deal }
+		mutually_exclusive = { focus = LIB_visa_policies }
+
+		cost = 5.13
+
+		ai_will_do = {
+		}
+
+		offset = {
+			x = 0
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_dolarisation
+			}
+		}
+
+		offset = {
+			x = -12
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				OR = {
+					has_completed_focus = LIB_hold_dearly_election
+					has_completed_focus =LIB_sounds_of_the_revolition
+				}
+			}
+		}
+
+		offset = {
+			x = 2
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_integrate_West_African_pound
+				has_completed_focus = LIB_crush_the_union_rats
+				has_completed_focus = LIB_Willkommenskultur
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_visa_policies
+				}
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = LIB_not_going_here_wilkommenskultur
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = LIB_louis_a_grimes
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = -0.10
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_weekly_manpower
+				value = 1500
+				tooltip = weekly_manpower_tt
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_expand_foreign_scientists
+		icon = GFX_z_goal_foreign_specialists
+		x = 1
+		y = 1
+		relative_position_id = LIB_Willkommenskultur
+		prerequisite = { focus = LIB_Willkommenskultur }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = -0.05
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_research_speed_factor
+				value = 0.15
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_land_for_settlers
+		icon = GFX_z_goal_land_aristo
+		x = -1
+		y = 1
+		relative_position_id = LIB_Willkommenskultur
+		prerequisite = { focus = LIB_Willkommenskultur }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			298 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_reestablish_radar_camps
+		icon = GFX_z_goal_Warwick_camp
+		x = 0
+		y = 1
+		relative_position_id = LIB_expand_foreign_scientists
+		prerequisite = { focus = LIB_expand_foreign_scientists }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_research_speed_factor
+				value = 0.20
+				tooltip = research_speed_factor_tt
+			}
+			add_tech_bonus = {
+				name = recon_tech_bonus
+				bonus = 0.75
+				uses = 2
+				category = signal_company_tech
+				category = radar_tech
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_national_language_projekt
+		icon = GFX_focus_LIB_national_language
+		x = 0
+		y = 1
+		relative_position_id = LIB_land_for_settlers
+		prerequisite = { focus = LIB_land_for_settlers }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			country_event = { id = liberia.7 days = 1 }
+		}
+	}
+
+	focus = {
+		id = LIB_the_star_of_africa
+		icon = GFX_focus_LIB_star_of_africa
+		x = 1
+		y = 1
+		relative_position_id = LIB_national_language_projekt
+		prerequisite = { focus = LIB_national_language_projekt }
+		prerequisite = { focus = LIB_reestablish_radar_camps }
+
+		cost = 13.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_to_variable = { THIS.prca_tokens = 50 }
+			custom_effect_tooltip = prca_tokens_tt_add_50
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_conscription_factor
+				value = 0.30
+				tooltip = conscription_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = 0.25
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_research_speed_factor
+				value = 0.10
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_visa_policies
+		icon = GFX_z_goal_JAP_common_affairs_reform
+		x = 1
+		y = 1
+		relative_position_id = LIB_crush_the_union_rats
+		prerequisite = { focus = LIB_crush_the_union_rats focus = LIB_contunie_new_deal }
+		mutually_exclusive = { focus = LIB_Willkommenskultur }
+
+		cost = 5.13
+
+		ai_will_do = {
+		}
+
+		available = {
+			NOT = {
+				has_country_flag =  LIB_not_going_here_visa_policies
+			}
+		}
+
+		offset = {
+			x = 4
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				AND = {
+					has_completed_focus = LIB_dolarisation
+					has_completed_focus = LIB_visa_policies
+				}
+			}
+		}
+
+		offset = {
+			x = 2
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_integrate_West_African_pound
+				has_completed_focus = LIB_crush_the_union_rats
+				has_completed_focus = LIB_visa_policies
+			}
+		}
+
+		offset = {
+			x = 4
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_contunie_new_deal
+				has_completed_focus = LIB_integrate_West_African_pound
+				has_completed_focus = LIB_visa_policies
+			}
+		}
+
+		offset = {
+			x = -6
+			y = 0
+			trigger = {
+				has_game_rule = {
+					rule = obsolete_focus_branches_visibility
+					option = HIDE
+				}
+				has_completed_focus = LIB_contunie_new_deal
+				has_completed_focus = LIB_integrate_West_African_pound
+			}
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				NOT = {
+					has_completed_focus = LIB_Willkommenskultur
+				}
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = LIB_albert_porte
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = -0.075
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_weekly_manpower
+				value = 750
+				tooltip = weekly_manpower_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_conscription_factor
+				value = 0.15
+				tooltip = conscription_factor_tt
+			}
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = obsolete_focus_branches_visibility
+						option = HIDE
+					}
+				}
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_take_settlers_lands
+		icon = GFX_z_goal_close_land_aristo
+		x = 1
+		y = 1
+		relative_position_id = LIB_visa_policies
+		prerequisite = { focus = LIB_visa_policies }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			298 = {
+				add_extra_state_shared_building_slots = 2
+			}
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_conscription_factor
+				value = 0.10
+				tooltip = conscription_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_local_languages_program
+		icon = GFX_focus_LIB_local_languages
+		x = 0
+		y = 1
+		relative_position_id = LIB_take_settlers_lands
+		prerequisite = { focus = LIB_take_settlers_lands }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			country_event = { id = liberia.4 days = 1 }
+		}
+	}
+
+	focus = {
+		id = LIB_purge_foreign_scientists
+		icon = GFX_focus_LIB_ban_scientists
+		x = -1
+		y = 1
+		relative_position_id = LIB_visa_policies
+		prerequisite = { focus = LIB_visa_policies }
+
+		cost = 7.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = 0.10
+				tooltip = stability_factor_tt
+			}
+			add_to_variable = {
+				var = LIB_multilingual_country_research_speed_factor
+				value = -0.15
+				tooltip = research_speed_factor_tt
+			}
+		}
+	}
+
+	focus = {
+		id = LIB_national_education
+		icon = GFX_focus_LIB_national_education
+		x = 0
+		y = 1
+		relative_position_id = LIB_purge_foreign_scientists
+		prerequisite = { focus = LIB_purge_foreign_scientists }
+
+		cost = 10.26
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_research_slot = 1
+			add_to_variable = { THIS.prca_tokens = 10 }
+			custom_effect_tooltip = prca_tokens_tt_add_10
+			unlock_decision_category_tooltip = LIB_national_education_category
+		}
+	}
+
+	focus = {
+		id = LIB_the_sun_of_africa
+		icon = GFX_focus_LIB_sun_of_africa
+		x = 1
+		y = 1
+		relative_position_id = LIB_national_education
+		prerequisite = { focus = LIB_national_education }
+		prerequisite = { focus = LIB_local_languages_program }
+
+		cost = 13.80
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+
+		completion_reward = {
+			add_to_variable = { THIS.prca_tokens = 50 }
+			custom_effect_tooltip = prca_tokens_tt_add_50
+			add_manpower = 10000
+			custom_effect_tooltip = LIB_modify_history_of_segregation_dmod_tt
+			add_to_variable = {
+				var = LIB_multilingual_country_stability_factor
+				value = 0.15
+				tooltip = stability_factor_tt
+			}
+		}
+	}
+
+}

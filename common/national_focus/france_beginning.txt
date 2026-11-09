@@ -1,0 +1,351 @@
+focus_tree = {
+	id = french_beginning_focus
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 1000
+			tag = FRA
+		}
+	}
+
+	continuous_focus_position = {
+		x = 50 y = 3250
+	}
+
+	initial_show_position = {
+		x = 0
+	}
+
+
+	default = no
+
+	shared_focus = UFRA_nationalism
+	shared_focus = UFRA_create_dga
+	shared_focus = UFRA_open_to_the_world
+	shared_focus = UFRA_economic_policies
+	shared_focus = UFRA_devalue_the_franc
+	shared_focus = UFRA_begin_rearmament
+	shared_focus = UFRA_naval_rearmament
+	shared_focus = UFRA_air_focus
+
+	focus = {
+		id = UFRA_french_election
+		icon = GFX_FRA_1936_Elections
+		x = 45
+		y = 0
+		offset = {
+			x = -4
+			y = 0
+			trigger = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+		cost = 5
+
+		ai_will_do = {
+			base = 500
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { }
+		completion_reward = {
+			custom_effect_tooltip = FRA_1936_election
+			custom_effect_tooltip = FRA_autocomplete_warning
+		}
+	}
+	focus = {
+		id = UFRA_communist_win
+		icon = GFX_goal_FRA_World_Revolution
+		prerequisite = { focus = UFRA_french_election }
+		relative_position_id = UFRA_french_election
+		x = -6
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		cost = 5
+
+		ai_will_do = {
+			base = 500
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+		}
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+
+
+
+		search_filters = { }
+		completion_reward = {
+			hidden_effect = {load_focus_tree = french_communist_focus}
+			custom_effect_tooltip = FRA_autocomplete_warning
+			custom_effect_tooltip = FRA_blum_rad_tt
+			custom_effect_tooltip = FRA_national_tree_change
+		}
+	}
+	focus = {
+		id = UFRA_fascist_win
+		icon = GFX_u_fra_FRA_the_french_century
+		prerequisite = { focus = UFRA_french_election }
+		relative_position_id = UFRA_french_election
+		x = -3
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		cost = 5
+
+		ai_will_do = {
+			base = 500
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+		}
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+
+
+
+		search_filters = { }
+		completion_reward = {
+			hidden_effect = {load_focus_tree = french_fascist_focus}
+			custom_effect_tooltip = FRA_autocomplete_warning
+			custom_effect_tooltip = FRA_pl_leagues_tt
+			custom_effect_tooltip = FRA_national_tree_change
+		}
+	}
+	focus = {
+		id = UFRA_royalist_coup
+		icon = GFX_goal_NFA_action_francaise
+		prerequisite = { focus = UFRA_french_election }
+		relative_position_id = UFRA_french_election
+		x = 6
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		cost = 5
+
+		ai_will_do = {
+			base = 500
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+		}
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+
+
+
+		search_filters = { }
+		completion_reward = {
+			hidden_effect = {load_focus_tree = french_royalist_focus}
+			custom_effect_tooltip = FRA_autocomplete_warning
+			custom_effect_tooltip = FRA_pl_acfr_tt
+			custom_effect_tooltip = FRA_national_tree_change
+		}
+	}
+	focus = {
+		id = UFRA_bonapartist_restauration
+		icon = GFX_focus_generic_military_mission
+		prerequisite = { focus = UFRA_french_election }
+		relative_position_id = UFRA_french_election
+		x = 3
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		cost = 5
+
+		ai_will_do = {
+			base = 500
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+		}
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+
+
+
+		search_filters = { }
+		completion_reward = {
+			hidden_effect = {load_focus_tree = french_bonapartist_focus}
+			custom_effect_tooltip = FRA_autocomplete_warning
+			custom_effect_tooltip = FRA_pl_bona_tt
+			custom_effect_tooltip = FRA_national_tree_change
+		}
+	}
+	focus = {
+		id = UFRA_popular_front_win
+		icon = GFX_goal_NFA_republic
+		prerequisite = { focus = UFRA_french_election }
+		relative_position_id = UFRA_french_election
+		x = 0
+		y = 1
+		offset = {
+			x = 0
+			y = 0
+		}
+		cost = 5
+
+		ai_will_do = {
+			base = 500
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { }
+		completion_reward = {
+			hidden_effect = {load_focus_tree = french_democratic_focus}
+			custom_effect_tooltip = FRA_autocomplete_warning
+			custom_effect_tooltip = FRA_front_pop_tt
+			custom_effect_tooltip = FRA_national_tree_change
+		}
+	}
+
+	focus = {
+		id = UFRA_vichyfascist_win
+		icon = GFX_u_fra_FRA_the_french_century
+		prerequisite = { focus = UFRA_french_election }
+		relative_position_id = UFRA_french_election
+		x = -2
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		cost = 5
+
+		ai_will_do = {
+			base = 500
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+		}
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+
+
+
+		search_filters = { }
+		completion_reward = {
+			load_focus_tree = vichy_french_focus
+			custom_effect_tooltip = FRA_autocomplete_warning
+			custom_effect_tooltip = FRA_pl_leagues_tt
+			custom_effect_tooltip = FRA_national_tree_change
+		}
+	}
+
+	focus = {
+		id = UFRA_free_france_win
+		icon = GFX_focus_focus_fra_national_resistance_council
+		prerequisite = { focus = UFRA_french_election }
+		relative_position_id = UFRA_french_election
+		x = 2
+		y = 2
+		offset = {
+			x = 0
+			y = 0
+		}
+		cost = 5
+
+		ai_will_do = {
+			base = 500
+		}
+
+		available = {
+			always = no
+		}
+
+		bypass = {
+		}
+		allow_branch = {
+			NOT = {
+				OR = {
+					has_global_flag = his_only
+				}
+			}
+		}
+
+
+
+		search_filters = { }
+		completion_reward = {
+			load_focus_tree = free_french_focus
+			custom_effect_tooltip = FRA_autocomplete_warning
+			custom_effect_tooltip = FRA_national_tree_change
+		}
+	}
+}

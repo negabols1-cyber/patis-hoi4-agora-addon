@@ -1,0 +1,6027 @@
+### search_filters = {FOCUS_FILTER_POLITICAL}
+### search_filters = {FOCUS_FILTER_RESEARCH}
+### search_filters = {FOCUS_FILTER_INDUSTRY}
+### search_filters = {FOCUS_FILTER_STABILITY}
+### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+### search_filters = {FOCUS_FILTER_MANPOWER}
+### search_filters = {FOCUS_FILTER_ANNEXATION}
+
+focus_tree = {
+	id = paraguay_focus
+	
+	country = {
+		factor = 0
+		
+		modifier = {
+			add = 10
+			tag = PAR
+		}
+	}
+	
+	initial_show_position = {
+		x = 0
+	}
+	continuous_focus_position = {
+		x = 100 y = 1550
+	}
+	
+	default = no
+
+	shortcut = {
+		name = PAR_paraguayan_economy_shortcut
+		target = PAR_subsidize_the_industry
+		scroll_wheel_factor = 1.4
+	}
+	shortcut = {
+		name = PAR_freedom_above_all_shortcut
+		target = PAR_fight_for_our_freedom
+		scroll_wheel_factor = 1.3
+	}
+	shortcut = {
+		name = PAR_support_the_revolution_shortcut
+		target = PAR_support_the_revolution
+		scroll_wheel_factor = 1.2
+	}
+	shortcut = {
+		name = PAR_the_armed_forces_shortcut
+		target = PAR_restructure_the_armed_forces
+		scroll_wheel_factor = 1.35
+	}
+	
+	################ INDUSTRY TREE #######################
+
+	### Develop the Chaco ###
+	focus = {
+		id = PAR_kickstart_economy
+		icon = GFX_PAR_kickstart_economy
+		x = 6
+		y = 0
+
+		cost = 5
+
+		available = {
+			is_subject = no 
+			controls_state = 688
+		}
+
+		ai_will_do = { factor = 3 }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 25
+			if = {
+				limit = {
+					can_build_railway = {
+						start_state = 688
+						target_state = 301
+						build_only_on_allied = yes 
+					}
+				}
+				build_railway = {
+					level = 1
+					start_state = 688
+					target_state = 301
+				}
+			}
+			every_controlled_state = {
+				limit = {
+					state = 688
+				}
+				add_dynamic_modifier = {
+					modifier = PAR_railway_infrastructure_initiative
+					days = 1260
+				}
+			}
+			unlock_decision_tooltip = {
+				decision = drill_for_oil_in_chaco_boreal
+				show_effect_tooltip = yes
+			}
+		}
+	}
+
+	### Maintain Agrarian Dominance ###
+	focus = {
+		id = PAR_maintain_agrarian_dominance
+		icon = GFX_URG_agricultural_economy
+		x = 3
+		y = 1
+		relative_position_id = PAR_kickstart_economy
+		prerequisite = { focus = PAR_kickstart_economy }
+		mutually_exclusive = {
+			focus = PAR_laissez_faire
+		}
+
+		cost = 7.2
+
+		ai_will_do = { factor = 2 }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_ideas = PAR_agrarian_society
+		}
+	}
+
+	### Return to a Laissez-faire Economy ###
+	focus = {
+		id = PAR_laissez_faire
+		icon = GFX_col_focus_ingenieria
+		x = -3
+		y = 1
+		relative_position_id = PAR_kickstart_economy
+		prerequisite = { focus = PAR_kickstart_economy }
+		mutually_exclusive = {
+			focus = PAR_maintain_agrarian_dominance
+		}
+
+		cost = 7.2
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes 
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = PAR_laissez_faire_approach_1
+			EUYL_add_2_civilian = yes
+			custom_effect_tooltip = PAR_people_will_get_angered_tt
+			hidden_effect = {
+				country_event = {
+					id = paraguay.1
+					days = 35
+					random_days = 50
+				}
+			}
+		}
+	}
+
+	### Attract American Investors - nyaaahh purr (=^ ･ ω ･ ^=) ###
+	focus = {
+		id = PAR_attract_american_investors
+		icon = GFX_PAR_invite_american_investors
+		x = -1
+		y = 1
+		relative_position_id = PAR_laissez_faire
+		prerequisite = {
+			focus = PAR_laissez_faire
+		}
+
+		cost = 6
+
+		available = {
+			has_civil_war = no
+		}
+		
+
+		bypass = {
+			OR = {
+                has_war_with = USA
+                NOT = {
+                    country_exists = USA
+                }
+            }
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = URG_american_investments_tt
+			if = {
+				limit = {
+					USA = {
+						has_opinion = {
+							target = ROOT
+							value > 80
+						}
+					}
+				}
+				add_ideas = PAR_american_investments_3
+			}
+			else_if = {
+				limit = {
+					USA = {
+						has_opinion = {
+							target = ROOT
+							value > 40
+						}
+					}
+				}
+				add_ideas = PAR_american_investments_2
+			}
+			else = {
+				add_ideas = PAR_american_investments_1
+			}
+		}
+	}
+
+	### Resource Extraction Effort ###
+	focus = {
+		id = PAR_resource_extraction_effort
+		icon = GFX_goal_generic_construction2
+		x = 1
+		y = 1
+		relative_position_id = PAR_attract_american_investors
+		prerequisite = {
+			focus = PAR_attract_american_investors
+		}
+		
+		cost = 8
+
+		available = {
+			has_tech = excavation1
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			capital_scope = {
+				add_resource = {
+					type = steel
+					amount = 8
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_capital = no
+				}
+				add_resource = {
+					type = tungsten
+					amount = 6
+				}
+				add_resource = {
+					type = aluminium #aluminum, because fuck you
+					amount = 4
+				}
+			}
+		}
+	}
+
+	### Lift Market Restrictions ###
+	focus = {
+		id = PAR_lift_market_restrictions
+		icon = GFX_PAR_lifted_market_restrictions
+		x = -1
+		y = 1
+		relative_position_id = PAR_attract_american_investors
+		prerequisite = {
+			focus = PAR_attract_american_investors
+		}
+		
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+			add_political_power = 35
+			EUYL_add_1_civilian = yes
+		}
+	}
+
+	### Properly Adopt a Laissez-Faire Model ###
+	focus = {
+		id = PAR_properly_adopt_laissez_faire
+		icon = GFX_PAR_adopt_faire_model
+		x = -1
+		y = 2
+		relative_position_id = PAR_resource_extraction_effort
+		prerequisite = {
+			focus = PAR_resource_extraction_effort
+		}
+		prerequisite = {
+			focus = PAR_lift_market_restrictions
+		}
+		
+		cost = 10
+
+		available = {
+			has_civil_war = no
+			NOT = {
+				has_idea = PAR_stagnated_economy_1
+			}
+			NOT = {
+				has_idea = PAR_dissatisfied_population
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_civilian = yes
+			swap_ideas = {
+				remove_idea = PAR_laissez_faire_approach_1
+				add_idea = PAR_laissez_faire_approach_2
+			}
+		}
+	}
+
+	### Subsidize the Industry ###
+	focus = {
+		id = PAR_subsidize_the_industry
+		icon = GFX_goal_generic_construct_civ_factory
+		x = 0
+		y = 2
+		relative_position_id = PAR_kickstart_economy
+		prerequisite = {
+			focus = PAR_laissez_faire
+			focus = PAR_maintain_agrarian_dominance
+		}
+
+		cost = 10
+
+		ai_will_do = { factor = 5 }
+
+		available = {
+			has_idea = PAR_stagnated_economy_1
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			unlock_decision_category_tooltip = PAR_subsidizing_paraguayan_industry
+			custom_effect_tooltip = PAR_decisions_allow_subsidize_industry_tt
+		}
+	}
+
+	### Invest in Our Nation's Professors ###
+	focus = {
+		id = PAR_invest_in_our_nations_professors
+		icon = GFX_PAR_national_professors
+		x = -1
+		y = 1
+		relative_position_id = PAR_properly_adopt_laissez_faire
+		prerequisite = {
+			focus = PAR_properly_adopt_laissez_faire
+			focus = PAR_allow_foreign_investment
+		}
+		mutually_exclusive = {
+			focus = PAR_invite_foreign_professors
+		}
+
+		cost = 5
+
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+			add_ideas = PAR_national_professors
+		}
+	}
+
+	### Expand the Universities ;3 meow ###
+	focus = {
+		id = PAR_expand_universities
+		icon = GFX_focus_SWE_education_reform
+		x = 5
+		y = 1
+		relative_position_id = PAR_invest_in_our_nations_professors
+		prerequisite = {
+			focus = PAR_invite_foreign_professors
+			focus = PAR_invest_in_our_nations_professors
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	### Electrical Grid - AMBATUKAM ###
+	focus = {
+		id = PAR_electrical_grid
+		icon = GFX_PAR_power_grids
+		x = 0
+		y = 1
+		relative_position_id = PAR_expand_universities
+		prerequisite = {
+			focus = PAR_expand_universities
+		}
+
+		cost = 5
+
+		available = { has_civil_war = no }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			unlock_decision_tooltip = { 
+				decision = PAR_construct_a_power_grid_FROM
+				show_modifiers = yes 
+				show_effect_tooltip = yes 
+			}
+			custom_effect_tooltip = EUYL_decisions_will_be_available_in_economic_policy_tt
+		}
+	}
+
+	### Rocket Studies ###
+	focus = {
+		id = PAR_rocket_studies
+		icon = GFX_focus_rocketry
+		x = 1
+		y = 2
+		relative_position_id = PAR_expand_universities
+		prerequisite = {
+			focus = PAR_electrical_grid
+		}
+
+		cost = 10
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAR_every_starting_state_has_power_grid_tt
+				688 = { has_dynamic_modifier = { modifier = PAR_power_grid_present } }
+				301 = { has_dynamic_modifier = { modifier = PAR_power_grid_present } }
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			if = {
+                limit = {
+					NOT = {
+						has_tech = experimental_rockets
+					}
+                }
+				add_tech_bonus = {
+					name = PAR_rocket_studies
+					category = rocketry
+					uses = 2
+					bonus = 1
+				}
+			}
+			else = {
+				add_political_power = 100
+            }
+		}
+	}
+
+	### Invest in Nuclear Studies ###
+	focus = {
+		id = PAR_invest_in_nuclear_studies
+		icon = GFX_focus_research2
+		x = -1
+		y = 2
+		relative_position_id = PAR_expand_universities
+		prerequisite = {
+			focus = PAR_electrical_grid
+		}
+
+		available = {
+			num_of_factories > 29
+			custom_trigger_tooltip = {
+				tooltip = PAR_every_starting_state_has_power_grid_tt
+				688 = { has_dynamic_modifier = { modifier = PAR_power_grid_present } }
+				301 = { has_dynamic_modifier = { modifier = PAR_power_grid_present } }
+			}
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			if = {
+                limit = {
+					NOT = {
+						has_tech = atomic_research
+					}
+                }
+				add_tech_bonus = {
+					name = PAR_nuclear_studies
+					category = nuclear
+					uses = 2
+					bonus = 1
+				}
+			}
+			else = {
+				add_political_power = 100
+            }
+		}
+	}
+
+	### Harness Nuclear Energy ###
+	focus = {
+		id = PAR_harness_nuclear_energy
+		icon = GFX_focus_wonderweapons
+		x = 1
+		y = 1
+		relative_position_id = PAR_invest_in_nuclear_studies
+		prerequisite = {
+			focus = PAR_invest_in_nuclear_studies
+		}
+		prerequisite = {
+			focus = PAR_rocket_studies
+		}
+
+		cost = 10
+
+		available = {
+			date > 1941.1.1
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+            every_controlled_state = {
+				limit = { is_core_of = ROOT }
+				add_dynamic_modifier = { modifier = PAR_advanced_reactor_technology days = 1080 }
+			}
+		}
+	}
+
+	### Push Agrarian Reforms ###
+	focus = {
+		id = PAR_push_agrarian_reforms
+		icon = GFX_focus_generic_land_reclamation
+		x = 1
+		y = 1
+		relative_position_id = PAR_maintain_agrarian_dominance
+		prerequisite = {
+			focus = PAR_maintain_agrarian_dominance
+		}
+
+		cost = 6
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_timed_idea = {
+				idea = PAR_agrarian_reforms
+				days = 365
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+
+	### Industrial Build-Up ###
+	focus = {
+		id = PAR_industrial_buildup
+		icon = GFX_focus_generic_industry_3
+		x = 1
+		y = 1
+		relative_position_id = PAR_subsidize_the_industry
+		prerequisite = {
+			focus = PAR_subsidize_the_industry
+		}
+
+		available = {
+			NOT = {
+				has_idea = PAR_stagnated_economy_1
+			}
+		}
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			EUYL_add_1_civilian = yes
+		}
+	}
+
+	### Develop Western Paraguay ###
+	focus = {
+		id = PAR_develop_western_paraguay
+		icon = GFX_PAR_develop_west
+		x = 0
+		y = 1
+		relative_position_id = PAR_industrial_buildup
+		prerequisite = {
+			focus = PAR_industrial_buildup
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			every_core_state = {
+				limit = {
+					state = 688
+					is_fully_controlled_by = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+                    type = industrial_complex
+                    level = 1
+                    instant_build = yes
+                }
+				add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+			}
+		}
+	}
+
+	### Develop the Capital ###
+	focus = {
+		id = PAR_develop_capital
+		icon = GFX_goal_generic_construct_civilian
+		x = 0
+		y = 1
+		relative_position_id = PAR_develop_western_paraguay
+		prerequisite = {
+			focus = PAR_develop_western_paraguay
+		}
+		mutually_exclusive = {
+			focus = PAR_heavy_military_investments
+		}
+
+		cost = 10
+
+		available = {
+			capital_scope = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+			capital_scope = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes 
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes 
+				}
+				add_dynamic_modifier = {
+					modifier = PAR_capital_investments
+				}
+			}
+			random_owned_controlled_state = {
+				limit = { is_core_of = ROOT }
+				ROOT = {
+					build_railway = {
+						level = 3
+						start_state = PREV 
+						target_state = THIS.capital
+					}
+				}
+			}
+		}
+	}
+
+	### Commence Paraguayan Mobilization ###
+	focus = {
+		id = PAR_commence_paraguayan_mobilization
+		icon = GFX_BRA_generic_military
+		x = -1
+		y = 1
+		relative_position_id = PAR_subsidize_the_industry
+		prerequisite = {
+			focus = PAR_subsidize_the_industry
+		}
+
+		available = {
+			threat > 0.05
+			NOT = {
+				has_idea = PAR_stagnated_economy_1
+			}
+		}
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_1_military = yes
+			add_manpower = 12500
+			add_timed_idea = {
+                idea = ARG_early_mobilization
+                days = 365
+            }
+		}
+	}
+
+	### Increased Military Production ###
+	focus = {
+		id = PAR_increased_military_production
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 0
+		y = 1
+		relative_position_id = PAR_commence_paraguayan_mobilization
+		prerequisite = {
+			focus = PAR_commence_paraguayan_mobilization
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_military = yes
+		}
+	}
+
+	### Heavy Military Investments ###
+	focus = {
+		id = PAR_heavy_military_investments
+		icon = GFX_focus_generic_combined_arms
+		x = 0
+		y = 1
+		relative_position_id = PAR_increased_military_production
+		prerequisite = {
+			focus = PAR_increased_military_production
+		}
+		mutually_exclusive = {
+			focus = PAR_develop_capital
+		}
+
+		cost = 10
+
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+			add_dynamic_modifier = {
+				modifier = PAR_paraguayan_military_production 
+			}
+			unlock_decision_tooltip = PAR_invest_in_our_military
+			custom_effect_tooltip = PAR_after_3_times_tt
+		}
+	}
+
+	### Open Our Markets ###
+	focus = {
+		id = PAR_open_our_markets
+		icon = GFX_goal_generic_trade
+		x = 1
+		y = 1
+		relative_position_id = PAR_push_agrarian_reforms
+		prerequisite = {
+			focus = PAR_push_agrarian_reforms
+		}
+
+		cost = 6
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			if = {
+                limit = { NOT = { has_idea = free_trade } }
+                add_ideas = free_trade
+            }
+            else = {
+                add_political_power = 150
+            }
+		}
+	}
+
+	### Industrial Agriculture ###
+	focus = {
+        id = PAR_industrial_agriculture
+        icon = GFX_URG_industrialized_agriculture
+        x = -1
+        y = 1
+        relative_position_id = PAR_push_agrarian_reforms
+        prerequisite = {
+            focus = PAR_push_agrarian_reforms
+        }
+		
+		cost = 8
+
+        search_filters = { FOCUS_FILTER_INDUSTRY }
+        completion_reward = {
+            add_political_power = 50
+            EUYL_add_1_civilian = yes 
+        }
+    }
+
+	### Allow Foreign Investment ###
+	focus = {
+        id = PAR_allow_foreign_investment
+        icon = GFX_goal_generic_intelligence_exchange
+        x = -1
+        y = 2
+        relative_position_id = PAR_open_our_markets
+        prerequisite = { focus = PAR_open_our_markets }
+        prerequisite = { focus = PAR_industrial_agriculture }
+
+        cost = 10
+
+        available = {
+			NOT = {
+				has_idea = PAR_stagnated_economy_1
+			}
+			has_idea = free_trade
+            any_neighbor_country = {
+                NOT = {
+                    has_war_with = ROOT 
+                }
+            }
+        }
+
+        
+        
+        
+
+        search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY }
+        completion_reward = {
+            custom_effect_tooltip = BOL_every_neighbor
+            hidden_effect = {
+                every_neighbor_country = {
+                    limit = {
+                        has_opinion = {
+                            target = ROOT
+                            value > 49
+                        }
+						NOT = { has_war_with = ROOT }
+                    }
+                    ROOT = {
+                        EUYL_add_1_civilian = yes 
+                    }
+                }
+            }
+        }
+    }
+
+	### Invite Foreign Professors ###
+	focus = {
+		id = PAR_invite_foreign_professors
+		icon = GFX_PAR_foreign_professors
+		x = 1
+		y = 1
+		relative_position_id = PAR_allow_foreign_investment
+		prerequisite = {
+			focus = PAR_properly_adopt_laissez_faire
+			focus = PAR_allow_foreign_investment
+		}
+		mutually_exclusive = {
+			focus = PAR_invest_in_our_nations_professors
+		}
+
+		cost = 5
+
+		search_filters = {
+			FOCUS_FILTER_RESEARCH
+		}
+		completion_reward = {
+			add_ideas = PAR_foreign_professors
+		}
+	}
+
+	################ POLITICAL TREE #######################
+
+	##### DEM ROUTE ####
+	### FEB REV - Oppose Feb Rev ###
+	focus = {
+		id = PAR_fight_for_our_freedom
+		icon = GFX_PAR_fight_freedom
+		x = 18
+		y = 0
+		
+		mutually_exclusive = {
+			focus = PAR_support_the_revolution
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_global_flag = PAR_chose_native_path_flag
+				}
+				NOT = { has_global_flag = PAR_chose_native_path_flag }
+			}
+		}
+
+		cost = 1
+
+		ai_will_do = { 
+			factor = 5
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes 
+			}
+		}
+
+		available = {
+			has_active_mission = PAR_the_february_revolution
+			exists = yes 
+			has_civil_war = no 
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			add_political_power = 50
+			PAR_move_10_leader = yes
+			add_days_mission_timeout = {
+				mission = PAR_the_february_revolution
+				days = 25
+			}
+			custom_effect_tooltip = PAR_unlock_revolution_decisions_tt
+		}
+	}
+
+	### Disband the Army ###
+	focus = {
+		id = PAR_disband_the_army
+		icon = GFX_goal_generic_forceful_treaty
+		x = 1
+		y = 1
+		relative_position_id = PAR_fight_for_our_freedom
+		prerequisite = {
+			focus = PAR_fight_for_our_freedom
+		}
+
+		cost = 2
+
+		ai_will_do = { factor = 10 }
+
+		available = {
+			has_active_mission = PAR_the_february_revolution
+			exists = yes 
+			has_civil_war = no 
+		}
+		bypass = {
+			has_completed_focus = PAR_fight_for_our_freedom
+			NOT = {
+				has_active_mission = PAR_the_february_revolution
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			PAR_move_5_leader = yes
+			add_political_power = 10
+			add_stability = -0.05
+			add_timed_idea = {
+				idea = ARG_disbanded_the_army
+				days = 560
+			}
+		}
+	}
+
+	### Limit Rafael Franco's Power owo ###
+	focus = {
+		id = PAR_limit_francos_power
+		icon = GFX_PAR_limit_franco
+		x = -1
+		y = 1
+		relative_position_id = PAR_fight_for_our_freedom
+		prerequisite = {
+			focus = PAR_fight_for_our_freedom
+		}
+
+		cost = 3
+
+		ai_will_do = { factor = 10 }
+
+		available = {
+			has_active_mission = PAR_the_february_revolution
+			exists = yes 
+			has_civil_war = no 
+		}
+		bypass = {
+			has_completed_focus = PAR_fight_for_our_freedom
+			NOT = {
+				has_active_mission = PAR_the_february_revolution
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			add_popularity = {
+				ideology = communism
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+			unlock_decision_tooltip = PAR_slander_franco
+			random_list = {
+				35 = {
+					PAR_move_5_leader = yes
+				}
+				50 = {
+					PAR_move_10_leader = yes
+				}
+			}
+		}
+	}
+
+	### Rally the People ###
+	focus = {
+		id = PAR_rally_the_people
+		icon = GFX_PAR_rally_people
+		x = -1
+		y = 1
+		relative_position_id = PAR_disband_the_army
+		prerequisite = {
+			focus = PAR_disband_the_army
+		}
+		prerequisite = {
+			focus = PAR_limit_francos_power
+		}
+		
+		cost = 5
+
+		ai_will_do = { factor = 10 }
+
+		available = {
+			has_active_mission = PAR_the_february_revolution
+			exists = yes 
+			has_civil_war = no
+		}
+		bypass = {
+			has_completed_focus = PAR_fight_for_our_freedom
+			NOT = {
+				has_active_mission = PAR_the_february_revolution
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			add_political_power = 10
+			PAR_move_5_leader = yes
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+			custom_effect_tooltip = PAR_lower_cost_to_support_leader_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					PAR_slight_support_cost = 5
+				}
+				subtract_from_variable = {
+					PAR_major_support_cost = 10
+				}
+			}
+		}
+	}
+
+	### Restructure the Country - meooooow ###
+	focus = {
+		id = PAR_restructure_the_country
+		icon = GFX_PAR_paraguay_flag_2
+		x = 0
+		y = 1
+		relative_position_id = PAR_rally_the_people
+		prerequisite = {
+			focus = PAR_rally_the_people
+		}
+		
+		cost = 10
+
+		available = {
+			NOT = {
+				has_active_mission = PAR_the_february_revolution
+			}
+			has_government = democratic
+			exists = yes 
+			has_civil_war = no
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.1
+		}
+	}
+
+	### Hold National Elections ###
+	focus = {
+		id = PAR_hold_national_elections
+		icon = GFX_PAR_hold_elections
+		x = 0
+		y = 1
+		relative_position_id = PAR_restructure_the_country
+		prerequisite = {
+			focus = PAR_restructure_the_country
+		}
+		
+		cost = 10
+
+		available = {
+			has_government = democratic
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			country_event = paraguay.4
+		}
+	}
+
+	focus = {
+		id = PAR_expand_national_education
+		icon = GFX_focus_generic_university_1
+		x = 1
+		y = 1
+		relative_position_id = PAR_hold_national_elections
+		prerequisite = { focus = PAR_hold_national_elections }
+
+		cost = 10
+
+		available = {
+			NOT = { has_idea = PAR_political_instability }
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	### Open Our Foreign Policy - Nyaaaaah ###
+	focus = {
+		id = PAR_open_our_foreign_policy
+		icon = GFX_ARG_open_our_borders
+		x = 0
+		y = 2
+		relative_position_id = PAR_hold_national_elections
+		prerequisite = {
+			focus = PAR_hold_national_elections
+		}
+		
+		cost = 5
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_political_power = 25
+			add_manpower = 21500
+		}
+	}
+
+	### Purchase Formosa ###
+	focus = {
+		id = PAR_purchase_formosa
+		icon = GFX_PAR_purchase_formosa
+		x = 0
+		y = 2
+		relative_position_id = PAR_open_our_foreign_policy
+		prerequisite = {
+			focus = PAR_join_the_allies_euyl
+			focus = PAR_go_our_own_way
+		}
+		
+		available = {
+			any_other_country = {
+				has_full_control_of_state = 957
+			}
+			has_army_manpower = {
+				size > 70000
+			}
+			num_of_factories > 20
+		}
+
+		bypass = {
+			has_full_control_of_state = 957
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			random_other_country = {
+				limit = {
+					controls_state = 957
+				}
+				country_event = {
+					id = paraguay.5
+					days = 1
+				}
+			}
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				transfer_state = 957
+				random_owned_controlled_state = {
+					limit = { industrial_complex > 1 }
+					remove_building = {
+						type = industrial_complex
+						level = 2
+					}
+				}
+			}
+		}
+	}
+
+	### Military Investments ###
+	focus = {
+		id = PAR_military_investments 
+		icon = GFX_focus_generic_tank_production
+		x = -1
+		y = 1
+		relative_position_id = PAR_purchase_formosa
+		prerequisite = { focus = PAR_purchase_formosa }
+
+		cost = 10
+
+		available = {
+			threat > 0.1
+			NOT = { has_idea = PAR_stagnated_economy_1 }
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_war_support = 0.05
+			EUYL_add_2_military = yes 
+		}
+	}
+
+	### Formosan Development ###
+	focus = {
+		id = PAR_formosan_development
+		icon = GFX_goal_generic_construction2
+		x = 1
+		y = 1
+		relative_position_id = PAR_purchase_formosa
+		prerequisite = { focus = PAR_purchase_formosa }
+
+		cost = 10
+
+		available =	{ 
+			NOT = { has_idea = PAR_stagnated_economy_1 }
+			has_full_control_of_state = 957
+			NOT = { has_war_with = ARG }
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			add_state_core = 957
+			957 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes 
+				}
+				add_building_construction = {
+					type = Infrastructure
+					level = 1
+					instant_build = yes 
+				}
+			}
+			build_railway = {
+				level = 1
+				start_state = 957
+				target_state = ROOT.capital
+			}
+		}
+	}
+
+	### Expand Conscription ###
+	focus = {
+		id = PAR_expand_conscription
+		icon = GFX_ARG_quantity
+		x= 0
+		y = 2
+		relative_position_id = PAR_purchase_formosa
+		prerequisite = {
+			focus = PAR_purchase_formosa
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_ideas = URG_expanded_consription
+		}
+	}
+
+	### Join the Allies ###
+	focus = {
+		id = PAR_join_the_allies_euyl
+		icon = GFX_focus_chi_british_cooperation
+		x = 5
+		y = 1
+		relative_position_id = PAR_open_our_foreign_policy
+		prerequisite = {
+			focus = PAR_open_our_foreign_policy
+		}
+		mutually_exclusive = {
+			focus = PAR_go_our_own_way
+		}
+		
+		cost = 5
+
+		available = { NOT = { has_idea = PAR_political_instability } }
+
+		available = {
+			is_in_faction = no
+			is_subject = no
+			has_civil_war = no
+			OR = {
+				ENG = {
+					NOT = {
+						has_war_with = ROOT
+						has_government = communism
+					}
+					is_faction_leader = yes
+				}
+				FRA = {
+					NOT = {
+						has_war_with = ROOT
+					}
+					has_government = democratic
+					is_faction_leader = yes
+				}
+				USA = {
+					NOT = {
+						has_war_with = ROOT
+					}
+					has_government = democratic
+					is_faction_leader = yes
+				}
+			}
+		}
+		bypass = {
+			OR = {
+				is_in_faction_with = ENG
+				is_in_faction_with = FRA
+				is_in_faction_with = USA
+			}
+		}
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			if = {
+				limit = { has_idea = USA_monroe_doctrine_idea }
+				remove_ideas = USA_monroe_doctrine_idea
+			}
+			if = {
+				limit = {
+					ENG = {
+						NOT = {
+							has_war_with = ROOT
+							has_government = communism
+						}
+						is_faction_leader = yes
+					}
+				}
+				ENG = {
+					country_event = generic.2
+				}
+			}
+			else_if = {
+				limit = {
+					FRA = {
+						NOT = {
+							has_war_with = ROOT
+							has_government = communism
+						}
+						is_faction_leader = yes
+					}
+				}
+				FRA = {
+					country_event = generic.2
+				}
+			}
+			else_if = {
+				limit = {
+					USA = {
+						NOT = {
+							has_war_with = ROOT
+							has_government = communism
+						}
+						is_faction_leader = yes
+					}
+				}
+				USA = {
+					country_event = generic.2
+				}
+			}
+		}
+	}
+
+	### Get British Weapons ###
+	focus = {
+		id = PAR_import_british_weaponry
+		icon = GFX_BOL_purchase_british_armaments
+		x = 0
+		y = 1
+		relative_position_id = PAR_join_the_allies_euyl
+		prerequisite = {
+			focus = PAR_join_the_allies_euyl
+		}
+
+		cost = 10
+
+		available = {
+			exists = yes
+			ENG = {
+				exists = yes #unfortunately
+				is_in_faction_with = ROOT
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_equipment_to_stockpile = {
+                type = infantry_equipment
+                amount = 1079
+                producer = ENG 
+            }
+            add_equipment_to_stockpile = {
+                type = artillery_equipment
+                amount = 250
+                producer = ENG 
+            }
+            add_equipment_to_stockpile = {
+                type = support_equipment
+                amount = 250
+                producer = ENG 
+            }
+		}
+	}
+
+	### Strengthen Ties with Daddy USA ###
+	focus = {
+		id = PAR_strengthen_ties_with_us
+		icon = GFX_focus_generic_befriend_usa
+		x = -1
+		y = 1
+		relative_position_id = PAR_import_british_weaponry
+		prerequisite = {
+			focus = PAR_import_british_weaponry
+			focus = PAR_study_the_british_navy
+		}
+
+		cost = 5
+
+		bypass = {
+			USA = {
+				OR = {
+					has_war_with = ROOT
+					NOT = { has_government = democratic }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			USA = {
+                add_opinion_modifier = {
+					modifier = strengthened_ties
+					target = ROOT
+				}
+            }
+            add_opinion_modifier = {
+				modifier = strengthened_ties
+				target = USA
+			}
+		}
+	}
+
+	### Study the British Navy ###
+	focus = {
+		id = PAR_study_the_british_navy
+		icon = GFX_british_navy
+		x = -2
+		y = 1
+		relative_position_id = PAR_join_the_allies_euyl
+		prerequisite = {
+			focus = PAR_join_the_allies_euyl
+		}
+
+		cost = 10
+
+		available = {
+			exists = yes
+			any_controlled_state = {
+				is_coastal = yes
+			}
+			ENG = {
+				exists = yes #unfortunately
+				is_in_faction_with = ROOT
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			navy_experience = 30
+            add_tech_bonus = {
+                name = URG_study_the_british_navy
+                bonus = 1.0
+                uses = 1
+                category = naval_doctrine
+            }
+            EUYL_add_2_dockyard = yes
+		}
+	}
+
+	### Aid in the European Front ###
+	focus = {
+		id = PAR_aid_in_european_front
+		icon = GFX_focus_secret_rearmament
+		x = 1
+		y = 1
+		relative_position_id = PAR_import_british_weaponry
+		prerequisite = {
+			focus = PAR_import_british_weaponry
+		}
+
+		cost = 10
+
+		available = {
+			OR = {
+				is_in_faction_with = ENG
+				is_in_faction_with = USA
+				is_in_faction_with = FRA
+			}
+			OR = {
+				has_war_with = ITA
+				has_war_with = GER
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH FOCUS_FILTER_ARMY_XP }
+		completion_reward = {
+			EUYL_add_1_military = yes
+			army_experience = 50
+			add_tech_bonus = {
+                name = ARG_help_out_in_dday
+                bonus = 1.0
+                uses = 1
+                technology = marines
+                technology = marines2
+            }
+            add_tech_bonus = {
+                name = ARG_help_out_in_dday
+                bonus = 1.0
+                uses = 1
+                category = tp_tech 
+            }
+			add_tech_bonus = {
+                name = ARG_help_out_in_operation_avalanche
+                bonus = 1.0
+                uses = 1
+                category = mountaineers_tech
+            }
+		}
+	}
+
+	### Go Our Own Way ###
+	focus = {
+		id = PAR_go_our_own_way
+		icon = GFX_PAR_our_own_way
+		x = -5
+		y = 1
+		relative_position_id = PAR_open_our_foreign_policy
+		prerequisite = {
+			focus = PAR_open_our_foreign_policy
+		}
+		mutually_exclusive = {
+			focus = PAR_join_the_allies_euyl
+		}
+		
+		cost = 5
+
+		available = { NOT = { has_idea = PAR_political_instability } }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_rule = { can_create_factions = yes }
+		}
+	}
+
+	### Work on South American Relations ###
+	focus = {
+		id = PAR_work_on_south_american_relations
+		icon = GFX_PRU_ally_with_south_america
+		x = 0
+		y = 1
+		relative_position_id = PAR_go_our_own_way
+		prerequisite = {
+			focus = PAR_go_our_own_way
+		}
+
+		cost = 6
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			every_other_country = {
+                limit = {
+                    capital_scope = { is_on_continent = south_america }
+                    NOT = {
+                        has_war_with = ROOT 
+                    }
+                }
+                add_opinion_modifier = { modifier = BOL_chose_path_of_diplomacy target = ROOT }
+                ROOT = {
+                    add_opinion_modifier = { modifier = BOL_chose_path_of_diplomacy target = PREV }
+                }
+            }
+		}
+	}
+
+	### Make Amends with Former Rivals ###
+	focus = {
+		id = PAR_make_amends
+		icon = GFX_goal_generic_improve_relations
+		x = -1
+		y = 1
+		relative_position_id = PAR_work_on_south_american_relations
+		prerequisite = {
+			focus = PAR_work_on_south_american_relations
+		}
+
+		cost = 8
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_political_power = 25
+			every_other_country = {
+				limit = {
+					OR = {
+						original_tag = BRA 
+						original_tag = URG 
+						original_tag = ARG 
+						original_tag = BOL 
+					}
+					NOT = { has_war_with = ROOT }
+				}
+				add_opinion_modifier = { modifier = PAR_amends target = ROOT }
+                ROOT = {
+                    add_opinion_modifier = { modifier = PAR_amends target = PREV }
+                }
+			}
+		}
+	}
+
+	### Invite South America ###
+	focus = {
+		id = PAR_invite_south_america
+		icon = GFX_focus_SA_demo
+		x = 1
+		y = 1
+		relative_position_id = PAR_work_on_south_american_relations
+		prerequisite = {
+			focus = PAR_work_on_south_american_relations
+		}
+
+		cost = 10
+		
+		available = {
+			is_faction_leader = yes 
+		}
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+		}
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					capital_scope = { is_on_continent = south_america }
+					NOT = {
+						has_war_with = ROOT 
+					}
+					is_in_faction = no 
+					OR = {
+						has_government = democratic 
+						has_government = neutrality
+					}
+				}
+				country_event = { id = generic.5 hours = 6 }
+			}
+		}
+	}
+
+	### Economic Cooperation with Our Allies ###
+	focus = {
+		id = PAR_economic_coop_with_allies
+		icon = GFX_URG_privatize_industry
+		x = -1
+		y = 1
+		relative_position_id = PAR_invite_south_america
+		prerequisite = {
+			focus = PAR_invite_south_america
+			focus = PAR_make_amends
+		}
+
+		cost = 10
+
+		available = { is_in_faction = yes }
+
+		search_filters = {
+			FOCUS_FILTER_INDUSTRY
+		}
+		completion_reward = {
+			every_other_country = {
+				limit = { is_in_faction_with = ROOT }
+				EUYL_add_1_civilian = yes 
+				EUYL_add_1_military = yes 
+			}
+			EUYL_add_1_civilian = yes 
+			EUYL_add_1_military = yes 
+		}
+	}
+
+	### Expand On Native Rights ###
+	focus = {
+		id = PAR_expand_on_native_rights
+		icon = GFX_PAR_native_rights
+		x = 3
+		y = 2
+		relative_position_id = PAR_hold_national_elections
+		prerequisite = {
+			focus = PAR_hold_national_elections
+			focus = PAR_create_new_ministries
+		}
+		
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				has_game_rule = {
+					rule = PAR_ai_behavior 
+					option = PAR_NATIVE
+				}
+			}
+		}
+
+		available = {
+			NOT = { has_idea = PAR_political_instability }
+			if = {
+				limit = { has_completed_focus = PAR_go_with_franco }
+				NOT = {
+					OR = {
+						has_idea = PAR_agitated_right_wing_revs
+						has_idea = PAR_liberal_remnants_idea
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_stability = 0.05
+			add_ideas = {
+				PAR_expanded_native_rights
+			}
+			if = {
+				limit = { has_completed_focus = PAR_utilize_our_indigenous_knowledge }
+				custom_effect_tooltip = PAR_easter_egg_tooltip_tt
+			}
+		}
+	}
+
+	########## GUARANI ANARCHIST ROUTE kek ##########
+	
+	### Rally the Native People ###
+	focus = {
+		id = PAR_rally_the_native_people
+		icon = GFX_GENERIC_people_uprising 
+		x = 18
+		y = 0
+		
+		allow_branch = {
+			has_global_flag = PAR_chose_native_path_flag
+		}
+
+		cost = 2
+
+		ai_will_do = { factor = 20 }
+
+		available = { has_active_mission = PAR_impending_native_uprising }
+
+		bypass = {
+			has_civil_war = yes 
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_political_power = 50
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.1
+			}
+		}
+	}
+
+	### take up arms 
+	focus = {
+		id = PAR_take_up_arms
+		icon = GFX_goal_generic_small_arms
+		x = -1
+		y = 1
+		relative_position_id = PAR_rally_the_native_people
+		prerequisite = { focus = PAR_rally_the_native_people }
+
+		cost = 5
+
+		ai_will_do = { factor = 10 }
+
+		available = { has_active_mission = PAR_impending_native_uprising }
+
+		bypass = { has_civil_war = yes }
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			unlock_decision_tooltip = PAR_arm_up_the_natives_in_FROM
+		}
+	}
+
+	### Convince the Experienced Soldiers ###
+	focus = {
+		id = PAR_convince_the_experienced_soldiers
+		icon = GFX_BOL_side_with_the_military
+		x = -1
+		y = 1
+		relative_position_id = PAR_take_up_arms
+		prerequisite = { 
+			focus = PAR_take_up_arms 
+			focus = PAR_seize_national_stockpiles
+		}
+
+		cost = 10
+
+		ai_will_do = { factor = 10 }
+
+		available = { has_active_mission = PAR_impending_native_uprising }
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			custom_effect_tooltip = EUYL_start_of_civil_war_gain_following_tt
+			effect_tooltip = {
+				random_controlled_state = {
+					limit = { has_state_flag = PAR_native_controlled_flag }
+					create_unit = {
+						division = "name = \"División de Infanteria Nativa\" division_template = \"División de Infanteria\" start_experience_factor = 0.1 start_equipment_factor = 0.85" 
+						owner = ROOT
+						count = 2 
+					}
+				}
+			}
+			EUYL_PAR_higinio_morinigo = { custom_effect_tooltip = ARG_become_loyal_to_communist_tt }
+			PAR_luis_irrazabal = { custom_effect_tooltip = ARG_become_loyal_to_communist_tt }
+		}
+	}
+
+	### Seize National Stockpiles 
+	focus = {
+		id = PAR_seize_national_stockpiles
+		icon = GFX_focus_ETH_freedom_at_gunpoint
+		x = 1
+		y = 1
+		relative_position_id = PAR_rally_the_native_people
+		prerequisite = { focus = PAR_rally_the_native_people }
+
+		cost = 5
+
+		ai_will_do = { factor = 10 }
+
+		available = { has_active_mission = PAR_impending_native_uprising }
+
+		bypass = { has_civil_war = yes }
+		
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			unlock_decision_tooltip = {
+				decision = PAR_steal_national_stockpiles_from_FROM
+				show_effect_tooltip = yes 
+			}
+		}
+	}
+
+	### Seize Local Factories ###
+	focus = {
+		id = PAR_seize_local_factories
+		icon = GFX_col_focus_propiedad_social
+		x = 1
+		y = 1
+		relative_position_id = PAR_seize_national_stockpiles
+		prerequisite = { 
+			focus = PAR_seize_national_stockpiles 
+			focus = PAR_take_up_arms
+		}
+
+		cost = 10
+
+		ai_will_do = { factor = 10 }
+
+		available = { has_active_mission = PAR_impending_native_uprising }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = EUYL_start_of_civil_war_gain_following_tt
+			effect_tooltip = {
+				random_controlled_state = {
+					limit = { has_state_flag = PAR_native_controlled_flag }
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes 
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes 
+					}
+				}
+			}
+		}
+	}
+
+	### Seize Control of the Government ###
+	focus = {
+		id = PAR_seize_control_of_the_government
+		icon = GFX_ARG_political_assasination
+		x = -1
+		y = 2
+		relative_position_id = PAR_seize_national_stockpiles
+		prerequisite = { 
+			focus = PAR_seize_national_stockpiles
+			focus = PAR_take_up_arms
+		}
+
+		cost = 7.2
+
+		ai_will_do = { factor = 3 }
+
+		available = {
+			OR = {
+				has_active_mission = PAR_impending_native_uprising
+				has_country_leader = {
+					character = PAR_juan_belaieff
+					ruling_only = yes 
+				}
+			}
+		}
+
+		select_effect = {
+			add_ideas = PAR_expansionist_path
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			if = {
+				limit = { has_active_mission = PAR_impending_native_uprising }
+				custom_effect_tooltip = PAR_uprising_will_get_triggered_tt
+				add_political_power = 35
+				hidden_effect = {
+					add_days_mission_timeout = {
+						mission = PAR_impending_native_uprising
+						days = -100
+					}
+				}
+			}
+			else = { add_political_power = 50 }
+		}
+	}
+
+	### Native Solidarity ###
+	focus = {
+		id = PAR_native_solidarity
+		icon = GFX_PAR_native_solidarity_icon
+		x = 0
+		y = 1
+		relative_position_id = PAR_seize_control_of_the_government
+		prerequisite = { focus = PAR_seize_control_of_the_government }
+
+		cost = 10
+
+		ai_will_do = { factor = 10 }
+
+		available = { has_civil_war = no }
+
+		select_effect = {
+			every_other_country = {
+				limit = { 
+					any_controlled_state = {
+						is_core_of = ROOT
+					}
+				}
+				ROOT = {
+					add_ai_strategy = {
+						type = prepare_for_war
+						id = PREV
+						value = 70
+					}
+				}
+			}
+		}
+
+		### Unlocks the Native Solidarity decision category ###
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			unlock_decision_category_tooltip = PAR_native_solidarity_cat
+			swap_ideas = {
+				remove_idea = PAR_the_native_struggle_1
+				add_idea = PAR_the_native_struggle_2
+			}
+			custom_effect_tooltip = PAR_monthly_natives_cooperate_tt
+			custom_effect_tooltip = PAR_gain_core_on_every_state_with_natives_tt
+			every_state = {
+				limit = {
+					NOT = { is_core_of = ROOT }
+					OR = {
+						has_dynamic_modifier = { modifier = EUYL_native_population }
+						has_dynamic_modifier = { modifier = EUYL_agitated_natives }
+						has_dynamic_modifier = { modifier = EUYL_cooperating_natives }
+					}
+				}
+				if = { limit = { is_claimed_by = ROOT } remove_claim_by = ROOT }
+				add_core_of = ROOT
+			}
+			hidden_effect = {
+				every_other_country = {
+					limit = { capital_scope = { is_on_continent = south_america } }
+					set_variable = { PAR_num_guns_to_natives = 0 }
+				}
+			}
+		}
+	}
+
+	### Mobilize the Economy ###
+	focus = {
+		id = PAR_mobilize_the_economy
+		icon = GFX_focus_generic_tank_production
+		x = -3
+		y = 1
+		relative_position_id = PAR_native_solidarity
+		prerequisite = { focus = PAR_native_solidarity }
+
+		cost = 7.2
+
+		ai_will_do = { factor = 2 }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							has_idea = war_economy
+							has_idea = tot_economic_mobilisation
+						}
+					}
+				}
+				add_ideas = war_economy
+			}
+			else = { EUYL_add_2_military = yes }
+		}
+	}
+
+	### Native Intellects ###
+	focus = {
+		id = PAR_native_intellects
+		icon = GFX_goal_generic_scientific_exchange
+		x = -1
+		y = 1
+		relative_position_id = PAR_mobilize_the_economy
+		prerequisite = { focus = PAR_mobilize_the_economy }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = { add_research_slot = 1 }
+	}
+
+	### Native Industry ###
+	focus = {
+		id = PAR_native_industry
+		icon = GFX_PAR_native_industry_pic
+		x = 1
+		y = 1
+		relative_position_id = PAR_mobilize_the_economy
+		prerequisite = { focus = PAR_mobilize_the_economy }
+
+		cost = 10
+
+		ai_will_do = { factor = 3 }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_civilian = yes 
+			EUYL_add_2_military = yes 
+		}
+	}
+
+	### Inherit a Foreign Industry ### 
+	focus = {
+		id = PAR_inherit_a_foreign_industry
+		icon = GFX_col_focus_ingenieria
+		x = -1
+		y = 3
+		relative_position_id = PAR_native_industry
+		prerequisite = { 
+			focus = PAR_native_intellects
+			focus = PAR_native_industry
+		}
+		prerequisite = { focus = PAR_our_expansion_begins }
+
+		cost = 10
+
+		available = {
+			num_of_controlled_states > 9
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = ARG_depends_on_num_of_controlled_states_tt
+			if = {
+				limit = { num_of_controlled_states > 34 }
+				EUYL_add_4_military = yes 
+			}
+			else_if = {
+				limit = { num_of_controlled_states > 16 }
+				EUYL_add_2_military = yes 
+				EUYL_add_1_military = yes 
+			}
+			else = {
+				EUYL_add_2_military = yes 
+			}
+		}
+	}
+
+	### The Call from our Brothers ###
+	# Give claims on every state that has the native population dynamic modifier #
+	# unlocks decisions that allow to intensify resistance in these states #
+	focus = {
+		id = PAR_the_call_from_our_brothers
+		icon = GFX_focus_r56_goal_generic_uprising
+		x = 3
+		y = 1
+		relative_position_id = PAR_native_solidarity
+		prerequisite = { focus = PAR_native_solidarity }
+
+		cost = 5
+
+		ai_will_do = { factor = 2 }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = PAR_unlock_intensify_FROM_tt
+		}
+	}
+
+	### Native Conscription ###
+	focus = {
+		id = PAR_native_conscription
+		icon = GFX_ARG_quantity
+		x = 1
+		y = 1
+		relative_position_id = PAR_native_solidarity
+		prerequisite = { focus = PAR_native_solidarity }
+
+		cost = 10
+
+		ai_will_do = { factor = 3 }
+
+		available = {
+			any_controlled_state = {
+				has_dynamic_modifier = { modifier = EUYL_cooperating_natives }
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			unlock_decision_tooltip = {
+				decision = PAR_conscript_the_natives_in_FROM
+				show_effect_tooltip = yes 
+			}
+		}
+	}
+
+	### Our Brothers in Arms ###
+	focus = {
+		id = PAR_our_brothers_in_arms
+		icon = GFX_goal_generic_occupy_states_ongoing_war
+		x = -1
+		y = 1
+		relative_position_id = PAR_the_call_from_our_brothers
+		prerequisite = {
+			focus = PAR_the_call_from_our_brothers
+			focus = PAR_native_conscription
+		}
+
+		cost = 10
+
+		ai_will_do = { factor = 2 }
+
+		available = { 
+			has_equipment = { infantry_equipment > 499 }
+			has_army_manpower = { size > 74999 }
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = PAR_unlock_arm_up_decisions_tt
+		}
+	}
+
+	### United Under One Banner ### 
+	focus = {
+		id = PAR_united_under_one_banner
+		icon = GFX_PAR_united_under_one_banner_icon
+		x = 0
+		y = 1
+		relative_position_id = PAR_our_brothers_in_arms
+		prerequisite = { focus = PAR_our_brothers_in_arms }
+
+		cost = 10
+
+		ai_will_do = { factor = 2 }
+
+		available = { has_army_manpower = { size > 99999 } }
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = PAR_unlock_native_uprising_decisions_tt
+		}
+	}
+
+	## Our Expansion Begins ##
+	focus = {
+		id = PAR_our_expansion_begins
+		icon = GFX_PAR_demand_lands
+		x = -2
+		y = 1
+		relative_position_id = PAR_united_under_one_banner
+		prerequisite = { focus = PAR_native_solidarity }
+
+		cost = 5
+
+		ai_will_do = { factor = 2 }
+
+		available = { has_army_manpower = { size > 139999 } }
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_war_support = 0.05
+		}
+	}
+
+	## Liberate the Bolivian Natives ##
+	focus = {
+		id = PAR_liberate_the_bolivian_natives
+		icon = GFX_focus_BOL_attack
+		x = 0
+		y = 1
+		relative_position_id = PAR_our_expansion_begins
+		prerequisite = { focus = PAR_our_expansion_begins }
+		will_lead_to_war_with = BOL 
+
+		cost = 7.2
+
+		ai_will_do = { factor = 2 }
+
+		available = {
+			NOT = { is_in_faction_with = PAR }
+		}
+
+		bypass = {
+			PAR = {
+				OR = {
+					has_war_with = ROOT 
+					is_subject_of = ROOT 
+					capital_scope = { is_fully_controlled_by = ROOT }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			set_rule = { can_create_factions = yes }
+			create_wargoal = {
+				type = annex_everything
+				target = BOL 
+			}
+		}
+	}
+
+	## March South ##
+	focus = {
+		id = PAR_march_south
+		icon = GFX_col_focus_attack_south
+		x = -1
+		y = 1
+		relative_position_id = PAR_liberate_the_bolivian_natives
+		prerequisite = { focus = PAR_liberate_the_bolivian_natives }
+		will_lead_to_war_with = ARG 
+		will_lead_to_war_with = CHL 
+		will_lead_to_war_with = URG
+
+		cost = 10
+
+		available = {
+			has_full_control_of_state = 487
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = URG_gain_wargoals_on_every_neighbor_tt
+			every_other_country = {
+				limit = {
+					OR = {
+						original_tag = ARG 
+						original_tag = CHL 
+						original_tag = URG
+					}
+					NOT = { has_war_with = ROOT }
+					NOT = { is_in_faction_with = ROOT }
+				}
+			}
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						OR = {
+							original_tag = ARG 
+							original_tag = CHL 
+							original_tag = URG
+						}
+						NOT = { has_war_with = ROOT }
+						NOT = { is_in_faction_with = ROOT }
+					}
+					ROOT = {
+						create_wargoal = {
+							type = annex_everything
+							target = PREV 
+						}
+					}
+				}
+			}
+		}
+	}
+
+	## To the Land of the Incas ##
+	focus = {
+		id = PAR_to_the_land_of_the_incas
+		icon = GFX_PRU_restore_the_incan_empire
+		x = 1
+		y = 1
+		relative_position_id = PAR_liberate_the_bolivian_natives
+		prerequisite = { focus = PAR_liberate_the_bolivian_natives }
+		will_lead_to_war_with = PRU 
+
+		cost = 7.2
+
+		available = {
+			has_full_control_of_state = 487
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			if = {
+				limit = {
+					PRU = {
+						has_completed_focus = PRU_solidify_our_state
+					}
+					is_faction_leader = yes 
+				}
+				PRU = { 
+					country_event = { 
+						id = generic.5 
+						hours = 6
+					}
+				}
+			}
+			else = {
+				create_wargoal = {
+					type = annex_everything
+					target = PRU 
+				}
+			}
+		}
+	}
+
+	### Never Again ### | gain wargoals on every country that has native population
+	focus = {
+		id = PAR_never_again
+		icon = GFX_ARG_commence_plans
+		x = -1
+		y = 1
+		relative_position_id = PAR_to_the_land_of_the_incas
+		prerequisite = { focus = PAR_to_the_land_of_the_incas }
+		prerequisite = { focus = PAR_march_south }
+
+		cost = 10
+
+		available = {
+			has_army_manpower = { size > 219999 }
+			any_controlled_state = {
+				is_core_of = CHL 
+				has_dynamic_modifier = { modifier = EUYL_cooperating_natives }
+			}
+			any_controlled_state = {
+				is_core_of = PRU 
+				has_dynamic_modifier = { modifier = EUYL_cooperating_natives }
+			}
+			any_controlled_state = {
+				is_core_of = ARG 
+				has_dynamic_modifier = { modifier = EUYL_cooperating_natives }
+			}
+		}
+ 
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = PAR_gain_wargoals_on_every_country_that_has_a_native_pop_tt
+			every_other_country = {
+				limit = {
+					any_controlled_state = {
+						OR = {
+							has_dynamic_modifier = { modifier = EUYL_native_population }
+							has_dynamic_modifier = { modifier = EUYL_agitated_natives }
+						}
+					}
+				}
+				ROOT = {
+					create_wargoal = {
+						type = annex_everything
+						target = PREV 
+					}
+				}
+			}
+		}
+	}
+
+	### Prepare for our European Invasion ###
+	focus = {
+		id = PAR_prepare_for_our_european_invasion
+		icon = GFX_focus_generic_full_social_mobilization
+		x = 4
+		y = 1
+		relative_position_id = PAR_never_again
+		prerequisite = { focus = PAR_never_again }
+
+		cost = 10
+
+		available = {
+			any_controlled_state = {
+				is_coastal = yes 
+			}
+			num_of_factories > 44
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_manpower = 25000
+			EUYL_add_1_civilian = yes 
+			EUYL_add_1_military = yes 
+			EUYL_add_2_dockyard = yes 
+		}
+	}
+
+	### Revenge Against the Europeans ###
+	focus = {
+		id = PAR_get_revenge_against_the_europeans
+		icon = GFX_goal_generic_major_war
+		x = 0
+		y = 1
+		relative_position_id = PAR_prepare_for_our_european_invasion
+		prerequisite = { focus = PAR_prepare_for_our_european_invasion }
+
+		cost = 15
+
+		available = {
+			has_navy_size = { size > 29 }
+			has_army_manpower = { size > 399999 }
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			activate_mission = PAR_conquer_the_european_continent
+			custom_effect_tooltip = EUYL_effects_when_completed_tt
+			effect_tooltip = {
+				add_stability = 0.2
+				add_war_support = 0.3
+			}
+			every_other_country = {
+				limit = {
+					capital_scope = { 
+						is_on_continent = europe
+						is_fully_controlled_by = PREV 
+					}
+					NOT = {
+						OR = {
+							has_war_with = ROOT 
+							is_in_faction_with = ROOT 
+						}
+					}
+				}
+				ROOT = {
+					create_wargoal = {
+						type = annex_everything
+						target = PREV 
+					}
+				}
+			}
+		}
+	}
+
+	### Improve our Civilian Industry 
+	focus = {
+		id = PAR_improve_our_civilian_industry
+		icon = GFX_goal_generic_construct_civ_factory
+		x = -1
+		y = 1
+		relative_position_id = PAR_never_again
+		prerequisite = { focus = PAR_never_again }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = { EUYL_add_2_civilian = yes }
+	}
+
+	### Improve our Military Industry 
+	focus = {
+		id = PAR_improve_our_military_industry
+		icon = GFX_goal_generic_construct_mil_factory
+		x = 1
+		y = 1
+		relative_position_id = PAR_never_again
+		prerequisite = { focus = PAR_never_again }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = { EUYL_add_2_military = yes }
+	}
+
+	### March North ###
+	focus = {
+		id = PAR_march_north
+		icon = GFX_ARG_conquer_america_central
+		x = -4
+		y = 1
+		relative_position_id = PAR_never_again
+		prerequisite = { focus = PAR_never_again }
+		will_lead_to_war_with = HON 
+		will_lead_to_war_with = NIC 
+		will_lead_to_war_with = GUA
+		
+		cost = 10
+		
+		available = {
+			has_army_manpower = { size > 299999 }
+			num_of_controlled_states > 19
+		}
+		
+		
+		
+		
+		
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = URG_gain_wargoals_on_every_neighbor_tt
+			every_other_country = {
+				limit = {
+					OR = {
+						original_tag = HON 
+						original_tag = NIC 
+						original_tag = GUA
+					}
+					NOT = { has_war_with = ROOT }
+					NOT = { is_in_faction_with = ROOT }
+				}
+			}
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						OR = {
+							original_tag = HON 
+							original_tag = NIC 
+							original_tag = GUA
+						}
+						NOT = { has_war_with = ROOT }
+						NOT = { is_in_faction_with = ROOT }
+					}
+					ROOT = {
+						create_wargoal = {
+							type = annex_everything
+							target = PREV 
+						}
+					}
+				}
+			}
+		}
+	}
+
+	### Take down the USA ###
+	focus = {
+		id = PAR_take_down_the_usa
+		icon = GFX_focus_generic_strike_at_democracy3
+		x = 0
+		y = 1
+		relative_position_id = PAR_march_north
+		prerequisite = { focus = PAR_march_north }
+
+		cost = 10
+
+		available = {
+			has_army_manpower = { size > 399999 }
+			num_of_controlled_states > 29
+			num_of_factories > 99
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			create_wargoal = {
+				type = annex_everything
+				target = USA 
+			}
+		}
+	}
+
+	### Native Integration ###
+	focus = {
+		id = PAR_native_integration
+		icon = GFX_ARG_gain_back_trust
+		x = 3
+		y = 1
+		relative_position_id = PAR_our_expansion_begins
+		prerequisite = { focus = PAR_our_expansion_begins }
+		prerequisite = { focus = PAR_united_under_one_banner }
+
+		cost = 10
+
+		available = { num_of_controlled_states > 20 }
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = ARG_unlock_integrate_territory
+			if = {
+				limit = {
+					NOT = { has_country_flag = EUYL_can_integrate }
+				}
+				set_country_flag = EUYL_can_integrate
+			}
+		}
+	}
+
+	##############
+
+	### Imprison Franco - ≧ω≦ ###
+	focus = {
+		id = PAR_imprison_franco
+		icon = GFX_PAR_imprison_franco
+		x = -3
+		y = 1
+		relative_position_id = PAR_restructure_the_country
+		prerequisite = {
+			focus = PAR_restructure_the_country
+		}
+		
+		cost = 6
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 10
+				has_game_rule = {
+					rule = PAR_ai_behavior 
+					option = PAR_NATIVE
+				}
+			}
+		}
+
+		available = {
+			has_government = democratic
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = PAR_imprison_franco_tt
+			add_stability = -0.05
+			hidden_effect = {
+				retire_character = EUYL_PAR_rafael_franco
+			}
+		}
+	}
+
+	### Ban Communism - oωo ###
+	focus = {
+		id = PAR_ban_communism
+		icon = GFX_PAR_ban_communism
+		x = 1
+		y = 1
+		relative_position_id = PAR_imprison_franco
+		prerequisite = {
+			focus = PAR_imprison_franco
+		}
+		mutually_exclusive = {
+			focus = PAR_free_the_press
+		}
+		
+		cost = 8
+
+		available = {
+			has_government = democratic
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			set_temp_variable = {
+				PAR_communist_support = party_popularity@communism
+			}
+			multiply_temp_variable = {
+				PAR_communist_support = -1
+			}
+			add_popularity = {
+				ideology = communism
+				popularity = PAR_communist_support
+			}
+			add_stability = -0.05
+		}
+	}
+
+	### Free the Press - oωo ###
+	focus = {
+		id = PAR_free_the_press
+		icon = GFX_goal_generic_propaganda
+		x = -1
+		y = 1
+		relative_position_id = PAR_imprison_franco
+		prerequisite = {
+			focus = PAR_imprison_franco
+		}
+		mutually_exclusive = {
+			focus = PAR_ban_communism
+		}
+		
+		cost = 8
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 10
+				has_game_rule = {
+					rule = PAR_ai_behavior 
+					option = PAR_NATIVE
+				}
+			}
+		}
+
+		available = {
+			has_government = democratic
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 50
+			add_popularity = {
+				ideology = democratic
+				popularity = 0.05
+			}
+		}
+	}
+
+	### Final Reforms - oωo ###
+	focus = {
+		id = PAR_final_reforms
+		icon = GFX_PAR_paraguay_flag
+		x = 0
+		y = 2
+		relative_position_id = PAR_imprison_franco
+		prerequisite = {
+			focus = PAR_ban_communism
+			focus = PAR_free_the_press
+		}
+		
+		cost = 10
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				factor = 10
+				has_game_rule = {
+					rule = PAR_ai_behavior 
+					option = PAR_NATIVE
+				}
+			}
+		}
+
+		available = {
+			has_government = democratic
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0.75
+			}
+		}
+		
+		continue_if_invalid = yes
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			remove_ideas = {
+				PAR_political_instability
+			}
+			add_stability = 0.1
+		}
+	}
+
+	#### SUPPORT FEB REV ROUTE ####
+	### FEB REV - Support Feb Rev ###
+	focus = {
+		id = PAR_support_the_revolution
+		icon = GFX_PAR_franco_focus_icon
+		x = 30
+		y = 0
+
+		mutually_exclusive = {
+			focus = PAR_fight_for_our_freedom
+		}
+
+		allow_branch = {
+			if = {
+				limit = {
+					has_global_flag = PAR_chose_native_path_flag
+				}
+				NOT = { has_global_flag = PAR_chose_native_path_flag }
+			}
+		}
+
+		ai_will_do = { factor = 5 }
+
+		cost = 2
+
+		available = {
+			has_active_mission = PAR_the_february_revolution
+			exists = yes 
+			has_civil_war = no 
+		}
+
+		bypass = {
+			OR = {
+				has_government = neutrality
+				has_country_flag = PAR_february_revolution_happened
+			}
+		}
+
+		bypass_effect = {
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+			hidden_effect = {
+				country_event = { ##Abolishment of the 1870 Constitution
+					id = paraguay.12
+					days = 115
+					random_days = 45
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_BALANCE_OF_POWER FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 25
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.05
+			}
+			add_days_mission_timeout = {
+				mission = PAR_the_february_revolution
+				days = -7
+			}
+			hidden_effect = {
+				country_event = { ##Abolishment of the 1870 Constitution
+					id = paraguay.12
+					days = 115
+					random_days = 45
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_open_new_schools
+		icon = GFX_focus_generic_university_3
+		x = 0
+		y = 1
+		relative_position_id = PAR_support_the_revolution
+		prerequisite = { focus = PAR_support_the_revolution }
+
+		cost = 10
+
+		available = {
+			num_of_factories > 14
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_HISTORICAL }
+		completion_reward = { add_research_slot = 1 }
+	}
+
+	### Ok so my idea is to cause an event around 80 to 120ish days 
+	### after the revolution called "Agitated Right-Wing Revolutionaries in the Army"
+	### which will push the BoP even faster to the army 
+
+	# The focuses beyond the 2 generic ones should only unlock once you have this national spirit 
+	# (and yes, if you go against them, you may be corrupt to go against the revolutionaries, cutie)
+
+	### Solidify Control ###
+	focus = {
+		id = PAR_solidify_control
+		icon = GFX_focus_generic_self_management
+		x = -2
+		y = 1
+		relative_position_id = PAR_support_the_revolution
+		prerequisite = {
+			focus = PAR_support_the_revolution
+		}
+
+		cost = 7.2
+
+		available = {
+			has_government = neutrality
+		}
+
+		ai_will_do = { factor = 3 }
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_BALANCE_OF_POWER FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 50
+			PAR_move_5_leader = yes 
+		}
+	}
+
+
+	### Establish Labor Reforms ###
+	focus = {
+		id = PAR_establish_labor_reforms
+		icon = GFX_col_focus_revolucion_en_marcha
+		x = 2
+		y = 1
+		relative_position_id = PAR_support_the_revolution
+		prerequisite = {
+			focus = PAR_support_the_revolution
+		}
+
+		cost = 6
+
+		available = {
+			has_government = neutrality
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_BALANCE_OF_POWER FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_timed_idea = {
+				idea = PAR_labor_reforms
+				days = 365
+			}
+			PAR_move_5_leader = yes 
+		}
+	}
+
+	#### FOR FRANCO ####
+	### Go with Franco ###
+	focus = {
+		id = PAR_go_with_franco
+		icon = GFX_PAR_support_franco
+		x = -2
+		y = 1
+		relative_position_id = PAR_solidify_control
+		prerequisite = { focus = PAR_solidify_control }
+		prerequisite = { focus = PAR_establish_labor_reforms }
+		mutually_exclusive = { focus = PAR_go_against_franco }
+
+		cost = 7.2
+
+		available = {
+		has_civil_war = no
+			has_government = neutrality
+			has_country_leader = {
+				character = EUYL_PAR_rafael_franco
+				ruling_only = yes 
+			}
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			PAR_move_10_leader = yes 
+			add_political_power = 20
+			custom_effect_tooltip = PAR_lower_cost_to_support_leader_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					PAR_slight_support_cost = 5
+				}
+				subtract_from_variable = {
+					PAR_major_support_cost = 10
+				}
+			}
+		}
+	}
+
+	### Industrial Expansion ###
+	focus = {
+		id = PAR_industrial_expansion
+		icon = GFX_focus_generic_modernize_industry
+		x = -3
+		y = 2
+		relative_position_id = PAR_go_with_franco
+		prerequisite = { 
+			focus = PAR_go_with_franco
+			focus = PAR_restructure_the_country
+		}
+
+		cost = 7.2
+
+		available = {
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0.3
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			random_list = {
+				50 = { EUYL_add_1_civilian = yes }
+				50 = { EUYL_add_2_civilian = yes }
+			}
+			add_ideas = ARG_industrial_expansionism
+		}
+	}
+
+	focus = {
+		id = PAR_focus_on_national_matters
+		icon = GFX_PAR_paraguay_flag_2
+		x = 0
+		y = 2
+		relative_position_id = PAR_go_with_franco
+		prerequisite = { focus = PAR_go_with_franco }
+
+		cost = 10
+
+		available = {
+			has_civil_war = no 
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			add_political_power = 40
+			PAR_move_5_leader = yes 
+			## unlocks that decision to deal with the liberal and fascist remnants in the army 
+			unlock_decision_tooltip = {
+				decision = PAR_perform_a_search_within_the_country
+				show_effect_tooltip = yes 
+			}
+			custom_effect_tooltip = PAR_be_able_to_get_rid_of_instability_with_high_support_tt
+			set_country_flag = PAR_capable_of_removing_political_instability_flag
+			custom_effect_tooltip = PAR_lower_cost_to_support_leader_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					PAR_slight_support_cost = 5
+				}
+				subtract_from_variable = {
+					PAR_major_support_cost = 15
+				}
+				if = {
+					limit = {
+						power_balance_value = {
+							id = PAR_military_leader_bop
+							value > 0.73
+						}
+						has_idea = PAR_political_instability
+					}
+					remove_ideas = PAR_political_instability
+				}
+			}
+		}
+	}
+
+	### Establish the Committee of Civilian Mobilization ###
+	focus = {
+		id = PAR_establish_the_committee_of_civilian_mobilization
+		icon = GFX_focus_generic_limited_social_mobilization
+		x = 3
+		y = 4
+		relative_position_id = PAR_focus_on_national_matters
+		prerequisite = {
+			focus = PAR_focus_on_national_matters
+			focus = PAR_la_patria_ante_todo
+		}
+
+		cost = 10
+
+		available = {
+			has_civil_war = no 
+			if = {
+				limit = { has_any_power_balance = yes }
+				power_balance_value = {
+					id = PAR_military_leader_bop
+					value > 0.6
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_ideas = PAR_committee_of_civilian_mobilization
+			unlock_decision_category_tooltip = PAR_committee_of_civilian_mobilization_cat
+		}
+	}
+
+	### Commence the Armament Project ###
+	focus = {
+		id = PAR_commence_the_armament_project
+		icon = GFX_PAR_armament_icon
+		x = -1
+		y = 1
+		relative_position_id = PAR_establish_the_committee_of_civilian_mobilization
+		prerequisite = { focus = PAR_establish_the_committee_of_civilian_mobilization }
+
+		cost = 5
+
+		available = { 
+			threat > 0.1
+			has_war_support > 0.7
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_1_military = yes 
+			unlock_decision_tooltip = {
+				decision = PAR_invest_in_the_construction_of_an_arms_factory
+				show_effect_tooltip = yes
+			}
+		}
+	}
+
+	### Economic Reacivation ###
+	focus = {
+		id = PAR_economic_reactivaiton
+		icon = GFX_ARG_develop_paraguay
+		x = 1
+		y = 1
+		relative_position_id = PAR_establish_the_committee_of_civilian_mobilization
+		prerequisite = { focus = PAR_establish_the_committee_of_civilian_mobilization }
+
+		cost = 5
+
+		available = {
+			NOT = { has_idea = PAR_stagnated_economy_1 }
+			num_of_factories > 12
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_1_civilian = yes 
+			unlock_decision_tooltip = {
+				decision = PAR_invest_in_the_construction_of_a_civilian_factory
+				show_effect_tooltip = yes 
+			}
+			custom_effect_tooltip = EUYL_unlock_railway_decision_tt
+		}
+	}
+
+	### Cooperate with the Oligarchs ###
+	focus = {
+		id = PAR_cooperate_with_oligarchs
+		icon = GFX_goal_generic_dangerous_deal
+		x = 1
+		y = 1
+		relative_position_id = PAR_go_with_franco
+		prerequisite = {
+			focus = PAR_go_with_franco
+		}
+
+		cost = 5
+
+		available = {
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0.6
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_ideas = PAR_pleased_oligarchs_idea
+		}
+	}
+
+	focus = {
+		id = PAR_fully_abolish_the_1870_consitution
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		X = 1
+		Y = 2
+		relative_position_id = PAR_focus_on_national_matters
+		prerequisite = { focus = PAR_focus_on_national_matters }
+
+		cost = 10
+
+		available = {
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0.8
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_ideas = PAR_full_abolishment_of_the_1870_constitution
+			add_stability = 0.1
+		}
+	}
+
+	### No Será comunista, ni Fascista, ni Racista ###
+	focus = {
+		id = PAR_no_sera_comunista_fascista_racista
+		icon = GFX_PAR_no_sera_comunista_ni_fascista_icon
+		x = 0
+		y = 1
+		relative_position_id = PAR_industrial_expansion
+		prerequisite = { focus = PAR_industrial_expansion }
+
+		cost = 10
+
+		available = {
+			has_stability > 0.65
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			add_ideas = PAR_ni_comunista_ni_fascista_ni_racista
+		}
+	}
+
+	## Purchase Italian Aircraft ##
+	focus = {
+		id = PAR_purchase_italian_aircraft
+		icon = GFX_PAR_purchase_italian_planes
+		x = 3
+		y = 1
+		relative_position_id = PAR_go_with_franco
+		prerequisite = { 
+			focus = PAR_go_with_franco 
+			focus = PAR_go_against_franco
+		}
+
+		cost = 7.2
+
+		available = { 
+			ITA = { 
+				exists = yes
+				has_civil_war = no 
+			}
+			NOT = { has_war_with = ITA }
+			num_of_factories > 9
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0
+			}
+		}
+ 
+		search_filters = { FOCUS_FILTER_AIR_XP FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			air_experience = 25
+			if = {
+				limit = {
+					has_dlc = "By Blood Alone"
+				}
+				add_equipment_to_stockpile = {
+					type = small_plane_airframe
+					amount = 60
+					producer = ITA
+				}
+			}
+			else = {
+				add_equipment_to_stockpile = {
+					type = fighter_equipment_0
+					amount = 60
+					producer = ITA
+				}
+			}
+			add_timed_idea = { idea = PRU_purchasing_3 days = 135 }
+		}
+	}
+
+	## Create New Ministries ## | will unlock new political advisors
+	focus = {
+		id = PAR_create_new_ministries 
+		icon = GFX_focus_generic_self_management 
+		x = -1
+		y =1
+		relative_position_id = PAR_focus_on_national_matters
+		prerequisite = { focus = PAR_focus_on_national_matters }
+
+		cost = 7.2
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { ## add one more minister
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = PAR_juan_stefanich_idea
+			show_ideas_tooltip = PAR_german_soler_idea
+		}
+	}
+
+	#### AGAINST FRANCO (✿˵•́ ૩•̀˵)৴♡* ####
+	### Go against Franco ###
+	focus = {
+		id = PAR_go_against_franco
+		icon = GFX_PAR_against_franco
+		x = 5
+		y = 1
+		relative_position_id = PAR_establish_labor_reforms
+		prerequisite = { focus = PAR_establish_labor_reforms }
+		prerequisite = { focus = PAR_solidify_control }
+		mutually_exclusive = { focus = PAR_go_with_franco }
+
+		cost = 7.2
+
+		ai_will_do = { factor = 3 }
+
+		available = {
+			has_civil_war = no
+			has_country_leader = {
+				character = EUYL_PAR_rafael_franco
+				ruling_only = yes
+			}
+		}
+
+		bypass = {
+			has_country_leader = {
+				character = PAR_junta
+				ruling_only = yes 
+			}
+		}
+
+		bypass_effect = {
+			country_event = { ## calls the event
+				id = paraguay.9
+				days = 4
+			}
+		}
+		
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			PAR_move_5_military = yes
+			unlock_decision_tooltip = {
+				decision = PAR_empower_the_army
+				show_effect_tooltip = yes 
+			}
+		}
+	}
+
+	## (Shared focus w/ commie) Nationwide Infrastructure ##
+	focus = {
+		id = PAR_improve_nationwide_infrastructure
+		icon = GFX_PAR_improve_naionwide_infra
+		x = -5
+		y = 1
+		relative_position_id = PAR_go_against_franco
+		prerequisite = { 
+			focus = PAR_go_against_franco 
+			focus = PAR_go_with_franco
+		}
+
+		cost = 8
+
+		available = {
+			has_civil_war = no 
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			custom_effect_tooltip = PAR_every_states_less_than_3_inf_gain_1_inf_tt
+			add_ideas = ARG_invest_in_infrastructure
+			hidden_effect = {
+				every_controlled_state = {
+					limit = { infrastructure < 3 }
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes 
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_national_department_of_labor
+		icon = GFX_focus_DEN_limited_regulations
+		x = 0
+		y = 1
+		relative_position_id = PAR_improve_nationwide_infrastructure
+		prerequisite = { focus = PAR_improve_nationwide_infrastructure }
+
+		cost = 10
+
+		available = {
+			has_civil_war = no 
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			EUYL_add_1_civilian = yes 
+			EUYL_add_1_military = yes 
+			add_ideas = PAR_department_of_labor
+		}
+	}
+
+	## Define our Foreign Policy ##
+	focus = {
+		id = PAR_define_our_foreign_policy
+		icon = GFX_goal_generic_political_pressure
+		x = 0
+		y = 6
+		relative_position_id = PAR_focus_on_national_matters
+		prerequisite = { focus = PAR_focus_on_national_matters }
+
+		cost = 5
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = PAR_agitated_right_wing_revs
+					has_idea = PAR_liberal_remnants_idea
+					has_idea = PAR_political_instability
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { add_political_power = 25 }
+	}
+
+	#### COMMIE PATH (☭ ͜ʖ ☭) ####
+	### Go Against Right-Wing Revolutionists ###
+	focus = {
+		id = PAR_go_against_right_wing
+		icon = GFX_focus_SWE_refuge_for_revolutionaries
+		x = 6
+		y = 2
+		relative_position_id = PAR_solidify_control
+		prerequisite = { focus = PAR_go_against_franco }
+		mutually_exclusive = {
+			focus = PAR_support_right_wing
+		}
+
+		cost = 10
+
+		ai_will_do = { 
+			factor = 2
+			modifier = { 
+				factor = 0
+				is_historical_focus_on = yes 
+			}
+		}
+
+		available = {
+			has_government = democratic
+			has_country_flag = PAR_paiva_called_up_flag
+		}
+
+		bypass = { has_government = communism }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			unlock_decision_category_tooltip = PAR_a_change_in_course
+			add_timed_idea = {
+				idea = communist_influence
+				days = 940
+			}
+			add_ideas = PAR_supprtive_communist_block
+			custom_effect_tooltip = available_political_advisor
+			show_ideas_tooltip = PAR_oscar_creydt_idea
+		}
+	}
+
+	focus = {
+		id = PAR_denounce_the_liberal_government
+		icon = GFX_focus_generic_strike_at_democracy2
+		x = 1
+		y = 1
+		relative_position_id = PAR_go_against_right_wing
+		prerequisite = {
+			focus = PAR_go_against_right_wing
+			focus = PAR_support_right_wing
+		}
+
+		cost = 10
+
+		available = {
+			has_government = democratic
+			if = {
+				limit = { has_completed_focus = PAR_go_against_right_wing }
+				NOT = { has_government = communism }
+			}
+			else_if = {
+				limit = { has_completed_focus = PAR_support_right_wing }
+				NOT = { has_government = fascism }
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			add_political_power = 25
+			if = {
+				limit = { has_completed_focus = PAR_go_against_right_wing }
+				add_popularity = {
+					ideology = communism
+					popularity = 0.075
+				}
+			}
+			else = {
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.075
+				}
+			}
+		}
+	}
+
+	focus = { ##gives stability
+		id = PAR_restore_the_consitution_of_1870
+		icon = GFX_focus_generic_treaty
+		x = 3
+		y = 1
+		relative_position_id = PAR_go_against_right_wing
+		prerequisite = {
+			focus = PAR_go_against_right_wing
+			focus = PAR_support_right_wing
+		}
+
+		cost = 7.2
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 5
+				is_historical_focus_on = yes 
+			}
+		}
+
+		available = { has_government = democratic }
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 25
+			add_stability = 0.05
+		}
+	}
+
+	focus = {
+		id = PAR_dissolve_the_legislature
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		x = 0
+		y = 1
+		relative_position_id = PAR_restore_the_consitution_of_1870
+		prerequisite = { focus = PAR_restore_the_consitution_of_1870 }
+
+		available = {
+			has_country_leader = {
+				character = EUYL_PAR_jose_felix_estigarribia
+				ruling_only = yes 
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 5
+				is_historical_focus_on = yes 
+			}
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_political_power = 40
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.075
+			}
+		}
+	}
+
+	### Promote Obdulio Barthe ###
+	focus = {
+		id = PAR_promote_barthe
+		icon = GFX_PAR_obdulio_icon
+		x = 0
+		y = 3
+		relative_position_id = PAR_go_against_right_wing
+		prerequisite = {
+			focus = PAR_go_against_right_wing
+		}
+
+		cost = 7.2
+
+		ai_will_do = { factor = 10 }
+
+		available = {
+			OR = {
+				communism > 0.5
+				PAR_marched_in_every_state = yes 
+				has_country_flag = PAR_jose_felix_died_flag
+			}
+		}
+
+		bypass = { has_government = communism }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			hidden_effect = {
+				PAR_bop_remove_bop_effect = yes 
+				set_power_balance = {
+					id = PAR_military_leader_bop
+					left_side = PAR_military_side # will keep the last set side if not specified
+					right_side = PAR_barthe_side # will keep the last set side if not specified
+					set_value = 0.05 # if specified will set the value of the power balance, this option will override the effect of set_default so the two options should not be used together. if neither set_default or set_value is specified the current value of the power balance will not change
+				}
+			}
+			set_politics = {
+				ruling_party = communism
+				elections_allowed = no 
+			}
+			promote_character = PAR_obdulio_barthe
+			if = {
+				limit = {
+					has_completed_focus = PAR_seize_equipment_reserves
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 750
+					producer = ROOT 
+				}
+			}
+		}
+	}
+
+	### National Labor Unions ###
+	focus = {
+		id = PAR_national_labor_unions
+		icon = GFX_focus_laborunion
+		x = -3
+		y = 1
+		relative_position_id = PAR_promote_barthe
+		prerequisite = { focus = PAR_promote_barthe }
+
+		cost = 8
+
+		available = { communism > 0.5 }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			EUYL_add_1_civilian = yes 
+			EUYL_add_1_military = yes 
+			add_manpower = 17500
+		}
+	}
+
+	### Political Cleanup ###
+	focus = {
+		id = PAR_political_cleanup
+		icon = GFX_CHL_bloodshed
+		x = 1
+		y = 1
+		relative_position_id = PAR_promote_barthe
+		prerequisite = { focus = PAR_promote_barthe }
+
+		cost = 10
+
+		available = { has_idea = PAR_agitated_right_wing_revs }
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			add_political_power = 50
+			add_stability = 0.05
+			remove_ideas = PAR_agitated_right_wing_revs
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+			PAR_move_10_leader = yes 
+		}
+	}
+
+	focus = {
+		id = PAR_the_influence_of_rafael_barrett
+		icon = GFX_PAR_rafael_barrett
+		x = -1
+		y = 1
+		relative_position_id = PAR_promote_barthe
+		prerequisite = { focus = PAR_promote_barthe }
+
+		cost = 10
+
+		available = {
+			has_government = communism
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_ideas = PAR_rafael_barretts_influence
+		}
+	}
+
+	#### HISTORICAL FASCIST PATH ####
+	### Support Right-Wing Revolutionists ###
+	focus = {
+		id = PAR_support_right_wing
+		icon = GFX_focus_ITA_generic_fascist_workers
+		x = 8
+		y = 2
+		relative_position_id = PAR_establish_labor_reforms
+		prerequisite = { focus = PAR_go_against_franco }
+		mutually_exclusive = {
+			focus = PAR_go_against_right_wing
+		}
+
+		cost = 10
+
+		ai_will_do = { factor = 2 }
+
+		available = {
+			has_idea = PAR_agitated_right_wing_revs
+			has_government = democratic
+			has_country_flag = PAR_paiva_called_up_flag
+		}
+		bypass = {
+			has_government = fascism
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			unlock_decision_category_tooltip = PAR_a_change_in_course
+			add_timed_idea = {
+				idea = fascist_influence
+				days = 940
+			}
+			swap_ideas = {
+				remove_idea = PAR_agitated_right_wing_revs
+				add_idea = PAR_supportive_right_wing_revs
+			}
+		}
+	}
+
+	# ### Promote Félix Paiva ###
+	# focus = {
+	# 	id = PAR_promote_paiva
+	# 	icon = GFX_PAR_felix
+	# 	x = -2
+	# 	y = 1
+	# 	relative_position_id = PAR_support_right_wing
+	# 	prerequisite = {
+	# 		focus = PAR_support_right_wing
+	# 	}
+	# 	mutually_exclusive = {
+	# 		focus = PAR_promote_morinigo
+	# 	}
+
+	# 	available = {
+	# 		has_country_leader = { 
+	# 			ruling_only = yes
+	# 			name = "Junta Militar Paraguaya"
+	# 		}
+	# 	}
+
+	# 	cost = 5
+
+	# 	search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+	# 	completion_reward = {
+	# 		promote_character = PAR_felix_paiva
+	# 	}
+	# }
+
+	### Promote Higinio Morínigo ###
+	focus = {
+		id = PAR_promote_morinigo
+		icon = GFX_PAR_higinio
+		x = 0
+		y = 3
+		relative_position_id = PAR_support_right_wing
+		prerequisite = {
+			focus = PAR_support_right_wing
+		}
+
+		ai_will_do = { 
+			factor = 1
+			modifier = {
+				factor = 0
+				AND = {
+					is_historical_focus_on = yes 
+					NOT = { has_country_flag = PAR_jose_felix_died_flag }
+				}
+			}
+			modifier = {
+				factor = 10
+				AND = {
+					is_historical_focus_on = yes 
+					has_country_flag = PAR_jose_felix_died_flag
+				}
+			}
+		}
+
+		available = {
+			OR = {
+				fascism > 0.5
+				PAR_marched_in_every_state = yes 
+				has_country_flag = PAR_jose_felix_died_flag
+			}
+		}
+		bypass = {
+			has_government = fascism
+		}
+
+		cost = 7.2
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			hidden_effect = {
+				PAR_bop_remove_bop_effect = yes 
+				set_power_balance = {
+					id = PAR_military_leader_bop
+					left_side = PAR_military_side # will keep the last set side if not specified
+					right_side = PAR_higinio_side # will keep the last set side if not specified
+					set_value = -0.1 # if specified will set the value of the power balance, this option will override the effect of set_default so the two options should not be used together. if neither set_default or set_value is specified the current value of the power balance will not change
+				}
+			}
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no 
+			}
+			promote_character = EUYL_PAR_higinio_morinigo
+			if = {
+				limit = {
+					has_completed_focus = PAR_seize_equipment_reserves
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 750
+					producer = ROOT 
+				}
+			}
+			set_party_name = {
+				ideology = fascism
+				long_name = PAR_frente_de_guerra_long
+				name = PAR_frente_de_guerra
+			}
+		}
+	}
+
+	### Deport the Fascists - Historical ###
+	focus = {
+		id = PAR_deport_the_fascists
+		icon = GFX_focus_SWE_undermine_fascism
+		x = 3
+		y = 1
+		relative_position_id = PAR_promote_morinigo
+		prerequisite = { focus = PAR_promote_morinigo }
+		mutually_exclusive = { focus = PAR_empower_the_fascists }
+
+		cost = 5
+
+		available = { has_government = fascism }
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			add_stability = 0.03
+			add_popularity = {
+				ideology = fascism
+				popularity = -0.05
+			}
+			add_ideas = PAR_fascist_deportations
+			remove_country_leader_trait = fascist_sympathies
+			PAR_move_5_leader = yes 
+		}
+	}
+
+	focus = {
+		id = PAR_la_primavera_democratica
+		icon = GFX_PAR_fight_freedom
+		x = 0
+		y = 1
+		relative_position_id = PAR_deport_the_fascists
+		prerequisite = { focus = PAR_deport_the_fascists}
+
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				AND = {
+					is_historical_focus_on = yes 
+					date < 1947.1.1
+				}
+			}
+			modifier = {
+				factor = 10
+				AND = {
+					is_historical_focus_on = yes 
+					date > 1947.1.2
+				}
+			}
+		}
+
+		available = {
+			fascism < 0.1
+			democratic > 0.45
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			add_stability = 0.2
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = no 
+			}
+			custom_effect_tooltip = PAR_coalition_will_be_formed_and_start_civil_war_against_higinio_tt
+			effect_tooltip = {
+				start_civil_war = { ideology = fascism }
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						NOT = {
+							has_template = "Milicias"
+						}
+					}
+					division_template = { 
+						name = "Milicias" 
+						division_names_group = SPAN_INF_02 
+						template_counter = 3
+						is_locked = yes 
+						regiments = { 
+							infantry = { x = 0 y = 0 }  
+							infantry = { x = 0 y = 1 } 
+							infantry = { x = 0 y = 2 } 
+						}
+					}
+				}
+				start_civil_war = {
+					ideology = fascism
+					size = 0.4
+					capital = 301
+					states = { 301 }
+					keep_all_characters = yes 
+					PREV = {
+						EUYL_PAR_higinio_morinigo = { set_nationality = PREV.PREV }
+					}
+					promote_character = EUYL_PAR_higinio_morinigo
+				}
+				promote_character = PAR_revolutionary_army
+				set_country_flag = PAR_historical_flag
+				every_controlled_state = {
+					create_unit = {
+						division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9" 
+						owner = ROOT
+					}
+				}
+				random_controlled_state = {
+					create_unit = {
+						division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9" 
+						owner = ROOT
+						count = 2
+					}
+				}
+				random_other_country = {
+					limit = { 
+						original_tag = PAR 
+						has_civil_war = yes 
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"Milicias\" division_template = \"Milicias\" start_experience_factor = 0.02 start_equipment_factor = 0.9" 
+							owner = PREV
+							count = 3
+						}
+					}
+				}
+			}
+		}
+	}
+
+	## Empower the Fascists ##
+	focus = {
+		id = PAR_empower_the_fascists
+		icon = GFX_focus_generic_fascist_troops
+		x = 1
+		y = 1
+		relative_position_id = PAR_promote_morinigo
+		prerequisite = { focus = PAR_promote_morinigo }
+		mutually_exclusive = { focus = PAR_deport_the_fascists }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes 
+			}
+		}
+
+		available = { has_government = fascism }
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			add_ideas = PAR_empowered_fascists
+			PAR_move_5_leader = yes 
+		}
+	}
+
+	## Support from the Red Banner ##
+	focus = {
+		id = PAR_red_banner_support
+		icon = GFX_PAR_guion_rojo_icon
+		x = -1
+		y = 3
+		relative_position_id = PAR_promote_morinigo
+		prerequisite = { focus = PAR_promote_morinigo }
+
+		available = { fascism > 0.5 }
+
+		select_effect = { 
+			division_template = { 
+				name = "Guión Rojo" 
+				division_names_group = SPAN_INF_02 
+				template_counter = 11
+				regiments = { 
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 1 y = 1 }
+					infantry = { x = 2 y = 0 }
+					artillery_brigade = { x = 2 y = 1 }
+				}
+				support = { 
+					engineer = { x = 0 y = 0 }
+					artillery = { x = 0 y = 1 }
+				}
+			}
+		}
+
+		cancel_if_invalid = no 
+		continue_if_invalid = yes 
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER FOCUS_FILTER_HISTORICAL }
+		completion_reward = {
+			EUYL_add_1_military = yes 
+			custom_effect_tooltip = PAR_create_guion_rojo_template_tt
+			capital_scope = {
+				create_unit = {
+					division = "name = \"Guión Rojo\" division_template = \"Guión Rojo\" start_experience_factor = 0.2 start_equipment_factor = 1.0"
+					owner = ROOT
+					count = 3
+				}
+			}
+			hidden_effect = { add_manpower = 12500 }
+		}
+	}
+
+	### Fascist Dictatorship ###
+	focus = {
+		id = PAR_fascist_dictatorship
+		icon = GFX_focus_generic_fascist_propaganda
+		x = 0
+		y = 1
+		relative_position_id = PAR_empower_the_fascists
+		prerequisite = { focus = PAR_empower_the_fascists }
+
+		cost = 10
+
+		available = { fascism > 0.9 }
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_political_power = 50
+			add_war_support = 0.05
+			swap_ideas = {
+				remove_idea = PAR_empowered_fascists
+				add_idea = PAR_fascist_dictatorship_idea
+			}
+		}
+	}
+
+	### Seize Equipment Reserves ###
+	focus = {
+		id = PAR_seize_equipment_reserves
+		icon = GFX_BRA_generic_military
+		x = -1
+		y = 1
+		relative_position_id = PAR_support_right_wing
+		prerequisite = {
+			focus = PAR_support_right_wing
+			focus = PAR_go_against_right_wing
+		}
+		bypass = {
+			has_civil_war = yes
+			has_government = fascism
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			custom_effect_tooltip = PAR_once_government_changes_tt
+			effect_tooltip = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 750
+					producer = ROOT 
+				}
+			}
+		}
+	}
+
+	### La Patria Ante Todo ###
+	focus = {
+		id = PAR_la_patria_ante_todo
+		icon = GFX_PAR_patria_ante_todo
+		x = -2
+		y = 3
+		relative_position_id = PAR_seize_equipment_reserves
+		prerequisite = {
+			focus = PAR_promote_barthe
+			focus = PAR_promote_morinigo
+		}
+
+		available = {
+			OR = {
+				has_government = communism
+				has_government = fascism
+			}
+		}
+		
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_HISTORICAL FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_manpower = 33450
+			custom_effect_tooltip = PAR_be_able_to_get_rid_of_instability_with_high_support_tt
+			set_country_flag = PAR_capable_of_removing_political_instability_flag
+			PAR_move_5_leader = yes 
+			custom_effect_tooltip = PAR_lower_cost_to_support_leader_tt
+			hidden_effect = {
+				subtract_from_variable = {
+					PAR_slight_support_cost = 5
+				}
+				subtract_from_variable = {
+					PAR_major_support_cost = 15
+				}
+				if = {
+					limit = {
+						power_balance_value = {
+							id = PAR_military_leader_bop
+							value > 0.73
+						}
+						has_idea = PAR_political_instability
+					}
+					remove_ideas = PAR_political_instability
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_looking_outwards
+		icon = GFX_goal_generic_forceful_treaty
+		x = 0
+		y = 3
+		relative_position_id = PAR_la_patria_ante_todo
+		prerequisite = { focus = PAR_la_patria_ante_todo }
+
+		cost = 5
+
+		available = { NOT = { has_idea = PAR_political_instability } }
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = { add_political_power = 25 }
+	}
+
+	### The Legacy of Selano Lopez ###
+	focus = {
+		id = PAR_the_legacy_of_selano_lopez
+		icon = GFX_PAR_solano_lopez_focus
+		x = -1
+		y = 1
+		relative_position_id = PAR_looking_outwards
+		prerequisite = { 
+			focus = PAR_looking_outwards 
+			focus = PAR_define_our_foreign_policy
+		}
+		mutually_exclusive = { focus = PAR_diplomacy_over_bloodshed }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes 
+			}
+		}
+
+		available = { 
+			has_army_manpower = { size > 99999 } 
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0.8
+			}
+		}
+
+		select_effect = {
+			add_ideas = PAR_expansionist_path
+			every_other_country = {
+				limit = { 
+					any_controlled_state = {
+						is_core_of = ROOT
+					}
+				}
+				ROOT = {
+					add_ai_strategy = {
+						type = prepare_for_war
+						id = PREV
+						value = 70
+					}
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL FOCUS_FILTER_WAR_SUPPORT FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			custom_effect_tooltip = PAR_military_side_replaced_with_public_concern_tt
+			add_ideas = PAR_legacy_of_solano_lopez_idea_1
+			add_ideas = PAR_public_concern_1
+			unlock_decision_category_tooltip = PAR_legacy_of_solano_lopez_cat
+			custom_effect_tooltip = PAR_neighboring_countries_become_more_concerned_tt
+			every_state = {
+				limit = {
+					NOT = { is_core_of = ROOT }
+					OR = {
+						state = 302
+						state = 509
+						state = 510
+						state = 504
+					}
+				}
+				add_core_of = ROOT
+			}
+			every_other_country = {
+				limit = {
+					has_civil_war = no 
+					NOT = { is_in_faction_with = ROOT }
+					capital_scope = { is_on_continent = south_america }
+				}
+				add_opinion_modifier = { target = ROOT modifier = PAR_dangerous_ambitions }
+			}
+			add_political_power = 50
+			hidden_effect = {
+				set_power_balance = {
+					id = PAR_military_leader_bop
+					left_side = PAR_public_concern_side 
+				}
+				set_country_flag = PAR_solano_lopez_active_flag
+				add_to_variable = { PAR_global_concern = 1 }
+			}
+		}
+	}
+
+	### Unrestricted Conscription ###
+	focus = {
+		id = PAR_unrestricted_conscription
+		icon = GFX_PAR_training_exercises_icon
+		x = -2
+		y = 1
+		relative_position_id = PAR_the_legacy_of_selano_lopez
+		prerequisite = { focus = PAR_the_legacy_of_selano_lopez }
+
+		cost = 10
+
+		available = {
+			has_civil_war = no 
+			surrender_progress < 0.2
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_idea = scraping_the_barrel }
+				}
+				add_ideas = scraping_the_barrel
+			}
+			else = { add_political_power = 75 }
+			if = {
+				limit = {
+					has_idea = PAR_legacy_of_solano_lopez_idea_3
+				}
+				swap_ideas = {
+					remove_idea = PAR_legacy_of_solano_lopez_idea_3
+					add_idea = PAR_legacy_of_solano_lopez_idea_4
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = PAR_legacy_of_solano_lopez_idea_1
+					add_idea = PAR_legacy_of_solano_lopez_idea_2
+				}
+			}
+			unlock_decision_tooltip = PAR_conscript_the_women_and_children
+			custom_effect_tooltip = PAR_public_concern_will_worsen_tt
+			PAR_worsen_public_concern = yes 
+			PAR_move_10_military = yes 
+			custom_effect_tooltip = PAR_neighboring_countries_become_more_concerned_tt
+			add_to_variable = { PAR_global_concern = 1 }
+		}
+	}
+
+	### Prepare for Hypermobilization ###
+	focus = {
+		id = PAR_prepare_for_hypermobilization
+		icon = GFX_CHL_military_economy
+		x = 3
+		y = 1
+		relative_position_id = PAR_the_legacy_of_selano_lopez
+		prerequisite = { focus = PAR_the_legacy_of_selano_lopez }
+
+		cost = 10
+
+		available = {
+			has_civil_war = no 
+			surrender_progress < 0.2
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_idea = tot_economic_mobilisation }
+				}
+				add_ideas = tot_economic_mobilisation
+			}
+			else = { add_political_power = 75 }
+			if = {
+				limit = {
+					has_idea = PAR_legacy_of_solano_lopez_idea_2
+				}
+				swap_ideas = {
+					remove_idea = PAR_legacy_of_solano_lopez_idea_2
+					add_idea = PAR_legacy_of_solano_lopez_idea_4
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = PAR_legacy_of_solano_lopez_idea_1
+					add_idea = PAR_legacy_of_solano_lopez_idea_3
+				}
+			}
+			custom_effect_tooltip = PAR_public_concern_will_worsen_tt
+			PAR_worsen_public_concern = yes
+			PAR_move_10_military = yes 
+			custom_effect_tooltip = PAR_neighboring_countries_become_more_concerned_tt
+			add_to_variable = { PAR_global_concern = 1 }
+		}
+	}
+
+	### Economic Hypermobilization ###
+	focus = {
+		id = PAR_econ_hypermobilization
+		icon = GFX_focus_SOV_merge_plants
+		x = -2
+		y = 1
+		relative_position_id = PAR_prepare_for_hypermobilization
+		prerequisite = { focus = PAR_prepare_for_hypermobilization }
+		mutually_exclusive = {
+			focus = PAR_mil_hypermobilization
+			focus = PAR_econ_mil_hypermobilization
+		}
+
+		available = {
+			num_of_controlled_states > 6 ##controls more than what is started with 
+			has_civil_war = no 
+			num_of_factories > 19
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_4_civilian = yes 
+			custom_effect_tooltip = PAR_public_concern_will_worsen_tt
+			PAR_worsen_public_concern = yes
+			if = {
+                limit = {
+                    NOT = { has_global_flag = triple_alliance_formed_flag }
+                }
+                custom_effect_tooltip = PAR_neighboring_countries_become_more_concerned_tt
+                add_to_variable = { PAR_global_concern = 1 }
+            }
+		}
+	}
+
+	### Military Hypermobilization ###
+	focus = {
+		id = PAR_mil_hypermobilization
+		icon = GFX_goal_generic_army_tanks
+		x = 0
+		y = 1
+		relative_position_id = PAR_prepare_for_hypermobilization
+		prerequisite = { focus = PAR_prepare_for_hypermobilization }
+		mutually_exclusive = {
+			focus = PAR_econ_hypermobilization
+			focus = PAR_econ_mil_hypermobilization
+		}
+
+		available = {
+			num_of_controlled_states > 6 ##controls more than what is started with 
+			has_civil_war = no 
+			num_of_factories > 19
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_4_military = yes 
+			custom_effect_tooltip = PAR_public_concern_will_worsen_tt
+			PAR_worsen_public_concern = yes
+			if = {
+                limit = {
+                    NOT = { has_global_flag = triple_alliance_formed_flag }
+                }
+                custom_effect_tooltip = PAR_neighboring_countries_become_more_concerned_tt
+                add_to_variable = { PAR_global_concern = 1 }
+            }
+		}
+	}
+
+	### Economic and Military Hypermobilization ###
+	focus = {
+		id = PAR_econ_mil_hypermobilization
+		icon = GFX_focus_generic_reorient_production
+		x = 2
+		y = 1
+		relative_position_id = PAR_prepare_for_hypermobilization
+		prerequisite = { focus = PAR_prepare_for_hypermobilization }
+		mutually_exclusive = {
+			focus = PAR_mil_hypermobilization
+			focus = PAR_econ_hypermobilization
+		}
+
+		available = {
+			num_of_controlled_states > 6 ##controls more than what is started with 
+			has_civil_war = no 
+			num_of_factories > 19
+		}
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_civilian = yes 
+			EUYL_add_2_military = yes 
+			custom_effect_tooltip = PAR_public_concern_will_worsen_tt
+			PAR_worsen_public_concern = yes
+			if = {
+                limit = {
+                    NOT = { has_global_flag = triple_alliance_formed_flag }
+                }
+                custom_effect_tooltip = PAR_neighboring_countries_become_more_concerned_tt
+                add_to_variable = { PAR_global_concern = 1 }
+            }
+		}
+	}
+
+	### Demand Rightful Territory ###
+	focus = {
+		id = PAR_demand_rightful_territory
+		icon = GFX_PAR_demand_lands
+		x = 0
+		y = 2
+		relative_position_id = PAR_unrestricted_conscription
+		prerequisite = { focus = PAR_unrestricted_conscription }
+
+		cost = 5
+
+		available = {
+			has_army_manpower = { size > 194999 }
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = PAR_unlock_demand_decisions_tt
+			unlock_decision_tooltip = PAR_promote_nacionalism
+		}
+	}
+
+	### Our war of Vengeance ###
+	focus = {
+		id = PAR_our_war_of_vengeance
+		icon = GFX_PAR_war_of_vengeance_icon
+		x = -1
+		y = 1
+		relative_position_id = PAR_demand_rightful_territory
+		prerequisite = { focus = PAR_demand_rightful_territory }
+
+		cost = 7.2
+
+		allow_branch = { has_global_flag = triple_alliance_formed_flag }
+
+		available = {
+			has_global_flag = triple_alliance_formed_flag
+			has_war = yes 
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_manpower = 17500
+			add_war_support = 0.05
+			add_ideas = PAR_war_of_veneance
+			set_rule = { can_create_factions = yes }
+			unlock_decision_tooltip = {
+				decision = PAR_desperate_defense
+				show_modifiers = yes 
+			}
+		}
+	}
+
+	### Adopt an Expansionist Policy ###
+	focus = {
+		id = PAR_adopt_an_expansionist_policy
+		icon = GFX_goal_generic_major_war
+		x = -4
+		y = 1
+		relative_position_id = PAR_demand_rightful_territory
+		prerequisite = {
+			focus = PAR_demand_rightful_territory
+			focus = PAR_kindly_ask_for_gran_chaco
+		}
+
+		cost = 10
+
+		available = {
+			OR = {
+				has_completed_focus = PAR_the_legacy_of_selano_lopez
+				threat > 0.24
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_war_support = 0.05
+			add_ideas = ARG_expansionist_policy
+		}
+	}
+
+	### The Nuclear Option ###
+	focus = {
+		id = PAR_the_nuclear_option
+		icon = GFX_PAR_nuclear_sa
+		x = 0
+		y = 1
+		relative_position_id = PAR_adopt_an_expansionist_policy
+		prerequisite = {
+			focus = PAR_adopt_an_expansionist_policy
+		}
+		available = {
+			has_completed_focus = PAR_harness_nuclear_energy
+			has_war = yes
+			has_tech = atomic_research
+		}
+
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			if = {
+				limit = {
+					num_of_controlled_states > 9
+				}
+				random_owned_controlled_state = {
+					add_building_construction = {
+						type = nuclear_reactor 
+						level = 1
+						instant_build = yes 
+					}
+				}
+				random_owned_controlled_state = {
+					add_building_construction = {
+						type = nuclear_reactor 
+						level = 1
+						instant_build = yes 
+					}
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					add_building_construction = {
+						type = nuclear_reactor 
+						level = 1
+						instant_build = yes 
+					}
+				}
+			}
+		}
+	}
+
+	### Build up in our conquered Provinces ###
+	focus = {
+		id = PAR_build_up_in_our_conquered_provinces
+		icon = GFX_goal_generic_construction2
+		x = 2
+		y = 1
+		relative_position_id = PAR_demand_rightful_territory
+		prerequisite = {
+			focus = PAR_demand_rightful_territory
+		}
+		prerequisite = { 
+			focus = PAR_econ_hypermobilization
+			focus = PAR_mil_hypermobilization
+			focus = PAR_econ_mil_hypermobilization
+		}
+
+		cost = 10
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = PAR_controls_any_core_non_starting_state_tt
+				any_core_state = {
+					NOT = { has_state_flag = paraguayan_starting_state }
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			custom_effect_tooltip = BOL_unlock_build_up_decisions_tt
+		}
+	}
+
+	### Form Greater Paraguay ###
+	focus = {
+		id = PAR_form_greater_paraguay
+		icon = GFX_PAR_form_greater_paraguay_icon
+		x = 0
+		y = 2
+		relative_position_id = PAR_demand_rightful_territory
+		prerequisite = {
+			focus = PAR_demand_rightful_territory
+		}
+
+		cost = 10
+
+		available = {
+			all_core_state = {
+				is_fully_controlled_by = ROOT 
+			}
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0.45
+			}
+		}
+
+		cancel_if_invalid = no 
+		continue_if_invalid = yes
+		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			set_cosmetic_tag = greater_paraguay
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_political_power = 75 
+			PAR_improve_public_concern = yes 
+			if = {
+                limit = {
+                    NOT = { has_global_flag = triple_alliance_formed_flag }
+                }
+                custom_effect_tooltip = PAR_neighboring_countries_become_more_concerned_tt
+                add_to_variable = { PAR_global_concern = 1 }
+				hidden_effect = {
+					if = {
+						limit = { 
+							BOL = { 
+								exists = yes 
+								is_subject = no 
+								num_of_controlled_states > 0
+							}
+						}
+						BOL = { country_event = paraguay.15 }
+					}
+					else = {
+						random_other_country = {
+							limit = { 
+								OR = {
+									is_neighbor_of = ROOT 
+									has_war_with = ROOT
+								}
+								has_civil_war = no
+								is_subject = no  
+								num_of_controlled_states > 0
+							}
+							country_event = paraguay.15
+						}
+					}
+				}
+            }
+			custom_effect_tooltip = PAR_every_neighbor_state_to_your_current_cores_will_become_core_tt
+			every_state = {
+				limit = {
+					any_neighbor_state = {
+						is_core_of = ROOT 
+					}
+					NOT = { is_core_of = ROOT }
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
+
+	### Everyone Shall Pay ###
+	focus = {
+		id = PAR_everyone_shall_pay
+		icon = GFX_focus_GRE_reviving_the_spartan_warrior_spirit
+		X = 1
+		Y = 1
+		relative_position_id = PAR_form_greater_paraguay
+		prerequisite = { focus = PAR_form_greater_paraguay }
+
+		cost = 5
+
+		available = {
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0.65
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = URG_unlocks_conquering_decisions_tt
+		}
+	}
+
+	### Demand our Enemies to Surrender ###
+	focus = {
+		id = PAR_demand_our_enemies_to_surrender
+		icon = GFX_goal_generic_demand_territory
+		x = -1
+		y = 1
+		relative_position_id = PAR_form_greater_paraguay
+		prerequisite = { focus = PAR_form_greater_paraguay }
+
+		cost = 10
+
+		available = {
+			OR = {
+				any_enemy_country = {
+					surrender_progress > 0.24
+				}
+				AND = {
+					has_war = no 
+					num_of_controlled_states > 8 
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			custom_effect_tooltip = PAR_unlock_demand_subjegation_decisions_tt
+		}
+	}
+
+	### A Major Power is Born ###
+	focus = {
+		id = PAR_a_major_power_is_born
+		icon = GFX_focus_rom_royal_dictatorship
+		x = -1
+		y = 1
+		relative_position_id = PAR_everyone_shall_pay
+		prerequisite = { focus = PAR_everyone_shall_pay }
+		prerequisite = { focus = PAR_demand_our_enemies_to_surrender }
+
+		cost = 10
+
+		available = {
+			power_balance_value = {
+				id = PAR_military_leader_bop
+				value > 0.8
+			}
+			all_core_state = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL
+			FOCUS_FILTER_STABILITY
+		}
+
+		completion_reward = {
+			add_political_power = 100
+			add_stability = 0.1
+			if = {
+				limit = {
+					ROOT = {
+						is_major = no
+					}
+				}
+				set_major = yes
+			}
+			custom_effect_tooltip = ARG_unlock_integrate_territory
+			if = {
+				limit = {
+					NOT = { has_country_flag = EUYL_can_integrate }
+				}
+				set_country_flag = EUYL_can_integrate
+			}
+		}
+	}
+
+	### Diplomacy Over Bloodshed ###
+	focus = {
+		id = PAR_diplomacy_over_bloodshed
+		icon = GFX_goal_generic_national_unity
+		x = -2
+		y = 1
+		relative_position_id = PAR_define_our_foreign_policy
+		prerequisite = { 
+			focus = PAR_define_our_foreign_policy 
+			focus = PAR_looking_outwards
+			focus = PAR_expand_conscription
+		}
+		mutually_exclusive = { focus = PAR_the_legacy_of_selano_lopez }
+
+		cost = 5
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes 
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { 
+						has_rule = can_create_factions
+					}
+				}
+				set_rule = { can_create_factions = yes }
+			}
+			every_other_country = {
+                limit = {
+                    capital_scope = { is_on_continent = south_america }
+                    NOT = {
+                        has_war_with = ROOT 
+                    }
+                }
+                add_opinion_modifier = { modifier = BOL_improved_relations target = ROOT }
+                ROOT = {
+                    add_opinion_modifier = { modifier = BOL_improved_relations target = PREV }
+                }
+            }
+		}
+	}
+
+	### United we Stand ###
+	focus = {
+		id = PAR_united_we_stand
+		icon = GFX_PRU_ally_with_south_america
+		x = 3
+		y = 1
+		relative_position_id = PAR_diplomacy_over_bloodshed
+		prerequisite = { focus = PAR_diplomacy_over_bloodshed }
+		mutually_exclusive = { focus = PAR_join_the_germans }
+		mutually_exclusive = { focus = PAR_join_the_soviets }
+		mutually_exclusive = { focus = PAR_join_the_british }
+
+		cost = 10
+
+		available = {
+			has_civil_war = no 
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 20
+				any_neighbor_country = {
+					has_government = ROOT 
+					is_faction_leader = yes 
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			if = {
+				limit = { is_faction_leader = yes }
+				every_other_country = {
+					limit = {
+						capital_scope = { is_on_continent = south_america }
+						has_government = ROOT 
+						is_in_faction = no 
+						NOT = {
+							has_war_with = ROOT
+						}
+					}
+					country_event = { id = generic.5 hours = 6 }
+				}
+			}
+			else = {
+				add_political_power = 50
+				every_other_country = {
+					limit = { is_in_faction_with = ROOT }
+					add_political_power = 50
+				}
+			}
+		}
+	}
+
+
+	focus = {
+		id = PAR_join_the_british
+		icon = GFX_focus_chi_british_cooperation
+		x = 1
+		y = 1
+		relative_position_id = PAR_diplomacy_over_bloodshed
+		prerequisite = { focus = PAR_diplomacy_over_bloodshed }
+		mutually_exclusive = { focus = PAR_join_the_germans }
+		mutually_exclusive = { focus = PAR_join_the_soviets }
+		mutually_exclusive = { focus = PAR_united_we_stand }
+
+		cost = 10
+
+		available = {
+			ENG = {
+				has_government = democratic
+				NOT = {
+					has_war_with = ROOT 
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 20
+				has_government = democratic
+			}
+		}
+
+		bypass = {
+			is_in_faction_with = ENG
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			ENG = {
+				country_event = { id = generic.2 hours = 6 }
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_join_the_germans
+		icon = GFX_focus_chi_mission_to_germany
+		x = -1
+		y = 1
+		relative_position_id = PAR_diplomacy_over_bloodshed
+		prerequisite = { focus = PAR_diplomacy_over_bloodshed }
+		mutually_exclusive = { focus = PAR_join_the_british }
+		mutually_exclusive = { focus = PAR_join_the_soviets }
+		mutually_exclusive = { focus = PAR_united_we_stand }
+
+		cost = 10
+
+		available = {
+			GER = {
+				has_government = fascism
+				NOT = {
+					has_war_with = ROOT 
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 20
+				has_government = fascism
+			}
+		}
+
+		bypass = {
+			is_in_faction_with = GER
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			GER = {
+				country_event = { id = generic.2 hours = 6 }
+			}
+		}
+	}
+
+	### JOIN THE SOVIETS ###
+	focus = {
+		id = PAR_join_the_soviets
+		icon = GFX_focus_chi_mission_to_the_soviet_union
+		x = -3
+		y = 1
+		relative_position_id = PAR_diplomacy_over_bloodshed
+		prerequisite = { focus = PAR_diplomacy_over_bloodshed }
+		mutually_exclusive = { focus = PAR_join_the_british }
+		mutually_exclusive = { focus = PAR_join_the_germans }
+		mutually_exclusive = { focus = PAR_united_we_stand }
+
+		cost = 10
+
+		available = {
+			SOV = {
+				has_government = communism
+				NOT = {
+					has_war_with = ROOT 
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 20
+				has_government = communism
+			}
+		}
+
+		bypass = {
+			is_in_faction_with = SOV
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		completion_reward = {
+			SOV = {
+				country_event = { id = generic.2 hours = 6 }
+			}
+		}
+	}
+
+	### Fight Communism in South America ###
+	focus = {
+		id = PAR_fight_communism
+		icon = GFX_ARG_rid_communism
+		x = 1
+		y = 1
+		relative_position_id = PAR_join_the_soviets
+		prerequisite = {
+			focus = PAR_join_the_british
+			focus = PAR_join_the_germans
+			focus = PAR_join_the_soviets
+			focus = PAR_united_we_stand
+		}
+
+		cost = 10
+
+		available = { 
+			has_army_manpower = {
+				size > 125000
+			}
+			NOT = { has_government = communism }
+		}
+
+		select_effect = {
+			every_country = {
+				limit = {
+					has_government = communism
+					NOT = { is_in_faction_with = ROOT }
+					OR = {
+						is_major = yes
+						is_neighbor_of = ROOT
+					}
+				}
+				ROOT = {
+					add_ai_strategy = {
+						type = prepare_for_war
+						id = PREV
+						value = 100
+					}
+				}
+			}
+		}
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION
+		}
+		completion_reward = {
+			custom_effect_tooltip = ARG_removecommunismfromcontinent
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						capital_scope = { is_on_continent = south_america }
+						has_government = communism
+						NOT = {
+							is_in_faction_with = ROOT 
+							has_war_with = ROOT
+						}
+					}
+					ROOT = {
+						create_wargoal = {
+							type = puppet_wargoal_focus
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	### Fight Fascism in South America ###
+	focus = {
+		id = PAR_fight_fascism
+		icon = GFX_ARG_rid_fascism
+		x = -1
+		y = 1
+		relative_position_id = PAR_join_the_soviets
+		prerequisite = {
+			focus = PAR_join_the_british
+			focus = PAR_join_the_germans
+			focus = PAR_join_the_soviets
+			focus = PAR_united_we_stand
+		}
+
+		cost = 10
+
+		available = { 
+			has_army_manpower = {
+				size > 125000
+			}
+			NOT = { has_government = fascism }
+		}
+
+		select_effect = {
+			every_country = {
+				limit = {
+					has_government = fascism
+					NOT = { is_in_faction_with = ROOT }
+					OR = {
+						is_major = yes
+						is_neighbor_of = ROOT
+					}
+				}
+				ROOT = {
+					add_ai_strategy = {
+						type = prepare_for_war
+						id = PREV
+						value = 100
+					}
+				}
+			}
+		}
+
+		search_filters = {
+			FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION
+		}
+		completion_reward = {
+			custom_effect_tooltip = ARG_removefascismfromcontinent
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						capital_scope = { is_on_continent = south_america }
+						has_government = fascism
+						NOT = {
+							is_in_faction_with = ROOT 
+							has_war_with = ROOT
+						}
+					}
+					ROOT = {
+						create_wargoal = {
+							type = puppet_wargoal_focus
+							target = PREV
+						}
+					}
+				}
+			}
+		}
+	}
+	### A New South America ###
+	focus = {
+		id = PAR_a_new_south_america
+		icon = GFX_goal_generic_national_unity
+		x = 0
+		y = 3
+		relative_position_id = PAR_join_the_soviets
+		prerequisite = {
+			focus = PAR_fight_fascism
+		}
+		prerequisite = {
+			focus = PAR_fight_communism
+		}
+
+		cost = 10
+		available = {
+			EUYL_every_SA_country_same_ideology_as_you = yes 
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			custom_effect_tooltip = PRU_every_south_american_nation_recieve
+			effect_tooltip = {
+				add_stability = 0.1
+				add_war_support = 0.1
+				add_popularity = {
+					ideology = ROOT
+					popularity = 0.05
+				}
+			}
+			hidden_effect = {
+				add_stability = 0.1
+				add_war_support = 0.1
+				add_popularity = {
+					ideology = ROOT
+					popularity = 0.05
+				}
+				every_other_country = {
+					limit = {
+						capital_scope = { is_on_continent = south_america }
+						NOT = {
+							has_war_with = ROOT 
+							OR = {
+								has_government = communism
+								has_government = fascism
+							}
+						}
+					}
+					add_stability = 0.1
+					add_war_support = 0.1
+					add_popularity = {
+						ideology = ROOT
+						popularity = 0.05
+					}
+				}
+			}
+		}
+	}
+
+	### ECON BOOST FROM ALLIES ###
+	focus = {
+		id = PAR_economic_boost_from_our_allies
+		icon = GFX_goal_generic_construction
+		x = -1
+		y = 1
+		relative_position_id = PAR_united_we_stand
+		prerequisite = {
+			focus = PAR_join_the_british
+			focus = PAR_join_the_germans
+			focus = PAR_join_the_soviets
+			focus = PAR_united_we_stand
+		}
+
+		cost = 10
+
+		available = { is_in_faction = yes }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_1_military = yes 
+			EUYL_add_2_civilian = yes 
+			if = {
+				limit = {
+					any_owned_state = { is_coastal = yes }
+				}
+				EUYL_add_1_dockyard = yes 
+			}
+		}
+	}
+
+	### Kindly Ask for Gran Chaco ###
+	focus = {
+		id = PAR_kindly_ask_for_gran_chaco
+		icon = GFX_PRU_invite_bolivia
+		x = 0
+		y = 1
+		relative_position_id = PAR_economic_boost_from_our_allies
+		prerequisite = {
+			focus = PAR_economic_boost_from_our_allies
+		}
+
+		cost = 10
+
+		available = {
+			has_army_manpower = {
+				size > 99999
+			}
+			num_of_factories > 24
+			any_other_country = {
+				controls_state = 302
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			random_other_country = {
+				limit = {
+					controls_state = 302
+				}
+				country_event = {
+					id = paraguay.8
+					days = 1
+				}
+			}
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = { transfer_state = 302 }
+		}
+	}
+
+	### ARMED FORCES TREE ###
+
+	### Restructure the armed forces ###
+	focus = {
+		id = PAR_restructure_the_armed_forces 
+		icon = GFX_PAR_armed_forces_icon
+		x = 17
+		y = 0
+		relative_position_id = PAR_support_the_revolution
+
+		cost = 5
+
+		offset = {
+			x = -20
+			y = 0
+			trigger = {
+				has_global_flag = PAR_chose_native_path_flag
+			}
+		}
+
+		available = { has_civil_war = no }
+
+		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_NAVY_XP FOCUS_FILTER_AIR_XP }
+		completion_reward = {
+			army_experience = 5
+			navy_experience = 5
+			air_experience = 5
+			add_command_power = 5
+			random_list = {
+				25 = {
+					PAR_improve_worn_out_army = yes 
+				}
+				75 = { }
+			}
+		}
+	}	
+
+	### The Paraguayan Army ###
+	focus = {
+		id = PAR_the_paraguayan_army
+		icon = GFX_PAR_ejercito_paraguayo_icon
+		x = 10
+		y = 1
+		relative_position_id = PAR_restructure_the_armed_forces
+		prerequisite = { focus = PAR_restructure_the_armed_forces }
+
+		cost = 7.2
+
+		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_INDUSTRY FOCUS_FILTER_BALANCE_OF_POWER }
+		completion_reward = {
+			EUYL_add_1_military = yes 
+			if = {
+				limit = {
+					has_any_power_balance = yes 
+				}
+				PAR_move_10_military = yes 
+			}
+			army_experience = 15
+			random_list = {
+				50 = {
+					PAR_improve_worn_out_army = yes 
+				}
+				50 = { }
+			}
+			if = {
+				limit = {
+					has_dlc = "Arms Against Tyranny"
+				}
+				mio:PAR_mauser_MIO = {
+					add_mio_funds = 750
+				}
+			}
+			else = {
+				custom_effect_tooltip = available_designer
+			    show_ideas_tooltip = PAR_mauser
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_ensure_quality_in_our_soldiers
+		icon = GFX_focus_generic_military_mission
+		x = -1
+		y = 1
+		relative_position_id = PAR_the_paraguayan_army
+		prerequisite = { focus = PAR_the_paraguayan_army }
+		mutually_exclusive = { focus = PAR_the_more_the_merrier }
+
+		cost = 10
+
+		available = {
+			num_of_military_factories > 5
+		}
+
+		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			army_experience = 10
+			add_ideas = ARG_quality
+			add_war_support = 0.05
+			random_list = {
+				50 = { 
+					PAR_improve_worn_out_army = yes 
+				}
+				50 = { }
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_utilize_our_indigenous_knowledge
+		icon = GFX_focus_FIN_utilize_the_sami
+		x = -5
+		y = 1
+		relative_position_id = PAR_the_paraguayan_army
+		prerequisite = { focus = PAR_the_paraguayan_army }
+		
+		cost = 10
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 10
+				has_game_rule = {
+					rule = PAR_ai_behavior 
+					option = PAR_NATIVE
+				}
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+		completion_reward = {
+			army_experience = 10
+			add_ideas = PAR_native_knowledge
+			custom_effect_tooltip = EUYL_available_army_chief_tt
+			show_ideas_tooltip = PAR_juan_belaieff_idea
+			if = {
+				limit = { has_completed_focus = PAR_expand_on_native_rights }
+				custom_effect_tooltip = PAR_easter_egg_tooltip_tt
+			}
+			hidden_effect = {
+				set_technology = {
+					PAR_indiginous_knowledge_tech = 1
+					popup = no
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_modernize_our_armaments
+		icon = GFX_goal_generic_small_arms
+		x = -3
+		y = 1
+		relative_position_id = PAR_ensure_quality_in_our_soldiers
+		prerequisite = { focus = PAR_ensure_quality_in_our_soldiers }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = PAR_worn_out_army_1
+					has_idea = PAR_worn_out_army_2
+				}
+			}
+		}
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = ARG_modernize_our_infantry_equipment
+				bonus = 1.0
+				uses = 2
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_modernize_our_artillery
+		icon = GFX_goal_generic_army_artillery2
+		x = -1
+		y = 1
+		relative_position_id = PAR_ensure_quality_in_our_soldiers
+		prerequisite = { focus = PAR_ensure_quality_in_our_soldiers }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = PAR_worn_out_army_1
+					has_idea = PAR_worn_out_army_2
+				}
+			}
+		}
+		
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = ARG_modern_artillery
+				bonus = 1.0
+				uses = 2
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_a_professional_army
+		icon = GFX_col_focus_escuela
+		x = -1
+		y = 1
+		relative_position_id = PAR_modernize_our_artillery
+		prerequisite = {
+			focus = PAR_modernize_our_artillery
+			focus = PAR_modernize_our_armaments
+		}
+
+		cost = 10
+
+		available = {
+			has_idea = ARG_quality
+			OR = {
+				num_of_military_factories > 9
+				threat > 0.24
+				has_war_support > 0.7
+				has_war = yes 
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			add_manpower = 7500
+			swap_ideas = {
+				remove_idea = ARG_quality
+				add_idea = ARG_quality_2
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_the_more_the_merrier
+		icon = GFX_focus_generic_full_social_mobilization
+		x = 1
+		y = 1
+		relative_position_id = PAR_the_paraguayan_army
+		prerequisite = { focus = PAR_the_paraguayan_army }
+		mutually_exclusive = { focus = PAR_ensure_quality_in_our_soldiers }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_WAR_SUPPORT }
+		completion_reward = {
+			add_ideas = BOL_expanded_army
+			add_war_support = 0.05
+			random_list = {
+				50 = {
+					PAR_improve_worn_out_army = yes 
+				}
+				50 = { }
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_cheap_out_on_infantry_equipment
+		icon = GFX_focus_generic_reorient_production
+		x = 1
+		y = 1
+		relative_position_id = PAR_the_more_the_merrier
+		prerequisite = { focus = PAR_the_more_the_merrier }
+
+		cost = 10
+
+		completion_reward = {
+			add_ideas = ARG_cheaper_equipment_anarchist
+		}
+	}
+
+	focus = {
+		id = PAR_produce_more_artillery
+		icon = GFX_goal_generic_army_artillery
+		x = 3
+		y = 1
+		relative_position_id = PAR_the_more_the_merrier
+		prerequisite = { focus = PAR_the_more_the_merrier }
+		
+		cost = 10
+		
+		
+		
+		
+		
+		completion_reward = {
+			add_ideas = ARG_cheaper_artillery
+		}
+	}
+
+	focus = {
+		id = PAR_an_expansive_army
+		icon = GFX_goal_generic_axis_build_infantry
+		x = -1
+		y = 1
+		relative_position_id = PAR_produce_more_artillery
+		prerequisite = {
+			focus = PAR_produce_more_artillery
+			focus = PAR_cheap_out_on_infantry_equipment
+		}
+
+		cost = 10
+
+		available = {
+			has_idea = BOL_expanded_army
+			OR = {
+				num_of_military_factories > 9
+				threat > 0.24
+				has_war_support > 0.7
+				has_war = yes 
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = BOL_expanded_army
+				add_idea = BOL_expanded_army_2
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_new_training_regiments
+		icon = GFX_PAR_training_exercises_icon
+		x = -1
+		y = 1
+		relative_position_id = PAR_the_more_the_merrier
+		prerequisite = { 
+			focus = PAR_the_more_the_merrier
+			focus = PAR_ensure_quality_in_our_soldiers
+		}
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+		completion_reward = {
+			if = {
+				limit = {
+					OR = {
+						has_idea = PAR_worn_out_army_1
+						has_idea = PAR_worn_out_army_2
+					}
+				}
+				PAR_improve_worn_out_army = yes 
+				custom_effect_tooltip = PAR_not_yet_fully_removed_tt
+				unlock_decision_tooltip = PAR_improve_the_army
+			}
+			else = {
+				add_command_power = 25
+				army_experience = 25
+				random_owned_controlled_state = {
+					create_unit = {
+						division = "name = \"División de Infanteria\" division_template = \"División de Infanteria\" start_experience_factor = 0.05 start_equipment_factor = 0.9" 
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_un_ejercito_moderno
+		icon = GFX_PAR_ejercito_moderno
+		x = 0
+		y = 1
+		relative_position_id = PAR_new_training_regiments
+		prerequisite = { focus = PAR_new_training_regiments }
+
+		cost = 10
+
+		available = {
+			NOT = {
+				OR = {
+					has_idea = PAR_worn_out_army_1
+					has_idea = PAR_worn_out_army_2
+				}
+			}
+			OR = {
+				num_of_military_factories > 11
+				threat > 0.34
+				has_war_support > 0.8
+				has_war = yes 
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_MANPOWER }
+		completion_reward = {
+			unlock_decision_category_tooltip = south_american_armament
+			EUYL_add_1_military = yes 
+		}
+	}
+
+	focus = {
+		id = PAR_the_paraguayan_airforce
+		icon = GFX_PAR_fuerza_aerea_icon
+		x = 0
+		y = 1
+		relative_position_id = PAR_restructure_the_armed_forces
+		prerequisite = { focus = PAR_restructure_the_armed_forces }
+
+		cost = 7.2
+
+		search_filters = { FOCUS_FILTER_AIR_XP FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			air_experience = 50
+			EUYL_add_1_air_base = yes
+			if = {
+				limit = {
+					has_dlc = "Arms Against Tyranny"
+				}
+				mio:PAR_douglas_aircraft_company = {
+					add_mio_size = 2
+				}
+			}
+			else = {
+				custom_effect_tooltip = available_designer
+				show_ideas_tooltip = PAR_douglas_aircraft 
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_modernize_our_fighters
+		icon = GFX_goal_generic_air_fighter2
+		x = 1
+		y = 1
+		relative_position_id = PAR_the_paraguayan_airforce
+		prerequisite = { focus = PAR_the_paraguayan_airforce }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PAR_fighter_modernization
+				bonus = 0.5
+				uses = 3
+				category = light_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_modernize_our_bombers
+		icon = GFX_goal_generic_air_bomber
+		x = 3
+		y = 1
+		relative_position_id = PAR_the_paraguayan_airforce
+		prerequisite = { focus = PAR_the_paraguayan_airforce }
+
+		cost = 8
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			add_tech_bonus = {
+				name = PAR_bomber_modernization
+				bonus = 0.5
+				uses = 3
+				category = tactical_bomber
+				category = cat_strategic_bomber
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_industrial_effort_into_airplane_production
+		icon = GFX_focus_generic_aircraft_production
+		x = 0
+		y = 2
+		relative_position_id = PAR_the_paraguayan_airforce
+		prerequisite = { focus = PAR_the_paraguayan_airforce }
+
+		cost = 10
+
+		available = {
+			num_of_controlled_states > 2
+			num_of_military_factories > 4
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_1_military = yes 
+			add_ideas = CHL_expanding_our_numbers
+		}
+	}
+
+	focus = {
+		id = PAR_airbase_expansion_project
+		icon = GFX_goal_generic_air_production
+		x = 0
+		y = 1
+		relative_position_id = PAR_industrial_effort_into_airplane_production
+		prerequisite = { focus = PAR_industrial_effort_into_airplane_production }
+
+		cost = 10
+
+		available = { num_of_controlled_states > 3 }
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_3_air_base = yes 
+		}
+	}
+
+	focus = {
+		id = PAR_heavy_military_funds
+		icon = GFX_CHL_military_economy
+		x = 4
+		y = 2
+		relative_position_id = PAR_industrial_effort_into_airplane_production
+		prerequisite = { focus = PAR_industrial_effort_into_airplane_production }
+		prerequisite = { focus = PAR_un_ejercito_moderno }
+
+		cost = 10
+
+		available = {
+			num_of_military_factories > 14
+			num_of_controlled_states > 8
+			has_war_support > 0.9
+		}
+
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			EUYL_add_4_military = yes 
+			custom_effect_tooltip = PAR_completed_PAR_heavy_military_investments_gain_following_tt
+			custom_effect_tooltip = PAR_improve_military_production_tt
+
+			custom_effect_tooltip = CHL_skip_one_line_tt
+
+			add_research_slot = 1
+			hidden_effect = {
+				if = {
+					limit = {
+						has_dynamic_modifier = { modifier = PAR_paraguayan_military_production }
+					}
+					add_to_variable = { PAR_arms_factory_construction_speed = 0.025 }
+					add_to_variable = { PAR_factory_output = 0.025 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_fully_establish_the_armada_paraguaya
+		icon = GFX_PAR_armada_paraguaya
+		x = -3
+		y = 1
+		relative_position_id = PAR_restructure_the_armed_forces
+		prerequisite = { focus = PAR_restructure_the_armed_forces }
+
+		cost = 7.2
+
+		available = {
+			any_owned_state = {
+				is_coastal = yes 
+			}
+		}
+
+		search_filters = { FOCUS_FILTER_NAVY_XP FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			navy_experience = 50
+			EUYL_add_2_dockyard = yes 
+		}
+	}
+
+	focus = {
+		id = PAR_submarine_effort
+		icon = GFX_goal_generic_navy_submarine
+		x = -1
+		y = 1
+		relative_position_id = PAR_fully_establish_the_armada_paraguaya
+		prerequisite = { focus = PAR_fully_establish_the_armada_paraguaya }
+		mutually_exclusive = { focus = PAR_destroyer_effort }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_NAVY_XP FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			navy_experience = 20
+			add_tech_bonus = {
+				name = PAR_submarine_effort
+				bonus = 1.0
+				uses = 2
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_destroyer_effort
+		icon = GFX_focus_generic_destroyer
+		x = 1
+		y = 1
+		relative_position_id = PAR_fully_establish_the_armada_paraguaya
+		prerequisite = { focus = PAR_fully_establish_the_armada_paraguaya }
+		mutually_exclusive = { focus = PAR_submarine_effort }
+
+		cost = 10
+
+		search_filters = { FOCUS_FILTER_NAVY_XP FOCUS_FILTER_RESEARCH }
+		completion_reward = {
+			navy_experience = 20
+			add_tech_bonus = {
+				name = PAR_destroyer_effort
+				bonus = 1.0
+				uses = 2
+				category = dd_tech
+			}
+		}
+	}
+
+	focus = {
+		id = PAR_heavy_naval_investments
+		icon = GFX_ARG_increase_navy_budget
+		x = 0
+		y = 1
+		relative_position_id = PAR_submarine_effort
+		prerequisite = {
+			focus = PAR_submarine_effort
+			focus = PAR_destroyer_effort
+		}
+		mutually_exclusive = { focus = PAR_mild_naval_investments }
+
+		cost = 10
+
+		completion_reward = {
+			add_ideas = PAR_heavy_naval_investments_idea
+		}
+	}
+
+	focus = {
+		id = PAR_mild_naval_investments
+		icon = GFX_goal_generic_build_navy
+		x = 0
+		y = 1
+		relative_position_id = PAR_destroyer_effort
+		prerequisite = {
+			focus = PAR_submarine_effort
+			focus = PAR_destroyer_effort
+		}
+		mutually_exclusive = { focus = PAR_heavy_naval_investments }
+
+		cost = 10
+
+		completion_reward = {
+			add_ideas = PAR_mild_naval_investments_idea
+		}
+	}
+
+	focus = {
+		id = PAR_an_improved_armada
+		icon = GFX_goal_generic_navy_battleship
+		x = -1
+		y = 1
+		relative_position_id = PAR_mild_naval_investments
+		prerequisite = {
+			focus = PAR_mild_naval_investments
+			focus = PAR_heavy_naval_investments
+		}
+
+		cost = 10
+
+		available = {
+			has_navy_size = { size > 19 }
+		}
+
+		search_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			EUYL_add_2_dockyard = yes 
+			EUYL_add_1_dockyard = yes 
+			add_tech_bonus = {
+				name = PAR_an_improved_armada
+				bonus = 0.5
+				uses = 1
+				category = ca_tech
+			}
+			add_tech_bonus = {
+				name = PAR_an_improved_armada
+				bonus = 0.5
+				uses = 1
+				category = ca_tech
+			}
+		}
+	}
+}

@@ -1,0 +1,786 @@
+characters={
+	ELS_maximiliano_hernández_martínez={
+		name="Maximiliano Hernández Martínez"
+		portraits={
+			civilian={
+				large="GFX_portrait_el_salvador_maximiliano_hernandez_martinez"
+			}
+			army={
+				large="GFX_portrait_el_salvador_maximiliano_hernandez_martinez"				
+				small="gfx/interface/ideas/ELS_maximiliano_hernandez.dds"
+			}
+		}
+		country_leader={
+			ideology=fascism_ideology
+			traits={ caudillo_1 anti_democrat anti_communist fascist_sympathies }
+			expire="1965.1.1.1"
+			id=-1
+		}
+		field_marshal={
+			traits = { politically_connected career_officer offensive_doctrine trait_cautious }
+			skill = 3
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 4
+			logistics_skill = 2
+			legacy_id=-1
+			visible = {
+				OR = {
+					has_government = neutrality
+				    has_government = fascism
+				}
+			}
+		}		
+	}
+
+	ELS_arturo_araujo={
+		name="Arturo Araujo"
+		portraits={
+			civilian={
+				large="gfx/leaders/ELS/Portrait_ELS_Arturo_Araujo.dds"
+			}
+		}
+		country_leader={
+			ideology=conservatism
+			traits={ HUN_veteran_president }			
+			expire="1965.1.1.12"
+			id=-1
+		}
+	}
+
+	ELS_miguel_marmol={
+		name="Miguel Mármol"
+		portraits={
+			civilian={
+				large="gfx/leaders/ELS/Portrait_ELS_Miguel_Mármol.dds"
+				small="gfx/interface/ideas/ELS_miguel_marmol.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_miguel_marmol
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits = {
+				communist_orator
+			}
+			available = {
+				NOT = {
+					has_country_leader = {
+						character = ELS_miguel_marmol
+						ruling_only = yes
+					}					
+				}
+			}			
+		}		
+		country_leader={
+			ideology=marxism
+			traits={ ARG_communist_insurrectionist }			
+			expire="1965.1.1.12"
+			id=-1
+		}
+	}
+
+	ELS_osmin_aguirre_salinas={
+		name="Osmin Aguirre y Salinas"
+		portraits={
+			civilian={
+				large="gfx/leaders/ELS/Portrait_ELS_Osmin_Aguirre_Y_Salinas.dds"
+				small="gfx/interface/ideas/ELS_osmin_aguirre_salinas_civil.dds"
+			}
+			army={
+				large="gfx/leaders/ELS/Portrait_ELS_Osmin_Aguirre_Y_Salinas.dds"
+				small="gfx/interface/ideas/ELS_osmin_aguirre_salinas.dds"
+			}			
+		}
+		country_leader={
+			ideology=centrism
+			expire="1965.1.1.12"
+			id=-1
+		}
+		advisor={
+			slot = high_command
+			idea_token = ELS_osmin_aguirre_salinas_army
+			ledger = army
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				army_chief_drill_1
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}	
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_osmin_aguirre_salinas_civil
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				BEL_minister_of_national_defence_deveze 
+			}
+		}			
+		corps_commander={
+			traits={ politically_connected militias_officer skilled_staffer }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 3
+			planning_skill = 1
+			logistics_skill = 1
+			legacy_id=-1
+		}		
+	}
+
+	ELS_salvador_castaneda_castro={
+		name="Salvador Castañeda Castro"
+		portraits={
+			civilian={
+				small= "gfx/interface/ideas/ELS_salvador_castaneda_castro_civil.dds"				
+			}
+			army={
+				large = "gfx/leaders/ELS/Portrait_ELS_Salvador_Castaneda_Castro.dds"
+				small= "gfx/interface/ideas/ELS_salvador_castaneda_castro.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_salvador_castaneda_castro
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits = {
+				SWE_minister_of_state the_director 
+			}
+		}
+		corps_commander={
+			traits={ trait_engineer }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 1
+			planning_skill = 2
+			logistics_skill = 1
+			legacy_id=-1
+		}
+		advisor = {
+			cost = 100
+			slot = army_chief
+			idea_token = ELS_salvador_castaneda_castro_chief
+			ledger = army
+			allowed = {
+				original_tag = ELS
+			}
+			available = {
+				#
+			}
+			traits = {
+				army_chief_organizational_2
+			}
+		}
+		advisor = {
+			cost = 100
+			slot = high_command
+			idea_token = ELS_salvador_castaneda_castro_army
+			ledger = army
+			allowed = {
+				original_tag = ELS
+			}
+			available = {
+				#
+			}
+			traits = {
+				army_artillery_2
+			}
+		}
+	}	
+
+	ELS_andres_ignacio_menendez={
+		name="Andrés Ignacio Menéndez"
+		portraits={
+			army={
+				large = "gfx/leaders/ELS/Portrait_ELS_Andres_Ignacio_Menendez.dds"
+				small="gfx/interface/ideas/ELS_andres_ignacio_menendez.dds"
+			}
+		}
+		corps_commander={
+			traits = { old_guard infantry_officer }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 2
+			legacy_id=-1
+		}
+		advisor = {
+			cost = 100
+			slot = army_chief
+			idea_token = ELS_andres_ignacio_menendez_chief
+			ledger = army
+			allowed = {
+				original_tag = ELS
+			}
+			available = {
+				#
+			}
+			traits = {
+				army_chief_morale_2
+			}
+		}
+		advisor = {
+			cost = 100
+			slot = high_command
+			idea_token = ELS_andres_ignacio_menendez_army
+			ledger = army
+			allowed = {
+				original_tag = ELS
+			}
+			available = {
+				#
+			}
+			traits = {
+				army_infantry_2
+			}
+		}
+	}
+
+	ELS_joaquin_valdez={
+		name="Joaquín Valdéz"
+		portraits={
+			army={
+				large = "gfx/leaders/ELS/Portrait_ELS_Joaquin_Valdez.dds"
+				small="gfx/interface/ideas/ELS_joaquin_valdez.dds"
+			}
+		}
+		corps_commander={
+			traits = { career_officer infantry_officer }
+			skill = 2
+			attack_skill = 3
+			defense_skill = 2
+			planning_skill = 1
+			logistics_skill = 1
+			legacy_id=-1
+		}
+	}	
+
+	ELS_cesar_yanes_urias={
+		name = "Cesar Yanes Urías"
+		portraits={
+			army={
+				large = "gfx/leaders/South America/Portrait_UL_South_America_Generic_navy_1.dds"
+			}
+		}
+		navy_leader={
+			traits = { navy_career_officer }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			maneuvering_skill = 1
+			coordination_skill = 1
+			legacy_id=-1
+		}
+	}
+
+	ELS_hector_escobar_serrano={
+		name="Hector Escobar Serraño"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_5"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ELS_hector_escobar_serrano
+			ledger = army
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				army_armored_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ELS_milton_andrade_cabrera={
+		name="Milton Andrade Cabrera"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ELS_milton_andrade_cabrera
+			ledger = air
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				air_airborne_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ELS_humbert_aberle={
+		name="Humbert Aberle"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_3"
+			}
+		}
+		advisor={
+			slot = air_chief
+			idea_token = ELS_humbert_aberle
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				air_chief_night_operations_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ELS_horacio_carnejo_ibanez={
+		name="Horacio Carnejo Ibanéz"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_1"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = ELS_horacio_carnejo_ibanez
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				navy_chief_commerce_raiding_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ELS_reinaldo_galindo_pohl={
+		name="Reinaldo Galindo Pohl"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_1"
+			}
+		}
+		advisor={
+			cost = 100
+			
+			slot = theorist
+			idea_token = ELS_reinaldo_galindo_pohl
+			ledger = navy
+			allowed = {
+				original_tag = ELS
+			}
+			
+			traits = {
+				naval_theorist
+			}
+		}
+	}
+
+	ELS_mauro_espinola_castro={
+		name="Mauro Espínola Castro"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_3"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ELS_mauro_espinola_castro
+			ledger = army
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				army_cavalry_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ELS_jose_angel_castillo={
+		name="José Angél Castillo"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+		advisor={
+			cost = 100
+			slot = theorist
+			idea_token = ELS_jose_angel_castillo
+			ledger = air
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				air_warfare_theorist
+			}
+		}
+	}
+
+	ELS_manuel_de_jesus_cordova={	
+		name="Manuel de Jesús Cordova"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_4"
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = ELS_manuel_de_jesus_cordova
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				army_chief_offensive_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+	
+	ELS_augustin_farabundo_marti={
+		name="Augustín Farabundo Martí"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_1"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ELS_augustin_farabundo_marti
+			ledger = army
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				navy_amphibious_assault_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ELS_manuel_jose_maria_lemus_lopez={
+		name="Manuel Jose Maria Lemus Lopez"
+		portraits={
+			army={
+				small="GFX_idea_generic_army_south_america_2"
+			}
+		}
+		advisor={
+			cost = 100
+			
+			slot = theorist
+			idea_token = ELS_manuel_jose_maria_lemus_lopez
+			ledger = army
+			allowed = {
+				original_tag = ELS
+			}
+			
+			traits = {
+				military_theorist
+			}
+		}
+	}
+
+	ELS_raul_rodolfi_sanchez={
+		name="Raul Rodolfí Sanchez"
+		portraits={
+			army={
+				small="GFX_idea_generic_navy_south_america_2"
+			}
+		}
+		advisor={
+			slot = navy_chief
+			idea_token = ELS_raul_rodolfi_sanchez
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				navy_chief_decisive_battle_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ELS_ricardo_abrego_abrego={
+		name="Ricardo Abrego Abrego"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_1"
+			}
+		}
+		advisor={
+			slot = air_chief
+			idea_token = ELS_ricardo_abrego_abrego
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				air_chief_reform_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ELS_humberto_costa={
+		name="Humberto Costa"
+		portraits={
+			army={
+				small="GFX_idea_generic_air_south_america_2"
+			}
+		}
+		advisor={
+			slot = high_command
+			idea_token = ELS_humberto_costa
+			ledger = air
+			allowed = {
+				original_tag = ELS
+			}
+			traits = {
+				air_air_superiority_2
+			}
+			cost = 100
+			ai_will_do = {
+				factor = 1.000
+			}
+		}
+	}
+
+	ELS_modesto_ramirez={ #Uno de los fundadores del Partido Comunista Salvadoreño
+		name="Modesto Ramirez"
+		portraits={
+			civilian={
+				small="gfx/interface/ideas/ELS_modesto_ramirez.dds"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_modesto_ramirez
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				veteran_communist 
+			}
+			available = {
+                has_government = democratic
+                has_government = communism				
+			}			
+		}
+	}	
+
+	ELS_abel_cuenca={ #Uno de los fundadores del Partido Comunista Salvadoreño
+		name="Abel Cuenca"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_abel_cuenca
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				NOR_communist_agitator 
+			}
+			available = {
+                has_government = democratic
+                has_government = communism				
+			}			
+		}
+	}	
+
+	ELS_miguel_angel_espino={ #Escritor, periodista y abogado salvadoreño.
+		name="Miguel Ángel Espino"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_3"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_miguel_angel_espino
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				BRA_academic_writer 
+			}		
+		}
+	}		
+
+	ELS_oscar_a_bolanos={
+		name="Oscar A. Bolaños"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_oscar_a_bolanos
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				captain_of_industry 
+			}
+		}
+	}
+
+	ELS_jose_maria_cuellar={
+		name="Jose Maria Cuellar"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_3"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_jose_maria_cuellar
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				quartermaster_general 
+			}
+		}
+	}
+
+	ELS_alfonso_espino={ #Poeta salvadoreño (1882-1946), autor del poemario Mármoles y bronces (1919), Padre de Edgardo Alfredo Espino Najarro.
+		name="Alfonso Espino"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_alfonso_espino
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				liberal_professor 
+			}		
+		}
+	}
+
+	ELS_jose_gustavo_guerrero={ #Abogado, diplomático, político y juez internacional salvadoreño, siendo el único en haber presidido las dos cortes mundiales.
+		name="José Gustavo Guerrero"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_jose_gustavo_guerrero
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				SWE_minister_of_justice 
+			}		
+		}
+	}	
+
+	ELS_napoleon_viera_altamirano={ #Cofundador y director de "El Diario de Hoy" y Candidatura a la Presidencia de la República por el Frente Social Republicano (FSR) en 1944.
+		name="Napoleón Viera Altamirano"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_2"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_napoleon_viera_altamirano
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				subservient_democrat 
+			}		
+		}
+	}
+
+	ELS_oscar_romero_galdamez={ #Sacerdote, cuarto arzobispo metropolitano de San Salvador (1977-1980), célebre por su prédica en defensa de los derechos humanos.
+		name="Óscar Arnulfo Romero Galdámez"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_napoleon_viera_altamirano
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				SWI_humanitarian 
+			}		
+		}
+	}
+
+	ELS_ramon_lopez_jimenez={ #Abogado, diplomático e historiador (1898-1973)
+		name="Ramón López Jiménez"
+		portraits={
+			army={
+				small="GFX_idea_generic_political_advisor_south_america_1"
+			}
+		}
+		advisor={
+			slot = political_advisor
+			idea_token = ELS_napoleon_viera_altamirano
+			allowed  = {
+				original_tag  = ELS
+			}
+			traits  = {
+				BRA_education_pioneer 
+			}		
+		}
+	}
+
+}

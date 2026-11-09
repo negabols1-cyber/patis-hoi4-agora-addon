@@ -1,0 +1,1047 @@
+parliament_gui_decision_category = {
+
+	FRA_veto_right = {
+		icon = generic_speech
+		allowed = {
+			tag = FRA
+		}
+
+		visible = {
+			has_country_flag = FRA_veto_right
+		}
+
+		days_remove = 70
+		days_re_enable = 140
+		fire_only_once = no
+		fixed_random_seed = no
+		complete_effect = {
+			add_to_variable = { fra_senate_support = 40 }
+			custom_effect_tooltip = senate_win_40
+		}
+
+		remove_effect = {
+			add_to_variable = { fra_senate_support = -40 }
+		}
+	}
+
+	FRA_disolve_gov = {
+		icon = generic_speech
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			IF = {
+				limit = {
+					NOT = {
+						has_country_flag = FRA_senate_reworked
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = fra_senate_support_80
+					check_variable = { fra_senate_support > 79 }
+				}
+			}
+		}
+
+		days_remove = 92
+		days_re_enable = 60
+		cost = 50
+		fire_only_once = no
+		fixed_random_seed = no
+		complete_effect = {
+			clr_country_flag = FRA_parliament_can_discuss
+			IF = {
+				limit = {
+					NOT = {
+						has_country_flag = FRA_first_disolve_gov
+					}
+				}
+				country_event = u_fra.148
+			}
+			set_country_flag = FRA_parliament_can_discuss
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliment_election_tt
+			fra_parliament_gui_elections = yes       #defined in common\scripted_effects\parliament_gui_scriped_effects
+		}
+	}
+
+	## PROMOTE
+
+	FRA_promote_socialism = {
+		icon = generic_political_discourse
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+		}
+
+		days_remove = 50
+
+		cost = 30
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_historical_focus_on = yes
+				set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+				add_to_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+				custom_trigger_tooltip = {
+					tooltip = popular_front_more_enough
+					check_variable = { FRA_rw_support < 120 }
+				}
+				NOT = {
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+					custom_trigger_tooltip = {
+						tooltip = socialists_advantage
+						check_variable = { FRA_rw_support > 60 }
+					}
+				}
+				add = 300
+			}
+		}
+		fire_only_once = no
+
+		complete_effect = {
+		}
+
+		modifier = {
+			political_power_gain = -0.05
+			consumer_goods_factor = 0.03
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = socialists_win_10
+			set_temp_variable = { temp_member = 1 }
+			set_temp_variable = { temp_seats = 10 }
+			modify_parliament_seat = yes
+			add_to_variable = { fra_senate_support = 4 }
+			custom_effect_tooltip = senate_win_4
+		}
+	}
+
+	FRA_promote_liberalism = {
+		icon = generic_political_discourse
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+		}
+
+		days_remove = 50
+
+		cost = 30
+		ai_will_do = {
+			base = 0
+			modifier = {
+				is_historical_focus_on = yes
+				OR = {
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+					custom_trigger_tooltip = {
+						tooltip = social_liberals_enough
+						check_variable = { FRA_rw_support < 97 }
+					}
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+					add_to_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+					custom_trigger_tooltip = {
+						tooltip = popular_front_more_enough
+						check_variable = { FRA_rw_support < 120 }
+					}
+				}
+				add = 1000
+			}
+		}
+		fire_only_once = no
+
+		complete_effect = {
+		}
+
+		modifier = {
+			political_power_gain = -0.05
+			consumer_goods_factor = 0.03
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = social_liberals_win_10
+			set_temp_variable = { temp_member = 2 }
+			set_temp_variable = { temp_seats = 10 }
+			modify_parliament_seat = yes
+			add_to_variable = { fra_senate_support = 4 }
+			custom_effect_tooltip = senate_win_4
+		}
+	}
+
+	FRA_promote_conservatism = {
+		icon = generic_political_discourse
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+		}
+
+		days_remove = 50
+
+		cost = 30
+
+		fire_only_once = no
+
+		complete_effect = {
+		}
+
+		modifier = {
+			political_power_gain = -0.05
+			consumer_goods_factor = 0.03
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = conservatives_win_10
+			set_temp_variable = { temp_member = 3 }
+			set_temp_variable = { temp_seats = 10 }
+			modify_parliament_seat = yes
+			add_to_variable = { fra_senate_support = 4 }
+			custom_effect_tooltip = senate_win_4
+		}
+	}
+
+	FRA_promote_nationalism = {
+		icon = generic_political_discourse
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+		}
+
+		days_remove = 50
+
+		cost = 30
+
+		fire_only_once = no
+
+		complete_effect = {
+		}
+
+		modifier = {
+			political_power_gain = -0.05
+			consumer_goods_factor = 0.03
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = nationalists_win_10
+			set_temp_variable = { temp_member = 4 }
+			set_temp_variable = { temp_seats = 10 }
+			modify_parliament_seat = yes
+			add_to_variable = { fra_senate_support = 4 }
+			custom_effect_tooltip = senate_win_4
+		}
+	}
+
+	FRA_quiet_socialists = {
+		icon = generic_arrest
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			has_idea = FRA_political_violence
+			custom_trigger_tooltip = {
+				tooltip = nationalists_advantage
+				set_temp_variable = { FRA_rw_support = parliament_seat_array^3 }
+				check_variable = { FRA_rw_support > 90 }
+			}
+		}
+
+		days_remove = 35
+
+		cost = 25
+
+		fire_only_once = no
+
+		complete_effect = {
+			custom_effect_tooltip = socialists_loss_15
+			set_temp_variable = { temp_member = 1 }
+			set_temp_variable = { temp_seats = -15 }
+			modify_parliament_seat = yes
+			custom_effect_tooltip = senate_loss_5
+			add_to_variable = { fra_senate_support = -10 }
+			modify_parliament_seat = yes
+			add_stability = -0.04
+		}
+
+		modifier = {
+		}
+
+		remove_effect = {
+		}
+	}
+
+	FRA_arrest_extremists = {
+		icon = generic_arrest
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			has_idea = FRA_political_violence
+			custom_trigger_tooltip = {
+				tooltip = socialists_advantage
+				set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+				check_variable = { FRA_rw_support > 90 }
+			}
+		}
+
+		days_remove = 35
+
+		cost = 25
+
+		fire_only_once = no
+
+		complete_effect = {
+			custom_effect_tooltip = nationalists_loss_15
+			set_temp_variable = { temp_member = 4 }
+			set_temp_variable = { temp_seats = -15 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = senate_loss_10
+			add_to_variable = { fra_senate_support = -10 }
+			modify_parliament_seat = yes
+			add_stability = -0.04
+		}
+
+		modifier = {
+		}
+
+		remove_effect = {
+		}
+	}
+
+	FRA_corrupt_senate = {
+		icon = hol_attract_foreign_investors
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+		}
+
+		days_remove = 40
+
+		cost = 25
+
+		fire_only_once = no
+
+		complete_effect = {
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.06
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = senate_win_8
+			add_to_variable = { fra_senate_support = 8 }
+			modify_parliament_seat = yes
+		}
+	}
+
+	FRA_silence_senate = {
+		icon = hol_attract_foreign_investors
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+		}
+
+		days_remove = 35
+
+		cost = 35
+
+		fire_only_once = no
+
+		complete_effect = {
+		}
+
+		modifier = {
+			democratic_drift = -0.02
+			consumer_goods_factor = 0.03
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = senate_win_14
+			add_to_variable = { fra_senate_support = 14 }
+			modify_parliament_seat = yes
+		}
+	}
+
+	FRA_poison_senate = {
+		icon = hol_attract_foreign_investors
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+		}
+
+		days_remove = 14
+
+		cost = 15
+
+		fire_only_once = no
+
+		modifier = {
+			consumer_goods_factor = 0.06
+		}
+
+		complete_effect = {
+			add_to_variable = { fra_senate_support = 14 }
+			add_stability = -0.02
+			custom_effect_tooltip = senate_win_14
+			custom_effect_tooltip = generic_skip_one_line_tt
+		}
+
+		modifier = {
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = senate_loss_16
+			add_to_variable = { fra_senate_support = -16 }
+			modify_parliament_seat = yes
+		}
+	}
+
+
+	## SOCIALIST POLICIES
+	FRA_social_security_for_working_class = {
+		icon = eng_trade_unions_support
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+			add_to_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+			custom_trigger_tooltip = {
+				tooltip = popular_front_majority
+				check_variable = { FRA_rw_support > 125 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_50
+				check_variable = { fra_senate_support > 49 }
+			}
+		}
+
+		days_remove = 90
+
+		cost = 25
+
+		fire_only_once = yes
+
+		complete_effect = {
+			add_stability = 0.05
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			custom_effect_tooltip = socialists_loss_10
+			set_temp_variable = { temp_member = 1 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = social_liberals_loss_10
+			set_temp_variable = { temp_member = 2 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+		}
+
+		remove_effect = {
+		}
+	}
+	## POPULAR FRONT POLICIES
+	FRA_office_du_ble = {
+		icon = eng_trade_unions_support
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+			add_to_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+			custom_trigger_tooltip = {
+				tooltip = popular_front_majority
+				check_variable = { FRA_rw_support > 125 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_50
+				check_variable = { fra_senate_support > 49 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 60
+		cost = 25
+
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = socialists_loss_10
+			set_temp_variable = { temp_member = 1 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = social_liberals_loss_10
+			set_temp_variable = { temp_member = 2 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+			production_speed_industrial_complex_factor = 0.05
+			stability_weekly = 0.001
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_60_days_tt
+		}
+	}
+	FRA_raise_mandatory_school_age = {
+		icon = eng_trade_unions_support
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+			add_to_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+			custom_trigger_tooltip = {
+				tooltip = popular_front_majority
+				check_variable = { FRA_rw_support > 125 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_50
+				check_variable = { fra_senate_support > 49 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 60
+		cost = 35
+
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = socialists_loss_10
+			set_temp_variable = { temp_member = 1 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = social_liberals_loss_10
+			set_temp_variable = { temp_member = 2 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+			research_speed_factor = 0.10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_60_days_tt
+		}
+	}
+	## BLOC NATIONAL POLICIES
+	FRA_council_of_regions = {
+		icon = generic_nationalism
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			set_temp_variable = { FRA_rw_support = parliament_seat_array^2 }
+			add_to_temp_variable = { FRA_rw_support = parliament_seat_array^3 }
+			custom_trigger_tooltip = {
+				tooltip = national_bloc_majority
+				check_variable = { FRA_rw_support > 125 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_50
+				check_variable = { fra_senate_support > 49 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 180
+		cost = 25
+
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = nationalists_loss_10
+			set_temp_variable = { temp_member = 4 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = conservatives_loss_10
+			set_temp_variable = { temp_member = 3 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+			min_export = -0.05
+			local_resources_factor = 0.10
+			production_factory_efficiency_gain_factor = 0.07
+			production_factory_start_efficiency_factor = 0.07
+			consumer_goods_factor = 0.03
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_180_days_tt
+		}
+	}
+	FRA_council_of_colonies = {
+		icon = generic_nationalism
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			set_temp_variable = { FRA_rw_support = parliament_seat_array^2 }
+			add_to_temp_variable = { FRA_rw_support = parliament_seat_array^3 }
+			custom_trigger_tooltip = {
+				tooltip = national_bloc_majority
+				check_variable = { FRA_rw_support > 125 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_50
+				check_variable = { fra_senate_support > 49 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 30
+		cost = 25
+
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = nationalists_loss_10
+			set_temp_variable = { temp_member = 4 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = conservatives_loss_10
+			set_temp_variable = { temp_member = 3 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+			resistance_growth = -0.15
+			compliance_growth = 0.15
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_30_days_tt
+		}
+	}
+	FRA_council_of_corporations = {
+		icon = generic_nationalism
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			set_temp_variable = { FRA_rw_support = parliament_seat_array^2 }
+			add_to_temp_variable = { FRA_rw_support = parliament_seat_array^3 }
+			custom_trigger_tooltip = {
+				tooltip = national_bloc_majority
+				check_variable = { FRA_rw_support > 125 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_50
+				check_variable = { fra_senate_support > 49 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 60
+		cost = 35
+
+		fire_only_once = yes
+
+		complete_effect = {
+			custom_effect_tooltip = nationalists_loss_10
+			set_temp_variable = { temp_member = 4 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = conservatives_loss_10
+			set_temp_variable = { temp_member = 3 }
+			set_temp_variable = { temp_seats = -10 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+			consumer_goods_factor = -0.03
+			production_speed_buildings_factor = 0.10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_60_days_tt
+		}
+	}
+	## SOCIALIST POLICIE
+	FRA_one_year_economy_plan = {
+		icon = generic_factory
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			custom_trigger_tooltip = {
+				tooltip = socialists_advantage
+				set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+				check_variable = { FRA_rw_support > 90 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_60
+				check_variable = { fra_senate_support > 59 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 60
+		cost = 25
+
+		fire_only_once = no
+
+		complete_effect = {
+			custom_effect_tooltip = socialists_loss_15
+			set_temp_variable = { temp_member = 1 }
+			set_temp_variable = { temp_seats = -15 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+			production_speed_radar_station_factor = 0.10
+			production_speed_rocket_site_factor = 0.10
+			production_speed_synthetic_refinery_factor = 0.10
+			production_speed_naval_base_factor = 0.10
+			production_speed_infrastructure_factor = 0.10
+			production_speed_coastal_bunker_factor = 0.10
+			production_speed_air_base_factor = 0.10
+			production_speed_bunker_factor = 0.10
+			production_speed_anti_air_building_factor = 0.10
+			economy_cost_factor = -0.10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_60_days_tt
+		}
+	}
+	## SOCIAL LIBERAL POLICIE
+	FRA_subsidized_rearmament = {
+		icon = generic_factory
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			custom_trigger_tooltip = {
+				tooltip = social_liberals_advantage
+				set_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+				check_variable = { FRA_rw_support > 90 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_60
+				check_variable = { fra_senate_support > 59 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 180
+		cost = 25
+
+		fire_only_once = no
+
+		complete_effect = {
+			custom_effect_tooltip = social_liberals_loss_15
+			set_temp_variable = { temp_member = 2 }
+			set_temp_variable = { temp_seats = -15 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.06
+			industrial_capacity_factory = 0.10
+			production_factory_max_efficiency_factor = 0.1
+			production_factory_efficiency_gain_factor = 0.1
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_180_days_tt
+		}
+	}
+	## CONSERVATIVE POLICIE
+	FRA_privatize_businesses = {
+		icon = generic_factory
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			custom_trigger_tooltip = {
+				tooltip = conservatives_advantage
+				set_temp_variable = { FRA_rw_support = parliament_seat_array^2 }
+				check_variable = { FRA_rw_support > 90 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_60
+				check_variable = { fra_senate_support > 59 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 60
+		cost = 25
+
+		fire_only_once = no
+
+		complete_effect = {
+			custom_effect_tooltip = conservatives_loss_15
+			set_temp_variable = { temp_member = 3 }
+			set_temp_variable = { temp_seats = -15 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+			industrial_capacity_dockyard = 0.15
+			production_speed_dockyard_factor = 0.10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_60_days_tt
+		}
+	}
+	## NATIONALIST POLICIE
+	FRA_state_controlled_unions = {
+		icon = generic_factory
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			custom_trigger_tooltip = {
+				tooltip = nationalists_advantage
+				set_temp_variable = { FRA_rw_support = parliament_seat_array^3 }
+				check_variable = { FRA_rw_support > 90 }
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_60
+				check_variable = { fra_senate_support > 59 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 60
+		cost = 25
+
+		fire_only_once = no
+		ai_will_do = {
+			base = 0
+			modifier = {
+				date > 1938.1.1
+				date < 1946.1.1
+				add = 100
+			}
+		}
+		complete_effect = {
+			custom_effect_tooltip = nationalists_loss_15
+			set_temp_variable = { temp_member = 4 }
+			set_temp_variable = { temp_seats = -15 }
+			modify_parliament_seat = yes
+
+			custom_effect_tooltip = generic_skip_one_line_tt
+
+			add_to_variable = { fra_senate_support = -6 }
+			custom_effect_tooltip = senate_loss_6
+		}
+
+		modifier = {
+			production_speed_arms_factory_factor = 0.20
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_60_days_tt
+		}
+	}
+	## GENERAL POLICIES
+	FRA_general_rearmement = {
+		icon = generic_military
+
+		allowed = {
+			tag = FRA
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_parliament_can_discuss_tt
+				has_country_flag = FRA_parliament_can_discuss
+			}
+			OR = {
+				AND = {
+					has_completed_focus = UFRA_national_bloc_victory
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^2 }
+					add_to_temp_variable = { FRA_rw_support = parliament_seat_array^3 }
+					custom_trigger_tooltip = {
+						tooltip = national_bloc_majority
+						check_variable = { FRA_rw_support > 125 }
+					}
+				}
+				AND = {
+					set_temp_variable = { FRA_rw_support = parliament_seat_array^0 }
+					add_to_temp_variable = { FRA_rw_support = parliament_seat_array^1 }
+					has_completed_focus = UFRA_popular_front_victory
+					custom_trigger_tooltip = {
+						tooltip = popular_front_majority
+						check_variable = { FRA_rw_support > 125 }
+					}
+				}
+
+			}
+			custom_trigger_tooltip = {
+				tooltip = fra_senate_support_60
+				check_variable = { fra_senate_support > 59 }
+			}
+		}
+
+		days_remove = 90
+		days_re_enable = 30
+		cost = 75
+
+		fire_only_once = no
+
+		complete_effect = {
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.01
+			non_core_manpower = 0.10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = FRA_parliament_decision_30_days_tt
+		}
+	}
+}

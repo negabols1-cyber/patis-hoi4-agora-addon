@@ -1,0 +1,287 @@
+###########################################################################
+# Syria (SYR) national spirits
+#
+# Starting spirits: SYR_the_french_mandate and SYR_a_divided_land, added in
+# history/countries/SYR - Syria.txt.
+# Loyalist lifecycle: the_french_mandate -> the_treaty_mandate ->
+# dominion_of_the_levant -> partner_of_the_french_union or
+# franco_syrian_alliance.
+# Independence lifecycle: the_french_mandate is removed by
+# SYR_become_independent; war_of_independence lasts while Syria fights France.
+# Design notes: docs/systems/syria_focus_tree.md
+###########################################################################
+
+ideas = {
+	country = {
+
+		### Starting spirits ###
+
+		SYR_the_french_mandate = {
+			picture = BRA_target_france_idea
+			allowed = { original_tag = SYR }
+			allowed_civil_war = { always = no }
+			removal_cost = -1
+			modifier = {
+				political_power_factor = -0.2
+				research_speed_factor = -0.1
+				war_support_factor = -0.1
+			}
+		}
+
+		SYR_a_divided_land = {
+			picture = CZE_divided_nation
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				stability_factor = -0.1
+				conscription_factor = -0.2
+				war_support_factor = -0.1
+			}
+		}
+
+		# Start-of-game air debuff; SYR_aaa2 (the air focus) removes it
+		SYR_no_air_force = {
+			picture = ban_airforce
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				air_attack_factor = -0.5
+				air_defence_factor = -0.5
+				air_agility_factor = -0.3
+				air_superiority_efficiency = -0.3
+				air_training_xp_gain_factor = -0.5
+			}
+		}
+
+		# From SYR_the_northern_frontier: cheaper anti-air guns
+		SYR_northern_air_defence = {
+			picture = generic_air_arab_2
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			equipment_bonus = {
+				anti_air_equipment = {
+					build_cost_ic = -0.2 instant = yes
+				}
+			}
+		}
+
+		### Loyalist route ###
+
+		SYR_the_treaty_mandate = {
+			picture = SYR_generic_3
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				political_power_factor = -0.05
+				stability_factor = 0.1
+				research_speed_factor = -0.05
+			}
+		}
+
+		SYR_dominion_of_the_levant = {
+			picture = FRA_undividable
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				political_power_factor = 0.05
+				stability_factor = 0.1
+				production_speed_buildings_factor = 0.1
+			}
+		}
+
+		SYR_parliamentary_republic = {
+			picture = FRA_liberte_egalite_solidarite
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				stability_factor = 0.05
+				political_power_gain = 0.15
+				democratic_drift = 0.03
+			}
+		}
+
+		SYR_arsenal_of_the_levant = {
+			picture = FRA_atelier_puteaux
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				industrial_capacity_factory = 0.1
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+
+		SYR_partner_of_the_french_union = {
+			picture = FRA_national_mobilization_focus
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				research_speed_factor = 0.1
+				industrial_capacity_factory = 0.05
+				political_power_factor = 0.1
+				stability_factor = 0.05
+			}
+		}
+
+		SYR_franco_syrian_alliance = {
+			picture = FRA_undividable
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				stability_factor = 0.1
+				political_power_factor = 0.1
+				research_speed_factor = 0.05
+			}
+		}
+
+		SYR_free_french_levant = {
+			picture = FRA_national_resistance_council
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				war_support_factor = 0.1
+				army_defence_factor = 0.05
+				conscription_factor = 0.05
+			}
+		}
+
+		SYR_vichy_levant = {
+			picture = FRA_down_marianne
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				stability_factor = 0.05
+				war_support_factor = -0.1
+				political_power_factor = 0.05
+			}
+		}
+
+		### Independence route ###
+
+		SYR_spirit_of_1925 = {
+			picture = PER_iranian_resistance_idea
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				war_support_factor = 0.1
+				army_defence_factor = 0.05
+				resistance_growth_on_our_occupied_states = 0.2
+			}
+		}
+
+		SYR_war_of_independence = {
+			picture = DEN_resistance
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			cancel = {
+				NOT = { has_war_with = FRA }
+			}
+			modifier = {
+				conscription_factor = 0.25
+				army_defence_factor = 0.15
+				attrition = -0.1
+			}
+		}
+
+		SYR_land_to_the_fellahin = {
+			picture = generic_agrarian_reform
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				stability_factor = 0.05
+				conscription_factor = 0.1
+				communism_drift = 0.03
+			}
+		}
+
+		SYR_the_whirlwind_banner = {
+			picture = SAU_generic_fascism_1
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				war_support_factor = 0.1
+				conscription_factor = 0.05
+				fascism_drift = 0.03
+			}
+		}
+
+		SYR_the_hashemite_crown = {
+			picture = IRQ_faisal_I_ns
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				stability_factor = 0.1
+				political_power_gain = 0.1
+				neutrality_drift = 0.03
+			}
+		}
+
+		### Economy ###
+
+		SYR_pipeline_transit_fees = {
+			picture = IRQ_iraq_petrolium_company
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				consumer_goods_factor = -0.05
+				political_power_gain = 0.1
+			}
+		}
+
+		SYR_the_syrian_university = {
+			picture = PER_adult_literacy_idea
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				research_speed_factor = 0.07
+			}
+		}
+
+		SYR_the_levantine_market = {
+			picture = PER_national_bank_iran
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				production_speed_buildings_factor = 0.1
+				consumer_goods_factor = -0.05
+				industrial_capacity_factory = 0.05
+			}
+		}
+
+		### Military ###
+
+		SYR_homs_military_academy = {
+			picture = SYR_generic_land_1
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				training_time_army_factor = -0.1
+				army_org_factor = 0.03
+			}
+		}
+
+		SYR_the_national_army = {
+			picture = SYR_generic_land_3
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				army_org_factor = 0.05
+			}
+		}
+
+
+		ahmudbin_or = {
+			picture = Abdulali_Diba
+			cost = 200
+			removal_cost = 200
+			modifier = {
+				war_support_factor = 0.05
+				political_power_gain = -0.05
+				acclimatization_hot_climate_gain_factor = 0.05
+			}
+			allowed = { original_tag = SYR }
+		}
+
+	}
+}

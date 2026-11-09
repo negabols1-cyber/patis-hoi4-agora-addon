@@ -1,0 +1,121 @@
+################
+##### FRA ######
+################
+
+FRA_systeme_francais_with_picture = {
+	picture = GFX_systeme
+	icon = generic_form_nation
+	priority = 90
+	allowed = {
+		original_tag = FRA
+	}
+}
+
+FRA_power_struggle_with_LoN_with_picture = {
+	picture = GFX_struggle_France_LoN
+	icon = power_struggle
+	priority = 100
+	allowed = {
+		original_tag = FRA
+	}
+}
+
+FRA_liberation_of_scotland_with_picture = {
+	picture = GFX_auld_alliance
+	icon = generic_form_nation
+	priority = 80
+	allowed = {
+		original_tag = FRA
+	}
+}
+
+FRA_gaulle_vs_giraud_decisions_category = {
+	priority = 12
+	icon = GFX_decision_category_ETH_orginization_of_african_unity
+	allowed = {
+		original_tag = FRA
+	}
+
+	visible = {
+		has_completed_focus = FRA_follow_giraud
+	}
+}
+
+FRA_evacuation = {
+
+	icon = GFX_decision_category_infiltration
+
+	allowed = {
+		OR = {
+			original_tag = FRA
+			original_tag = BEL
+		}
+	}
+	visible = {
+		country_exists = GER
+		has_war_with = GER
+	}
+}
+
+FRA_indochina_war = {
+	allowed = {
+		original_tag = FRA
+	}
+	visible = {
+		has_global_flag = indochina_war
+	}
+}
+
+FRA_europeans_protests = {
+	allowed = {
+		original_tag = FRA
+	}
+	visible = {
+		has_global_flag = european_strikes_missions
+	}
+}
+
+FRA_french_territories = {
+	allowed = {
+		original_tag = FRA
+	}
+	visible = {
+	}
+}
+
+FRA_forced_assimilation = {
+	allowed = {
+		original_tag = FRA
+	}
+	visible = {
+		has_completed_focus = UFRA_forced_assimilation
+	}
+}
+
+FRA_fra_ger_influence = {
+
+	icon = intervention_overseas
+
+	allowed = {
+		original_tag = FRA
+	}
+	visible = {
+		has_completed_focus = UFRA_establish_spheres_of_influence
+		country_exists = GER
+		is_in_faction_with = GER
+	}
+
+	picture = GFX_decision_cat_picture_gateway_to_europe
+
+	custom_icon = {
+		tag = GER
+		value = FRA_fra_ger_influence_value
+		desc = FRA_fra_ger_influence_desc
+	}
+	custom_icon = {
+		tag = ITA
+		value = FRA_fra_ita_influence_value
+		desc = FRA_fra_ger_influence_desc
+	}
+
+}

@@ -1,0 +1,95 @@
+EF_SWE_historical_plan = {
+	name = "Sweden historical plan"
+	desc = "Essentially historical behaviour for Sweden"
+
+	allowed = {
+		original_tag = SWE
+		NOT = { has_dlc = "Arms Against Tyranny" }
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = SWE_AI_BEHAVIOR
+					option = DEFAULT
+				}
+			}
+			has_country_flag = SWE_AI_RANDOM_HISTORICAL
+			has_game_rule = {
+				rule = SWE_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+	abort = {
+		is_subject = yes
+		has_war = no
+	}
+
+	ai_national_focuses = {
+		SWE_stay_neatural
+		SWE_hansson_way
+		SWE_sendinng_volunteers
+		SWE_more_steats_for_demokrats
+		SWE_getting_rid_of_communism
+		SWE_the_saltsjobaden_agreement
+		SWE_stonrgline_intel
+		SWE_stay_neatural_demok
+		SWE_indus_sport
+		SWE_civ_fatorty
+		SWE_invest_aliminyum
+		SWE_invest_iron
+		SWE_invest_resource_extraction
+		SWE_reserg_slot
+		SWE_support_civ_endu
+		SWE_tac_reform
+		SWE_land_refom
+		#1937
+		SWE_dispanded_endu
+		SWE_radar
+		SWE_construction
+		SWE_trade_decitions
+		SWE_forsvarsbeslutet
+		SWE_armestaben
+		SWE_delete_debuff1
+		SWE_mobile_focus
+		SWE_develop_tanks
+		SWE_delete_debuff2
+		SWE_utlandskt_samarbete
+		SWE_total_mobilise
+		#1938
+		SWE_the_scania
+		SWE_motorized_logistics
+		SWE_marinstaben
+		SWE_u-batsteknologi
+		SWE_naval_effort
+		SWE_master_of_seas
+		SWE_submarine_efoort
+		SWE_lead_german_troops
+		SWE_leak_german_intel
+		SWE_leak_soviet_intel
+		#1939
+		SWE_leak_eng_intel
+		SWE_flygstaben
+		SWE_luftvarnet
+		SWE_fighter_focus
+		SWE_supreme_air
+		SWE_bomber_focus
+
+	}
+
+	research = {
+	}
+
+
+	# Keep small, as it is used as a factor for some things (such as research needs)
+	# Recommended around 1.0. Useful for relation between plans
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+
+}

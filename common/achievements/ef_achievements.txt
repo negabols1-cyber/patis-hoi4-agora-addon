@@ -1,0 +1,725 @@
+# possible - filters out achivements on game start so we dont have to check everything all the
+#time
+## happened - checks if achivement happened
+#
+###########################
+## ACHIEVEMENTS
+#############################
+
+unique_id = europe_in_flames_achievements_1
+
+back_from_dead = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = SOV
+	}
+
+	happened = {
+		has_cosmetic_tag = FORM_RUE_tsar
+		has_cosmetic_tag = russian_empire_nicholas
+	}
+}
+
+Third_Siege_Of_Vienna = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = TUR
+	}
+
+	happened = {
+		has_country_flag = TUR_ott_sultanate_flag
+		has_country_leader = {
+			character = TUR_abdulmejid_ii
+			ruling_only = yes
+		}
+		owns_state = 4
+		OR = {
+			NOT = {
+				country_exists = HUN
+			}
+			HUN = {
+				is_puppet_of = TUR
+			}
+		}
+	}
+}
+
+achieve_the_impossible = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = TUR
+	}
+
+	happened = {
+		date > 1945.1.1
+		has_country_leader = {
+			character = TUR_ismet_inonu
+			ruling_only = yes
+		}
+		TUR = {
+			all_core_state = {
+				is_owned_and_controlled_by = TUR
+			}
+		}
+	}
+}
+
+Unfinished_business = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = HUN
+	}
+
+	happened = {
+		has_completed_focus = HUN_what_am_i
+		has_country_leader = {
+			name = "József August"
+			ruling_only = yes
+		}
+		has_cosmetic_tag = HNK_neutrality
+		owns_state = 2
+		ITA = {
+			is_puppet_of = HUN
+			OR = {
+				has_country_leader = {
+					character = ITA_vittorio_emanuele_iii
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = ITA_papa_pio_xi
+					ruling_only = yes
+				}
+				has_country_leader = {
+					character = ITA_papa_pio_xii
+					ruling_only = yes
+				}
+			}
+		}
+	}
+}
+
+desert_fox = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = GER
+	}
+
+	happened = {
+		is_ally_with = ITA
+		has_country_leader = {
+			character = GER_adolf_hitler
+			ruling_only = yes
+		}
+		has_war_with = ENG
+		has_war_with = FRA
+		ITA = {
+			has_country_leader = {
+				character = ITA_benito_mussolini
+				ruling_only = yes
+			}
+		}
+		GER = {
+			GER_erwin_rommel = {
+				skill > 4
+				is_field_marshal = yes
+				is_unit_leader = yes
+				is_army_leader = yes
+			}
+		}
+		OR = {
+			ITA = {
+				controls_state = 448
+				controls_state = 449
+				controls_state = 450
+				controls_state = 451
+			}
+			GER = {
+				controls_state = 448
+				controls_state = 449
+				controls_state = 450
+				controls_state = 451
+			}
+		}
+		OR = {
+			divisions_in_state = {
+				type = armor
+				size > 2
+				state = 448
+			}
+			divisions_in_state = {
+				type = armor
+				size > 2
+				state = 449
+			}
+			divisions_in_state = {
+				type = armor
+				size > 2
+				state = 450
+			}
+			divisions_in_state = {
+				type = armor
+				size > 2
+				state = 451
+			}
+		}
+	}
+}
+
+peace_in_our_time = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = ENG
+	}
+
+	happened = {
+		has_country_leader = {
+			character = ENG_neville_chamberlain
+			ruling_only = yes
+		}
+		has_war = no
+		date < 1939.01.01
+		GER = {
+			has_country_leader = {
+				character = GER_adolf_hitler
+				ruling_only = yes
+			}
+			has_country_flag = sudetenland_acquired
+			has_completed_focus = GER_demand_sudetenland
+			owns_state = 69
+		}
+	}
+}
+father_of_turks = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = TUR
+	}
+
+	happened = {
+		has_country_flag = ataturk_enabled
+		has_country_leader = {
+			character = TUR_mustafa_kemal_ataturk
+			ruling_only = yes
+		}
+	}
+}
+parallel_universe = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = GER
+	}
+
+	happened = {
+		has_country_leader = {
+			character = GER_adolf_hitler
+			ruling_only = yes
+		}
+		country_exists = GER
+		has_global_flag = disarmed_and_demilitarized_london_flag
+	}
+}
+grand_admiral_new_emperor = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = JAP
+	}
+
+	happened = {
+		has_country_leader = {
+			character = JAP_isoroku_yamamoto
+			ruling_only = yes
+		}
+		has_country_flag = jap_yamato_created
+		JAP = {
+			JAP_isoroku_yamamoto = {
+				skill > 5
+			}
+		}
+	}
+}
+the_real_asia_empire = {
+
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = SIA
+	}
+
+	happened = {
+		has_country_leader = {
+			character = SIA_plaek_phibunsongkhram
+			ruling_only = yes
+		}
+		is_in_faction_with = JAP
+		JAP = {
+			NOT = {controls_state = 597}
+			is_faction_leader = yes
+		}
+		controls_state = 597
+	}
+}
+
+ufra_truly_we_mean_it = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		original_tag = FRA
+	}
+	happened = {
+		custom_trigger_tooltip = {
+			tooltip = UFRA_fra_ger_war_rhine_achivement_tt
+			has_global_flag = UFRA_fra_ger_war_rhine
+		}
+		42 = { is_demilitarized_zone = yes }
+		51 = { is_demilitarized_zone = yes }
+	}
+}
+
+Deutsche_Disziplin = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		original_tag = GER
+	}
+	happened = {
+		custom_trigger_tooltip = {
+			tooltip = reichswerke_hermann_goring_var_achievement_tt
+			check_variable = {
+				var = reichswerke_hermann_goring_var
+				value = 9
+				compare = equals
+			}
+		}
+	}
+}
+legion_v_macedonia = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		original_tag = ITA
+	}
+	happened = {
+		ITA = {
+			has_country_leader = {
+				character = ITA_benito_mussolini
+				ruling_only = yes
+			}
+			has_cosmetic_tag = FORM_WRO
+			owns_state = 907
+		}
+	}
+}
+
+hot_tub_pleasure = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		original_tag = SOV
+	}
+
+	happened = {
+		SOV_hot_tub_trigger = yes
+	}
+}
+
+the_new_order = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = GER
+	}
+
+	happened = {
+		GER_new_order_trigger = yes
+	}
+}
+
+steiners_counter_attack = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = GER
+	}
+
+	happened = {
+		has_completed_focus = GER_volkssturm
+		has_war_with_major = yes
+		surrender_progress < 0.05
+	}
+}
+
+the_man_in_the_high_castle = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = GER
+	}
+
+	happened = {
+		has_completed_focus = GER_cold_war
+		has_completed_focus = GER_high_castle
+		USA = { is_subject_of = GER }
+		JAP = { NOT = { is_in_faction_with = GER } }
+	}
+}
+
+a_new_sun_rises = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = CHI
+	}
+
+	happened = {
+		has_country_leader = { character = CHI_chiang_kaishek ruling_only = yes }
+		has_global_flag = JAP_declare_war_on_chi_flag
+		OR = {
+			JAP = { is_puppet_of = CHI }
+			custom_trigger_tooltip = {
+				tooltip = formable_greater_japan_tt
+				528 = { is_controlled_by = ROOT }
+				530 = { is_controlled_by = ROOT }
+				529 = { is_controlled_by = ROOT }
+				531 = { is_controlled_by = ROOT }
+				532 = { is_controlled_by = ROOT }
+				535 = { is_controlled_by = ROOT }
+				282 = { is_controlled_by = ROOT }
+				534 = { is_controlled_by = ROOT }
+				533 = { is_controlled_by = ROOT }
+				536 = { is_controlled_by = ROOT }
+				526 = { is_controlled_by = ROOT }
+				537 = { is_controlled_by = ROOT }
+				555 = { is_controlled_by = ROOT }
+			}
+		}
+	}
+}
+
+revenge_of_gallipoli = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		OR = {
+			tag = AST
+			tag = NZL
+		}
+	}
+
+	happened = {
+		is_subject_of = ENG
+		has_war_with = TUR
+		controls_state = 341
+	}
+}
+
+totaler_landwirtschaft = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = IRE
+	}
+
+	happened = {
+		custom_trigger_tooltip = {
+			tooltip = IRE_IAOS_achievement
+			check_variable = {
+				var = iaos_equality_of_farmers_var
+				value = 100
+				compare = equals
+			}
+		}
+	}
+}
+
+Belgiums_Strongest_Woman = {
+	possible = {
+		is_ironman = yes
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		tag = BEL
+	}
+
+	happened = {
+		BEL = {
+			has_country_leader = {
+				character = BEL_princess_lilian
+				ruling_only = yes
+			}
+			has_country_leader_with_trait = BEL_queen_of_belgium
+		}
+	}
+}
+
+#############################
+## HISTORICAL ACHIEVEMENTS ##
+#############################
+inevitable_end = {
+	possible = {
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		OR = {
+			has_global_flag = his_only
+			has_game_rule = {
+				rule = ef_historical_only
+				option = ENABLED
+			}
+		}
+		original_tag = USA
+	}
+	happened = {
+		has_completed_focus = USA_manhattan_project
+		date < 1945.01.01
+		num_of_nukes > 2
+	}
+}
+
+we_shall_never_surrender = {
+	possible = {
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		OR = {
+			has_global_flag = his_only
+			has_game_rule = {
+				rule = ef_historical_only
+				option = ENABLED
+			}
+		}
+		original_tag = ENG
+	}
+	happened = {
+		has_war_with = GER
+		OR = {
+			ENG = { controls_state = 16 }
+			USA = {
+				is_in_faction_with = ENG
+				controls_state = 16
+			}
+		}
+	}
+}
+
+#############################
+##### EUYL ACHIEVEMENTS #####
+#############################
+
+EUYL_problems_in_the_family = {
+	possible = {
+		# classic triggers used in all vanilla achievements
+		difficulty > 1
+		has_start_date < 1936.01.02
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		is_ironman = yes
+		is_debug = no
+		original_tag = ARG
+	}
+
+	happened = {
+		has_government = communism
+		has_country_leader = {
+			character = ARG_liborio_justo
+			ruling_only = yes
+		}
+		any_enemy_country = {
+			has_country_leader = {
+				character = ARG_agustín_pedro_justo
+				ruling_only = yes
+			}
+		}
+	}
+}
+
+EUYL_right_back_at_ya = {
+	possible = {
+		# classic triggers used in all vanilla achievements
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		is_ironman = yes
+		original_tag = ARG
+	}
+
+	happened = {
+		has_completed_focus = ARG_follow_mussolinis_principles
+		has_country_leader = {
+			character = ARG_juan_domingo_peron_fascist
+			ruling_only = yes
+		}
+		ITA = { is_subject_of = ARG }
+	}
+}
+
+EUYL_god_bless_the_pope = {
+	possible = {
+		# classic triggers used in all vanilla achievements
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		is_ironman = yes
+		original_tag = ARG
+	}
+
+	happened = {
+		has_completed_focus = ARG_the_one_true_papal_state
+		has_country_leader = {
+			character = ARG_julio_meinvielle_pope
+			ruling_only = yes
+		}
+		has_full_control_of_state = 2
+		has_full_control_of_state = 454
+	}
+}
+
+EUYL_just_a_bit_indecisive = {
+	possible = {
+		# classic triggers used in all vanilla achievements
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		is_ironman = yes
+		original_tag = PAR
+	}
+
+	happened = {
+		custom_trigger_tooltip = {
+			tooltip = PAR_switched_governments_4_times_tt
+			check_variable = { PAR.PAR_government_changes > 3 }
+		}
+	}
+}
+
+EUYL_the_real_united_states = {
+	possible = {
+		# classic triggers used in all vanilla achievements
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		is_ironman = yes
+		original_tag = COL
+	}
+
+	happened = {
+		has_cosmetic_tag = UCO_unified
+		USA = { is_subject_of = COL }
+	}
+}
+
+EUYL_super_chile = {
+	possible = {
+		# classic triggers used in all vanilla achievements
+		difficulty > 1
+		has_any_custom_difficulty_setting = no
+		game_rules_allow_achievements = yes
+		is_ironman = yes
+		original_tag = CHL
+	}
+
+	happened = {
+		hidden_trigger = {
+			all_core_state = {
+				is_fully_controlled_by = CHL
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = CHL_controls_every_state_coastal_to_pacific_tt
+			controls_state = 492
+			controls_state = 303
+			controls_state = 305
+			controls_state = 306
+			controls_state = 493
+			controls_state = 304
+			controls_state = 685
+			controls_state = 316
+			controls_state = 317
+			controls_state = 312
+			controls_state = 314
+			controls_state = 313
+			controls_state = 475
+			controls_state = 476
+			controls_state = 485
+			controls_state = 478
+			controls_state = 481
+			controls_state = 483
+			controls_state = 484
+			controls_state = 378
+			controls_state = 385
+			controls_state = 386
+			controls_state = 473
+			controls_state = 740
+			controls_state = 739
+			controls_state = 471
+			controls_state = 463
+		}
+	}
+}

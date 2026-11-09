@@ -1,0 +1,101 @@
+scripted_gui = {
+	BEL_integrate_benelux_scripted_gui = {
+		window_name = integrate_benelux_container
+		context_type = decision_category
+
+		effects = {
+			decision_checkbox_hol_available_click = {
+				if = {
+					limit = {
+						has_country_flag = BEL_public_oppose_integration_flag
+					}
+					add_ideas = BEL_integration_works_accelerated_alt
+				}
+				else = {
+					add_ideas = BEL_integration_works_accelerated
+				}
+				set_country_flag = decision_checkbox_hol_completed_flag
+				set_country_flag = { flag = BEL_integration_cooldown value = 1 days = 7 }
+			}
+			decision_checkbox_hol_completed_click = {
+				clr_country_flag = decision_checkbox_hol_completed_flag
+				remove_ideas = BEL_integration_works_accelerated
+				remove_ideas = BEL_integration_works_accelerated_alt
+			}
+			decision_checkbox_lux_available_click = {
+				if = {
+					limit = {
+						has_country_flag = BEL_public_oppose_integration_flag
+					}
+					add_ideas = BEL_integration_works_accelerated_alt
+				}
+				else = {
+					add_ideas = BEL_integration_works_accelerated
+				}
+				set_country_flag = decision_checkbox_lux_completed_flag
+				set_country_flag = { flag = BEL_integration_cooldown value = 1 days = 7 }
+			}
+			decision_checkbox_lux_completed_click = {
+				clr_country_flag = decision_checkbox_lux_completed_flag
+				remove_ideas = BEL_integration_works_accelerated
+				remove_ideas = BEL_integration_works_accelerated_alt
+			}
+			Button_1_click = {
+
+			}
+		}
+
+		triggers = {
+			decision_checkbox_hol_disable_visible = {
+				has_country_flag = decision_checkbox_lux_completed_flag
+			}
+			decision_checkbox_hol_unavailable_visible = {
+				NOT = {
+					has_country_flag = decision_checkbox_lux_completed_flag
+					has_country_flag = decision_checkbox_hol_completed_flag
+				}
+				political_power_daily < 1.49
+			}
+			decision_checkbox_hol_available_visible = {
+				NOT = {
+					has_country_flag = decision_checkbox_hol_completed_flag
+					has_country_flag = decision_checkbox_lux_completed_flag
+				}
+				political_power_daily > 1.5
+			}
+			decision_checkbox_hol_completed_click_enabled = {
+				NOT = { has_country_flag = BEL_integration_cooldown }
+			}
+			decision_checkbox_hol_completed_visible = {
+				has_country_flag = decision_checkbox_hol_completed_flag
+			}
+			decision_checkbox_lux_disable_visible = {
+				has_country_flag = decision_checkbox_hol_completed_flag
+			}
+			decision_checkbox_lux_unavailable_visible = {
+				NOT = {
+					has_country_flag = decision_checkbox_hol_completed_flag
+					has_country_flag = decision_checkbox_lux_completed_flag
+				}
+				political_power_daily < 0.99
+			}
+			decision_checkbox_lux_available_visible = {
+				NOT = {
+					has_country_flag = decision_checkbox_hol_completed_flag
+					has_country_flag = decision_checkbox_lux_completed_flag
+				}
+				political_power_daily > 1
+			}
+			decision_checkbox_lux_completed_click_enabled = {
+				NOT = { has_country_flag = BEL_integration_cooldown }
+			}
+			decision_checkbox_lux_completed_visible = {
+				has_country_flag = decision_checkbox_lux_completed_flag
+			}
+		}
+
+		properties = {
+
+		}
+	}
+}

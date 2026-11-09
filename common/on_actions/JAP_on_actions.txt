@@ -1,0 +1,242 @@
+# on_actions = {
+	# 	#ROOT is winner #FROM gets annexed - This will also fire on_annex
+	#     on_annex = {
+		# 		effect = {
+			# 			if = {
+				# 				limit = {
+					# 					FROM = {
+						# 						tag = IJA
+						# 						has_government = fascism
+						# 			            has_country_flag = JAP_imperial_army_country
+						# 					}
+					# 					ROOT = {
+						# 						tag = JAC
+						# 						has_government = neutrality
+						# 						has_country_flag = JAP_arasaka_country
+						# 					}
+					# 					NOT = { has_global_flag = JAP_arasaka_civil_war_conculuded }
+					# 				}
+				# 				if = {
+					# 					limit = {
+						# 						has_country_flag = JAP_arasaka_country
+						# 						has_global_flag = JAP_arasakan_civil_war_flag
+						# 					}
+					# 					set_global_flag = JAP_arasaka_civil_war_conculuded
+					# 					clr_global_flag = JAP_arasakan_civil_war_flag
+					# 					JAC = {
+						# 						every_unit_leader = {
+							# 							set_nationality = JAP
+							# 						}
+						# 					}
+					# 					JAP = {
+						# 						change_tag_from = IJA
+						# 						change_tag_from = JAC
+						# 						JAP_bop_high_increase_effect = yes
+						# 						JAP_bop_medium_increase_effect = yes
+						# 						remove_ideas = JAP_arasaka_rising_idea
+						# 						add_timed_idea = { idea = JAP_recovering_from_civil_war days = 720 }
+						# 						annex_country = { target = JAC transfer_troops = yes }
+						# 						hidden_effect = {
+							# 							if = {
+								# 								limit = {
+									# 									NOT = { has_completed_focus = JAP_protect_private_business }
+									# 								}
+								# 								unlock_national_focus = JAP_protect_private_business
+								# 								add_ideas = JAP_protect_private_business_idea
+								# 							}
+							# 							if = {
+								# 								limit = {
+									# 									NOT = { has_completed_focus = JAP_japanese_business_community }
+									# 								}
+								# 								unlock_national_focus = JAP_japanese_business_community
+								# 								swap_ideas = {
+									# 									remove_idea = JAP_angry_business_community
+									# 									add_idea = JAP_skeptical_business_community
+									# 								}
+								# 							}
+							# 							if = {
+								# 								limit = {
+									# 									NOT = { has_completed_focus = JAP_arasaka_expansions }
+									# 								}
+								# 								unlock_national_focus = JAP_protect_private_business
+								# 								random_owned_controlled_state = {
+									# 									limit = {
+										# 										is_core_of = JAP
+										# 										is_in_home_area = yes
+										# 										free_building_slots = {
+											# 											building = arms_factory
+											# 											size > 1
+											# 											include_locked = yes
+											# 										}
+										# 									}
+									# 									add_extra_state_shared_building_slots = 4
+									# 									add_building_construction = {
+										# 										type = arms_factory
+										# 										level = 2
+										# 										instant_build = yes
+										# 									}
+									# 								}
+								# 								random_owned_controlled_state = {
+									# 									limit = {
+										# 										is_core_of = JAP
+										# 										is_in_home_area = yes
+										# 										free_building_slots = {
+											# 											building = industrial_complex
+											# 											size > 1
+											# 											include_locked = yes
+											# 										}
+										# 									}
+									# 									add_extra_state_shared_building_slots = 4
+									# 									add_building_construction = {
+										# 										type = industrial_complex
+										# 										level = 2
+										# 										instant_build = yes
+										# 									}
+									# 								}
+								# 							}
+							# 							if = {
+								# 								limit = {
+									# 									NOT = { has_completed_focus = JAP_japanese_technocracy }
+									# 								}
+								# 								unlock_national_focus = JAP_japanese_technocracy
+								# 								remove_ideas = JAP_arasaka_rising_idea
+								# 			                    add_research_slot = 1
+								# 								set_country_flag = deactivate_factory_right_limit_value
+								# 								set_country_flag = dont_join_faction
+								# 								set_country_flag = dont_join_faction_rule
+								# 								set_variable = { JAP_jt_political_power_factor = 0.05 }
+								# 				                set_variable = { JAP_jt_surrender_limit = 0.05 }
+								# 				                set_variable = { JAP_jt_enemy_justify_war_goal_time = 0.5 }
+								# 				                set_variable = { JAP_jt_justify_war_goal_time = 1 }
+								# 				                set_variable = { JAP_jt_generate_wargoal_tension = 1 }
+								# 				                set_variable = { JAP_jt_guarantee_cost = 5 }
+								# 								set_variable = { JAP_jt_resistance_growth = 0.80 }
+								# 								set_variable = { JAP_jt_resistance_target = 1.25 }
+								# 								set_variable = { JAP_jt_no_compliance_gain = 1 }
+								# 								add_dynamic_modifier = { modifier = JAP_japanese_technocracy_dynamic_modifier }
+								# 							}
+							# 							if = {
+								# 								limit = {
+									# 									NOT = { has_completed_focus = JAP_eliminate_bureaucrats }
+									# 								}
+								# 								complete_national_focus = JAP_eliminate_bureaucrats
+								# 							}
+							# 							if = {
+								# 								limit = {
+									# 									NOT = { has_completed_focus = JAP_recruit_arasaka_high_ranks_to_the_army }
+									# 								}
+								# 								complete_national_focus = JAP_recruit_arasaka_high_ranks_to_the_army
+								# 							}
+							# 							if = {
+								# 								limit = {
+									# 									NOT = { has_completed_focus = JAP_purge_army }
+									# 								}
+								# 								complete_national_focus = JAP_purge_army
+								# 							}
+							# 						}
+						# 					}
+					# 					every_state = {
+						# 						limit = {
+							# 							OR = {
+								# 								is_core_of = IJA
+								# 								is_core_of = JAC
+								# 							}
+							# 						}
+						# 						remove_core_of = IJA
+						# 						remove_core_of = JAC
+						# 					}
+					# 				}
+				# 			}
+
+			# 			#ROOT is winner #FROM gets annexed - This will also fire on_annex
+			# 			if = {
+				# 				limit = {
+					# 					FROM = {
+						# 						tag = JAC
+						# 						has_government = neutrality
+						# 						has_country_flag = JAP_arasaka_country
+						# 					}
+					# 					ROOT = {
+						# 						tag = IJA
+						# 						has_government = fascism
+						# 			            has_country_flag = JAP_imperial_army_country
+						# 					}
+					# 					NOT = { has_global_flag = JAP_arasaka_civil_war_conculuded }
+					# 				}
+				# 				if = {
+					# 					limit = {
+						# 						has_country_flag = JAP_imperial_army_country
+						# 						has_global_flag = JAP_arasakan_civil_war_flag
+						# 					}
+					# 					clr_global_flag = JAP_arasakan_civil_war_flag
+					# 					IJA = {
+						# 						every_unit_leader = {
+							# 							set_nationality = JAP
+							# 						}
+						# 					}
+					# 					JAP = {
+						# 						change_tag_from = IJA
+						# 						change_tag_from = JAC
+						# 						complete_national_focus = JAP_sea_purge_the_kodoha_faction
+						# 						remove_ideas = JAP_arasaka_rising_idea
+						# 						add_timed_idea = { idea = JAP_recovering_from_civil_war days = 720 }
+						# 						annex_country = { target = IJA transfer_troops = yes }
+						# 						if = {
+							# 							limit = {
+								# 								has_country_leader_with_trait = JAP_losing_power
+								# 							}
+							# 							remove_country_leader_trait = JAP_losing_power
+							# 						}
+						# 						random_owned_controlled_state = {
+							# 							limit = {
+								# 								is_core_of = JAP
+								# 								is_in_home_area = yes
+								# 								free_building_slots = {
+									# 									building = arms_factory
+									# 									size > 1
+									# 									include_locked = yes
+									# 								}
+								# 							}
+							# 							add_extra_state_shared_building_slots = 4
+							# 							add_building_construction = {
+								# 								type = arms_factory
+								# 								level = 2
+								# 								instant_build = yes
+								# 							}
+							# 						}
+						# 						random_owned_controlled_state = {
+							# 							limit = {
+								# 								is_core_of = JAP
+								# 								is_in_home_area = yes
+								# 								free_building_slots = {
+									# 									building = industrial_complex
+									# 									size > 1
+									# 									include_locked = yes
+									# 								}
+								# 							}
+							# 							add_extra_state_shared_building_slots = 4
+							# 							add_building_construction = {
+								# 								type = industrial_complex
+								# 								level = 2
+								# 								instant_build = yes
+								# 							}
+							# 						}
+						# 						remove_power_balance = {
+							# 							id = JAP_arasaka_emperor_bop
+							# 						}
+						# 					}
+					# 					every_state = {
+						# 						limit = {
+							# 							OR = {
+								# 								is_core_of = IJA
+								# 								is_core_of = JAC
+								# 							}
+							# 						}
+						# 						remove_core_of = IJA
+						# 						remove_core_of = JAC
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 	}
+	# }

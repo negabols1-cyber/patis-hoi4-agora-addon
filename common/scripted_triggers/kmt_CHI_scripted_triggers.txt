@@ -1,0 +1,1508 @@
+#	Example:
+#
+#	example_trigger = {
+	#		tag = GER
+	#		is_ai = no
+	#	}
+#
+#
+#	In a script file:
+#
+#	trigger = {
+	#		example_trigger = yes
+	#	}
+#
+
+is_not_a_puppet_or_is_puppet_of_CHI = {
+	exists = yes
+	OR = {
+		is_puppet = no
+		is_puppet_of = CHI
+	}
+}
+
+full_control_by_root = {
+	is_owned_by = ROOT
+	is_controlled_by = ROOT
+}
+
+is_potential_power_struggle_participant = {
+	custom_trigger_tooltip = {
+		tooltip = KMT_is_potential_ps_participants_tt
+		OR = {
+			original_tag = CHI
+			original_tag = PRC
+			original_tag = GXC
+			original_tag = YUN
+			original_tag = SHX
+			original_tag = XSM
+			original_tag = SIK
+			original_tag = MEN
+		}
+	}
+}
+
+is_valid_power_struggle_participant = {
+	custom_trigger_tooltip = {
+		tooltip = KMT_valid_ps_participant_tt
+		OR = {
+			original_tag = CHI
+			original_tag = PRC
+			original_tag = GXC
+			original_tag = YUN
+			original_tag = SHX
+			original_tag = XSM
+			original_tag = SIK
+			original_tag = MEN
+		}
+		OR = {
+			is_subject = no
+			is_subject_of = event_target:KMT_central_gov_tag
+		}
+	}
+}
+
+is_chinese_nations = {
+	OR = {
+		original_tag = CHI
+		original_tag = PRC
+		original_tag = GXC
+		original_tag = YUN
+		original_tag = SHX
+		original_tag = XSM
+	}
+}
+
+is_independent_china_or_warlord = { #Does not include sinkiang
+	OR = {
+		original_tag = CHI
+		original_tag = PRC
+		original_tag = GXC
+		original_tag = YUN
+		original_tag = SHX
+		original_tag = XSM
+	}
+	is_puppet = no
+}
+
+is_independent_warlords = {
+	OR = {
+		original_tag = GXC
+		original_tag = YUN
+		original_tag = SHX
+		original_tag = XSM
+	}
+	is_puppet = no
+}
+
+is_alone_or_in_faction_at_peace_with_CHI = {
+	OR = {
+		is_in_faction = no
+		is_in_faction_with = CHI
+		AND = {
+			is_in_faction = yes
+			NOT = {
+				is_in_faction_with = CHI
+			}
+		}
+	}
+	NOT = {
+		any_country = {
+			is_in_faction_with = PREV
+			has_war_with = CHI
+		}
+	}
+}
+
+check_for_excavation_1 = {
+	OR = {
+		AND = {
+			has_tech = excavation1
+			NOT = {
+				has_tech = excavation2
+				has_tech = excavation3
+				has_tech = excavation4
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation2
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation3
+				has_tech = excavation4
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation3
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation2
+				has_tech = excavation4
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation4
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation2
+				has_tech = excavation3
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation2
+				has_tech = excavation3
+				has_tech = excavation4
+			}
+		}
+	}
+}
+
+check_for_excavation_2 = {
+	OR = {
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			NOT = {
+				has_tech = excavation3
+				has_tech = excavation4
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation3
+			NOT = {
+				has_tech = excavation2
+				has_tech = excavation4
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation4
+			NOT = {
+				has_tech = excavation2
+				has_tech = excavation3
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation2
+				has_tech = excavation3
+				has_tech = excavation4
+			}
+		}
+		AND = {
+			has_tech = excavation2
+			has_tech = excavation3
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation4
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation2
+			has_tech = excavation4
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation3
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation2
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation3
+				has_tech = excavation4
+			}
+		}
+		AND = {
+			has_tech = excavation3
+			has_tech = excavation4
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation2
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation3
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation2
+				has_tech = excavation4
+			}
+		}
+		AND = {
+			has_tech = excavation4
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation2
+				has_tech = excavation3
+			}
+		}
+	}
+}
+
+check_for_excavation_3 = {
+	OR = {
+		AND = {
+			has_tech = excavation3
+			has_tech = excavation4
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation2
+			}
+		}
+		AND = {
+			has_tech = excavation2
+			has_tech = excavation4
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation3
+			}
+		}
+		AND = {
+			has_tech = excavation2
+			has_tech = excavation3
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation4
+			}
+		}
+		AND = {
+			has_tech = excavation2
+			has_tech = excavation3
+			has_tech = excavation4
+			NOT = {
+				has_tech = excavation1
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation4
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation2
+				has_tech = excavation3
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation3
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation2
+				has_tech = excavation4
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation3
+			has_tech = excavation4
+			NOT = {
+				has_tech = excavation2
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation3
+				has_tech = excavation4
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation4
+			NOT = {
+				has_tech = excavation3
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation3
+			NOT = {
+				has_tech = excavation4
+				has_tech = excavation5
+			}
+		}
+	}
+}
+
+check_for_excavation_4 = {
+	OR = {
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation3
+			has_tech = excavation4
+			NOT = {
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation3
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation4
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation4
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation3
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation3
+			has_tech = excavation4
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation2
+			}
+		}
+		AND = {
+			has_tech = excavation2
+			has_tech = excavation3
+			has_tech = excavation4
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation1
+			}
+		}
+	}
+}
+
+check_for_excavation_5 = {
+	OR = {
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation3
+			has_tech = excavation4
+			has_tech = excavation5
+			NOT = {
+				has_tech = excavation6
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation3
+			has_tech = excavation4
+			has_tech = excavation6
+			NOT = {
+				has_tech = excavation5
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation3
+			has_tech = excavation5
+			has_tech = excavation6
+			NOT = {
+				has_tech = excavation4
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation2
+			has_tech = excavation4
+			has_tech = excavation5
+			has_tech = excavation6
+			NOT = {
+				has_tech = excavation3
+			}
+		}
+		AND = {
+			has_tech = excavation1
+			has_tech = excavation3
+			has_tech = excavation4
+			has_tech = excavation5
+			has_tech = excavation6
+			NOT = {
+				has_tech = excavation2
+			}
+		}
+		AND = {
+			has_tech = excavation2
+			has_tech = excavation3
+			has_tech = excavation4
+			has_tech = excavation5
+			has_tech = excavation6
+			NOT = {
+				has_tech = excavation1
+			}
+		}
+	}
+}
+
+check_for_warlord_2_left = {
+	count_triggers = {
+		amount = 2
+		CHI = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		SHX = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		GXC = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		YUN = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		XSM = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		TNG = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+}
+
+check_for_warlord_3_left = {
+	count_triggers = {
+		amount = 3
+		CHI = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		SHX = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		GXC = {
+			has_country_flag = is_warlords
+
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		YUN = {
+			has_country_flag = is_warlords
+
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		XSM = {
+			has_country_flag = is_warlords
+
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		TNG = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+}
+
+check_for_warlord_1_left = {
+	count_triggers = {
+		amount = 1
+		CHI = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		SHX = {
+			has_country_flag = is_warlords
+
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		GXC = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		YUN = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		XSM = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		TNG = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+}
+
+own_china_proper = {
+	717 = { is_owned_by = ROOT }
+	714 = { is_owned_by = ROOT }
+	328 = { is_owned_by = ROOT }
+	716 = { is_owned_by = ROOT }
+	610 = { is_owned_by = ROOT }
+	715 = { is_owned_by = ROOT }
+	609 = { is_owned_by = ROOT }
+	612 = { is_owned_by = ROOT }
+	611 = { is_owned_by = ROOT }
+	608 = { is_owned_by = ROOT }
+	614 = { is_owned_by = ROOT }
+	597 = { is_owned_by = ROOT }
+	598 = { is_owned_by = ROOT }
+	613 = { is_owned_by = ROOT }
+	596 = { is_owned_by = ROOT }
+	595 = { is_owned_by = ROOT }
+	593 = { is_owned_by = ROOT }
+	592 = { is_owned_by = ROOT }
+	591 = { is_owned_by = ROOT }
+	594 = { is_owned_by = ROOT }
+	599 = { is_owned_by = ROOT }
+	600 = { is_owned_by = ROOT }
+	606 = { is_owned_by = ROOT }
+	607 = { is_owned_by = ROOT }
+	615 = { is_owned_by = ROOT }
+	621 = { is_owned_by = ROOT }
+	622 = { is_owned_by = ROOT }
+	620 = { is_owned_by = ROOT }
+	602 = { is_owned_by = ROOT }
+	603 = { is_owned_by = ROOT }
+	605 = { is_owned_by = ROOT }
+	325 = { is_owned_by = ROOT }
+	283 = { is_owned_by = ROOT }
+	616 = { is_owned_by = ROOT }
+}
+
+check_for_warlord_4_left = {
+	count_triggers = {
+		amount = 4
+		CHI = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		SHX = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		GXC = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		YUN = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		XSM = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		TNG = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+}
+
+check_for_warlord_full = {
+	count_triggers = {
+		amount = 8
+		CHI = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = CHI
+			}
+		}
+		SHX = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = CHI
+			}
+		}
+		GXC = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = CHI
+			}
+		}
+		YUN = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = CHI
+			}
+		}
+		XSM = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = CHI
+			}
+		}
+		TNG = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = CHI
+			}
+		}
+	}
+}
+
+
+same_ideo_with_JAP = {
+	OR = {
+		AND = {
+			has_government = democratic
+			JAP = {
+				has_government = democratic
+			}
+		}
+		AND = {
+			has_government = fascism
+			JAP = {
+				has_government = fascism
+			}
+		}
+		AND = {
+			has_government = communism
+			JAP = {
+				has_government = communism
+			}
+		}
+		AND = {
+			has_government = neutrality
+			JAP = {
+				has_government = neutrality
+			}
+		}
+	}
+}
+
+no_jap_in_manchuria = {
+	608 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+		}
+	}
+	611 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+			tag = ROOT
+		}
+	}
+	612 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+			tag = ROOT
+		}
+	}
+	609 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+		}
+	}
+	610 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+			tag = ROOT
+		}
+	}
+	716 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+			tag = ROOT
+		}
+	}
+	328 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+			tag = ROOT
+		}
+	}
+	717 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+			tag = ROOT
+		}
+	}
+	715 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+			tag = ROOT
+		}
+	}
+	714 = {
+		controller = {
+			NOT = {
+				tag = JAP
+				is_puppet_of = JAP
+				has_country_flag = JAP_puppet
+			}
+			tag = ROOT
+		}
+	}
+}
+
+check_for_warlord_none = {
+	count_triggers = {
+		amount = 0
+		CHI = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		SHX = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		GXC = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		YUN = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		XSM = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		TNG = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+}
+
+check_for_warlord_7_left = {
+	count_triggers = {
+		amount = 7
+		CHI = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		SHX = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		GXC = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		YUN = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		XSM = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		TNG = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+}
+
+check_for_warlord_6_left = {
+	count_triggers = {
+		amount = 6
+		CHI = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		SHX = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		GXC = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		YUN = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		XSM = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		TNG = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+}
+
+check_for_warlord_5_left = {
+	count_triggers = {
+		amount = 5
+		CHI = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		SHX = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		GXC = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		YUN = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		XSM = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+		TNG = {
+			has_country_flag = is_warlords
+			exists = yes
+			NOT = {
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+}
+
+has_japanese_officials_in_gov = {
+	OR = {
+		has_idea_with_trait = captain_of_industry_mck
+		has_idea_with_trait = captain_of_industry_mck_tfv
+		has_idea_with_trait = war_industrialist_mck
+		has_idea_with_trait = war_industrialist_mck_tfv
+		has_idea_with_trait = armaments_organizer_mck
+		has_idea_with_trait = armaments_organizer_mck_tfv
+	}
+}
+
+has_japanese_officials_in_mili = {
+	OR = {
+		has_idea_with_trait = army_chief_drill_1_mck_tfv
+		has_idea_with_trait = army_chief_reform_3_mck
+		has_idea_with_trait = army_chief_drill_1_mck
+		has_idea_with_trait = army_chief_reform_3_mck_tfv
+		has_idea_with_trait = military_theorist_mck
+		has_idea_with_trait = military_theorist_mck_tfv
+		has_idea_with_trait = army_chief_organizational_2_mck
+		has_idea_with_trait = army_chief_organizational_2_mck_tfv
+		has_idea_with_trait = lawrence_of_manchuria
+		has_idea_with_trait = lawrence_of_manchuria_tfv
+		has_idea_with_trait = air_chief_ground_support_2_mck
+		has_idea_with_trait = air_chief_ground_support_2_mck_tfv
+		has_idea_with_trait = army_regrouping_2_mck
+		has_idea_with_trait = army_regrouping_2_mck_tfv
+		has_idea_with_trait = army_infantry_2_mck
+		has_idea_with_trait = army_infantry_2_mck_tfv
+	}
+}
+
+burma_road_ok = {
+	747 = {
+		infrastructure > 0
+		controller = {
+			NOT = {
+				has_war_with = CHI
+				has_war_with = ENG
+				has_war_with = PREV.PREV
+			}
+			OR = {
+				tag = CHI
+				is_in_faction_with = CHI
+				is_puppet_of = CHI
+				has_war_together_with = CHI
+			}
+		}
+	}
+	640 = {
+		infrastructure > 0
+		controller = {
+			NOT = {
+				has_war_with = CHI
+				has_war_with = ENG
+				has_war_with = PREV.PREV
+			}
+			OR = {
+				tag = ENG
+				is_in_faction_with = ENG
+				is_puppet_of = ENG
+				has_war_together_with = ENG
+			}
+		}
+	}
+}
+
+yunnan_bahn_ok = {
+	325 = {
+		infrastructure > 0
+		controller = {
+			NOT = {
+				has_war_with = CHI
+				has_war_with = FRA
+				has_war_with = PREV.PREV
+			}
+			OR = {
+				tag = CHI
+				is_in_faction_with = CHI
+				is_puppet_of = CHI
+				has_war_together_with = CHI
+			}
+		}
+	}
+	671 = {
+		infrastructure > 0
+		controller = {
+			NOT = {
+				has_war_with = CHI
+				has_war_with = FRA
+				has_war_with = PREV.PREV
+			}
+			OR = {
+				OR ={
+					tag = FRA
+					is_in_faction_with = FRA
+					is_puppet_of = FRA
+					has_war_together_with = FRA
+				}
+				OR ={
+					tag = CHI
+					is_in_faction_with = CHI
+					is_puppet_of = CHI
+					has_war_together_with = CHI
+				}
+			}
+		}
+	}
+}
+
+the_hump_ok = {
+	OR = {
+		747 = {
+			air_base > 0
+			controller = {
+				NOT = {
+					has_war_with = CHI
+					has_war_with = PREV.PREV
+				}
+				OR = {
+					tag = CHI
+					is_in_faction_with = CHI
+					is_puppet_of = CHI
+					has_war_together_with = CHI
+				}
+			}
+		}
+		325 = {
+			air_base > 0
+			controller = {
+				NOT = {
+					has_war_with = CHI
+					has_war_with = PREV.PREV
+				}
+				OR = {
+					tag = CHI
+					is_in_faction_with = CHI
+					is_puppet_of = CHI
+					has_war_together_with = CHI
+				}
+			}
+		}
+		751 = {
+			air_base > 0
+			controller = {
+				NOT = {
+					has_war_with = CHI
+					has_war_with = PREV.PREV
+				}
+				OR = {
+					tag = CHI
+					is_in_faction_with = CHI
+					is_puppet_of = CHI
+					has_war_together_with = CHI
+				}
+			}
+		}
+		603 = {
+			air_base > 0
+			controller = {
+				NOT = {
+					has_war_with = CHI
+					has_war_with = PREV.PREV
+				}
+				OR = {
+					tag = CHI
+					is_in_faction_with = CHI
+					is_puppet_of = CHI
+					has_war_together_with = CHI
+				}
+			}
+		}
+	}
+	432 = {
+		air_base > 0
+		controller = {
+			NOT = {
+				has_war_with = CHI
+				has_war_with = USA
+				has_war_with = PREV.PREV
+			}
+			OR = {
+				tag = ENG
+				is_in_faction_with = ENG
+				is_puppet_of = ENG
+				has_war_together_with = ENG
+			}
+		}
+	}
+	434 = {
+		air_base > 0
+		controller = {
+			NOT = {
+				has_war_with = CHI
+				has_war_with = ENG
+				has_war_with = PREV.PREV
+			}
+			OR = {
+				tag = ENG
+				is_in_faction_with = ENG
+				is_puppet_of = ENG
+				has_war_together_with = ENG
+			}
+		}
+	}
+	640 = {
+		air_base > 0
+		controller = {
+			NOT = {
+				has_war_with = CHI
+				has_war_with = ENG
+				has_war_with = PREV.PREV
+			}
+			OR = {
+				tag = ENG
+				is_in_faction_with = ENG
+				is_puppet_of = ENG
+				has_war_together_with = ENG
+			}
+		}
+	}
+	288 = {
+		air_base > 0
+		controller = {
+			NOT = {
+				has_war_with = CHI
+				has_war_with = ENG
+				has_war_with = PREV.PREV
+			}
+			OR = {
+				tag = ENG
+				is_in_faction_with = ENG
+				is_puppet_of = ENG
+				has_war_together_with = ENG
+			}
+		}
+	}
+	747 = {
+		infrastructure > 0
+		controller = {
+			NOT = {
+				has_war_with = CHI
+				has_war_with = ENG
+				has_war_with = PREV.PREV
+			}
+			OR = {
+				tag = CHI
+				is_in_faction_with = CHI
+				is_puppet_of = CHI
+				has_war_together_with = CHI
+			}
+		}
+	}
+}
+
+KMT_is_chinese_states_broad = {
+}
+
+KMT_ps_is_in_alliance = {
+}
+
+PRC_owns_10_states = {
+	count_triggers = {
+		amount > 9
+		owns_state = 283
+		owns_state = 287
+		owns_state = 322
+		owns_state = 325
+		owns_state = 326
+		owns_state = 328
+		owns_state = 329
+		owns_state = 330
+		owns_state = 434
+		owns_state = 524
+		owns_state = 591
+		owns_state = 592
+		owns_state = 593
+		owns_state = 594
+		owns_state = 595
+		owns_state = 596
+		owns_state = 597
+		owns_state = 598
+		owns_state = 599
+		owns_state = 600
+		owns_state = 601
+		owns_state = 602
+		owns_state = 603
+		owns_state = 604
+		owns_state = 605
+		owns_state = 606
+		owns_state = 607
+		owns_state = 608
+		owns_state = 609
+		owns_state = 610
+		owns_state = 611
+		owns_state = 612
+		owns_state = 613
+		owns_state = 614
+		owns_state = 615
+		owns_state = 616
+		owns_state = 617
+		owns_state = 618
+		owns_state = 619
+		owns_state = 620
+		owns_state = 621
+		owns_state = 622
+		owns_state = 714
+		owns_state = 715
+		owns_state = 716
+		owns_state = 717
+		owns_state = 728
+		owns_state = 729
+		owns_state = 743
+		owns_state = 744
+		owns_state = 745
+		owns_state = 746
+		owns_state = 747
+		owns_state = 748
+		owns_state = 749
+		owns_state = 750
+		owns_state = 751
+		owns_state = 752
+		owns_state = 753
+		owns_state = 754
+		owns_state = 755
+		owns_state = 756
+		owns_state = 757
+		owns_state = 758
+		owns_state = 759
+		owns_state = 760
+		owns_state = 761
+		owns_state = 818
+		owns_state = 817
+		owns_state = 819
+		owns_state = 835
+		owns_state = 836
+		owns_state = 837
+		owns_state = 838
+		owns_state = 839
+		owns_state = 840
+		owns_state = 841
+		owns_state = 842
+		owns_state = 843
+		owns_state = 844
+	}
+}
+
+PRC_owns_50_states = {
+	count_triggers = {
+		amount > 49
+		owns_state = 283
+		owns_state = 287
+		owns_state = 322
+		owns_state = 325
+		owns_state = 326
+		owns_state = 328
+		owns_state = 329
+		owns_state = 330
+		owns_state = 434
+		owns_state = 524
+		owns_state = 591
+		owns_state = 592
+		owns_state = 593
+		owns_state = 594
+		owns_state = 595
+		owns_state = 596
+		owns_state = 597
+		owns_state = 598
+		owns_state = 599
+		owns_state = 600
+		owns_state = 601
+		owns_state = 602
+		owns_state = 603
+		owns_state = 604
+		owns_state = 605
+		owns_state = 606
+		owns_state = 607
+		owns_state = 608
+		owns_state = 609
+		owns_state = 610
+		owns_state = 611
+		owns_state = 612
+		owns_state = 613
+		owns_state = 614
+		owns_state = 615
+		owns_state = 616
+		owns_state = 617
+		owns_state = 618
+		owns_state = 619
+		owns_state = 620
+		owns_state = 621
+		owns_state = 622
+		owns_state = 714
+		owns_state = 715
+		owns_state = 716
+		owns_state = 717
+		owns_state = 728
+		owns_state = 729
+		owns_state = 743
+		owns_state = 744
+		owns_state = 745
+		owns_state = 746
+		owns_state = 747
+		owns_state = 748
+		owns_state = 749
+		owns_state = 750
+		owns_state = 751
+		owns_state = 752
+		owns_state = 753
+		owns_state = 754
+		owns_state = 755
+		owns_state = 756
+		owns_state = 757
+		owns_state = 758
+		owns_state = 759
+		owns_state = 760
+		owns_state = 761
+		owns_state = 818
+		owns_state = 817
+		owns_state = 819
+		owns_state = 835
+		owns_state = 836
+		owns_state = 837
+		owns_state = 838
+		owns_state = 839
+		owns_state = 840
+		owns_state = 841
+		owns_state = 842
+		owns_state = 843
+		owns_state = 844
+		owns_state = 820
+	}
+}

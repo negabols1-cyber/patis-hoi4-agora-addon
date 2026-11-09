@@ -1,0 +1,102 @@
+technology_sharing_group = {
+
+	id = ger_sov_cooperation
+	name = ger_sov_cooperation_name
+	desc = ger_sov_cooperation_name
+	picture = GFX_technology_sharing_default
+
+	research_sharing_per_country_bonus = 0.1
+
+	available = {
+		OR = {
+			is_in_faction_with = GER
+			is_in_faction_with = SOV
+		}
+	}
+}
+
+technology_sharing_group = {
+
+	id = sau_arab_research
+	name = sau_arab_league_research_name
+	desc = sau_arab_league_research_name
+	picture = GFX_technology_sharing_default
+
+	research_sharing_per_country_bonus = 0.05
+
+	available = {
+		is_in_faction_with = SAU
+	}
+
+}
+
+technology_sharing_group = {
+
+	id = sau_eng_research
+	name = sau_eng_research_name
+	desc = sau_eng_research_name
+	picture = GFX_technology_sharing_default
+
+	research_sharing_per_country_bonus = 0.1
+
+	available = {
+		NOT = { has_war_with = ENG }
+	}
+}
+
+technology_sharing_group = {
+
+	id = sau_sov_research
+	name = sau_sov_research_name
+	desc = sau_sov_research_name
+	picture = GFX_technology_sharing_default
+
+	research_sharing_per_country_bonus = 0.1
+
+	available = {
+		is_in_faction_with = SAU
+	}
+}
+
+technology_sharing_group = {
+
+	id = ENG_GER_tech_sharing
+	name = ENG_GER_tech_sharing_name
+	desc = ENG_GER_tech_sharing_desc
+	picture = GFX_technology_sharing_default
+
+	research_sharing_per_country_bonus = 0.1
+
+	available = {
+		OR = {
+			AND = {
+				original_tag = GER
+				has_government = fascism
+				NOT = {
+					has_war_with = ENG
+				}
+			}
+			AND = {
+				original_tag = ENG
+				has_government = fascism
+				NOT = {
+					has_war_with = GER
+				}
+			}
+		}
+	}
+}
+
+technology_sharing_group = {
+
+	id = usa_nato_tech_sharing
+	name = usa_nato_tech_sharing_name
+	desc = usa_nato_tech_sharing_desc
+	picture = GFX_technology_sharing_default
+
+	research_sharing_per_country_bonus = 0.1
+
+	available = {
+		is_in_faction_with = USA
+	}
+}

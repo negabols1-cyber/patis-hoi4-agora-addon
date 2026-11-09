@@ -1,0 +1,855 @@
+﻿###########################
+# Latin American Events
+###########################
+
+add_namespace = conference
+add_namespace = conference_trigger
+add_namespace = EUYL_startupevent
+add_namespace = EUYL
+add_namespace = venezuela
+
+#USA calls the conference - trigger (HIDDEN)
+
+country_event = {
+	id = conference_trigger.1
+
+	is_triggered_only = yes
+	hidden = yes
+
+	immediate = {
+		MEX = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		CAN = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		CUB = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		HAI = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		DOM = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		GUA = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		HON = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		ELS = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		NIC = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		COS = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		PAN = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		VEN = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		COL = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		ECU = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		PRU = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		BRA = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		BOL = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		CHL = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		PAR = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		ARG = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+		URG = {
+			country_event = { id = conference.0 hours = 8 }
+		}
+	}
+
+	option = {
+		name = conference_trigger.1.a
+	}
+}
+
+#conference 0 - USA calls the conference
+
+country_event = {
+	id = conference.0
+
+	title = {
+		text = conference.0.title
+		trigger = {
+			NOT = { tag = ARG }
+		}
+	}
+	title = {
+		text = conference.0.title_arg
+		trigger = {
+			tag = ARG
+		}
+	}
+
+	desc = {
+		text = conference.0.desc
+		trigger = {
+			NOT = { tag = ARG }
+		}
+	}
+	desc = {
+		text = conference.0.desc_arg
+		trigger = {
+			tag = ARG
+		}
+	}
+
+	picture = GFX_report_event_conference
+
+	is_triggered_only = yes
+
+	immediate = {
+		ROOT = {
+			set_country_flag = conference
+		}
+	}
+
+	# OK
+	option = {
+		name = conference.0.a
+		ai_chance = {
+			base = 90
+			modifier = {
+				is_historical_focus_on = yes
+				factor = 100
+			}
+		}
+		ROOT = {
+			custom_effect_tooltip = conference_0a_tt
+		}
+	}
+
+	# Nah
+	option = {
+		name = conference.0.b
+		ai_chance = {
+			base = 10
+		}
+		trigger = {
+			NOT = {
+				tag = ARG
+			}
+		}
+		ROOT = {
+			custom_effect_tooltip = conference_0b_tt
+			set_country_flag = conference_denied
+		}
+	}
+}
+
+#conference 1 - choose industrial buff
+
+country_event = {
+	id = conference.1
+	title = conference.1.title
+	desc = conference.1.desc
+	picture = GFX_report_event_generic_factory
+
+	is_triggered_only = yes
+
+	# Ok - civilian buildings
+	option = {
+		name = conference.1.a
+		ai_chance = {
+			base = 50
+		}
+		set_country_flag = conf_1
+		custom_effect_tooltip = conference_1a_tt
+	}
+
+	# Ok - military buildings
+	option = {
+		name = conference.1.b
+		ai_chance = {
+			base = 50
+		}
+		set_country_flag = conf_2
+		custom_effect_tooltip = conference_1b_tt
+	}
+}
+
+#conference 2 - choose military buff
+
+country_event = {
+	id = conference.2
+	title = conference.2.title
+	desc = conference.2.desc
+	picture = GFX_report_event_soldiers_marching
+
+	is_triggered_only = yes
+
+	# Ok - land
+	option = {
+		name = conference.2.a
+		ai_chance = {
+			base = 50
+		}
+		set_country_flag = conf_a1
+		custom_effect_tooltip = conference_2a_tt
+	}
+
+	# Ok - sea
+	option = {
+		name = conference.2.b
+		trigger = {
+			ROOT = {
+				any_owned_state = {
+					is_coastal = yes
+				}
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+		set_country_flag = conf_a2
+		custom_effect_tooltip = conference_2b_tt
+	}
+
+	# Ok - air
+	option = {
+		name = conference.2.c
+		ai_chance = {
+			base = 50
+		}
+		set_country_flag = conf_a3
+		custom_effect_tooltip = conference_2c_tt
+	}
+}
+
+#conference 3 - choose research buff
+
+country_event = {
+	id = conference.3
+	title = conference.3.title
+	desc = conference.3.desc
+	picture = GFX_report_event_generic_research_lab
+
+	is_triggered_only = yes
+
+	# Ok - general research bonus
+	option = {
+		name = conference.3.a
+		ai_chance = {
+			base = 50
+		}
+		set_country_flag = conf_b1
+		custom_effect_tooltip = conference_3a_tt
+	}
+
+	# Ok - industry and electronics research bonus
+	option = {
+		name = conference.3.b
+		ai_chance = {
+			base = 50
+		}
+		set_country_flag = conf_b2
+		custom_effect_tooltip = conference_3b_tt
+	}
+}
+
+#conference 4 - cenference ends
+
+country_event = {
+	id = conference.4
+
+	title = {
+		text = conference.4.title
+		trigger = {
+			NOT = { tag = ARG }
+		}
+	}
+	title = {
+		text = conference.4.title_arg
+		trigger = {
+			tag = ARG
+		}
+	}
+
+	desc = {
+		text = conference.4.desc
+		trigger = {
+			NOT = { tag = ARG }
+		}
+	}
+	desc = {
+		text = conference.4.desc_arg
+		trigger = {
+			tag = ARG
+		}
+	}
+
+	picture = GFX_report_event_generic_conference
+
+	is_triggered_only = yes
+
+	# Ok! - gains national spirit
+	option = {
+		name = conference.4.a
+		ai_chance = {
+			base = 50
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_1
+					has_country_flag = conf_a1
+					has_country_flag = conf_b1
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference1
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_1
+					has_country_flag = conf_a1
+					has_country_flag = conf_b2
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference2
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_1
+					has_country_flag = conf_a2
+					has_country_flag = conf_b1
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference3
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_1
+					has_country_flag = conf_a2
+					has_country_flag = conf_b2
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference4
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_1
+					has_country_flag = conf_a3
+					has_country_flag = conf_b1
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference5
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_1
+					has_country_flag = conf_a3
+					has_country_flag = conf_b2
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference6
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_2
+					has_country_flag = conf_a1
+					has_country_flag = conf_b1
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference7
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_2
+					has_country_flag = conf_a1
+					has_country_flag = conf_b2
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference8
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_2
+					has_country_flag = conf_a2
+					has_country_flag = conf_b1
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference9
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_2
+					has_country_flag = conf_a2
+					has_country_flag = conf_b2
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference10
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_2
+					has_country_flag = conf_a3
+					has_country_flag = conf_b1
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference11
+					days = 365
+				}
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					has_country_flag = conf_2
+					has_country_flag = conf_a3
+					has_country_flag = conf_b2
+				}
+			}
+			ROOT = {
+				add_timed_idea = {
+					idea = conference12
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = EUYL_startupevent.1
+	title = EUYL_startupevent.1.t
+	desc = EUYL_startupevent.1.d
+	picture = GFX_logo_game_event
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_country_flag = EUYL_mod_active
+			#BRC = { load_focus_tree = brazil_focus }
+			#BZE = { load_focus_tree = brazil_focus }
+			#IBR = { load_focus_tree = brazil_focus }
+		}
+	}
+
+	option = { #thank you
+		name = EUYL_startupevent.1.a
+	}
+
+	option = { #stop bothering me
+		name = EUYL_startupevent.1.b
+	}
+}
+
+# Conference ends - Trigger (HIDDEN)
+news_event = {
+	id = conference.5
+	hidden = yes
+
+	fire_only_once = yes
+
+	trigger = {
+		date > 1936.12.23
+		date < 1936.12.25
+	}
+
+	immediate = {
+		news_event = { id = conference.6 }
+		set_global_flag = conference_ends
+	}
+
+	option = {
+		name = conference.5.a
+	}
+}
+
+# Conferencia ends news
+news_event = {
+	id = conference.6
+	title = conference.6.title
+	desc = conference.6.desc
+	picture = GFX_news_event_canada_patriation
+
+	major = yes
+
+	is_triggered_only = yes
+
+	option = {
+		name = conference.6.a
+	}
+}
+
+### USA is Giving us 3 Years to Declare War on the Axis ##
+country_event = {
+	id = EUYL.1
+	title = EUYL.1.t
+	desc = EUYL.1.d
+	picture = GFX_report_event_generic_usa_treaty
+
+	is_triggered_only = yes
+
+	option = {
+		name = EUYL.1.a
+		#activate_mission = EUYL_USA_expects_us_to_declare_war_on_axis
+		add_ai_strategy = {
+			type = antagonize
+			id = GER
+			value = -100
+		}
+	}
+}
+
+## Country that Declared War Failed to Reach their goal
+country_event = {
+	id = EUYL.2
+	title = EUYL.2.t
+	desc = EUYL.2.d
+	picture = GFX_report_event_generic_riot
+
+	is_triggered_only = yes
+
+	option = { ## We surrender || Can't make this fully dynamic as that could cause unwanted bugs
+		name = EUYL.2.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 10
+				any_enemy_country = {
+					strength_ratio = {
+						tag = ROOT
+						ratio > 1
+					}
+				}
+			}
+		}
+		if = { ## Bolivia
+			limit = {
+				original_tag = BOL
+				has_war_with = PAR
+			}
+			every_core_state = {
+				limit = {
+					is_controlled_by = PAR
+				}
+				PAR = {
+					transfer_state = PREV
+				}
+			}
+			white_peace = PAR
+			PAR = {
+				country_event = {
+					id = EUYL.3
+					hours = 4
+				}
+			}
+		}
+		if = {
+			limit = { ## Peru
+				original_tag = PRU
+				has_war_with = ECU
+			}
+			every_core_state = {
+				limit = {
+					is_controlled_by = ECU
+				}
+				ECU = {
+					transfer_state = PREV
+				}
+			}
+			white_peace = ECU
+			ECU = {
+				country_event = {
+					id = EUYL.3
+					hours = 4
+				}
+			}
+			hidden_effect = {
+				ECU = {
+					set_country_flag = ECU_winner_of_peru_ecuador_war_flag
+				}
+			}
+		}
+		if = {
+			limit = { ## Argentina | Brazil
+				OR = {
+					original_tag = ARG
+					original_tag = BRA
+					has_offensive_war_with = URG
+				}
+			}
+			every_core_state = {
+				limit = {
+					is_controlled_by = URG
+				}
+				URG = {
+					transfer_state = PREV
+				}
+			}
+			white_peace = URG
+			URG = {
+				country_event = {
+					id = EUYL.3
+					hours = 4
+				}
+			}
+		}
+	}
+
+	option = { # We must keep going
+		name = EUYL.2.b
+		ai_chance = {
+			base = 5
+			modifier = {
+				factor = 0
+				any_enemy_country = {
+					is_ai = no ## player
+				}
+			}
+		}
+		add_war_support = -0.05
+		add_political_power = -25
+	}
+}
+
+## FROM has put down their arms
+country_event = {
+	id = EUYL.3
+	title = EUYL.3.t
+	desc = EUYL.3.d
+	picture = GFX_report_event_generic_read_write
+
+	is_triggered_only = yes
+
+	option = {
+		name = EUYL.3.a
+		add_war_support = 0.05
+		add_political_power = 25
+	}
+}
+
+############## TEMP ##############
+## [FROM.GetName] has sent us an Ultimatum
+country_event = {
+	id = venezuela.49
+	title = venezuela.49.t
+	desc = venezuela.49.d
+	picture = GFX_report_event_generic_army
+
+	is_triggered_only = yes
+
+	option = { ## do we even have a choice?
+		name = venezuela.49.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 5
+				FROM = {
+					original_tag = COL
+					has_completed_focus = COL_ocupar_el_itsmo
+				}
+				ROOT = {
+					original_tag = PAN
+				}
+			}
+			modifier = {
+				factor = 0 ## cant believe i didnt set this up wtf
+				has_war_with = FROM
+			}
+			modifier = {
+				factor = 4
+				strength_ratio = {
+					tag = FROM
+					ratio < 1
+				}
+			}
+			modifier = {
+				factor = 0
+				strength_ratio = {
+					tag = FROM
+					ratio > 1
+				}
+			}
+			modifier = {
+				factor = 2
+				has_opinion = {
+					target = FROM
+					value > 79
+				}
+			}
+			modifier = {
+				factor = 3
+				FROM = {
+					num_of_factories > 49
+				}
+			}
+			modifier = {
+				factor = 2
+				num_of_factories < 19
+			}
+			modifier = {
+				factor = 2
+				has_army_manpower = {
+					size < 99999
+				}
+			}
+			modifier = {
+				factor = 3
+				OR = {
+					is_in_faction_with = FROM
+					has_government = FROM
+				}
+			}
+		}
+		custom_effect_tooltip = GAME_OVER_TT
+		FROM = {
+			annex_country = {
+				target = ROOT
+				transfer_troops = yes
+			}
+			country_event = peru.16
+		}
+		if = {
+			limit = {
+				original_tag = GUA
+				FROM = { original_tag = HON } ## idk if this is too op or not, if anything i'll just use it on small countries (Future me here: yeah it defo was lmao)
+			}
+			every_core_state = {
+				add_compliance = 25
+			}
+		}
+	}
+
+	option = { ## we'll fight till the very end
+		name = venezuela.49.b
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 3
+				FROM = {
+					has_war = yes
+				}
+			}
+			modifier = {
+				factor = 2
+				NOT = {
+					has_government = FROM
+				}
+			}
+			modifier = {
+				factor = 0.5
+				has_war = yes
+			}
+			modifier = {
+				factor = 2
+				has_army_manpower = {
+					size > 199999
+				}
+			}
+			modifier = {
+				factor = 0.5
+				FROM = {
+					has_army_manpower = {
+						size > 149999
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				num_of_factories > 49
+			}
+			modifier = {
+				factor = 2
+				FROM = {
+					CEA_is_central_american = yes
+				}
+			}
+		}
+		FROM = {
+			country_event = {
+				id = peru.17
+				hours = 4
+				random_hours = 4
+			}
+		}
+	}
+}

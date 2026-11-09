@@ -1,0 +1,196 @@
+scripted_gui = {
+
+	IB_background_ui = {
+		window_name = "ib_menu_back_ground2"
+		context_type = player_context
+		dirty = global.num_days
+		visible = {
+			NOT = { has_country_flag = IB_IC_UI_switching_flag }
+		}
+	}
+
+	EF_Factory_limit_container_ui = {
+		window_name = "ef_factory_container"
+		context_type = selected_country_context
+		parent_window_token = selected_country_view_diplomacy
+		visible = {
+			NOT = { has_country_flag = factory_limit_flag }
+		}
+	}
+
+	KR_unit_limits_deployment2 = {
+		window_name = "KR_unit_limit_deployment_tab2"
+
+		ai_enabled = {
+			always = no
+		}
+		dirty = global.num_days
+		visible = {
+			is_ai = no
+			NOT = {
+				has_global_flag = KR_no_unit_limits
+				has_global_flag = KR_unit_limits_ai_only
+			}
+			NOT = { has_country_flag = IB_IC_UI_switching_flag }
+		}
+	}
+	KR_unit_limits_army_view2 = {
+		window_name = "KR_unit_limit_countryarmyview2"
+
+		ai_enabled = {
+			always = no
+		}
+		dirty = global.num_days
+		visible = {
+			is_ai = no
+			NOT = {
+				has_global_flag = KR_no_unit_limits
+				has_global_flag = KR_unit_limits_ai_only
+			}
+			NOT = { has_country_flag = IB_IC_UI_switching_flag }
+		}
+	}
+	KR_unit_limits_alert2 = {
+		window_name = "KR_unit_limit_alert_container2"
+
+		ai_enabled = {
+			always = no
+		}
+		dirty = global.num_days
+		visible = {
+			is_ai = no
+			has_dlc = "La Resistance"
+			has_reached_maximum_divisions = yes
+			NOT = {
+				has_global_flag = KR_no_unit_limits
+				has_global_flag = KR_unit_limits_ai_only
+			}
+			NOT = { has_country_flag = IB_IC_UI_switching_flag }
+		}
+	}
+	KR_unit_limits_alert_non_LaR2 = {
+		window_name = "KR_unit_limit_alert_container2"
+
+		ai_enabled = {
+			always = no
+		}
+		dirty = global.num_days
+		visible = {
+			is_ai = no
+			NOT = { has_dlc = "La Resistance" }
+			has_reached_maximum_divisions = yes
+			NOT = {
+				has_global_flag = KR_no_unit_limits
+				has_global_flag = KR_unit_limits_ai_only
+			}
+			NOT = { has_country_flag = IB_IC_UI_switching_flag }
+		}
+
+		properties = {
+			unit_limit_alert = {
+				x = -55
+			}
+		}
+	}
+
+	IB_civ_ui = {
+		window_name = "IB_civ_ui_window"
+		dirty = global.num_days
+		visible = {
+			NOT = { has_country_flag = IB_IC_UI_switching_flag }
+		}
+	}
+
+	IB_mil_ui = {
+		window_name = "IB_mil_ui_window"
+		dirty = global.num_days
+		visible = {
+			NOT = { has_country_flag = IB_IC_UI_switching_flag }
+		}
+	}
+
+	IB_dockyard = {
+		window_name = "IB_dockyard_ui_window"
+		dirty = global.num_days
+		visible = {
+			NOT = { has_country_flag = IB_IC_UI_switching_flag }
+		}
+	}
+
+	IB_divison = {
+		window_name = "IB_divison_ui_window"
+		dirty = global.num_days
+		visible = {
+			NOT = { has_country_flag = IB_other_UI_switching_flag }
+		}
+	}
+
+	IB_planes = {
+		window_name = "IB_planes_ui_window"
+		dirty = global.num_days
+		visible = {
+			NOT = { has_country_flag = IB_other_UI_switching_flag }
+		}
+	}
+
+	IB_ships = {
+		window_name = "IB_ships_ui_window"
+		dirty = global.num_days
+		visible = {
+			NOT = { has_country_flag = IB_other_UI_switching_flag }
+		}
+	}
+
+	IB_topbar_open = {
+		window_name = "ib_open_ui"
+		context_type = player_context
+		visible = {
+			NOT = {
+				AND = {
+					has_country_flag = IB_IC_UI_switching_flag
+					has_country_flag = IB_other_UI_switching_flag
+				}
+			}
+		}
+
+		effects = {
+			ib_open_and_close_window_click = {
+				if = {
+					limit = {
+						NOT = {
+							has_country_flag = IB_IC_UI_switching_flag
+							has_country_flag = IB_other_UI_switching_flag
+						}
+					}
+					set_country_flag = IB_IC_UI_switching_flag
+					set_country_flag = IB_other_UI_switching_flag
+				}
+				else = {
+					clr_country_flag = IB_IC_UI_switching_flag
+					clr_country_flag = IB_other_UI_switching_flag
+				}
+			}
+
+		}
+	}
+
+	IB_topbar_close = {
+		window_name = "ib_close_ui"
+		context_type = player_context
+		visible = {
+			AND = {
+				has_country_flag = IB_IC_UI_switching_flag
+				has_country_flag = IB_other_UI_switching_flag
+			}
+		}
+
+		effects = {
+			ib_close_window_click = {
+				clr_country_flag = IB_IC_UI_switching_flag
+				clr_country_flag = IB_other_UI_switching_flag
+			}
+
+		}
+	}
+}
+

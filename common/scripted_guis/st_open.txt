@@ -1,0 +1,74 @@
+scripted_gui = {
+
+	st_open = {
+		context_type = player_context
+
+		window_name = "st_open_container"
+
+		parent_window_token = top_bar
+		dirty = ef_refresh_st
+		visible = {
+			is_ai = no
+			NOT = { has_country_flag = hidden_switch }
+			NOT = {
+				has_global_flag = EF_disabled_stt
+			}
+		}
+
+		effects = {
+			open_ST_click = {
+				if = {
+					limit = { ROOT = { NOT = { has_country_flag = transfer_enabled } } }
+					ROOT = { set_country_flag = transfer_enabled }
+					add_to_variable = { ef_refresh_st = 1 }
+				}
+				else = {
+					ROOT = { clr_country_flag = transfer_enabled }
+					clear_variable = ef_refresh_st
+				}
+			}
+		}
+		triggers = {
+			open_ST_click_enabled = {
+				always = yes
+			}
+		}
+	}
+
+	st_hide = {
+		context_type = player_context
+
+		window_name = "st_hide_container"
+		dirty = ef_refresh_st
+		visible = {
+			has_game_rule = {
+				rule = use_new_tool
+				option = YES
+			}
+		}
+
+		effects = {
+			hide_ST_click = {
+				if = {
+					limit = { 
+						NOT = { 
+							has_variable = ef_refresh_st
+						}
+					}
+					set_country_flag = hidden_switch
+					add_to_variable = { ef_refresh_st = 1 }
+				}
+				else = {
+					clr_country_flag = hidden_switch
+					clear_variable = ef_refresh_st
+				}
+			}
+		}
+		triggers = {
+			hide_ST_click_enabled = {
+				always = yes
+			}
+		}
+	}
+
+}

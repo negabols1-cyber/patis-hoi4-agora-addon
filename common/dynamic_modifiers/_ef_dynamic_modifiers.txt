@@ -1,0 +1,678 @@
+#	Example:
+#
+#	example_dynamic_modifier = {
+	#		icon = "GFX_idea_unknown" # optional, will show up in guis if icon is specified
+	#		enable = { always = yes } #optional, the modifier won't apply if not enabled
+	#		remove_trigger = { always = no } #optional, will remove the modifier if true
+	#
+	#		# list of modifiers
+	#		fuel_cost = 321
+	#		max_fuel = var_max_fuel # will be taken from a variable
+	#	}
+#
+#
+#	In a script file:
+#
+#	effect = {
+	#		add_dynamic_modifier = {
+		#			modifier = example_dynamic_modifier
+		#			scope = GER # optional, if you specify this your dynamic modifier scoped to this scope (root is the effect scope)
+		#			days = 14 # optional, will be removed after this many days passes
+		#		}
+	#	}
+#
+#	can be added to countries, states or unit leaders
+#	will only updated daily, unless forced by force_update_dynamic_modifier effect
+
+RAJ_national_reforms = { #national spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_RUS_land_reforms
+
+	stability_factor = RAJ_national_reforms_stability
+	consumer_goods_factor = RAJ_national_reforms_goods
+	global_building_slots_factor = RAJ_national_reforms_slots
+	production_speed_buildings_factor = RAJ_national_reforms_buildings
+	industrial_capacity_factory = RAJ_national_reforms_capacity
+}
+
+CAN_quebec_state_reform = { #state spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_CAN_french_friendship
+
+	recruitable_population_factor = 0.15
+	local_building_slots_factor = 0.10
+	state_resources_factor = 0.10
+	state_production_speed_buildings_factor = 0.15
+}
+
+CAN_british_state_reform = { #state spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_CAN_french_tension
+
+	political_power_factor = CAN_british_state_reform_political
+	recruitable_population_factor = CAN_british_state_reform_population
+}
+
+URG_the_terra_dictatorship = { #national spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_URG_terra_dictator
+
+	stability_factor = URG_terra_stability
+	neutrality_drift = URG_terra_support
+	democratic_drift = URG_democracy_from_terra
+}
+
+URG_terra_loyalities = {
+	enable = { always = yes }
+
+	icon = GFX_idea_URG_terra_loyalities
+
+	recruitable_population_factor = -0.25
+	local_building_slots_factor = -0.25
+	state_resources_factor = -0.25
+	state_production_speed_buildings_factor = -0.25
+	army_speed_factor_for_controller = -0.15
+}
+
+PRU_army_navy_rivalry_idea = { #national spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_army_vs_navy
+	stability_factor = -0.2
+	industrial_capacity_factory = PRU_factory_output
+	production_speed_arms_factory_factor = PRU_military_factory_speed
+	army_attack_factor = PRU_army_attack_and_defense
+	army_defence_factor = PRU_army_attack_and_defense
+	industrial_capacity_dockyard = PRU_dockyard_output
+	production_speed_dockyard_factor = PRU_dockyard_production_speed
+	naval_damage_factor = PRU_ship_attack_and_defense
+	naval_hit_chance = PRU_ship_attack_and_defense
+	naval_speed_factor = PRU_ship_attack_and_defense
+}
+
+BOL_controlled_by_toro = {
+	enable = { always = yes }
+
+	icon = GFX_idea_bol_controlled_by_toro
+
+	recruitable_population_factor = -0.3
+	local_building_slots_factor = -0.3
+	state_resources_factor = -0.3
+	state_production_speed_buildings_factor = -0.25
+	army_speed_factor_for_controller = -0.15
+}
+
+CHL_organized_nacista_rebellion = {
+	enable = { always = yes }
+
+	icon = GFX_idea_CHL_nacista_rebellion
+
+	recruitable_population_factor = -0.3
+	state_production_speed_buildings_factor = -0.3
+	local_building_slots_factor = -0.5
+}
+
+CHL_organized_communist_rebellion = {
+	enable = { always = yes }
+
+	icon = GFX_idea_CHL_communists_rebellion
+
+	recruitable_population_factor = -0.3
+	state_production_speed_buildings_factor = -0.3
+	local_building_slots_factor = -0.5
+}
+
+CHL_political_instability = {
+	enable = { always = yes }
+
+	icon = GFX_idea_CHL_political_instability
+
+	stability_factor = -0.1
+	political_power_factor = -0.05
+	fascism_drift = CHL_fascist_drift
+	communism_drift = CHL_communist_drift
+}
+
+COL_laureanist_agitation = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_col_laureanist_agitation
+
+	recruitable_population_factor = -0.3
+	state_production_speed_buildings_factor = -0.25
+	army_speed_factor_for_controller = -0.15
+}
+
+COL_general_strike = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_col_strikes
+
+	local_building_slots_factor = -0.3
+	local_factories = -0.3
+	state_production_speed_buildings_factor = -0.25
+}
+
+COL_road_blockades = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_col_blockade
+
+	state_resources_factor = -0.33
+	local_supplies_for_controller = -0.3
+}
+
+PBC_PRU_nationalists = {
+	enable = { always = yes }
+
+	icon = GFX_PBC_PRU_nationalistas
+
+	recruitable_population_factor = -0.35
+	state_production_speed_buildings_factor = -0.25
+	local_building_slots_factor = -0.4
+	industry_air_damage_factor = 0.2
+}
+
+PBC_BOL_nationalists =  {
+	enable = { always = yes }
+
+	icon = GFX_PBC_BOL_nationalistas
+
+	recruitable_population_factor = -0.35
+	state_production_speed_buildings_factor = -0.25
+	local_building_slots_factor = -0.4
+	industry_air_damage_factor = 0.2
+}
+
+PBC_nationalism_on_the_rise = {
+	enable = { always = yes }
+
+	icon = GFX_PBC_nationalism_rising
+
+	stability_factor = PBC_stability_factor
+	production_speed_buildings_factor = PBC_industrial_factors
+	industrial_capacity_factory = PBC_industrial_factors
+	industrial_capacity_dockyard = PBC_industrial_factors
+	production_oil_factor = PBC_industrial_factors
+	industry_repair_factor = PBC_industrial_factors
+}
+
+BRA_small_coffee_plantations = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_small_coffee
+
+	state_production_speed_buildings_factor = -0.03
+	local_building_slots_factor = 0.05
+	industry_air_damage_factor = -0.05
+	local_resources = 0.05
+}
+
+BRA_widespread_coffee_plantations = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_large_coffee
+
+	state_production_speed_buildings_factor = -0.05
+	local_building_slots_factor = 0.1
+	industry_air_damage_factor = -0.1
+	local_resources = 0.08
+}
+
+BRA_rebelling_coffee_plantations = {
+	enable = { always = yes }
+
+	icon = GFX_BRA_rebelling_plantations
+
+	recruitable_population_factor = -0.35
+	state_production_speed_buildings_factor = -0.25
+	local_building_slots_factor = -0.4
+	local_factories = -0.3
+}
+
+EF_country_gdp = {
+	enable = { always = yes }
+
+	stability_factor = ROOT.country_gdp_value
+	political_power_factor = ROOT.country_gdp_value
+	research_speed_factor = ROOT.country_gdp_reseacrh_value
+}
+
+EF_radiation_state_modifier = {
+	remove_trigger = {
+		NOT = {
+			has_state_flag = ef_has_radiation
+		}
+	}
+
+	icon = GFX_modifiers_ef_radiation_state_modifier
+
+	army_speed_factor = ef_radiation_army_speed_factor
+	attrition = ef_radiation_attrition
+	army_org_regain = ef_radiation_army_org_regain
+	army_attack_factor = ef_radiation_army_attack_factor
+}
+
+war_crime_rate_modifier = {
+	enable = { always = yes }
+
+	stability_factor = ROOT.war_crime_rate_stability
+	political_power_factor = ROOT.war_crime_rate_political
+	conscription = ROOT.war_crime_rate_population
+	war_support_factor = ROOT.war_crime_rate_war
+}
+
+TUR_nizamiye_ordusu_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_idea_TUR_nizamiye_ordusu
+
+	#Initial
+	experience_gain_army_factor = TUR_nizamiye_ordusu_experience_gain_army_factor # 0.05
+	army_org_factor = TUR_nizamiye_ordusu_army_org_factor # 0.05
+	army_artillery_attack_factor = TUR_nizamiye_ordusu_army_artillery_attack_factor # 0.05
+	conscription_factor = TUR_nizamiye_ordusu_conscription_factor # 0.05
+
+	#From Umum Jandarma Kumandanlığı
+	special_forces_cap = TUR_nizamiye_ordusu_special_forces_cap # 0.05
+	special_forces_out_of_supply_factor = TUR_nizamiye_ordusu_special_forces_out_of_supply_factor # -0.05
+	attrition = TUR_nizamiye_ordusu_attrition # -0.05
+	mobilization_speed = TUR_nizamiye_ordusu_mobilization_speed # 0.10
+
+	#From Strengthen the Harbiye Nezareti
+	planning_speed = TUR_nizamiye_ordusu_planning_speed # 0.05
+	land_doctrine_cost_factor = TUR_nizamiye_ordusu_land_doctrine_cost_factor # -0.15
+	command_power_gain_mult = TUR_nizamiye_ordusu_command_power_gain_mult # 0.10
+
+	#From Strong Man of Europe
+	army_org_regain = TUR_nizamiye_ordusu_army_org_regain # 0.05
+	org_loss_when_moving = TUR_nizamiye_ordusu_org_loss_when_moving # 0.10
+	max_dig_in_factor = TUR_nizamiye_ordusu_max_dig_in_factor # 0.10
+}
+
+Gokturk_main_idea = { #national spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_Gokturk_main_idea
+	stability_factor = GOK_stability_factor
+	industrial_capacity_factory = GOK_factory_output
+	production_speed_arms_factory_factor = GOK_military_factory_speed
+	army_attack_factor = GOK_army_attack_and_defense
+	army_defence_factor = GOK_army_attack_and_defense
+	industrial_capacity_dockyard = GOK_dockyard_output
+	production_speed_dockyard_factor = GOK_dockyard_production_speed
+	naval_damage_factor = GOK_ship_attack_and_defense
+	naval_hit_chance = GOK_ship_attack_and_defense
+	naval_speed_factor = GOK_ship_attack_and_defense
+	consumer_goods_factor = GOK_national_reforms_goods
+	global_building_slots_factor = GOK_national_reforms_slots
+	production_speed_buildings_factor = GOK_national_reforms_buildings
+	min_export = GOK_min_export
+
+}
+
+TUR_ataturks_vision_modifier = { #National Spirit
+	enable = { always = yes }
+
+	icon = GFX_idea_tur_legacy_of_ataturk
+
+	#Initial
+	political_power_factor = TUR_ataturks_vision_political_power_factor # 0.1
+	stability_factor = TUR_ataturks_vision_stability_factor # 0.05
+
+	#Focuses
+	conscription = TUR_ataturks_vision_conscription # 0.005
+	weekly_manpower = TUR_ataturks_vision_weekly_manpower # 1000
+	operative_slot = TUR_ataturks_vision_operative_slot # 1
+	decryption_power = TUR_ataturks_vision_decryption_power # 15
+	industrial_capacity_factory = TUR_ataturks_vision_industrial_capacity_factory # 0.025
+	consumer_goods_factor = TUR_ataturks_vision_consumer_goods_factor
+	global_building_slots_factor = TUR_ataturks_vision_global_building_slots_factor
+	local_resources_factor = TUR_ataturks_vision_local_resources_factor
+	production_speed_industrial_complex_factor = TUR_ataturks_vision_production_speed_industrial_complex_factor
+	production_speed_arms_factory_factor = TUR_ataturks_vision_production_speed_arms_factory_factor
+	research_speed_factor = TUR_ataturks_vision_research_speed_factor
+	surrender_limit = TUR_ataturks_vision_surrender_limit
+	experience_gain_air_factor = TUR_ataturks_vision_experience_gain_air_factor
+	production_speed_air_facility_factor = TUR_ataturks_vision_production_speed_air_facility_factor
+}
+
+SAU_royal_saudi_army_dmod = { #When you edit this idea, also edit this SAU_royal_saudi_army_ns
+	enable = { always = yes }
+
+	icon = GFX_idea_SAU_royal_saudi_land_forces
+
+	experience_gain_army_factor = SAU_royal_saudi_army_experience_gain_army_factor #-0.05
+	army_org_factor = SAU_royal_saudi_army_org_factor
+	army_org_regain = SAU_royal_saudi_army_org_regain
+	army_morale_factor = SAU_royal_saudi_army_morale_factor #-0.05
+	army_attack_factor = SAU_royal_saudi_army_attack_factor # -0.05
+	army_core_defence_factor = SAU_royal_saudi_army_army_core_defence_factor
+	army_armor_speed_factor = SAU_royal_saudi_army_army_armor_speed_factor
+	heat_attrition_factor = SAU_royal_saudi_army_heat_attrition_factor #-0.1
+	acclimatization_hot_climate_gain_factor = SAU_royal_saudi_army_acclimatization_hot_climate_gain_factor
+	conscription_factor = SAU_royal_saudi_army_conscription_factor
+	conscription = SAU_royal_saudi_army_conscription
+	special_forces_cap = SAU_royal_saudi_army_special_forces_cap
+	initiative_factor = SAU_royal_saudi_army_initiative_factor
+	max_planning_factor = SAU_royal_saudi_army_max_planning_factor
+	planning_speed = SAU_royal_saudi_army_planning_speed
+	army_infantry_attack_factor = SAU_royal_saudi_army_infantry_attack_factor
+	supply_node_range = SAU_royal_saudi_army_supply_node_range
+	modifier_army_sub_unit_irregular_infantry_attack_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_attack_factor
+	modifier_army_sub_unit_irregular_infantry_defence_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_defence_factor
+	modifier_army_sub_unit_irregular_infantry_speed_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_speed_factor
+	modifier_army_sub_unit_irregular_infantry_max_org_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_max_org_factor
+	unit_limit_bonus = SAU_royal_saudi_army_unit_limit_bonus
+}
+
+SAU_communist_army_dmod = {
+	enable = { always = yes }
+
+	icon = GFX_idea_SAU_arabian_peoples_army
+
+	experience_gain_army_factor = SAU_royal_saudi_army_experience_gain_army_factor #-0.05
+	army_org_factor = SAU_royal_saudi_army_org_factor
+	army_org_regain = SAU_royal_saudi_army_org_regain
+	army_morale_factor = SAU_royal_saudi_army_morale_factor #-0.05
+	army_attack_factor = SAU_royal_saudi_army_attack_factor # -0.05
+	army_core_defence_factor = SAU_royal_saudi_army_army_core_defence_factor
+	army_armor_speed_factor = SAU_royal_saudi_army_army_armor_speed_factor
+	heat_attrition_factor = SAU_royal_saudi_army_heat_attrition_factor #-0.1
+	acclimatization_hot_climate_gain_factor = SAU_royal_saudi_army_acclimatization_hot_climate_gain_factor
+	conscription_factor = SAU_royal_saudi_army_conscription_factor
+	conscription = SAU_royal_saudi_army_conscription
+	special_forces_cap = SAU_royal_saudi_army_special_forces_cap
+	initiative_factor = SAU_royal_saudi_army_initiative_factor
+	max_planning_factor = SAU_royal_saudi_army_max_planning_factor
+	planning_speed = SAU_royal_saudi_army_planning_speed
+	army_infantry_attack_factor = SAU_royal_saudi_army_infantry_attack_factor
+	supply_node_range = SAU_royal_saudi_army_supply_node_range
+	modifier_army_sub_unit_irregular_infantry_attack_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_attack_factor
+	modifier_army_sub_unit_irregular_infantry_defence_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_defence_factor
+	modifier_army_sub_unit_irregular_infantry_speed_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_speed_factor
+	modifier_army_sub_unit_irregular_infantry_max_org_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_max_org_factor
+	unit_limit_bonus = SAU_royal_saudi_army_unit_limit_bonus
+}
+
+SAU_arab_federation_army_dmod = {
+	enable = { always = yes }
+
+	icon = GFX_idea_SAU_armed_forces_of_arabia
+
+	experience_gain_army_factor = SAU_royal_saudi_army_experience_gain_army_factor #-0.05
+	army_org_factor = SAU_royal_saudi_army_org_factor
+	army_org_regain = SAU_royal_saudi_army_org_regain
+	army_morale_factor = SAU_royal_saudi_army_morale_factor #-0.05
+	army_attack_factor = SAU_royal_saudi_army_attack_factor # -0.05
+	army_core_defence_factor = SAU_royal_saudi_army_army_core_defence_factor
+	army_armor_speed_factor = SAU_royal_saudi_army_army_armor_speed_factor
+	heat_attrition_factor = SAU_royal_saudi_army_heat_attrition_factor #-0.1
+	acclimatization_hot_climate_gain_factor = SAU_royal_saudi_army_acclimatization_hot_climate_gain_factor
+	conscription_factor = SAU_royal_saudi_army_conscription_factor
+	conscription = SAU_royal_saudi_army_conscription
+	special_forces_cap = SAU_royal_saudi_army_special_forces_cap
+	initiative_factor = SAU_royal_saudi_army_initiative_factor
+	max_planning_factor = SAU_royal_saudi_army_max_planning_factor
+	planning_speed = SAU_royal_saudi_army_planning_speed
+	army_infantry_attack_factor = SAU_royal_saudi_army_infantry_attack_factor
+	supply_node_range = SAU_royal_saudi_army_supply_node_range
+	modifier_army_sub_unit_irregular_infantry_attack_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_attack_factor
+	modifier_army_sub_unit_irregular_infantry_defence_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_defence_factor
+	modifier_army_sub_unit_irregular_infantry_speed_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_speed_factor
+	modifier_army_sub_unit_irregular_infantry_max_org_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_max_org_factor
+	unit_limit_bonus = SAU_royal_saudi_army_unit_limit_bonus
+}
+
+SAU_arab_state_army_dmod = {
+	enable = { always = yes }
+
+	icon = GFX_idea_SAU_armed_forces_of_arabia
+
+	experience_gain_army_factor = SAU_royal_saudi_army_experience_gain_army_factor #-0.05
+	army_org_factor = SAU_royal_saudi_army_org_factor
+	army_org_regain = SAU_royal_saudi_army_org_regain
+	army_morale_factor = SAU_royal_saudi_army_morale_factor #-0.05
+	army_attack_factor = SAU_royal_saudi_army_attack_factor # -0.05
+	army_core_defence_factor = SAU_royal_saudi_army_army_core_defence_factor
+	army_armor_speed_factor = SAU_royal_saudi_army_army_armor_speed_factor
+	heat_attrition_factor = SAU_royal_saudi_army_heat_attrition_factor #-0.1
+	acclimatization_hot_climate_gain_factor = SAU_royal_saudi_army_acclimatization_hot_climate_gain_factor
+	conscription_factor = SAU_royal_saudi_army_conscription_factor
+	conscription = SAU_royal_saudi_army_conscription
+	special_forces_cap = SAU_royal_saudi_army_special_forces_cap
+	initiative_factor = SAU_royal_saudi_army_initiative_factor
+	max_planning_factor = SAU_royal_saudi_army_max_planning_factor
+	planning_speed = SAU_royal_saudi_army_planning_speed
+	army_infantry_attack_factor = SAU_royal_saudi_army_infantry_attack_factor
+	supply_node_range = SAU_royal_saudi_army_supply_node_range
+	modifier_army_sub_unit_irregular_infantry_attack_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_attack_factor
+	modifier_army_sub_unit_irregular_infantry_defence_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_defence_factor
+	modifier_army_sub_unit_irregular_infantry_speed_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_speed_factor
+	modifier_army_sub_unit_irregular_infantry_max_org_factor = SAU_royal_saudi_army_modifier_army_sub_unit_irregular_infantry_max_org_factor
+	unit_limit_bonus = SAU_royal_saudi_army_unit_limit_bonus
+}
+
+SAU_main_oil_extraction_area = { # on State
+	enable = { always = yes }
+
+	icon = GFX_modifiers_main_oil_extraction_area
+
+	state_production_speed_buildings_factor = 0.05
+	local_building_slots = 2
+	state_resources_factor = 0.1
+	custom_modifier_tooltip = SAU_main_oil_extraction_area_tt
+}
+
+SAU_hajj_area = { # on State
+	enable = { always = yes }
+
+	icon = GFX_idea_SAU_hajj_area
+
+	state_production_speed_buildings_factor = 0.03
+	local_building_slots = 1
+	enemy_attrition = 0.05
+}
+
+SAU_state_supporting_resistance_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_bul_macedonian_revolutionaries
+
+	resistance_damage_to_garrison = 0.15
+	resistance_activity = 0.2
+	resistance_growth = 0.4
+	resistance_target = 0.7
+	compliance_growth = -0.1
+}
+
+SAU_sabotaged_oil_wells = {
+	enable = { always = yes }
+
+	icon = GFX_modifiers_oil_well_sabotaged
+
+	state_resources_factor = -0.15
+	temporary_state_resource_oil = -15
+	local_factory_sabotage = 0.1
+	state_production_speed_buildings_factor = -0.1
+}
+
+SAU_arabian_military_offensive = { #STATE MODIFIER
+	enable = { always = yes }
+
+	icon = GFX_modifiers_generic_military_plans
+
+	breakthrough_factor = 0.1
+	army_attack_factor = 0.1
+}
+
+SAU_common_investment_program_dmod = {
+	enable = { always = yes }
+
+	icon = GFX_idea_ARG_public_works_investment
+
+	consumer_goods_factor = SAU_common_investment_program_consumer_goods_factor
+	production_factory_max_efficiency_factor = SAU_common_investment_program_production_factory_max_efficiency_factor
+	line_change_production_efficiency_factor = SAU_common_investment_program_line_change_production_efficiency_factor
+	production_factory_efficiency_gain_factor = SAU_common_investment_program_production_factory_efficiency_gain_factor
+}
+
+CYP_mediterranean_stronghold_modifier = { #STATE MODIFIER
+	enable = { always = yes }
+
+	icon = GFX_idea_generic_fortify_the_borders
+
+	mobilization_speed = 0.1
+	state_coastal_bunker_max_level_terrain_limit = 1
+	state_production_speed_coastal_bunker_factor = 0.1
+	enemy_army_bonus_air_superiority_factor = -0.1
+	max_dig_in = 5
+	amphibious_invasion_defence = 0.1
+	unit_limit_bonus = 5
+}
+
+CYP_hellenic_spirit_modifier = { #STATE MODIFIER
+	enable = { always = yes }
+
+	icon = GFX_idea_gre_martyrs_of_the_anatolian_catastrophe
+
+	local_factories = 0.15
+	local_manpower = 0.15
+	mobilization_speed = 0.1
+	army_defence_factor = 0.05
+}
+
+CYP_holy_offensive_modifier = { #STATE MODIFIER
+	enable = { always = yes }
+
+	icon = GFX_modifiers_generic_military_plans
+
+	breakthrough_factor = 0.05
+	army_infantry_attack_factor = 0.05
+}
+
+EF_administrative_reorganization_modifier = { #STATE MODIFIER
+	enable = { always = yes }
+
+	icon = GFX_modifiers_generic_military_plans
+
+	local_manpower = -0.25
+	local_resources = -0.15
+}
+
+EF_operation_neptune_zone_modifier = { #STATE MODIFIER
+	enable = { always = yes }
+
+	icon = GFX_modifiers_generic_military_plans
+
+	amphibious_invasion_defence = -0.1
+	army_defence_factor = -0.1
+}
+
+EF_operation_overlord_zone_modifier = { #STATE MODIFIER
+	enable = { always = yes }
+
+	icon = GFX_modifiers_generic_military_plans
+
+	breakthrough_factor = 0.05
+	army_armor_attack_factor = 0.05
+	army_infantry_attack_factor = 0.05
+}
+
+EF_operation_overlord_zone2_modifier = { #STATE MODIFIER
+	enable = { always = yes }
+
+	icon = GFX_modifiers_generic_military_plans
+
+	breakthrough_factor = 0.1
+	army_armor_attack_factor = 0.1
+	army_infantry_attack_factor = 0.1
+}
+
+MAN_economy_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_idea_MAN_manchurian_industry
+
+	consumer_goods_factor = MAN_economy_modifier_consumer_goods_factor
+	production_factory_max_efficiency_factor = MAN_economy_modifier_production_factory_max_efficiency_factor
+	line_change_production_efficiency_factor = MAN_economy_modifier_line_change_production_efficiency_factor
+	production_factory_efficiency_gain_factor = MAN_economy_modifier_production_factory_efficiency_gain_factor
+	production_factory_start_efficiency_factor = MAN_economy_modifier_production_factory_start_efficiency_factor
+	research_speed_factor = MAN_economy_modifier_research_speed_factor
+	production_speed_buildings_factor = MAN_economy_modifier_production_speed_buildings_factor
+	production_speed_arms_factory_factor = MAN_economy_modifier_production_speed_arms_factory_factor
+	production_speed_industrial_complex_factor = MAN_economy_modifier_production_speed_industrial_complex_factor
+	production_speed_dockyard_factor = MAN_economy_modifier_production_speed_dockyard_factor
+	production_speed_infrastructure_factor = MAN_economy_modifier_production_speed_infrastructure_factor
+	production_speed_rail_way_factor = MAN_economy_modifier_production_speed_rail_way_factor
+	industrial_capacity_factory = MAN_economy_modifier_industrial_capacity_factory
+	industrial_capacity_dockyard = MAN_economy_modifier_industrial_capacity_dockyard
+	production_lack_of_resource_penalty_factor = MAN_economy_modifier_production_lack_of_resource_penalty_factor
+	local_resources_factor = MAN_economy_modifier_local_resources_factor
+	cic_construction_boost_factor = MAN_economy_modifier_cic_construction_boost_factor
+	factory_energy_consumption = MAN_economy_modifier_factory_energy_consumption
+}
+
+MAN_new_economy_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_idea_MAN_manchurian_industry
+
+	consumer_goods_factor = MAN_economy_modifier_consumer_goods_factor
+	production_factory_max_efficiency_factor = MAN_economy_modifier_production_factory_max_efficiency_factor
+	line_change_production_efficiency_factor = MAN_economy_modifier_line_change_production_efficiency_factor
+	production_factory_efficiency_gain_factor = MAN_economy_modifier_production_factory_efficiency_gain_factor
+	production_factory_start_efficiency_factor = MAN_economy_modifier_production_factory_start_efficiency_factor
+	research_speed_factor = MAN_economy_modifier_research_speed_factor
+	production_speed_buildings_factor = MAN_economy_modifier_production_speed_buildings_factor
+	production_speed_arms_factory_factor = MAN_economy_modifier_production_speed_arms_factory_factor
+	production_speed_industrial_complex_factor = MAN_economy_modifier_production_speed_industrial_complex_factor
+	production_speed_dockyard_factor = MAN_economy_modifier_production_speed_dockyard_factor
+	production_speed_infrastructure_factor = MAN_economy_modifier_production_speed_infrastructure_factor
+	production_speed_rail_way_factor = MAN_economy_modifier_production_speed_rail_way_factor
+	industrial_capacity_factory = MAN_economy_modifier_industrial_capacity_factory
+	industrial_capacity_dockyard = MAN_economy_modifier_industrial_capacity_dockyard
+	production_lack_of_resource_penalty_factor = MAN_economy_modifier_production_lack_of_resource_penalty_factor
+	local_resources_factor = MAN_economy_modifier_local_resources_factor
+	factory_energy_consumption = MAN_economy_modifier_factory_energy_consumption
+}
+
+MAN_army_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_idea_MAN_army_modifier
+
+	experience_gain_army_factor = MAN_army_modifier_experience_gain_army_factor
+	army_org_factor = MAN_army_modifier_army_org_factor
+	army_morale_factor = MAN_army_modifier_army_morale_factor 
+	org_loss_at_low_org_factor = MAN_army_modifier_org_loss_at_low_org_factor
+	max_planning_factor = MAN_army_modifier_max_planning_factor
+	planning_speed = MAN_army_modifier_planning_speed
+	cas_damage_reduction = MAN_army_modifier_cas_damage_reduction
+	army_armor_attack_factor = MAN_army_modifier_army_armor_attack_factor
+	experience_loss_factor = MAN_army_modifier_experience_loss_factor
+	army_artillery_attack_factor = MAN_army_modifier_army_artillery_attack_factor
+	breakthrough_factor = MAN_army_modifier_breakthrough_factor
+	dig_in_speed_factor = MAN_army_modifier_dig_in_speed_factor
+	mobilization_speed = MAN_army_modifier_mobilization_speed
+	conscription = MAN_army_modifier_conscription
+	special_forces_cap = MAN_army_modifier_special_forces_cap
+	supply_consumption_factor = MAN_army_modifier_supply_consumption_factor
+	resistance_damage_to_garrison = MAN_army_modifier_resistance_damage_to_garrison
+	army_core_defence_factor = MAN_army_modifier_army_core_defence_factor
+	army_leader_start_level = MAN_army_modifier_army_leader_start_level
+}
+
+MAN_resource_extraction_investments_dm = { #STATE MODIFIER
+	enable = { always = yes }
+
+	icon = GFX_modifiers_generic_construction
+
+	local_resources = 0.1
+	local_building_slots = 1
+}

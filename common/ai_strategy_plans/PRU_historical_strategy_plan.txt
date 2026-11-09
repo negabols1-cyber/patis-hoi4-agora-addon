@@ -1,0 +1,51 @@
+#####-----> PRU: Historical AI Behavior <><> <><> <><> <><> <><>
+
+PRU_historical_plan = {
+	name = "Peru Hisorical Plan"
+	desc = "Historical behavior for Peru."
+	allowed = {
+		original_tag = PRU
+	}
+	enable = {
+		OR = {
+			AND = {
+				is_historical_focus_on = yes
+				has_game_rule = {
+					rule = PRU_ai_behavior
+					option = DEFAULT
+				}
+			}
+			has_country_flag = PRU_AI_HISTORICAL
+			has_game_rule = {
+				rule = PRU_ai_behavior
+				option = HISTORICAL
+			}
+		}
+	}
+
+	focus_factors = {
+		PRU_the_best_of_both_worlds = 0
+		PRU_a_parliamentary_republic = 0
+		PRU_strengthen_civil_liberties = 0
+		PRU_the_people_serve_the_state = 0
+		PRU_delay_democracy = 0
+		PRU_form_the_democratic_coalition = 0
+		PRU_the_coalition_wins = 0
+		PRU_lean_more_to_the_left = 0
+		PRU_communist_peru = 0
+		PRU_social_democratic_peru = 0
+		PRU_learn_from_the_germans = 0
+		PRU_work_with_the_japanese = 0
+	}
+
+	#Keep small, as it is used as a factor for some things, such as research needs.
+	#Recommended around 1.0. Useful for relation between plans.
+	weight = {
+		factor = 1.0
+		modifier = {
+			factor = 1.0
+		}
+	}
+}
+
+#####-----> End of File <><> <><> <><> <><> <><>

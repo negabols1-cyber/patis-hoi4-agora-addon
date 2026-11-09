@@ -1,0 +1,86 @@
+PER_the_constitutional_arrows_category = {
+	priority = 100
+	picture = GFX_decision_cat_picture_spr_civil_war_offensives
+	icon = spr_the_seeds_of_revolution
+	allowed = {
+		original_tag = PER
+	}
+}
+
+PER_reform_the_army_category = {
+	icon = decision_category_generic_propaganda
+
+	allowed = {
+		original_tag = PER
+	}
+
+	visible = {
+		has_completed_focus = PER_imperial_iranian_ground_force
+	}
+
+	priority = 102
+}
+
+
+PER_pahlavi_propaganda_decision = {
+	priority = 100
+	picture = GFX_decision_cat_picture_spr_civil_war_offensives
+	icon = spr_the_seeds_of_revolution
+	scripted_gui = PER_pahlavi_propaganda_decision
+
+	on_map_area = {
+		target_array = owned_states
+		target_trigger = {
+			FROM = {
+				OR = {
+					#TODO
+				}
+			}
+		}
+		name = PER_states_that_have_problems_tt #TODO
+		zoom = 150
+	}
+
+	allowed = {
+		original_tag = PER
+	}
+	visible = {
+		is_debug = yes
+	}
+}
+
+PER_clergy_balance_category = {
+	priority = 102
+
+	allowed = {
+		original_tag = PER
+	}
+
+	visible = {
+		has_any_power_balance = yes
+	}
+}
+
+PER_civil_war_category = {
+	priority = 102
+
+	allowed = {
+		original_tag = PER
+	}
+
+	visible = {
+		has_completed_focus = PER_overthrow_the_shah
+		NOT = { has_global_flag = PER_persian_civil_war_flag }
+	}
+}
+
+PER_domination_of_the_qajar_dynasty = {
+	priority = 88
+	icon = decision_category_conference
+	allowed = {
+		original_tag = PER
+	}
+
+	visible = {
+	}
+}

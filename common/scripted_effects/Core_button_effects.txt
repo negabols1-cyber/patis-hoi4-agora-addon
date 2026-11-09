@@ -1,0 +1,348 @@
+CORE_button_cost_variables = {
+	FROM = {
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					NOT = { state_population > 50000 }
+				}
+			}
+			ROOT = { add_political_power = -50 }
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 50000
+					NOT = { state_population > 100000 }
+				}
+			}
+			ROOT = { add_political_power = -75 }
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 100000
+					NOT = { state_population > 250000 }
+				}
+			}
+			ROOT = { add_political_power = -100 }
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 250000
+					NOT = { state_population > 500000 }
+				}
+			}
+			ROOT = { add_political_power = -125 }
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 500000
+					NOT = { state_population > 1000000 }
+				}
+			}
+			ROOT = { add_political_power = -150 }
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 1000000
+					NOT = { state_population > 5000000 }
+				}
+			}
+			ROOT = { add_political_power = -175 }
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 5000000
+					NOT = { state_population > 10000000 }
+				}
+			}
+			ROOT = { add_political_power = -250 }
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 10000000
+					NOT = { state_population > 15000000 }
+				}
+			}
+			ROOT = { add_political_power = -350 }
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 15000000
+				}
+			}
+			ROOT = { add_political_power = -450 }
+		}
+	}
+}
+CORE_button_stability_hit_variables = {
+	FROM = {
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 500000
+					NOT = { state_population > 1000000 }
+				}
+			}
+			if = {
+				limit = {
+					NOT = { is_claimed_by = ROOT }
+				}
+				ROOT = {
+					add_stability = -0.01
+					add_to_variable = {
+						var = global_stability_right
+						value = 1
+						tooltip = Political_right
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 1000000
+					NOT = { state_population > 2000000 }
+				}
+			}
+			if = {
+				limit = {
+					NOT = { is_claimed_by = ROOT }
+				}
+				ROOT = {
+					add_stability = -0.02
+					add_to_variable = {
+						var = global_stability_right
+						value = 1
+						tooltip = Political_right
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 2000000
+					NOT = { state_population > 3000000 }
+				}
+			}
+			if = {
+				limit = {
+					is_claimed_by = ROOT
+				}
+				ROOT = {
+					add_stability = -0.01
+					add_to_variable = {
+						var = global_stability_right
+						value = 1
+						tooltip = Political_right
+					}
+				}
+			}
+			else = {
+				ROOT = {
+					add_stability = -0.03
+					add_to_variable = {
+						var = global_stability_right
+						value = 2
+						tooltip = Political_right2
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 3000000
+					NOT = { state_population > 4000000 }
+				}
+			}
+			if = {
+				limit = {
+					is_claimed_by = ROOT
+				}
+				ROOT = {
+					add_stability = -0.02
+					add_to_variable = {
+						var = global_stability_right
+						value = 1
+						tooltip = Political_right
+					}
+				}
+			}
+			else = {
+				ROOT = {
+					add_stability = -0.04
+					add_to_variable = {
+						var = global_stability_right
+						value = 3
+						tooltip = Political_right3
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 4000000
+					NOT = { state_population > 5000000 }
+				}
+			}
+			if = {
+				limit = {
+					is_claimed_by = ROOT
+				}
+				ROOT = {
+					add_stability = -0.03
+					add_to_variable = {
+						var = global_stability_right
+						value = 2
+						tooltip = Political_right2
+					}
+				}
+			}
+			else = {
+				ROOT = {
+					add_stability = -0.05
+					add_to_variable = {
+						var = global_stability_right
+						value = 3
+						tooltip = Political_right3
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 5000000
+					NOT = { state_population > 10000000 }
+				}
+			}
+			if = {
+				limit = {
+					is_claimed_by = ROOT
+				}
+				ROOT = {
+					add_stability = -0.04
+					add_to_variable = {
+						var = global_stability_right
+						value = 3
+						tooltip = Political_right3
+					}
+				}
+			}
+			else = {
+				ROOT = {
+					add_stability = -0.06
+					add_to_variable = {
+						var = global_stability_right
+						value = 4
+						tooltip = Political_right4
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 10000000
+					NOT = { state_population > 15000000 }
+				}
+			}
+			if = {
+				limit = {
+					is_claimed_by = ROOT
+				}
+				ROOT = {
+					add_stability = -0.05
+					add_to_variable = {
+						var = global_stability_right
+						value = 4
+						tooltip = Political_right4
+					}
+				}
+			}
+			else = {
+				ROOT = {
+					add_stability = -0.07
+					add_to_variable = {
+						var = global_stability_right
+						value = 4
+						tooltip = Political_right4
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				AND = {
+					is_fully_controlled_by = ROOT
+					NOT = { is_core_of = ROOT }
+					state_population > 15000000
+				}
+			}
+			if = {
+				limit = {
+					is_claimed_by = ROOT
+				}
+				ROOT = {
+					add_stability = -0.06
+					add_to_variable = {
+						var = global_stability_right
+						value = 4
+						tooltip = Political_right4
+					}
+				}
+			}
+			else = {
+				ROOT = {
+					add_stability = -0.08
+					add_to_variable = {
+						var = global_stability_right
+						value = 4
+						tooltip = Political_right4
+					}
+				}
+			}
+		}
+	}
+}

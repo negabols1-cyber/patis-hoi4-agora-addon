@@ -1,0 +1,183 @@
+﻿# ### search_filters = {FOCUS_FILTER_POLITICAL}
+# ### search_filters = {FOCUS_FILTER_RESEARCH}
+# ### search_filters = {FOCUS_FILTER_INDUSTRY}
+# ### search_filters = {FOCUS_FILTER_STABILITY}
+# ### search_filters = {FOCUS_FILTER_WAR_SUPPORT}
+# ### search_filters = {FOCUS_FILTER_MANPOWER}
+# ### search_filters = {FOCUS_FILTER_ANNEXATION}
+
+# focus_tree = {
+	# 	id = german_focus
+
+	# 	country = {
+		# 		factor = 0
+
+		# 		modifier = {
+			# 			add = 1000
+			# 			tag = GER
+			# 		}
+		# 	}
+
+	# 	default = no
+
+	# 	shared_focus = GER_nationalize_resource_industries
+	# 	shared_focus = GER_wehrmacht_focus
+	# 	shared_focus = GER_Schutzstaffel_focus
+
+	#     focus = {
+		# 		id = GER_fuhrer_legacy
+		# 		icon = {
+			# 			trigger = {
+				# 				has_game_rule = {
+					# 					rule = ef_censor_setting
+					# 					option = CENSORED
+					# 				}
+				# 			}
+			# 			value = GFX_GER_Ein_Volk_Ein_Reich_Ein_Fuhrer
+			# 		}
+		# 		icon = {
+			# 			value = GFX_GER_Chancellor_Hitler
+			# 		}
+		# 		mutually_exclusive = { focus = GER_old_empire focus = GER_kill_hitler focus = GER_manace_spreading}
+		# 		x = 38
+		# 		y = 0
+		# 		offset = {
+			# 			x = -4
+			# 			y = 0
+			# 			trigger = {
+				# 				OR = {
+					# 					has_global_flag = his_only
+					# 					has_game_rule = {
+						# 						rule = ef_historical_only
+						# 						option = ENABLED
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 		cost = 5
+		# 	    ai_will_do = {
+			# 			factor = 10
+			# 		}
+		# 		completion_reward = {
+			# 		    add_country_leader_trait = fuhrer
+			# 	        add_ideas = GER_denounce_versailles
+			# 		    add_ideas = GER_hitler_ambition_1
+			# 			custom_effect_tooltip = FRA_national_tree_change
+			# 		    hidden_effect = {
+				# 		        load_focus_tree = german_fuhrer
+				# 				mark_focus_tree_layout_dirty = yes
+				# 				set_country_flag = GER_fuhrer_legacy_flag
+				# 		    }
+			# 		}
+		# 		search_filters = { FOCUS_FILTER_HISTORICAL }
+		# 	}
+	# 	focus = {
+		# 		id = GER_old_empire
+		# 		icon = GFX_GER_Return_of_the_Kaiser
+		# 		mutually_exclusive = { focus = GER_fuhrer_legacy focus = GER_kill_hitler focus = GER_manace_spreading }
+		# 		cost = 8
+		# 		x = 36
+		# 		y = 0
+		# 		allow_branch = {
+			# 			has_dlc = "Waking the Tiger"
+			# 			NOT = {
+				# 				OR = {
+					# 					has_global_flag = his_only
+					# 					has_game_rule = {
+						# 						rule = ef_historical_only
+						# 						option = ENABLED
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 		completion_reward = {
+			# 		    add_timed_idea = { idea = neutrality_influence days = 1200 }
+			# 		    hidden_effect = {
+				# 			    load_focus_tree = german_kaisers
+				# 				mark_focus_tree_layout_dirty = yes
+				# 				set_country_flag = GER_old_empire_flag
+				# 			}
+			# 			custom_effect_tooltip = FRA_national_tree_change
+			# 	    }
+		# 	}
+	# 	focus = {
+		# 		id = GER_kill_hitler
+		# 		icon = GFX_GER_SS_VT
+		# 		cost = 8
+		# 		mutually_exclusive = { focus = GER_fuhrer_legacy focus = GER_old_empire focus = GER_manace_spreading }
+		# 		allow_branch = {
+			# 			NOT = {
+				# 				OR = {
+					# 					has_global_flag = his_only
+					# 					has_game_rule = {
+						# 						rule = ef_historical_only
+						# 						option = ENABLED
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 		x = 34
+		# 		y = 0
+		# 		offset = {
+			# 			x = 2
+			# 			y = 0
+			# 			trigger = {
+				# 				NOT = {
+					# 					has_dlc = "Waking the Tiger"
+					# 				}
+				# 			}
+			# 		}
+
+		# 		ai_will_do = {
+			# 			factor = 8
+			# 		}
+		# 		completion_reward = {
+			# 			country_event = {
+				# 				id = germany.71
+				# 			}
+			# 			hidden_effect = {
+				# 				load_focus_tree = german_demo_himler
+				# 				set_country_flag = GER_kill_hitler_flag
+				# 			}
+			# 			custom_effect_tooltip = FRA_national_tree_change
+			# 		}
+		# 	}
+	# 	focus = {
+		# 		id = GER_manace_spreading
+		# 		icon = GFX_DDR_Auferstanden_Aus_Ruinen
+		# 		mutually_exclusive = { focus = GER_fuhrer_legacy focus = GER_kill_hitler focus = GER_old_empire }
+		# 		x = 40
+		# 		y = 0
+		# 		cost = 8
+		# 		ai_will_do = {
+			# 			base = 10
+			# 		}
+		# 		allow_branch = {
+			# 			NOT = {
+				# 				OR = {
+					# 					has_global_flag = his_only
+					# 					has_game_rule = {
+						# 						rule = ef_historical_only
+						# 						option = ENABLED
+						# 					}
+					# 				}
+				# 			}
+			# 		}
+		# 		search_filters = { FOCUS_FILTER_POLITICAL }
+		# 		completion_reward = {
+			# 			hidden_effect = {
+				# 				load_focus_tree = german_sosyal_comi
+				# 				mark_focus_tree_layout_dirty = yes
+				# 				set_country_flag = GER_manace_spreading_flag
+				# 			}
+			# 			add_timed_idea = {
+				# 				idea = comintern_influence
+				# 				days = 1095
+				# 			}
+			# 			custom_effect_tooltip = available_political_advisor
+			# 			show_ideas_tooltip = ernst_thalmann
+			# 			custom_effect_tooltip = FRA_national_tree_change
+			# 		}
+		# 	}
+	# }
+

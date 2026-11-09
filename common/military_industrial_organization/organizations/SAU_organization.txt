@@ -1,0 +1,72 @@
+#####################
+
+###  ##  #  # # #  ##
+#  #  # ## # # # #
+#  #### # ## ##   #
+#  #  # #  # # #   #
+#  #  # #  # # # ##
+
+#####################
+
+
+#####################
+
+## #  # ### ###   ##
+#   #  #  #  #  # #
+#  ####  #  ###   #
+# #  #  #  #      #
+##  #  # ### #    ##
+
+#####################
+
+
+###########################
+
+###  #    ##  #  # ###  ##
+#  # #   #  # ## # #   #
+###  #   #### # ## ##   #
+#    #   #  # #  # #     #
+#    ### #  # #  # ### ##
+
+###########################
+
+
+###################################
+
+#   #  ##  ### ### ###  ### ### #
+## ## #  #  #  #   #  #  #  #   #
+# # # ####  #  ##  ###   #  ##  #
+#   # #  #  #  #   #  #  #  #   #
+#   # #  #  #  ### #  # ### ### ###
+
+
+###################################
+
+SAU_military_industries_corporation_organization = {
+	name = SAU_military_industries_corporation
+	include = generic_infantry_equipment_organization
+	icon = GFX_idea_generic_infantry_equipment_manufacturer_2
+	allowed = {
+		original_tag = SAU
+	}
+	available = {
+		if = {
+			limit = {
+				FROM = {
+					has_completed_focus = SAU_concessions_to_glavneft
+				}
+			}
+			FROM = {
+				has_completed_focus = SAU_establish_military_industries_corporation_com
+			}
+		}
+		else = {
+			FROM = {
+				OR = {
+					has_completed_focus = SAU_establish_military_industries_corporation
+					has_completed_focus = SAU_subsidize_military_industry
+				}
+			}
+		}
+	}
+}

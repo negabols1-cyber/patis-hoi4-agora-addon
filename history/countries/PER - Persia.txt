@@ -1,0 +1,264 @@
+﻿capital = 266
+
+oob = "PER_1936"
+
+# Starting tech
+set_technology = {
+	infantry_weapons = 1
+	infantry_weapons1 = 1
+	tech_support = 1
+	tech_mountaineers = 1
+	tech_trucks = 1
+	gw_artillery = 1
+}
+
+
+if = {
+	limit = { not = { has_dlc = "Man the Guns" } }
+	set_technology = {
+		early_destroyer = 1
+		basic_destroyer = 1
+	}
+}
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	set_technology = {
+		early_ship_hull_light = 1
+		basic_battery = 1
+	}
+}
+if = {
+	limit = {
+		NOT = { has_dlc = "No Step Back" }
+	}
+	set_technology = {
+		gwtank = 1
+	}
+}
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	set_technology = {
+		gwtank_chassis = 1
+	}
+}
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	set_naval_oob = "PER_1936_naval_mtg"
+	else = {
+		set_naval_oob = "PER_1936_naval_legacy"
+	}
+}
+
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+	set_air_oob = "PER_1936_air_bba"
+	set_technology = {
+		aa_lmg = 1
+		engines_1 = 1
+		early_bombs = 1
+		iw_small_airframe = 1
+	}
+	else = {
+		set_air_oob = "PER_1936_air_legacy"
+		set_technology = {
+			early_fighter = 1
+			CAS1 = 1
+		}
+	}
+}
+
+#Dynamic Modifiers
+#Army
+set_variable = { PER_inefficient_army_dmod_army_org_factor = -0.1 }
+set_variable = { PER_inefficient_army_dmod_army_morale_factor = 0 }
+set_variable = { PER_inefficient_army_dmod_army_org_regain = 0 }
+set_variable = { PER_inefficient_army_dmod_army_attack_factor = -0.1 }
+set_variable = { PER_inefficient_army_dmod_army_attack_against_major_factor = 0 }
+set_variable = { PER_inefficient_army_dmod_army_defence_factor = -0.1 }
+set_variable = { PER_inefficient_army_dmod_land_reinforce_rate = -0.06 }
+set_variable = { PER_inefficient_army_dmod_war_support_factor = -0.2 }
+set_variable = { PER_inefficient_army_dmod_experience_gain_army_factor = -0.1 }
+set_variable = { PER_inefficient_army_dmod_training_time_army_factor = 0.15 }
+set_variable = { PER_inefficient_army_dmod_land_doctrine_cost_factor = 0 }
+set_variable = { PER_inefficient_army_dmod_conscription_factor = 0 }
+set_variable = { PER_inefficient_army_dmod_special_forces_cap = 0 }
+set_variable = { PER_inefficient_army_dmod_unit_limit_bonus = 0 }
+set_variable = { PER_inefficient_army_dmod_resistance_target = 0 }
+set_variable = { PER_inefficient_army_dmod_heat_attrition_factor = 0 }
+set_variable = { PER_inefficient_army_dmod_conscription = 0 }
+set_variable = { PER_inefficient_army_dmod_max_command_power = 0 }
+set_variable = { PER_buffed_inefficient_army = 0 }
+add_dynamic_modifier = { modifier = PER_inefficient_army_dmod }
+
+#Air
+set_variable = { PER_iran_airforce_dmod_experience_gain_air_factor = 0.05 }
+set_variable = { PER_iran_airforce_dmod_untrained_pilots_penalty_factor = -0.1 }
+set_variable = { PER_iran_airforce_dmod_air_doctrine_cost_factor = 0.15 }
+set_variable = { PER_iran_airforce_dmod_air_accidents_factor = 0.25 }
+set_variable = { PER_iran_airforce_dmod_air_superiority_efficiency = 0 }
+set_variable = { PER_iran_airforce_dmod_air_home_defence_factor = 0 }
+set_variable = { PER_iran_airforce_dmod_air_ace_generation_chance_factor = 0 }
+set_variable = { PER_iran_airforce_dmod_air_range_factor = 0 }
+set_variable = { PER_iran_airforce_dmod_conscription_factor = 0 }
+set_variable = { PER_iran_airforce_dmod_air_mission_xp_gain_factor = 0 }
+set_variable = { PER_iran_airforce_dmod_naval_strike_targetting_factor = 0 }
+set_variable = { PER_iran_airforce_dmod_industrial_capacity_factory = 0 }
+
+#Clergy
+set_variable = { PER_power_of_clergy_level = 0 }
+set_variable = { PER_power_of_clergy_dmod_army_org_factor = 0.02 }
+set_variable = { PER_power_of_clergy_dmod_army_morale_factor = 0.02 }
+set_variable = { PER_power_of_clergy_dmod_political_power_gain = -0.05 }
+set_variable = { PER_power_of_clergy_dmod_stability_factor = -0.02 }
+set_variable = { PER_power_of_clergy_dmod_surrender_limit = 0.02 }
+set_variable = { PER_clergy_anger_level = 0 } # 0 = Calm / 5 = Nervous / 10 = Very Angry // Hidden value not shared with the player
+set_variable = { PER_conservative_education_var = 0 }
+
+### VARIABLES FOR OFFENSIVE TACTICS ###
+set_variable = { PER_sub_unit_infantry_attack_factor = 0.1 }
+set_variable = { PER_sub_unit_infantry_irregular_attack_factor = 0.1 }
+set_variable = { PER_army_defence_factor = -0.05 }
+
+### VARIABLES FOR DEFENSIVE MANEUVRES ###
+set_variable = { PER_sub_unit_infantry_defence_factor = 0.1 }
+set_variable = { PER_sub_unit_infantry_irregular_defence_factor = 0.1 }
+set_variable = { PER_army_attack_factor = -0.05 }
+
+#Variables
+set_variable = { PER_basic_subsidies_value = 1000 } #Focus
+
+# 1936 BoP (1939 BoP set up below)
+if = {
+	limit = {
+		has_start_date < 1936.01.02
+	}
+	set_power_balance = {
+		id = PER_clergy_balance
+		left_side = PER_shah_side
+		right_side = PER_clergy_side
+		set_value = 0.15
+	}
+	#Clergy NS
+	add_dynamic_modifier = { modifier = PER_power_of_clergy_dmod }
+}
+
+#Leaders
+recruit_character = PER_reza_shah_pahlavi
+recruit_character = PER_mohammed_reza_pahlavi
+recruit_character = PER_ali_reza_pahlavi
+recruit_character = PER_mohammad_hassan_mirza
+recruit_character = PER_fereydoun_mirza_qajar
+recruit_character = PER_iraj_eskandari
+recruit_character = PER_soleyman_mirza_eskandari
+recruit_character = PER_mohammad_ali_foroughi
+recruit_character = PER_mohammad_mosaddegh
+recruit_character = PER_fazlollah_zahedi
+recruit_character = PER_davud_monshizadeh
+recruit_character = PER_abdul_hussein_dastghaib
+
+#Others
+recruit_character = PER_mahmud_djam
+recruit_character = PER_ali_mansur
+recruit_character = PER_ali_mansur_prime_minister
+recruit_character = PER_hassan_taqizadeh
+recruit_character = PER_hasan_arfa
+recruit_character = PER_karim_buzarjomehri
+recruit_character = PER_haj_ali_razmara
+recruit_character = PER_abdollah_hedayat
+recruit_character = PER_amanullah_jahanbani
+recruit_character = PER_ahmad_amir_ahmadi
+recruit_character = PER_morteza_yazdanpanah
+recruit_character = PER_gholamali_bayandor
+recruit_character = PER_abdollah_zelli
+recruit_character = PER_mohammad_shahbakhti
+recruit_character = PER_mahmoud_afshartous
+recruit_character = PER_mir_afkhami
+recruit_character = PER_reza_mizani
+recruit_character = PER_ali_razmara
+recruit_character = PER_ahmad_mira_khosravani
+recruit_character = PER_ahmad_khan_nakhjavan
+recruit_character = PER_abdolreza_afkhami
+recruit_character = PER_ali_zohayli
+recruit_character = PER_mostafa_recai
+recruit_character = PER_ehsan_tabari
+recruit_character = PER_mohammad_tadayyon
+recruit_character = PER_seyyed_ziaeddin_tabatabai
+recruit_character = PER_abdulaziz_mofti
+recruit_character = PER_abdulali_diba
+recruit_character = PER_Sayyid_Hasan_Mudarris
+recruit_character = PER_Seyyed_Hossein_Borujerdi
+recruit_character = PER_jalaluddin_ashtiani
+recruit_character = PER_ali_soheili
+recruit_character = PER_ahmad_qavam
+
+#SCIENTISTS
+recruit_character = PER_mahmoud_hessabi
+
+set_convoys = 30
+set_stability = 0.55
+set_war_support = 0.4 #0.54 Test
+set_research_slots = 3
+
+set_politics = {
+	ruling_party = neutrality
+	last_election = "1936.1.1"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+add_ideas = {
+	limited_conscription
+	PER_agrarian_economy
+
+	PER_british_repression
+	PER_low_literacy_rate
+	PER_government_corruption
+	PER_mahmud_djam
+}
+
+set_popularities = {
+	neutrality = 76
+	democratic = 8
+	fascism = 12
+	communism = 4
+}
+
+if = {
+	limit = { has_dlc = "Man the Guns" }
+	# Destroyers #
+	create_equipment_variant = {
+		name = "Babr Class"
+		name_group = PER_DD_HISTORICAL
+		type = ship_hull_light_1
+		parent_version = 0
+		modules = {
+			fixed_ship_battery_slot = ship_light_battery_1
+			fixed_ship_anti_air_slot = empty
+			fixed_ship_fire_control_system_slot = empty
+			fixed_ship_radar_slot = empty
+			fixed_ship_engine_slot = light_ship_engine_1
+			fixed_ship_torpedo_slot = empty
+			mid_1_custom_slot = empty
+			rear_1_custom_slot = empty
+		}
+	}
+}
+
+if = {
+	limit = {
+		has_dlc = "By Blood Alone"
+	}
+	create_equipment_variant = {
+		name = "DH.82 Tiger Moth"
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		obsolete = yes
+	}
+}

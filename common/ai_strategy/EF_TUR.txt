@@ -1,0 +1,217 @@
+TUR_tank = {
+	allowed = {
+		original_tag = TUR
+	}
+	enable = {
+		OR = {
+			has_tech = concentrated_industry
+			has_tech = dispersed_industry
+		}
+		NOT = {
+			has_tech = basic_medium_tank_chassis
+		}
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = research_weight_factor
+		id = basic_medium_tank_chassis
+		value = 3000
+	}
+	ai_strategy = {
+		type = research_tech
+		id = basic_medium_tank_chassis
+		value = 3000
+	}
+}
+TUR_always = {
+	allowed = {
+		original_tag = TUR
+	}
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype #Build these up over time, don't stall
+		id = infantry_equipment
+		value = 3
+	}
+	ai_strategy = {
+		type = equipment_production_min_factories_archetype #Build these up over time, don't stall
+		id = infantry_equipment
+		value = 1
+	}
+}
+TUR_civ = {
+	allowed = {
+		original_tag = TUR
+	}
+	enable = {
+		is_historical_focus_on = yes
+		date < 1938.5.15
+	}
+	abort_when_not_enabled = yes
+
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 100
+	}
+}
+TUR_inf = {
+	allowed = {
+		original_tag = TUR
+	}
+	enable = {
+		is_historical_focus_on = yes
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 347
+		value = 6
+	}
+
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 49
+		value = 6
+	}
+
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 343
+		value = 3
+	}
+
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 348
+		value = 3
+	}
+	ai_strategy = {
+		type = build_building
+		id = infrastructure
+		target = 346
+		value = 2
+	}
+}
+TUR_civ3 = {
+	allowed = {
+		original_tag = TUR
+	}
+	enable = {
+		is_historical_focus_on = yes
+		date > 1938.5.15
+		date < 1939.6.15
+	}
+	abort_when_not_enabled = yes
+
+
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = -100
+	}
+}
+TUR_civ2 = {
+	allowed = {
+		original_tag = TUR
+	}
+	enable = {
+		is_historical_focus_on = yes
+		date > 1938.11.1
+		date < 1939.6.15
+	}
+	abort_when_not_enabled = yes
+
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 100
+	}
+}
+TUR_mil = {
+	allowed = {
+		original_tag = TUR
+	}
+	enable = {
+		is_historical_focus_on = yes
+		OR = {
+			num_of_civilian_factories > 69
+			date > 1939.6.15
+		}
+		date < 1945.6.15
+	}
+	abort_when_not_enabled = yes
+
+
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 270
+	}
+}
+TUR_for_inf = {
+	allowed = {
+		original_tag = TUR
+	}
+	enable = {
+		has_war = no
+		is_historical_focus_on = yes
+		date < 1939.1.1
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = -30
+	}
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = -30
+	}
+
+	ai_strategy = {
+		type = build_building
+		id = arms_factory
+		value = -30
+	}
+
+	ai_strategy = {
+		type = build_building
+		id = industrial_complex
+		value = -30
+	}
+}
+TUR_highered_armor_prod = {
+	allowed = {
+		original_tag = TUR
+	}
+	enable = {
+		is_historical_focus_on = yes
+		num_of_military_factories > 69
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 25
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 4
+	}
+}

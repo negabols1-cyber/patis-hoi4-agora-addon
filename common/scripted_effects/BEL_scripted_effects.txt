@@ -1,0 +1,414 @@
+BEL_lower_great_depression_effects = {
+	if = {
+		limit = {
+			has_idea = BEL_great_depression1
+		}
+		swap_ideas = {
+			remove_idea = BEL_great_depression1
+			add_idea = BEL_great_depression2
+		}
+		custom_effect_tooltip = BEL_great_depression_cooldown_tt
+		set_country_flag = { flag = BEL_great_depression_cooldown value = 1 days = 50 }
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_great_depression2
+		}
+		swap_ideas = {
+			remove_idea = BEL_great_depression2
+			add_idea = BEL_great_depression3
+		}
+		custom_effect_tooltip = BEL_great_depression_cooldown_tt
+		set_country_flag = { flag = BEL_great_depression_cooldown value = 1 days = 50 }
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_great_depression3
+		}
+		swap_ideas = {
+			remove_idea = BEL_great_depression3
+			add_idea = BEL_great_depression4
+		}
+		custom_effect_tooltip = BEL_great_depression_cooldown_tt
+		set_country_flag = { flag = BEL_great_depression_cooldown value = 1 days = 50 }
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_great_depression4
+		}
+		remove_ideas = BEL_great_depression4
+	}
+}
+
+BEL_lower_great_depression_effects_alt = {
+	if = {
+		limit = {
+			has_idea = BEL_great_depression1
+		}
+		swap_ideas = {
+			remove_idea = BEL_great_depression1
+			add_idea = BEL_great_depression2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_great_depression2
+		}
+		swap_ideas = {
+			remove_idea = BEL_great_depression2
+			add_idea = BEL_great_depression3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_great_depression3
+		}
+		swap_ideas = {
+			remove_idea = BEL_great_depression3
+			add_idea = BEL_great_depression4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_great_depression4
+		}
+		remove_ideas = BEL_great_depression4
+	}
+}
+
+BEL_lower_navy_effect = {
+	if = {
+		limit = {
+			has_idea = BEL_no_navy_idea
+		}
+		swap_ideas = {
+			remove_idea = BEL_no_navy_idea
+			add_idea = BEL_no_navy_idea2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_no_navy_idea2
+		}
+		swap_ideas = {
+			remove_idea = BEL_no_navy_idea2
+			add_idea = BEL_no_navy_idea3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_no_navy_idea3
+		}
+		swap_ideas = {
+			remove_idea = BEL_no_navy_idea3
+			add_idea = BEL_no_navy_idea5
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_no_navy_idea4
+		}
+		swap_ideas = {
+			remove_idea = BEL_no_navy_idea4
+			add_idea = BEL_no_navy_idea5
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = BEL_no_navy_idea5
+		}
+		remove_ideas = BEL_no_navy_idea5
+	}
+}
+
+BEL_foreign_subsidies_effect = {
+	if = {
+		limit = {
+			country_exists = HOL
+			HOL = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 50 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = LUX
+			LUX = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 50 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = SWI
+			SWI = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 60 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = DEN
+			DEN = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 60 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = POL
+			POL = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 60 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = CZE
+			CZE = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 60 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = AUS
+			AUS = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 60 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = FRA
+			FRA = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 75 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = SPR
+			SPR = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 75 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = POR
+			POR = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 75 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = ITA
+			ITA = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 75 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = ENG
+			ENG = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 75 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = GER
+			GER = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 75 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+	if = {
+		limit = {
+			country_exists = SOV
+			SOV = {
+				has_government = democratic
+				has_opinion = { target = BEL value > 75 }
+			}
+		}
+		add_offsite_building = { type = industrial_complex level = 1 }
+	}
+}
+
+BEL_election_stability_debuff = {
+	if = {
+		limit = {
+			check_variable = { BEL_postpone_election_count > 1 }
+		}
+		add_stability = -0.02
+	}
+	else_if = {
+		limit = {
+			check_variable = { BEL_postpone_election_count > 2 }
+		}
+		add_stability = -0.03
+	}
+	else_if = {
+		limit = {
+			check_variable = { BEL_postpone_election_count > 3 }
+		}
+		add_stability = -0.04
+		hidden_effect = {
+			country_event = { id = belgium.61 days = 20 random_days = 10 }
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BEL_postpone_election_count > 4 }
+		}
+		add_stability = -0.06
+	}
+	else_if = {
+		limit = {
+			check_variable = { BEL_postpone_election_count > 5 }
+		}
+		add_stability = -0.08
+		add_ideas = BEL_postponed_election
+		custom_effect_tooltip = BEL_state_of_emergency_declare_tt
+		hidden_effect = {
+			set_country_flag = BEL_state_of_emergency_flag
+			set_country_flag = BEL_failed_to_form_a_government_flag
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { BEL_postpone_election_count > 6 }
+		}
+		add_stability = -0.1
+	}
+}
+
+BEL_set_kingdom_of_belgium_variables = {
+	set_variable = { BEL_kingdom_of_belgium_dmod_political_power_gain = 0 }
+	set_variable = { BEL_kingdom_of_belgium_dmod_offensive_war_stability_factor = 0 }
+	set_variable = { BEL_kingdom_of_belgium_dmod_drift_defence_factor = 0 }
+	set_variable = { BEL_kingdom_of_belgium_dmod_improve_relations_maintain_cost_factor = 0 }
+	set_variable = { BEL_kingdom_of_belgium_dmod_join_faction_tension = 0 }
+	set_variable = { BEL_kingdom_of_belgium_dmod_guarantee_tension = 0 }
+	set_variable = { BEL_kingdom_of_belgium_dmod_political_advisor_cost_factor = 0 }
+	set_variable = { BEL_kingdom_of_belgium_dmod_consumer_goods_factor = 0 }
+	set_variable = { BEL_kingdom_of_belgium_dmod_army_org_factor = 0 }
+	set_variable = { BEL_kingdom_of_belgium_dmod_justify_war_goal_time = 0 }
+}
+
+BEL_set_integrate_benelux_variables = {
+	set_variable = { BEL_netherlands_integration_progress = 0 }
+	set_variable = { BEL_luxembourg_integration_progress = 0 }
+	set_variable = { BEL_integration_hol = 0 }
+	set_variable = { BEL_integration_lux = 0 }
+	set_variable_to_random = {
+		var = BEL_integration_hol
+		max = 0.15
+	}
+	set_variable_to_random = {
+		var = BEL_integration_lux
+		max = 0.15
+	}
+	add_to_variable = {
+		var = BEL_netherlands_integration_progress
+		value = BEL_integration_hol
+	}
+	add_to_variable = {
+		var = BEL_luxembourg_integration_progress
+		value = BEL_integration_lux
+	}
+	clamp_variable = {
+		var = BEL_netherlands_integration_progress
+		min = 0
+		max = 1
+	}
+	clamp_variable = {
+		var = BEL_luxembourg_integration_progress
+		min = 0
+		max = 1
+	}
+	clear_variable = BEL_integration_hol
+	clear_variable = BEL_integration_lux
+}
+
+#Change name of States and VPs when appropriate. Expected to be used inside on_state_control_changed. FROM.FROM is state / ROOT is new controller / FROM is former controller
+BEL_change_name_of_state_or_vp = {
+	if = { # Dunkerque / Lille // (Duunkerke / Rysel)
+		limit = {
+			FROM.FROM = {
+				state = 29 #Nord-Pas-de-Calais
+			}
+		}
+		if = { #BELGIUM CONTROLLER
+			limit = {
+				ROOT = { original_tag = BEL }
+			}
+			set_province_name = { id = 575 name = VICTORY_POINTS_575_FLA } #Duunkerke
+			set_province_name = { id = 11483 name = VICTORY_POINTS_11483_FLA } #Rysel
+		}
+		else_if = { #FLANDERS CONTROLLER
+			limit = {
+				ROOT = { original_tag = FLA }
+			}
+			set_province_name = { id = 575 name = VICTORY_POINTS_575_FLA } #Duunkerke
+			set_province_name = { id = 11483 name = VICTORY_POINTS_11483_FLA } #Rysel
+		}
+		else_if = { #OTHER CONTROLLER
+			limit = {
+				FROM = { original_tag = BEL }
+			}
+			reset_province_name = 575
+			reset_province_name = 11483
+		}
+	}
+	else_if = { # Charleroi / Liége // (Tchålerwè / Lîdje)
+		limit = {
+			FROM.FROM = {
+				state = 34 #Wallonie
+			}
+		}
+		if = { #WALLONIA CONTROLLER
+			limit = {
+				ROOT = { original_tag = WLL }
+			}
+			set_province_name = { id = 9536 name = VICTORY_POINTS_9536_WLL } #Tchålerwè
+			set_province_name = { id = 11519 name = VICTORY_POINTS_11519_WLL } #Lîdje
+		}
+		else_if = { #OTHER CONTROLLER
+			limit = {
+				FROM = { original_tag = WLL }
+			}
+			reset_province_name = 9536
+			reset_province_name = 11519
+		}
+	}
+}

@@ -1,0 +1,109 @@
+
+URG_nacional_colorado_bop = {
+	initial_value = 1
+	left_side = URG_colorado_side
+	right_side = URG_nacional_side
+	decision_category = URG_BoP_nacional_colorado
+	range = {
+		id = URG_balanced_both
+		min = -0.1
+		max = 0.1
+		modifier = {
+			industrial_capacity_factory = 0.01
+			stability_factor = 0.05
+			political_power_gain = -0.05
+		}
+	}
+	side = {
+		id = URG_colorado_side
+		icon = GFX_URG_BoP_colorados
+		range = {
+			id = URG_very_dominant_colorado_side
+			min = -1
+			max = -0.6
+			modifier = {
+				political_power_gain = 0.2
+				stability_factor = 0.1
+				consumer_goods_factor = 0.15
+				production_speed_buildings_factor = 0.1
+				industrial_capacity_factory = -0.075
+				monthly_population = 0.1
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_government = democratic #nacionales in power
+						NOT = {
+							OR = {
+								has_idea = URG_blancos_in_opposition0
+								has_idea = URG_blancos_in_opposition1
+								has_idea = URG_blancos_in_opposition2
+							}
+						}
+					}
+					add_ideas = URG_blancos_in_opposition0 #begins mechanic for potential blancos civil war
+					activate_mission = URG_blancos_in_opposition
+				}
+			}
+		}
+		range = {
+			id = URG_slightly_dominant_colorado_side
+			min = -0.6
+			max = -0.1
+			modifier = {
+				political_power_gain = 0.1
+				stability_factor = 0.05
+				consumer_goods_factor = 0.075
+				production_speed_buildings_factor = 0.075
+				industrial_capacity_factory = -0.05
+				monthly_population = 0.05
+			}
+		}
+	}
+	side = {
+		id = URG_nacional_side
+		icon = GFX_URG_BoP_NACIONALES
+		range = {
+			id = URG_very_dominant_nacionales_side
+			min = 0.6
+			max = 1
+			modifier = {
+				political_power_gain = -0.15
+				consumer_goods_factor = -0.15
+				production_speed_buildings_factor = -0.1
+				industrial_capacity_factory = 0.1
+				industrial_capacity_dockyard = 0.1
+			}
+			on_activate = {
+				if = {
+					limit = {
+						has_government = neutrality #colorados in power
+						NOT = {
+							OR = {
+								has_idea = URG_colorados_in_opposition0
+								has_idea = URG_colorados_in_opposition1
+								has_idea = URG_colorados_in_opposition2
+							}
+						}
+					}
+					add_ideas = URG_colorados_in_opposition0 #begins mechanic for potential colorados civil war
+					activate_mission = URG_colorados_in_opposition
+				}
+			}
+		}
+
+		range = {
+			id = URG_somewhat_dominant_nacionales_side
+			min = 0.1
+			max = 0.6
+			modifier = {
+				political_power_gain = -0.075
+				consumer_goods_factor = -0.075
+				production_speed_buildings_factor = -0.075
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+			}
+		}
+	}
+}
+

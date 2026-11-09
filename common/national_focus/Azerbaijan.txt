@@ -1,0 +1,5273 @@
+focus_tree = {
+	id = azerbaijan_focus
+
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = AZR
+		}
+	}
+
+	default = no
+
+	continuous_focus_position = { x = 50 y = 1650 }
+
+
+	###############################
+	##### Faşist/Kralık ###########
+	###############################
+
+	focus = {
+		id = AZR_western_focus
+		icon = GFX_goal_generic_position_armies
+		mutually_exclusive = { focus = AZR_go_to_soviet_union focus = AZR_unlikely_option}
+		x = 2
+		y = 0
+
+		cost = 6
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+
+		completion_reward = {
+			add_political_power = 120
+			add_stability = 0.10
+		}
+	}
+
+	focus = {
+		id = AZR_friendship_treaty_with_turkey
+		icon = GFX_focus_generic_befriend_turkey
+		prerequisite = { focus = AZR_western_focus }
+		mutually_exclusive = { focus = AZR_reinforce_old_shii }
+		x = -3
+		y = 1
+		relative_position_id = AZR_western_focus
+
+		cost = 5
+
+		ai_will_do = {
+			base = 80
+		}
+
+		available = {
+			TUR = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_capitulated = no
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+
+
+		completion_reward = {
+			TUR = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_reinforce_old_shii
+		icon = GFX_focus_AZR_old_shii.dds
+		prerequisite = { focus = AZR_western_focus }
+		mutually_exclusive = { focus = AZR_friendship_treaty_with_turkey }
+		x = 3
+		y = 1
+		relative_position_id = AZR_western_focus
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			PER = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_capitulated = no
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+
+
+		completion_reward = {
+			add_timed_idea = { idea = neutrality_influence days = 720 }
+			PER = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+				add_ai_strategy = {
+					type = protect
+					id = "AZR"
+					value = 100
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_attract_persian_capital
+		icon = GFX_focus_AZR_capital_of_pers.dds
+		prerequisite = { focus = AZR_reinforce_old_shii }
+		x = 0
+		y = 1
+		relative_position_id = AZR_reinforce_old_shii
+
+		cost = 10
+
+		ai_will_do = {
+			base = 80
+		}
+
+		available = {
+			PER = {
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+
+
+		completion_reward = {
+			add_ideas = AZR_focus_on_quality
+		}
+	}
+
+	focus = {
+		id = AZR_attract_turkey_capital
+		icon = GFX_focus_TUR_the_montreux_convention
+		prerequisite = { focus = AZR_friendship_treaty_with_turkey }
+		x = 0
+		y = 1
+		relative_position_id = AZR_friendship_treaty_with_turkey
+
+		cost = 10
+
+		ai_will_do = {
+			base = 80
+		}
+
+		available = {
+			amount_research_slots < 5
+			TUR = {
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		bypass = {
+			amount_research_slots > 5
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	############################
+	##### Türk    Turan   ######
+	############################
+
+	focus = {
+		id = AZR_Pan_turkish_teory
+		icon = GFX_goal_generic_wolf_pack
+		prerequisite = { focus = AZR_attract_turkey_capital  }
+		x = 0
+		y = 1
+		relative_position_id = AZR_attract_turkey_capital
+
+		cost = 5
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
+
+		completion_reward = {
+			add_ideas = AZR_Pan_turkish_teory
+		}
+	}
+
+	focus = {
+		id = AZR_turkish_nationalizm
+		icon = GFX_focus_AZR_pan_turk.dds
+		prerequisite = { focus = AZR_Pan_turkish_teory }
+		x = -1
+		y = 1
+		relative_position_id = AZR_Pan_turkish_teory
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = {  FOCUS_FILTER_WAR_SUPPORT }
+
+		completion_reward = {
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.07
+			}
+			TUR = {
+				add_ideas = AZR_Pan_turkish_teory
+				add_war_support = 0.05
+				add_popularity = {
+					ideology = fascism
+					popularity = 0.08
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_fasict_movement
+		icon = GFX_goal_support_fascism
+		prerequisite = { focus = AZR_Pan_turkish_teory }
+		x = 1
+		y = 1
+		relative_position_id = AZR_Pan_turkish_teory
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_MANPOWER }
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_one_nation
+		icon = GFX_goal_continuous_increase_nu
+		prerequisite = { focus = AZR_turkish_nationalizm focus = AZR_fasict_movement }
+		mutually_exclusive = { focus = AZR_two_country_one_nation }
+		x = 0
+		y = 1
+		relative_position_id = AZR_fasict_movement
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			fascism > 0.25
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			TUR = { country_event = azerbai.3 }
+		}
+	}
+
+	focus = {
+		id = AZR_two_country_one_nation
+		icon = GFX_focus_generic_concessions
+		prerequisite = { focus = AZR_turkish_nationalizm focus = AZR_fasict_movement }
+		mutually_exclusive = { focus = AZR_one_nation }
+		x = 0
+		y = 1
+		relative_position_id = AZR_turkish_nationalizm
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			fascism > 0.25
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		completion_reward = {
+			set_politics = {
+				ruling_party = fascism
+				elections_allowed = no
+			}
+			TUR = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = large_increase
+				}
+			}
+			set_rule = { can_create_factions = yes }
+		}
+	}
+
+	focus = {
+		id = AZR_axsis
+		icon = GFX_focus_ger_reichskommisariats
+		prerequisite = { focus = AZR_fasict_movement }
+		x = 2
+		y = 1
+		relative_position_id = AZR_fasict_movement
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		completion_reward = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
+			every_other_country = {
+				limit = {
+					has_government = fascism
+					capital_scope = {
+						is_on_continent = europe
+					}
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = fascism_leanings_good
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_Turkish_Brothers
+		icon = GFX_goal_turkey_unite_the_azeri_diaspora
+		prerequisite = { focus = AZR_one_nation }
+		prerequisite = { focus = AZR_Turkish_State }
+		x = 0
+		y = 2
+		relative_position_id = AZR_one_nation
+
+		cost = 5
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_core_of = TUR
+				}
+				add_core_of = AZR
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_Turkish_State
+		icon = GFX_focus_TUR_purge_the_kemalists
+		prerequisite = { focus = AZR_one_nation focus = AZR_two_country_one_nation }
+		x = -1
+		y = 1
+		relative_position_id = AZR_one_nation
+
+		cost = 5
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_STABILITY }
+		completion_reward = {
+			remove_ideas = AZR_oil_interests
+			add_ideas = AZR_turkic_state
+		}
+	}
+
+	focus = {
+		id = AZR_turkish_war_econ
+		icon = GFX_focus_TUR_ratify_the_six_arrows
+		prerequisite = { focus = AZR_two_country_one_nation }
+		prerequisite = { focus = AZR_Turkish_State }
+		x = -2
+		y = 2
+		relative_position_id = AZR_one_nation
+
+		cost = 5
+
+		ai_will_do = {
+			base = 10
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = { has_idea = war_economy }
+					NOT = { has_idea = tot_economic_mobilisation }
+				}
+				add_ideas = war_economy
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+			TUR = {
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+						free_building_slots = {
+							building = arms_factory
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	##############################
+	##### Persi İstilası    ######
+	##############################
+
+	focus = {
+		id = AZR_lost_home
+		icon = GFX_focus_POL_support_global_falangism
+		prerequisite = {  focus = AZR_attract_persian_capital }
+		x = 0
+		y = 1
+		relative_position_id = AZR_attract_persian_capital
+
+		cost = 7
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			neutrality > 0.2
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_stability = -0.10
+			set_politics = {
+				ruling_party = neutrality
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = 0.2
+			}
+			leave_faction = yes
+			add_ideas = AZR_focus_on_epo
+		}
+	}
+
+	focus = {
+		id = AZR_we_must
+		icon = GFX_focus_AZR_we_must.dds
+		prerequisite = { focus = AZR_lost_home }
+		x = -1
+		y = 1
+		relative_position_id = AZR_lost_home
+
+		cost = 5
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		completion_reward = {
+			add_ideas = AZR_workforce
+		}
+	}
+
+	focus = {
+		id = AZR_nationalize_oil
+		icon = GFX_focus_AZR_oil.dds
+		prerequisite = { focus = AZR_lost_home }
+		x = 1
+		y = 1
+		relative_position_id = AZR_lost_home
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			add_political_power = 150
+			remove_ideas = AZR_oil_interests
+			if = {
+				limit = {
+					controls_state = 229
+				}
+				add_resource = {
+					type = oil
+					amount = 8
+					state = 229
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_open_up_war_factories
+		icon = GFX_focus_generic_industry_3
+		prerequisite = { focus = AZR_we_must focus = AZR_nationalize_oil }
+		x = 0
+		y = 1
+		relative_position_id = AZR_nationalize_oil
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_open_up_war_factories
+				bonus = 1.0
+				uses = 4
+				category = industry
+			}
+			if = {
+				limit = {
+					controls_state = 229
+				}
+				229 = {
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = arms_factory
+						level = 4
+						instant_build = yes
+					}
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+					}
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = arms_factory
+						level = 4
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_reopen_mosque
+		icon = GFX_focus_AZR_reopen_mosquesm.dds
+		prerequisite = { focus = AZR_we_must }
+		x = -2
+		y = 1
+		relative_position_id = AZR_nationalize_oil
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			has_government = neutrality
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		completion_reward = {
+			add_ideas = AZR_islamic_law
+			if = {
+				limit = {
+					controls_state = 229
+				}
+				229 = {
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = industrial_complex
+						level = 4
+						instant_build = yes
+					}
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+					}
+					add_extra_state_shared_building_slots = 4
+					add_building_construction = {
+						type = industrial_complex
+						level = 4
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_destory_armanians
+		icon = GFX_focus_AZR_destory_arm.dds
+		prerequisite = { focus = AZR_reopen_mosque focus = AZR_open_up_war_factories }
+		x = -1
+		y = 1
+		relative_position_id = AZR_open_up_war_factories
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
+
+		completion_reward = {
+			add_war_support = 0.1
+			remove_ideas = AZR_idea_armenian_opposition
+		}
+	}
+
+	focus = {
+		id = AZR_new_unis
+		icon = GFX_goal_SYR_Army
+		prerequisite = { focus = AZR_reopen_mosque focus = AZR_open_up_war_factories }
+		x = 1
+		y = 1
+		relative_position_id = AZR_open_up_war_factories
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+			amount_research_slots > 5
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_RESEARCH}
+
+		completion_reward = {
+			add_research_slot = 1
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = AZR_demand_referendum
+		icon = GFX_focus_AZR_retook_persia.dds
+		prerequisite = { focus = AZR_destory_armanians }
+		x = 1
+		y = 1
+		relative_position_id = AZR_destory_armanians
+		mutually_exclusive = { focus = AZR_Safavid_Iran }
+		cost = 10
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		completion_reward = {
+			PER = {country_event = azerbai.4}
+		}
+		will_lead_to_war_with = PER
+	}
+
+	focus = {
+		id = AZR_qajar_iran
+		icon = GFX_focus_AZR_qajar.dds
+		prerequisite = { focus = AZR_demand_referendum }
+		x = 0
+		y = 1
+		relative_position_id = AZR_demand_referendum
+
+		cost = 10
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			AZR = {
+				controls_state = 420
+				controls_state = 1000
+				controls_state = 419
+			}
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			PER = { country_event = { id = azerbai.5 days = 5 } }
+		}
+	}
+	focus = {
+		id = AZR_reastabils_old
+		icon = GFX_goal_PER_Pan_Iranism
+		prerequisite = { focus = AZR_qajar_iran }
+		x = 0
+		y = 2
+		relative_position_id = AZR_qajar_iran
+
+		cost = 10
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_core_of = PER
+				}
+				add_core_of = AZR
+			}
+			add_ideas = AZR_master_end
+			add_ideas = AZR_idea_rebuiled_empire
+		}
+	}
+
+
+	focus = {
+		id = AZR_greater_Qajar
+		icon = GFX_focus_POL_prussia_line
+		prerequisite = { focus = AZR_reastabils_old }
+		x = 0
+		y = 1
+		relative_position_id = AZR_reastabils_old
+
+		cost = 10
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			AZR = {
+				add_state_core = 584
+				add_state_core = 415
+				add_state_core = 444
+				add_state_core = 988
+				add_state_core = 1012
+				add_state_core = 1011
+				add_state_core = 1010
+				add_state_core = 291
+				add_state_core = 676
+				add_state_core = 656
+				add_state_core = 230
+				add_state_core = 352
+				add_state_core = 267
+				add_state_core = 292
+				add_state_core = 765
+				add_state_core = 678
+				add_state_core = 231
+				add_state_core = 675
+				add_state_core = 1009
+				add_state_core = 1007
+				add_state_core = 1008
+				add_state_core = 1006
+				add_state_core = 1005
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_old_ennemys
+		icon = GFX_focus_generic_attack_turkey
+		prerequisite = { focus = AZR_greater_Qajar focus = AZR_rise_the_impire}
+		x = -1
+		y = 1
+		relative_position_id = AZR_greater_Qajar
+
+		cost = 10
+
+		ai_will_do = {
+			base = 80
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		completion_reward = {
+			create_wargoal = {
+				target = SOV
+				type = puppet_wargoal_focus
+				expire = 0
+			}
+			create_wargoal = {
+				target = TUR
+				type = puppet_wargoal_focus
+				expire = 0
+			}
+			create_wargoal = {
+				target = AFG
+				type = puppet_wargoal_focus
+				expire = 0
+			}
+		}
+		will_lead_to_war_with = SOV
+		will_lead_to_war_with = TUR
+		will_lead_to_war_with = AFG
+	}
+
+	################
+	#   Turan     ##
+	################
+
+
+	focus = {
+		id = AZR_armania_problem
+		icon = GFX_focus_AZR_destory_arm.dds
+		prerequisite = {focus = AZR_Turkish_Brothers focus = AZR_turkish_war_econ }
+		prerequisite = { focus = AZR_sovyet_treat }
+		x = -1
+		y = 1
+		relative_position_id = AZR_Turkish_Brothers
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			date > 1938.10.1
+		}
+
+		bypass = {
+		}
+
+
+
+
+		completion_reward = {
+			remove_ideas = AZR_idea_armenian_opposition
+			SOV = { country_event = { id = azerbai.6 days = 5 } }
+		}
+	}
+
+	focus = {
+		id = AZR_respect_misali_milli
+		icon = GFX_focus_TUR_misak_i_milli
+		prerequisite = { focus = AZR_armania_problem }
+		x = -1
+		y = 1
+		relative_position_id = AZR_armania_problem
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = { TUR = { exists = yes } }
+				TUR = {
+					add_state_core = 799
+					add_state_core = 677
+					add_state_core = 680
+					add_state_core = 676
+					add_state_core = 183
+					add_state_core = 164
+					add_state_core = 182
+					add_state_core = 187
+					add_state_core = 731
+					add_state_core = 184
+					add_state_core = 211
+					add_state_core = 231}
+			}
+			if = {
+				limit = { TUR = { exists = no } }
+				AZR = {
+					add_state_core = 799
+					add_state_core = 677
+					add_state_core = 680
+					add_state_core = 676
+					add_state_core = 183
+					add_state_core = 164
+					add_state_core = 182
+					add_state_core = 187
+					add_state_core = 731
+					add_state_core = 184
+					add_state_core = 211
+					add_state_core = 231}
+			}
+		}
+	}
+	focus = {
+		id = AZR_integrate
+		icon = GFX_focus_TUR_the_sun_language_theory
+		prerequisite = { focus = AZR_armania_problem }
+		x = 1
+		y = 1
+		relative_position_id = AZR_armania_problem
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			if = {
+				limit = { TUR = { exists = no } }
+				AZR = {
+					add_state_core = 350
+					add_state_core = 353
+					add_state_core = 800
+					add_state_core = 352
+					add_state_core = 350
+					}}
+			if = {
+				limit = {
+					controls_state = 230
+				}
+				AZR = {
+					add_state_core = 230
+				}
+			}
+			if = {
+				limit = { TUR = { exists = yes } }
+				TUR = {
+					add_state_core = 350
+					add_state_core = 353
+					add_state_core = 800
+					add_state_core = 352
+					add_state_core = 350
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_fatherland
+		icon = GFX_focus_eng_organise_the_blackshirts
+		prerequisite = { focus = AZR_integrate }
+		prerequisite = { focus = AZR_respect_misali_milli }
+		x = 0
+		y = 1
+		relative_position_id = AZR_integrate
+
+		cost = 10
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_ideas = AZR_ideological_fanaticism_I
+			if = {
+				limit = {
+					TUR = {
+						exists = yes
+						is_in_faction_with = ROOT
+					}
+				}
+				TUR = {
+					add_ideas = AZR_ideological_fanaticism_I
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_way_to_turan
+		icon = GFX_focus_TUR_turanist_ambition
+		prerequisite = { focus = AZR_fatherland }
+		x = 0
+		y = 1
+		relative_position_id = AZR_fatherland
+
+		cost = 10
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			AZR = {
+				unlock_decision_category_tooltip = form_turan_category2
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = BUK
+						}
+					}
+					add_core_of = AZR
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = KAZ
+						}
+					}
+					add_core_of = AZR
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = KHI
+						}
+					}
+					add_core_of = AZR
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = KYR
+						}
+					}
+					add_core_of = AZR
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = UZB
+						}
+					}
+					add_core_of = AZR
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = TMS
+						}
+					}
+					add_core_of = AZR
+				}
+				every_state = {
+					limit = {
+						OR = {
+							is_core_of = TAN
+						}
+					}
+					add_core_of = AZR
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_other_turks
+		icon = GFX_focus_TUR_crowning_ourselves_with_the_fin_ugor
+		prerequisite = { focus = AZR_integrate }
+		prerequisite = { focus = AZR_respect_misali_milli }
+		x = 0
+		y = 1
+		relative_position_id = AZR_respect_misali_milli
+
+		cost = 15
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			every_state = {
+				limit = {
+					OR = {
+						is_core_of = HUN
+						is_core_of = EST
+						is_core_of = FIN
+						is_core_of = TAT
+						is_core_of = ALT
+						is_core_of = BYA
+						is_core_of = MON
+						is_core_of = TNG
+					}
+				}
+				add_core_of = AZR
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_persian_turks
+		icon = GFX_focus_TUR_loosen_the_laws_on_secularism
+		prerequisite = { focus = AZR_other_turks }
+		x = 0
+		y = 1
+		relative_position_id = AZR_other_turks
+
+		cost = 6
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			AZR = {
+				add_state_core = 266
+				add_state_core = 416
+				add_state_core = 413
+			}
+		}
+	}
+
+	######
+	#Axis#
+	######
+
+	focus = {
+		id = AZR_german_offisers
+		icon = GFX_focus_AZR_german_offisers.dds
+		prerequisite = { focus = AZR_axsis }
+		x = 0
+		y = 1
+		relative_position_id = AZR_axsis
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			NOT = { has_war_with = GER }
+		}
+
+		bypass = {
+		}
+
+
+
+
+		completion_reward = {
+			add_ideas = AZR_german_offisers
+		}
+	}
+
+	focus = {
+		id = AZR_sovyet_treat
+		icon = GFX_focus_SOV_socialism_in_one_country
+		prerequisite = { focus = AZR_german_offisers }
+		x = 0
+		y = 1
+		relative_position_id = AZR_german_offisers
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+		available_if_capitulated = yes
+		completion_reward = {
+			add_ideas = AZR_soviet_trate
+		}
+	}
+
+	focus = {
+		id = AZR_join_axis
+		icon = GFX_focus_chi_mission_to_germany
+		prerequisite = { focus = AZR_sovyet_treat }
+		x = 0
+		y = 1
+		relative_position_id = AZR_sovyet_treat
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			NOT = { has_war_with = GER }
+			GER = {
+				is_faction_leader = yes
+				has_government = fascism
+			}
+		}
+
+		bypass = {
+			is_in_faction_with = GER
+		}
+
+
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					GER = {
+						has_government = fascism
+					}
+				}
+				GER = {
+					country_event = { id = generic.2 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_Safavid_Iran
+		icon = GFX_focus_generic_attack_iran
+		prerequisite = { focus = AZR_destory_armanians }
+		x = -1
+		y = 1
+		relative_position_id = AZR_destory_armanians
+		cost = 10
+		mutually_exclusive = { focus = AZR_demand_referendum }
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			AZR = {
+				declare_war_on = {
+					target = PER
+					type = annex_everything
+				}
+			}
+		}
+		will_lead_to_war_with = PER
+	}
+	focus = {
+		id = AZR_rebuild_empire
+		icon = GFX_focus_generic_aircraft_production
+		prerequisite = { focus = AZR_Safavid_Iran }
+		mutually_exclusive = {  }
+		x = 0
+		y = 1
+		relative_position_id = AZR_Safavid_Iran
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			every_state = {
+				limit = {
+					is_core_of = PER
+				}
+				add_core_of = AZR
+			}
+			set_cosmetic_tag = AZS_neutrality
+			add_ideas = AZR_rebuilded
+		}
+	}
+
+	focus = {
+		id = AZR_reunite_the_kingdom
+		icon = GFX_goal_PER_Claim_Iraq
+		prerequisite = { focus = AZR_rebuild_empire }
+		mutually_exclusive = {  }
+		x = 0
+		y = 1
+		relative_position_id = AZR_rebuild_empire
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		completion_reward = {
+			AZR = {
+				add_state_core = 584
+				add_state_core = 584
+				add_state_core = 415
+				add_state_core = 444
+				add_state_core = 291
+				add_state_core = 676
+				add_state_core = 656
+				add_state_core = 230
+				add_state_core = 352
+				add_state_core = 267
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_rise_the_impire
+		icon = GFX_focus_eng_expose_the_belly_of_the_bear
+		prerequisite = { focus = AZR_reunite_the_kingdom  }
+		x = 0
+		y = 1
+		relative_position_id = AZR_reunite_the_kingdom
+
+		cost = 10
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_stability = 0.1
+			add_ideas = AZR_defeatism
+		}
+	}
+
+
+	###################
+	####  SOVIET ######
+	###################
+
+	focus = {
+		id = AZR_go_to_soviet_union
+		icon = GFX_focus_generic_soviet_politics
+		mutually_exclusive = { focus = AZR_western_focus focus = AZR_unlikely_option}
+		x = 10
+		y = 0
+
+		cost = 6
+
+		ai_will_do = {
+		}
+
+		available = {
+			SOV = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_capitulated = no
+				has_government = communism
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			add_political_power = 150
+			SOV = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = medium_increase
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_form_peasant_councils
+		icon = GFX_focus_SOV_builder_of_the_red_army
+		prerequisite = { focus = AZR_go_to_soviet_union }
+		x = -1
+		y = 1
+		relative_position_id = AZR_go_to_soviet_union
+
+		cost = 10
+
+		ai_will_do = {
+			base = 200
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_timed_idea = { idea = AZR_idea_peasant_councils days = 730 }
+		}
+	}
+
+	focus = {
+		id = AZR_mutual_economic_aid
+		icon = GFX_goal_generic_soviet_construction
+		prerequisite = { focus = AZR_go_to_soviet_union }
+		x = 1
+		y = 1
+		relative_position_id = AZR_go_to_soviet_union
+
+		cost = 10
+
+		ai_will_do = {
+			base = 200
+		}
+
+		available = {
+			SOV = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_capitulated = no
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_timed_idea = { idea = AZR_idea_sovyet_aid days = 720 }
+			SOV = {
+				add_timed_idea = { idea = AZR_idea_sovyet_aid days = 365 }
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_sovyet_republic
+		icon = GFX_goal_tfv_burn_the_royal_portraits
+		prerequisite = { focus = AZR_form_peasant_councils }
+		prerequisite = { focus = AZR_mutual_economic_aid }
+		x = 0
+		y = 2
+		relative_position_id = AZR_go_to_soviet_union
+
+		cost = 10
+
+		ai_will_do = {
+		}
+
+		available = {
+			communism > 0.4
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			remove_ideas = AZR_soviet_infuulance
+			SOV = {
+				set_autonomy = {
+					target = AZR
+					autonomy_state = autonomy_dominion
+				}
+			}
+			add_popularity = {
+				ideology = neutrality
+				popularity = -0.2
+			}
+			effect_tooltip = {
+				swap_ideas = { remove_idea = AZR_idea_peasant_councils add_idea = AZR_idea_empowered_peasant_councils }
+			}
+			hidden_effect = {
+				remove_ideas = { AZR_idea_peasant_councils }
+				add_ideas = { AZR_idea_empowered_peasant_councils }
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_oil_comes_out
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = AZR_sovyet_republic }
+		x = -1
+		y = 1
+		relative_position_id = AZR_sovyet_republic
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			is_in_faction_with = SOV
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.10
+				localization = AZR_oil_comes_out
+			}
+			if = {
+				limit = {
+					controls_state = 229
+				}
+				add_resource = {
+					type = oil
+					amount = 32
+					state = 229
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+					}
+					add_resource = {
+						type = oil
+						amount = 32
+					}
+				}
+			}
+			229 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_Supreme_Peasants
+		icon = GFX_focus_SOV_stalins_cult_of_personality
+		prerequisite = { focus = AZR_sovyet_republic }
+		x = 1
+		y = 1
+		relative_position_id = AZR_sovyet_republic
+
+		cost = 10
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = 0.10
+				localization = AZR_Supreme_Peasants
+			}
+			swap_ideas = { remove_idea = AZR_idea_empowered_peasant_councils add_idea = AZR_idea_very_empowered_peasant_councils }
+		}
+	}
+
+	focus = {
+		id = AZR_sovyet_industry
+		icon = GFX_focus_generic_tank_production
+		prerequisite = { focus = AZR_Supreme_Peasants  }
+		x = 0
+		y = 1
+		relative_position_id = AZR_Supreme_Peasants
+
+		cost = 10
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = 0.10
+				localization = AZR_sovyet_industry
+			}
+			remove_ideas = AZR_oil_interests
+			if = {
+				limit = {
+					controls_state = 229
+				}
+				add_resource = {
+					type = steel
+					amount = 8
+					state = 229
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+					}
+					add_resource = {
+						type =  steel
+						amount = 8
+					}
+				}
+			}
+			if = {
+				limit = {
+					controls_state = 229
+				}
+				229 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_soviet_workers_congress
+		icon = GFX_focus_SOV_third_rome
+		prerequisite = { focus = AZR_Supreme_Peasants }
+		x = 3
+		y = 1
+		relative_position_id = AZR_Supreme_Peasants
+
+		cost = 10
+
+		ai_will_do = {
+		}
+
+		available = {
+			is_subject = yes
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.10
+				localization = AZR_soviet_workers_congress
+			}
+			SOV = {
+				country_event = azerbai.1
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_research_collaboration
+		icon = GFX_focus_generic_socialist_science
+		prerequisite = { focus = AZR_oil_comes_out }
+		x = 0
+		y = 1
+		relative_position_id = AZR_oil_comes_out
+
+		cost = 10
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			is_in_faction_with = SOV
+			SOV = { has_government = communism }
+		}
+
+		bypass = {
+			amount_research_slots > 5
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.10
+				localization = AZR_research_collaboration
+			}
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = AZR_sovyet_offisers
+		icon = GFX_focus_YUG_pan_slavic_congress
+		prerequisite = { focus = AZR_sovyet_industry }
+		x = 0
+		y = 2
+		relative_position_id = AZR_Supreme_Peasants
+
+		cost = 10
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = 0.10
+				localization = AZR_sovyet_offisers
+			}
+			add_ideas = AZR_supreme
+		}
+	}
+
+	focus = {
+		id = AZR_annex_armenia
+		icon = GFX_goal_ARM_united_and_ready
+		prerequisite = { focus = AZR_soviet_workers_congress }
+		x = -1
+		y = 1
+		relative_position_id = AZR_soviet_workers_congress
+
+		cost = 5
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			ARM = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_government = communism
+			}
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.05
+				localization = AZR_annex_armenia
+			}
+			remove_ideas = AZR_idea_armenian_opposition
+			AZR = {
+				annex_country = { target = ARM transfer_troops = yes }
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_annex_georgia
+		icon = GFX_goal_PER_Claim_Georgia
+		prerequisite = { focus = AZR_soviet_workers_congress }
+		x = 1
+		y = 1
+		relative_position_id = AZR_soviet_workers_congress
+
+		cost = 5
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			GEO = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_government = communism
+			}
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.05
+				localization = AZR_annex_georgia
+			}
+			AZR = {
+				annex_country = { target = GEO transfer_troops = yes }
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_annex_da
+		icon = GFX_goal_generic_alliance
+		prerequisite = { focus = AZR_annex_armenia }
+		prerequisite = { focus = AZR_annex_georgia }
+		prerequisite = { focus = AZR_sovyet_offisers }
+		x = -1
+		y = 1
+		relative_position_id = AZR_annex_armenia
+
+		cost = 10
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+			DAG = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_government = communism
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.05
+				localization = AZR_annex_da
+			}
+			AZR = {
+				annex_country = { target = DAG transfer_troops = yes }
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_annex_checenya
+		icon = GFX_goal_generic_alliance
+		prerequisite = { focus = AZR_annex_da }
+		x = -2
+		y = 1
+		relative_position_id = AZR_annex_da
+
+		cost = 5
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			CIN = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_government = communism
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.05
+				localization = AZR_annex_checenya
+			}
+			AZR = {
+				annex_country = { target = CIN transfer_troops = yes }
+			}
+		}
+	}
+
+
+	focus = {
+		id = AZR_annex_ossesa
+		icon = GFX_goal_generic_alliance
+		prerequisite = { focus = AZR_annex_da }
+		x = 0
+		y = 1
+		relative_position_id = AZR_annex_da
+
+		cost = 5
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			NOA = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_government = communism
+			}
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.05
+				localization = AZR_annex_ossesa
+			}
+			AZR = {
+				annex_country = { target = NOA transfer_troops = yes }
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_annex_kabo
+		icon = GFX_goal_generic_alliance
+		prerequisite = { focus = AZR_annex_da }
+		x = 2
+		y = 1
+		relative_position_id = AZR_annex_da
+
+		cost = 5
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+			KBK = {
+				NOT = { has_war_with = ROOT }
+				exists = yes
+				has_government = communism
+			}
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.05
+				localization = AZR_annex_kabo
+			}
+			AZR = {
+				annex_country = { target = KBK transfer_troops = yes }
+			}
+		}
+	}
+
+
+	focus = {
+		id = AZR_form_kafkasya
+		icon = GFX_focus_chi_mission_to_the_soviet_union
+		prerequisite = { focus = AZR_annex_checenya }
+		prerequisite = { focus = AZR_annex_kabo }
+		prerequisite = { focus = AZR_annex_ossesa }
+		x = 0
+		y = 1
+		relative_position_id = AZR_annex_ossesa
+
+		cost = 5
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = 0.60
+				localization = AZR_form_kafkasya
+			}
+			set_cosmetic_tag = transcaucasia_unified
+			827 = { add_core_of = ROOT }
+			826 = { add_core_of = ROOT }
+			232 = { add_core_of = ROOT }
+			828 = { add_core_of = ROOT }
+			231 = { add_core_of = ROOT }
+			821 = { add_core_of = ROOT }
+			233 = { add_core_of = ROOT }
+			230 = { add_core_of = ROOT }
+			add_ideas = soldiers_of_the_steppe
+			hidden_effect = {
+				news_event = { id = nsb_news.302 hours = 8 }
+				set_global_flag = form_transcaucasia_flag
+			}
+		}
+	}
+
+
+	############################
+	######### INDUSTRY #########
+	############################
+
+	focus = {
+		id = AZR_industrialization_program
+		icon = GFX_goal_generic_construction
+		x = 20
+		y = 0
+
+		cost = 8
+
+		ai_will_do = {
+			base = 80
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				bonus = 1.0
+				uses = 2
+				category = industry
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_expand_the_mining_industry
+		icon = GFX_goal_generic_construct_civilian
+		prerequisite = { focus = AZR_industrialization_program }
+		x = 0
+		y = 1
+		relative_position_id = AZR_industrialization_program
+
+		cost = 9
+
+		ai_will_do = {
+			base = 70
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_timed_idea = {
+				idea = AZR_period_of_significant_economic_growth_I1
+				days = 1460
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_rare_minerals_exploitation
+		icon = GFX_goal_generic_construction2
+		prerequisite = { focus = AZR_expand_the_mining_industry }
+		x = -3
+		y = 1
+		relative_position_id = AZR_expand_the_mining_industry
+
+		cost = 9
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		completion_reward = {
+			if = {
+				limit = {
+					229 = {
+						owner = {
+							OR = {
+								tag = ROOT
+								is_subject_of = ROOT
+								AND = {
+									tag = MNT
+									is_in_faction_with = ROOT
+								}
+							}
+						}
+					}
+				}
+				229 = {
+					add_resource = {
+						type = tungsten
+						amount = 8
+					}
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					add_resource = {
+						type = tungsten
+						amount = 8
+					}
+				}
+			}
+			if = {
+				limit = {
+					229 = {
+						owner = {
+							OR = {
+								tag = ROOT
+								is_subject_of = ROOT
+								AND = {
+									tag = MNT
+									is_in_faction_with = ROOT
+								}
+							}
+						}
+					}
+				}
+				229 = {
+					add_resource = {
+						type = chromium
+						amount = 8
+					}
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					add_resource = {
+						type = chromium
+						amount = 8
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_oil
+		icon = GFX_goal_generic_oil_refinery
+		prerequisite = { focus = AZR_rare_minerals_exploitation }
+		x = 0
+		y = 1
+		relative_position_id = AZR_rare_minerals_exploitation
+
+		cost = 9
+
+		ai_will_do = {
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_resource = {
+					type = oil
+					amount = 16
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_develop_civilian_industry
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = AZR_expand_the_mining_industry }
+		x = -1
+		y = 1
+		relative_position_id = AZR_expand_the_mining_industry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_expand_the_university
+		icon = GFX_focus_research
+		prerequisite = { focus = AZR_develop_civilian_industry focus = AZR_develop_military_industry }
+		x = 0
+		y = 3
+		relative_position_id = AZR_industrialization_program
+
+		cost = 9
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		}
+
+		bypass = {
+			amount_research_slots > 5
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = AZR_integrated_rail_network
+		icon = GFX_goal_generic_construct_infrastructure
+		prerequisite = { focus = AZR_expand_the_university }
+		x = 0
+		y = 2
+		relative_position_id = AZR_develop_civilian_industry
+
+		cost = 10
+
+		ai_will_do = {
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+					is_core_of = ROOT
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_light_industry
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = { focus = AZR_integrated_rail_network focus = AZR_improve_azerbeycan_rail_network }
+		x = 1
+		y = 3
+		relative_position_id = AZR_develop_civilian_industry
+
+		cost = 9
+
+		ai_will_do = {
+
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_develop_industry
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = AZR_integrated_rail_network }
+		x = 0
+		y = 4
+		relative_position_id = AZR_develop_civilian_industry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+		complete_tooltip = {
+
+		}
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 229
+				}
+				229 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						ROOT = { has_full_control_of_state = PREV }
+					}
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_local_self_management
+		icon = GFX_focus_generic_self_management
+		prerequisite = { focus = AZR_develop_industry }
+		x = 0
+		y = 1
+		relative_position_id = AZR_develop_industry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			add_ideas = AZR_collectivist_ethos
+		}
+	}
+
+	focus = {
+		id = AZR_expand_the_university_of_azerbeycan
+		icon = GFX_focus_research
+		prerequisite = { focus = AZR_develop_industry }
+		x = -2
+		y = 1
+		relative_position_id = AZR_develop_industry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		}
+
+		bypass = {
+			amount_research_slots > 5
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = AZR_develop_military_industry
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = AZR_expand_the_mining_industry }
+		x = 1
+		y = 1
+		relative_position_id = AZR_expand_the_mining_industry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_improve_azerbeycan_rail_network
+		icon = GFX_goal_generic_construct_infrastructure
+		prerequisite = { focus = AZR_expand_the_university }
+		x = 0
+		y = 2
+		relative_position_id = AZR_develop_military_industry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			has_full_control_of_state = 229
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			229 = {
+				add_building_construction = {
+					type = supply_node
+					level = 1
+					province = 11704
+					instant_build = yes
+				}
+			}
+			build_railway = {
+				path = { 1610 9715 12434 4473 }
+			}
+			build_railway = {
+				path = { 1610 9715 12434 4473 }
+			}
+			build_railway = {
+				path = { 1610 9715 12434 4473 }
+			}
+		}
+	}
+
+
+	focus = {
+		id = AZR_azerbeycan_steel
+		icon = GFX_goal_generic_construct_civilian
+		prerequisite = { focus = AZR_improve_azerbeycan_rail_network }
+		x = 1
+		y = 3
+		relative_position_id = AZR_develop_military_industry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				add_resource = {
+					type = steel
+					amount = 16
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_expand_the_university_of_baku
+		icon = GFX_focus_research
+		prerequisite = { focus = AZR_improve_azerbeycan_rail_network }
+		x = 0
+		y = 4
+		relative_position_id = AZR_develop_military_industry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+			amount_research_slots > 5
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_research_slot = 1
+		}
+	}
+
+	focus = {
+		id = AZR_central_management
+		icon = GFX_goal_generic_demand_territory
+		prerequisite = { focus = AZR_expand_the_university_of_baku }
+		x = 0
+		y = 5
+		relative_position_id = AZR_develop_military_industry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			add_ideas = AZR_reform_the_tax_system_I
+		}
+	}
+
+	focus = {
+		id = AZR_expand_the_army
+		icon = GFX_goal_generic_build_tank
+		prerequisite = { focus = AZR_local_self_management focus = AZR_central_management }
+		x = 1
+		y = 1
+		relative_position_id = AZR_local_self_management
+
+		cost = 9
+
+		ai_will_do = {
+			base = 100
+		}
+
+		available = {
+		}
+
+		bypass = {
+
+		}
+
+
+
+		available_if_capitulated = yes
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			if = {
+				limit = {
+					has_full_control_of_state = 229
+				}
+				229 = {
+					add_extra_state_shared_building_slots = 3
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						free_building_slots = {
+							building = arms_factory
+							size > 1
+							include_locked = yes
+						}
+					}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = arms_factory
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+
+
+	############################
+	######## AIR FORCE #########
+	############################
+
+	focus = {
+		id = AZR_modernize_the_air_force
+		icon = GFX_goal_generic_air_doctrine
+		x = 25
+		y = 0
+
+		cost = 8
+
+		ai_will_do = {
+			base = 60
+			modifier = {
+				factor = 1.2
+				is_in_faction_with = GER
+			}
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = air_doc_bonus
+				cost_reduction = 0.5
+				uses = 1
+				category = air_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_local_developers
+		icon = GFX_goal_generic_air_production
+		prerequisite = { focus = AZR_modernize_the_air_force }
+		x = 0
+		y = 1
+		relative_position_id = AZR_modernize_the_air_force
+
+		cost = 9
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_ideas = HUN_indigenous_designs #emergency fix
+		}
+	}
+
+	focus = {
+		id = AZR_flyway
+		icon = GFX_focus_generic_air_defense
+		prerequisite = { focus = AZR_local_developers }
+		x = -2
+		y = 1
+		relative_position_id = AZR_local_developers
+
+		cost = 9
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_international_airway
+		icon = GFX_goal_continuous_air_production
+		prerequisite = { focus = AZR_local_developers }
+		x = 0
+		y = 1
+		relative_position_id = AZR_local_developers
+
+		cost = 9
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_more_airway
+		icon = GFX_focus_YUG_ikarus
+		prerequisite = { focus = AZR_local_developers }
+		x = 2
+		y = 1
+		relative_position_id = AZR_local_developers
+
+		cost = 9
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					ROOT = { has_full_control_of_state = PREV }
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_the_sky
+		icon = GFX_goal_generic_air_fighter2
+		prerequisite = { focus = AZR_flyway focus = AZR_international_airway focus = AZR_more_airway }
+		x = 0
+		y = 2
+		relative_position_id = AZR_local_developers
+
+		cost = 10
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_the_ik_3
+				bonus = 0.50
+				uses = 1
+				category = air_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_heavy_fighter_project
+		icon = GFX_goal_generic_air_fighter
+		prerequisite = { focus = AZR_the_sky }
+		x = -1
+		y = 3
+		relative_position_id = AZR_local_developers
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_heavy_fighter_project
+				bonus = 1.0
+				uses = 1
+				category = cat_heavy_fighter
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_bomber_project
+		icon = GFX_goal_generic_air_bomber
+		prerequisite = { focus = AZR_the_sky }
+		x = 1
+		y = 3
+		relative_position_id = AZR_local_developers
+
+		cost = 10
+
+		ai_will_do = {
+			base = 20
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_bomber_project
+				bonus = 1.0
+				uses = 1
+				category = cat_strategic_bomber
+				category = tactical_bomber
+			}
+		}
+	}
+	############################
+	######## LAND FORCE ########
+	############################
+
+	focus = {
+		id = AZR_army_modernization
+		icon = GFX_goal_generic_army_doctrines
+		x = 35
+		y = 0
+
+		cost = 8
+
+		ai_will_do = {
+			base = 70
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+
+
+		completion_reward = {
+			army_experience = 25
+		}
+	}
+
+	focus = {
+		id = AZR_motorize_the_cavalry
+		icon = GFX_goal_generic_cavalry
+		prerequisite = { focus = AZR_army_modernization }
+		x = -3
+		y = 1
+		relative_position_id =  AZR_army_modernization
+
+		cost = 9
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_motorize_the_cavalry
+				bonus = 3.0
+				technology = motorised_infantry
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_motorized_logistics
+		icon = GFX_goal_generic_army_motorized
+		prerequisite = { focus = AZR_motorize_the_cavalry }
+		x = -2
+		y = 1
+		relative_position_id = AZR_motorize_the_cavalry
+
+		cost = 8
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_motorized_logistics
+				bonus = 1.0
+				uses = 2
+				category = hospital_tech
+				category = logistics_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_armored_cavalry
+		icon = GFX_goal_generic_build_tank
+		prerequisite = { focus = AZR_motorize_the_cavalry }
+		x = 0
+		y = 1
+		relative_position_id = AZR_motorize_the_cavalry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_armored_cavalry
+				bonus = 1.0
+				uses = 1
+				category = cat_mechanized_equipment
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_modern_tanks
+		icon = GFX_goal_generic_army_tanks
+		prerequisite = { focus = AZR_armored_cavalry }
+		x = 0
+		y = 2
+		relative_position_id = AZR_motorize_the_cavalry
+
+		cost = 9
+
+		ai_will_do = {
+			base = 25
+		}
+
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_modern_tanks
+				bonus = 1.0
+				uses = 1
+				category = armor
+			}
+		}
+	}
+	focus = {
+		id = AZR_small_arms
+		icon = GFX_goal_generic_small_arms
+		prerequisite = { focus = AZR_army_modernization }
+		x = -1
+		y = 1
+		relative_position_id = AZR_army_modernization
+
+		cost = 9
+
+		ai_will_do = {
+			base = 70
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_small_arms
+				bonus = 1.00
+				uses = 1
+				category = infantry_weapons
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_domestic_artillery_production
+		icon = GFX_goal_generic_construct_military
+		prerequisite = { focus = AZR_small_arms }
+		x = 0
+		y = 1
+		relative_position_id = AZR_small_arms
+
+		cost = 9
+
+		ai_will_do = {
+			base = 70
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_domestic_artillery_production
+				bonus = 1.00
+				uses = 1
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_anti_tank_defenses
+		icon = GFX_goal_generic_army_artillery2
+		prerequisite = { focus = AZR_domestic_artillery_production }
+		x = 0
+		y = 2
+		relative_position_id = AZR_small_arms
+
+		cost = 10
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_anti_tank_defenses
+				bonus = 3.0
+				uses = 1
+				category = cat_anti_tank
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_mountain_brigades
+		icon = GFX_goal_generic_special_forces
+		prerequisite = { focus = AZR_army_modernization }
+		x = 1
+		y = 1
+		relative_position_id = AZR_army_modernization
+
+		cost = 9
+
+		ai_will_do = {
+			base = 70
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_mountain_brigades
+				bonus = 3.0
+				uses = 1
+				category = mountaineers_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_independent_engineer_regiments
+		icon = GFX_goal_generic_production
+		prerequisite = { focus = AZR_mountain_brigades }
+		x = 0
+		y = 1
+		relative_position_id = AZR_mountain_brigades
+
+		cost = 9
+
+		ai_will_do = {
+			base = 50
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_independent_engineer_regiments
+				bonus = 3.0
+				uses = 1
+				category = engineers_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_motorized_recon_companies
+		icon = GFX_goal_generic_military_sphere
+		prerequisite = { focus = AZR_independent_engineer_regiments }
+		x = 0
+		y = 2
+		relative_position_id = AZR_mountain_brigades
+
+		cost = 9
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_motorized_recon_companies
+				bonus = 3.0
+				uses = 1
+				category = recon_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_form_parachute_battalions
+		icon = GFX_focus_generic_paratrooper
+		prerequisite = { focus = AZR_motorized_recon_companies }
+		x = 0
+		y = 3
+		relative_position_id = AZR_mountain_brigades
+
+		cost = 9
+
+		ai_will_do = {
+			base = 10
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = AZR_form_parachute_battalions
+				bonus = 3.0
+				uses = 1
+				category = para_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_army_maneuvers
+		icon = GFX_goal_generic_army_doctrines
+		prerequisite = { focus = AZR_army_modernization }
+		x = 4
+		y = 1
+		relative_position_id = AZR_army_modernization
+
+		cost = 9
+
+		ai_will_do = {
+			base = 70
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = AZR_army_maneuvers
+				cost_reduction = 0.5
+				uses = 1
+				category = land_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_supremacy_of_offense
+		icon = GFX_goal_generic_major_war
+		prerequisite = { focus = AZR_army_maneuvers }
+		mutually_exclusive = { focus = AZR_supremacy_of_defense }
+		x = -1
+		y = 1
+		relative_position_id = AZR_army_maneuvers
+
+		cost = 10
+
+		ai_will_do = {
+			base = 30
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = AZR_supremacy_of_offense
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_mobile_warfare
+				category = cat_superior_firepower
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_supremacy_of_defense
+		icon = GFX_goal_generic_position_armies
+		prerequisite = { focus = AZR_army_maneuvers }
+		mutually_exclusive = { focus = AZR_supremacy_of_offense }
+		x = 1
+		y = 1
+		relative_position_id = AZR_army_maneuvers
+
+		cost = 10
+
+		ai_will_do = {
+			base = 60
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_RESEARCH }
+
+
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				name = AZR_supremacy_of_defense
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_grand_battle_plan
+				category = cat_mass_assault
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_artillery_regiments
+		icon = GFX_goal_generic_army_artillery
+		prerequisite = { focus = AZR_supremacy_of_offense focus = AZR_supremacy_of_defense }
+		x = 0
+		y = 2
+		relative_position_id = AZR_army_maneuvers
+
+		cost = 9
+
+		ai_will_do = {
+			base = 70
+		}
+
+		available = {
+
+		}
+
+		bypass = {
+
+		}
+
+
+
+
+
+
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = TUR_superiority_of_arms
+				bonus = 1.5
+				uses = 3
+				category = artillery
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_more_oil
+		icon = GFX_goal_generic_trade
+		prerequisite = { focus = AZR_research_collaboration }
+		x = 0
+		y = 1
+		relative_position_id = AZR_research_collaboration
+
+		cost = 10
+
+		ai_will_do = {
+			base = 40
+		}
+
+		available = {
+			is_in_faction_with = SOV
+		}
+
+		bypass = {
+		}
+
+
+
+
+		search_filters = { FOCUS_FILTER_POLITICAL }
+
+		completion_reward = {
+			add_autonomy_ratio = {
+				value = -0.10
+				localization = AZR_more_oil
+			}
+			if = {
+				limit = {
+					controls_state = 229
+				}
+				add_resource = {
+					type = oil
+					amount = 25
+					state = 229
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					add_resource = {
+						type = oil
+						amount = 25
+					}
+				}
+			}
+		}
+	}
+
+	#############
+	##Demokrasi##
+	#############
+
+	focus = {
+		id = AZR_unlikely_option
+		icon = GFX_goal_support_democracy
+		x = -6
+		y = 0
+		mutually_exclusive = { focus = AZR_western_focus focus = AZR_go_to_soviet_union}
+		cost = 6
+		ai_will_do = {
+			base = 40
+		}
+		available = {
+		}
+		bypass = {
+		}
+
+
+
+		completion_reward = {
+			add_timed_idea = { idea = democratic_influence days = 720 }
+
+		}
+	}
+	focus = {
+		id = AZR_work_with_british
+		icon = GFX_focus_chi_british_cooperation
+		prerequisite = { focus = AZR_unlikely_option }
+		x = 0
+		y = 1
+		relative_position_id = AZR_unlikely_option
+		cost = 10
+		ai_will_do = {
+			base = 1
+		}
+		available = {
+			democratic > 0.25
+		}
+		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_INDUSTRY}
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = 125
+			set_politics = {
+				ruling_party = democratic
+				elections_allowed = no
+			}
+			ENG = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = democratic_leanings_good
+				}
+			}
+			FRA = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = democratic_leanings_good
+				}
+			}
+			USA = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = democratic_leanings_good
+				}
+			}
+			if = {
+				limit = {
+					SOV = {
+						NOT = { has_government = democratic }
+					}
+				}
+				add_opinion_modifier = { target = AZR modifier = HOL_caved_to_the_british_ger }
+			}
+			else_if = {
+				limit = {
+					SOV = { has_government = democratic }
+				}
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = democratic_leanings_good
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_expand_foreign_investment
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		x = 0
+		y = 1
+		cost = 10
+		available = { has_war = no }
+		prerequisite = { focus = AZR_work_with_british }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		relative_position_id = AZR_work_with_british
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_political_power = 75
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_azneft_board_expansion
+		icon = GFX_focus_GRE_reevaluating_the_drachma
+		x = 2
+		y = 1
+		cost = 7
+
+		prerequisite = { focus = AZR_expand_foreign_investment }
+		relative_position_id = AZR_expand_foreign_investment
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = AZR_Eng_Deal
+		}
+	}
+
+	focus = {
+		id = AZR_suppress_religious_education
+		icon = GFX_focus_TUR_loosen_the_laws_on_secularism
+		x = 0
+		y = 1
+		cost = 10
+
+		prerequisite = { focus = AZR_azneft_board_expansion }
+		relative_position_id = AZR_azneft_board_expansion
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = AZR_secular_republic
+		}
+	}
+
+	focus = {
+		id = AZR_mass_arms
+		icon = GFX_focus_mex_privatisation
+		x = 0
+		y = 1
+		cost = 10
+
+		available = {
+			OR = {
+				has_war = yes
+				threat > 0.6
+				has_war_support > 0.8
+			}
+		}
+
+		prerequisite = { focus = AZR_suppress_religious_education }
+		relative_position_id = AZR_suppress_religious_education
+
+		completion_reward = {
+			add_ideas = AZR_mass_infantry_production
+		}
+	}
+
+	focus = {
+		id = AZR_oil_revenue_reinvestment
+		icon = GFX_goal_generic_construction2
+		x = -4
+		y = 1
+		cost = 8
+
+		prerequisite = {focus = AZR_expand_foreign_investment }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		relative_position_id = AZR_expand_foreign_investment
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+	}
+
+	focus = {
+		id = AZR_reduce_oil_dependency
+		icon = GFX_goal_generic_oil_refinery
+		x = 2
+		y = 1
+		cost = 10
+
+		prerequisite = { focus = AZR_oil_revenue_reinvestment focus = AZR_expand_oil_fields }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		relative_position_id = AZR_oil_revenue_reinvestment
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_stability = 0.05
+			remove_ideas = AZR_oil_interests
+		}
+	}
+
+	focus = {
+		id = AZR_moderate_oil_investment
+		icon = GFX_goal_continuous_non_factory_construct
+		x = -2
+		y = 1
+		cost = 10
+
+		prerequisite = { focus = AZR_reduce_oil_dependency }
+		prerequisite = { focus = AZR_oil_revenue_reinvestment }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		relative_position_id = AZR_reduce_oil_dependency
+
+		completion_reward = {
+			if = {
+				limit = {
+					controls_state = 229
+				}
+				add_resource = {
+					type = oil
+					amount = 16
+					state = 229
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					add_resource = {
+						type = oil
+						amount = 16
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = AZR_encourage_tourism
+		icon = GFX_focus_spr_anarchism_knows_no_borders
+		x = -1
+		y = 1
+		cost = 8
+
+		prerequisite = { focus = AZR_moderate_oil_investment }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		relative_position_id = AZR_moderate_oil_investment
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_offsite_building = { type = industrial_complex level = 2 }
+		}
+	}
+
+	focus = {
+		id = AZR_military_industry
+		icon = GFX_goal_generic_allies_build_infantry
+		x = 1
+		y = 1
+		cost = 10
+
+		available = {
+			OR = {
+				has_war = yes
+				threat > 0.5
+				has_war_support > 0.65
+			}
+		}
+
+		prerequisite = {focus = AZR_moderate_oil_investment }
+		relative_position_id = AZR_moderate_oil_investment
+
+		completion_reward = {
+			add_ideas = AZR_focus_on_quality
+		}
+	}
+	focus = {
+		id = AZR_expand_oil_fields
+		icon = GFX_goal_generic_oil_refinery
+		x = 0
+		y = 1
+		cost = 10
+
+		prerequisite = { focus = AZR_expand_foreign_investment }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		relative_position_id = AZR_expand_foreign_investment
+
+		completion_reward = {
+			if = {
+				limit = {
+					controls_state = 229
+				}
+				add_resource = {
+					type = oil
+					amount = 32
+					state = 229
+				}
+			}
+			else = {
+				random_owned_controlled_state = {
+					limit = {
+						is_core_of = ROOT
+						is_in_home_area = yes
+					}
+					add_resource = {
+						type = oil
+						amount = 32
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_build_refineries
+		icon = GFX_focus_spa_the_spanish_miracle
+		x = 0
+		y = 1
+		cost = 10
+
+		prerequisite = { focus = AZR_expand_oil_fields }
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		relative_position_id = AZR_expand_oil_fields
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = fuel_silo
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = fuel_silo
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = fuel_silo
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = fuel_silo
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_buy_tech
+		icon = GFX_goal_generic_scientific_exchange
+		x = 0
+		y = 1
+		cost = 7
+
+		prerequisite = { focus = AZR_build_refineries }
+		search_filters = { FOCUS_FILTER_RESEARCH }
+		relative_position_id = AZR_build_refineries
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = electronics_bonus
+				bonus = 1.0
+				uses = 2
+				category = excavation_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_azeri_volunteers
+		icon = GFX_focus_spr_torchbearers_of_tomorrow
+		x = -1
+		y = 1
+		cost = 9
+
+		prerequisite = { focus = AZR_buy_tech }
+		relative_position_id = AZR_buy_tech
+
+		completion_reward = {
+			add_ideas = volunteer_corps_focus
+			set_rule = {
+				can_send_volunteers = yes
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_new_republic
+		icon = GFX_goal_generic_major_alliance
+		x = 1
+		y = 2
+		cost = 7
+
+		available = {
+			has_government = democratic
+		}
+
+		prerequisite = { focus = AZR_buy_tech }
+		relative_position_id = AZR_build_refineries
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = AZR_democracy_of_the_east
+		}
+	}
+
+	focus = {
+		id = AZR_liberalism
+		icon = GFX_goal_support_democracy
+		x = 0
+		y = 1
+		cost = 10
+
+		prerequisite = { focus = AZR_new_republic }
+		relative_position_id = AZR_new_republic
+		available_if_capitulated = yes
+
+		completion_reward = {
+			add_ideas = AZR_liberal_reforms
+			remove_ideas = AZR_soviet_infuulance
+		}
+	}
+
+	focus = {
+		id = AZR_join_allies
+		icon = GFX_focus_eng_the_sun_never_sets
+		x = 0
+		y = 3
+		cost = 10
+
+		prerequisite = { focus = AZR_azeri_volunteers focus = AZR_liberalism}
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		relative_position_id = AZR_buy_tech
+		bypass = {
+			is_in_faction = yes
+			any_allied_country = {
+				is_faction_leader = yes
+				has_government = democratic
+			}
+		}
+		available_if_capitulated = yes
+		available = {
+			democratic > 0.9
+			OR = {
+				AND = {
+					ENG = {
+						has_government = democratic
+						is_faction_leader = yes
+						NOT = { has_war_with = ROOT }
+					}
+				}
+				AND = {
+					FRA = {
+						has_government = democratic
+						is_faction_leader = yes
+						NOT = { has_war_with = ROOT }
+					}
+				}
+				AND = {
+					GER = {
+						has_government = democratic
+						is_faction_leader = yes
+						NOT = { has_war_with = ROOT }
+					}
+				}
+				AND = {
+					ITA = {
+						has_government = democratic
+						is_faction_leader = yes
+						NOT = { has_war_with = ROOT }
+					}
+				}
+				AND = {
+					SOV = {
+						has_government = democratic
+						is_faction_leader = yes
+						NOT = { has_war_with = ROOT }
+					}
+				}
+				AND = {
+					USA = {
+						has_government = democratic
+						is_faction_leader = yes
+						NOT = { has_war_with = ROOT }
+					}
+				}
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					ENG = {
+						has_government = democratic
+						is_faction_leader = yes
+						NOT = { has_war_with = ROOT }
+					}
+				}
+				ENG = { country_event = { days = 1 id = generic.2 } }
+				else_if = {
+					limit = {
+						USA = {
+							has_government = democratic
+							is_faction_leader = yes
+							NOT = { has_war_with = ROOT }
+						}
+					}
+					USA = { country_event = { days = 1 id = generic.2 } }
+				}
+				else_if = {
+					limit = {
+						FRA = {
+							has_government = democratic
+							is_faction_leader = yes
+							NOT = { has_war_with = ROOT }
+						}
+					}
+					FRA = { country_event = { days = 1 id = generic.2 } }
+				}
+				else_if = {
+					limit = {
+						GER = {
+							has_government = democratic
+							is_faction_leader = yes
+							NOT = { has_war_with = ROOT }
+						}
+					}
+					GER = { country_event = { days = 1 id = generic.2 } }
+				}
+				else_if = {
+					limit = {
+						ITA = {
+							has_government = democratic
+							is_faction_leader = yes
+							NOT = { has_war_with = ROOT }
+						}
+					}
+					ITA = { country_event = { days = 1 id = generic.2 } }
+				}
+				else_if = {
+					limit = {
+						SOV = {
+							has_government = democratic
+							is_faction_leader = yes
+							NOT = { has_war_with = ROOT }
+						}
+					}
+					SOV = { country_event = { days = 1 id = generic.2 } }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_infulance
+		icon = GFX_focus_SOV_international_union_of_soviet_republics
+		x = 3
+		y = 1
+		cost = 8
+
+		prerequisite = { focus = AZR_Pan_turkish_teory focus = AZR_lost_home }
+		relative_position_id = AZR_Pan_turkish_teory
+		available_if_capitulated = yes
+		available = {
+			OR = {
+				has_completed_focus = AZR_axsis
+				has_completed_focus = AZR_open_up_war_factories
+			}
+		}
+		completion_reward = {
+			remove_ideas = AZR_soviet_infuulance
+		}
+	}
+	#NAVY#
+	focus = {
+		id = AZR_nayw
+		icon = GFX_goal_generic_construct_naval_dockyard
+		x = 2
+		y = 1
+		cost = 9
+		available = {
+			any_owned_state = {
+				is_coastal = yes
+			}
+		}
+		prerequisite = { focus = AZR_more_airway focus = AZR_motorized_logistics}
+		relative_position_id = AZR_more_airway
+		available_if_capitulated = yes
+
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = AZR_submarine_effort
+		icon = GFX_goal_generic_navy_submarine
+		prerequisite = { focus = AZR_nayw }
+		x = -1
+		y = 1
+		relative_position_id = AZR_nayw
+		cost = 5
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+				name = ss_bonus
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+	focus = {
+		id = AZR_submarine_effort_2
+		icon = GFX_goal_generic_navy_submarine
+		prerequisite = { focus = AZR_submarine_effort }
+		x = -1
+		y = 2
+		relative_position_id = AZR_nayw
+		cost = 5
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = ss_bonus
+				bonus = 1.0
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_destroyer_effort
+		icon = GFX_goal_generic_wolf_pack
+		prerequisite = { focus = AZR_nayw}
+		x = 1
+		y = 1
+		relative_position_id = AZR_nayw
+		cost = 5
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			navy_experience = 25
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 1.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_destroyer_effort_2
+		icon = GFX_goal_generic_wolf_pack
+		prerequisite = { focus = AZR_destroyer_effort}
+		x = 1
+		y = 2
+		relative_position_id = AZR_nayw
+		cost = 5
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = dd_bonus
+				bonus = 1.0
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+
+
+	focus = {
+		id = AZR_flexible_navy
+		icon = GFX_goal_generic_build_navy
+		prerequisite = { focus = AZR_submarine_effort_2 focus = AZR_destroyer_effort_2 }
+		x = 0
+		y = 3
+		relative_position_id = AZR_nayw
+		cost = 5
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+
+			add_doctrine_cost_reduction = {
+				name = naval_doctrine
+				cost_reduction = 0.5
+				uses = 2
+				category = naval_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_flexible_navy_2
+		icon = GFX_goal_generic_build_navy
+		prerequisite = { focus = AZR_flexible_navy }
+		x = 2
+		y = 4
+		relative_position_id = AZR_nayw
+		cost = 5
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+
+			add_doctrine_cost_reduction = {
+				name = naval_doctrine
+				cost_reduction = 0.5
+				uses = 1
+				category = naval_doctrine
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_naval_effort_2
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = { focus = AZR_nayw}
+		x = 3
+		y = 1
+		cost = 9
+		relative_position_id = AZR_nayw
+		search_filters = {  FOCUS_FILTER_INDUSTRY }
+
+		available_if_capitulated = yes
+
+
+		available = {
+			any_controlled_state = {
+				is_coastal = yes
+			}
+		}
+
+
+		completion_reward = {
+			navy_experience = 25
+			random_owned_controlled_state = {
+				limit = {
+					is_coastal = yes
+					free_building_slots = {
+						building = dockyard
+						size > 2
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = dockyard
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = AZR_Naval_eq
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = AZR_flexible_navy }
+		x = 0
+		y = 4
+		relative_position_id = AZR_nayw
+		cost = 5
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_tech_bonus = {
+				name = sub_op_bonus
+				bonus = 1.0
+				uses = 4
+				technology = basic_battery
+				technology = basic_light_battery
+				technology = improved_light_battery
+				technology = advanced_light_battery
+				technology = basic_heavy_battery
+				technology = improved_heavy_battery
+				technology = advanced_heavy_battery
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_Naval_landing
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = AZR_Naval_eq }
+		x = 0
+		y = 5
+		relative_position_id = AZR_nayw
+		cost = 5
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+
+			add_tech_bonus = {
+				name = fleet_in_being_bonus
+				bonus = 1.0
+				uses = 1
+				category = tp_tech
+			}
+			add_tech_bonus = {
+				name = fleet_in_being_bonus
+				bonus = 1.0
+				uses = 1
+				ahead_reduction = 2
+				category = tp_tech
+			}
+			add_tech_bonus = {
+				name = sub_op_bonus
+				bonus = 1.0
+				uses = 1
+				technology = amphibious_tank
+				technology = amphibious_tank_2
+				technology = amphibious_mechanized_infantry
+				technology = amphibious_mechanized_infantry_2
+
+			}
+		}
+	}
+
+	focus = {
+		id = AZR_Naval_end
+		icon = GFX_goal_generic_navy_cruiser
+		prerequisite = { focus = AZR_Naval_landing }
+		x = 0
+		y = 6
+		relative_position_id = AZR_nayw
+		cost = 10
+
+		search_filters = {  FOCUS_FILTER_RESEARCH }
+
+		available_if_capitulated = yes
+
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				factor = 0
+				all_owned_state = {
+					OR = {
+						is_coastal = no
+						dockyard < 1
+					}
+				}
+			}
+		}
+
+		completion_reward = {
+			add_ideas = hull_end
+		}
+	}
+}

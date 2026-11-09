@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Edit(/AGENTS.md)",
+      "Edit(/AGENTS_template.md)",
+      "Edit(/.claude/agent-map.md)",
+      "Edit(/.agents/skills/**)",
+      "Edit(/.qoder/skills/**)",
+      "Edit(/.grok/skills/**)",
+      "Edit(/.kiro/skills/**)",
+      "Edit(/.qwen/skills/**)",
+      "Edit(/.codex/agents/**)",
+      "Edit(/.cursor/agents/**)",
+      "Edit(/.cursor/agent-map.md)",
+      "Edit(/.qoder/agents/**)",
+      "Edit(/.qoder/agent-map.md)",
+      "Edit(/.opencode/agent/**)",
+      "Edit(/.opencode/agent-map.md)",
+      "Edit(/.gemini/agents/**)",
+      "Edit(/.gemini/agent-map.md)",
+      "Edit(/.agents/agents/**)",
+      "Edit(/.agents/agent-map.md)",
+      "Edit(/.kilo/agents/**)",
+      "Edit(/.kilo/agent-map.md)",
+      "Edit(/.kiro/agents/**)",
+      "Edit(/.kiro/agent-map.md)",
+      "Edit(/.qwen/agents/**)",
+      "Edit(/.qwen/agent-map.md)",
+      "Edit(/.devin/agents/**)",
+      "Edit(/.devin/agent-map.md)",
+      "Edit(/.augment/agents/**)",
+      "Edit(/.augment/agent-map.md)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh \"${CLAUDE_PROJECT_DIR}/.tools/py.sh\" -B \"${CLAUDE_PROJECT_DIR}/.tools/sync/generators.py\" --hook",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+on_actions = {
+
+	on_peaceconference_ended = {
+		effect = {
+			if = {
+				limit = {
+					has_global_flag = rhineland_remilitarized #so it was remilitarized once
+					GER = {
+						has_country_leader = {
+							character = GER_adolf_hitler
+							ruling_only = yes
+						}
+					}
+					126 = {
+						pc_does_state_stack_demilitarized = yes
+					}
+				}
+				set_global_flag = disarmed_and_demilitarized_london_flag
+			}
+		}
+	}
+}

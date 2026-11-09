@@ -1,0 +1,272 @@
+PRU_army_navy_bop = {
+	initial_value = 1
+	left_side = PRU_navy_side
+	right_side = PRU_army_side
+	decision_category = PRU_army_navy_rivalry_bop
+
+	range = { #Balanced Range, neither Army nor Navy
+		id = PRU_army_navy_bop_balanced
+		min = -0.1
+		max = 0.1
+		modifier = {
+			stability_factor = -0.15
+		}
+		on_activate = {
+			set_variable = { PRU_army_loyalty_status = 0 }
+			set_variable = { PRU_navy_loyalty_status = 0 }
+			PRU_partidos_update_update_effect = yes
+		}
+	}
+
+	side = {
+		id = PRU_army_side
+		icon = GFX_bop_PRU_army_side
+		range = {
+			id = PRU_army_navy_bop_very_dominant_army
+			min = 0.85
+			max = 1
+			modifier = {
+				stability_factor = -0.15
+				industrial_capacity_factory = 0.1
+				production_speed_arms_factory_factor = 0.1
+				army_attack_factor = 0.1
+				army_defence_factor = 0.1
+				industrial_capacity_dockyard = -0.1
+				production_speed_dockyard_factor = -0.1
+				naval_damage_factor = -0.2
+				naval_hit_chance = -0.2
+				naval_speed_factor = -0.2
+			}
+			on_activate = {
+				activate_mission = PRU_impending_navy_rebellion
+				custom_effect_tooltip = BRA_effects_when_failed_tt
+				effect_tooltip = {
+					start_civil_war = {
+						ideology = democratic
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = PRU_caudillismo_mechanic_removed_flag
+						}
+					}
+					set_variable = { PRU_army_loyalty_status = 2 }
+					PRU_partidos_update_update_effect = yes
+				}
+			}
+		}
+
+		range = {
+			id = PRU_army_navy_bop_dominant_army
+			min = 0.65
+			max = 0.85
+			modifier = {
+				stability_factor = -0.15
+				industrial_capacity_factory = 0.07
+				production_speed_arms_factory_factor = 0.07
+				army_attack_factor = 0.07
+				army_defence_factor = 0.07
+				industrial_capacity_dockyard = -0.07
+				production_speed_dockyard_factor = -0.07
+				naval_damage_factor = -0.15
+				naval_hit_chance = -0.15
+				naval_speed_factor = -0.15
+			}
+			on_activate = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = PRU_caudillismo_mechanic_removed_flag
+						}
+					}
+					set_variable = { PRU_army_loyalty_status = 2 }
+					PRU_partidos_update_update_effect = yes
+				}
+			}
+		}
+
+		range = {
+			id = PRU_army_navy_bop_somewhat_dominant_army
+			min = 0.4
+			max = 0.65
+			modifier = {
+				stability_factor = -0.15
+				industrial_capacity_factory = 0.05
+				production_speed_arms_factory_factor = 0.05
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				industrial_capacity_dockyard = -0.05
+				production_speed_dockyard_factor = -0.05
+				naval_damage_factor = -0.1
+				naval_hit_chance = -0.1
+				naval_speed_factor = -0.1
+			}
+			on_activate = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = PRU_caudillismo_mechanic_removed_flag
+						}
+					}
+					set_variable = { PRU_army_loyalty_status = 1 }
+					PRU_partidos_update_update_effect = yes
+				}
+			}
+		}
+
+		range = {
+			id = PRU_army_navy_bop_slightly_dominant_army
+			min = 0.1
+			max = 0.4
+			modifier = {
+				stability_factor = -0.15
+				army_attack_factor = 0.02
+				army_defence_factor = 0.02
+				industrial_capacity_dockyard = -0.05
+				production_speed_dockyard_factor = -0.05
+				naval_damage_factor = -0.05
+				naval_hit_chance = -0.05
+				naval_speed_factor = -0.05
+			}
+			on_activate = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = PRU_caudillismo_mechanic_removed_flag
+						}
+					}
+					set_variable = { PRU_navy_loyalty_status = 0 }
+					set_variable = { PRU_army_loyalty_status = 1 }
+					PRU_partidos_update_update_effect = yes
+				}
+			}
+		}
+	}
+
+	side = {
+		id = PRU_navy_side
+		icon = GFX_bop_PRU_navy_side
+		range = {
+			id = PRU_army_navy_bop_very_dominant_navy
+			min = -1
+			max = -0.85
+			modifier = {
+				stability_factor = -0.15
+				industrial_capacity_factory = -0.1
+				production_speed_arms_factory_factor = -0.1
+				army_attack_factor = -0.1
+				army_defence_factor = -0.1
+				industrial_capacity_dockyard = 0.1
+				production_speed_dockyard_factor = 0.1
+				naval_damage_factor = 0.1
+				naval_hit_chance = 0.1
+				naval_speed_factor = 0.1
+			}
+			on_activate = {
+				activate_mission = PRU_impending_army_rebellion
+				custom_effect_tooltip = BRA_effects_when_failed_tt
+				effect_tooltip = {
+					start_civil_war = {
+						ideology = democratic
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = PRU_caudillismo_mechanic_removed_flag
+						}
+					}
+					set_variable = { PRU_navy_loyalty_status = 2 }
+					PRU_partidos_update_update_effect = yes
+				}
+			}
+		}
+
+		range = {
+			id = PRU_army_navy_bop_dominant_navy
+			min = -0.85
+			max = -0.65
+			modifier = {
+				stability_factor = -0.15
+				industrial_capacity_factory = -0.07
+				production_speed_arms_factory_factor = -0.07
+				army_attack_factor = -0.07
+				army_defence_factor = -0.07
+				industrial_capacity_dockyard = 0.07
+				production_speed_dockyard_factor = 0.07
+				naval_damage_factor = 0.08
+				naval_hit_chance = 0.08
+				naval_speed_factor = 0.08
+			}
+			on_activate = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = PRU_caudillismo_mechanic_removed_flag
+						}
+					}
+					set_variable = { PRU_navy_loyalty_status = 2 }
+					PRU_partidos_update_update_effect = yes
+				}
+			}
+		}
+
+		range = {
+			id = PRU_army_navy_bop_somewhat_dominant_navy
+			min = -0.65
+			max = -0.4
+			modifier = {
+				stability_factor = -0.15
+				industrial_capacity_factory = -0.05
+				production_speed_arms_factory_factor = -0.05
+				army_attack_factor = -0.05
+				army_defence_factor = -0.05
+				industrial_capacity_dockyard = 0.05
+				production_speed_dockyard_factor = 0.05
+				naval_damage_factor = 0.05
+				naval_hit_chance = 0.05
+				naval_speed_factor = 0.05
+			}
+			on_activate = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = PRU_caudillismo_mechanic_removed_flag
+						}
+					}
+					set_variable = { PRU_navy_loyalty_status = 1 }
+					PRU_partidos_update_update_effect = yes
+				}
+			}
+		}
+
+		range = {
+			id = PRU_army_navy_bop_slightly_dominant_navy
+			min = -0.4
+			max = -0.1
+			modifier = {
+				stability_factor = -0.15
+				industrial_capacity_factory = -0.05
+				production_speed_arms_factory_factor = -0.05
+				army_attack_factor = -0.03
+				army_defence_factor = -0.03
+				naval_damage_factor = 0.02
+				naval_hit_chance = 0.02
+				naval_speed_factor = 0.02
+			}
+			on_activate = {
+				if = {
+					limit = {
+						NOT = {
+							has_global_flag = PRU_caudillismo_mechanic_removed_flag
+						}
+					}
+					set_variable = { PRU_army_loyalty_status = 0 }
+					set_variable = { PRU_navy_loyalty_status = 1 }
+					PRU_partidos_update_update_effect = yes
+				}
+			}
+		}
+	}
+}

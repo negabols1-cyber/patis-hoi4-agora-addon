@@ -1,0 +1,74 @@
+###########################
+# French Events
+###########################
+
+add_namespace = maginotevent
+
+# CZE ask for help with their fortifications
+country_event = {
+	id = maginotevent.1
+	title = maginotevent.1.t
+	desc = maginotevent.1.d
+	picture = GFX_report_event_bunker_01
+
+	is_triggered_only = yes
+
+	option = { # Agree
+		name = maginotevent.1.a
+		ai_chance = { base = 80 }
+
+		CZE = {
+			add_ideas = { cze_maginot_yes }
+			country_event = maginotevent.2
+
+			add_opinion_modifier = {
+				target = CZE
+				modifier =  medium_increase
+			}
+		}
+	}
+	option = { # Refuse
+		name = maginotevent.1.b
+		ai_chance = { base = 30 }
+
+		CZE = {
+			add_ideas = { cze_maginot_no }
+			country_event = maginotevent.3
+
+			add_opinion_modifier = {
+				target = CZE
+				modifier =  medium_decrease
+			}
+		}
+
+	}
+}
+
+
+# France agreed
+country_event = {
+	id = maginotevent.2
+	title = maginotevent.2.t
+	desc = maginotevent.2.d
+	picture = GFX_report_event_bunker_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = maginotevent.2.a
+	}
+}
+
+# France Refused
+country_event = {
+	id = maginotevent.3
+	title = maginotevent.3.t
+	desc = maginotevent.3.d
+	picture = GFX_report_event_bunker_01
+
+	is_triggered_only = yes
+
+	option = {
+		name = maginotevent.3.a
+	}
+}

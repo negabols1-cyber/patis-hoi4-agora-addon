@@ -1,0 +1,5745 @@
+ECU_liberal_conservative_conflict = {
+	debug_ECU_lower_conservative_opinion = {
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			ECU_worsen_conservative_opinion = yes
+		}
+	}
+	debug_ECU_lower_liberal_opinion = {
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			ECU_worsen_liberal_opinion = yes
+		}
+	}
+
+	debug_ECU_improve_conservative_opinion = {
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			ECU_improve_conservative_opinion = yes
+		}
+	}
+	debug_ECU_improve_liberal_opinion = {
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			ECU_improve_liberal_opinion = yes
+		}
+	}
+
+	ECU_quell_the_conservatives = {
+		icon = {
+			key = GFX_ECU_conservative_icon_0
+			trigger = {
+				check_variable = {
+					ECU_conservative_quelled_var = 0
+				}
+			}
+		}
+		icon = {
+			key = GFX_ECU_conservative_icon_1
+			trigger = {
+				check_variable = {
+					ECU_conservative_quelled_var = 1
+				}
+			}
+		}
+		icon = {
+			key = GFX_ECU_conservative_icon_2
+			trigger = {
+				check_variable = {
+					ECU_conservative_quelled_var = 2
+				}
+			}
+		}
+		icon = {
+			key = GFX_ECU_conservative_icon_3
+			trigger = {
+				check_variable = {
+					ECU_conservative_quelled_var = 3
+				}
+			}
+		}
+
+		cost = ECU_conservative_quell_var_cost
+
+		highlight_states = {
+		}
+
+		on_map_mode = map_only
+
+		visible = {
+			has_country_flag = ECU_liberals_and_conservatives_mad_flag
+			has_idea = ECU_aftermath_of_4_day_civil_war_1
+		}
+
+		available = {
+			OR = {
+				has_completed_focus = ECU_quell_the_parties
+				has_completed_focus = ECU_crush_the_bipartisanship_conflict
+			}
+			check_variable = {
+				ECU_conservative_quelled_var < 3
+			}
+		}
+
+		days_remove = 25
+
+		ai_will_do = {
+			base = 275
+		}
+
+		modifier = {
+			political_power_cost = 0.1
+		}
+
+		complete_effect = {
+			add_to_variable = {
+				ECU_conservative_quelled_var = 1
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						ECU_conservative_quelled_var = 3
+					}
+					check_variable = {
+						ECU_liberal_quelled_var = 3
+					}
+				}
+				remove_ideas = ECU_aftermath_of_4_day_civil_war_1
+				hidden_effect = {
+					clear_variable = ECU_conservative_quelled_var
+					clear_variable = ECU_liberal_quelled_var
+				}
+			}
+			if = {
+				limit = {
+					has_idea = ECU_conservative_agitation_2
+				}
+				swap_ideas = {
+					remove_idea = ECU_conservative_agitation_2
+					add_idea = ECU_conservative_agitation_1
+				}
+			}
+			else_if = {
+				limit = { has_idea = ECU_conservative_agitation_1 }
+				remove_ideas = ECU_conservative_agitation_1
+			}
+			else = {
+				add_political_power = 20
+			}
+			custom_effect_tooltip = EUYL_decision_cost_increase_15_tt
+			add_to_variable = {
+				ECU_conservative_quell_var_cost = 15
+			}
+		}
+	}
+
+	ECU_quell_the_liberals = {
+		icon = {
+			key = GFX_ECU_liberal_icon_0
+			trigger = {
+				check_variable = {
+					ECU_liberal_quelled_var = 0
+				}
+			}
+		}
+		icon = {
+			key = GFX_ECU_liberal_icon_1
+			trigger = {
+				check_variable = {
+					ECU_liberal_quelled_var = 1
+				}
+			}
+		}
+		icon = {
+			key = GFX_ECU_liberal_icon_2
+			trigger = {
+				check_variable = {
+					ECU_liberal_quelled_var = 2
+				}
+			}
+		}
+		icon = {
+			key = GFX_ECU_liberal_icon_3
+			trigger = {
+				check_variable = {
+					ECU_liberal_quelled_var = 3
+				}
+			}
+		}
+
+		cost = ECU_liberal_quell_var_cost
+
+		highlight_states = {
+		}
+
+		on_map_mode = map_only
+
+		visible = {
+			has_country_flag = ECU_liberals_and_conservatives_mad_flag
+			has_idea = ECU_aftermath_of_4_day_civil_war_1
+		}
+
+		available = {
+			OR = {
+				has_completed_focus = ECU_quell_the_parties
+				has_completed_focus = ECU_crush_the_bipartisanship_conflict
+			}
+			check_variable = {
+				ECU_liberal_quelled_var < 3
+			}
+		}
+
+		days_remove = 25
+
+		modifier = {
+			political_power_cost = 0.1
+		}
+
+		ai_will_do = {
+			base = 275
+		}
+
+		complete_effect = {
+			add_to_variable = {
+				ECU_liberal_quelled_var = 1
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						ECU_conservative_quelled_var = 3
+					}
+					check_variable = {
+						ECU_liberal_quelled_var = 3
+					}
+				}
+				remove_ideas = ECU_aftermath_of_4_day_civil_war_1
+				hidden_effect = {
+					clear_variable = ECU_conservative_quelled_var
+					clear_variable = ECU_liberal_quelled_var
+				}
+			}
+			if = {
+				limit = {
+					has_idea = ECU_liberal_agitation_2
+				}
+				swap_ideas = {
+					remove_idea = ECU_liberal_agitation_2
+					add_idea = ECU_liberal_agitation_1
+				}
+			}
+			else_if = {
+				limit = { has_idea = ECU_liberal_agitation_1 }
+				remove_ideas = ECU_liberal_agitation_1
+			}
+			else = {
+				add_political_power = 20
+			}
+			custom_effect_tooltip = EUYL_decision_cost_increase_15_tt
+			add_to_variable = {
+				ECU_liberal_quell_var_cost = 15
+			}
+		}
+	}
+
+	ECU_slander_the_government = {
+		icon = generic_political_address
+
+		visible = {
+			has_completed_focus = ECU_slander_the_current_government
+		}
+
+		available = {
+			has_civil_war = no
+			custom_trigger_tooltip = {
+				tooltip = ECU_a_conservative_isnt_in_charge_tt
+				any_character = {
+					is_country_leader = yes
+					NOT = { has_character_flag = ECU_conservative }
+				}
+			}
+		}
+
+		cost = 20
+
+		days_remove = 70
+
+		ai_will_do = {
+			base = 200
+		}
+
+		modifier = {
+			stability_weekly = -0.01
+		}
+
+		cancel_trigger = {
+			has_civil_war = yes
+		}
+	}
+
+	ECU_gallos_looming_coup = {
+		priority = 250
+		icon = generic_army_support
+
+		activation = {
+			always = no
+		}
+
+		days_mission_timeout = 635
+
+		is_good = no
+
+		available = {
+			has_completed_focus = ECU_imprison_gallo
+		}
+
+		cancel_trigger = {
+			NOT = {
+				has_character = ECU_alberto_enriquez_gallo
+			}
+		}
+
+		complete_effect = {
+			add_stability = 0.02
+			ECU_worsen_liberal_opinion = yes
+		}
+
+		timeout_effect = {
+			country_event = ecu.1
+		}
+	}
+
+	ECU_impending_conservative_insurrection = {
+		priority = 200
+		icon = GFX_ECU_conservative_insurrection_icon
+
+		activation = {
+			OR = {
+				has_idea = ECU_conservative_agitation_3
+				check_variable = {
+					ECU_conservative_opinion = -3
+				}
+				AND = {
+					check_variable = {
+						ECU_conservative_opinion < 0
+					}
+					check_variable = {
+						ECU_liberal_opinion = 3
+					}
+				}
+			}
+			NOT = {
+				OR = {
+					has_government = communism
+					has_government = fascism
+				}
+			}
+			NOT = {
+				is_ai = yes
+				any_other_country = {
+					is_ai = no # a player is controlling another country
+				}
+			}
+		}
+
+		available = {
+			NOT = {
+				has_idea = ECU_conservative_agitation_3
+			}
+			custom_trigger_tooltip = {
+				tooltip = ECU_not_actively_antagonizing_conservatives_tt
+				check_variable = {
+					ECU_conservative_opinion > -3
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						ECU_liberal_opinion = 3
+					}
+				}
+				custom_trigger_tooltip = {
+					tooltip = ECU_conservatives_arent_hostile_tt
+					check_variable = {
+						ECU_conservative_opinion > -1
+					}
+				}
+			}
+		}
+
+		is_good = no
+
+		days_mission_timeout = 120
+
+		cancel_trigger = {
+			has_civil_war = yes
+		}
+
+		complete_effect = {
+			add_stability = 0.01
+		}
+
+		timeout_effect = {
+			ECU_start_conservative_civil_war_against_player = yes
+		}
+	}
+
+	ECU_impending_liberal_insurrection = {
+		priority = 200
+		icon = GFX_ECU_liberal_insurrection_icon
+
+		activation = {
+			OR = {
+				has_idea = ECU_liberal_agitation_3
+				check_variable = {
+					ECU_liberal_opinion = -3
+				}
+			}
+			NOT = {
+				OR = {
+					has_government = communism
+					has_government = fascism
+					has_completed_focus = ECU_the_elections_that_shouldve_been ## hardcoded civil war
+				}
+			}
+		}
+
+		available = {
+			NOT = {
+				has_idea = ECU_liberal_agitation_3
+			}
+			custom_trigger_tooltip = {
+				tooltip = ECU_not_actively_antagonizing_liberals_tt
+				check_variable = {
+					ECU_liberal_opinion > -3
+				}
+			}
+		}
+
+		is_good = no
+
+		days_mission_timeout = 120
+
+		cancel_trigger = {
+			has_civil_war = yes
+		}
+
+		complete_effect = {
+			add_stability = 0.01
+		}
+
+		timeout_effect = {
+			ECU_start_liberal_civil_war_against_player = yes
+		}
+	}
+
+	ECU_appease_the_conservatives = {
+		icon = generic_political_address
+
+		cost = 50
+
+		ai_will_do = {
+			base = 375
+			modifier = {
+				factor = 500
+				has_active_mission = ECU_impending_conservative_insurrection
+			}
+		}
+
+		visible = {
+			ECU_has_active_conservative_agitation = yes
+			NOT = {
+				OR = {
+					has_government = communism
+					has_government = fascism
+				}
+			}
+		}
+
+		complete_effect = {
+			ECU_remove_conservative_agitation = yes
+			ECU_improve_conservative_opinion = yes
+		}
+	}
+
+	ECU_appease_the_liberals = {
+		icon = generic_political_address
+
+		cost = 50
+
+		ai_will_do = {
+			base = 375
+			modifier = {
+				factor = 500
+				has_active_mission = ECU_impending_liberal_insurrection
+			}
+		}
+
+		visible = {
+			ECU_has_active_liberal_agitation = yes
+			NOT = {
+				OR = {
+					has_government = communism
+					has_government = fascism
+				}
+			}
+		}
+
+		complete_effect = {
+			ECU_remove_liberal_agitation = yes
+			ECU_improve_liberal_opinion = yes
+		}
+	}
+
+	ECU_cooperate_with_the_liberals = {
+		icon = hol_exchange_intelligence_data
+
+		cost = ECU_cooperate_liberal_cost
+
+		visible = { ## will eventually add more conditions here
+			has_civil_war = no
+			NOT = {
+				OR = {
+					has_government = communism
+					has_government = fascism
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 4
+			modifier = {
+				factor = 20
+				has_completed_focus = ECU_support_gallo
+			}
+			modifier = {
+				factor = 500
+				has_active_mission = ECU_impending_liberal_insurrection
+			}
+			modifier = {
+				factor = 5
+				check_variable = {
+					ECU_liberal_opinion < 3
+				}
+			}
+			modifier = {
+				factor = 20
+				has_completed_focus = ECU_stabilize_our_politics
+			}
+			modifier = {
+				factor = 3
+				has_completed_focus = ECU_depoliticize_the_navy
+			}
+			modifier = {
+				factor = 0
+				OR = {
+					has_completed_focus = ECU_the_elections_that_shouldve_been
+					AND = {
+						check_variable = {
+							ECU_conservative_opinion < 0
+						}
+						check_variable = {
+							ECU_liberal_opinion > 1
+						}
+					}
+				}
+				NOT = {
+					OR = {
+						has_active_mission = ECU_impending_liberal_insurrection
+						has_completed_focus = ECU_stabilize_our_politics
+					}
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ECU_NOT_has_active_liberal_agitation_tt
+				NOT = {
+					OR = {
+						has_idea = ECU_liberal_agitation_1
+						has_idea = ECU_liberal_agitation_2
+						has_idea = ECU_liberal_agitation_3
+					}
+				}
+			}
+			NOT = {
+				has_country_flag = ECU_meddling_in_politics_flag
+			}
+			hidden_trigger = {
+				check_variable = {
+					ECU_liberal_opinion < 3
+				}
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = ECU_meddling_in_politics_flag
+		}
+
+		days_remove = 30
+
+		modifier = {
+			political_power_cost = 0.05
+		}
+
+		remove_effect = {
+			clr_country_flag = ECU_meddling_in_politics_flag
+			ECU_improve_liberal_opinion = yes
+		}
+	}
+
+	ECU_cooperate_with_the_conservatives = {
+		icon = hol_exchange_intelligence_data
+
+		cost = ECU_cooperate_conservative_cost
+
+		visible = { ## will eventually add more conditions here
+			has_civil_war = no
+			NOT = {
+				OR = {
+					has_government = fascism
+					has_government = communism
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 4
+			modifier = {
+				factor = 40
+				has_completed_focus = ECU_the_elections_that_shouldve_been
+			}
+			modifier = {
+				factor = 500
+				has_active_mission = ECU_impending_conservative_insurrection
+			}
+			modifier = {
+				factor = 5
+				check_variable = {
+					ECU_conservative_opinion < 3
+				}
+			}
+			modifier = {
+				factor = 100
+				has_game_rule = {
+					rule = ECU_ai_behavior
+					option = ECU_CONSERVATISM
+				}
+			}
+			modifier = {
+				factor = 20
+				has_completed_focus = ECU_stabilize_our_politics
+			}
+			modifier = {
+				factor = 0
+				check_variable = {
+					ECU_liberal_opinion < -1
+				}
+				has_idea = ECU_pro_conservative_navy
+			}
+			modifier = {
+				factor = 0
+				has_completed_focus = ECU_support_gallo
+				NOT = {
+					OR = {
+						has_active_mission = ECU_impending_conservative_insurrection
+						has_completed_focus = ECU_stabilize_our_politics
+					}
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ECU_NOT_has_active_conservative_agitation_tt
+				NOT = {
+					OR = {
+						has_idea = ECU_conservative_agitation_1
+						has_idea = ECU_conservative_agitation_2
+						has_idea = ECU_conservative_agitation_3
+					}
+				}
+			}
+			NOT = {
+				has_country_flag = ECU_meddling_in_politics_flag
+			}
+			hidden_trigger = {
+				check_variable = {
+					ECU_conservative_opinion < 3
+				}
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = ECU_meddling_in_politics_flag
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ECU_cooperated_with_conservatives_flag
+					}
+				}
+				set_country_flag = ECU_cooperated_with_conservatives_flag
+			}
+		}
+
+		days_remove = 30
+
+		modifier = {
+			political_power_cost = 0.05
+		}
+
+		remove_effect = {
+			clr_country_flag = ECU_meddling_in_politics_flag
+			ECU_improve_conservative_opinion = yes
+		}
+	}
+
+	ECU_stabilize_the_nation = {
+		priority = 50
+		visible = {
+			has_stability < 0.4
+			has_country_flag = ECU_assembly_recently_deposed_leader_flag
+		}
+
+		available = {
+			has_country_flag = ECU_assembly_recently_deposed_leader_flag
+		}
+
+		cost = 20
+
+		ai_will_do = {
+			base = 275
+		}
+
+		days_remove = 40
+
+		remove_effect = {
+			add_stability = 0.05
+		}
+	}
+
+	ECU_summon_up_liberal_support_in_FROM = {
+		icon = eng_propaganda_campaigns
+
+		visible = { ## also add the completion of the convince the liberals focus
+			has_active_mission = ECU_gallos_looming_coup
+			has_completed_focus = ECU_convince_our_liberal_supporters
+		}
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		on_map_mode = map_only
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				is_island_state = no
+			}
+		}
+
+		ai_will_do = {
+			base = 275
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		cost = 20
+
+		days_remove = 40
+
+		fire_only_once = yes
+
+		modifier = {
+			political_power_factor = -0.15
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = ECU_depending_on_current_liberal_support_following_occur_tt
+			if = {
+				limit = {
+					check_variable = {
+						ECU_liberal_opinion > 2
+					}
+				}
+				add_days_mission_timeout = {
+					mission = ECU_gallos_looming_coup
+					days = -50
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.03
+				}
+				add_stability = 0.02
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						ECU_liberal_opinion > 1
+					}
+				}
+				add_days_mission_timeout = {
+					mission = ECU_gallos_looming_coup
+					days = -35
+				}
+				add_popularity = {
+					ideology = democratic
+					popularity = 0.02
+				}
+				add_stability = 0.01
+			}
+			else = {
+				add_days_mission_timeout = {
+					mission = ECU_gallos_looming_coup
+					days = -20
+				}
+			}
+		}
+	}
+
+	ECU_radicalize_the_moderates = {
+		icon = generic_political_address
+
+		visible = {
+			has_completed_focus = ECU_leftist_agitation
+			NOT = {
+				has_government = communism
+			}
+		}
+
+		available = {
+			has_civil_war = no
+		}
+
+		ai_will_do = {
+			base = 275
+		}
+
+		cost = 25
+
+		days_remove = 50
+
+		modifier = {
+			communism_drift = 0.1
+		}
+
+		remove_effect = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.05
+			}
+		}
+	}
+}
+
+ECU_economic_reignition_cat = {
+	ECU_inflationary_crisis_takes_toll_on_economy = {
+		icon = generic_scorched_earth
+
+		activation = {
+			has_idea = ECU_active_inflationary_crisis
+		}
+
+		days_mission_timeout = 365
+
+		is_good = no
+
+		available = {
+			NOT = {
+				has_idea = ECU_active_inflationary_crisis
+			}
+		}
+
+		timeout_effect = {
+			add_stability = -0.02
+			if = {
+				limit = {
+					num_of_civilian_factories > 2
+				}
+				random = {
+					chance = 25
+					random_owned_controlled_state = {
+						limit = {
+							industrial_complex > 0
+						}
+						remove_building = {
+							type = industrial_complex
+							level = 1
+						}
+					}
+				}
+			}
+		}
+	}
+
+	ECU_promote_development_in_FROM = {
+		icon = generic_construction
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				has_dynamic_modifier = {
+					modifier = ECU_rural_state
+				}
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		visible = {
+			has_completed_focus = ECU_nationwide_development
+			FROM = {
+				is_controlled_by = ROOT
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = ECU_recently_promoted_development_flag
+			}
+		}
+
+		cost = 25
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 190
+			modifier = {
+				factor = 3
+				NOT = {
+					any_core_state = {
+						NOT = {
+							has_dynamic_modifier = {
+								modifier = ECU_rural_state
+							}
+						}
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = {
+				flag = ECU_recently_promoted_development_flag
+				days = 90
+				value = 1
+			}
+			FROM = {
+				remove_dynamic_modifier = {
+					modifier = ECU_rural_state
+				}
+			}
+		}
+	}
+
+	ECU_push_forth_an_industrial_initiative_in_FROM = {
+		icon = generic_factory
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				is_owned_by = ROOT
+				is_core_of = ROOT
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		visible = {
+			has_completed_focus = ECU_civilian_expansion
+		}
+
+		available = {
+			has_civil_war = no
+		}
+
+		ai_will_do = {
+			base = 90
+		}
+
+		cost = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			FROM = {
+				add_dynamic_modifier = {
+					modifier = VEN_industrial_initiative
+					days = 900
+				}
+			}
+		}
+	}
+}
+
+EUYL_peru_ecuador_rising_tensions = {
+	EUYL_conflict_escalation = {
+		priority = 100
+		icon = generic_ignite_civil_war
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			OR = {
+				has_war_with = ECU
+				has_war_with = PRU
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				ECU = { exists = no }
+				PRU = {
+					OR = {
+						exists = no
+						has_country_flag = is_PBC
+					}
+				}
+				check_variable = {
+					EUYL_peru_ecuador_threat_level = 5
+				}
+			}
+		}
+
+		days_mission_timeout = 480
+
+		complete_effect = { ## adds the dynamic modifiers n stuff lol | will be event
+			set_global_flag = EUYL_peru_ecuador_war_triggered_flag
+		}
+
+		timeout_effect = {
+			custom_effect_tooltip = EUYL_tension_will_increase_tt
+			add_to_variable = {
+				EUYL_peru_ecuador_threat_level = 1
+			}
+			clamp_variable = {
+				var = EUYL_peru_ecuador_threat_level
+				min = 0
+				max = 5
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+							EUYL_peru_ecuador_threat_level < 5
+						}
+					}
+					activate_mission = EUYL_conflict_escalation
+				}
+				#if = {
+					#	limit = {
+						#		original_tag = PRU
+						#		check_variable = {
+							#			EUYL_peru_ecuador_threat_level = 5
+							#		}
+						#	}
+					#	country_event = peruecuador.12
+					#}
+				## Now a focus lol
+			}
+		}
+	}
+
+	EUYL_days_until_peace_talks_commence = {
+		priority = 200
+		icon = eng_puppet_usa
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			always = no
+		}
+
+		cancel_trigger = {
+			OR = {
+				PRU = {
+					NOT = {
+						has_war_with = ECU
+					}
+				}
+				exists = no
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 80
+
+		timeout_effect = {
+			country_event = {
+				id = peruecuador.4
+				hours = 2
+				random_hours = 24
+			}
+		}
+	}
+
+	DEBUG_increment_border_tension_level = {
+		visible = {
+			is_debug = yes
+		}
+
+		complete_effect = {
+			add_to_variable = {
+				EUYL_peru_ecuador_threat_level = 1
+			}
+			clamp_variable = {
+				var = EUYL_peru_ecuador_threat_level
+				min = 0
+				max = 5
+			}
+			random_other_country = {
+				limit = {
+					OR = {
+						original_tag = ECU
+						original_tag = PRU
+					}
+				}
+				add_to_variable = {
+					EUYL_peru_ecuador_threat_level = 1
+				}
+				clamp_variable = {
+					var = EUYL_peru_ecuador_threat_level
+					min = 0
+					max = 5
+				}
+			}
+		}
+	}
+
+	PRU_instigate_a_small_skirmish_in_FROM = {
+		icon = generic_military
+
+		fire_only_once = yes
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		visible = {
+			## TODO: INCLUDE PERU'S FOCUS HERE | DONE
+			has_completed_focus = PRU_test_the_ecuadorians
+			NOT = {
+				OR = {
+					has_global_flag = EUYL_peru_ecuador_war_triggered_flag
+					has_global_flag = EUYL_peru_ecuador_war_concluded_flag
+				}
+			}
+		}
+
+		available = {
+			NOT = {
+				has_war_with = ECU
+			}
+			command_power > 14
+			custom_trigger_tooltip = {
+				tooltip = PRU_at_least_one_division_in_neighbor_state_tt
+				FROM = { ## Ecuadorian state
+					any_neighbor_state = { ## Checking a peruvian state
+						is_controlled_by = PRU
+						ROOT = {
+							divisions_in_state = {
+								size > 0
+								state = PREV
+							}
+						}
+					}
+				}
+			}
+			ECU = {
+				divisions_in_state = {
+					size > 0
+					state = FROM
+				}
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = PRU_preparing_skirmish_flag
+				}
+			}
+		}
+
+		custom_cost_text = CHL_cost_15_cp
+		custom_cost_trigger = {
+			command_power > 14
+		}
+
+		state_target = yes
+
+		targets = {
+		}
+
+		ai_will_do = {
+			base = 130
+			modifier = {
+				factor = 3
+				strength_ratio = {
+					tag = ECU
+					ratio > 1
+				}
+			}
+		}
+
+		visible = {
+			always = no
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		cancel_trigger = {
+			has_war_with = ECU
+		}
+
+		cancel_effect = {
+			clr_country_flag = PRU_preparing_skirmish_flag
+			FROM = {
+				clr_state_flag = ECU_skirmish_happening_here_flag
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -15
+				ECU = {
+					activate_mission = ECU_PRU_planning_small_skirmish_in_FROM
+				}
+			}
+			set_country_flag = PRU_preparing_skirmish_flag
+			FROM = {
+				set_state_flag = ECU_skirmish_happening_here_flag
+			}
+		}
+
+		days_remove = 25
+
+		modifier = {
+			weekly_manpower = -150
+		}
+
+		remove_effect = {
+			clr_country_flag = PRU_preparing_skirmish_flag
+			add_days_mission_timeout = {
+				mission = EUYL_conflict_escalation
+				days = -95
+			}
+			hidden_effect = {
+				ECU = {
+					add_days_mission_timeout = {
+						mission = EUYL_conflict_escalation
+						days = -95
+					}
+				}
+				FROM = {
+					clr_state_flag = ECU_skirmish_happening_here_flag
+				}
+			}
+			random_list = {
+				50 = {
+					modifier = {
+						factor = 2
+						strength_ratio = {
+							tag = ECU
+							ratio > 1
+						}
+					}
+					modifier = {
+						factor = 0.3
+						FROM = { ## Ecuador added more divisions to prevent it
+							owner = {
+								divisions_in_state = {
+									size > 2
+									state = PREV
+								}
+							}
+						}
+					}
+					country_event = peruecuador.13
+					if = {
+						limit = {
+							NOT = {
+								has_country_flag = PRU_succesful_skirmish_flag
+							}
+						}
+						set_country_flag = PRU_succesful_skirmish_flag
+					}
+					ECU = { country_event = peruecuador.14 }
+				}
+				50 = {
+					modifier = {
+						factor = 0.5
+						FROM = { ## Ecuadorian state
+							any_neighbor_state = { ## Checking a peruvian state
+								is_controlled_by = PRU
+								ROOT = {
+									divisions_in_state = {
+										size > 3
+										state = PREV
+									}
+								}
+							}
+						}
+					}
+					country_event = peruecuador.14
+					ECU = { country_event = peruecuador.13 }
+				}
+			}
+		}
+	}
+
+	ECU_PRU_planning_small_skirmish_in_FROM = {
+		priority = 550
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		highlight_states = {
+			highlight_states_trigger = {
+				has_state_flag = ECU_skirmish_happening_here_flag
+			}
+		}
+
+		days_mission_timeout = 25
+
+		is_good = no
+
+		available = {
+			always = no
+		}
+
+		cancel_trigger = {
+			PRU = {
+				OR = {
+					exists = no
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		timeout_effect = {
+			effect_tooltip = {
+				random_list = {
+					50 = {
+						modifier = {
+							factor = 2
+							strength_ratio = {
+								tag = PRU
+								ratio > 1
+							}
+						}
+						country_event = peruecuador.13
+						PRU = { country_event = peruecuador.14 }
+					}
+					50 = {
+						country_event = peruecuador.14
+						PRU = { country_event = peruecuador.13 }
+					}
+				}
+			}
+		}
+	}
+
+	PRU_start_a_border_war_in_western_pastaza = {
+		icon = border_war
+
+		allowed = {
+			original_tag = PRU
+		}
+
+		fire_only_once = yes
+
+		highlight_states = {
+		}
+
+		visible = {
+			has_completed_focus = PRU_test_the_ecuadorians
+			check_variable = {
+				EUYL_peru_ecuador_threat_level > 1
+			}
+			# NOT = {
+				# 	1036 = {
+					# 		is_controlled_by = ROOT
+					# 	}
+				# }
+			# 1036 = {
+				# 	is_controlled_by = ECU
+				# }
+			always = no
+			NOT = {
+				OR = {
+					has_global_flag = EUYL_peru_ecuador_war_triggered_flag
+					has_global_flag = EUYL_peru_ecuador_war_concluded_flag
+				}
+			}
+		}
+
+		available = {
+			has_country_flag = PRU_succesful_skirmish_flag
+			NOT = {
+				has_war_with = ECU
+			}
+			490 = {
+				is_controlled_by = ROOT
+				is_demilitarized_zone = no
+			}
+			# divisions_in_border_state = {
+				#     size > 0
+				#     state = 490
+				#     border_state = 1036
+				# }
+			# ECU = {
+				# 	divisions_in_border_state = {
+					# 		size > 0
+					# 		state = 1036
+					# 		border_state = 490
+					# 	}
+				# }
+			has_border_war = no
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		custom_cost_text = decision_cost_CP_25_pp_25
+
+		ai_will_do = {
+			base = 175
+			modifier = {
+				factor = 2
+				strength_ratio = {
+					tag = ECU
+					ratio > 1
+				}
+			}
+			modifier = {
+				factor = 0
+				is_historical_focus_on = yes
+			}
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			EUYL_step_up_tension = yes
+			remove_ideas = PRU_1936_status_quo
+			ECU = {
+				remove_ideas = ECU_1936_status_quo
+			}
+			# start_border_war = {
+				# 	change_state_after_war = no
+				# 	attacker = {
+					# 		state = 490
+					# 		num_provinces = 1
+					# 		on_win = peruecuador.140
+					# 		on_lose = peruecuador.14
+					# 		#on_cancel =
+					# 	}
+
+				# 	defender = {
+					# 		state = 491
+					# 		num_provinces = 1
+					# 		on_win = peruecuador.140
+					# 		on_lose = peruecuador.14
+					# 		#on_cancel =
+					# 	}
+				# }
+			custom_effect_tooltip = PRU_if_you_win_tt
+			effect_tooltip = {
+				add_war_support = 0.05
+				custom_effect_tooltip = EUYL_modify_peru_ecuador_war_idea_by_tt
+				add_to_variable = {
+					EUYL_peru_ecuador_attack_bonus = 0.07
+					tooltip = army_attack_factor_tt
+				}
+				add_to_variable = {
+					EUYL_peru_ecuador_defense_bonus = 0.07
+					tooltip = army_defence_factor_tt
+				}
+			}
+			custom_effect_tooltip = CHL_skip_one_line_tt
+			custom_effect_tooltip = PRU_if_you_lose_tt
+			effect_tooltip = {
+				custom_effect_tooltip = EUYL_modify_peru_ecuador_war_idea_by_tt
+				add_to_variable = {
+					EUYL_peru_ecuador_attack_bonus = -0.02
+					tooltip = army_attack_factor_tt
+				}
+				add_to_variable = {
+					EUYL_peru_ecuador_defense_bonus = -0.02
+					tooltip = army_defence_factor_tt
+				}
+			}
+			hidden_effect = {
+				ECU = {
+					country_event = peruecuador.21
+				}
+			}
+		}
+	}
+
+	ECU_launch_a_reconnaissance_mission_in_FROM = {
+		icon = generic_air
+
+		fire_only_once = yes
+
+		allowed = {
+			original_tag = ECU
+		}
+
+		visible = {
+			has_completed_focus = ECU_perform_recon_flights
+			NOT = {
+				OR = {
+					has_global_flag = EUYL_peru_ecuador_war_triggered_flag
+					has_global_flag = EUYL_peru_ecuador_war_concluded_flag
+				}
+			}
+		}
+
+		available = {
+			NOT = {
+				has_war_with = PRU
+			}
+			command_power > 9
+			has_deployed_air_force_size = {
+				size > 9
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ECU_performing_recon_flight_flag
+				}
+			}
+		}
+
+		custom_cost_text = CHL_cost_10_cp
+		custom_cost_trigger = {
+			command_power > 9
+		}
+
+		days_remove = 20
+
+		state_target = yes
+
+		targets = {
+			490
+		}
+
+		ai_will_do = {
+			base = 210
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -10
+			}
+			set_country_flag = ECU_performing_recon_flight_flag
+		}
+
+		cancel_trigger = {
+			has_war_with = PRU
+		}
+
+		cancel_effect = {
+			clr_country_flag = ECU_performing_recon_flight_flag
+		}
+
+		remove_effect = {
+			random_list = {
+				15 = {
+					custom_effect_tooltip = EUYL_modify_peru_ecuador_war_idea_by_tt
+					add_to_variable = {
+						EUYL_peru_ecuador_attack_bonus = 0.05
+						tooltip = army_attack_factor_tt
+					}
+					add_to_variable = {
+						EUYL_peru_ecuador_defense_bonus = 0.05
+						tooltip = army_defence_factor_tt
+					}
+				}
+				35 = {
+					custom_effect_tooltip = EUYL_modify_peru_ecuador_war_idea_by_tt
+					add_to_variable = {
+						EUYL_peru_ecuador_attack_bonus = 0.03
+						tooltip = army_attack_factor_tt
+					}
+					add_to_variable = {
+						EUYL_peru_ecuador_defense_bonus = 0.03
+						tooltip = army_defence_factor_tt
+					}
+				}
+				50 = {
+					custom_effect_tooltip = EUYL_modify_peru_ecuador_war_idea_by_tt
+					add_to_variable = {
+						EUYL_peru_ecuador_attack_bonus = 0.02
+						tooltip = army_attack_factor_tt
+					}
+					add_to_variable = {
+						EUYL_peru_ecuador_defense_bonus = 0.02
+						tooltip = army_defence_factor_tt
+					}
+				}
+				25 = {
+
+				}
+			}
+			clr_country_flag = ECU_performing_recon_flight_flag
+			add_days_mission_timeout = {
+				mission = EUYL_conflict_escalation
+				days = -30
+			}
+			hidden_effect = {
+				PRU = {
+					add_days_mission_timeout = {
+						mission = EUYL_conflict_escalation
+						days = -30
+					}
+				}
+			}
+		}
+	}
+
+	ECU_prepare_defensive_fortifications_in_FROM = {
+		icon = generic_fortification
+
+		fire_only_once = yes
+
+		allowed = {
+			original_tag = ECU
+		}
+
+		visible = {
+			has_completed_focus = ECU_commence_defensive_preperations
+			NOT = {
+				OR = {
+					has_global_flag = EUYL_peru_ecuador_war_triggered_flag
+					has_global_flag = EUYL_peru_ecuador_war_concluded_flag
+				}
+			}
+		}
+
+		available = {
+			NOT = {
+				has_war_with = PRU
+			}
+		}
+
+		cost = 15
+
+		state_target = yes
+
+		targets = {
+			490
+		}
+
+		ai_will_do = {
+			base = 155
+			modifier = {
+				factor = 2
+				has_completed_focus = ECU_adopt_a_defensive_strategy_plan
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		cancel_trigger = {
+			has_war_with = PRU
+		}
+
+		days_remove = 30
+
+		modifier = {
+			consumer_goods_factor = 0.5
+			political_power_factor = -0.05
+		}
+
+		remove_effect = {
+			FROM = {
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_border = yes
+					}
+				}
+			}
+			add_days_mission_timeout = {
+				mission = EUYL_conflict_escalation
+				days = -20
+			}
+			hidden_effect = {
+				PRU = {
+					add_days_mission_timeout = {
+						mission = EUYL_conflict_escalation
+						days = -20
+					}
+				}
+			}
+		}
+	}
+
+	EUYL_formalize_a_militia_regiment_in_FROM = {
+		icon = generic_army_support
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				any_neighbor_state = {
+					owner = {
+						has_war_with = ROOT
+					}
+				}
+			}
+		}
+
+		visible = {
+			OR = {
+				has_war_with = PRU
+				has_war_with = ECU
+			}
+			if = {
+				limit = {
+					original_tag = ECU
+				}
+				has_completed_focus = ECU_formalize_militia_regiments
+			}
+			if = {
+				limit = {
+					original_tag = PRU
+				}
+				has_completed_focus = PRU_ramp_up_mobilization
+			}
+			FROM = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		on_map_mode = map_only
+
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		custom_cost_text = decision_cost_CP_25_pp_25
+
+		ai_will_do = {
+			base = 175
+			modifier = {
+				factor = 2
+				surrender_progress > 0.05
+			}
+		}
+
+		cancel_trigger = {
+			has_war = no
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_template = "Brigada"
+					}
+				}
+				division_template = {
+					name = "Brigada"
+					division_names_group = SPAN_INF_02
+					template_counter = 3
+					is_locked = yes
+
+					regiments = {
+						infantry = { x = 0 y = 0 }
+						infantry = { x = 0 y = 1 }
+						infantry = { x = 0 y = 2 }
+						infantry = { x = 0 y = 3 }
+					}
+				}
+			}
+			#FROM = {
+				create_unit = {
+					division = "name = \"Brigada\" division_template = \"Brigada\" start_experience_factor = 0.04 start_equipment_factor = 1"
+					owner = ECU
+				}
+				#}
+		}
+	}
+
+	ECU_hold_western_pastaza = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			490 = {
+				NOT = {
+					is_controlled_by = ROOT
+				}
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = PRU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 35
+
+		highlight_states = {
+			highlight_states_trigger = {
+				state = 490
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = yes
+
+		complete_effect = {
+			country_event = peruecuador.11
+			#activate_mission = ECU_hold_guayaquil
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.10
+			#activate_mission = ECU_capture_pastaza
+		}
+	}
+
+	ECU_hold_guayaquil = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = PRU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 65
+
+		highlight_states = {
+		}
+
+		visible = {
+			always = no
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = yes
+
+		complete_effect = {
+			country_event = peruecuador.11
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.10
+			if = {
+				limit = {
+					always = no
+				}
+				activate_mission = ECU_recapture_western_pastaza
+			}
+			else = {
+				activate_mission = ECU_capture_piura
+			}
+		}
+	}
+
+	ECU_recapture_western_pastaza = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			490 = {
+				is_controlled_by = ROOT
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = PRU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 40
+
+		highlight_states = {
+			highlight_states_trigger = {
+				state = 490
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = no
+
+		complete_effect = {
+			country_event = peruecuador.10
+			#activate_mission = ECU_capture_pastaza
+			activate_mission = ECU_capture_trujillo_and_loreto
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.11
+		}
+	}
+
+	ECU_capture_pastaza = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			490 = {
+				is_controlled_by = ROOT
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = PRU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 55
+
+		highlight_states = {
+			highlight_states_trigger = {
+				state = 490
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = no
+
+		complete_effect = {
+			country_event = peruecuador.10
+			if = {
+				limit = {
+					always = no
+				}
+				activate_mission = ECU_capture_piura
+			}
+			else = {
+				activate_mission = ECU_capture_trujillo_and_loreto
+			}
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.11
+			if = {
+				limit = {
+					has_country_flag = EUYL_war_triggered_early_flag
+				}
+				activate_mission = ECU_hold_western_pastaza
+			}
+		}
+	}
+
+	ECU_capture_piura = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = PRU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 50
+
+		highlight_states = {
+		}
+
+		visible = {
+			always = no
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = no
+
+		complete_effect = {
+			country_event = peruecuador.10
+			activate_mission = ECU_capture_trujillo_and_loreto
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.11
+		}
+	}
+
+	ECU_capture_trujillo_and_loreto = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			491 = {
+				is_controlled_by = ROOT
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = PRU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 65
+
+		highlight_states = {
+			highlight_states_trigger = {
+				state = 491
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = no
+
+		complete_effect = {
+			country_event = peruecuador.10
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.11
+		}
+	}
+
+	PRU_hold_pastaza = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			490 = {
+				NOT = {
+					is_controlled_by = ROOT
+				}
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = ECU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 60
+
+		highlight_states = {
+			highlight_states_trigger = {
+				state = 490
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = yes
+
+		complete_effect = {
+			country_event = peruecuador.11
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.10
+			activate_mission = PRU_capture_western_pastaza
+		}
+	}
+
+	PRU_capture_western_pastaza = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			490 = {
+				is_controlled_by = ROOT
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = ECU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 40
+
+		highlight_states = {
+			highlight_states_trigger = {
+				state = 490
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = no
+
+		complete_effect = {
+			country_event = peruecuador.10
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = PRU_launch_the_guayaquil_offensive
+					}
+				}
+				activate_mission = PRU_blockade_guayaquil
+			}
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.11 ## in this event, Peru can just get the next mission via focus
+		}
+	}
+
+	PRU_blockade_guayaquil = {
+		icon = generic_naval
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				OR = {
+					ships_in_area = { area = 109 size > 3 }
+					ships_in_area = { area = 107 size > 3 }
+				}
+			}
+			else = {
+				ships_in_area = { area = 107 size > 6 }
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = ECU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 25
+
+		is_good = no
+
+		complete_effect = {
+			navy_experience = 25
+			add_command_power = 15
+			add_war_support = 0.02
+			ECU = {
+				add_war_support = -0.03
+				add_stability = -0.05
+				country_event = {
+					id = ecu.27
+					days = 2
+				}
+				add_timed_idea = {
+					idea = EUYL_blockaded
+					days = 90
+				}
+			}
+			activate_mission = PRU_capture_guayaquil
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.11
+		}
+	}
+
+	PRU_capture_guayaquil = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = ECU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		visible = {
+			always = no
+		}
+
+		days_mission_timeout = 50
+
+		highlight_states = {
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = no
+
+		complete_effect = {
+			country_event = peruecuador.10
+			if = {
+				limit = {
+					has_completed_focus = PRU_launch_the_guayaquil_offensive
+				}
+				custom_effect_tooltip = EUYL_modify_peru_ecuador_war_idea_by_tt
+				add_to_variable = {
+					EUYL_peru_ecuador_attack_bonus = 0.05
+					tooltip = army_attack_factor_tt
+				}
+				add_to_variable = {
+					EUYL_peru_ecuador_defense_bonus = 0.05
+					tooltip = army_defence_factor_tt
+				}
+			}
+			activate_mission = PRU_capture_orellana
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.11
+		}
+	}
+
+	PRU_capture_orellana = {
+		icon = generic_operation
+
+		activation = {
+			always = no
+		}
+
+		available = {
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = {
+					has_war_with = ECU
+				}
+				PRU = { exists = no }
+				ECU = { exists =  no }
+			}
+		}
+
+		days_mission_timeout = 55
+
+		highlight_states = {
+		}
+
+		visible = {
+			always = no
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		is_good = no
+
+		complete_effect = {
+			country_event = peruecuador.10
+		}
+
+		timeout_effect = {
+			country_event = peruecuador.11
+		}
+	}
+
+	ECU_import_german_weapons = {
+		icon = generic_prepare_civil_war
+
+		allowed = {
+			original_tag = ECU
+		}
+
+		target_trigger = {
+			FROM = {
+				original_tag = GER
+			}
+		}
+
+		visible = {
+			has_completed_focus = ECU_diplomatic_mission_to_germany
+			has_war_with = PRU
+		}
+
+		available = {
+			FROM = {
+				exists = yes
+				has_government = fascism
+				NOT = { has_war_with = ROOT }
+			}
+		}
+
+		ai_will_do = {
+			base = 90
+			modifier = {
+				factor = 2
+				surrender_progress > 0.05
+			}
+		}
+
+		cost = 25
+
+		days_remove = 35
+
+		fire_only_once = yes
+
+		remove_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 1079
+				producer = FROM
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = 100
+				producer = FROM
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = 75
+				producer = FROM
+			}
+		}
+	}
+
+	ECU_conscript_the_machateros = {
+		icon = generic_reorganize_irregulars
+
+		allowed = {
+			original_tag = ECU
+		}
+
+		highlight_states = {
+			highlight_states_trigger = {
+				state = 305
+			}
+		}
+
+		fire_only_once = yes
+
+		visible = {
+			has_war_with = PRU
+		}
+
+		ai_will_do = {
+			base = 315
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		custom_cost_text = ARG_mobilize_elite_15
+		custom_cost_trigger = {
+			has_army_experience > 14
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				army_experience = -15
+			}
+			division_template = {
+				name = "Macheteros"
+				division_names_group = SPAN_INF_02
+				is_locked = no
+				template_counter = 4
+				regiments = {
+					infantry = { x = 0 y = 0 }
+					infantry = { x = 1 y = 0 }
+					infantry = { x = 2 y = 0 }
+					infantry = { x = 3 y = 0 }
+					infantry = { x = 0 y = 1 }
+					infantry = { x = 1 y = 1 }
+				}
+			}
+			305 = {
+				create_unit = {
+					division = "name = \"Macheteros\" division_template = \"Macheteros\" start_experience_factor = 0.05 start_equipment_factor = 1"
+					owner = ROOT
+					count = 2
+				}
+			}
+		}
+	}
+}
+
+ECU_greater_ecuador_cat = {
+	ECU_form_greater_ecuador = {
+		icon = generic_form_nation
+		visible = {
+			OR = {
+				has_completed_focus = ECU_greater_ecuador
+				has_completed_focus = ECU_pushing_our_claims
+			}
+			NOT = {
+				OR = {
+					has_cosmetic_tag = GUOSR_UNIFIED ## will add the other possible tags here
+					has_cosmetic_tag = ECU_KINGDOM_QUITO
+					has_cosmetic_tag = ECU_UNITED_KINGDOM
+					has_cosmetic_tag = ECU_BANANA_COMPANY
+					has_cosmetic_tag = ECU_COLOMBIA_ECUADOR
+					has_cosmetic_tag = ECU_GLOBAL_ENTERPRISE_ZONE
+					has_cosmetic_tag = ECU_SPANISH_EMPIRE
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 490
+					state = 491
+					has_state_flag = ECU_starting_state
+				}
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			hidden_trigger = {
+				controls_state = 305
+			}
+			controls_state = 490
+			controls_state = 491
+		}
+
+		complete_effect = {
+			set_cosmetic_tag = ECU_GREATER
+			490 = { add_core_of = ROOT }
+			491 = { add_core_of = ROOT }
+			every_state = {
+				limit = {
+					any_neighbor_state = {
+						is_core_of = ROOT
+					}
+					NOT = { is_core_of = ROOT }
+				}
+				add_core_of = ROOT
+			}
+		}
+	}
+
+	ECU_occupy_militarily_the_province_of_FROM = {
+		icon = generic_military
+
+		state_target = yes
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					state = 490
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = ECU_greater_ecuador ## only available with this one
+			NOT = {
+				has_full_control_of_state = FROM
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			has_army_manpower = {
+				size > 119999
+			}
+			FROM = {
+				controller = {
+					is_neighbor_of = ROOT
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 150
+			modifier = {
+				factor = 3
+				FROM = {
+					controller = {
+						has_capitulated = yes
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = {
+					controller = {
+						has_war = yes
+					}
+				}
+			}
+			modifier = {
+				factor = 2
+				FROM = {
+					controller = {
+						num_of_factories < 24
+					}
+				}
+			}
+		}
+
+		cost = 25
+
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				FROM = {
+					save_event_target_as = VEN_STATE_OCCUPIED
+					controller = {
+						if = {
+							limit = {
+								exists = yes
+							}
+							country_event = {
+								id = venezuela.61
+								hours = 6
+								random_hours = 8
+							}
+						}
+					}
+				}
+			}
+			transfer_state = FROM
+			custom_effect_tooltip = VEN_controller_may_retaliate_depending_on_conditions_tt
+		}
+	}
+}
+
+ECU_the_revolution_lives_on_cat = {
+	ECU_declare_the_global_union = {
+		icon = generic_form_nation
+
+		ai_will_do = {
+			base = 750
+		}
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					is_on_continent = south_america
+					is_on_continent = north_america
+				}
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ECU_controls_every_north_and_south_american_state_tt
+				NOT = {
+					any_state = {
+						OR = {
+							is_on_continent = north_america
+							is_on_continent = south_america
+						}
+						NOT = { is_controlled_by = ROOT }
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			drop_cosmetic_tag = yes
+			set_cosmetic_tag = GUOSR_UNIFIED
+			add_stability = 0.1
+			add_war_support = 0.1
+			every_controlled_state = {
+				limit = {
+					NOT = {
+						is_core_of = ROOT
+					}
+				}
+				add_compliance = 15
+			}
+		}
+	}
+
+	ECU_strengthen_the_revolutionaries_in_FROM = {
+		icon = generic_civil_support
+
+		visible = {
+			has_completed_focus = ECU_the_revolution_lives_on
+		}
+
+		ai_will_do = {
+			base = 75
+			modifier = {
+				factor = 3
+				FROM = {
+					communism < 0.4
+				}
+			}
+		}
+
+		cost = 25
+
+		days_remove = 70
+
+		target_trigger = {
+			FROM = {
+				exists = yes
+				NOT = {
+					has_government = communism
+				}
+				capital_scope = {
+					is_on_continent = south_america
+				}
+				NOT = {
+					OR = {
+						original_tag = HON
+						original_tag = NIC
+						original_tag = COS
+						original_tag = GUA
+						original_tag = ELS
+					}
+				}
+			}
+		}
+
+		available = {
+			FROM = {
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+		}
+
+		modifier = {
+			political_power_factor = -0.15
+		}
+
+		remove_effect = {
+			FROM = {
+				if = {
+					limit = {
+						communism > 0.4
+					}
+					add_popularity = {
+						ideology = communism
+						popularity = 0.03
+					}
+				}
+				else = {
+					add_popularity = {
+						ideology = communism
+						popularity = 0.05
+					}
+				}
+			}
+		}
+	}
+
+	ECU_train_rural_bandits_from_FROM = {
+		icon = generic_military
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					has_state_category = rural
+					has_state_category = pastoral
+				}
+				state_population_k > 20
+			}
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		ai_will_do = {
+			base = 145
+		}
+
+		cost = 25
+
+		days_remove = 50
+
+		modifier = {
+			political_power_factor = -0.1
+		}
+
+		remove_effect = {
+			add_manpower = 10000
+		}
+	}
+
+	ECU_invite_FROM_to_our_faction = {
+		icon = hol_exchange_intelligence_data
+
+		target_trigger = {
+			FROM = {
+				is_in_faction = no
+				NOT = {
+					OR = {
+						has_war_with = ROOT
+						is_subject_of = ROOT
+					}
+				}
+				capital_scope = {
+					OR = {
+						is_on_continent = south_america
+						is_on_continent = north_america
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 110
+		}
+
+		visible = {
+			has_completed_focus = ECU_united_under_one_banner
+			is_faction_leader = yes
+		}
+
+		available = {
+			FROM = { communism > 0.45 }
+		}
+
+		cost = 75
+
+		fire_only_once = yes
+
+		complete_effect = {
+			FROM = {
+				country_event = {
+					id = generic.5
+					hours = 6
+				}
+			}
+		}
+	}
+
+	ECU_subjegate_FROM = {
+		priority = 50
+		icon = eng_trade_unions_demand
+
+		visible = {
+			has_completed_focus = ECU_united_under_one_banner
+			FROM = {
+				is_in_faction_with = ROOT
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				exists = yes
+				capital_scope = {
+					OR = {
+						is_on_continent = south_america
+						is_fully_controlled_by = MEX
+						is_fully_controlled_by = HAI
+						is_fully_controlled_by = CUB
+						is_fully_controlled_by = DOM
+					}
+				}
+			}
+		}
+
+		available = {
+			strength_ratio = {
+				tag = FROM
+				ratio > 1
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ECU_annexing_country
+				}
+			}
+		}
+
+		cost = 75
+
+		days_remove = 25
+
+		ai_will_do = {
+			base = 60
+			modifier = {
+				factor = 3
+				strength_ratio = {
+					tag = FROM
+					ratio > 2
+				}
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = ECU_annexing_country
+		}
+
+		cancel_trigger = {
+			FROM = {
+				OR = {
+					exists = no
+					has_war_with = ROOT
+					is_subject_of = ROOT
+				}
+			}
+		}
+
+		cancel_effect = {
+			clr_country_flag = ECU_annexing_country
+		}
+
+		remove_effect = {
+			clr_country_flag = ECU_annexing_country
+			FROM = {
+				country_event = {
+					id = venezuela.49
+					hours = 6
+					random_hours = 6
+				}
+			}
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				annex_country = {
+					target = FROM
+					transfer_troops = yes
+				}
+			}
+		}
+	}
+
+	ECU_integrate_FROM = {
+		icon = generic_nationalism
+
+		state_target = yes
+
+		target_array = owned_states
+
+		target_trigger = {
+			FROM = {
+				any_neighbor_state = {
+					is_core_of = ROOT
+				}
+				NOT = { is_core_of = ROOT }
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		on_map_mode = map_only
+
+		available = {
+			has_civil_war = no
+			FROM = {
+				compliance > 50
+				resistance < 15
+			}
+		}
+
+		visible = {
+			has_completed_focus = ECU_integration_campaigns
+		}
+
+		ai_will_do = { factor = 190 }
+
+		cost = 50
+
+		days_remove = 70
+
+		cancel_trigger = {
+			FROM = {
+				NOT = {
+					is_fully_controlled_by = ROOT
+				}
+			}
+		}
+
+		cancel_effect = {
+			add_political_power = 20
+		}
+
+		remove_effect = {
+			FROM = {
+				add_core_of = ROOT
+			}
+		}
+	}
+}
+
+ECU_national_mobilization_cat = {
+	ECU_mobilize_soldiers_in_FROM = {
+		icon = generic_military
+
+		state_target = yes
+
+		target_array = core_states
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		fire_only_once = yes
+
+		on_map_mode = map_and_decisions_view
+
+		ai_will_do = {
+			base = 115
+			modifier = {
+				factor = 2
+				has_manpower < 99999
+			}
+		}
+
+		cost = 25
+
+		days_remove = 50
+
+		modifier = {
+			political_power_factor = -0.1
+		}
+
+		remove_effect = {
+			add_manpower = 10000
+			if = {
+				limit = {
+					check_variable = {
+						ECU_national_mobilization_conscription < 0.08
+					}
+				}
+				custom_effect_tooltip = ECU_modify_national_conscription_by_tt
+				add_to_variable = {
+					ECU_national_mobilization_conscription = 0.005
+					tooltip = conscription_tt
+				}
+			}
+		}
+	}
+}
+
+ECU_reforming_the_lost_unions = {
+	ECU_reform_central_america = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 313
+					state = 314
+					state = 312
+					state = 317
+					state = 316
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			313 = { controls_or_subject_of = yes }
+			314 = { controls_or_subject_of = yes }
+			312 = { controls_or_subject_of = yes }
+			317 = { controls_or_subject_of = yes }
+			316 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_central_america_formed_tt
+			hidden_effect = {
+				HON = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = RCA_UNIFIED
+					transfer_state = 316
+					transfer_state = 317
+					transfer_state = 312
+					transfer_state = 314
+					transfer_state = 313
+					every_controlled_state = {
+						limit = {
+							controls_or_subject_of = yes
+							OR = {
+								is_core_of = GUA
+								is_core_of = ELS
+								is_core_of = NIC
+								is_core_of = COS
+							}
+							NOT = {
+								is_core_of = PREV
+							}
+						}
+						add_core_of = PREV
+					}
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Centroamerica"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_central_america.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Centroamerica"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_central_america.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Centroamerica"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_central_america.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Consejo Administrativo de Centroamerica"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_central_america.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "División de Infanteria Centroamericana"
+						division_names_group = SPAN_INF_02
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria Centroamericana\" division_template = \"División de Infanteria Centroamericana\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 4
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria Centroamericana\" division_template = \"División de Infanteria Centroamericana\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						HON = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = HON
+				}
+			}
+		}
+	}
+
+	ECU_reform_peru_bolivia = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 491
+					state = 494
+					state = 303
+					state = 492
+					state = 947
+					state = 302
+					state = 487
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			## Peru ##
+			491 = { controls_or_subject_of = yes }
+			494 = { controls_or_subject_of = yes }
+			303 = { controls_or_subject_of = yes }
+			492 = { controls_or_subject_of = yes }
+			947 = { controls_or_subject_of = yes }
+			## Bolivia ##
+			302 = { controls_or_subject_of = yes }
+			487 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_peru_bolivia_formed_tt
+			hidden_effect = {
+				PRU = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = PBC_UNIFIED
+					transfer_state = 491
+					transfer_state = 494
+					transfer_state = 303
+					transfer_state = 492
+					transfer_state = 947
+					transfer_state = 302
+					transfer_state = 487
+					every_controlled_state = {
+						limit = {
+							controls_or_subject_of = yes
+							is_core_of = BOL
+							NOT = {
+								is_core_of = PREV
+							}
+						}
+						add_core_of = PREV
+					}
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Perú-Bolivia"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_PBC.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Perú-Bolivia"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_PBC.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Perú-Bolivia"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_PBC.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Consejo Administrativo de Perú-Bolivia"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_PBC.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "División de Infanteria Peru-Boliviana"
+						division_names_group = SPAN_INF_02
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria Peru-Boliviana\" division_template = \"División de Infanteria Peru-Boliviana\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 4
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria Peru-Boliviana\" division_template = \"División de Infanteria Peru-Boliviana\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 4
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						PRU = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = PRU
+				}
+			}
+		}
+	}
+
+	ECU_reform_the_united_provinces_of_rio_de_la_plata = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					has_state_flag = argentine_starting_state
+					state = 688
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			688 = { controls_or_subject_of = yes }
+			278 = { controls_or_subject_of = yes }
+			510 = { controls_or_subject_of = yes }
+			509 = { controls_or_subject_of = yes }
+			957 = { controls_or_subject_of = yes }
+			508 = { controls_or_subject_of = yes }
+			956 = { controls_or_subject_of = yes }
+			958 = { controls_or_subject_of = yes }
+			960 = { controls_or_subject_of = yes }
+			511 = { controls_or_subject_of = yes }
+			512 = { controls_or_subject_of = yes }
+			955 = { controls_or_subject_of = yes }
+			954 = { controls_or_subject_of = yes }
+			953 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_united_provinces_formed_tt
+			hidden_effect = {
+				ARG = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = ARG_PROVINCIAS
+					transfer_state = 688
+					transfer_state = 278
+					transfer_state = 510
+					transfer_state = 509
+					transfer_state = 957
+					transfer_state = 508
+					transfer_state = 956
+					transfer_state = 958
+					transfer_state = 960
+					transfer_state = 511
+					transfer_state = 512
+					transfer_state = 955
+					transfer_state = 954
+					transfer_state = 953
+					transfer_state = 959
+					every_controlled_state = {
+						limit = {
+							NOT = {
+								is_core_of = PREV
+							}
+						}
+						add_core_of = PREV
+					}
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de las Provincias Unidas"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_provincias.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de las Provincias Unidas"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_provincias.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de las Provincias Unidas"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_provincias.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Consejo Administrativo de las Provincias Unidas"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_provincias.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "División de Infanteria Argentina"
+						division_names_group = SPAN_INF_02
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria Argentina\" division_template = \"División de Infanteria Argentina\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 6
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infanteria Argentina\" division_template = \"División de Infanteria Argentina\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 4
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						ARG = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = ARG
+				}
+			}
+		}
+	}
+
+	ECU_reform_the_empire_of_brazil = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					has_state_flag = brazilian_starting_state
+					has_state_flag = uruguayan_starting_state
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ECU_controls_every_brazilian_and_uruguayan_state_tt
+				OR = {
+					NOT = {
+						any_of_scopes = {
+							array = BRA.cores_at_game_start
+							NOT = {
+								OR = {
+									is_controlled_by = ROOT
+									any_country = {
+										is_subject_of = ROOT
+										controls_state = PREV
+									}
+								}
+							}
+						}
+						any_of_scopes = {
+							array = URG.cores_at_game_start
+							NOT = {
+								OR = {
+									is_controlled_by = ROOT
+									any_country = {
+										is_subject_of = ROOT
+										controls_state = PREV
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_empire_of_brazil_formed_tt
+			hidden_effect = {
+				BRA = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = BRI_UNIFIED
+					every_state = {
+						limit = {
+							OR = {
+								has_state_flag = brazilian_starting_state
+								has_state_flag = uruguayan_starting_state
+							}
+							NOT = {
+								is_fully_controlled_by = PREV
+							}
+						}
+						PREV = { transfer_state = PREV }
+					}
+					every_controlled_state = {
+						limit = {
+							NOT = {
+								is_core_of = PREV
+							}
+						}
+						add_core_of = PREV
+					}
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Conselho Administrativo do Império do Brasil"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_brazil.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Conselho Administrativo do Império do Brasil"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_brazil.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Conselho Administrativo do Império do Brasil"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_brazil.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Conselho Administrativo do Império do Brasil"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_brazil.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "Divisão de Infantaria Brasilera"
+						division_names_group = POR_INF_01
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"Divisão de Infantaria Brasilera\" division_template = \"Divisão de Infantaria Brasilera\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 7
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"Divisão de Infantaria Brasilera\" division_template = \"Divisão de Infantaria Brasilera\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 5
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						BRA = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = BRA
+				}
+			}
+		}
+	}
+
+	ECU_unite_the_guyanas = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 687
+					state = 309
+					state = 310
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			687 = { controls_or_subject_of = yes }
+			309 = { controls_or_subject_of = yes }
+			310 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_guyana_unified_will_be_formed_tt
+			hidden_effect = {
+				GYA = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = GUA_UNIFIED
+					transfer_state = 687
+					transfer_state = 309
+					transfer_state = 310
+					every_controlled_state = {
+						limit = {
+							NOT = {
+								is_core_of = PREV
+							}
+						}
+						add_core_of = PREV
+					}
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Guyana"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_GUYANAS.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Guyana"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_GUYANAS.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Guyana"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_GUYANAS.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Consejo Administrativo de Guyana"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_GUYANAS.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "División de Infantaria de Guiana"
+						division_names_group = SPAN_INF_02
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria de Guiana\" division_template = \"División de Infantaria de Guiana\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria de Guiana\" division_template = \"División de Infantaria de Guiana\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 2
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						GYA = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = GYA
+				}
+			}
+		}
+	}
+
+	ECU_transfer_belize_to_central_america = {
+		icon = generic_nationalism
+
+		state_target = yes
+
+		targets = { 311 }
+
+		visible = {
+			HON = {
+				exists = yes
+				is_subject_of = ROOT
+				has_country_flag = ECU_puppeted_flag
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+
+		on_map_mode = map_only
+
+		available = {
+			311 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			311 = { add_core_of = HON }
+			if = {
+				limit = {
+					311 = {
+						NOT = {
+							is_controlled_by = HON
+						}
+					}
+				}
+				HON = {
+					transfer_state = 311
+				}
+			}
+		}
+	}
+
+	ECU_transfer_arica_to_peru_bolivia = {
+		icon = generic_nationalism
+
+		state_target = yes
+
+		targets = { 951 }
+
+		visible = {
+			PRU = {
+				exists = yes
+				is_subject_of = ROOT
+				has_country_flag = ECU_puppeted_flag
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+
+		on_map_mode = map_only
+
+		available = {
+			951 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			951 = { add_core_of = PRU }
+			if = {
+				limit = {
+					951 = {
+						NOT = {
+							is_controlled_by = PRU
+						}
+					}
+				}
+				PRU = {
+					transfer_state = 951
+				}
+			}
+		}
+	}
+
+	ECU_reform_the_first_mexican_empire = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 375
+					state = 374
+					state = 382
+					state = 376
+					state = 377
+					state = 380
+					state = 379
+					state = 378
+					state = 484
+					state = 483
+					state = 482
+					state = 481
+					state = 480
+					state = 479
+					state = 478
+					state = 477
+					state = 277
+					state = 485
+					state = 476
+					state = 475
+					state = 474
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			375 = { controls_or_subject_of = yes }
+			374 = { controls_or_subject_of = yes }
+			382 = { controls_or_subject_of = yes }
+			376 = { controls_or_subject_of = yes }
+			377 = { controls_or_subject_of = yes }
+			380 = { controls_or_subject_of = yes }
+			379 = { controls_or_subject_of = yes }
+			378 = { controls_or_subject_of = yes }
+			484 = { controls_or_subject_of = yes }
+			483 = { controls_or_subject_of = yes }
+			482 = { controls_or_subject_of = yes }
+			481 = { controls_or_subject_of = yes }
+			480 = { controls_or_subject_of = yes }
+			479 = { controls_or_subject_of = yes }
+			478 = { controls_or_subject_of = yes }
+			477 = { controls_or_subject_of = yes }
+			277 = { controls_or_subject_of = yes }
+			485 = { controls_or_subject_of = yes }
+			476 = { controls_or_subject_of = yes }
+			475 = { controls_or_subject_of = yes }
+			474 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_mexican_empire_formed_tt
+			hidden_effect = {
+				MEX = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = MEX_FIRST_EMPIRE
+					transfer_state = 375
+					transfer_state = 374
+					transfer_state = 382
+					transfer_state = 376
+					transfer_state = 377
+					transfer_state = 380
+					transfer_state = 379
+					transfer_state = 378
+					transfer_state = 484
+					transfer_state = 483
+					transfer_state = 482
+					transfer_state = 481
+					transfer_state = 480
+					transfer_state = 479
+					transfer_state = 478
+					transfer_state = 477
+					transfer_state = 277
+					transfer_state = 485
+					transfer_state = 476
+					transfer_state = 475
+					transfer_state = 474
+					every_controlled_state = {
+						limit = {
+							NOT = {
+								is_core_of = PREV
+							}
+						}
+						add_core_of = PREV
+					}
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Mexico"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_mexico.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Mexico"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_mexico.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Mexico"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_mexico.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Consejo Administrativo de Mexico"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_mexico.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "División de Infantaria de Mexico"
+						division_names_group = SPAN_INF_02
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria de Mexico\" division_template = \"División de Infantaria de Mexico\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 5
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria de Mexico\" division_template = \"División de Infantaria de Mexico\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 4
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						MEX = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = MEX
+				}
+			}
+		}
+	}
+
+	ECU_unite_the_caribbean = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 315
+					state = 318
+					state = 319
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			315 = { controls_or_subject_of = yes }
+			318 = { controls_or_subject_of = yes }
+			319 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_caribbean_federation_will_be_formed_tt
+			hidden_effect = {
+				CUB = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = CUB_CARIBBEAN_FEDERATION
+					transfer_state = 315
+					transfer_state = 318
+					transfer_state = 319
+					every_controlled_state = {
+						limit = {
+							NOT = {
+								is_core_of = PREV
+							}
+						}
+						add_core_of = PREV
+					}
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo del Caribe"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_cuba.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo del Caribe"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_cuba.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo del Caribe"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_cuba.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Consejo Administrativo del Caribe"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_cuba.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "División de Infantaria del Caribe"
+						division_names_group = SPAN_INF_02
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria del Caribe\" division_template = \"División de Infantaria del Caribe\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria del Caribe\" division_template = \"División de Infantaria del Caribe\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						CUB = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = CUB
+				}
+			}
+		}
+	}
+
+	ECU_transfer_FROM_to_caribbean_federation = {
+		icon = generic_nationalism
+
+		state_target = yes
+
+		targets = { 690 693 686 308 694 691 695 689 692 }
+
+		visible = {
+			CUB = {
+				exists = yes
+				is_subject_of = ROOT
+				has_country_flag = ECU_puppeted_flag
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		cost = 10
+
+		fire_only_once = yes
+
+		on_map_mode = map_only
+
+		available = {
+			FROM = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			FROM = { add_core_of = CUB }
+			if = {
+				limit = {
+					FROM = {
+						NOT = {
+							is_controlled_by = CUB
+						}
+					}
+				}
+				CUB = {
+					transfer_state = FROM
+				}
+			}
+		}
+	}
+
+	ECU_integrate_chile_into_our_sphere_of_influence = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 506
+					state = 952
+					state = 279
+					state = 950
+					state = 949
+					state = 507
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			506 = { controls_or_subject_of = yes }
+			952 = { controls_or_subject_of = yes }
+			279 = { controls_or_subject_of = yes }
+			950 = { controls_or_subject_of = yes }
+			949 = { controls_or_subject_of = yes }
+			507 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_chile_will_be_integrated_tt
+			hidden_effect = {
+				CHL = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = CHL_REORGANIZED
+					transfer_state = 506
+					transfer_state = 952
+					transfer_state = 279
+					transfer_state = 950
+					transfer_state = 949
+					transfer_state = 507
+					every_controlled_state = {
+						limit = {
+							NOT = {
+								is_core_of = PREV
+							}
+						}
+						add_core_of = PREV
+					}
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Chile"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_chile.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Chile"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_chile.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Chile"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_chile.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Consejo Administrativo de Chile"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_chile.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "División de Infantaria de Chile"
+						division_names_group = SPAN_INF_02
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria de Chile\" division_template = \"División de Infantaria de Chile\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria de Chile\" division_template = \"División de Infantaria de Chile\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						CHL = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = CHL
+				}
+			}
+		}
+	}
+
+	ECU_integrate_paraguay_into_our_sphere_of_influence = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 301
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			301 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_PAR_integrated_into_sphere_of_influence_tt
+			hidden_effect = {
+				PAR = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = PAR_REORGANIZED
+					transfer_state = 301
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Paraguay"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_paraguay.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Paraguay"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_paraguay.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Consejo Administrativo de Paraguay"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_paraguay.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Consejo Administrativo de Paraguay"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_paraguay.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "División de Infantaria de Paraguay"
+						division_names_group = SPAN_INF_02
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria de Paraguay\" division_template = \"División de Infantaria de Paraguay\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 2
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"División de Infantaria de Paraguay\" division_template = \"División de Infantaria de Paraguay\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						PAR = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = PAR
+				}
+			}
+		}
+	}
+
+	ECU_integrate_the_united_states_into_sphere_of_influence = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 366
+					state = 365
+					state = 367
+					state = 370
+					state = 371
+					state = 372
+					state = 373
+					state = 368
+					state = 363
+					state = 362
+					state = 816
+					state = 369
+					state = 393
+					state = 361
+					state = 360
+					state = 359
+					state = 358
+					state = 357
+					state = 261
+					state = 396
+					state = 395
+					state = 394
+					state = 391
+					state = 392
+					state = 383
+					state = 384
+					state = 390
+					state = 389
+					state = 381
+					state = 388
+					state = 387
+					state = 385
+					state = 386
+					state = 364
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			366 = { controls_or_subject_of = yes }
+			365 = { controls_or_subject_of = yes }
+			367 = { controls_or_subject_of = yes }
+			370 = { controls_or_subject_of = yes }
+			371 = { controls_or_subject_of = yes }
+			372 = { controls_or_subject_of = yes }
+			373 = { controls_or_subject_of = yes }
+			368 = { controls_or_subject_of = yes }
+			363 = { controls_or_subject_of = yes }
+			362 = { controls_or_subject_of = yes }
+			816 = { controls_or_subject_of = yes }
+			369 = { controls_or_subject_of = yes }
+			393 = { controls_or_subject_of = yes }
+			361 = { controls_or_subject_of = yes }
+			360 = { controls_or_subject_of = yes }
+			359 = { controls_or_subject_of = yes }
+			358 = { controls_or_subject_of = yes }
+			357 = { controls_or_subject_of = yes }
+			261 = { controls_or_subject_of = yes }
+			396 = { controls_or_subject_of = yes }
+			395 = { controls_or_subject_of = yes }
+			394 = { controls_or_subject_of = yes }
+			391 = { controls_or_subject_of = yes }
+			392 = { controls_or_subject_of = yes }
+			383 = { controls_or_subject_of = yes }
+			384 = { controls_or_subject_of = yes }
+			390 = { controls_or_subject_of = yes }
+			389 = { controls_or_subject_of = yes }
+			381 = { controls_or_subject_of = yes }
+			388 = { controls_or_subject_of = yes }
+			387 = { controls_or_subject_of = yes }
+			385 = { controls_or_subject_of = yes }
+			386 = { controls_or_subject_of = yes }
+			364 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_USA_integrated_into_sphere_of_influence_tt
+			hidden_effect = {
+				USA = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = USA_REORGANIZED
+					transfer_state = 366
+					transfer_state = 365
+					transfer_state = 367
+					transfer_state = 370
+					transfer_state = 371
+					transfer_state = 372
+					transfer_state = 373
+					transfer_state = 368
+					transfer_state = 363
+					transfer_state = 362
+					transfer_state = 816
+					transfer_state = 369
+					transfer_state = 393
+					transfer_state = 361
+					transfer_state = 360
+					transfer_state = 359
+					transfer_state = 358
+					transfer_state = 357
+					transfer_state = 261
+					transfer_state = 396
+					transfer_state = 395
+					transfer_state = 394
+					transfer_state = 391
+					transfer_state = 392
+					transfer_state = 383
+					transfer_state = 384
+					transfer_state = 390
+					transfer_state = 389
+					transfer_state = 381
+					transfer_state = 388
+					transfer_state = 387
+					transfer_state = 385
+					transfer_state = 386
+					transfer_state = 364
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Administrative Council of the United States"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_USA.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Administrative Council of the United States"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_USA.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Administrative Council of the United States"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_USA.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Administrative Council of the United States"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_USA.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "American Infantry Division"
+						division_names_group = ENG_INF_01
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"American Infantry Division\" division_template = \"American Infantry Division\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 4
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"American Infantry Division\" division_template = \"American Infantry Division\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"American Infantry Division\" division_template = \"American Infantry Division\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 4
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"American Infantry Division\" division_template = \"American Infantry Division\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						USA = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = USA
+				}
+			}
+		}
+	}
+
+	ECU_integrate_canada_into_our_sphere_of_influence = {
+		icon = generic_form_nation
+
+		fire_only_once = yes
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					state = 464
+					state = 465
+					state = 468
+					state = 863
+					state = 860
+					state = 466
+					state = 861
+					state = 862
+					state = 276
+					state = 682
+					state = 866
+					state = 867
+					state = 467
+					state = 469
+					state = 865
+					state = 683
+					state = 472
+					state = 473
+					state = 470
+					state = 471
+					state = 864
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		on_map_mode = map_and_decisions_view
+
+		available = {
+			464 = { controls_or_subject_of = yes }
+			465 = { controls_or_subject_of = yes }
+			468 = { controls_or_subject_of = yes }
+			863 = { controls_or_subject_of = yes }
+			860 = { controls_or_subject_of = yes }
+			466 = { controls_or_subject_of = yes }
+			861 = { controls_or_subject_of = yes }
+			862 = { controls_or_subject_of = yes }
+			276 = { controls_or_subject_of = yes }
+			682 = { controls_or_subject_of = yes }
+			866 = { controls_or_subject_of = yes }
+			867 = { controls_or_subject_of = yes }
+			467 = { controls_or_subject_of = yes }
+			469 = { controls_or_subject_of = yes }
+			865 = { controls_or_subject_of = yes }
+			683 = { controls_or_subject_of = yes }
+			472 = { controls_or_subject_of = yes }
+			473 = { controls_or_subject_of = yes }
+			470 = { controls_or_subject_of = yes }
+			471 = { controls_or_subject_of = yes }
+			864 = { controls_or_subject_of = yes }
+		}
+
+		complete_effect = {
+			custom_effect_tooltip = ECU_CAN_integrated_tt
+			hidden_effect = {
+				CAN = {
+					drop_cosmetic_tag = yes
+					set_cosmetic_tag = CAN_REORGANIZED
+					transfer_state = 464
+					transfer_state = 465
+					transfer_state = 468
+					transfer_state = 863
+					transfer_state = 860
+					transfer_state = 466
+					transfer_state = 861
+					transfer_state = 862
+					transfer_state = 276
+					transfer_state = 682
+					transfer_state = 866
+					transfer_state = 867
+					transfer_state = 467
+					transfer_state = 469
+					transfer_state = 865
+					transfer_state = 683
+					transfer_state = 472
+					transfer_state = 473
+					transfer_state = 470
+					transfer_state = 471
+					transfer_state = 864
+					set_politics = {
+						ruling_party = ROOT
+					}
+					load_focus_tree = generic_focus
+					add_stability = 0.15
+					add_war_support = 0.3
+					retire_country_leader = yes
+					if = {
+						limit = {
+							has_government = fascism
+						}
+						create_country_leader = {
+							name = "Administrative Council of Canada"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_canada.dds"
+							expire = "1965.1.1"
+							ideology = gen_nazism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = communism
+						}
+						create_country_leader = {
+							name = "Administrative Council of Canada"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_canada.dds"
+							expire = "1965.1.1"
+							ideology = marxism
+						}
+					}
+					else_if = {
+						limit = {
+							has_government = democratic
+						}
+						create_country_leader = {
+							name = "Administrative Council of Canada"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_canada.dds"
+							expire = "1965.1.1"
+							ideology = liberalism
+						}
+					}
+					else = {
+						create_country_leader = {
+							name = "Administrative Council of Canada"
+							desc = "POLITICS_ADMINISTRATIVE_COUNCIL_DESC"
+							picture = "gfx/leaders/Administrative Councils/portrait_EUYL_administrative_council_canada.dds"
+							expire = "1965.1.1"
+							ideology = conservatism
+						}
+					}
+					division_template = {
+						name = "Canadian Infantry Division"
+						division_names_group = ENG_INF_01
+						is_locked = no
+						regiments = {
+							infantry = { x = 0 y = 0 }
+							infantry = { x = 1 y = 0 }
+							infantry = { x = 2 y = 0 }
+							infantry = { x = 3 y = 0 }
+							infantry = { x = 0 y = 1 }
+							infantry = { x = 1 y = 1 }
+							infantry = { x = 2 y = 1 }
+							infantry = { x = 3 y = 1 }
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"Canadian Infantry Division\" division_template = \"Canadian Infantry Division\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"Canadian Infantry Division\" division_template = \"Canadian Infantry Division\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 2
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"Canadian Infantry Division\" division_template = \"Canadian Infantry Division\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 3
+						}
+					}
+					random_owned_controlled_state = {
+						create_unit = {
+							division = "name = \"Canadian Infantry Division\" division_template = \"Canadian Infantry Division\" start_experience_factor = 0.05 start_equipment_factor = 1.0"
+							owner = PREV
+							count = 2
+						}
+					}
+					set_country_flag = ECU_puppeted_flag
+				}
+				if = {
+					limit = {
+						CAN = {
+							NOT = {
+								is_subject_of = ROOT
+							}
+						}
+					}
+					puppet = CAN
+				}
+			}
+		}
+	}
+}
+
+ECU_cooperating_with_the_fascists = {
+	ECU_intensify_fascist_support_in_FROM = {
+		icon = ITA_reorganize_ascari
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				is_core_of = ROOT
+				has_state_flag = ECU_starting_state
+			}
+		}
+
+		visible = {
+			FROM = {
+				NOT = {
+					has_state_flag = ECU_taken_over_flag
+				}
+			}
+			NOT = { has_government = fascism }
+		}
+
+		available = {
+			has_civil_war = no
+			NOT = {
+				has_country_flag = ECU_intensifying_support_flag
+			}
+		}
+
+		ai_will_do = {
+			base = 120
+			modifier = {
+				factor = 2
+				fascism < 0.45
+			}
+		}
+
+		cost = 25
+
+		days_remove = 50
+
+		fire_only_once = yes
+
+		complete_effect = {
+			set_country_flag = ECU_intensifying_support_flag
+		}
+
+		remove_effect = {
+			clr_country_flag = ECU_intensifying_support_flag
+			FROM = {
+				set_state_flag = ECU_taken_over_flag
+			}
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.05
+			}
+			add_to_variable = {
+				ECU_states_cooperated = 1
+			}
+		}
+	}
+
+	ECU_use_the_german_spies_to_intensify_support = {
+		icon = SWI_expand_covert_operations
+
+		visible = {
+			has_completed_focus = ECU_diplomatic_mission_to_germany
+			NOT = {
+				has_government = fascism
+			}
+		}
+
+		highlight_states = {
+		}
+
+		ai_will_do = {
+			base = 175
+		}
+
+		on_map_mode = map_only
+
+		cost = 20
+
+		days_remove = 70
+
+		modifier = {
+			fascism_drift = 0.2
+		}
+
+		remove_effect = {
+			add_popularity = {
+				ideology = fascism
+				popularity = 0.02
+			}
+			add_war_support = 0.03
+		}
+	}
+}
+
+ECU_the_united_kingdom_of_peru_ecuador_and_bolivia = {
+	ECU_proclaim_the_kingdom_of_ecuador_peru_and_bolivia = {
+		icon = generic_form_nation
+
+		highlight_states = {
+			highlight_states_trigger = {
+				OR = {
+					has_state_flag = ECU_starting_state
+					has_state_flag = peruvian_starting_state
+					has_state_flag = bolivian_starting_state
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ECU_controls_every_starting_ecuadorian_state_tt
+				NOT = {
+					any_of_scopes = {
+						array = ECU.controlled_states_at_game_start
+						NOT = {
+							is_controlled_by = ROOT
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = ECU_controls_every_starting_peruvian_state_tt
+				NOT = {
+					any_of_scopes = {
+						array = PRU.controlled_states_at_game_start
+						NOT = {
+							is_controlled_by = ROOT
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = ECU_controls_every_starting_bolivian_state_tt
+				NOT = {
+					any_of_scopes = {
+						array = BOL.cores_at_game_start
+						NOT = {
+							is_controlled_by = ROOT
+						}
+					}
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 750
+		}
+
+		complete_effect = {
+			drop_cosmetic_tag = yes
+			set_cosmetic_tag = ECU_UNITED_KINGDOM
+			custom_effect_tooltip = ECU_gain_core_on_all_peruvian_states_tt
+			custom_effect_tooltip = ECU_gain_core_on_all_bolivian_states_tt
+			every_controlled_state = {
+				limit = {
+					is_claimed_by = ROOT
+					NOT = {
+						is_core_of = ROOT
+					}
+				}
+				add_core_of = ROOT
+			}
+
+			custom_effect_tooltip = CHL_skip_one_line_tt
+
+			swap_ideas = {
+				remove_idea = ECU_the_ambition_of_jose_juan_flores_1
+				add_idea = ECU_the_ambition_of_jose_juan_flores_2
+			}
+			remove_country_leader_trait = ECU_low_public_support
+
+			hidden_effect = {
+				news_event = {
+					id = ecu.26
+					days = 1
+					hours = 12
+				}
+			}
+		}
+	}
+
+	ECU_demand_the_subjegation_of_FROM = {
+		priority = 50
+		icon = eng_trade_unions_demand
+
+		visible = {
+			has_completed_focus = ECU_restore_the_empire
+		}
+
+		target_trigger = {
+			FROM = {
+				exists = yes
+				capital_scope = {
+					OR = {
+						is_on_continent = south_america
+						is_fully_controlled_by = MEX
+						is_fully_controlled_by = HAI
+						is_fully_controlled_by = CUB
+						is_fully_controlled_by = DOM
+					}
+				}
+			}
+		}
+
+		available = {
+			strength_ratio = {
+				tag = FROM
+				ratio > 1
+			}
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = PRU_annexing_country
+				}
+			}
+		}
+
+		cost = 75
+
+		days_remove = 25
+
+		ai_will_do = {
+			base = 60
+			modifier = {
+				factor = 3
+				strength_ratio = {
+					tag = FROM
+					ratio > 2
+				}
+			}
+		}
+
+		complete_effect = {
+			set_country_flag = PRU_annexing_country
+		}
+
+		cancel_trigger = {
+			FROM = {
+				OR = {
+					exists = no
+					has_war_with = ROOT
+					is_subject_of = ROOT
+				}
+			}
+		}
+
+		cancel_effect = {
+			clr_country_flag = PRU_annexing_country
+		}
+
+		remove_effect = {
+			clr_country_flag = PRU_annexing_country
+			FROM = {
+				country_event = {
+					id = venezuela.49
+					hours = 6
+					random_hours = 6
+				}
+			}
+			custom_effect_tooltip = ARG_iftheyaccept
+			effect_tooltip = {
+				annex_country = {
+					target = FROM
+					transfer_troops = yes
+				}
+			}
+		}
+	}
+
+	ECU_integrate_FROM_to_the_spanish_empire = {
+		icon = generic_nationalism
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				is_fully_controlled_by = ROOT
+				NOT = {
+					is_core_of = ROOT
+				}
+				is_claimed_by = ROOT
+			}
+		}
+
+		visible = {
+			has_completed_focus = ECU_restore_the_empire
+		}
+
+		fire_only_once = yes
+
+		on_map_mode = map_only
+
+		cost = 40
+
+		days_remove = 25
+
+		ai_will_do = {
+			base = 195
+		}
+
+		available = {
+			FROM = {
+				compliance > 24
+				resistance < 24
+			}
+		}
+
+		remove_effect = {
+			FROM = {
+				add_core_of = ROOT
+			}
+		}
+	}
+}
+
+ECU_fuerzas_armadas_ecuatorianas = {
+	ECU_invite_FROM_advisors = {
+		icon = generic_army_support
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					original_tag = SOV
+					original_tag = GER
+					original_tag = ENG
+					original_tag = JAP
+					original_tag = USA
+					original_tag = ITA
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				factor = 10
+				threat > 0.1
+			}
+			modifier = {
+				factor = 20
+				OR = {
+					has_war_with = PRU
+					check_variable = {
+						EUYL_peru_ecuador_threat_level > 3
+					}
+				}
+			}
+		}
+
+		visible = {
+			has_completed_focus = ECU_seek_foreign_military_advising
+			FROM = {
+				exists = yes
+				is_major = yes
+				num_of_controlled_states > 5
+			}
+		}
+
+		available = {
+			NOT = {
+				has_country_flag = ECU_recently_seeked_advisors_flag
+			}
+			FROM = {
+				NOT = {
+					has_war_with = ROOT
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_government = fascism
+					}
+				}
+				FROM = {
+					NOT = {
+						has_government = fascism
+					}
+				}
+			}
+		}
+
+		custom_cost_text = decision_cost_CP_25_pp_25
+		custom_cost_trigger = {
+			has_political_power > 24
+			command_power > 24
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+				FROM = {
+					set_country_flag = ECU_seeked_advisors_from_here_flag
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						original_tag = GER
+					}
+				}
+				custom_effect_tooltip = ECU_modify_ejercito_ecuatoriano_tt
+				add_to_variable = {
+					ECU_army_modifier_army_armor_attack_factor = 0.05
+					tooltip = army_armor_attack_factor_tt
+				}
+				add_to_variable = {
+					ECU_army_production_speed_arms_factory_factor = 0.05
+					tooltip = production_speed_arms_factory_factor_tt
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						original_tag = ITA
+					}
+				}
+				custom_effect_tooltip = ECU_modify_ejercito_ecuatoriano_tt
+				add_to_variable = {
+					ECU_army_modifier_max_command_power_mult = 0.1
+					tooltip = max_planning_factor_tt
+				}
+				add_to_variable = {
+					ECU_supply_combat_penalties_on_core_factor = -0.1
+					tooltip = supply_combat_penalties_on_core_factor_tt
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						original_tag = JAP
+					}
+				}
+				custom_effect_tooltip = ECU_modify_ejercito_ecuatoriano_tt
+				add_to_variable = {
+					ECU_army_modifier_army_defence_factor = 0.05
+					tooltip = army_defence_factor_tt
+				}
+				add_to_variable = {
+					ECU_army_modifier_army_attack_factor = 0.03
+					tooltip = army_attack_factor_tt
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						original_tag = USA
+					}
+				}
+				custom_effect_tooltip = ECU_modify_ejercito_ecuatoriano_tt
+				add_to_variable = {
+					ECU_army_modifier_experience_gain_army_factor = 0.1
+					tooltip = experience_gain_army_factor_tt
+				}
+				add_to_variable = {
+					ECU_modifier_production_speed_supply_node_factor = 0.1
+					tooltip = production_speed_supply_node_factor_tt
+				}
+				add_to_variable = {
+					JUNO_army_modifier_production_speed_anti_air_building_factor = 0.05
+					tooltip = production_speed_anti_air_building_factor_tt
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = {
+						original_tag = SOV
+					}
+				}
+				custom_effect_tooltip = ECU_modify_ejercito_ecuatoriano_tt
+				add_to_variable = {
+					ECU_ejercito_conscription = 0.01
+					tooltip = conscription_tt
+				}
+				add_to_variable = {
+					ECU_army_modifier_army_artillery_attack_factor = 0.03
+					tooltip = army_artillery_attack_factor_tt
+				}
+				add_to_variable = {
+					army_artillery_defence_factor = 0.03
+					tooltip = army_artillery_defence_factor_tt
+				}
+			}
+			else = { ## ENG
+				custom_effect_tooltip = ECU_modify_ejercito_ecuatoriano_tt
+				add_to_variable = {
+					ECU_army_modifier_max_planning_factor = 0.05
+					tooltip = max_planning_factor_tt
+				}
+				add_to_variable = {
+					ECU_army_modifier_planning_speed_factor = 0.1
+					tooltip = planning_speed_factor_tt
+				}
+			}
+
+			custom_effect_tooltip = CHL_skip_one_line_tt
+
+			FROM = {
+				add_opinion_modifier = {
+					target = ROOT
+					modifier = ECU_invited_our_advisors
+				}
+			}
+
+			set_country_flag = {
+				flag = ECU_recently_seeked_advisors_flag
+				days = 180
+				value = 1
+			}
+		}
+	}
+
+	ECU_allocate_industrial_resources_to_plane_production_decision = {
+		icon = generic_air
+
+		cost = 50
+
+		visible = {
+			has_completed_focus = ECU_allocate_industrial_resources_to_plane_production
+			num_of_civilian_factories_available_for_projects > 1
+		}
+
+		days_remove = 180
+
+		days_re_enable = 180
+
+		modifier = {
+			civilian_factory_use = 2
+		}
+
+		complete_effect = {
+			add_ideas = ARG_expand_air_force
+		}
+
+		remove_effect = {
+			remove_ideas = ARG_expand_air_force
+			custom_effect_tooltip = EUYL_decision_will_reappear_in_180_days_tt
+		}
+	}
+
+	ECU_initiate_a_dockyard_expansion_project_in_FROM = {
+		icon = generic_merge_plant_ship
+
+		state_target = yes
+
+		targets = { 305 }
+
+		cost = 30
+
+		days_remove = 90
+
+		visible = {
+			has_completed_focus = ECU_dockyard_facility_expansion
+			FROM = {
+				is_fully_controlled_by = ROOT
+			}
+		}
+
+		ai_will_do = {
+			base = 90
+			modifier = {
+				factor = 1.5
+				has_navy_size = {
+					size < 9
+				}
+			}
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 0
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ECU_constructing_dockyard_flag
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		modifier = {
+			civilian_factory_use = 1
+		}
+
+		complete_effect = {
+			set_country_flag = ECU_constructing_dockyard_flag
+		}
+
+		remove_effect = {
+			clr_country_flag = ECU_constructing_dockyard_flag
+			FROM = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+ECU_bananas_for_all = {
+	ECU_establish_a_banana_plantation_in_FROM = {
+		icon = GFX_EUYL_banana_icon
+
+		state_target = yes
+
+		target_array = controlled_states
+
+		target_trigger = {
+			FROM = {
+				NOT = {
+					has_dynamic_modifier = {
+						modifier = ECU_local_banana_production
+					}
+				}
+			}
+		}
+
+		cost = 20
+
+		days_remove = 35
+
+		modifier = {
+			political_power_factor = -0.1
+		}
+
+		on_map_mode = map_only
+
+		fire_only_once = yes
+
+		visible = {
+			has_completed_focus = ECU_bananas_for_all_f
+		}
+
+		remove_effect = {
+			FROM = {
+				add_dynamic_modifier = {
+					modifier = ECU_local_banana_production
+				}
+			}
+			if = {
+				limit = {
+					FROM = {
+						NOT = {
+							is_core_of = ROOT
+						}
+					}
+				}
+				FROM = { add_compliance = 15 }
+			}
+
+			custom_effect_tooltip = CHL_skip_one_line_tt
+
+			if = {
+				limit = {
+					OR = {
+						check_variable = { ECU_banana_company_industrial_capacity_dockyard < 0.15 }
+						check_variable = { ECU_banana_company_industrial_capacity_factory < 0.2 }
+						check_variable = { ECU_banana_company_production_speed_buildings_factor < 0.15 }
+						check_variable = { ECU_banana_company_local_resources_factor < 0.1 }
+					}
+				}
+				custom_effect_tooltip = ECU_modify_banana_company_administration_tt
+				if = {
+					limit = {
+						check_variable = { ECU_banana_company_industrial_capacity_factory < 0.2 }
+					}
+					add_to_variable = {
+						ECU_banana_company_industrial_capacity_factory = 0.01
+						tooltip = industrial_capacity_factory_tt
+					}
+				}
+				if = {
+					limit = {
+						check_variable = { ECU_banana_company_industrial_capacity_dockyard < 0.15 }
+					}
+					add_to_variable = {
+						ECU_banana_company_industrial_capacity_dockyard = 0.01
+						tooltip = industrial_capacity_dockyard_tt
+					}
+				}
+				if = {
+					limit = {
+						check_variable = { ECU_banana_company_production_speed_buildings_factor < 0.15 }
+					}
+					add_to_variable = {
+						ECU_banana_company_production_speed_buildings_factor = 0.01
+						tooltip = production_speed_buildings_factor_tt
+					}
+				}
+				if = {
+					limit = {
+						check_variable = { ECU_banana_company_local_resources_factor < 0.1 }
+					}
+					add_to_variable = {
+						ECU_banana_company_local_resources_factor = 0.01
+						tooltip = local_resources_factor_tt
+					}
+				}
+			}
+		}
+	}
+}

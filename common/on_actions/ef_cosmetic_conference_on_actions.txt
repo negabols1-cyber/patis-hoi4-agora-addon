@@ -1,0 +1,1484 @@
+on_actions = {
+
+	#Kurtulus orgutleri eklemek icin
+	# on_capitulation = {
+		# 	effect = {
+			# 		if = {
+				# 		}
+			# 	}
+		# }
+
+	#used when puppeting in a peace conference
+	#ROOT = nation being puppeted, FROM = overlord
+	on_puppet = {
+		effect = {
+			##Greece
+			if = {
+				limit = {
+					AND = {
+						TAG = GNA
+						is_subject_of = GRE
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = GNA_GRE
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ITA
+						is_subject_of = GRE
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ITA_GRE
+			}
+			##Turkey
+			if = {
+				limit = {
+					AND = {
+						TAG = ARM
+						is_subject_of = TUR
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ARM_TUR
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = CYP
+						is_subject_of = TUR
+					}
+				}
+				retire_ideology_leader = neutrality
+				create_country_leader = {
+					name = "Fazıl Küçük"
+					picture = GFX_portrait_CYP_Fazil_kucuk
+					expire = "1957.1.1"
+					ideology = moderatism
+					traits = {
+						#
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = CYP_TUR
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SYR
+						is_subject_of = TUR
+						NOT = {
+							TAG = TUR
+							has_government = communism
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SYR_TUR
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ISR
+						is_subject_of = TUR
+						NOT = {
+							TAG = TUR
+							has_government = communism
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ISR_TUR
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = LBA
+						is_subject_of = TUR
+						NOT = {
+							TAG = TUR
+							has_government = communism
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = LBA_TUR
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = TUN
+						is_subject_of = TUR
+						NOT = {
+							TAG = TUR
+							has_government = communism
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = TUN_TUR
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ALG
+						is_subject_of = TUR
+						NOT = {
+							TAG = TUR
+							has_government = communism
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ALG_TUR
+			}
+			##China
+			if = {
+				limit = {
+					AND = {
+						TAG = BRM
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = BRM_CHI
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = YUN
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = YUN_CHI
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = GXC
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = GXC_CHI
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = XSM
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = XSM_CHI
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = VIN
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = VIN_CHI
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SIK
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SIK_CHI
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SHX
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SHX_CHI
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = MON
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = MON_CHI
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = MEN
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = MEN_CHI
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = MAL
+						is_subject_of = CHI
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = MAL_CHI
+			}
+			##Japan
+			if = {
+				limit = {
+					AND = {
+						TAG = AST
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = AST_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = CAN
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = CAN_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = GXC
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = GXC_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = INS
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = INS_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = KOR
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = KOR_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = MAL
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = MAL_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = NZL
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = NZL_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = PHI
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = PHI_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SHX
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SHX_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SIK
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SIK_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = TIB
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = TIB_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = XSM
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = XSM_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = YUN
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = YUN_JAP
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = FSM
+						is_subject_of = JAP
+						NOT = {
+							TAG = JAP
+							OR = {
+								has_government = communism
+								has_government = democratic
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = FSM_JAP
+			}
+			#United Kingdom
+			if = {
+				limit = {
+					AND = {
+						TAG = INS
+						is_subject_of = ENG
+						NOT = {
+							TAG = ENG
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = INS_ENG
+			}
+			#Germany
+			if = {
+				limit = {
+					AND = {
+						TAG = AST
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = AST_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = BEL
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = BEL_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = BLR
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = BLR_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = CZE
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = CZE_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = EST
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = EST_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = HOL
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = HOL_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = INS
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = fascism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = INS_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = LAT
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = LAT_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = LBA
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = LBA_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = LIT
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = LIT_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = POL
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = POL_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SAF
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SAF_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = UKR
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = UKR_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ZIM
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ZIM_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = NMB
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = fascism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = NMB_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = PNG
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = fascism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = PNG_GER
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SAM
+						is_subject_of = GER
+						NOT = {
+							TAG = GER
+							OR = {
+								has_government = communism
+								has_government = democratic
+								has_government = fascism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SAM_GER
+			}
+			##Holland
+			if = {
+				limit = {
+					AND = {
+						TAG = SUR
+						is_subject_of = HOL
+						NOT = {
+							TAG = HOL
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SUR_HOL
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = BRA
+						is_subject_of = HOL
+						NOT = {
+							TAG = HOL
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = BRA_HOL
+			}
+			##Portugese
+			if = {
+				limit = {
+					AND = {
+						TAG = MZB
+						is_subject_of = POR
+						NOT = {
+							TAG = POR
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = MZB_POR
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ANG
+						is_subject_of = POR
+						NOT = {
+							TAG = POR
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ANG_POR
+			}
+			#French
+			if = {
+				limit = {
+					AND = {
+						TAG = CAR
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = CAR_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = CHA
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = CHA_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = MRT
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = MRT_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = NGR
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = NGR_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = DAH
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = DAH_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = TOG
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = TOG_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ALG
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ALG_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = GAB
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = GAB_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = VIN
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = VIN_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SYR
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SYR_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = CAM
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = CAM_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = VOL
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = VOL_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = RAJ
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = RAJ_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = TUN
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = TUN_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = IVO
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = IVO_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = LAO
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = LAO_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SEN
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SEN_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = GNA
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = GNA_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = RCG
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = RCG_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = MLI
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = MLI_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = INS
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = INS_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = MOR
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = MOR_FRA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = CMR
+						is_subject_of = FRA
+						NOT = {
+							TAG = FRA
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = CMR_FRA
+			}
+			##Swedish
+			if = {
+				limit = {
+					AND = {
+						TAG = IVO
+						is_subject_of = SWE
+						NOT = {
+							TAG = SWE
+							OR = {
+								has_government = communism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = IVO_SWE
+			}
+			##Soviet
+			if = {
+				limit = {
+					AND = {
+						TAG = RAJ
+						is_subject_of = SOV
+						SOV = {
+							has_government = communism
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = RAJ_SOV
+			}
+			##Italy
+			if = {
+				limit = {
+					AND = {
+						TAG = YUG
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = neutrality
+								has_government = fascism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = YUG_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ERI
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = neutrality
+								has_government = fascism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ERI_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = SOM
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = neutrality
+								has_government = fascism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = SOM_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = LBA
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = neutrality
+								has_government = fascism
+							}
+						}
+					}
+				}
+				retire_ideology_leader = fascism
+				add_ideas = ITA_ALB_italian_settlers
+				if = {
+					limit = {
+						ITA = {
+							NOT = {
+								has_country_leader = {
+									character = ITA_italo_balbo
+								}
+							}
+						}
+					}
+					create_country_leader = {
+						name = "Italo Balbo"
+						picture = GFX_portrait_ITA_italo_balbo
+						expire = "1941.1.1"
+						ideology = fascism_ideology
+						traits = {
+							#
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = LBA_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = TUN
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = neutrality
+								has_government = fascism
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = TUN_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ALB
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = fascism
+							}
+						}
+					}
+				}
+				retire_ideology_leader = fascism
+				create_country_leader = {
+					name = "Francesco Jacomoni"
+					picture = GFX_portrait_ITA_francesco_jacomoni
+					expire = "1941.1.1"
+					ideology = fascism_ideology
+					traits = {
+						#
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ALB_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ALG
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = fascism
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ALG_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = PAL
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = fascism
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = PAL_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = CYP
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = fascism
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = CYP_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = MLT
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = fascism
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = MLT_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = GRE
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = fascism
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = GRE_ITA
+			}
+			if = {
+				limit = {
+					AND = {
+						TAG = ETH
+						is_subject_of = ITA
+						ITA = {
+							OR = {
+								has_government = fascism
+								has_government = neutrality
+							}
+						}
+					}
+				}
+				set_country_flag = cosmetic_tagged_flag
+				set_cosmetic_tag = ETH_ITA
+			}
+		}
+	}
+}

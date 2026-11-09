@@ -1,0 +1,61 @@
+POR_monarchist_cause = {
+
+	POR_support_empire_of_brazil_sao_paulo = {
+		icon = generic_political_discourse
+
+		allowed = {
+			has_dlc = "La Resistance"
+			original_tag = POR
+		}
+
+		available = {
+			BRA = {
+				BRA_is_the_empire_of_brazil = yes
+				has_war_with = SAO
+			}
+		}
+
+		visible = {
+			SAO = {
+				exists = yes
+				has_war_with = BRA
+				any_enemy_country = {
+					has_cosmetic_tag = BRA_TEMPORARY_MONARCHIST_STATE
+				}
+			}
+			NOT = { has_war_with = SAO }
+			has_completed_focus = POR_monarchist_uprising_in_brazil
+		}
+
+		cost = 25
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 1
+		}
+
+		complete_effect = {
+			every_other_country = {
+				limit = {
+					original_tag = SAO
+					SAO = {
+						has_war_with = BRA
+						any_enemy_country = {
+							has_cosmetic_tag = BRA_TEMPORARY_MONARCHIST_STATE
+						}
+					}
+				}
+				POR = {
+					add_to_war = { targeted_alliance = BRA enemy = PREV hostility_reason = asked_to_join }
+					diplomatic_relation = {
+						country = BRA
+						relation = military_access
+						active = yes
+					}
+				}
+			}
+		}
+	}
+
+}
+

@@ -1,0 +1,449 @@
+SIA_Hakko_Ichiu_dec_cat = {
+	SIA_Military_Investments_dec = {
+
+		icon = GFX_decision_generic_army_support
+
+		cost = 75
+
+		available = {
+			has_completed_focus = SIA_Hakko_Ichiu
+			has_country_flag = SIA_approached_japan
+		}
+
+		days_remove = 30
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus = SIA_Hakko_Ichiu
+		}
+
+		modifier = {
+			consumer_goods_factor = 0.05
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ROOT
+					is_in_home_area = yes
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	SIA_Demand_Indochina = {
+
+		icon = GFX_decision_generic_army_support
+
+		cost = 150
+
+		available = {
+			has_completed_focus = SIA_Demand_Indochina
+			has_country_flag = SIA_approached_japan
+		}
+
+		days_remove = 30
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus = SIA_Demand_Indochina
+		}
+
+		modifier = {
+			political_power_factor = -0.15
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			every_other_country = {
+				limit = {
+					OR = {
+						any_controlled_state = {
+							OR = {
+								state = 670
+								state = 671
+								state = 286
+								state = 741
+							}
+							is_controlled_by = PREV
+						}
+						any_subject_country = {
+							OR = {
+								original_tag = LAO
+								original_tag = CAM
+								original_tag = VIN
+								any_controlled_state = {
+									OR = {
+										state = 670
+										state = 671
+										state = 286
+										state = 741
+									}
+									is_controlled_by = PREV
+								}
+							}
+						}
+					}
+					is_subject = no
+				}
+				country_event = { id = SIA.9 hours = 2 random_hours = 4 }
+			}
+		}
+	}
+	SIA_Demand_North_Borneo_decision = {
+
+		icon = GFX_decision_generic_army_support
+
+		cost = 150
+
+		available = {
+			has_completed_focus = SIA_Demand_North_Borneo
+			has_country_flag = SIA_approached_japan
+		}
+
+		days_remove = 30
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus = SIA_Demand_North_Borneo
+		}
+
+		modifier = {
+			political_power_factor = -0.15
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			every_country = {
+				limit = {
+					owns_state = 333
+				}
+				country_event = SIA.10
+			}
+		}
+	}
+	SIA_old_empire_decision = {
+
+		icon = GFX_decision_generic_army_support
+
+		cost = 150
+
+		available = {
+			has_completed_focus = SIA_old_empire
+			has_country_flag = SIA_approached_japan
+		}
+
+		days_remove = 90
+
+		ai_will_do = {
+			base = 0
+		}
+
+		visible = {
+			has_completed_focus = SIA_old_empire
+		}
+
+		modifier = {
+			political_power_factor = -0.15
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			add_state_core = 741
+			add_state_core = 286
+			add_state_core = 671
+			add_state_core = 670
+		}
+	}
+}
+
+SIA_Economic_Works = {
+	SIA_Start_To_Reduce_Depression = {
+		icon = GFX_decision_gre_investment_decisions
+		available = {
+			has_completed_focus = SIA_End_Of_Economic_Depression
+			OR = {
+				has_idea = SIA_Great_Depression
+				has_idea = SIA_Great_Depression0
+			}
+		}
+
+		fire_only_once = no
+
+		cost = 75
+
+		days_remove = 35
+
+		ai_will_do = {
+			base = 1
+		}
+
+		visible = {
+			has_completed_focus = SIA_End_Of_Economic_Depression
+			OR = {
+				has_idea = SIA_Great_Depression
+				has_idea = SIA_Great_Depression0
+			}
+		}
+
+		remove_effect = {
+			if = {
+				limit = {
+					has_idea = SIA_Great_Depression
+				}
+				swap_ideas = {
+					remove_idea = SIA_Great_Depression
+					add_idea = SIA_Great_Depression2
+				}
+			}
+			if = {
+				limit = {
+					has_idea = SIA_Great_Depression0
+				}
+				swap_ideas = {
+					remove_idea = SIA_Great_Depression0
+					add_idea = SIA_Great_Depression
+				}
+			}
+		}
+	}
+
+	SIA_Finish_Depression = {
+		icon = GFX_decision_gre_investment_decisions
+		available = {
+			has_completed_focus = SIA_End_Of_Economic_Depression
+			NOT = { has_idea = SIA_Great_Depression0 }
+			has_idea = SIA_Great_Depression2
+		}
+
+		cost = 75
+
+		days_remove = 35
+
+		ai_will_do = {
+			factor = 1
+		}
+
+		visible = {
+			has_completed_focus = SIA_End_Of_Economic_Depression
+			OR = {
+				has_idea = SIA_Great_Depression
+				has_idea = SIA_Great_Depression2
+				has_idea = SIA_Great_Depression0
+			}
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			if = {
+				limit = {
+					has_idea = SIA_Great_Depression
+				}
+				remove_ideas = SIA_Great_Depression
+			}
+			if = {
+				limit = {
+					has_idea = SIA_Great_Depression2
+				}
+				remove_ideas = SIA_Great_Depression2
+			}
+			if = {
+				limit = {
+					has_idea = SIA_Great_Depression0
+				}
+				remove_ideas = SIA_Great_Depression0
+			}
+		}
+	}
+
+	SIA_Depression = {
+
+		icon = GFX_decision_gre_paying_ifc_debt
+		available = {
+			NOT = { has_idea = SIA_Great_Depression2 }
+			NOT = { has_idea = SIA_Great_Depression }
+			has_completed_focus = SIA_End_Of_Economic_Depression
+		}
+
+		allowed = {
+			original_tag = SIA
+		}
+
+		visible = {
+			has_completed_focus = SIA_End_Of_Economic_Depression
+		}
+
+		days_mission_timeout = 365
+
+		is_good = no
+
+		activation = {
+			has_idea = SIA_Great_Depression
+		}
+
+		timeout_effect = {
+			if = {
+				limit = {
+					has_idea = SIA_Great_Depression2
+				}
+				swap_ideas = {
+					remove_idea = SIA_Great_Depression2
+					add_idea = SIA_Great_Depression
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = SIA_Great_Depression
+					add_idea = SIA_Great_Depression0
+				}
+			}
+		}
+	}
+}
+
+SIA_second_siamese_revoulation = {
+	SIA_start_to_work = {
+		icon = GFX_decision_SWI_no_elected_president
+
+		visible = {
+			has_completed_focus = SIA_start_to_work
+		}
+
+		cost = 50
+
+		days_remove = 45
+
+		modifier = {
+			political_power_factor = 0.15
+		}
+
+		remove_effect = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+		}
+	}
+
+	SIA_communist_propaganda = {
+		icon = GFX_decision_SOV_socialism_in_one_country
+
+		visible = {
+			has_completed_focus = SIA_communist_propaganda
+		}
+
+		cost = 45
+
+		days_remove = 30
+
+
+		remove_effect = {
+			add_popularity = {
+				ideology = communism
+				popularity = 0.1
+			}
+			add_stability = -0.025
+		}
+	}
+}
+
+SIA_building_program = {
+	SIA_building_program_decision = {
+
+		icon = GFX_decision_generic_forestry
+
+		state_target = yes
+		target_array = ROOT.controlled_states
+		visible = {
+			has_completed_focus = SIA_building_program
+		}
+
+		available = {
+			FROM = {
+				is_core_of = ROOT
+				is_owned_and_controlled_by = ROOT
+				free_building_slots = {
+					building = industrial_complex
+					size > 0
+					include_locked = yes
+				}
+				NOT = { has_state_flag = SIA_building_program_done }
+			}
+			NOT = { has_country_flag = SIA_building_program_active }
+		}
+		
+		target_trigger = {
+			FROM = {
+				is_core_of = ROOT
+				is_owned_and_controlled_by = ROOT
+			}
+		}
+
+		target_root_trigger = {
+			has_completed_focus = SIA_building_program
+		}
+
+		fire_only_once = yes
+		cost = 50
+
+		days_remove = 30
+
+		cancel_if_not_visible = yes
+
+		cancel_effect = {
+
+		}
+
+		complete_effect = {
+			set_country_flag = SIA_building_program_active
+		}
+
+		remove_effect = {
+			FROM = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				set_state_flag = SIA_building_program_done
+			}
+			clr_country_flag = SIA_building_program_active
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+	}
+}
+
+####################################
+####################################
+####################################
+SIA_Queens_Economy_Policy = {
+}
