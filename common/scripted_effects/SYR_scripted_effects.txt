@@ -125,6 +125,38 @@ SYR_recruit_qawuqji = {
 	}
 }
 
+# SYR scope. Called before the peace with France in the war of independence.
+# If Syria holds Lebanon (state 553) and France or a French subject still owns
+# it, Lebanon passes to Syria instead of going back with the peace: Syria
+# annexes the Lebanese puppet (LEB), or takes the state if France owns it.
+SYR_keep_occupied_lebanon = {
+	if = {
+		limit = {
+			553 = {
+				# PREV is Syria. ROOT is not used: syria.33 runs this from France's event.
+				is_controlled_by = PREV
+				NOT = { is_owned_by = PREV }
+				OWNER = {
+					OR = {
+						tag = FRA
+						is_subject_of = FRA
+					}
+				}
+			}
+		}
+		if = {
+			limit = { 553 = { is_owned_by = LEB } }
+			annex_country = {
+				target = LEB
+				transfer_troops = yes
+			}
+		}
+		else = {
+			transfer_state = 553
+		}
+	}
+}
+
 # SYR scope. Syria breaks from France by force.
 SYR_launch_the_revolt = {
 	FRA = { end_puppet = SYR }

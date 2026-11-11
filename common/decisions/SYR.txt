@@ -13,6 +13,9 @@
 # SYR_the_french_levant
 #   Loyalist support for France at war, paid in equipment and manpower and
 #   rewarded with autonomy.
+# prospect_for_resources (vanilla category)
+#   SYR_open_the_local_mines adds tungsten and chromium to Damascus 30 days
+#   after it is taken, two times at most, after the focus SYR_the_damascus_industrial_zone_minesplaces.
 # Helpers: common/scripted_effects/SYR_scripted_effects.txt
 # Design notes: docs/systems/syria_focus_tree.md
 ###########################################################################
@@ -33,6 +36,11 @@
 @SYR_BATTALION_MANPOWER = 10000
 @SYR_BATTALION_MANPOWER_COST = -10000
 @SYR_LOYAL_AUTONOMY = 0.05
+@SYR_LOCAL_MINES_USES = 2
+@SYR_LOCAL_MINES_COST = 150
+@SYR_LOCAL_MINES_DAYS = 30
+@SYR_LOCAL_MINES_TUNGSTEN = 5
+@SYR_LOCAL_MINES_CHROMIUM = 5
 
 SYR_the_national_struggle = {
 
@@ -368,6 +376,34 @@ SYR_the_french_levant = {
 			FRA = { add_manpower = @SYR_BATTALION_MANPOWER }
 			army_experience = 5
 			add_autonomy_ratio = { value = @SYR_LOYAL_AUTONOMY localization = SYR_autonomy_battalions }
+		}
+	}
+}
+
+prospect_for_resources = {
+
+	SYR_open_the_local_mines = {
+		icon = GFX_decision_tungsten
+		allowed = { original_tag = SYR }
+		highlight_states = {
+			highlight_state_targets = { state = 554 }
+		}
+		visible = {
+			has_completed_focus = SYR_the_damascus_industrial_zone_minesplaces
+			owns_state = 554
+			controls_state = 554
+			check_variable = { SYR_local_mines_opened < @SYR_LOCAL_MINES_USES }
+		}
+		cost = @SYR_LOCAL_MINES_COST
+		fire_only_once = no
+		days_remove = @SYR_LOCAL_MINES_DAYS
+		ai_will_do = { base = 5 }
+		remove_effect = {
+			add_to_variable = { SYR_local_mines_opened = 1 }
+			554 = {
+				add_resource = { type = tungsten amount = @SYR_LOCAL_MINES_TUNGSTEN }
+				add_resource = { type = chromium amount = @SYR_LOCAL_MINES_CHROMIUM }
+			}
 		}
 	}
 }

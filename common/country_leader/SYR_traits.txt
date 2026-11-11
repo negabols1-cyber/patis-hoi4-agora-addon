@@ -2,8 +2,20 @@
 # SYR_patron_of_learning is the political advisor trait of SYR_anamarudun
 # (common/characters/SYR_independence_characters.txt): research speed while hired.
 # Pattern: vanilla MEN_nationalist_education_enthusiast (common/country_leader/00_traits.txt).
+# SYR_mobilisation_organiser is the political advisor trait of
+# SYR_jamil_mardam_bey: faster mobilisation (pattern: vanilla maresal).
+# SYR_voice_of_arab_unity is the political advisor trait of
+# SYR_shukri_al_quwatli: more manpower from non-core states (pattern: vanilla
+# grand_vizier_nursi).
+# SYR_dislikes_the_ussr is a country leader trait of SYR_realcominismLeader,
+# who takes power with SYR_the_moscow_unconnection: -10% stability and
+# -10% war support.
 
 @SYR_PATRON_OF_LEARNING_RESEARCH_SPEED = 0.1
+@SYR_MOBILISATION_ORGANISER_SPEED = 0.15
+@SYR_ARAB_UNITY_NON_CORE_MANPOWER = 0.05
+@SYR_DISLIKES_THE_USSR_STABILITY = -0.1
+@SYR_DISLIKES_THE_USSR_WAR_SUPPORT = -0.1
 
 leader_traits = {
 	SYR_patron_of_learning = {
@@ -11,5 +23,26 @@ leader_traits = {
 		sprite = 13
 
 		research_speed_factor = @SYR_PATRON_OF_LEARNING_RESEARCH_SPEED
+	}
+
+	SYR_mobilisation_organiser = {
+		random = no
+		sprite = 13
+
+		mobilization_speed = @SYR_MOBILISATION_ORGANISER_SPEED
+	}
+
+	SYR_voice_of_arab_unity = {
+		random = no
+		sprite = 13
+
+		non_core_manpower = @SYR_ARAB_UNITY_NON_CORE_MANPOWER
+	}
+
+	SYR_dislikes_the_ussr = {
+		random = no
+
+		stability_factor = @SYR_DISLIKES_THE_USSR_STABILITY
+		war_support_factor = @SYR_DISLIKES_THE_USSR_WAR_SUPPORT
 	}
 }

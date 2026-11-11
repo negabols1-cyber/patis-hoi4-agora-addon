@@ -19,3 +19,5 @@ Consultation held on 2026-11-08. The user answered "tamam yap", which accepts ev
 | D-12 | AI | Route AI weights are tuned by the agent | agent default | 2026-11-08 | Routine implementation choice |
 | D-13 | World iteration | No effect or trigger iterates over every country; everything runs on Syria, France and named neighbours | agent default | 2026-11-08 | CLAUDE.md coding style rule 6 |
 | D-14 | Git | No commits; the project is not a git repository by the user's choice | established | 2026-11-08 | User decision recorded in agent memory |
+| D-16 | Independent communist route | A six-focus branch under `SYR_the_moscow_unconnection` makes Syria communist without the Soviet Union and ends in neutrality: no faction and no war focuses | user | 2026-11-10 | Consultation answer ("Tarafsız kalsın") |
+| D-17 | Independent communist route size | Six focuses: road to socialism, planned economy, collective farms, workers' militia, defence of the revolution, neutral people's republic | user | 2026-11-10 | Consultation answer (suggestion accepted) |

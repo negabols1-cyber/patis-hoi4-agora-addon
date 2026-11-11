@@ -8,6 +8,9 @@
 #   (history/countries/SYR - Syria.txt).
 # - SYR_zeid_bin_hussein is recruited by SYR_install_hashemite_monarchy.
 # - SYR_fawzi_al_qawuqji is recruited by SYR_recruit_qawuqji.
+# - SYR_jamil_mardam_bey and SYR_shukri_al_quwatli are political advisors
+#   recruited at game start; their traits are in
+#   common/country_leader/SYR_traits.txt.
 # Portraits reuse the mod's existing art: GFX_portrait_Zeid_bin_Hussein
 # (interface/_ef_leader_portraits.gfx) and the Fawzi al-Qawuqji portrait of
 # IRQ_fawzi_al_qawuqji (common/characters/IRQ.txt).
@@ -96,6 +99,38 @@ characters = {
 		}
 	}
 
+	SYR_jamil_mardam_bey = {
+		name = SYR_jamil_mardam_bey
+		portraits = {
+			civilian = {
+				large = GFX_Portrait_Arabia_Generic_1
+				small = GFX_Portrait_Arabia_Generic_1_small
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SYR_jamil_mardam_bey
+			cost = 150
+			traits = { SYR_mobilisation_organiser }
+		}
+	}
+
+	SYR_shukri_al_quwatli = {
+		name = SYR_shukri_al_quwatli
+		portraits = {
+			civilian = {
+				large = GFX_Portrait_Arabia_Generic_2
+				small = GFX_Portrait_Arabia_Generic_2_small
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SYR_shukri_al_quwatli
+			cost = 150
+			traits = { SYR_voice_of_arab_unity }
+		}
+	}
+
 	SYR_savilnabtar = {
 		name = SYR_savilnabtar
 		portraits = {
@@ -118,7 +153,7 @@ characters = {
 		name = SYR_adobel
 		portraits = {
 			army = {
-				large = GFX_portrait_unknown
+				large = GFX_Portrait_Arabia_Generic_land_1
 			}
 		}
 		field_marshal = {
@@ -129,6 +164,21 @@ characters = {
 			planning_skill = 1
 			logistics_skill = 1
 			legacy_id = -1
+		}
+	}
+
+	SYR_realcominismLeader = {
+		name = SYR_realcominismLeader
+		portraits = {
+			civilian = {
+				large = GFX_portrait_Soviet_Nicholas_second
+			}
+		}
+		country_leader = {
+			ideology = leninism
+			traits = { dictator SYR_dislikes_the_ussr }
+			expire = "1965.1.1.1"
+			id = -1
 		}
 	}
 }
