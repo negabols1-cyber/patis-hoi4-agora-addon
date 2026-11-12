@@ -14,12 +14,11 @@
 @SYR_RESISTANCE_GOAL = 100
 @SYR_FRANCE_WEAK_MULT = 1.5
 @SYR_UNDERGROUND_MULT = 1.25
-@SYR_RESPONSE_CHANCE = 50
-@SYR_NO_RESPONSE_CHANCE = 50
 @SYR_RESPONSE_COOLDOWN_DAYS = 30
 @SYR_LEADERSHIP_MAX_STABILITY_COST = 0.15
 @SYR_LEADERSHIP_POPULARITY_BOOST = 0.15
 @SYR_REVOLT_WAR_SUPPORT = 0.15
+@SYR_ARAB_LIBERATION_WAR_DAYS = 365
 
 # SYR scope. Input: temp variable SYR_resistance_gain (base gain).
 # The gain grows while France is weakened or no longer democratic, and once
@@ -74,12 +73,14 @@ SYR_roll_french_response = {
 				is_subject_of = FRA
 				NOT = { has_country_flag = SYR_french_response_pending }
 			}
+			# random_list weights must be literal numbers: an @constant there is read
+			# as a redefinition and leaves the list empty.
 			random_list = {
-				@SYR_RESPONSE_CHANCE = {
+				50 = { # France answers
 					set_country_flag = { flag = SYR_french_response_pending days = @SYR_RESPONSE_COOLDOWN_DAYS value = 1 }
 					FRA = { country_event = { id = syria.10 days = 5 random_days = 10 } }
 				}
-				@SYR_NO_RESPONSE_CHANCE = { }
+				50 = { }
 			}
 		}
 	}
@@ -255,4 +256,178 @@ SYR_install_national_bloc_government = {
 	}
 	SYR_make_atassi_president = yes
 	set_country_flag = SYR_route_democratic
+}
+
+# Country scope: the invited country; ROOT is Syria. Sends the invitation into
+# the Syrian faction (event syria.85, FROM is Syria) to an independent country
+# without a faction. Used by the Arab-Islamic alliance focuses.
+SYR_invite_to_the_alliance = {
+	if = {
+		limit = {
+			is_in_faction = no
+			is_subject = no
+			ROOT = { is_faction_leader = yes }
+		}
+		country_event = { id = syria.85 days = 2 }
+	}
+}
+
+# SYR scope. Focus SYR_the_free_arab_nations and decision SYR_free_the_held_arab_lands:
+# Syria releases Egypt, Kuwait and Libya as its subjects from the core states it
+# holds and brings them into its faction; an Arab nation that is already
+# independent is invited instead.
+SYR_free_the_arab_nations = {
+	if = {
+		limit = {
+			NOT = { country_exists = EGY }
+			any_owned_state = { is_core_of = EGY }
+		}
+		release_puppet = EGY
+	}
+	if = {
+		limit = {
+			is_faction_leader = yes
+			country_exists = EGY
+			EGY = {
+				is_subject_of = ROOT
+				NOT = { is_in_faction_with = ROOT }
+			}
+		}
+		add_to_faction = EGY
+	}
+	else_if = {
+		limit = { country_exists = EGY }
+		EGY = { SYR_invite_to_the_alliance = yes }
+	}
+	if = {
+		limit = {
+			NOT = { country_exists = KUW }
+			any_owned_state = { is_core_of = KUW }
+		}
+		release_puppet = KUW
+	}
+	if = {
+		limit = {
+			is_faction_leader = yes
+			country_exists = KUW
+			KUW = {
+				is_subject_of = ROOT
+				NOT = { is_in_faction_with = ROOT }
+			}
+		}
+		add_to_faction = KUW
+	}
+	else_if = {
+		limit = { country_exists = KUW }
+		KUW = { SYR_invite_to_the_alliance = yes }
+	}
+	if = {
+		limit = {
+			NOT = { country_exists = LBA }
+			any_owned_state = { is_core_of = LBA }
+		}
+		release_puppet = LBA
+	}
+	if = {
+		limit = {
+			is_faction_leader = yes
+			country_exists = LBA
+			LBA = {
+				is_subject_of = ROOT
+				NOT = { is_in_faction_with = ROOT }
+			}
+		}
+		add_to_faction = LBA
+	}
+	else_if = {
+		limit = { country_exists = LBA }
+		LBA = { SYR_invite_to_the_alliance = yes }
+	}
+}
+
+# SYR scope. Focus SYR_the_free_arab_nations: the country holding Cairo (or
+# Alexandria) is asked to free Egypt (syria.87), the country holding Tripoli (or
+# Benghazi) to free Libya (syria.88). FROM in those events is Syria.
+SYR_demand_arab_independence = {
+	if = {
+		limit = {
+			446 = {
+				NOT = { is_owned_by = ROOT }
+				NOT = { is_owned_by = EGY }
+			}
+		}
+		446 = { OWNER = { country_event = { id = syria.87 days = 1 } } }
+	}
+	else_if = {
+		limit = {
+			447 = {
+				NOT = { is_owned_by = ROOT }
+				NOT = { is_owned_by = EGY }
+			}
+		}
+		447 = { OWNER = { country_event = { id = syria.87 days = 1 } } }
+	}
+	if = {
+		limit = {
+			448 = {
+				NOT = { is_owned_by = ROOT }
+				NOT = { is_owned_by = LBA }
+			}
+		}
+		448 = { OWNER = { country_event = { id = syria.88 days = 1 } } }
+	}
+	else_if = {
+		limit = {
+			450 = {
+				NOT = { is_owned_by = ROOT }
+				NOT = { is_owned_by = LBA }
+			}
+		}
+		450 = { OWNER = { country_event = { id = syria.88 days = 1 } } }
+	}
+}
+
+# Country scope: the country that frees Egypt (syria.87). Egypt is released
+# from its core states, or receives them if it already exists.
+SYR_grant_egypt_independence = {
+	if = {
+		limit = { NOT = { country_exists = EGY } }
+		release = EGY
+	}
+	else = {
+		every_owned_state = {
+			limit = { is_core_of = EGY }
+			EGY = { transfer_state = PREV }
+		}
+	}
+}
+
+# Country scope: the country that frees Libya (syria.88). Libya is released
+# from its core states, or receives them if it already exists.
+SYR_grant_libya_independence = {
+	if = {
+		limit = { NOT = { country_exists = LBA } }
+		release = LBA
+	}
+	else = {
+		every_owned_state = {
+			limit = { is_core_of = LBA }
+			LBA = { transfer_state = PREV }
+		}
+	}
+}
+
+# SYR scope. Option "free it by force" of syria.96 and syria.97: war on FROM, the
+# country that refused, for the Egyptian and Libyan states it holds, and one year
+# of the attack spirit SYR_war_of_arab_liberation.
+SYR_start_arab_liberation_war = {
+	declare_war_on = {
+		target = FROM
+		type = take_state_focus
+		generator = { 446 447 452 453 456 457 552 907 273 448 449 450 451 661 662 663 }
+	}
+	add_timed_idea = {
+		idea = SYR_war_of_arab_liberation
+		days = @SYR_ARAB_LIBERATION_WAR_DAYS
+	}
 }

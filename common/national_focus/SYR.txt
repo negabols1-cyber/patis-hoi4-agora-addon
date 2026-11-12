@@ -31,6 +31,15 @@
 @SYR_AIR_RESEARCH_USES = 3
 @SYR_DAMASCUS_STEEL = 8
 @SYR_IRON_MINES_STEEL = 10
+@SYR_LATE_IRON_MINES_STEEL = 6
+@SYR_AXIS_OIL = 20
+@SYR_ARMS_WORKS_FACTORIES = 1
+@SYR_GERMAN_ACT_ARMOR_BONUS = 2.0 # +200% armour research speed
+@SYR_GERMAN_ACT_ARMOR_USES = 5
+@SYR_GERMAN_ACT_BONUS = 0.5
+@SYR_GERMAN_ACT_USES = 3
+@SYR_GERMAN_ACT_RIFLES = 8000
+@SYR_GERMAN_ACT_ARTILLERY = 500
 @SYR_HOMS_REFINERY_OIL = 24
 @SYR_MOUNTAIN_RESEARCH_BONUS = 0.5
 @SYR_MOUNTAIN_RESEARCH_USES = 1
@@ -1171,7 +1180,7 @@ add_popularity = { ideology = communism popularity = 0.1 }
 		icon = GFX_focus_generic_fascist_propaganda
 		prerequisite = { focus = SYR_the_hour_of_independence }
 		mutually_exclusive = { focus = SYR_the_peoples_front focus = SYR_the_hashemite_restoration }
-		x = 21
+		x = 22
 		y = 8
 		cost = 5
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -1193,7 +1202,7 @@ add_popularity = { ideology = communism popularity = 0.1 }
 		id = SYR_the_whirlwind_banner
 		icon = GFX_focus_generic_spread_fascism
 		prerequisite = { focus = SYR_the_syrian_social_nationalist_party }
-		x = 20
+		x = 21
 		y = 9
 		cost = 7
 		search_filters = { FOCUS_FILTER_WAR_SUPPORT }
@@ -1207,7 +1216,7 @@ add_popularity = { ideology = communism popularity = 0.1 }
 		id = SYR_the_corporate_economy
 		icon = GFX_focus_ITA_generic_fascist_workers
 		prerequisite = { focus = SYR_the_syrian_social_nationalist_party }
-		x = 22
+		x = 23
 		y = 9
 		cost = 7
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -1226,7 +1235,7 @@ add_popularity = { ideology = communism popularity = 0.1 }
 		id = SYR_the_ssnp_militia
 		icon = GFX_focus_generic_fascist_troops
 		prerequisite = { focus = SYR_the_whirlwind_banner }
-		x = 20
+		x = 21
 		y = 10
 		cost = 7
 		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_ARMY_XP }
@@ -1241,7 +1250,7 @@ add_popularity = { ideology = communism popularity = 0.1 }
 		id = SYR_the_doctrine_of_natural_syria
 		icon = GFX_focus_IRQ_unite_mashriq
 		prerequisite = { focus = SYR_the_corporate_economy }
-		x = 22
+		x = 23
 		y = 10
 		cost = 7
 		search_filters = { FOCUS_FILTER_ANNEXATION }
@@ -1273,7 +1282,7 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		icon = GFX_focus_PER_iran_first
 		prerequisite = { focus = SYR_the_ssnp_militia }
 		prerequisite = { focus = SYR_the_doctrine_of_natural_syria }
-		x = 21
+		x = 22
 		y = 11
 		cost = 7
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
@@ -1288,9 +1297,10 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 
 	focus = {
 		id = SYR_seek_axis_patronage
-		icon = GFX_focus_TUR_support_the_golden_square
+		icon = GFX_focus_chi_mission_to_germany
 		prerequisite = { focus = SYR_the_zaim }
-		x = 20
+		mutually_exclusive = { focus = SYR_axis_events }
+		x = 24
 		y = 12
 		cost = 7
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -1324,9 +1334,9 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 	focus = {
 		id = SYR_reclaim_lebanon
 		icon = GFX_focus_generic_attack_lebanon
-		prerequisite = { focus = SYR_the_zaim }
+		prerequisite = { focus = SYR_seek_axis_patronage focus = SYR_axis_events }
 		x = 22
-		y = 12
+		y = 13
 		cost = 7
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 		available = {
@@ -1384,14 +1394,14 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 		id = SYR_german_military_advisors
 		icon = GFX_focus_PER_luftwaffe_planes
 		prerequisite = { focus = SYR_seek_axis_patronage }
-		x = 20
+		x = 24
 		y = 13
 		cost = 7
 		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_RESEARCH }
 		available = {
 			OR = {
-				GER = { has_opinion = { target = ROOT value > 20 } }
-				ITA = { has_opinion = { target = ROOT value > 20 } }
+				GER = { has_opinion = { target = ROOT value > 30 } }
+				ITA = { has_opinion = { target = ROOT value > 30 } }
 			}
 		}
 		ai_will_do = { base = 10 }
@@ -1408,10 +1418,10 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 
 	focus = {
 		id = SYR_march_on_jerusalem
-		icon = GFX_focus_IRQ_liberate_levant
-		prerequisite = { focus = SYR_reclaim_lebanon }
-		x = 22
-		y = 13
+		icon = GFX_focus_attack_britain
+		prerequisite = { focus = SYR_reclaim_lebanon focus = SYR_german_officers }
+		x = 23
+		y = 15
 		cost = 7
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 		available = {
@@ -1449,9 +1459,9 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 	focus = {
 		id = SYR_the_mesopotamian_front
 		icon = GFX_focus_PER_path_through_iraq
-		prerequisite = { focus = SYR_german_military_advisors }
-		x = 20
-		y = 14
+		prerequisite = { focus = SYR_reclaim_lebanon }
+		x = 21
+		y = 15
 		cost = 7
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 		available = {
@@ -1478,9 +1488,9 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 	focus = {
 		id = SYR_the_star_of_cyprus
 		icon = GFX_focus_IRQ_navy
-		prerequisite = { focus = SYR_march_on_jerusalem }
+		prerequisite = { focus = SYR_the_mesopotamian_front focus = SYR_march_on_jerusalem }
 		x = 22
-		y = 14
+		y = 16
 		cost = 7
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 		available = {
@@ -1495,13 +1505,29 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 			}
 		}
 		completion_reward = {
-			183 = {
-				OWNER = {
-					ROOT = {
-						create_wargoal = {
-							type = take_state_focus
-							target = PREV
-							generator = { 183 }
+			# Cyprus as a country is the enemy; without it, the owner of the island
+			# gets a war goal as before.
+			if = {
+				limit = {
+					country_exists = CYP
+					NOT = { has_war_with = CYP }
+				}
+				declare_war_on = {
+					target = CYP
+					type = take_state_focus
+					generator = { 183 }
+				}
+			}
+			else_if = {
+				limit = { NOT = { country_exists = CYP } }
+				183 = {
+					OWNER = {
+						ROOT = {
+							create_wargoal = {
+								type = take_state_focus
+								target = PREV
+								generator = { 183 }
+							}
 						}
 					}
 				}
@@ -1518,9 +1544,11 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 	focus = {
 		id = SYR_greater_syria_proclaimed
 		icon = GFX_focus_IRQ_greater_iraq
-		prerequisite = { focus = SYR_the_mesopotamian_front focus = SYR_the_star_of_cyprus }
-		x = 21
-		y = 15
+		prerequisite = { focus = SYR_march_on_jerusalem }
+		prerequisite = { focus = SYR_the_mesopotamian_front }
+		prerequisite = { focus = SYR_the_star_of_cyprus }
+		x = 22
+		y = 17
 		cost = 7
 		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_STABILITY }
 		available = {
@@ -1559,7 +1587,7 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 		icon = GFX_focus_IRQ_rally_behind_the_hashemite_dynasty
 		prerequisite = { focus = SYR_the_hour_of_independence }
 		mutually_exclusive = { focus = SYR_the_peoples_front focus = SYR_the_syrian_social_nationalist_party }
-		x = 25
+		x = 30
 		y = 8
 		cost = 5
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -1581,7 +1609,7 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 		id = SYR_crown_the_king_in_damascus
 		icon = GFX_focus_ICE_the_kingdom_of_iceland
 		prerequisite = { focus = SYR_the_hashemite_restoration }
-		x = 24
+		x = 29
 		y = 9
 		cost = 7
 		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_POLITICAL }
@@ -1595,7 +1623,7 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 		id = SYR_the_royal_diwan
 		icon = GFX_focus_PER_constitutional_monarchy
 		prerequisite = { focus = SYR_the_hashemite_restoration }
-		x = 26
+		x = 31
 		y = 9
 		cost = 7
 		search_filters = { FOCUS_FILTER_POLITICAL }
@@ -1610,7 +1638,7 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 		id = SYR_the_bedouin_levies
 		icon = GFX_focus_generic_camel_corps
 		prerequisite = { focus = SYR_crown_the_king_in_damascus }
-		x = 24
+		x = 29
 		y = 10
 		cost = 7
 		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_ARMY_XP }
@@ -1625,7 +1653,7 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 		id = SYR_the_tribal_councils
 		icon = GFX_focus_IRQ_approach_tribes_for_support
 		prerequisite = { focus = SYR_the_royal_diwan }
-		x = 26
+		x = 31
 		y = 10
 		cost = 7
 		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_MANPOWER }
@@ -1639,9 +1667,10 @@ add_popularity = { ideology = fascism popularity = 0.1 }
 	focus = {
 		id = SYR_the_throne_of_faisal
 		icon = GFX_focus_IRQ_restoration_of_hejaz
-		prerequisite = { focus = SYR_the_bedouin_levies }
+		mutually_exclusive = { focus = SYR_komkompuration }
 		prerequisite = { focus = SYR_the_tribal_councils }
-		x = 25
+		prerequisite = { focus = SYR_the_bedouin_levies }
+		x = 30
 		y = 11
 		cost = 7
 		search_filters = { FOCUS_FILTER_POLITICAL FOCUS_FILTER_STABILITY FOCUS_FILTER_WAR_SUPPORT }
@@ -1658,9 +1687,9 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		id = SYR_the_hashemite_entente
 		icon = GFX_focus_IRQ_hashemite_arab_federation
 		prerequisite = { focus = SYR_the_throne_of_faisal }
-		x = 24
+		x = 29
 		y = 12
-		cost = 7
+		cost = 4
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		ai_will_do = { base = 10 }
 		completion_reward = {
@@ -1689,9 +1718,9 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		id = SYR_the_armed_neutrality
 		icon = GFX_focus_SWI_spirit_of_resistance
 		prerequisite = { focus = SYR_the_throne_of_faisal }
-		x = 26
+		x = 31
 		y = 12
-		cost = 7
+		cost = 4
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 10 }
 		completion_reward = {
@@ -1720,9 +1749,9 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		id = SYR_the_arab_league_initiative
 		icon = GFX_focus_IRQ_arab_league
 		prerequisite = { focus = SYR_the_hashemite_entente }
-		x = 24
+		x = 29
 		y = 13
-		cost = 7
+		cost = 4
 		search_filters = { FOCUS_FILTER_POLITICAL }
 		ai_will_do = { base = 10 }
 		completion_reward = {
@@ -1756,9 +1785,9 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		id = SYR_reunite_with_lebanon
 		icon = GFX_focus_generic_attack_lebanon
 		prerequisite = { focus = SYR_the_armed_neutrality }
-		x = 26
+		x = 31
 		y = 13
-		cost = 7
+		cost = 2
 		search_filters = { FOCUS_FILTER_ANNEXATION }
 		available = {
 			is_subject = no
@@ -1796,9 +1825,9 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		id = SYR_the_fertile_crescent_plan
 		icon = GFX_focus_IRQ_reach_out_to_jordan
 		prerequisite = { focus = SYR_the_arab_league_initiative }
-		x = 24
+		x = 29
 		y = 14
-		cost = 7
+		cost = 4
 		search_filters = { FOCUS_FILTER_ANNEXATION FOCUS_FILTER_POLITICAL }
 		ai_will_do = { base = 8 }
 		completion_reward = {
@@ -1828,9 +1857,9 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		id = SYR_the_royal_guard
 		icon = GFX_focus_PER_expand_imperial_guard
 		prerequisite = { focus = SYR_reunite_with_lebanon }
-		x = 26
+		x = 31
 		y = 14
-		cost = 7
+		cost = 4
 		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_MANPOWER }
 		ai_will_do = { base = 10 }
 		completion_reward = {
@@ -1843,7 +1872,7 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		id = SYR_the_hashemite_kingdom_of_syria
 		icon = GFX_focus_IRQ_unite_mashriq
 		prerequisite = { focus = SYR_the_fertile_crescent_plan focus = SYR_the_royal_guard }
-		x = 25
+		x = 30
 		y = 15
 		cost = 7
 		search_filters = { FOCUS_FILTER_STABILITY FOCUS_FILTER_ANNEXATION }
@@ -1867,13 +1896,179 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 	}
 
 	#######################################################################
+	### HASHEMITE BRANCH: THE ARAB-ISLAMIC ALLIANCE ###
+	# SYR_the_throne_of_faisal -> arab covenant (Saudi Arabia, Yemen) ->
+	# islamic conference (Persia, Afghanistan) -> liberate the Arab lands
+	# (Egypt, Kuwait, Libya) -> free Arab nations; arab covenant -> arab
+	# brotherhood (spirit for the whole faction). Both lines meet in the
+	# Arabia Organization: faction name, dark green colour (cosmetic tag
+	# SYR_arabia_org) and union with Syria (event syria.86, decisions in
+	# SYR_arabia_organization). Invitations use event syria.85.
+	#######################################################################
+
+	focus = {
+		id = SYR_the_arab_covenant
+		icon = GFX_focus_generic_befriend_saudi_arabia
+		prerequisite = { focus = SYR_the_throne_of_faisal }
+		x = 34
+		y = 12
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = {
+			OR = {
+				is_in_faction = no
+				is_faction_leader = yes
+			}
+		}
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			if = {
+				limit = { is_in_faction = no }
+				create_faction = SYR_hashemite_entente_faction
+			}
+			if = {
+				limit = { country_exists = SAU }
+				SAU = {
+					add_opinion_modifier = { target = ROOT modifier = SYR_arab_covenant }
+					SYR_invite_to_the_alliance = yes
+				}
+			}
+			if = {
+				limit = { country_exists = YEM }
+				YEM = {
+					add_opinion_modifier = { target = ROOT modifier = SYR_arab_covenant }
+					SYR_invite_to_the_alliance = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SYR_the_islamic_conference
+		icon = GFX_focus_PER_islamic_solidarity
+		prerequisite = { focus = SYR_the_arab_covenant }
+		x = 33
+		y = 13
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = { is_faction_leader = yes }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			if = {
+				limit = { country_exists = PER }
+				PER = {
+					add_opinion_modifier = { target = ROOT modifier = SYR_islamic_solidarity }
+					SYR_invite_to_the_alliance = yes
+				}
+			}
+			if = {
+				limit = { country_exists = AFG }
+				AFG = {
+					add_opinion_modifier = { target = ROOT modifier = SYR_islamic_solidarity }
+					SYR_invite_to_the_alliance = yes
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SYR_the_arab_brotherhood
+		icon = GFX_focus_TUR_support_the_golden_square
+		prerequisite = { focus = SYR_the_arab_covenant }
+		x = 35
+		y = 13
+		cost = 7
+		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_WAR_SUPPORT }
+		available = { is_faction_leader = yes }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			add_ideas = SYR_arab_brotherhood
+			every_other_country = {
+				limit = { is_in_faction_with = ROOT }
+				add_ideas = SYR_arab_brotherhood
+			}
+		}
+	}
+
+	focus = {
+		id = SYR_liberate_the_arab_lands
+		icon = GFX_focus_generic_africa_liberation
+		prerequisite = { focus = SYR_the_islamic_conference }
+		x = 33
+		y = 14
+		cost = 7
+		search_filters = { FOCUS_FILTER_ANNEXATION }
+		available = { is_subject = no }
+		ai_will_do = { base = 5 }
+		completion_reward = {
+			every_other_country = {
+				limit = {
+					NOT = { is_in_faction_with = ROOT }
+					any_owned_state = { SYR_is_arab_nation_land = yes }
+				}
+				ROOT = {
+					create_wargoal = {
+						type = take_state_focus
+						target = PREV
+						generator = { 446 447 452 453 456 457 552 907 656 273 448 449 450 451 661 662 663 }
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = SYR_the_free_arab_nations
+		icon = GFX_focus_PER_middle_east_protectorate
+		prerequisite = { focus = SYR_liberate_the_arab_lands }
+		x = 33
+		y = 15
+		cost = 7
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = { is_faction_leader = yes }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			# Arab lands Syria already holds are freed at once; the holders of
+			# Egypt and Libya are asked to free them (syria.87 and syria.88), and a
+			# refusal lets Syria declare war (syria.96 and syria.97).
+			SYR_free_the_arab_nations = yes
+			SYR_demand_arab_independence = yes
+			unlock_decision_category_tooltip = SYR_arabia_organization
+		}
+	}
+
+	focus = {
+		id = SYR_the_arabia_organization
+		icon = GFX_goal_Unite_Arabia
+		prerequisite = { focus = SYR_the_free_arab_nations }
+		prerequisite = { focus = SYR_the_arab_brotherhood }
+		prerequisite = { focus = SYR_the_hashemite_kingdom_of_syria }
+		x = 34
+		y = 16
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		available = { is_faction_leader = yes }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			set_faction_name = SYR_arabia_organization_faction
+			set_cosmetic_tag = SYR_arabia_org
+			every_other_country = {
+				limit = { is_in_faction_with = ROOT }
+				country_event = { id = syria.86 days = 3 }
+			}
+			custom_effect_tooltip = SYR_arabia_union_cores_tt
+			unlock_decision_category_tooltip = SYR_arabia_organization
+		}
+	}
+
+	#######################################################################
 	### ECONOMY ###
 	#######################################################################
 
 	focus = {
 		id = SYR_the_mandate_economy
 		icon = GFX_focus_PER_national_bank
-		x = -3
+		x = -8
 		y = 0
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -1894,7 +2089,7 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		icon = GFX_focus_CHL_enlarge_the_textile_industries
 		mutually_exclusive = { focus = SYR_the_aleppo_textile_mills_copy2 }
 		prerequisite = { focus = SYR_the_mandate_economy }
-		x = -4
+		x = -7
 		y = 1
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -1912,8 +2107,8 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 	focus = {
 		id = SYR_the_jazira_wheat_frontier
 		icon = GFX_focus_generic_modernizing_agriculture
-		prerequisite = { focus = SYR_the_aleppo_textile_mills_copy2 }
-		x = 0
+		prerequisite = { focus = SYR_the_aleppo_textile_mills }
+		x = -5
 		y = 2
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
@@ -1933,8 +2128,8 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 	focus = {
 		id = SYR_railways_of_the_levant
 		icon = GFX_focus_generic_railroad
-		prerequisite = { focus = SYR_the_aleppo_textile_mills }
-		x = -4
+		prerequisite = { focus = SYR_the_aleppo_textile_mills_copy2 }
+		x = -9
 		y = 2
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -1956,9 +2151,9 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 
 	focus = {
 		id = SYR_the_iraq_pipeline_transit
-		icon = GFX_focus_IRQ_anglo_iraqi_oil_expansion
-		prerequisite = { focus = SYR_the_aleppo_textile_mills_copy2 }
-		x = -2
+		icon = GFX_focus_IRQ_nationalize_the_anglo_iraqi_oil_company
+		prerequisite = { focus = SYR_the_aleppo_textile_mills }
+		x = -7
 		y = 2
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
@@ -1975,8 +2170,8 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 	focus = {
 		id = SYR_the_damascus_industrial_zone
 		icon = GFX_focus_IRQ_found_the_state_company_for_iron_and_steel
-		prerequisite = { focus = SYR_the_aleppo_textile_mills }
-		x = -6
+		prerequisite = { focus = SYR_the_aleppo_textile_mills_copy2 }
+		x = -11
 		y = 2
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -1996,7 +2191,7 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		id = SYR_the_iron_mines
 		icon = GFX_goal_generic_construct_mil_factory
 		prerequisite = { focus = SYR_the_damascus_industrial_zone }
-		x = -5
+		x = -10
 		y = 3
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -2014,7 +2209,7 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 		id = SYR_the_homs_refinery
 		icon = GFX_focus_PER_form_oil_company
 		prerequisite = { focus = SYR_the_jazira_wheat_frontier }
-		x = -1
+		x = -6
 		y = 3
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -2035,9 +2230,8 @@ add_popularity = { ideology = neutrality popularity = 0.1 }
 	focus = {
 		id = SYR_the_syrian_university
 		icon = GFX_focus_generic_university_1
-		prerequisite = { focus = SYR_the_damascus_industrial_zone focus = SYR_the_homs_refinery focus = SYR_the_jazira_wheat_frontier_copy focus = SYR_the_iraq_pipeline_transit }
-		prerequisite = { focus = SYR_railways_of_the_levant }
-		x = -3
+		prerequisite = { focus = SYR_railways_of_the_levant focus = SYR_the_iraq_pipeline_transit focus = SYR_the_homs_refinery focus = SYR_the_iron_mines }
+		x = -8
 		y = 4
 		cost = 7
 		search_filters = { FOCUS_FILTER_RESEARCH }
@@ -2052,7 +2246,7 @@ add_research_slot = 1
 		id = SYR_arms_workshops
 		icon = GFX_focus_CONGO_copper_cartridges
 		prerequisite = { focus = SYR_the_syrian_university }
-		x = -4
+		x = -9
 		y = 5
 		cost = 5
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -2071,7 +2265,7 @@ add_research_slot = 1
 		id = SYR_the_euphrates_project
 		icon = GFX_focus_focus_generic_build_dam
 		prerequisite = { focus = SYR_the_syrian_university }
-		x = -2
+		x = -7
 		y = 5
 		cost = 5
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -2092,7 +2286,7 @@ add_research_slot = 1
 		icon = GFX_focus_generic_monetary_union
 		prerequisite = { focus = SYR_arms_workshops }
 		prerequisite = { focus = SYR_the_euphrates_project }
-		x = -3
+		x = -8
 		y = 6
 		cost = 5
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -2106,18 +2300,23 @@ add_research_slot = 1
 		id = SYR_modernise_the_harbours
 		icon = GFX_goal_generic_construct_naval_dockyard
 		prerequisite = { focus = SYR_the_levantine_market }
-		x = -4
+		x = -9
 		y = 7
 		cost = 5
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		ai_will_do = { base = 6 }
 		completion_reward = {
+add_equipment_to_stockpile = {
+    type = convoy
+    amount = 50
+}
 			random_owned_controlled_state = {
 				limit = { is_coastal = yes }
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = { type = dockyard level = 1 instant_build = yes }
 				add_building_construction = { type = infrastructure level = 1 instant_build = yes }
 			}
+
 		}
 	}
 
@@ -2125,12 +2324,13 @@ add_research_slot = 1
 		id = SYR_the_damascus_trade_fair
 		icon = GFX_goal_generic_trade
 		prerequisite = { focus = SYR_the_levantine_market }
-		x = -2
+		x = -7
 		y = 7
 		cost = 5
 		search_filters = { FOCUS_FILTER_INDUSTRY }
 		ai_will_do = { base = 6 }
 		completion_reward = {
+add_ideas = SYR_the_damascus_trade_fair
 			554 = {
 				if = {
 					limit = { is_owned_and_controlled_by = ROOT }
@@ -2144,9 +2344,8 @@ add_research_slot = 1
 	focus = {
 		id = SYR_a_self_reliant_syria
 		icon = GFX_goal_generic_production
-		prerequisite = { focus = SYR_modernise_the_harbours }
 		prerequisite = { focus = SYR_the_damascus_trade_fair }
-		x = -3
+		x = -6
 		y = 8
 		cost = 5
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_RESEARCH }
@@ -2173,8 +2372,8 @@ add_research_slot = 1
 	focus = {
 		id = SYR_an_army_for_syria
 		icon = GFX_focus_IRQ_royal_iraqi_army
-		x = 30
-		y = 1
+		x = 40
+		y = 3
 		cost = 3
 		search_filters = { FOCUS_FILTER_MANPOWER FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 12 }
@@ -2189,8 +2388,8 @@ add_research_slot = 1
 		id = SYR_the_desert_cavalry
 		icon = GFX_focus_generic_camel_corps
 		prerequisite = { focus = SYR_an_army_for_syria }
-		x = 29
-		y = 2
+		x = 39
+		y = 4
 		cost = 2.5
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 8 }
@@ -2209,8 +2408,8 @@ add_research_slot = 1
 		id = SYR_the_homs_military_academy
 		icon = GFX_focus_IRQ_train
 		prerequisite = { focus = SYR_an_army_for_syria }
-		x = 31
-		y = 2
+		x = 41
+		y = 4
 		cost = 2.5
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 10 }
@@ -2223,8 +2422,8 @@ add_research_slot = 1
 		id = SYR_mountain_warfare
 		icon = GFX_focus_AFG_mountain_training
 		prerequisite = { focus = SYR_the_desert_cavalry focus = SYR_the_homs_military_academy }
-		x = 30
-		y = 3
+		x = 39
+		y = 5
 		cost = 2.5
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 8 }
@@ -2244,8 +2443,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
     id = SYR_the_artillery_park
     icon = GFX_goal_artillery
     prerequisite = { focus = SYR_the_homs_military_academy focus = SYR_the_desert_cavalry }
-    x = 32
-    y = 3
+    x = 41
+    y = 5
     cost = 2.5
     search_filters = { FOCUS_FILTER_RESEARCH }
     ai_will_do = { base = 8 }
@@ -2269,8 +2468,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_desert_raiders
 		icon = GFX_focus_PER_desert_training
 		prerequisite = { focus = SYR_mountain_warfare focus = SYR_the_artillery_park }
-		x = 31
-		y = 4
+		x = 39
+		y = 6
 		cost = 2.5
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 6 }
@@ -2289,8 +2488,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_motorized_columns
 		icon = GFX_focus_PER_establish_tehran_armor
 		prerequisite = { focus = SYR_the_artillery_park focus = SYR_mountain_warfare }
-		x = 33
-		y = 4
+		x = 41
+		y = 6
 		cost = 2.5
 		search_filters = { FOCUS_FILTER_RESEARCH }
 		ai_will_do = { base = 6 }
@@ -2309,8 +2508,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_general_staff
 		icon = GFX_focus_PER_restructure_army
 		prerequisite = { focus = SYR_generalsttt }
-		x = 33
-		y = 6
+		x = 38
+		y = 8
 		cost = 6
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 8 }
@@ -2324,8 +2523,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_syrian_air_arm
 		icon = GFX_focus_IRQ_airforce
 		prerequisite = { focus = SYR_the_general_staff }
-		x = 32
-		y = 7
+		x = 37
+		y = 9
 		cost = 2
 		search_filters = { FOCUS_FILTER_RESEARCH }
 		ai_will_do = { base = 6 }
@@ -2348,8 +2547,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_defence_of_damascus
 		icon = GFX_focus_SWI_continuous_support_active_militias
 		prerequisite = { focus = SYR_the_general_staff }
-		x = 34
-		y = 7
+		x = 39
+		y = 9
 		cost = 6
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 8 }
@@ -2375,8 +2574,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_mezzeh_flight_school
 		icon = GFX_focus_PER_establish_airforce
 		prerequisite = { focus = SYR_generalsttt }
-		x = 37
-		y = 6
+		x = 42
+		y = 8
 		cost = 6
 		search_filters = { FOCUS_FILTER_RESEARCH }
 		ai_will_do = { base = 6 }
@@ -2395,8 +2594,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_northern_frontier
 		icon = GFX_focus_PER_construct_air_defenses
 		prerequisite = { focus = SYR_the_defence_of_damascus focus = SYR_the_syrian_air_arm }
-		x = 33
-		y = 8
+		x = 38
+		y = 10
 		cost = 6
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 6 }
@@ -2424,8 +2623,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_national_army
 		icon = GFX_focus_IRQ_royal_iraqi_army_alt
 		prerequisite = { focus = SYR_the_northern_frontier }
-		x = 33
-		y = 9
+		x = 38
+		y = 11
 		cost = 6
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 10 }
@@ -2438,8 +2637,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_reserve_system
 		icon = GFX_goal_generic_allies_build_infantry
 		prerequisite = { focus = SYR_the_national_army }
-		x = 32
-		y = 11
+		x = 37
+		y = 13
 		cost = 5
 		search_filters = { FOCUS_FILTER_MANPOWER }
 		ai_will_do = { base = 8 }
@@ -2453,8 +2652,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_northern_fortress_line
 		icon = GFX_goal_generic_defence
 		prerequisite = { focus = SYR_the_national_army }
-		x = 34
-		y = 11
+		x = 39
+		y = 13
 		cost = 5
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 6 }
@@ -2478,8 +2677,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		icon = GFX_goal_generic_army_doctrines
 		prerequisite = { focus = SYR_the_reserve_system }
 		prerequisite = { focus = SYR_the_northern_fortress_line }
-		x = 33
-		y = 13
+		x = 38
+		y = 15
 		cost = 7
 		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_RESEARCH }
 		ai_will_do = { base = 8 }
@@ -2490,17 +2689,20 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 				bonus = 1.0
 				uses = 1
 				category = land_doctrine
-			}
+}
+add_ideas = SYR_the_national_army2
+remove_ideas = SYR_the_national_army
+		
 		}
 	}
 
 	focus = {
 		id = SYR_generalsttt
 		icon = GFX_goal_turkey_return_of_the_sultan
-		prerequisite = { focus = SYR_motorized_columns focus = SYR_the_desert_raiders }
-		x = 35
-		y = 5
-		cost = 6
+		prerequisite = { focus = SYR_the_desert_raiders focus = SYR_motorized_columns }
+		x = 40
+		y = 7
+		cost = 4
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 8 }
 		completion_reward = {
@@ -2514,8 +2716,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_aaa2
 		icon = GFX_goal_generic_air_fighter_new
 		prerequisite = { focus = SYR_the_mezzeh_flight_school }
-		x = 37
-		y = 7
+		x = 42
+		y = 9
 		cost = 11
 		search_filters = { FOCUS_FILTER_RESEARCH }
 		ai_will_do = { base = 8 }
@@ -2542,8 +2744,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		icon = GFX_focus_ITA_modernize_ansaldo_facilities
 		prerequisite = { focus = SYR_the_national_army }
 		prerequisite = { focus = SYR_aaa2 }
-		x = 37
-		y = 10
+		x = 42
+		y = 12
 		cost = 7
 		search_filters = { FOCUS_FILTER_RESEARCH }
 		ai_will_do = { base = 8 }
@@ -2568,8 +2770,8 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_general_staff_copy
 		icon = GFX_goal_generic_build_airforce
 		prerequisite = { focus = SYR_aaa2 focus = SYR_the_defence_of_damascus }
-		x = 35
-		y = 8
+		x = 40
+		y = 10
 		cost = 6
 		search_filters = { FOCUS_FILTER_ARMY_XP }
 		ai_will_do = { base = 8 }
@@ -2584,7 +2786,7 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		icon = GFX_focus_generic_industry_1
 		mutually_exclusive = { focus = SYR_the_aleppo_textile_mills }
 		prerequisite = { focus = SYR_the_mandate_economy }
-		x = -2
+		x = -9
 		y = 1
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -2603,7 +2805,7 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 		id = SYR_the_jazira_wheat_frontier_copy
 		icon = GFX_focus_AUS_agriculture
 		prerequisite = { focus = SYR_the_jazira_wheat_frontier }
-		x = 1
+		x = -4
 		y = 3
 		cost = 6
 		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_STABILITY }
@@ -2621,7 +2823,7 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
     id = SYR_the_damascus_industrial_zone_minesplaces
     icon = GFX_focus_generic_resource_extraction
     prerequisite = { focus = SYR_the_damascus_industrial_zone }
-    x = -7
+    x = -12
     y = 3
     cost = 6
     search_filters = { FOCUS_FILTER_INDUSTRY }
@@ -2661,8 +2863,20 @@ add_equipment_to_stockpile = { type = infantry_equipment amount = 1000 }
 					add_opinion_modifier = { target = ROOT modifier = SYR_broke_with_moscow }
 				}
 			}
+			# promote_character only makes a country leader of the ruling party's
+			# leader, so the communists must be in power for Ilhan Dam to take over.
+			if = {
+				limit = { NOT = { has_government = communism } }
+				set_politics = {
+					ruling_party = communism
+					elections_allowed = no
+				}
+			}
 			recruit_character = SYR_realcominismLeader
-			promote_character = SYR_realcominismLeader
+			promote_character = {
+				character = SYR_realcominismLeader
+				ideology = leninism
+			}
 		}
 	}
 
@@ -2954,4 +3168,299 @@ bu focus rewardi rusiyede militiaları aktif etsin işte
         }
     }
 }
+
+	focus = {
+		id = SYR_the_late_iron_mines
+		icon = GFX_focus_generic_steel
+		prerequisite = { focus = SYR_the_euphrates_project }
+		prerequisite = { focus = SYR_the_jazira_wheat_frontier }
+		x = -6
+		y = 6
+		cost = 2
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = { base = 8 }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = { is_core_of = ROOT }
+				prioritize = { 554 }
+				add_resource = { type = steel amount = @SYR_LATE_IRON_MINES_STEEL }
+			}
+		}
+	}
+
+	focus = {
+    id = SYR_the_levantine_market_copy
+    icon = GFX_SOV_planned_economy_ccp_2d_sov_compatibility
+    prerequisite = { focus = SYR_the_damascus_trade_fair }
+    prerequisite = { focus = SYR_modernise_the_harbours }
+    x = -8
+    y = 9
+    cost = 5
+    search_filters = { FOCUS_FILTER_INDUSTRY }
+    ai_will_do = { base = 10 }
+
+    completion_reward = {
+        remove_ideas = SYR_the_levantine_market
+        add_ideas = SYR_levantinmarkeet
+    }
+}
+
+	focus = {
+		id = SYR_modernise_the_harbours_copy
+		icon = GFX_goal_generic_naval_base
+		prerequisite = { focus = SYR_modernise_the_harbours }
+		x = -10
+		y = 8
+		cost = 5
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = { base = 6 }
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = { is_coastal = yes }
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = { type = dockyard level = 1 instant_build = yes }
+			}
+
+		}
+	}
+
+	focus = {
+    id = SYR_BeterayMain_copy
+    icon = GFX_goal_OTT_Integrate_Khuzestan
+    prerequisite = { focus = SYR_BeterayMain }
+    x = 12
+    y = 6
+    cost = 1
+    search_filters = { FOCUS_FILTER_POLITICAL }
+    ai_will_do = { base = 1 }
+
+    completion_reward = {
+        if = {
+            limit = { is_in_faction = yes }
+            leave_faction = yes
+        }
+
+        add_stability = -0.20
+    }
+}
+
+	focus = {
+		id = SYR_Late_Oil_Pipeline
+		icon = GFX_focus_IRQ_nationalize_the_anglo_iraqi_oil_company
+		prerequisite = { focus = SYR_the_damascus_industrial_zone }
+		prerequisite = { focus = SYR_arms_workshops }
+		x = -11
+		y = 6
+		cost = 2
+		search_filters = { FOCUS_FILTER_INDUSTRY FOCUS_FILTER_POLITICAL }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			add_ideas = SYR_pipeline_transit_fees
+			if = {
+				limit = { 680 = { is_owned_and_controlled_by = ROOT } }
+				680 = { add_resource = { type = oil amount = 4 } }
+			}
+		}
+	}
+
+	focus = {
+		id = SYR_axis_events
+		icon = GFX_focus_attack_germany
+		prerequisite = { focus = SYR_the_zaim }
+		mutually_exclusive = { focus = SYR_seek_axis_patronage }
+		x = 20
+		y = 12
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = { base = 1 }
+		completion_reward = {
+			if = {
+				limit = { country_exists = GER }
+				GER = {
+					add_opinion_modifier = { target = ROOT modifier = SYR_distance_from_berlin }
+				}
+				add_opinion_modifier = { target = GER modifier = SYR_distance_from_berlin }
+			}
+		}
+	}
+
+	# SYR_axis_events -> local mines: +10% resource extraction through the
+	# national spirit SYR_syrian_mines_spirit (common/ideas/SYR.txt).
+	focus = {
+		id = SYR_syrian_mines
+		icon = GFX_focus_generic_resource_extraction
+		prerequisite = { focus = SYR_axis_events }
+		x = 20
+		y = 13
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			add_ideas = SYR_syrian_mines_spirit
+		}
+	}
+
+	# SYR_syrian_mines -> resource management: the mines spirit also cuts the
+	# production penalty for missing resources (SYR_syrian_mines_spirit_2).
+	focus = {
+		id = SYR_resource_management
+		icon = GFX_focus_generic_mineral_prospecting
+		prerequisite = { focus = SYR_syrian_mines }
+		x = 19
+		y = 14
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			if = {
+				limit = { has_idea = SYR_syrian_mines_spirit }
+				swap_ideas = {
+					remove_idea = SYR_syrian_mines_spirit
+					add_idea = SYR_syrian_mines_spirit_2
+				}
+			}
+			else = {
+				add_ideas = SYR_syrian_mines_spirit_2
+			}
+		}
+	}
+
+	# SYR_syrian_mines -> arms works: military factories in Damascus (554),
+	# Aleppo (677), Deir-az-Zur (680) and Hatay (799), in each one Syria holds.
+	focus = {
+		id = SYR_syrian_arms_works
+		icon = GFX_goal_generic_construct_mil_factory
+		prerequisite = { focus = SYR_syrian_mines }
+		x = 19
+		y = 15
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			every_owned_state = {
+				limit = {
+					OR = {
+						state = 554
+						state = 677
+						state = 680
+						state = 799
+					}
+					is_controlled_by = ROOT
+				}
+				add_extra_state_shared_building_slots = @SYR_ARMS_WORKS_FACTORIES
+				add_building_construction = {
+					type = arms_factory
+					level = @SYR_ARMS_WORKS_FACTORIES
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	# SYR_seek_axis_patronage -> Axis oil: Syria and every Axis country (Germany and its
+	# faction) get oil in their capital state.
+	focus = {
+		id = SYR_axis_oil
+		icon = GFX_goal_generic_oil_refinery
+		prerequisite = { focus = SYR_seek_axis_patronage }
+		x = 26
+		y = 13
+		cost = 7
+		search_filters = { FOCUS_FILTER_INDUSTRY }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			capital_scope = {
+				add_resource = { type = oil amount = @SYR_AXIS_OIL }
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					OR = {
+						tag = GER
+						is_in_faction_with = GER
+					}
+				}
+				capital_scope = {
+					add_resource = { type = oil amount = @SYR_AXIS_OIL }
+				}
+			}
+		}
+	}
+
+	# SYR_seek_axis_patronage -> German officers: the army spirit SYR_german_officers_spirit
+	# and two German commanders (common/characters/SYR_independence_characters.txt).
+	focus = {
+		id = SYR_german_officers
+		icon = GFX_goal_generic_military_sphere
+		prerequisite = { focus = SYR_german_military_advisors }
+		x = 24
+		y = 14
+		cost = 7
+		search_filters = { FOCUS_FILTER_ARMY_XP }
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			add_ideas = SYR_german_officers_spirit
+			recruit_character = SYR_hellmuth_felmy
+			recruit_character = SYR_oskar_von_niedermayer
+		}
+	}
+
+	focus = {
+		id = SYR_komkompuration
+		icon = GFX_goal_SAU_reject_skyes_picot
+		mutually_exclusive = { focus = SYR_the_throne_of_faisal }
+		x = 33
+		y = 11
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = { base = 1 }
+		completion_reward = {
+		}
+	}
+
+	focus = {
+		id = SYR_german_military_act
+		icon = GFX_focus_ger_oppose_hitler
+		prerequisite = { focus = SYR_german_officers }
+		prerequisite = { focus = SYR_axis_oil }
+		x = 25
+		y = 15
+		cost = 7
+		search_filters = { FOCUS_FILTER_ARMY_XP FOCUS_FILTER_RESEARCH }
+		available = {
+			OR = {
+				GER = { has_opinion = { target = ROOT value > 30 } }
+				ITA = { has_opinion = { target = ROOT value > 30 } }
+			}
+		}
+		ai_will_do = { base = 10 }
+		completion_reward = {
+			add_tech_bonus = {
+				name = SYR_german_military_act
+				bonus = @SYR_GERMAN_ACT_ARMOR_BONUS
+				uses = @SYR_GERMAN_ACT_ARMOR_USES
+				category = armor
+			}
+			add_tech_bonus = {
+				name = SYR_german_military_act
+				bonus = @SYR_GERMAN_ACT_BONUS
+				uses = @SYR_GERMAN_ACT_USES
+				category = support_tech
+			}
+			add_tech_bonus = {
+				name = SYR_german_military_act
+				bonus = @SYR_GERMAN_ACT_BONUS
+				uses = @SYR_GERMAN_ACT_USES
+				category = infantry_weapons
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = @SYR_GERMAN_ACT_RIFLES
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = @SYR_GERMAN_ACT_ARTILLERY
+			}
+		}
+	}
 }

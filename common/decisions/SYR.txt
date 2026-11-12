@@ -16,6 +16,11 @@
 # prospect_for_resources (vanilla category)
 #   SYR_open_the_local_mines adds tungsten and chromium to Damascus 30 days
 #   after it is taken, two times at most, after the focus SYR_the_damascus_industrial_zone_minesplaces.
+# SYR_arabia_organization
+#   After the focus SYR_the_free_arab_nations: invitations into the faction
+#   (event syria.85) and freeing the Egyptian, Kuwaiti and Libyan lands Syria
+#   holds. After SYR_the_arabia_organization: diplomatic pressure on a faction
+#   member (opinion of Syria) and a proposal of union (event syria.86).
 # Helpers: common/scripted_effects/SYR_scripted_effects.txt
 # Design notes: docs/systems/syria_focus_tree.md
 ###########################################################################
@@ -24,8 +29,6 @@
 @SYR_PAMPHLET_GAIN = 6
 @SYR_SMUGGLE_GAIN = 8
 @SYR_SMUGGLE_RIFLES = 400
-@SYR_SMUGGLE_DISCOVERY_CHANCE = 30
-@SYR_SMUGGLE_SAFE_CHANCE = 70
 @SYR_CLANS_GAIN = 14
 @SYR_CLANS_MANPOWER = 3000
 @SYR_SABOTAGE_GAIN = 10
@@ -41,6 +44,12 @@
 @SYR_LOCAL_MINES_DAYS = 30
 @SYR_LOCAL_MINES_TUNGSTEN = 5
 @SYR_LOCAL_MINES_CHROMIUM = 5
+@SYR_UNION_PRESSURE_COST = 50
+@SYR_UNION_PROPOSAL_COST = 25
+@SYR_UNION_PROPOSAL_DAYS = 90
+@SYR_ARAB_INVITE_COST = 25
+@SYR_ARAB_INVITE_DAYS = 180
+@SYR_FREE_ARAB_LANDS_COST = 25
 
 SYR_the_national_struggle = {
 
@@ -112,11 +121,13 @@ SYR_the_national_struggle = {
 			SYR_add_resistance = yes
 			custom_effect_tooltip = SYR_smuggling_risk_tt
 			hidden_effect = {
+				# random_list weights must be literal numbers: an @constant there is read
+				# as a redefinition and leaves the list empty.
 				random_list = {
-					@SYR_SMUGGLE_DISCOVERY_CHANCE = {
+					30 = { # the French discover the smuggling
 						country_event = { id = syria.14 days = 10 random_days = 10 }
 					}
-					@SYR_SMUGGLE_SAFE_CHANCE = { }
+					70 = { }
 				}
 			}
 			SYR_roll_french_response = yes
@@ -383,7 +394,7 @@ SYR_the_french_levant = {
 prospect_for_resources = {
 
 	SYR_open_the_local_mines = {
-		icon = GFX_decision_tungsten
+		icon = GFX_decision_category_generic_prospect_for_resources
 		allowed = { original_tag = SYR }
 		highlight_states = {
 			highlight_state_targets = { state = 554 }
@@ -400,10 +411,114 @@ prospect_for_resources = {
 		ai_will_do = { base = 5 }
 		remove_effect = {
 			add_to_variable = { SYR_local_mines_opened = 1 }
+
 			554 = {
-				add_resource = { type = tungsten amount = @SYR_LOCAL_MINES_TUNGSTEN }
-				add_resource = { type = chromium amount = @SYR_LOCAL_MINES_CHROMIUM }
+			    add_resource = { type = tungsten amount = 3 }
+			    add_resource = { type = chromium amount = 3 }
 			}
+		}
+	}
+}
+
+SYR_arabia_organization = {
+
+	SYR_invite_into_the_alliance = {
+		icon = GFX_decision_hol_exchange_intelligence_data
+		allowed = { original_tag = SYR }
+		targets = { IRQ SAU YEM PER AFG EGY KUW LBA }
+		target_trigger = {
+			FROM = {
+				exists = yes
+				is_in_faction = no
+				is_subject = no
+			}
+		}
+		visible = {
+			OR = {
+				has_completed_focus = SYR_the_free_arab_nations
+				has_completed_focus = SYR_the_arabia_organization
+			}
+		}
+		available = {
+			is_faction_leader = yes
+			FROM = { NOT = { has_war_with = ROOT } }
+		}
+		cost = @SYR_ARAB_INVITE_COST
+		fire_only_once = no
+		days_re_enable = @SYR_ARAB_INVITE_DAYS
+		ai_will_do = { base = 5 }
+		complete_effect = {
+			FROM = { SYR_invite_to_the_alliance = yes }
+		}
+	}
+
+	SYR_free_the_held_arab_lands = {
+		icon = GFX_decision_generic_independence
+		allowed = { original_tag = SYR }
+		visible = {
+			OR = {
+				has_completed_focus = SYR_the_free_arab_nations
+				has_completed_focus = SYR_the_arabia_organization
+			}
+		}
+		available = {
+			is_faction_leader = yes
+			any_owned_state = { SYR_is_arab_nation_land = yes }
+		}
+		cost = @SYR_FREE_ARAB_LANDS_COST
+		fire_only_once = no
+		ai_will_do = { base = 5 }
+		complete_effect = {
+			SYR_free_the_arab_nations = yes
+		}
+	}
+
+	SYR_arab_diplomatic_pressure = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { original_tag = SYR }
+		target_array = ROOT.faction_members
+		target_trigger = {
+			FROM = {
+				NOT = { tag = ROOT }
+				is_in_faction_with = ROOT
+			}
+		}
+		visible = { has_completed_focus = SYR_the_arabia_organization }
+		available = {
+			is_faction_leader = yes
+			FROM = { NOT = { has_war_with = ROOT } }
+		}
+		cost = @SYR_UNION_PRESSURE_COST
+		fire_only_once = yes
+		ai_will_do = { base = 5 }
+		complete_effect = {
+			FROM = {
+				add_opinion_modifier = { target = ROOT modifier = SYR_arab_union_pressure }
+			}
+		}
+	}
+
+	SYR_propose_arab_union = {
+		icon = GFX_decision_generic_nationalism
+		allowed = { original_tag = SYR }
+		target_array = ROOT.faction_members
+		target_trigger = {
+			FROM = {
+				NOT = { tag = ROOT }
+				is_in_faction_with = ROOT
+			}
+		}
+		visible = { has_completed_focus = SYR_the_arabia_organization }
+		available = {
+			is_faction_leader = yes
+			FROM = { NOT = { has_war_with = ROOT } }
+		}
+		cost = @SYR_UNION_PROPOSAL_COST
+		fire_only_once = no
+		days_re_enable = @SYR_UNION_PROPOSAL_DAYS
+		ai_will_do = { base = 5 }
+		complete_effect = {
+			FROM = { country_event = { id = syria.86 days = 1 } }
 		}
 	}
 }

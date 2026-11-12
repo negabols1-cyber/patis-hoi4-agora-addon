@@ -85,3 +85,23 @@ SYR_struggle_is_active = {
 	}
 	NOT = { has_country_flag = SYR_independent }
 }
+
+# State scope. True for a state of Egypt, Kuwait or Libya that the Arab nation
+# itself does not own (used by SYR_liberate_the_arab_lands and
+# SYR_the_free_arab_nations).
+SYR_is_arab_nation_land = {
+	OR = {
+		AND = {
+			is_core_of = EGY
+			NOT = { is_owned_by = EGY }
+		}
+		AND = {
+			is_core_of = KUW
+			NOT = { is_owned_by = KUW }
+		}
+		AND = {
+			is_core_of = LBA
+			NOT = { is_owned_by = LBA }
+		}
+	}
+}

@@ -15,6 +15,14 @@
 
 @SYR_WORKERS_MILITIA_BONUS = 0.05
 @SYR_WORKERS_MILITIA_2_BONUS = 0.15
+@SYR_GERMAN_OFFICERS_ATTACK = 0.1
+@SYR_GERMAN_OFFICERS_DEFENCE = 0.05
+@SYR_GERMAN_OFFICERS_ORG = 0.05
+@SYR_SYRIAN_MINES_RESOURCES = 0.1
+@SYR_SYRIAN_MINES_SHORTAGE_PENALTY = -0.25
+@SYR_ARAB_BROTHERHOOD_DEFENCE = 0.05
+@SYR_ARAB_BROTHERHOOD_WAR_SUPPORT = 0.05
+@SYR_ARAB_LIBERATION_ATTACK = 0.15
 
 ideas = {
 	country = {
@@ -316,7 +324,7 @@ defensive_war_stability_factor = 0.1
 		}
 
 		SYR_the_national_army = {
-			picture = SYR_generic_land_3
+			picture = chi_army_corruption3
 			allowed = { original_tag = SYR }
 			removal_cost = -1
 			modifier = {
@@ -347,6 +355,102 @@ defensive_war_stability_factor = 0.1
 				war_stability_factor = 0.1
 				weekly_manpower = 0.8
 				army_intel_factor = -0.03
+			}
+		}
+
+		SYR_levantinmarkeet = {
+			picture = PER_national_bank_iran
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				production_speed_buildings_factor = 0.15
+				consumer_goods_factor = -0.10
+				industrial_capacity_factory = 0.08
+				production_speed_infrastructure_factor = 0.10
+				trade_opinion_factor = 0.05
+			}
+		}
+
+		SYR_the_damascus_trade_fair = {
+    picture = constraining_hierarchy_spirit
+    removal_cost = -1
+    modifier = { min_export = 0.10 }
+}
+
+		# Added by the focus SYR_german_officers.
+		SYR_german_officers_spirit = {
+			picture = german_advisors
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				army_attack_factor = @SYR_GERMAN_OFFICERS_ATTACK
+				army_defence_factor = @SYR_GERMAN_OFFICERS_DEFENCE
+				army_org_factor = @SYR_GERMAN_OFFICERS_ORG
+			}
+		}
+
+		# Added by the focus SYR_syrian_mines.
+		SYR_syrian_mines_spirit = {
+			picture = generic_production_bonus
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				local_resources_factor = @SYR_SYRIAN_MINES_RESOURCES
+			}
+		}
+
+		# Replaces SYR_syrian_mines_spirit after the focus SYR_resource_management.
+		SYR_syrian_mines_spirit_2 = {
+			picture = generic_production_bonus
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				local_resources_factor = @SYR_SYRIAN_MINES_RESOURCES
+				production_lack_of_resource_penalty_factor = @SYR_SYRIAN_MINES_SHORTAGE_PENALTY
+			}
+		}
+
+		# Added by the focus SYR_the_arab_brotherhood to Syria and every member of
+		# its faction; it ends when the country leaves Syria's faction.
+		SYR_arab_brotherhood = {
+			picture = generic_pp_unity_bonus
+			allowed = { always = yes }
+			removal_cost = -1
+			cancel = {
+				NOT = {
+					OR = {
+						tag = SYR
+						is_in_faction_with = SYR
+					}
+				}
+			}
+			modifier = {
+				army_defence_factor = @SYR_ARAB_BROTHERHOOD_DEFENCE
+				war_support_factor = @SYR_ARAB_BROTHERHOOD_WAR_SUPPORT
+			}
+		}
+
+		# One year after Syria declares war to free Egypt or Libya (syria.96, syria.97;
+		# helper SYR_start_arab_liberation_war).
+		SYR_war_of_arab_liberation = {
+			picture = generic_army_war_college
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				army_attack_factor = @SYR_ARAB_LIBERATION_ATTACK
+			}
+		}
+
+		SYR_syr_the_national_army2 = {
+			picture = tdlra_states_army
+			removal_cost = -1
+			modifier = {
+				army_attack_factor = 0.05
+				army_defence_factor = 0.05
+				army_org_factor = 0.05
+				army_core_defence_factor = 0.05
+				army_core_attack_factor = 0.05
+				attrition = -0.05
 			}
 		}
 	}

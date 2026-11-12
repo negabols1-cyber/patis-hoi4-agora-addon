@@ -8,6 +8,9 @@
 # syria.50-57  Loyalist route: Lebanon and the independence treaty
 # syria.60     Loyalist route: France has fallen (on_capitulation hook)
 # syria.80-92  Foreign answers to Syrian proposals
+# syria.85-86  Arab-Islamic alliance: invitation and union with Syria
+# syria.87-88  Arab-Islamic alliance: Syria demands freedom for Egypt and Libya
+# syria.94-97  Arab-Islamic alliance: Egypt or Libya freed, or refused (war option)
 #
 # Fired from common/national_focus/SYR.txt, common/decisions/SYR.txt and
 # common/on_actions/SYR_on_actions.txt.
@@ -23,6 +26,7 @@ add_namespace = syria
 @SYR_CACHE_LOSS = 3
 @SYR_POSTPONE_LOSS = 20
 @SYR_BETRAYAL_RESISTANCE = 25
+@SYR_UNION_OPINION = 60
 
 #######################################################################
 # Opening
@@ -331,6 +335,20 @@ country_event = {
 		name = syria.33.a
 		FROM = {
 			SYR_keep_occupied_lebanon = yes
+			# French subjects and France's faction partners joined the war through France,
+			# so the peace covers them too; otherwise the war goes on without France.
+			every_enemy_country = {
+				limit = {
+					NOT = { tag = FRA }
+					OR = {
+						is_subject_of = FRA
+						is_in_faction_with = FRA
+					}
+				}
+				PREV = {
+					white_peace = { tag = PREV }
+				}
+			}
 			white_peace = {
 				tag = FRA
 				message = SYR_peace_with_france_msg
@@ -753,6 +771,251 @@ country_event = {
 			}
 			country_event = { id = syria.91 hours = 6 }
 		}
+	}
+}
+
+# Invitation into the Syrian faction (Arab-Islamic alliance focuses, helper
+# SYR_invite_to_the_alliance). FROM is Syria.
+country_event = {
+	id = syria.85
+	title = syria.85.t
+	desc = syria.85.d
+	picture = GFX_report_event_generic_handshake
+	is_triggered_only = yes
+
+	trigger = {
+		is_in_faction = no
+		is_subject = no
+		FROM = { is_faction_leader = yes }
+	}
+
+	option = { # Join the alliance
+		name = syria.85.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 2
+				has_opinion = { target = FROM value > 50 }
+			}
+			modifier = {
+				factor = 0.25
+				tag = SAU # the house of Saud and the Hashemites are old rivals
+			}
+			modifier = {
+				factor = 0
+				has_war_with = FROM
+			}
+		}
+		FROM = {
+			add_to_faction = ROOT
+			country_event = { id = syria.90 hours = 6 }
+		}
+	}
+	option = { # Stay outside
+		name = syria.85.b
+		ai_chance = { base = 30 }
+		FROM = { country_event = { id = syria.91 hours = 6 } }
+	}
+}
+
+# Union with Syria, sent to the members of Syria's faction by the focus
+# SYR_the_arabia_organization and by the decision SYR_propose_arab_union.
+# The AI accepts when its opinion of Syria is above @SYR_UNION_OPINION.
+# FROM is Syria.
+country_event = {
+	id = syria.86
+	title = syria.86.t
+	desc = syria.86.d
+	picture = GFX_report_event_generic_sign_treaty2
+	is_triggered_only = yes
+
+	trigger = {
+		is_in_faction_with = FROM
+		NOT = { has_war_with = FROM }
+	}
+
+	option = { # Unite with Syria
+		name = syria.86.a
+		ai_chance = {
+			base = 0
+			modifier = {
+				add = 100
+				has_opinion = { target = FROM value > @SYR_UNION_OPINION }
+			}
+		}
+		every_owned_state = { add_core_of = FROM }
+		FROM = {
+			country_event = { id = syria.90 hours = 6 }
+			annex_country = {
+				target = ROOT
+				transfer_troops = yes
+			}
+		}
+	}
+	option = { # Keep our independence
+		name = syria.86.b
+		ai_chance = {
+			base = 100
+			modifier = {
+				factor = 0
+				has_opinion = { target = FROM value > @SYR_UNION_OPINION }
+			}
+		}
+		FROM = { country_event = { id = syria.91 hours = 6 } }
+	}
+}
+
+# The holder of Egypt: Syria demands its independence (focus
+# SYR_the_free_arab_nations). FROM is Syria.
+country_event = {
+	id = syria.87
+	title = syria.87.t
+	desc = syria.87.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = { # Grant independence
+		name = syria.87.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 3
+				has_capitulated = yes
+			}
+			modifier = {
+				factor = 0
+				has_war_with = FROM
+			}
+		}
+		SYR_grant_egypt_independence = yes
+		FROM = { country_event = { id = syria.94 hours = 6 } }
+	}
+	option = { # Refuse
+		name = syria.87.b
+		ai_chance = { base = 80 }
+		FROM = { country_event = { id = syria.96 hours = 6 } }
+	}
+}
+
+# The holder of Libya: Syria demands its independence (focus
+# SYR_the_free_arab_nations). FROM is Syria.
+country_event = {
+	id = syria.88
+	title = syria.88.t
+	desc = syria.88.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	option = { # Grant independence
+		name = syria.88.a
+		ai_chance = {
+			base = 20
+			modifier = {
+				factor = 2
+				has_war = yes
+			}
+			modifier = {
+				factor = 3
+				has_capitulated = yes
+			}
+			modifier = {
+				factor = 0
+				has_war_with = FROM
+			}
+		}
+		SYR_grant_libya_independence = yes
+		FROM = { country_event = { id = syria.95 hours = 6 } }
+	}
+	option = { # Refuse
+		name = syria.88.b
+		ai_chance = { base = 80 }
+		FROM = { country_event = { id = syria.97 hours = 6 } }
+	}
+}
+
+# Syria: the nation is free and is invited into the faction. FROM is its former holder.
+country_event = {
+	id = syria.94
+	title = syria.94.t
+	desc = syria.94.d
+	picture = GFX_report_event_generic_rally2
+	is_triggered_only = yes
+
+	option = {
+		name = syria.94.a
+		if = {
+			limit = { country_exists = EGY }
+			EGY = { SYR_invite_to_the_alliance = yes }
+		}
+	}
+}
+
+# Syria: the nation is free and is invited into the faction. FROM is its former holder.
+country_event = {
+	id = syria.95
+	title = syria.95.t
+	desc = syria.95.d
+	picture = GFX_report_event_generic_rally2
+	is_triggered_only = yes
+
+	option = {
+		name = syria.95.a
+		if = {
+			limit = { country_exists = LBA }
+			LBA = { SYR_invite_to_the_alliance = yes }
+		}
+	}
+}
+
+# Syria: the holder refuses. Syria may go to war for it. FROM is the holder.
+country_event = {
+	id = syria.96
+	title = syria.96.t
+	desc = syria.96.d
+	picture = GFX_report_event_ENG_middle_eastern_conflict_2
+	is_triggered_only = yes
+
+	option = { # Free it by force
+		name = syria.96.a
+		trigger = {
+			NOT = { has_war_with = FROM }
+			NOT = { is_in_faction_with = FROM }
+			is_subject = no
+		}
+		ai_chance = { base = 10 }
+		SYR_start_arab_liberation_war = yes
+	}
+	option = { # Not yet
+		name = syria.96.b
+		ai_chance = { base = 90 }
+	}
+}
+
+# Syria: the holder refuses. Syria may go to war for it. FROM is the holder.
+country_event = {
+	id = syria.97
+	title = syria.97.t
+	desc = syria.97.d
+	picture = GFX_report_event_ENG_middle_eastern_conflict_2
+	is_triggered_only = yes
+
+	option = { # Free it by force
+		name = syria.97.a
+		trigger = {
+			NOT = { has_war_with = FROM }
+			NOT = { is_in_faction_with = FROM }
+			is_subject = no
+		}
+		ai_chance = { base = 10 }
+		SYR_start_arab_liberation_war = yes
+	}
+	option = { # Not yet
+		name = syria.97.b
+		ai_chance = { base = 90 }
 	}
 }
 

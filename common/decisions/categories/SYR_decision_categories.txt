@@ -4,6 +4,9 @@
 # SYR_the_national_struggle: independence route (National Resistance meter,
 #   the hour of revolt, the Damascus mission, leadership fallback).
 # SYR_the_french_levant: loyalist route support for France at war.
+# SYR_arabia_organization: Hashemite route, growth of the Arab-Islamic
+#   alliance (after SYR_the_free_arab_nations) and union with Syria (after
+#   SYR_the_arabia_organization).
 # Decisions: common/decisions/SYR.txt
 # Design notes: docs/systems/syria_focus_tree.md
 ###########################################################################
@@ -33,5 +36,20 @@ SYR_the_french_levant = {
 	visible = {
 		SYR_is_loyalist = yes
 		SYR_is_french_mandate = yes
+	}
+}
+
+SYR_arabia_organization = {
+	icon = GFX_decision_category_gre_faction_management
+	priority = 95
+	visible_when_empty = yes
+	allowed = {
+		original_tag = SYR
+	}
+	visible = {
+		OR = {
+			has_completed_focus = SYR_the_free_arab_nations
+			has_completed_focus = SYR_the_arabia_organization
+		}
 	}
 }
