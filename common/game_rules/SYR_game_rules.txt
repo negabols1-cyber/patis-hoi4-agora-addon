@@ -1,0 +1,61 @@
+###########################################################################
+# Syria (SYR) game rules
+#
+# SYR_ai_behavior: the route an AI Syria follows. DEFAULT keeps the normal AI
+#   weights; RANDOM rolls one of the other routes at game start
+#   (on_startup in common/on_actions/SYR_on_actions.txt, flag SYR_AI_RANDOM_*).
+#   The scripted triggers SYR_ai_wants_* (common/scripted_triggers/SYR_scripted_triggers.txt)
+#   read the rule and the flag; focus ai_will_do and the ai_chance of syria.40
+#   follow them.
+# Design notes: docs/systems/syria_focus_tree.md
+###########################################################################
+
+SYR_ai_behavior = {
+	name = "SYR_AI_BEHAVIOR"
+	group = "RULE_GROUP_AI_BEHAVIOR"
+	default = {
+		name = "DEFAULT"
+		text = "RULE_OPTION_SYR_HISTORICAL"
+		desc = "RULE_OPTION_SYR_HISTORICAL_DESC"
+	}
+	option = {
+		name = "LOYALIST"
+		text = "RULE_OPTION_SYR_LOYALIST"
+		desc = "RULE_OPTION_SYR_LOYALIST_DESC"
+	}
+	option = {
+		name = "COMMUNIST"
+		text = "RULE_OPTION_SYR_COMMUNIST"
+		desc = "RULE_OPTION_SYR_COMMUNIST_DESC"
+	}
+	option = {
+		name = "INDEPENDENT_COMMUNIST"
+		text = "RULE_OPTION_SYR_INDEPENDENT_COMMUNIST"
+		desc = "RULE_OPTION_SYR_INDEPENDENT_COMMUNIST_DESC"
+	}
+	option = {
+		name = "FASCIST"
+		text = "RULE_OPTION_SYR_FASCIST"
+		desc = "RULE_OPTION_SYR_FASCIST_DESC"
+	}
+	option = {
+		name = "HASHEMITE"
+		text = "RULE_OPTION_SYR_HASHEMITE"
+		desc = "RULE_OPTION_SYR_HASHEMITE_DESC"
+	}
+	option = {
+		name = "ARAB_ALLIANCE"
+		text = "RULE_OPTION_SYR_ARAB_ALLIANCE"
+		desc = "RULE_OPTION_SYR_ARAB_ALLIANCE_DESC"
+	}
+	option = {
+		name = "BLACK_BANNER"
+		text = "RULE_OPTION_SYR_BLACK_BANNER"
+		desc = "RULE_OPTION_SYR_BLACK_BANNER_DESC"
+	}
+	option = {
+		name = "RANDOM"
+		text = "RULE_OPTION_RANDOM"
+		desc = "RULE_OPTION_SYR_RANDOM_DESC"
+	}
+}

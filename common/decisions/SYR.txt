@@ -21,6 +21,19 @@
 #   (event syria.85) and freeing the Egyptian, Kuwaiti and Libyan lands Syria
 #   holds. After SYR_the_arabia_organization: diplomatic pressure on a faction
 #   member (opinion of Syria) and a proposal of union (event syria.86).
+# SYR_the_black_banner (secret route after the focus SYR_komkompuration)
+#   SYR_the_day_of_reckoning is the countdown mission: when it ends, the war of
+#   faith starts (SYR_start_the_war_of_faith). Three decisions delay it, by at
+#   most @SYR_RECKONING_MAX_EXTENSION days in total; one starts the rising early.
+#   After SYR_the_minbar_of_damascus: win the mosques of a state (it stays with
+#   us in the war). After SYR_the_hidden_armouries: rifle caches and mujahideen.
+#   After SYR_brothers_in_faith: ask Saudi Arabia, Yemen, Egypt or Afghanistan
+#   for rifles and volunteers (syria.101); this one stays during the war.
+# SYR_the_emirates_call (after the focus SYR_the_call_to_the_arab_nations)
+#   SYR_demand_the_submission_of_FROM: an independent Arab nation is asked to
+#   become a subject (syria.106). Acceptance makes it a puppet in the
+#   Emirate's lighter green (SYR_make_sham_vassal); refusal means war and
+#   the timed spirit SYR_the_sword_of_the_emirate (syria.108).
 # Helpers: common/scripted_effects/SYR_scripted_effects.txt
 # Design notes: docs/systems/syria_focus_tree.md
 ###########################################################################
@@ -50,6 +63,38 @@
 @SYR_ARAB_INVITE_COST = 25
 @SYR_ARAB_INVITE_DAYS = 180
 @SYR_FREE_ARAB_LANDS_COST = 25
+# The Black Banner. A delay decision is available while the days already added
+# are at most its ROOM (= @SYR_RECKONING_MAX_EXTENSION minus its own days), so the
+# countdown never grows by more than @SYR_RECKONING_MAX_EXTENSION days.
+# @SYR_RECKONING_MAX_EXTENSION must match common/scripted_effects/SYR_scripted_effects.txt.
+@SYR_RECKONING_DAYS = 60
+@SYR_RECKONING_MAX_EXTENSION = 60
+@SYR_OATH_COST = 35
+@SYR_OATH_DAYS = 15
+@SYR_OATH_ROOM = 45
+@SYR_OATH_WAR_SUPPORT = -0.03
+@SYR_INFORMANTS_COST = 25
+@SYR_INFORMANTS_DAYS = 10
+@SYR_INFORMANTS_ROOM = 50
+@SYR_INFORMANTS_STABILITY = -0.02
+@SYR_INFORMANTS_COOLDOWN = 14
+@SYR_HOLY_MONTH_COST = 50
+@SYR_HOLY_MONTH_DAYS = 20
+@SYR_HOLY_MONTH_ROOM = 40
+@SYR_EARLY_RISING_COST = 50
+@SYR_MOSQUES_COST = 30
+@SYR_MOSQUES_DAYS = 21
+@SYR_CACHE_COST = 20
+@SYR_CACHE_RIFLES = 500
+@SYR_CACHE_RIFLES_TAKEN = -500
+@SYR_CACHE_RIFLES_STORED = 750
+@SYR_CACHE_COOLDOWN = 14
+@SYR_MUJAHIDEEN_COST = 25
+@SYR_MUJAHIDEEN_MANPOWER = 4000
+@SYR_MUJAHIDEEN_MANPOWER_TAKEN = -4000
+@SYR_MUJAHIDEEN_COOLDOWN = 14
+@SYR_FAITH_AID_COST = 25
+@SYR_SUBMISSION_COST = 50
 
 SYR_the_national_struggle = {
 
@@ -304,6 +349,7 @@ SYR_the_national_struggle = {
 			NOT = { has_country_flag = SYR_route_fascist }
 			NOT = { has_country_flag = SYR_route_monarchy }
 			NOT = { has_country_flag = SYR_route_democratic }
+			NOT = { has_country_flag = SYR_route_secret }
 		}
 		available = {
 			has_war = no
@@ -519,6 +565,344 @@ SYR_arabia_organization = {
 		ai_will_do = { base = 5 }
 		complete_effect = {
 			FROM = { country_event = { id = syria.86 days = 1 } }
+		}
+	}
+}
+
+SYR_the_emirates_call = {
+
+	# Once per nation. The answer comes in syria.106: accepted (syria.107) or
+	# refused, which starts the war (syria.108).
+	SYR_demand_the_submission_of_FROM = {
+		icon = GFX_decision_generic_nationalism
+		allowed = { original_tag = SYR }
+		targets = { IRQ SAU YEM JOR LEB EGY KUW OMN PAL LBA }
+		target_trigger = {
+			FROM = {
+				exists = yes
+				is_subject = no
+				NOT = { has_country_flag = SYR_submission_demanded }
+			}
+		}
+		visible = {
+			has_completed_focus = SYR_the_call_to_the_arab_nations
+		}
+		available = {
+			FROM = { NOT = { has_war_with = ROOT } }
+		}
+		cost = @SYR_SUBMISSION_COST
+		fire_only_once = no
+		ai_will_do = { base = 10 }
+		complete_effect = {
+			FROM = {
+				hidden_effect = { set_country_flag = SYR_submission_demanded }
+				country_event = { id = syria.106 days = 1 }
+			}
+		}
+	}
+}
+
+SYR_the_black_banner = {
+
+	# The countdown, started by SYR_open_the_reckoning (focus SYR_komkompuration).
+	# It completes on its own when the rising starts early; when the timer runs
+	# out, the war of faith starts. Pattern: vanilla PER_incoming_civil_war_mission.
+	SYR_the_day_of_reckoning = {
+		icon = GFX_decision_generic_prepare_civil_war
+		allowed = { original_tag = SYR }
+		activation = { always = no }
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = SYR_black_banner_raised_tt
+				has_country_flag = SYR_war_of_faith_started
+			}
+		}
+		days_mission_timeout = @SYR_RECKONING_DAYS
+		is_good = no
+		fire_only_once = yes
+		ai_will_do = { base = 1 }
+		complete_effect = {
+		}
+		timeout_effect = {
+			SYR_start_the_war_of_faith = yes
+		}
+	}
+
+	### Delaying the Day of Reckoning (vanilla precedent: add_days_mission_timeout in PER.txt) ###
+
+	# Once: the sheikh swears loyalty to the cabinet; the faithful are dismayed.
+	SYR_swear_loyalty_to_the_cabinet = {
+		icon = GFX_decision_generic_political_address
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_reckoning_is_coming = yes
+		}
+		available = {
+			SYR_reckoning_is_coming = yes
+			custom_trigger_tooltip = {
+				tooltip = SYR_reckoning_can_be_delayed_tt
+				check_variable = {
+					var = SYR_faith_countdown_extended
+					value = @SYR_OATH_ROOM
+					compare = less_than_or_equals
+				}
+			}
+		}
+		cost = @SYR_OATH_COST
+		fire_only_once = yes
+		ai_will_do = { base = 5 }
+		complete_effect = {
+			set_temp_variable = { SYR_reckoning_delay = @SYR_OATH_DAYS }
+			custom_effect_tooltip = SYR_reckoning_delayed_tt
+			hidden_effect = {
+				add_days_mission_timeout = {
+					mission = SYR_the_day_of_reckoning
+					days = @SYR_OATH_DAYS
+				}
+				add_to_variable = { SYR_faith_countdown_extended = @SYR_OATH_DAYS }
+				SYR_update_moderate_strength = yes
+			}
+			add_war_support = @SYR_OATH_WAR_SUPPORT
+		}
+	}
+
+	# Repeatable: bribes keep the moderates' informants quiet, at the price of scandal.
+	SYR_buy_off_the_informants = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_reckoning_is_coming = yes
+		}
+		available = {
+			SYR_reckoning_is_coming = yes
+			custom_trigger_tooltip = {
+				tooltip = SYR_reckoning_can_be_delayed_tt
+				check_variable = {
+					var = SYR_faith_countdown_extended
+					value = @SYR_INFORMANTS_ROOM
+					compare = less_than_or_equals
+				}
+			}
+		}
+		cost = @SYR_INFORMANTS_COST
+		fire_only_once = no
+		days_re_enable = @SYR_INFORMANTS_COOLDOWN
+		ai_will_do = { base = 5 }
+		complete_effect = {
+			set_temp_variable = { SYR_reckoning_delay = @SYR_INFORMANTS_DAYS }
+			custom_effect_tooltip = SYR_reckoning_delayed_tt
+			hidden_effect = {
+				add_days_mission_timeout = {
+					mission = SYR_the_day_of_reckoning
+					days = @SYR_INFORMANTS_DAYS
+				}
+				add_to_variable = { SYR_faith_countdown_extended = @SYR_INFORMANTS_DAYS }
+				SYR_update_moderate_strength = yes
+			}
+			add_stability = @SYR_INFORMANTS_STABILITY
+		}
+	}
+
+	# Once: the longest delay, but the moderates use the truce as well.
+	SYR_the_truce_of_the_holy_month = {
+		icon = GFX_decision_eng_propaganda_campaigns
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_reckoning_is_coming = yes
+		}
+		available = {
+			SYR_reckoning_is_coming = yes
+			custom_trigger_tooltip = {
+				tooltip = SYR_reckoning_can_be_delayed_tt
+				check_variable = {
+					var = SYR_faith_countdown_extended
+					value = @SYR_HOLY_MONTH_ROOM
+					compare = less_than_or_equals
+				}
+			}
+		}
+		cost = @SYR_HOLY_MONTH_COST
+		fire_only_once = yes
+		ai_will_do = { base = 3 }
+		complete_effect = {
+			set_temp_variable = { SYR_reckoning_delay = @SYR_HOLY_MONTH_DAYS }
+			custom_effect_tooltip = SYR_reckoning_delayed_tt
+			hidden_effect = {
+				add_days_mission_timeout = {
+					mission = SYR_the_day_of_reckoning
+					days = @SYR_HOLY_MONTH_DAYS
+				}
+				add_to_variable = { SYR_faith_countdown_extended = @SYR_HOLY_MONTH_DAYS }
+			}
+			SYR_call_the_holy_month_truce = yes
+		}
+	}
+
+	# Strike first: the war starts now, before the moderates are ready.
+	SYR_raise_the_black_banner_now = {
+		icon = GFX_decision_generic_ignite_civil_war
+		allowed = { original_tag = SYR }
+		visible = {
+			SYR_reckoning_is_coming = yes
+		}
+		available = {
+			SYR_reckoning_is_coming = yes
+		}
+		cost = @SYR_EARLY_RISING_COST
+		fire_only_once = yes
+		ai_will_do = { base = 0 }
+		complete_effect = {
+			SYR_raise_the_banner_early = yes
+		}
+	}
+
+	### Preparing for the war of faith ###
+
+	# After SYR_the_minbar_of_damascus: one state at a time. A state with the
+	# Black Banner's mosques stays with us when the war starts; the moderates
+	# always keep at least one state. Pattern: vanilla PER_spread_the_movement_in_FROM.
+	SYR_win_the_mosques_of_FROM = {
+		icon = GFX_PER_decision_built_mosques
+		allowed = { original_tag = SYR }
+		state_target = yes
+		target_array = controlled_states
+		on_map_mode = map_and_decisions_view
+		target_trigger = {
+			FROM = {
+				is_owned_and_controlled_by = ROOT
+				NOT = { has_dynamic_modifier = { modifier = SYR_faithful_state } }
+			}
+		}
+		visible = {
+			has_completed_focus = SYR_the_minbar_of_damascus
+			SYR_reckoning_is_coming = yes
+		}
+		available = {
+			SYR_reckoning_is_coming = yes
+			custom_trigger_tooltip = {
+				tooltip = SYR_no_mosque_campaign_running_tt
+				NOT = { has_country_flag = SYR_faith_spreading }
+			}
+			custom_trigger_tooltip = {
+				tooltip = SYR_moderates_keep_a_state_tt
+				check_variable = { SYR_moderate_states > 1 }
+			}
+		}
+		cost = @SYR_MOSQUES_COST
+		days_remove = @SYR_MOSQUES_DAYS
+		fire_only_once = no
+		ai_will_do = { base = 30 }
+		complete_effect = {
+			hidden_effect = {
+				set_country_flag = SYR_faith_spreading
+				SYR_update_moderate_strength = yes
+			}
+		}
+		remove_effect = {
+			SYR_win_the_mosques = yes
+		}
+		cancel_trigger = {
+			has_country_flag = SYR_war_of_faith_started
+		}
+	}
+
+	# After SYR_the_hidden_armouries: rifles leave the stockpile, which the
+	# moderates would share at the split, and return with interest at the rising.
+	SYR_hide_rifles_in_the_mosques = {
+		icon = GFX_decision_generic_military
+		allowed = { original_tag = SYR }
+		visible = {
+			has_completed_focus = SYR_the_hidden_armouries
+			SYR_reckoning_is_coming = yes
+		}
+		available = {
+			SYR_reckoning_is_coming = yes
+			has_equipment = { infantry_equipment > @SYR_CACHE_RIFLES }
+			custom_trigger_tooltip = {
+				tooltip = SYR_rifle_caches_left_tt
+				check_variable = { SYR_rifle_caches < SYR_rifle_caches_max }
+			}
+		}
+		cost = @SYR_CACHE_COST
+		fire_only_once = no
+		days_re_enable = @SYR_CACHE_COOLDOWN
+		ai_will_do = { base = 10 }
+		complete_effect = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = @SYR_CACHE_RIFLES_TAKEN
+			}
+			set_temp_variable = { SYR_cache_gain = @SYR_CACHE_RIFLES_STORED }
+			custom_effect_tooltip = SYR_rifles_to_caches_tt
+			hidden_effect = {
+				add_to_variable = { SYR_hidden_rifles = @SYR_CACHE_RIFLES_STORED }
+				add_to_variable = { SYR_rifle_caches = 1 }
+				SYR_update_moderate_strength = yes
+			}
+		}
+	}
+
+	# After SYR_the_hidden_armouries: each takes the field as a Jund al-Raya
+	# division when the war starts.
+	SYR_train_the_mujahideen = {
+		icon = GFX_decision_generic_army_support
+		allowed = { original_tag = SYR }
+		visible = {
+			has_completed_focus = SYR_the_hidden_armouries
+			SYR_reckoning_is_coming = yes
+		}
+		available = {
+			SYR_reckoning_is_coming = yes
+			has_manpower > @SYR_MUJAHIDEEN_MANPOWER
+			custom_trigger_tooltip = {
+				tooltip = SYR_mujahideen_left_tt
+				check_variable = { SYR_mujahideen_brigades < SYR_mujahideen_max }
+			}
+		}
+		cost = @SYR_MUJAHIDEEN_COST
+		fire_only_once = no
+		days_re_enable = @SYR_MUJAHIDEEN_COOLDOWN
+		ai_will_do = { base = 10 }
+		complete_effect = {
+			add_manpower = @SYR_MUJAHIDEEN_MANPOWER_TAKEN
+			custom_effect_tooltip = SYR_mujahideen_trained_tt
+			hidden_effect = {
+				add_to_variable = { SYR_mujahideen_brigades = 1 }
+				SYR_update_moderate_strength = yes
+			}
+		}
+	}
+
+	# After SYR_brothers_in_faith, before and during the war: once per nation.
+	# The answer comes in syria.101 (accepted: syria.102, refused: syria.103).
+	SYR_seek_the_aid_of_FROM = {
+		icon = GFX_decision_generic_civil_support
+		allowed = { original_tag = SYR }
+		targets = { SAU YEM EGY AFG }
+		target_trigger = {
+			FROM = {
+				exists = yes
+				NOT = { has_country_flag = SYR_faith_aid_asked }
+			}
+		}
+		visible = {
+			has_completed_focus = SYR_brothers_in_faith
+			OR = {
+				has_active_mission = SYR_the_day_of_reckoning
+				has_country_flag = SYR_black_banner_side
+			}
+		}
+		available = {
+			FROM = { NOT = { has_war_with = ROOT } }
+		}
+		cost = @SYR_FAITH_AID_COST
+		fire_only_once = no
+		ai_will_do = { base = 10 }
+		complete_effect = {
+			FROM = {
+				hidden_effect = { set_country_flag = SYR_faith_aid_asked }
+				country_event = { id = syria.101 days = 1 }
+			}
 		}
 	}
 }

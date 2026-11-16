@@ -1,0 +1,22 @@
+###########################################################################
+# Syria (SYR) dynamic modifiers
+#
+# SYR_faithful_state: a state where the mosques stand with the Black Banner
+#   (secret route after SYR_komkompuration). The capital gets it when the
+#   route opens; the decision SYR_win_the_mosques_of_FROM adds it to other
+#   states. When the war of faith starts, states with it stay with Syria and
+#   states without it go to the moderates (start_civil_war states_filter in
+#   SYR_start_the_war_of_faith), then the modifier is removed.
+#   Pattern: vanilla PER_qajar_influence (common/dynamic_modifiers/PER_dynamic_modifiers.txt).
+# Design notes: docs/systems/syria_focus_tree.md
+###########################################################################
+
+@SYR_FAITHFUL_STATE_MANPOWER = 0.1
+
+SYR_faithful_state = {
+	enable = { always = yes }
+
+	icon = GFX_idea_islamic_treaty
+
+	local_manpower = @SYR_FAITHFUL_STATE_MANPOWER
+}

@@ -8,6 +8,9 @@
 # National Resistance is stored in the SYR country variable SYR_resistance.
 # It is full at @SYR_RESISTANCE_GOAL, which must match the value in
 # common/scripted_effects/SYR_scripted_effects.txt.
+# The Black Banner (secret route): SYR_reckoning_is_coming is true while the
+# countdown mission runs, SYR_is_black_banner on the Black Banner side once it
+# holds power (never on the moderates' breakaway country).
 # Design notes: docs/systems/syria_focus_tree.md
 ###########################################################################
 
@@ -103,5 +106,103 @@ SYR_is_arab_nation_land = {
 			is_core_of = LBA
 			NOT = { is_owned_by = LBA }
 		}
+	}
+}
+
+# SYR scope. True while the Day of Reckoning countdown runs (the Black Banner
+# prepares for the war of faith).
+SYR_reckoning_is_coming = {
+	custom_trigger_tooltip = {
+		tooltip = SYR_reckoning_is_coming_tt
+		has_active_mission = SYR_the_day_of_reckoning
+	}
+}
+
+# SYR scope. True for the Black Banner government. The flag is set after the
+# civil war split, so the moderates' breakaway country never has it.
+SYR_is_black_banner = {
+	custom_trigger_tooltip = {
+		tooltip = SYR_is_black_banner_tt
+		has_country_flag = SYR_black_banner_side
+	}
+}
+
+#######################################################################
+# AI route game rule (common/game_rules/SYR_game_rules.txt). Each trigger is
+# true when the rule picks the route, or RANDOM rolled it at game start.
+# Used only in ai_will_do and ai_chance blocks.
+#######################################################################
+
+# SYR scope. The rule fixes a route (any option but DEFAULT).
+SYR_ai_route_is_set = {
+	OR = {
+		SYR_ai_wants_loyalist = yes
+		SYR_ai_wants_communist = yes
+		SYR_ai_wants_fascist = yes
+		SYR_ai_wants_hashemite = yes
+		SYR_ai_wants_black_banner = yes
+	}
+}
+
+SYR_ai_wants_loyalist = {
+	OR = {
+		has_game_rule = { rule = SYR_ai_behavior option = LOYALIST }
+		has_country_flag = SYR_AI_RANDOM_LOYALIST
+	}
+}
+
+# Both communist routes (with or without Moscow).
+SYR_ai_wants_communist = {
+	OR = {
+		has_game_rule = { rule = SYR_ai_behavior option = COMMUNIST }
+		has_country_flag = SYR_AI_RANDOM_COMMUNIST
+		SYR_ai_wants_independent_communist = yes
+	}
+}
+
+SYR_ai_wants_independent_communist = {
+	OR = {
+		has_game_rule = { rule = SYR_ai_behavior option = INDEPENDENT_COMMUNIST }
+		has_country_flag = SYR_AI_RANDOM_INDEPENDENT_COMMUNIST
+	}
+}
+
+SYR_ai_wants_fascist = {
+	OR = {
+		has_game_rule = { rule = SYR_ai_behavior option = FASCIST }
+		has_country_flag = SYR_AI_RANDOM_FASCIST
+	}
+}
+
+# Both Hashemite routes (with or without the Arab-Islamic alliance).
+SYR_ai_wants_hashemite = {
+	OR = {
+		has_game_rule = { rule = SYR_ai_behavior option = HASHEMITE }
+		has_country_flag = SYR_AI_RANDOM_HASHEMITE
+		SYR_ai_wants_arab_alliance = yes
+	}
+}
+
+SYR_ai_wants_arab_alliance = {
+	OR = {
+		has_game_rule = { rule = SYR_ai_behavior option = ARAB_ALLIANCE }
+		has_country_flag = SYR_AI_RANDOM_ARAB_ALLIANCE
+	}
+}
+
+SYR_ai_wants_black_banner = {
+	OR = {
+		has_game_rule = { rule = SYR_ai_behavior option = BLACK_BANNER }
+		has_country_flag = SYR_AI_RANDOM_BLACK_BANNER
+	}
+}
+
+# Country scope. The leader is a monarch: the monarchy sub-ideologies of
+# common/ideologies/00_ideologies.txt (neutral, constitutional and royalist fascist).
+SYR_is_monarchy = {
+	OR = {
+		has_country_leader_ideology = monarchism
+		has_country_leader_ideology = democratic_monarchy
+		has_country_leader_ideology = royalist_fascism
 	}
 }

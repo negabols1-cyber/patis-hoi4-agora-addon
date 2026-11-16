@@ -8,6 +8,19 @@
 # National Resistance (SYR country variable SYR_resistance) runs from 0 to
 # @SYR_RESISTANCE_GOAL. When it is full, Syria can force the independence
 # crisis: France either grants independence or Syria rises in revolt.
+#
+# The Black Banner (secret route, end of this file): SYR_open_the_reckoning
+# starts the Day of Reckoning countdown; SYR_start_the_war_of_faith starts the
+# civil war against the moderates when it ends. SYR country variables:
+#   SYR_moderate_strength (0 to 1) share of the army and stockpile the
+#     moderates take; SYR_moderate_strength_pct for display
+#   SYR_faithful_states, SYR_moderate_states  states with and without the
+#     Black Banner's mosques (dynamic modifier SYR_faithful_state)
+#   SYR_hidden_rifles, SYR_rifle_caches, SYR_rifle_caches_max  mosque caches
+#   SYR_mujahideen_brigades, SYR_mujahideen_max  divisions raised at the rising
+#   SYR_faith_volunteers  divisions promised by Muslim nations
+#   SYR_faith_countdown_extended, SYR_reckoning_max_extension  days added to
+#     the countdown (the limit is applied in common/decisions/SYR.txt)
 # Design notes: docs/systems/syria_focus_tree.md
 ###########################################################################
 
@@ -19,6 +32,23 @@
 @SYR_LEADERSHIP_POPULARITY_BOOST = 0.15
 @SYR_REVOLT_WAR_SUPPORT = 0.15
 @SYR_ARAB_LIBERATION_WAR_DAYS = 365
+@SYR_PERCENT = 100
+@SYR_RECKONING_POPULARITY = 0.1
+# Must match the extension limit in common/decisions/SYR.txt (shown in the category).
+@SYR_RECKONING_MAX_EXTENSION = 60
+@SYR_RIFLE_CACHES_MAX = 4
+@SYR_MUJAHIDEEN_MAX = 6
+@SYR_MODERATE_BASE_STRENGTH = 0.5
+@SYR_MODERATE_STATE_REDUCTION = 0.08
+@SYR_MODERATE_HOLY_MONTH_GAIN = 0.05
+@SYR_MODERATE_SURPRISE_LOSS = 0.05
+@SYR_MODERATE_MIN_STRENGTH = 0.2
+@SYR_MODERATE_MAX_STRENGTH = 0.6
+@SYR_BLACK_BANNER_SEIZURE_POPULARITY = 0.4
+@SYR_MODERATES_POPULARITY = 0.25
+@SYR_SURPRISE_RISING_DAYS = 60
+@SYR_FAITH_AID_RIFLES = 1000
+@SYR_SWORD_OF_THE_EMIRATE_DAYS = 120
 
 # SYR scope. Input: temp variable SYR_resistance_gain (base gain).
 # The gain grows while France is weakened or no longer democratic, and once
@@ -429,5 +459,430 @@ SYR_start_arab_liberation_war = {
 	add_timed_idea = {
 		idea = SYR_war_of_arab_liberation
 		days = @SYR_ARAB_LIBERATION_WAR_DAYS
+	}
+}
+
+# SYR scope. on_add of advisor SYR_savur_qadir (trait SYR_friend_of_crowns):
+# mutual opinion bonus with monarchies (SYR_is_monarchy) and mutual opinion
+# penalty with the other democracies, counted when he is hired.
+SYR_friend_of_crowns_add_opinions = {
+	every_other_country = {
+		limit = { SYR_is_monarchy = yes }
+		add_opinion_modifier = { target = PREV modifier = SYR_friend_of_crowns_monarchies }
+		PREV = { add_opinion_modifier = { target = PREV modifier = SYR_friend_of_crowns_monarchies } }
+	}
+	every_other_country = {
+		limit = {
+			has_government = democratic
+			NOT = { SYR_is_monarchy = yes }
+		}
+		add_opinion_modifier = { target = PREV modifier = SYR_friend_of_crowns_democracies }
+		PREV = { add_opinion_modifier = { target = PREV modifier = SYR_friend_of_crowns_democracies } }
+	}
+}
+
+# SYR scope. on_remove of advisor SYR_savur_qadir: clears both opinion modifiers.
+SYR_friend_of_crowns_remove_opinions = {
+	every_other_country = {
+		remove_opinion_modifier = { target = PREV modifier = SYR_friend_of_crowns_monarchies }
+		remove_opinion_modifier = { target = PREV modifier = SYR_friend_of_crowns_democracies }
+		PREV = {
+			remove_opinion_modifier = { target = PREV modifier = SYR_friend_of_crowns_monarchies }
+			remove_opinion_modifier = { target = PREV modifier = SYR_friend_of_crowns_democracies }
+		}
+	}
+}
+
+#######################################################################
+# The Black Banner (secret route after the focus SYR_komkompuration)
+# Pattern: the vanilla Persian civil war (PER_civil_war_mission_effect in
+# common/scripted_effects/PER_scripted_effects.txt, decisions in
+# common/decisions/PER.txt).
+#######################################################################
+
+# SYR scope. Focus SYR_komkompuration: the Black Banner comes into the open.
+# Recruits Muhammad al-Ashmar, renames the fascist party, wins the mosques of the
+# capital and starts the Day of Reckoning countdown (SYR_the_day_of_reckoning).
+SYR_open_the_reckoning = {
+	set_country_flag = SYR_reckoning_begun
+	add_popularity = { ideology = fascism popularity = @SYR_RECKONING_POPULARITY }
+	if = {
+		limit = { NOT = { has_character = SYR_muhammad_al_ashmar } }
+		recruit_character = SYR_muhammad_al_ashmar
+	}
+	set_party_name = {
+		ideology = fascism
+		long_name = SYR_black_banner_party_long
+		name = SYR_black_banner_party
+	}
+	capital_scope = {
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = SYR_faithful_state } } }
+			add_dynamic_modifier = { modifier = SYR_faithful_state }
+		}
+	}
+	hidden_effect = {
+		set_variable = { SYR_faith_countdown_extended = 0 }
+		set_variable = { SYR_reckoning_max_extension = @SYR_RECKONING_MAX_EXTENSION }
+		set_variable = { SYR_hidden_rifles = 0 }
+		set_variable = { SYR_rifle_caches = 0 }
+		set_variable = { SYR_rifle_caches_max = @SYR_RIFLE_CACHES_MAX }
+		set_variable = { SYR_mujahideen_brigades = 0 }
+		set_variable = { SYR_mujahideen_max = @SYR_MUJAHIDEEN_MAX }
+		set_variable = { SYR_faith_volunteers = 0 }
+		SYR_update_moderate_strength = yes
+	}
+	activate_mission = SYR_the_day_of_reckoning
+	custom_effect_tooltip = SYR_reckoning_begins_tt
+}
+
+# SYR scope. Counts the states with and without the Black Banner's mosques and
+# sets the share of the army and stockpile the moderates will take when the war
+# of faith starts. Every mosque state beyond the capital weakens the moderates;
+# the holy month truce strengthens them; an early rising catches them unready.
+SYR_update_moderate_strength = {
+	set_variable = { SYR_faithful_states = 0 }
+	set_variable = { SYR_moderate_states = 0 }
+	every_owned_state = {
+		if = {
+			limit = { has_dynamic_modifier = { modifier = SYR_faithful_state } }
+			PREV = { add_to_variable = { SYR_faithful_states = 1 } }
+		}
+		else = {
+			PREV = { add_to_variable = { SYR_moderate_states = 1 } }
+		}
+	}
+	set_temp_variable = { SYR_mosque_states_beyond_capital = SYR_faithful_states }
+	subtract_from_temp_variable = { SYR_mosque_states_beyond_capital = 1 }
+	if = {
+		limit = { check_variable = { SYR_mosque_states_beyond_capital < 0 } }
+		set_temp_variable = { SYR_mosque_states_beyond_capital = 0 }
+	}
+	multiply_temp_variable = { SYR_mosque_states_beyond_capital = @SYR_MODERATE_STATE_REDUCTION }
+	set_variable = { SYR_moderate_strength = @SYR_MODERATE_BASE_STRENGTH }
+	subtract_from_variable = { SYR_moderate_strength = SYR_mosque_states_beyond_capital }
+	if = {
+		limit = { has_country_flag = SYR_holy_month_truce }
+		add_to_variable = { SYR_moderate_strength = @SYR_MODERATE_HOLY_MONTH_GAIN }
+	}
+	if = {
+		limit = { has_country_flag = SYR_surprise_rising }
+		subtract_from_variable = { SYR_moderate_strength = @SYR_MODERATE_SURPRISE_LOSS }
+	}
+	clamp_variable = {
+		var = SYR_moderate_strength
+		min = @SYR_MODERATE_MIN_STRENGTH
+		max = @SYR_MODERATE_MAX_STRENGTH
+	}
+	set_variable = { SYR_moderate_strength_pct = SYR_moderate_strength }
+	multiply_variable = { SYR_moderate_strength_pct = @SYR_PERCENT }
+}
+
+# SYR scope; FROM is the target state (decision SYR_win_the_mosques_of_FROM).
+# The state's mosques join the Black Banner: it stays with us when the war of
+# faith starts, and the moderates grow weaker.
+SYR_win_the_mosques = {
+	FROM = { add_dynamic_modifier = { modifier = SYR_faithful_state } }
+	set_temp_variable = { SYR_moderate_delta = @SYR_MODERATE_STATE_REDUCTION }
+	multiply_temp_variable = { SYR_moderate_delta = @SYR_PERCENT }
+	custom_effect_tooltip = SYR_moderates_weaken_tt
+	hidden_effect = {
+		clr_country_flag = SYR_faith_spreading
+		SYR_update_moderate_strength = yes
+	}
+}
+
+# SYR scope. Decision SYR_the_truce_of_the_holy_month: the moderates use the
+# truce as well and grow stronger.
+SYR_call_the_holy_month_truce = {
+	set_country_flag = SYR_holy_month_truce
+	set_temp_variable = { SYR_moderate_delta = @SYR_MODERATE_HOLY_MONTH_GAIN }
+	multiply_temp_variable = { SYR_moderate_delta = @SYR_PERCENT }
+	custom_effect_tooltip = SYR_moderates_strengthen_tt
+	hidden_effect = { SYR_update_moderate_strength = yes }
+}
+
+# SYR scope. Decision SYR_raise_the_black_banner_now: the rising comes before
+# the moderates are ready. They lose strength and the Black Banner gets the
+# timed spirit SYR_the_surprise_rising.
+SYR_raise_the_banner_early = {
+	set_country_flag = SYR_surprise_rising
+	set_temp_variable = { SYR_moderate_delta = @SYR_MODERATE_SURPRISE_LOSS }
+	multiply_temp_variable = { SYR_moderate_delta = @SYR_PERCENT }
+	custom_effect_tooltip = SYR_moderates_weaken_tt
+	set_temp_variable = { SYR_surprise_days = @SYR_SURPRISE_RISING_DAYS }
+	custom_effect_tooltip = SYR_surprise_rising_tt
+	SYR_start_the_war_of_faith = yes
+}
+
+# SYR scope. Called before the war of faith starts. The moderates always keep at
+# least one state: if every state has the Black Banner's mosques, Aleppo (or
+# another state other than the capital) loses them.
+SYR_secure_a_moderate_stronghold = {
+	if = {
+		limit = {
+			NOT = {
+				any_owned_state = {
+					NOT = { has_dynamic_modifier = { modifier = SYR_faithful_state } }
+				}
+			}
+			any_owned_state = { is_capital = no }
+		}
+		if = {
+			limit = {
+				677 = {
+					is_owned_by = ROOT
+					is_capital = no
+				}
+			}
+			677 = { remove_dynamic_modifier = { modifier = SYR_faithful_state } }
+		}
+		else = {
+			random_owned_state = {
+				limit = { is_capital = no }
+				remove_dynamic_modifier = { modifier = SYR_faithful_state }
+			}
+		}
+	}
+}
+
+# SYR scope. The Black Banner takes the government: fascist (islamism) rule
+# without elections under Muhammad al-Ashmar, and the country becomes the Emirate
+# of Sham (cosmetic tag SYR_emirate_of_sham: near-black green, black banner).
+SYR_seat_the_black_banner = {
+	set_politics = {
+		ruling_party = fascism
+		elections_allowed = no
+	}
+	add_popularity = { ideology = fascism popularity = @SYR_BLACK_BANNER_SEIZURE_POPULARITY }
+	if = {
+		limit = { NOT = { has_character = SYR_muhammad_al_ashmar } }
+		recruit_character = SYR_muhammad_al_ashmar
+	}
+	promote_character = SYR_muhammad_al_ashmar
+	set_party_name = {
+		ideology = fascism
+		long_name = SYR_black_banner_party_long
+		name = SYR_black_banner_party
+	}
+	set_cosmetic_tag = SYR_emirate_of_sham
+}
+
+# SYR scope. Raises the mujahideen (SYR_mujahideen_brigades) and the foreign
+# volunteers (SYR_faith_volunteers) in the capital as "Jund al-Raya" divisions.
+SYR_raise_black_banner_forces = {
+	if = {
+		limit = { NOT = { has_country_flag = SYR_jund_al_raya_template } }
+		set_country_flag = SYR_jund_al_raya_template
+		division_template = {
+			name = "Jund al-Raya"
+			regiments = {
+				infantry = { x = 0 y = 0 }
+				infantry = { x = 0 y = 1 }
+				infantry = { x = 0 y = 2 }
+				infantry = { x = 1 y = 0 }
+				infantry = { x = 1 y = 1 }
+				infantry = { x = 1 y = 2 }
+			}
+		}
+	}
+	if = {
+		limit = { check_variable = { SYR_mujahideen_brigades > 0 } }
+		capital_scope = {
+			create_unit = {
+				division = "name = \"Mujahidin al-Raya\" division_template = \"Jund al-Raya\" start_experience_factor = 0.2 start_equipment_factor = 1.0"
+				owner = PREV
+				count = SYR_mujahideen_brigades
+			}
+		}
+		set_variable = { SYR_mujahideen_brigades = 0 }
+	}
+	if = {
+		limit = { check_variable = { SYR_faith_volunteers > 0 } }
+		capital_scope = {
+			create_unit = {
+				division = "name = \"Ansar al-Raya\" division_template = \"Jund al-Raya\" start_experience_factor = 0.3 start_equipment_factor = 1.0"
+				owner = PREV
+				count = SYR_faith_volunteers
+			}
+		}
+		set_variable = { SYR_faith_volunteers = 0 }
+	}
+}
+
+# SYR scope. After the Black Banner takes power: the mosque caches are opened,
+# the mujahideen and the foreign volunteers take the field, and the mosque
+# states lose SYR_faithful_state, whose work is done.
+SYR_take_up_the_hidden_arms = {
+	if = {
+		limit = { check_variable = { SYR_hidden_rifles > 0 } }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = SYR_hidden_rifles
+			producer = ROOT
+		}
+		set_variable = { SYR_hidden_rifles = 0 }
+	}
+	SYR_raise_black_banner_forces = yes
+	every_owned_state = {
+		limit = { has_dynamic_modifier = { modifier = SYR_faithful_state } }
+		remove_dynamic_modifier = { modifier = SYR_faithful_state }
+	}
+	clr_country_flag = SYR_faith_spreading
+	clr_country_flag = SYR_holy_month_truce
+	clr_country_flag = SYR_surprise_rising
+}
+
+# SYR scope. The Day of Reckoning: timeout of the mission SYR_the_day_of_reckoning
+# or the decision SYR_raise_the_black_banner_now (SYR_raise_the_banner_early).
+# States with SYR_faithful_state stay with the Black Banner; the others break
+# away as the moderates' democratic Syria with SYR_moderate_strength of the army
+# and stockpile. If the moderates hold no state at all (Syria owns only its
+# capital), the government falls without a war (syria.105).
+SYR_start_the_war_of_faith = {
+	hidden_effect = {
+		set_country_flag = SYR_war_of_faith_started
+		clr_country_flag = SYR_faith_spreading
+		capital_scope = {
+			if = {
+				limit = { NOT = { has_dynamic_modifier = { modifier = SYR_faithful_state } } }
+				add_dynamic_modifier = { modifier = SYR_faithful_state }
+			}
+		}
+		SYR_secure_a_moderate_stronghold = yes
+		SYR_update_moderate_strength = yes
+	}
+	if = {
+		limit = {
+			any_owned_state = {
+				NOT = { has_dynamic_modifier = { modifier = SYR_faithful_state } }
+			}
+		}
+		custom_effect_tooltip = SYR_war_of_faith_starts_tt
+		hidden_effect = {
+			start_civil_war = {
+				ruling_party = fascism
+				ideology = democratic
+				size = SYR_moderate_strength
+				states = all
+				states_filter = {
+					NOT = { has_dynamic_modifier = { modifier = SYR_faithful_state } }
+				}
+			}
+			set_country_flag = SYR_black_banner_side
+			SYR_seat_the_black_banner = yes
+			add_ideas = SYR_the_war_of_faith
+			if = {
+				limit = { has_country_flag = SYR_surprise_rising }
+				add_timed_idea = {
+					idea = SYR_the_surprise_rising
+					days = @SYR_SURPRISE_RISING_DAYS
+				}
+			}
+			random_enemy_country = {
+				limit = {
+					original_tag = SYR
+					has_government = democratic
+				}
+				add_popularity = { ideology = democratic popularity = @SYR_MODERATES_POPULARITY }
+			}
+			SYR_take_up_the_hidden_arms = yes
+			country_event = { id = syria.100 hours = 1 }
+		}
+	}
+	else = {
+		custom_effect_tooltip = SYR_government_falls_tt
+		hidden_effect = {
+			set_country_flag = SYR_black_banner_side
+			set_country_flag = SYR_war_of_faith_won
+			SYR_seat_the_black_banner = yes
+			SYR_take_up_the_hidden_arms = yes
+			country_event = { id = syria.105 hours = 1 }
+		}
+	}
+}
+
+# SYR scope. Focus SYR_brothers_in_faith: the Muslim nations that can be asked
+# for aid think better of the Black Banner.
+SYR_call_the_faithful_nations = {
+	if = {
+		limit = { country_exists = SAU }
+		SAU = { add_opinion_modifier = { target = ROOT modifier = SYR_call_of_the_faithful } }
+	}
+	if = {
+		limit = { country_exists = YEM }
+		YEM = { add_opinion_modifier = { target = ROOT modifier = SYR_call_of_the_faithful } }
+	}
+	if = {
+		limit = { country_exists = EGY }
+		EGY = { add_opinion_modifier = { target = ROOT modifier = SYR_call_of_the_faithful } }
+	}
+	if = {
+		limit = { country_exists = AFG }
+		AFG = { add_opinion_modifier = { target = ROOT modifier = SYR_call_of_the_faithful } }
+	}
+}
+
+# Country scope: the Arab nation that accepts the Emirate's demand (syria.106);
+# FROM is the Emirate. It becomes a puppet and takes the Emirate's lighter green
+# (cosmetic tag SYR_sham_vassal_<TAG>, flags copied from its vanilla flags).
+SYR_make_sham_vassal = {
+	FROM = { puppet = ROOT }
+	if = { limit = { tag = IRQ } set_cosmetic_tag = SYR_sham_vassal_IRQ }
+	else_if = { limit = { tag = SAU } set_cosmetic_tag = SYR_sham_vassal_SAU }
+	else_if = { limit = { tag = YEM } set_cosmetic_tag = SYR_sham_vassal_YEM }
+	else_if = { limit = { tag = JOR } set_cosmetic_tag = SYR_sham_vassal_JOR }
+	else_if = { limit = { tag = LEB } set_cosmetic_tag = SYR_sham_vassal_LEB }
+	else_if = { limit = { tag = EGY } set_cosmetic_tag = SYR_sham_vassal_EGY }
+	else_if = { limit = { tag = KUW } set_cosmetic_tag = SYR_sham_vassal_KUW }
+	else_if = { limit = { tag = OMN } set_cosmetic_tag = SYR_sham_vassal_OMN }
+	else_if = { limit = { tag = PAL } set_cosmetic_tag = SYR_sham_vassal_PAL }
+	else_if = { limit = { tag = LBA } set_cosmetic_tag = SYR_sham_vassal_LBA }
+}
+
+# SYR scope; FROM is the Arab nation that refused (syria.108). War for its
+# submission and @SYR_SWORD_OF_THE_EMIRATE_DAYS days of SYR_the_sword_of_the_emirate
+# (renewed to the full length if it is already running).
+SYR_start_war_of_submission = {
+	declare_war_on = {
+		target = FROM
+		type = puppet_wargoal_focus
+	}
+	if = {
+		limit = { has_idea = SYR_the_sword_of_the_emirate }
+		remove_ideas = SYR_the_sword_of_the_emirate
+	}
+	add_timed_idea = {
+		idea = SYR_the_sword_of_the_emirate
+		days = @SYR_SWORD_OF_THE_EMIRATE_DAYS
+	}
+}
+
+# SYR scope; FROM is the donor (event syria.102). Before the war of faith the
+# rifles go into the mosque caches and the volunteer division waits for the
+# rising; once the Black Banner holds power both arrive at once.
+SYR_receive_the_aid_of_the_faithful = {
+	add_opinion_modifier = { target = FROM modifier = SYR_aid_of_the_faithful }
+	set_temp_variable = { SYR_aid_rifles = @SYR_FAITH_AID_RIFLES }
+	if = {
+		limit = { has_country_flag = SYR_black_banner_side }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = @SYR_FAITH_AID_RIFLES
+			producer = FROM
+		}
+		custom_effect_tooltip = SYR_aid_volunteers_arrive_tt
+		hidden_effect = {
+			add_to_variable = { SYR_faith_volunteers = 1 }
+			SYR_raise_black_banner_forces = yes
+		}
+	}
+	else = {
+		custom_effect_tooltip = SYR_aid_rifles_to_caches_tt
+		custom_effect_tooltip = SYR_aid_volunteers_promised_tt
+		hidden_effect = {
+			add_to_variable = { SYR_hidden_rifles = @SYR_FAITH_AID_RIFLES }
+			add_to_variable = { SYR_faith_volunteers = 1 }
+		}
 	}
 }

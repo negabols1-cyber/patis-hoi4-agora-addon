@@ -10,6 +10,11 @@
 # SYR_become_independent; war_of_independence lasts while Syria fights France.
 # Workers' militia lifecycle: the_workers_militia -> the_workers_militia_2
 # (SYR_the_workers_militia, then SYR_defend_the_revolution).
+# Black Banner lifecycle (secret route): the_war_of_faith lasts while the war
+# of faith goes on (cancelled when the civil war ends); the_surprise_rising is
+# a timed spirit after an early rising; the_rule_of_the_banner comes from the
+# focus SYR_the_banner_over_damascus after victory; the_peace_of_the_emirate
+# comes from the focus SYR_the_peace_of_the_emirate.
 # Design notes: docs/systems/syria_focus_tree.md
 ###########################################################################
 
@@ -23,6 +28,30 @@
 @SYR_ARAB_BROTHERHOOD_DEFENCE = 0.05
 @SYR_ARAB_BROTHERHOOD_WAR_SUPPORT = 0.05
 @SYR_ARAB_LIBERATION_ATTACK = 0.15
+@SYR_NEW_ECONOMY_MIL_PENALTY = -0.1
+@SYR_NEW_ECONOMY_CIV_BONUS = 0.1
+@SYR_NEW_ECONOMY_INFRA_BONUS = 0.1
+@SYR_NEW_ECONOMY_2_CIV_BONUS = 0.15
+@SYR_NEW_ECONOMY_2_INFRA_BONUS = 0.15
+@SYR_NEW_ECONOMY_2_GRID_BONUS = 0.15
+@SYR_WAR_INDUSTRY_MIL_SPEED = 0.15
+@SYR_WAR_OF_FAITH_MORALE = 0.1
+@SYR_WAR_OF_FAITH_CONSCRIPTION = 0.15
+@SYR_WAR_OF_FAITH_DEFENCE = 0.1
+@SYR_SURPRISE_RISING_ATTACK = 0.15
+@SYR_SURPRISE_RISING_SPEED = 0.1
+@SYR_RULE_OF_THE_BANNER_STABILITY = 0.1
+@SYR_RULE_OF_THE_BANNER_POLITICAL_POWER = 0.15
+@SYR_RULE_OF_THE_BANNER_WAR_SUPPORT = 0.1
+@SYR_RULE_OF_THE_BANNER_DRIFT = 0.03
+@SYR_ZAKAT_CONSUMER_GOODS = -0.05
+@SYR_ZAKAT_CONSTRUCTION = 0.1
+@SYR_ZAKAT_PRODUCTION = 0.05
+@SYR_PEACE_OF_THE_EMIRATE_RESISTANCE_TARGET = -0.15
+@SYR_PEACE_OF_THE_EMIRATE_RESISTANCE_GROWTH = -0.2
+@SYR_PEACE_OF_THE_EMIRATE_POLITICAL_POWER = 0.15
+@SYR_SWORD_ATTACK = 0.15
+@SYR_SWORD_DEFENCE = 0.15
 
 ideas = {
 	country = {
@@ -63,6 +92,40 @@ ideas = {
 				air_agility_factor = -0.3
 				air_superiority_efficiency = -0.3
 				air_training_xp_gain_factor = -0.5
+			}
+		}
+
+		# From syria.98 option a (focus SYR_the_ssnp_militia_copy): easier occupation
+		SYR_ssnp_order_guard = {
+			picture = generic_secret_police
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				required_garrison_factor = -0.2
+				resistance_growth_on_our_occupied_states = -0.2
+				resistance_damage_to_garrison_on_our_occupied_states = -0.2
+			}
+		}
+
+		# From syria.98 option b: faster, cheaper war goals but more resistance in occupied states
+		SYR_ssnp_expansion_legions = {
+			picture = LIT_paramilitarists
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				resistance_growth_on_our_occupied_states = 0.1
+				justify_war_goal_time = -0.25
+				generate_wargoal_tension = -0.25
+			}
+		}
+
+		# From SYR_the_latakia_shipyards: faster dockyard construction
+		SYR_latakia_shipyards = {
+			picture = PER_iranian_shipyards
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				production_speed_dockyard_factor = 0.25
 			}
 		}
 
@@ -279,6 +342,93 @@ defensive_war_stability_factor = 0.1
 			}
 		}
 
+		### The Black Banner (secret route) ###
+
+		# Added to the Black Banner side when the war of faith starts
+		# (SYR_start_the_war_of_faith); it ends with the civil war.
+		SYR_the_war_of_faith = {
+			picture = PER_islamic_army
+			allowed = { original_tag = SYR }
+			allowed_civil_war = { has_government = fascism }
+			removal_cost = -1
+			cancel = {
+				has_civil_war = no
+			}
+			modifier = {
+				army_morale_factor = @SYR_WAR_OF_FAITH_MORALE
+				conscription_factor = @SYR_WAR_OF_FAITH_CONSCRIPTION
+				army_core_defence_factor = @SYR_WAR_OF_FAITH_DEFENCE
+			}
+		}
+
+		# Timed spirit after the decision SYR_raise_the_black_banner_now: the
+		# moderates are caught before they are ready.
+		SYR_the_surprise_rising = {
+			picture = PER_guardians_of_the_islamic_revolution
+			allowed = { original_tag = SYR }
+			allowed_civil_war = { has_government = fascism }
+			removal_cost = -1
+			modifier = {
+				army_attack_factor = @SYR_SURPRISE_RISING_ATTACK
+				army_speed_factor = @SYR_SURPRISE_RISING_SPEED
+			}
+		}
+
+		# From the focus SYR_the_banner_over_damascus, after the war of faith is won.
+		SYR_the_rule_of_the_banner = {
+			picture = SAU_sharia_law
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				stability_factor = @SYR_RULE_OF_THE_BANNER_STABILITY
+				political_power_gain = @SYR_RULE_OF_THE_BANNER_POLITICAL_POWER
+				war_support_factor = @SYR_RULE_OF_THE_BANNER_WAR_SUPPORT
+				fascism_drift = @SYR_RULE_OF_THE_BANNER_DRIFT
+				cavalry_attack_factor = 0.25
+				cavalry_defence_factor = 0.25
+				non_core_manpower = 0.08
+				army_speed_factor = 0.05
+			}
+		}
+
+		# From the focus SYR_the_peace_of_the_emirate: less resistance in the
+		# states we occupy and faster political power.
+		SYR_the_peace_of_the_emirate = {
+			picture = generic_secret_police
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				resistance_target = @SYR_PEACE_OF_THE_EMIRATE_RESISTANCE_TARGET
+				resistance_growth = @SYR_PEACE_OF_THE_EMIRATE_RESISTANCE_GROWTH
+				political_power_factor = @SYR_PEACE_OF_THE_EMIRATE_POLITICAL_POWER
+			}
+		}
+
+		# From the focus SYR_the_zakat_treasury.
+		SYR_the_zakat_treasury = {
+			picture = generic_industrial_concern_1
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				consumer_goods_factor = @SYR_ZAKAT_CONSUMER_GOODS
+				production_speed_buildings_factor = @SYR_ZAKAT_CONSTRUCTION
+				industrial_capacity_factory = @SYR_ZAKAT_PRODUCTION
+				stability_factor = -0.05
+			}
+		}
+
+		# Timed (@SYR_SWORD_OF_THE_EMIRATE_DAYS in SYR_scripted_effects.txt) when an
+		# Arab nation refuses to submit and the Emirate declares war (syria.108).
+		SYR_the_sword_of_the_emirate = {
+			picture = PER_islamic_army
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				army_attack_factor = @SYR_SWORD_ATTACK
+				army_defence_factor = @SYR_SWORD_DEFENCE
+			}
+		}
+
 		### Economy ###
 
 		SYR_pipeline_transit_fees = {
@@ -349,14 +499,14 @@ defensive_war_stability_factor = 0.1
 
 
 		SYR_Kizilvarakliordi = {
-			picture = generic_communist_army
-			removal_cost = -1
-			modifier = {
-				war_stability_factor = 0.1
-				weekly_manpower = 0.8
-				army_intel_factor = -0.03
-			}
-		}
+    picture = generic_communist_army
+    removal_cost = -1
+    modifier = {
+        war_stability_factor = 0.1
+        weekly_manpower = 800
+        army_intel_factor = -0.03
+    }
+}
 
 		SYR_levantinmarkeet = {
 			picture = PER_national_bank_iran
@@ -364,10 +514,10 @@ defensive_war_stability_factor = 0.1
 			removal_cost = -1
 			modifier = {
 				production_speed_buildings_factor = 0.15
-				consumer_goods_factor = -0.10
+				consumer_goods_factor = -0.15
 				industrial_capacity_factory = 0.08
 				production_speed_infrastructure_factor = 0.10
-				trade_opinion_factor = 0.05
+				trade_opinion_factor = 0.3
 			}
 		}
 
@@ -386,6 +536,41 @@ defensive_war_stability_factor = 0.1
 				army_attack_factor = @SYR_GERMAN_OFFICERS_ATTACK
 				army_defence_factor = @SYR_GERMAN_OFFICERS_DEFENCE
 				army_org_factor = @SYR_GERMAN_OFFICERS_ORG
+			}
+		}
+
+		# Added by the focus SYR_economymodeloff.
+		SYR_new_economy_model_spirit = {
+			picture = generic_production_bonus
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				industrial_capacity_factory = @SYR_NEW_ECONOMY_MIL_PENALTY
+				production_speed_industrial_complex_factor = @SYR_NEW_ECONOMY_CIV_BONUS
+				production_speed_infrastructure_factor = @SYR_NEW_ECONOMY_INFRA_BONUS
+			}
+		}
+
+		# Replaces SYR_new_economy_model_spirit via the focus SYR_ekonomiler_beni_bilemediler.
+		SYR_new_economy_model_spirit_2 = {
+			picture = generic_production_bonus
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				industrial_capacity_factory = @SYR_NEW_ECONOMY_MIL_PENALTY
+				production_speed_industrial_complex_factor = @SYR_NEW_ECONOMY_2_CIV_BONUS
+				production_speed_infrastructure_factor = @SYR_NEW_ECONOMY_2_INFRA_BONUS
+				production_speed_industrial_infrastructure_factor = @SYR_NEW_ECONOMY_2_GRID_BONUS
+			}
+		}
+
+		# Added by the focus SYR_war_industry_mobilization.
+		SYR_war_industry_spirit = {
+			picture = generic_production_bonus
+			allowed = { original_tag = SYR }
+			removal_cost = -1
+			modifier = {
+				production_speed_arms_factory_factor = @SYR_WAR_INDUSTRY_MIL_SPEED
 			}
 		}
 

@@ -1,14 +1,47 @@
 ###########################################################################
 # Syria (SYR) on actions
 #
+# on_startup: with the game rule SYR_ai_behavior = RANDOM, rolls the AI route
+# (flags SYR_AI_RANDOM_*).
 # on_capitulation: when France capitulates while Syria is still a loyal
 # French subject, Syria chooses between Free France, the Vichy government
 # and independence (event syria.60). The event waits ten days so the Vichy
 # state from events/France.txt exists before Syria decides.
+# on_state_control_changed: in the war of independence, taking Lebanon
+# (state 553) wins the war at once: France signs the peace (syria.33) and
+# Lebanon stays Syrian.
+# on_civil_war_end: when the Black Banner (secret route) wins the war of
+# faith, it gets the victory event syria.104 and the flag
+# SYR_war_of_faith_won (focus SYR_the_banner_over_damascus).
 # Design notes: docs/systems/syria_focus_tree.md
 ###########################################################################
 
 on_actions = {
+	# Game rule SYR_ai_behavior = RANDOM: roll the route an AI Syria follows
+	# (pattern: the RANDOM rolls of ef_on_actions.txt). random_list weights must
+	# be literal numbers.
+	on_startup = {
+		effect = {
+			if = {
+				limit = {
+					country_exists = SYR
+					has_game_rule = { rule = SYR_ai_behavior option = RANDOM }
+				}
+				SYR = {
+					random_list = {
+						15 = { set_country_flag = SYR_AI_RANDOM_LOYALIST }
+						15 = { set_country_flag = SYR_AI_RANDOM_COMMUNIST }
+						10 = { set_country_flag = SYR_AI_RANDOM_INDEPENDENT_COMMUNIST }
+						15 = { set_country_flag = SYR_AI_RANDOM_FASCIST }
+						15 = { set_country_flag = SYR_AI_RANDOM_HASHEMITE }
+						15 = { set_country_flag = SYR_AI_RANDOM_ARAB_ALLIANCE }
+						15 = { set_country_flag = SYR_AI_RANDOM_BLACK_BANNER }
+					}
+				}
+			}
+		}
+	}
+
 	# ROOT is the capitulated country, FROM is the winner
 	on_capitulation = {
 		effect = {
@@ -26,6 +59,42 @@ on_actions = {
 					set_country_flag = SYR_france_fell
 					country_event = { id = syria.60 days = 10 }
 				}
+			}
+		}
+	}
+
+	# ROOT is new controller, FROM is old controller, FROM.FROM is the state.
+	# Taking Lebanon (state 553) in the war of independence wins the war at once.
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = SYR
+					has_country_flag = SYR_fought_for_independence
+					NOT = { has_country_flag = SYR_lebanon_victory }
+					has_war_with = FRA
+					FROM.FROM = { state = 553 }
+					553 = { is_controlled_by = ROOT }
+				}
+				set_country_flag = SYR_lebanon_victory
+				FRA = { country_event = { id = syria.33 } }
+			}
+		}
+	}
+
+	# ROOT is the winner, FROM gets annexed. Only the Black Banner side has
+	# SYR_black_banner_side (set after the split), so a moderate victory does
+	# nothing here.
+	on_civil_war_end = {
+		effect = {
+			if = {
+				limit = {
+					original_tag = SYR
+					has_country_flag = SYR_black_banner_side
+					NOT = { has_country_flag = SYR_war_of_faith_won }
+				}
+				set_country_flag = SYR_war_of_faith_won
+				country_event = { id = syria.104 days = 1 }
 			}
 		}
 	}

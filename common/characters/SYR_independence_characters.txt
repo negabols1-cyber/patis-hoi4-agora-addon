@@ -11,6 +11,10 @@
 # - SYR_jamil_mardam_bey and SYR_shukri_al_quwatli are political advisors
 #   recruited at game start; their traits are in
 #   common/country_leader/SYR_traits.txt.
+# - SYR_muhammad_al_ashmar leads the Black Banner (secret route): recruited by
+#   SYR_open_the_reckoning (focus SYR_komkompuration) and promoted when the
+#   Black Banner takes power (SYR_seat_the_black_banner). Portrait: vanilla
+#   GFX_Portrait_Arabia_Generic_land_2 until a custom portrait is made.
 # Portraits reuse the mod's existing art: GFX_portrait_Zeid_bin_Hussein
 # (interface/_ef_leader_portraits.gfx) and the Fawzi al-Qawuqji portrait of
 # IRQ_fawzi_al_qawuqji (common/characters/IRQ.txt).
@@ -44,6 +48,24 @@ characters = {
 		country_leader = {
 			ideology = fascism_ideology
 			traits = { nationalist_symbol }
+			expire = "1965.1.1.1"
+			id = -1
+		}
+	}
+
+	# Sheikh of al-Midan in Damascus, who fought in the Great Syrian Revolt of 1925
+	# and in Palestine in 1936; leader of the Black Banner (secret route).
+	SYR_muhammad_al_ashmar = {
+		name = SYR_muhammad_al_ashmar
+		portraits = {
+			civilian = {
+				large = GFX_Portrait_Arabia_Generic_land_2
+				small = GFX_Portrait_Arabia_Generic_land_2_small
+			}
+		}
+		country_leader = {
+			ideology = islamism
+			traits = { SYR_warrior_sheikh }
 			expire = "1965.1.1.1"
 			id = -1
 		}
@@ -216,6 +238,57 @@ characters = {
 			planning_skill = 2
 			logistics_skill = 3
 			legacy_id = -1
+		}
+	}
+
+	SYR_savur_qadir = {
+		name = SYR_savur_qadir
+		portraits = {
+			civilian = {
+				large = GFX_idea_arabia_generic_land_5
+				small = GFX_idea_arabia_generic_land_5
+			}
+		}
+		advisor = {
+			slot = political_advisor
+			idea_token = SYR_savur_qadir
+			allowed = {
+				original_tag = SYR
+			}
+			# Recruited at game start (history/countries/SYR - Syria.txt), hireable after the focus
+			available = {
+				has_completed_focus = SYR_advisorofking
+			}
+			traits = {
+				SYR_friend_of_crowns
+			}
+			cost = 150
+			ai_will_do = {
+				factor = 1
+			}
+			on_add = {
+				owner = { SYR_friend_of_crowns_add_opinions = yes }
+			}
+			on_remove = {
+				owner = { SYR_friend_of_crowns_remove_opinions = yes }
+			}
+		}
+	}
+
+	SYR_yusufkaayaalp = {
+		name = SYR_yusufkaayaalp
+		portraits = {
+			civilian = {
+				large = GFX_portrait_Abdullah_bin_Jassim_Al_Thani
+			}
+		}
+		country_leader = {
+			ideology = islamism
+			expire = "1965.1.1.1"
+			id = -1
+			traits = {
+				SYR_halife_of_syria
+			}
 		}
 	}
 }

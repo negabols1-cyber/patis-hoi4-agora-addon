@@ -11,8 +11,14 @@
 # syria.85-86  Arab-Islamic alliance: invitation and union with Syria
 # syria.87-88  Arab-Islamic alliance: Syria demands freedom for Egypt and Libya
 # syria.94-97  Arab-Islamic alliance: Egypt or Libya freed, or refused (war option)
+# syria.98     Task of the SSNP legions: occupation order or faster war goals
+# syria.100-108 The Black Banner (secret route): the war of faith starts (100),
+#              aid from Muslim nations (101-103), victory (104), or the
+#              government falls without a war (105); an Arab nation is told to
+#              submit (106), submits (107) or refuses and is attacked (108)
 #
-# Fired from common/national_focus/SYR.txt, common/decisions/SYR.txt and
+# Fired from common/national_focus/SYR.txt, common/decisions/SYR.txt,
+# common/scripted_effects/SYR_scripted_effects.txt and
 # common/on_actions/SYR_on_actions.txt.
 # Design notes: docs/systems/syria_focus_tree.md
 ###########################################################################
@@ -27,6 +33,9 @@ add_namespace = syria
 @SYR_POSTPONE_LOSS = 20
 @SYR_BETRAYAL_RESISTANCE = 25
 @SYR_UNION_OPINION = 60
+@SYR_FAITH_AID_OPINION = 30
+@SYR_FAITH_VICTORY_STABILITY = 0.05
+@SYR_SUBMISSION_OPINION = 50
 
 #######################################################################
 # Opening
@@ -318,12 +327,21 @@ country_event = {
 	}
 }
 
-# France: the Levant war has gone on too long; peace is signed and Syria keeps its land.
-# Fired by the timeout of SYR_hold_damascus. FROM is Syria.
+# France: the Levant war has gone on too long, or Syria has taken Lebanon;
+# peace is signed and Syria keeps its land (and Lebanon, if it holds it).
+# Fired by the timeout of SYR_hold_damascus, or by on_state_control_changed
+# in SYR_on_actions.txt when Syria takes state 553. FROM is Syria.
 country_event = {
 	id = syria.33
 	title = syria.33.t
-	desc = syria.33.d
+	desc = {
+		text = syria.33.d_lebanon
+		trigger = { FROM = { has_country_flag = SYR_lebanon_victory } }
+	}
+	desc = {
+		text = syria.33.d
+		trigger = { FROM = { NOT = { has_country_flag = SYR_lebanon_victory } } }
+	}
 	picture = GFX_report_event_gathering_protest
 	is_triggered_only = yes
 
@@ -389,6 +407,7 @@ country_event = {
 		NOT = { has_country_flag = SYR_route_fascist }
 		NOT = { has_country_flag = SYR_route_monarchy }
 		NOT = { has_country_flag = SYR_route_democratic }
+		NOT = { has_country_flag = SYR_route_secret }
 	}
 
 	option = { # The People's Front
@@ -402,6 +421,16 @@ country_event = {
 			modifier = {
 				add = 30
 				communism > 0.25
+			}
+			# Game rule SYR_ai_behavior
+			modifier = {
+				add = 1000
+				SYR_ai_wants_communist = yes
+			}
+			modifier = {
+				factor = 0
+				SYR_ai_route_is_set = yes
+				NOT = { SYR_ai_wants_communist = yes }
 			}
 		}
 		SYR_install_communist_government = yes
@@ -418,6 +447,16 @@ country_event = {
 				add = 30
 				fascism > 0.25
 			}
+			# Game rule SYR_ai_behavior
+			modifier = {
+				add = 1000
+				SYR_ai_wants_fascist = yes
+			}
+			modifier = {
+				factor = 0
+				SYR_ai_route_is_set = yes
+				NOT = { SYR_ai_wants_fascist = yes }
+			}
 		}
 		SYR_install_fascist_government = yes
 	}
@@ -433,8 +472,36 @@ country_event = {
 				add = 30
 				neutrality > 0.25
 			}
+			# Game rule SYR_ai_behavior: this option also opens the Black Banner
+			modifier = {
+				add = 1000
+				OR = {
+					SYR_ai_wants_hashemite = yes
+					SYR_ai_wants_black_banner = yes
+				}
+			}
+			modifier = {
+				factor = 0
+				SYR_ai_route_is_set = yes
+				NOT = { SYR_ai_wants_hashemite = yes }
+				NOT = { SYR_ai_wants_black_banner = yes }
+			}
 		}
-		SYR_install_hashemite_monarchy = yes
+		if = {
+			# Secret route: the tooltip shows the Hashemite restoration, but the
+			# Black Banner route opens instead (SYR_komkompuration). The leader
+			# stays until the Black Banner takes power in the war of faith.
+			limit = { has_country_flag = SYR_secret_path_eligible }
+			effect_tooltip = { SYR_install_hashemite_monarchy = yes }
+			hidden_effect = {
+				clr_country_flag = SYR_secret_path_eligible
+				set_country_flag = SYR_route_secret
+				mark_focus_tree_layout_dirty = yes
+			}
+		}
+		else = {
+			SYR_install_hashemite_monarchy = yes
+		}
 	}
 	option = { # The National Bloc keeps the republic
 		name = syria.40.e
@@ -1069,5 +1136,211 @@ news_event = {
 
 	option = {
 		name = syria.93.a
+	}
+}
+
+# The task of the SSNP legions (focus SYR_the_ssnp_militia_copy)
+country_event = {
+	id = syria.98
+	title = syria.98.t
+	desc = syria.98.d
+	picture = GFX_report_event_soldiers_marching
+	is_triggered_only = yes
+
+	option = { # Keep order at home: easier occupation
+		name = syria.98.a
+		ai_chance = { base = 50 }
+		add_ideas = SYR_ssnp_order_guard
+	}
+	option = { # Legions for expansion: faster war goals, harder occupation
+		name = syria.98.b
+		ai_chance = { base = 50 }
+		add_ideas = SYR_ssnp_expansion_legions
+	}
+}
+
+#######################################################################
+# The Black Banner (secret route after the focus SYR_komkompuration)
+#######################################################################
+
+# Syria (the Black Banner side): the war of faith has begun. Fired by
+# SYR_start_the_war_of_faith after the civil war split.
+country_event = {
+	id = syria.100
+	title = syria.100.t
+	desc = syria.100.d
+	picture = GFX_report_event_SAU_fall_of_mecca
+	is_triggered_only = yes
+
+	option = {
+		name = syria.100.a
+	}
+}
+
+# A Muslim nation: the Black Banner asks for rifles and volunteers (decision
+# SYR_seek_the_aid_of_FROM). FROM is Syria.
+country_event = {
+	id = syria.101
+	title = syria.101.t
+	desc = syria.101.d
+	picture = GFX_report_event_SAU_treaty_of_friendship
+	is_triggered_only = yes
+
+	trigger = {
+		NOT = { has_war_with = FROM }
+	}
+
+	option = { # Send rifles and volunteers
+		name = syria.101.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				factor = 2
+				has_opinion = { target = FROM value > @SYR_FAITH_AID_OPINION }
+			}
+			modifier = {
+				factor = 0.5
+				has_government = democratic
+			}
+			modifier = {
+				factor = 0.5
+				is_subject = yes # a subject answers to its overlord first
+			}
+		}
+		custom_effect_tooltip = SYR_aid_sent_tt
+		FROM = { country_event = { id = syria.102 hours = 6 } }
+	}
+	option = { # Refuse
+		name = syria.101.b
+		ai_chance = { base = 40 }
+		FROM = { country_event = { id = syria.103 hours = 6 } }
+	}
+}
+
+# Syria: a Muslim nation sends rifles and volunteers. FROM is the donor.
+country_event = {
+	id = syria.102
+	title = syria.102.t
+	desc = syria.102.d
+	picture = GFX_report_event_SAU_arab_league_accepted
+	is_triggered_only = yes
+
+	option = {
+		name = syria.102.a
+		SYR_receive_the_aid_of_the_faithful = yes
+	}
+}
+
+# Syria: a Muslim nation refuses to help. FROM is the country that refused.
+country_event = {
+	id = syria.103
+	title = syria.103.t
+	desc = syria.103.d
+	picture = GFX_report_event_gathering_protest
+	is_triggered_only = yes
+
+	option = {
+		name = syria.103.a
+	}
+}
+
+# Syria (the Black Banner side): the moderates are beaten. Fired by
+# on_civil_war_end in common/on_actions/SYR_on_actions.txt.
+country_event = {
+	id = syria.104
+	title = syria.104.t
+	desc = syria.104.d
+	picture = GFX_report_event_SAU_fallen_city_retaken
+	is_triggered_only = yes
+
+	option = {
+		name = syria.104.a
+		add_stability = @SYR_FAITH_VICTORY_STABILITY
+		custom_effect_tooltip = SYR_banner_over_damascus_unlocked_tt
+	}
+}
+
+# Syria: the moderates had no state to rally in, so the government fell without
+# a war. Fired by SYR_start_the_war_of_faith.
+country_event = {
+	id = syria.105
+	title = syria.105.t
+	desc = syria.105.d
+	picture = GFX_report_event_gathering_protest
+	is_triggered_only = yes
+
+	option = {
+		name = syria.105.a
+		custom_effect_tooltip = SYR_banner_over_damascus_unlocked_tt
+	}
+}
+
+# An Arab nation: the Emirate of Sham demands its submission (decision
+# SYR_demand_the_submission_of_FROM). FROM is Syria.
+country_event = {
+	id = syria.106
+	title = syria.106.t
+	desc = syria.106.d
+	picture = GFX_report_event_generic_sign_treaty1
+	is_triggered_only = yes
+
+	trigger = {
+		is_subject = no
+		NOT = { has_war_with = FROM }
+	}
+
+	option = { # Submit
+		name = syria.106.a
+		ai_chance = {
+			base = 15
+			modifier = {
+				factor = 3
+				has_opinion = { target = FROM value > @SYR_SUBMISSION_OPINION }
+			}
+			modifier = {
+				factor = 0
+				is_major = yes
+			}
+		}
+		SYR_make_sham_vassal = yes
+		FROM = { country_event = { id = syria.107 hours = 6 } }
+	}
+	option = { # Refuse
+		name = syria.106.b
+		ai_chance = { base = 60 }
+		custom_effect_tooltip = SYR_submission_refused_tt
+		FROM = { country_event = { id = syria.108 hours = 6 } }
+	}
+}
+
+# Syria: an Arab nation submits. FROM is the new subject.
+country_event = {
+	id = syria.107
+	title = syria.107.t
+	desc = syria.107.d
+	picture = GFX_report_event_SAU_arab_league_accepted
+	is_triggered_only = yes
+
+	option = {
+		name = syria.107.a
+	}
+}
+
+# Syria: an Arab nation refuses, and the Emirate goes to war. FROM is the
+# country that refused.
+country_event = {
+	id = syria.108
+	title = syria.108.t
+	desc = syria.108.d
+	picture = GFX_report_event_SAU_fall_of_mecca
+	is_triggered_only = yes
+
+	trigger = {
+		NOT = { has_war_with = FROM }
+	}
+
+	option = {
+		name = syria.108.a
+		SYR_start_war_of_submission = yes
 	}
 }
