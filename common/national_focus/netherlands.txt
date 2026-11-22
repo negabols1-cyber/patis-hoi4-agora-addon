@@ -1469,7 +1469,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		relative_position_id = HOL_expand_the_artillerieinrichtingen
-		cost = 27
+		cost = 20
 
 		available_if_capitulated = yes
 		search_filters = {FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY}
@@ -3401,6 +3401,7 @@ focus_tree = {
 				category = naval_doctrine
 			}
 			add_ideas = HOL_naval_heritage
+			add_equipment_to_stockpile = { type = convoy amount = 1000 }
 		}
 	}
 
@@ -6609,7 +6610,7 @@ focus_tree = {
 		}
 		prerequisite = { focus = HOL_lead_the_minor_democracies }
 		icon = GFX_goal_generic_position_armies
-		x = -1
+		x = 1
 		y = 1
 		relative_position_id = HOL_lead_the_minor_democracies
 		cost = 10
@@ -6653,7 +6654,7 @@ focus_tree = {
 		id = HOL_responsibility_for_our_own_defense
 		prerequisite = { focus = HOL_lead_the_minor_democracies }
 		icon = GFX_goal_generic_build_tank
-		x = 1
+		x = -1
 		y = 1
 		relative_position_id = HOL_lead_the_minor_democracies
 		cost = 10
@@ -6669,10 +6670,10 @@ focus_tree = {
 
 	focus = {
 		id = HOL_lessons_from_the_low_countries
-		prerequisite = { focus = HOL_form_the_benelux }
-		prerequisite = { focus = HOL_responsibility_for_our_own_defense }
 		icon = GFX_goal_generic_construct_military
-		x = 1
+		prerequisite = { focus = HOL_responsibility_for_our_own_defense }
+		prerequisite = { focus = HOL_form_the_benelux }
+		x = -1
 		y = 1
 		relative_position_id = HOL_form_the_benelux
 		cost = 10
@@ -6689,8 +6690,8 @@ focus_tree = {
 		available = {
 			is_faction_leader = yes
 		}
-		prerequisite = { focus = HOL_lessons_from_the_low_countries }
 		icon = GFX_focus_generic_the_council_of_europe
+		prerequisite = { focus = HOL_lessons_from_the_low_countries }
 		x = 0
 		y = 1
 		relative_position_id = HOL_lessons_from_the_low_countries
@@ -6743,8 +6744,9 @@ focus_tree = {
 
 	focus = {
 		id = HOL_the_continents_best_and_brightest
-		prerequisite = { focus = HOL_foundations_for_a_european_union }
 		icon = GFX_goal_tfv_generic_tech_sharing
+		prerequisite = { focus = HOL_the_continent_s_sun }
+		prerequisite = { focus = HOL_foundations_for_a_european_union }
 		x = -1
 		y = 1
 		relative_position_id = HOL_foundations_for_a_european_union
@@ -6769,12 +6771,12 @@ focus_tree = {
 			NOT = { is_in_faction_with = GER }
 			NOT = { is_in_faction_with = ENG }
 		}
-		prerequisite = { focus = HOL_foundations_for_a_european_union }
 		will_lead_to_war_with = GER
 		will_lead_to_war_with = ENG
 		icon = GFX_goal_generic_major_war
-		x = 1
-		y = 1
+		prerequisite = { focus = HOL_foundations_for_a_european_union }
+		x = 0
+		y = 2
 		relative_position_id = HOL_foundations_for_a_european_union
 		cost = 10
 
@@ -6795,4 +6797,61 @@ focus_tree = {
 	}
 
 
+
+	focus = {
+		id = HOL_european_union_laws
+		icon = GFX_focus_hol_gateway_to_europe
+		prerequisite = { focus = HOL_inviteeuro }
+		x = 54
+		y = 9
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = { base = 1 }
+		completion_reward = {
+			add_ideas = HOL_eubuff
+			every_other_country = {
+				limit = {
+					is_in_faction_with = ROOT
+				}
+				add_ideas = HOL_eubuff
+			}
+		}
+	}
+
+	focus = {
+		id = HOL_inviteeuro
+		icon = GFX_focus_generic_democratic_europe
+		prerequisite = { focus = HOL_foundations_for_a_european_union }
+		x = 53
+		y = 8
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = { base = 1 }
+		completion_reward = {
+			custom_effect_tooltip = HOL_inviteeuro_tt
+			hidden_effect = {
+				every_other_country = {
+					limit = {
+						capital_scope = { is_on_continent = europe }
+						has_government = democratic
+						is_in_faction = no
+						is_subject = no
+					}
+					country_event = { id = generic.5 hours = 6 }
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = HOL_the_continent_s_sun
+		icon = GFX_focus_research2
+		prerequisite = { focus = HOL_responsibility_for_our_own_defense }
+		x = 51
+		y = 6
+		cost = 10
+		search_filters = { FOCUS_FILTER_POLITICAL }
+		ai_will_do = { base = 1 }
+		completion_reward = { add_research_slot = 1 }
+	}
 }
