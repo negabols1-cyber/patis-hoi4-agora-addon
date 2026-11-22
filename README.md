@@ -1,5 +1,8 @@
 Agora Ama Daha iyi 
 
+iletişim dc: patislord
+gerçek mod budur https://steamcommunity.com/sharedfiles/filedetails/?l=turkish&id=2716194283&ysclid=mws0hbnndg485073587
+
 
 # Europe in Flames AGORA 1.18.2
 
