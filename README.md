@@ -2,6 +2,7 @@ Agora Ama Daha iyi
 
 iletişim dc: patislord
 
+hoi4 sürümü : 1.17.4.1.1e2e musketeer (dd32s)(5)
 
 gerçek mod  https://steamcommunity.com/sharedfiles/filedetails/?l=turkish&id=2716194283&ysclid=mws0hbnndg485073587
 
